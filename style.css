@@ -20,6 +20,65 @@ body {
     flex: 1;
   }
   
+  .right-column {
+    flex: 1;
+  }
+  
+  .video-container {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .video-info {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+  }
+  
+  .video-info h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .video-info p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .coming-soon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    background-color: #CCCCCC;
+  }
+  
+  .project-info {
+    margin-left: 20px;
+  }
+  
+  .blog-post {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .blog-post img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .blog-post h2 {
+    font-size: 18px;
+  }
+  
+  .blog-post p {
+    font-size: 14px;
+  }
   .bottom-column {
     flex: 1;
   }
