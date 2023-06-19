@@ -1,5 +1,5 @@
 body {
-    background-color: #E8F5E9; /* Green background */
+    background-color: #a5f3ac; /* Green background */
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -26,7 +26,7 @@ body {
   
   img {
     max-width: 100%;
-    height: auto;
+    height: 100%;
   }
   
   h1 {
