@@ -3,20 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
+    <title>My Projects</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
     <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">About Me</a></li>
-                <li><a href="music.html">My Music</a></li>
-                <li><a href="projects.html">My Projects</a></li>
-                <li><a href="blog.html">My Blog</a></li>
-            </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li><a href="index.html">About Me</a></li>
+          <li><a href="music.html">My Music</a></li>
+          <li><a href="projects.html">My Projects</a></li>
+          <li><a href="blog.html">My Blog</a></li>
+        </ul>
+      </nav>
     </header>
-    
-</body>
-</html>
+    <div class="container">
+      <div class="left-column">
+        <div class="video-container">
+          <video src="your-project-video.mp4" controls></video>
+        </div>
+      </div>
+      <div class="right-column">
+        <div class="project-info">
+          <h2>Project Title</h2>
+          <p>Description of the project goes here.</p>
+        </div>
+      </div>
+    </div>
+    <button id="sort-button">Sort</button>
+  
+    <script src="script.js"></script>
+  </body>
+  </html>
