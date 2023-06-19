@@ -81,9 +81,7 @@ body {
   .blog-post p {
     font-size: 14px;
   }
-  .bottom-column {
-    flex: 1;
-  }
+  
   
   img {
     max-width: 100%;
