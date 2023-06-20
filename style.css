@@ -29,6 +29,10 @@ body {
     position: relative;
     margin-bottom: 20px;
   }
+
+  .video-box {
+    width: 30%
+  }
   
   .video-info {
     position: relative;
