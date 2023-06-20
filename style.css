@@ -28,20 +28,13 @@ body {
   .video-container {
     position: relative;
     margin-bottom: 20px;
+    margin-right: 30px;
+    background-color: black;
+    color: white;
   }
 
   .video-box {
     width: 90px;
-  }
-  
-  .video-info {
-    position: relative;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #FFFFFF;
   }
   
   .video-info h2 {
