@@ -34,7 +34,8 @@ body {
   }
 
   .video-box {
-    width: 90px;
+    width: 40vw;
+    height: 30vw;
   }
   
   .video-info h2 {
