@@ -47,15 +47,7 @@ body {
     margin: 0;
     font-size: 14px;
   }
-  
-  .coming-soon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    background-color: #CCCCCC;
-  }
-  
+    
   .project-info {
     margin-left: 20px;
   }
