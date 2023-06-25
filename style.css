@@ -229,9 +229,9 @@ body {
     background-color: black;
     color: white;
     animation: bounce-rotate 5s ease-in-out forwards;
+    transform: rotate(0deg);
   }
-
-
+  
   .video-container:nth-child(1) {
     animation-delay: 0.5s;
   }
@@ -258,28 +258,32 @@ body {
     opacity: 0;
     animation: return-original 5s linear forwards;
   }
-
+  
   @keyframes return-original {
     0% {
       opacity: 1;
-      transform: translate(-100%, -100%) rotate(-180deg);
+      transform: translate(-100%, -100%) rotate(-360deg);
     }
     25% {
       opacity: 1;
-      transform: translate(100%, -100%) rotate(180deg);
+      transform: translate(100%, -100%) rotate(360deg);
     }
     50% {
       opacity: 1;
-      transform: translate(100%, 100%) rotate(-180deg);
+      transform: translate(100%, 100%) rotate(-360deg);
     }
     75% {
       opacity: 1;
-      transform: translate(-100%, 100%) rotate(180deg);
+      transform: translate(-100%, 100%) rotate(360deg);
     }
     100% {
       opacity: 0;
       transform: translate(-100%, -100%) rotate(0deg);
     }
+  }
+  
+  .video-container video {
+    transform: rotate(0deg);
   }
   
 
@@ -329,19 +333,19 @@ body {
   }
   25% {
     opacity: 1;
-    transform: translate(-100%, 100%) rotate(180deg);
+    transform: translate(-100%, 100%) rotate(360deg);
   }
   50% {
     opacity: 1;
-    transform: translate(100%, 100%) rotate(-180deg);
+    transform: translate(100%, 100%) rotate(-360deg);
   }
   75% {
     opacity: 1;
-    transform: translate(100%, -100%) rotate(180deg);
+    transform: translate(100%, -100%) rotate(360deg);
   }
   100% {
     opacity: 1;
-    transform: translate(-100%, -100%) rotate(-180deg);
+    transform: translate(-100%, -100%) rotate(-360deg);
   }
 }
 
