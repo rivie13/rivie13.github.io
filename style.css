@@ -85,7 +85,7 @@ body {
     @-webkit-keyframes fadeInRight {
       0%{
         opacity: 0;
-        -webkit-transform: translateX(50px);
+        
         transform-origin: right top;
       }
       100%{
@@ -96,7 +96,7 @@ body {
     @-moz-keyframes fadeInRight {
       0%{
         opacity: 0;
-        -moz-transform: translateX(50px);
+       
         transform-origin: right top;
       }
       100%{
@@ -107,7 +107,7 @@ body {
     @-o-keyframes fadeInRight {
       0%{
         opacity: 0;
-        -o-transform: translateX(50px);
+        
         transform-origin: right top;
       }
       100%{
@@ -118,7 +118,7 @@ body {
     @keyframes fadeInRight {
       0%{
         opacity: 0;
-        transform: translateX(50px);
+        
         transform-origin: right top;
       }
       100%{
