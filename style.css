@@ -328,22 +328,22 @@ body {
 
 .video-container:nth-child(1) h2,
 .video-container:nth-child(1) p {
-  animation-delay: 5s;
+  animation-delay: 6s;
 }
 
 .video-container:nth-child(2) h2,
 .video-container:nth-child(2) p {
-  animation-delay: 10s;
+  animation-delay: 7s;
 }
 
 .video-container:nth-child(3) h2,
 .video-container:nth-child(3) p {
-  animation-delay: 15s;
+  animation-delay: 8s;
 }
 
 .video-container:nth-child(4) h2,
 .video-container:nth-child(4) p {
-  animation-delay: 20s;
+  animation-delay: 9s;
 }
 
 @keyframes fade-in {
