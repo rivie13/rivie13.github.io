@@ -228,6 +228,7 @@ body {
     margin-right: 15vw;
     background-color: black;
     color: white;
+    opacity: 0;
     animation: bounce-rotate 5s ease-in-out forwards;
     transform: rotate(0deg);
   }
@@ -247,38 +248,38 @@ body {
   .video-container:nth-child(4) {
     animation-delay: 2s;
   }
-
+  
   .video-container:before {
     content: "";
     position: absolute;
-    top: -100%;
-    left: -100%;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
+    opacity: 1;
     animation: return-original 5s linear forwards;
   }
   
   @keyframes return-original {
     0% {
       opacity: 1;
-      transform: translate(-100%, -100%) rotate(-360deg);
+      transform: translate(0, 0) rotate(0deg);
     }
     25% {
       opacity: 1;
-      transform: translate(100%, -100%) rotate(360deg);
+      transform: translate(0, 0) rotate(360deg);
     }
     50% {
       opacity: 1;
-      transform: translate(100%, 100%) rotate(-360deg);
+      transform: translate(0, 0) rotate(-360deg);
     }
     75% {
       opacity: 1;
-      transform: translate(-100%, 100%) rotate(360deg);
+      transform: translate(0, 0) rotate(360deg);
     }
     100% {
-      opacity: 0;
-      transform: translate(-100%, -100%) rotate(0deg);
+      opacity: 1;
+      transform: translate(0, 0) rotate(0deg);
     }
   }
   
@@ -329,23 +330,23 @@ body {
 @keyframes bounce-rotate {
   0% {
     opacity: 0;
-    transform: translate(-100%, -100%) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg);
   }
   25% {
     opacity: 1;
-    transform: translate(-100%, 100%) rotate(360deg);
+    transform: translate(0, 0) rotate(360deg);
   }
   50% {
     opacity: 1;
-    transform: translate(100%, 100%) rotate(-360deg);
+    transform: translate(0, 0) rotate(-360deg);
   }
   75% {
     opacity: 1;
-    transform: translate(100%, -100%) rotate(360deg);
+    transform: translate(0, 0) rotate(360deg);
   }
   100% {
     opacity: 1;
-    transform: translate(-100%, -100%) rotate(-360deg);
+    transform: translate(0, 0) rotate(0deg);
   }
 }
 
