@@ -5,6 +5,10 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
   }
+
+  body.about {
+    background-image: url(https://tenor.com/view/philadelphia-philly-skyline-philadelphia-skyline-philly-skyline-gif-25199686);
+  }
   
   .container {
     display: flex;
