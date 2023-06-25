@@ -323,7 +323,38 @@ body {
 .video-container h2,
 .video-container p {
   opacity: 0;
-  animation: fade-in 1s ease-in-out forwards 5s;
+  animation: fade-in 1s ease-in-out forwards;
+}
+
+.video-container:nth-child(1) h2,
+.video-container:nth-child(1) p {
+  animation-delay: 5s;
+}
+
+.video-container:nth-child(2) h2,
+.video-container:nth-child(2) p {
+  animation-delay: 10s;
+}
+
+.video-container:nth-child(3) h2,
+.video-container:nth-child(3) p {
+  animation-delay: 15s;
+}
+
+.video-container:nth-child(4) h2,
+.video-container:nth-child(4) p {
+  animation-delay: 20s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 
