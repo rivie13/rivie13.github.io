@@ -31,17 +31,15 @@ body {
   
   .video-container {
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 10vw;
+    margin-right: 15vw;
+    background-color: black;
+    color: white;
   }
-  
-  .video-info {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #FFFFFF;
+
+  .video-box {
+    width: 40vw;
+    height: 30vw;
   }
   
   .video-info h2 {
@@ -76,9 +74,7 @@ body {
   .blog-post p {
     font-size: 14px;
   }
-  .bottom-column {
-    flex: 1;
-  }
+  
   
   img {
     max-width: 100%;
