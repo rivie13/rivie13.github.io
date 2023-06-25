@@ -39,7 +39,7 @@ body {
     flex: 1;
   }
 
-  myImage {
+  img.myImage {
     max-width: 50%;
     height: 50%;
     align-self: center;
