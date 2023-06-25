@@ -82,10 +82,12 @@ body {
       }
     }
 
+    /* Have Nate look at this the animation is not coming in from the right direction*/
+
     @-webkit-keyframes fadeInRight {
       0%{
         opacity: 0;
-        
+        -webkit-transform: translateX(50px);
         transform-origin: right top;
       }
       100%{
@@ -96,7 +98,7 @@ body {
     @-moz-keyframes fadeInRight {
       0%{
         opacity: 0;
-       
+        -moz-transform: translateX(50px);
         transform-origin: right top;
       }
       100%{
@@ -107,7 +109,7 @@ body {
     @-o-keyframes fadeInRight {
       0%{
         opacity: 0;
-        
+        -o-transform: translateX(50px);
         transform-origin: right top;
       }
       100%{
@@ -118,13 +120,43 @@ body {
     @keyframes fadeInRight {
       0%{
         opacity: 0;
-        
+        transform: translateX(50px);
         transform-origin: right top;
       }
       100%{
         opacity: 1;
         transform: translateX(22vw);
       }
+    }
+
+
+    .textContainer {
+      display: inline-block;
+    }
+
+
+    .text {
+      font-size: inherit;
+      letter-spacing: inherit;
+      font-family: inherit;
+      border-right: 5px solid;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: 
+        typing 4s ,
+        cursor .4s step-end infinite alternate;
+    }
+
+    /* cursor blinking */
+
+    @keyframes cursor {
+      50% { border-color: transparent }
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      
     }
 
 
