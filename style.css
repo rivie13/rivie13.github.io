@@ -19,6 +19,7 @@ body {
     flex-direction: column-reverse;
     justify-content: space-between;
     margin: 50px;
+    align-content: center;
   }
 
   .animated {
@@ -88,7 +89,7 @@ body {
       }
       100%{
         opacity: 1;
-        -webkit-transform: translateX(0);
+        -webkit-transform: translateX(22vw);
       }
     }
     @-moz-keyframes fadeInRight {
@@ -98,7 +99,7 @@ body {
       }
       100%{
         opacity: 1;
-        -moz-transform: translateX(0);
+        -moz-transform: translateX(22vw);
       }
     }
     @-o-keyframes fadeInRight {
@@ -108,7 +109,7 @@ body {
       }
       100%{
         opacity: 1;
-        -o-transform: translateX(0);
+        -o-transform: translateX(22vw);
       }
     }
     @keyframes fadeInRight {
@@ -118,7 +119,7 @@ body {
       }
       100%{
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(22vw);
       }
     }
 
