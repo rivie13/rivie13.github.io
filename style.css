@@ -132,6 +132,7 @@ body {
 
     .textContainer {
       display: inline-block;
+      
     }
 
 
@@ -141,7 +142,7 @@ body {
       font-family: inherit;
       border-right: 5px solid;
       width: 100%;
-      white-space: nowrap;
+      white-space: inherit;
       overflow: hidden;
       animation: 
         typing 4s ,
