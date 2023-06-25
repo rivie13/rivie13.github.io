@@ -14,9 +14,16 @@ body {
     margin: 0;
   }
 
-  .container {
+  .aboutContainer {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: space-between;
+    margin: 50px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     margin: 50px;
   }
@@ -27,6 +34,7 @@ body {
   
   .middle-column {
     flex: 1;
+    border-radius: 25px;
     text-align: center;
     box-shadow: 5px 5px 5px 5px green;
     margin: auto;
