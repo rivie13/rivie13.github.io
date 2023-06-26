@@ -444,12 +444,16 @@ PROJECT STUFF STUFF*/
 
   .project-info {
     margin-left: 20px;
+    margin: auto;
     background-color: white;
     border-radius: 10px;
-    box-shadow: 5px 5px 5px green;
+    box-shadow: 5px 5px 5px 5px green;
     opacity: 0;
+    padding: 20px;
     animation: fade-inProjects 1s ease-in-out forwards, slide-in 1s ease-in-out forwards;
   }
+
+
 
   @keyframes fade-inProjects {
     
