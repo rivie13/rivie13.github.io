@@ -247,12 +247,11 @@ ALL OTHER PAGE CONTAINER STUFF*/
   .center-column {
     flex: 1;
     align-self: center;
-    margin-top: 50px;
+    margin-top: 50vw;
     padding: 10px;
     border-radius: 10px;
-    text-align: left;
-    box-shadow: 5px 5px 5px 5px green;
-    background-color: slategray;
+    box-shadow: 5px 5px 5px 5px slategray;
+    background-color: white;
   }
 
 /*##############################################################################################################################
@@ -504,7 +503,6 @@ PROJECT STUFF STUFF*/
 BLOG STUFF*/
   .blog-post {
     text-align: center;
-    margin-bottom: 50px;
   }
   
   .blog-post img {
