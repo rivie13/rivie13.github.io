@@ -223,6 +223,12 @@ ALL OTHER PAGE CONTAINER STUFF*/
     justify-content: space-between;
     margin: 50px;
   }
+
+  @media (max-width: 800px) {
+    .container {
+      flex-direction: column;
+    }
+  }
   
   .left-column {
     flex: 1;
@@ -289,15 +295,15 @@ VIDEO CONTAINER STUFF*/
   }
   
   .video-container:nth-child(2) {
-    animation-delay: 1.5s;
+    animation-delay: .3s;
   }
   
   .video-container:nth-child(3) {
-    animation-delay: 2.5s;
+    animation-delay: .6s;
   }
   
   .video-container:nth-child(4) {
-    animation-delay: 3s;
+    animation-delay: 1s;
   }
   
   .video-container:before {
