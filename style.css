@@ -247,11 +247,14 @@ ALL OTHER PAGE CONTAINER STUFF*/
 MY PICTURE HOME PAGE STUFF*/
 
   img.myImage {
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px 5px beige;
     max-width: 50%;
     height: 50%;
     align-self: center;
     /*add animation here for fading in from right to center
     pulled the projects animation here because it does what I want it to do.*/
+    /*still doesn't do what I want but this animation is ok here it's cool I guess lol*/
     animation: fade-inProjects 3s ease-in-out forwards, slide-in 3s ease-in-out forwards;
   }
 
@@ -261,12 +264,14 @@ VIDEO CONTAINER STUFF*/
   .video-container {
     position: relative;
     margin-bottom: 10vw;
-    margin-right: 15vw;
+    margin-right: 10vw;
     background-color: black;
     color: white;
     opacity: 0;
     animation: bounce-rotate 5s ease-in-out forwards;
     transform: rotate(0deg);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px 5px white;
   }
   
   .video-container:nth-child(1) {
@@ -365,21 +370,25 @@ VIDEO CONTAINER STUFF*/
 .video-container:nth-child(1) h2,
 .video-container:nth-child(1) p {
   animation-delay: 5s;
+  padding: 10px;
 }
 
 .video-container:nth-child(2) h2,
 .video-container:nth-child(2) p {
   animation-delay: 7s;
+  padding: 10px;
 }
 
 .video-container:nth-child(3) h2,
 .video-container:nth-child(3) p {
   animation-delay: 8s;
+  padding: 10px;
 }
 
 .video-container:nth-child(4) h2,
 .video-container:nth-child(4) p {
   animation-delay: 9s;
+  padding: 10px;
 }
 
 @keyframes fade-in {
