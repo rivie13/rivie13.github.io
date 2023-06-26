@@ -46,6 +46,7 @@ RECITAL VID STUFF*/
     overflow: hidden;
     width: 100%;
     margin-bottom: 2vh;
+    border-radius: 10px;
     padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
   }
 
@@ -401,7 +402,6 @@ VIDEO CONTAINER STUFF*/
     transform: translateY(0);
   }
 }
-
 
 @keyframes bounce-rotate {
   0% {
