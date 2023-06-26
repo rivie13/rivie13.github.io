@@ -247,7 +247,6 @@ ALL OTHER PAGE CONTAINER STUFF*/
   .center-column {
     flex: 1;
     align-self: center;
-    margin-top: 50vw;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 5px 5px 5px 5px slategray;
