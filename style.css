@@ -452,8 +452,8 @@ VIDEO CONTAINER STUFF*/
   }
 }
   .video-box {
-    width: 40vw;
-    height: 30vw;
+    width: 100%;
+    border-radius: 10px;
   }
   
   .video-info h2 {
