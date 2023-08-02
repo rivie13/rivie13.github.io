@@ -169,10 +169,6 @@ MY PICTURE HOME PAGE STUFF*/
     max-width: 50%;
     height: 50%;
     align-self: center;
-    /*add animation here for fading in from right to center
-    pulled the projects animation here because it does what I want it to do.*/
-    /*still doesn't do what I want but this animation is ok here it's cool I guess lol*/
-    animation: fade-inProjects 3s ease-in-out forwards, slide-in 3s ease-in-out forwards;
   }
 
 /*##############################################################################################################################
@@ -185,13 +181,11 @@ VIDEO CONTAINER STUFF*/
     background-color: black;
     color: white;
     opacity: 0;
-    animation: bounce-rotate 5s ease-in-out forwards;
-    transform: rotate(0deg);
     border-radius: 10px;
     box-shadow: 5px 5px 5px 5px white;
   }
   
-
+  
   /*##############################################################################################################################
 PROJECT STUFF STUFF*/
   
@@ -204,9 +198,11 @@ PROJECT STUFF STUFF*/
     box-shadow: 5px 5px 5px 5px green;
     opacity: 0;
     padding: 20px;
-    animation: fade-inProjects 1s ease-in-out forwards, slide-in 1s ease-in-out forwards;
   }
 
+
+
+ 
   
   /*##############################################################################################################################
 BLOG STUFF*/
