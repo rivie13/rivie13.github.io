@@ -14,12 +14,12 @@
 Ruby is the programming language that Jekyll is built on. To install Ruby on Windows:
 
 1. Download the RubyInstaller from [RubyInstaller.org](https://rubyinstaller.org/downloads/)
-   - Choose the **Ruby+Devkit** version (recommended: Ruby+Devkit 3.3.x (x64))
+   - Choose the **Ruby+Devkit** version (recommended: Ruby+Devkit 3.4.x (x64))
    - The DevKit is necessary for building native extensions for certain gems
 
 2. Run the installer and follow these steps:
    - Accept the license agreement
-   - Keep the default installation location (typically `C:\Ruby33-x64\`)
+   - Keep the default installation location (typically `C:\Ruby34-x64\`)
    - Check "Add Ruby executables to your PATH"
    - Check "MSYS2 development toolchain"
    - Complete the installation
@@ -48,7 +48,7 @@ If you see a Ruby version, Ruby is properly set in your PATH.
 If Ruby is not in your PATH for the current session:
 
 ```
-set PATH=C:\Ruby33-x64\bin;%PATH%
+set PATH=C:\Ruby34-x64\bin;%PATH%
 ```
 
 This only affects the current command prompt session.
@@ -62,7 +62,7 @@ To permanently add Ruby to your PATH:
 3. Click the "Environment Variables" button
 4. In the "System variables" section, find and select the "Path" variable
 5. Click "Edit"
-6. Click "New" and add the path to your Ruby installation's bin directory (e.g., `C:\Ruby33-x64\bin`)
+6. Click "New" and add the path to your Ruby installation's bin directory (e.g., `C:\Ruby34-x64\bin`)
 7. Click "OK" on all windows to save
 8. Restart any open command prompts for changes to take effect
 
@@ -85,6 +85,8 @@ After installing Ruby, you need to install Jekyll and Bundler gems:
    ```
    jekyll -v
    ```
+
+   Note: If you get dependency errors at this step, don't worry. This is normal and will be resolved when you run `bundle install` in your project directory.
 
 ## Setting Up Your Jekyll Site
 
@@ -149,7 +151,29 @@ To stop the server, press `Ctrl+C` in the command prompt.
 **Solutions**:
 - Restart your computer after installing Ruby
 - Manually add Ruby to your PATH as described in the [Setting Ruby in PATH](#setting-ruby-in-path) section
-- Verify the Ruby installation directory exists (e.g., `C:\Ruby33-x64\`)
+- Verify the Ruby installation directory exists (e.g., `C:\Ruby34-x64\`)
+
+### Jekyll-Sass-Converter Version Conflict
+
+**Issue**: `You have already activated jekyll-sass-converter 3.1.0, but your Gemfile requires jekyll-sass-converter 2.2.0`
+
+**Solutions**:
+1. Add `bundle exec` before any Jekyll commands:
+   ```
+   bundle exec jekyll -v
+   bundle exec jekyll serve
+   ```
+
+2. Update your Gemfile to explicitly use the newer version:
+   ```ruby
+   # In your Gemfile, add:
+   gem "jekyll-sass-converter", "~> 3.0"
+   ```
+   
+   Then run:
+   ```
+   bundle update
+   ```
 
 ### WDM Gem Installation Error
 
