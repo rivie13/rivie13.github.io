@@ -18,3 +18,16 @@
   - [x] Created _includes/header.html with responsive navigation
   - [x] Created _includes/footer.html with contact info and social links
   - [x] Created assets/css/main.css with basic custom styling
+- [x] **Step 1.7:** Populate Basic Pages (`.md` files)
+  - [x] Updated YAML Front Matter for all files
+  - [x] Enhanced content with modern layouts using Tailwind CSS
+  - [x] Created visually appealing layouts for all pages
+  - [x] Set up blog.md with pagination structure
+- [x] **Step 1.8:** Basic Styling (`assets/css/main.css`)
+  - [x] Created custom CSS to extend Tailwind
+  - [x] Added transition effects and hover styles
+  - [x] Created custom utility classes
+- [x] **Step 1.9:** Local Testing Setup
+  - [x] Created Gemfile with Jekyll and required plugins
+  - [x] Added sample blog post template
+  - [x] Created assets/js/main.js for basic JS functionality
