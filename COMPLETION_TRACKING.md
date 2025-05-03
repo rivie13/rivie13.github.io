@@ -14,3 +14,7 @@
   - [x] Moved image files from media/ into assets/images/
 - [x] **Step 1.4:** Configure _config.yml
 - [x] **Step 1.5:** Create Default Layout (_layouts/default.html) 
+- [x] **Step 1.6:** Create Header/Footer Includes
+  - [x] Created _includes/header.html with responsive navigation
+  - [x] Created _includes/footer.html with contact info and social links
+  - [x] Created assets/css/main.css with basic custom styling
