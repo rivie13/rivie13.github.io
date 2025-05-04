@@ -499,11 +499,12 @@ document.addEventListener('DOMContentLoaded', function() {
       // Map repository slugs to actual repository names if needed
       const repoMapping = {
         'codegrind': 'codegrind',
-        'helios': 'Helios', // Adjusted to match actual repo name
-        'helios-swarm-robotics': 'Helios', // Alternative name mapping
-        'bestnotes': 'BestNotes', // Adjusted to match actual repo name
-        'projectile-launcher-rework': 'Projectile-Launcher-Rework', // Adjusted to match actual repo name
-        'robotics-nav2-slam-example': 'Robotics-Nav2-SLAM-Example'
+        'helios': 'Helios', 
+        'helios-swarm-robotics': 'Helios',
+        'bestnotes': '01-BestNotes',
+        'projectile-launcher-rework': 'PLR',
+        'robotics-nav2-slam-example': 'Robotics-Nav2-SLAM-Example',
+        'book-player-application': 'assignment-10-rivie13'
       };
       
       const actualRepo = repoMapping[repo.toLowerCase()] || repo;

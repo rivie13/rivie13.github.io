@@ -45,7 +45,7 @@
 - name: "BestNotes"
   url: ""
   demo: ""
-  repo: "https://github.com/rivie13/bestnotes"
+  repo: "https://github.com/rivie13/01-BestNotes"
   description: "Free, open-source note-taking application with customizable features."
   features:
     - "Moveable toolbar"
@@ -60,7 +60,7 @@
 - name: "Projectile Launcher Rework"
   url: ""
   downloads: "45k+"
-  repo: "https://github.com/rivie13/projectile-launcher-rework"
+  repo: "https://github.com/rivie13/PLR"
   description: "Mod for Cyberpunk 2077 that modifies game mechanics with new variants, attachments, and ammo."
   features:
     - "Modified game mechanics"
@@ -71,4 +71,19 @@
     - YAML
     - JSON
     - RedScript
-  period: "December 2022 - Present" 
+  period: "December 2022 - Present"
+
+- name: "Book Player Application"
+  url: ""
+  demo: ""
+  repo: "https://github.com/rivie13/assignment-10-rivie13"
+  description: "Mobile application for reading and listening to books on Android devices."
+  features:
+    - "Audio playback for books"
+    - "Reading interface with pagination"
+    - "Book library management"
+  technologies:
+    - Kotlin
+    - Android SDK
+    - Material Design
+  period: "November 2024 - December 2024" 
