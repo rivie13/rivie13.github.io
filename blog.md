@@ -58,19 +58,32 @@ permalink: /blog/
   <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-xl font-bold mb-4">Subscribe for Updates</h2>
     <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
-    <form action="https://test.formspree.io/" method="POST" class="flex flex-col sm:flex-row gap-2">
-      <input type="email" name="email" placeholder="Your email address" class="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      <input type="hidden" name="subject" value="Blog Subscription">
-      <input type="hidden" name="_next" value="{{ site.url }}{{ site.baseurl }}/blog/?subscribed=true">
-      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all transform hover:scale-105">
-        Subscribe
-      </button>
-    </form>
-    {% if page.url contains '?subscribed=true' %}
-    <div class="mt-4 p-3 bg-green-100 text-green-800 rounded-lg">
-      Thanks for subscribing! You'll receive updates when new content is published.
+    
+    <!-- Mailchimp Signup Form -->
+    <div id="mc_embed_signup">
+      <!-- Replace 'YOUR_MAILCHIMP_URL_HERE' with your actual Mailchimp form action URL -->
+      <form action="https://YOUR_MAILCHIMP_URL_HERE.list-manage.com/subscribe/post?u=XXXXXXXX&amp;id=XXXXXXXX" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate flex flex-col sm:flex-row gap-2" target="_blank" novalidate>
+        <input type="email" value="" name="EMAIL" class="required email flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="mce-EMAIL" placeholder="Your email address" required>
+        <!-- This is the hidden field to prevent spam bots - do not remove -->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+          <input type="text" name="b_XXXXXXXX_XXXXXXXX" tabindex="-1" value="">
+        </div>
+        <div class="clear">
+          <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all transform hover:scale-105">Subscribe</button>
+        </div>
+      </form>
     </div>
-    {% endif %}
+    <!--End Mailchimp-->
+    
+    <!-- How to complete setup -->
+    <!-- 
+    To finish setting up:
+    1. Create a Mailchimp account at mailchimp.com
+    2. Create an audience for your subscribers
+    3. Create an embedded form (Audience → Signup forms → Embedded forms)
+    4. Replace the form action URL above with your Mailchimp URL
+    5. Delete these instructions
+    -->
   </div>
   {% else %}
   <!-- This section will display when blog posts are available -->
