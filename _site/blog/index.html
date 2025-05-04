@@ -66,9 +66,9 @@
     
     <main class="container mx-auto px-4 py-8">
         <div class="max-w-4xl mx-auto">
-  <h1 class="text-3xl font-bold mb-6">Blog</h1>
+  <h1 class="text-3xl font-bold mb-6 opacity-0" data-animate="fade-in">Blog</h1>
   
-  <p class="mb-8 text-lg">Welcome to my blog where I share insights, tutorials, and thoughts on software development, cloud architecture, and AI.</p>
+  <p class="mb-8 text-lg opacity-0" data-animate="fade-in">Welcome to my blog where I share insights, tutorials, and thoughts on software development, cloud architecture, and AI.</p>
 
   
 
@@ -76,7 +76,7 @@
   <!-- This section will display when blog posts are available -->
   <div class="space-y-8">
     
-      <article class="bg-white rounded-lg shadow-md overflow-hidden">
+      <article class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
         <div class="p-6">
           <h2 class="text-2xl font-bold mb-2">
             <a href="/development/tutorials/2025/05/03/sample-post.html" class="text-blue-600 hover:text-blue-800">Sample Blog Post</a>
@@ -97,7 +97,7 @@
           <div class="prose max-w-none mb-4">
             This is a sample blog post that demonstrates the formatting capabilities of Jekyll and Markdown for the portfolio website.
           </div>
-          <a href="/development/tutorials/2025/05/03/sample-post.html" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+          <a href="/development/tutorials/2025/05/03/sample-post.html" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transform hover:translate-x-2 transition-transform">
             Read more 
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -113,16 +113,16 @@
   
   
   <!-- Categories section -->
-  <div class="mt-12">
+  <div class="mt-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-2xl font-bold mb-4">Categories</h2>
     <div class="flex flex-wrap gap-2">
       
       
-        <a href="/categories/development" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-full transition-colors">
+        <a href="/categories/development" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-full transition-colors transform hover:scale-105">
           development (1)
         </a>
       
-        <a href="/categories/tutorials" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-full transition-colors">
+        <a href="/categories/tutorials" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-full transition-colors transform hover:scale-105">
           tutorials (1)
         </a>
       

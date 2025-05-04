@@ -5,10 +5,10 @@ permalink: /contact/
 ---
 
 <div class="max-w-6xl mx-auto px-4">
-  <h1 class="text-3xl font-bold mb-8" data-animate="fade-in">Contact Me</h1>
+  <h1 class="text-3xl font-bold mb-8 opacity-0" data-animate="fade-in">Contact Me</h1>
   
   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
-    <div class="bg-white rounded-lg shadow-md p-8">
+    <div class="bg-white rounded-lg shadow-md p-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <h2 class="text-xl font-bold mb-5 flex items-center">
         <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
@@ -61,7 +61,7 @@ permalink: /contact/
             </div>
             <div>
               <span class="block text-gray-800 font-medium">LinkedIn</span>
-              <a href="https://www.linkedin.com/in/riviera-sperduto" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition-colors">linkedin.com/in/riviera-sperduto</a>
+              <a href="https://www.linkedin.com/in/riviera-sperduto-219a54203/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600 transition-colors">Riviera Sperduto</a>
             </div>
           </li>
           <li class="flex items-center">
@@ -79,14 +79,14 @@ permalink: /contact/
         </ul>
       </div>
       
-      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg">
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg" data-hover="scale">
         <h3 class="font-bold text-lg mb-2">Response Time</h3>
         <p class="text-gray-700">I typically respond to inquiries within 24-48 hours. For urgent matters, please indicate this in your message subject.</p>
       </div>
     </div>
     
     <div>
-      <form id="contact-form" action="https://formspree.io/f/mldbјvpv" method="POST" class="bg-white rounded-lg shadow-md p-8">
+      <form id="contact-form" action="https://formspree.io/f/mldbјvpv" method="POST" class="bg-white rounded-lg shadow-md p-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
         <h2 class="text-xl font-bold mb-5 flex items-center">
           <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -148,7 +148,7 @@ permalink: /contact/
   </div>
   
   <!-- Music Services Section -->
-  <div class="bg-white rounded-lg shadow-md p-6 mb-8 hover-card" data-scroll="fade-up">
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8 hover-card opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-xl font-bold mb-4">Music Services</h2>
     <div class="flex flex-col md:flex-row gap-8 items-center">
       <div class="md:w-1/2">
@@ -158,7 +158,7 @@ permalink: /contact/
         <h3 class="font-semibold text-lg mb-3">Music Lessons</h3>
         <p class="text-gray-700 mb-5">Offering personalized music instruction for students of all ages and skill levels. Lessons are available both in-person (Philadelphia area) and online.</p>
         
-        <div class="bg-blue-50 p-5 rounded-lg border border-blue-200" id="lesson-info-section">
+        <div class="bg-blue-50 p-5 rounded-lg border border-blue-200" id="lesson-info-section" data-hover="scale">
           <h4 class="font-medium text-blue-800 mb-3">Lesson Information</h4>
           <ul class="list-disc pl-5 text-gray-700 space-y-2">
             <li>30, 45, or 60-minute sessions</li>
@@ -203,7 +203,7 @@ permalink: /contact/
   </div>
   
   <!-- Philadelphia Services Section -->
-  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <div class="flex flex-col md:flex-row gap-8 items-center">
       <div class="md:w-1/2">
         <h2 class="text-xl font-bold mb-4">Available for Local Philadelphia Services</h2>
@@ -211,13 +211,13 @@ permalink: /contact/
         <p class="text-gray-700">Whether you're based in Center City, the surrounding neighborhoods, or the broader metropolitan area, I can provide hands-on assistance with your technology needs while maintaining the convenience of face-to-face interaction.</p>
       </div>
       <div class="md:w-1/2">
-        <img src="{{ '/assets/images/9864029d3d105423f29f6f1032bc6f45.gif' | relative_url }}" alt="Philadelphia Skyline" class="rounded-lg shadow-md w-full">
+        <img src="{{ '/assets/images/9864029d3d105423f29f6f1032bc6f45.gif' | relative_url }}" alt="Philadelphia Skyline" class="rounded-lg shadow-md w-full" data-hover="scale">
       </div>
     </div>
   </div>
   
   <!-- FAQ Section -->
-  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-xl font-bold mb-5">Frequently Asked Questions</h2>
     
     <div class="space-y-5">
@@ -248,7 +248,7 @@ permalink: /contact/
       
       <div>
         <h3 class="font-semibold text-gray-900">What instruments do you teach?</h3>
-        <p class="text-gray-700 mt-2">I offer lessons primarily in piano, guitar, and music theory. Contact me for information about other instruments or specialized musical training.</p>
+        <p class="text-gray-700 mt-2">I offer lessons primarily in voice, piano, and music theory. Contact me for information about other instruments or specialized musical training.</p>
       </div>
       
       <div>
