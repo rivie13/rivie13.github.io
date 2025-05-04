@@ -25,11 +25,11 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
+          bundler-cache: false
           
       - name: Build site
         run: |
-          bundle lock --add-platform x86_64-linux
+          rm -f Gemfile.lock
           bundle install
           bundle exec jekyll build
         env:
