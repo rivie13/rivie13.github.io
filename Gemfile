@@ -1,12 +1,13 @@
 source "https://rubygems.org"
 
-# Use GitHub Pages
-gem "github-pages", group: :jekyll_plugins
+# Jekyll version for local development
+gem "jekyll", "~> 4.4.0"
 
-# If you have any plugins, put them here!
+# Plugins
 group :jekyll_plugins do
-  gem "jekyll-seo-tag"
-  gem "jekyll-paginate"
+  gem "jekyll-seo-tag", "~> 2.7.1"
+  gem "jekyll-paginate", "~> 1.1.0"
+  gem "jekyll-sass-converter", "~> 3.0"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
