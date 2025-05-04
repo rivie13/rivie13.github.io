@@ -7,11 +7,21 @@
   will-change: opacity, transform; /* Performance optimization */
 }
 
+/* Elements with data-scroll attribute start completely hidden */
+[data-scroll] {
+  opacity: 0;
+  visibility: hidden; /* Hide completely initially */
+  will-change: opacity, transform; /* Performance optimization */
+}
+
 /* When animations are ready, control visibility through opacity only */
 .animations-ready [data-animate] {
   visibility: visible;
   transition: opacity 0.5s ease-out;
 }
+
+/* DO NOT make data-scroll elements visible by default */
+/* They should only become visible when their animation is triggered */
 
 /* Transition utilities */
 .transition-all {
@@ -71,17 +81,20 @@
   }
 }
 
-/* Animation classes */
+/* Animation classes - ensure visibility is set along with the animation */
 .animate-fade-in {
-  animation: fadeIn 0.5s ease forwards;
+  animation: fadeIn 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+  visibility: visible; /* Make visible when animation is applied */
 }
 
 .animate-fade-up {
-  animation: fadeUp 0.5s ease forwards;
+  animation: fadeUp 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+  visibility: visible; /* Make visible when animation is applied */
 }
 
 .animate-slide-in {
-  animation: slideIn 0.5s ease forwards;
+  animation: slideIn 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) forwards;
+  visibility: visible; /* Make visible when animation is applied */
 }
 
 .animate-pulse {
