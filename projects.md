@@ -36,6 +36,14 @@ permalink: /projects/
     </div>
   </section>
   
+  <!-- Additional GitHub Projects -->
+  <section class="mt-16">
+    <h2 class="text-2xl font-bold mb-6 pb-2 border-b">More Projects from GitHub</h2>
+    <div id="additional-projects">
+      <!-- Dynamic content will be loaded here by JavaScript -->
+    </div>
+  </section>
+  
   <!-- Individual Project Details -->
   <section class="mt-16">
     {% for project in site.data.projects %}
@@ -199,6 +207,8 @@ permalink: /projects/
     {% endfor %}
   </section>
 </div>
+
+<script src="{{ '/assets/js/github-repos.js' | relative_url }}"></script>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
