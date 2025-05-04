@@ -1,0 +1,74 @@
+- name: "CodeGrind"
+  url: "https://codegrind.online/"
+  demo: ""
+  repo: "https://github.com/rivie13/codegrind"
+  description: "Gamified technical interview preparation platform with AI tutoring assistant."
+  features:
+    - "AI guidance without explicit answers"
+    - "Community-contributed problem sets"
+    - "Tower defense coding game that mixes gameplay with coding challenges"
+  future_plans: "Expansion into comprehensive learning platform"
+  technologies:
+    - React
+    - Node.js
+    - HTML/CSS
+    - Python
+    - PostgreSQL
+    - Prisma
+    - Azure
+  period: "Jan 2025 - Present"
+
+- name: "Helios: Swarm Robotics"
+  url: ""
+  demo: ""
+  repo1: "https://github.com/rivie13/Robotics-Nav2-SLAM-Example"
+  repo1_description: "Base product with Unity components for Navigation2's SLAM tutorial"
+  repo2: "https://github.com/rivie13/Helios"
+  repo2_description: "Release product for capstone project"
+  description: "Disaster response simulation with Python backend, Unity frontend, and custom visualization tools."
+  features:
+    - "Frameless PyQt5 GUI with custom title bar"
+    - "Dynamically loaded Unity scenarios for disaster simulations (wildfire, earthquake, flood, tornado, search & rescue, hazmat)"
+    - "PDF export with graph visualizations (temperature, humidity, battery, position)"
+    - "Socket communication with Unity for live sensor data"
+    - "Custom Unity environment using Robotics Warehouse randomizable environment"
+    - "Integration with ROS 2 for robotics navigation"
+    - "Database for sensor data and test suites with 83% code coverage"
+  technologies:
+    - Python
+    - C#
+    - Unity
+    - PyQt5
+    - ROS 2
+  period: "January 2025 - May 2025"
+
+- name: "BestNotes"
+  url: ""
+  demo: ""
+  repo: "https://github.com/rivie13/bestnotes"
+  description: "Free, open-source note-taking application with customizable features."
+  features:
+    - "Moveable toolbar"
+    - "Customizable eraser features"
+    - "Application reliability through testing"
+  technologies:
+    - Python
+    - Qt Core
+    - Pyside6
+  period: "October 2024 - December 2024"
+
+- name: "Projectile Launcher Rework"
+  url: ""
+  downloads: "45k+"
+  repo: "https://github.com/rivie13/projectile-launcher-rework"
+  description: "Mod for Cyberpunk 2077 that modifies game mechanics with new variants, attachments, and ammo."
+  features:
+    - "Modified game mechanics"
+    - "New variants and attachments"
+    - "Custom ammunition types"
+  technologies:
+    - Lua
+    - YAML
+    - JSON
+    - RedScript
+  period: "December 2022 - Present" 

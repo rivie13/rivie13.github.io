@@ -1,11 +1,12 @@
 ---
-layout: default
+layout: post
 title: "Sample Blog Post"
 date: 2025-05-03 12:00:00 -0500
 categories: [development, tutorials]
+tags: [jekyll, markdown, web-development]
+author: Riviera Sperduto
+excerpt: This is a sample blog post that demonstrates the formatting capabilities of Jekyll and Markdown for the portfolio website.
 ---
-
-# Sample Blog Post
 
 This is a sample blog post template that can be used as a reference for future posts. Jekyll uses Markdown formatting which makes it easy to write and format content.
 
@@ -44,7 +45,7 @@ Ordered list:
 
 ### Images
 
-![Alt text for image]({{ '/assets/images/placeholder-profile.jpg' | relative_url }})
+![Alt text for image](/assets/images/your-image.jpg)
 
 ### Code Blocks
 
@@ -69,7 +70,7 @@ You can customize various aspects of your post with front matter:
 
 ```yaml
 ---
-layout: default
+layout: post
 title: "Your Post Title"
 date: YYYY-MM-DD HH:MM:SS -0500
 categories: [category1, category2]
@@ -79,5 +80,17 @@ excerpt: A brief excerpt of your post
 image: path/to/featured-image.jpg
 ---
 ```
+
+## Benefits of a Technical Blog
+
+Maintaining a technical blog has several benefits:
+
+1. **Knowledge Sharing**: Helps others learn from your experiences
+2. **Personal Growth**: Reinforces your own understanding of concepts
+3. **Building Authority**: Establishes you as an expert in your field
+4. **Networking**: Connects you with others in the industry
+5. **Documentation**: Creates a record of your technical journey
+
+Writing about your coding projects, challenges you've overcome, or tutorials on specific technologies can be incredibly valuable both for your own development and for the wider community.
 
 This is just a placeholder post. Feel free to delete it when creating actual content! 
