@@ -2,11 +2,13 @@
   url: "https://codegrind.online/"
   demo: ""
   repo: "https://github.com/rivie13/codegrind"
-  description: "Gamified technical interview preparation platform with AI tutoring assistant."
+  description: "Gamified technical interview preparation platform with AI tutoring assistant that helps users practice for coding interviews."
   features:
     - "AI guidance without explicit answers"
     - "Community-contributed problem sets"
     - "Tower defense coding game that mixes gameplay with coding challenges"
+    - "LeetCode-style competitive leaderboards"
+    - "Tracked progress and skill development metrics"
   future_plans: "Expansion into comprehensive learning platform"
   technologies:
     - React
@@ -77,11 +79,13 @@
   url: ""
   demo: ""
   repo: "https://github.com/rivie13/assignment-10-rivie13"
-  description: "Mobile application for reading and listening to books on Android devices."
+  description: "Mobile application for reading and listening to books on Android devices, featuring a clean Material Design interface."
   features:
     - "Audio playback for books"
     - "Reading interface with pagination"
     - "Book library management"
+    - "Modern Material Design UI"
+    - "Offline book support"
   technologies:
     - Kotlin
     - Android SDK
