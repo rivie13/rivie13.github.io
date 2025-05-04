@@ -1,5 +1,18 @@
 /* Animation styles for the portfolio site */
 
+/* Elements with data-animate attribute start hidden by default */
+[data-animate] {
+  opacity: 0;
+  visibility: hidden; /* Hide completely initially */
+  will-change: opacity, transform; /* Performance optimization */
+}
+
+/* When animations are ready, control visibility through opacity only */
+.animations-ready [data-animate] {
+  visibility: visible;
+  transition: opacity 0.5s ease-out;
+}
+
 /* Transition utilities */
 .transition-all {
   transition-property: all;

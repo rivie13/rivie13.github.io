@@ -1,10 +1,15 @@
 // Animation utilities for the portfolio site
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize animations
-  initFadeInElements();
-  initHoverEffects();
-  initScrollAnimations();
+  // Ensure elements are hidden before animations start
+  document.body.classList.add('animations-ready');
+  
+  // Initialize animations after a very short delay to ensure CSS is applied
+  setTimeout(() => {
+    initFadeInElements();
+    initHoverEffects();
+    initScrollAnimations();
+  }, 10);
 });
 
 // Fade in elements with data-animate="fade-in" attribute on page load
@@ -16,6 +21,7 @@ function initFadeInElements() {
     const delay = 100 + (index * 100);
     
     setTimeout(() => {
+      element.style.opacity = '1';
       element.classList.add('opacity-100');
       element.classList.remove('opacity-0');
     }, delay);
@@ -70,6 +76,9 @@ function initScrollAnimations() {
         } else if (animation === 'slide-in') {
           element.classList.add('animate-slide-in');
         }
+        
+        // Ensure the element is visible
+        element.style.opacity = '1';
         
         // Once the animation is applied, stop observing this element
         observer.unobserve(element);
