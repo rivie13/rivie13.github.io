@@ -10,6 +10,7 @@ github_username: rivie13
 
 # Build settings
 markdown: kramdown
+future: true
 plugins:
   - jekyll-seo-tag
   - jekyll-paginate
