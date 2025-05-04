@@ -1,0 +1,39 @@
+languages:
+  - Python
+  - Kotlin
+  - Java
+  - C/C++
+  - C#
+  - SQL (MySQL & Postgres)
+  - JavaScript
+  - HTML/CSS
+  - YAML
+  - Lua
+  - RedScript
+
+frameworks:
+  - Testim.io
+  - MS Active Directory
+  - Tailwind
+  - Unity
+
+developer_tools:
+  - Git/GitHub
+  - Docker
+  - Microsoft Azure
+  - VS Code
+  - Visual Studio
+  - PyCharm
+  - IntelliJ
+  - MariaDB
+  - Dependency Track
+  - Power Automate
+  - Prisma
+  - Ollama
+
+libraries:
+  - Qt Core
+  - Pyside6
+  - Meraki
+  - GUIZero
+  - React 
