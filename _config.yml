@@ -22,3 +22,15 @@ paginate_path: "/blog/page:num/"
 social_links:
   github: rivie13
   linkedin: # Add your LinkedIn username when available 
+
+# Exclude from processing
+exclude:
+  - PLANNING.md
+  - RUBY_JEKYLL_SETUP.md
+  - COMPLETION_TRACKING.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - fix_jekyll.bat
+  - .gitignore
+  - .nojekyll 
