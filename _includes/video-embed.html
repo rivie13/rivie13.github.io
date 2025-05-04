@@ -1,0 +1,13 @@
+<div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden {{ include.classes }}">
+  <iframe 
+    src="https://www.youtube.com/embed/{{ include.video_id }}{% if include.autoplay %}?autoplay=1{% endif %}" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen
+    class="w-full h-full"
+    loading="lazy">
+  </iframe>
+</div>
+{% if include.caption %}
+<p class="mt-2 text-sm text-gray-600">{{ include.caption }}</p>
+{% endif %} 

@@ -5,15 +5,15 @@ permalink: /blog/
 ---
 
 <div class="max-w-4xl mx-auto">
-  <h1 class="text-3xl font-bold mb-6">Blog</h1>
+  <h1 class="text-3xl font-bold mb-6 opacity-0" data-animate="fade-in">Blog</h1>
   
-  <p class="mb-8 text-lg">Welcome to my blog where I share insights, tutorials, and thoughts on software development, cloud architecture, and AI.</p>
+  <p class="mb-8 text-lg opacity-0" data-animate="fade-in">Welcome to my blog where I share insights, tutorials, and thoughts on software development, cloud architecture, and AI.</p>
 
   {% assign post_count = site.posts | size %}
 
   {% if post_count == 0 %}
   <!-- Display when no posts are available -->
-  <div class="bg-white rounded-lg shadow-md p-8 mb-8">
+  <div class="bg-white rounded-lg shadow-md p-8 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <div class="text-center mb-6">
       <svg class="w-16 h-16 mx-auto text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
@@ -55,13 +55,13 @@ permalink: /blog/
     </div>
   </div>
   
-  <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm mb-8">
+  <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-xl font-bold mb-4">Subscribe for Updates</h2>
     <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
     <form action="https://formspree.io/f/mzbndrlq" method="POST" class="flex flex-col sm:flex-row gap-2">
       <input type="email" name="email" placeholder="Your email address" class="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
       <input type="hidden" name="subject" value="Blog Subscription">
-      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all transform hover:scale-105">
         Subscribe
       </button>
     </form>
@@ -70,7 +70,7 @@ permalink: /blog/
   <!-- This section will display when blog posts are available -->
   <div class="space-y-8">
     {% for post in site.posts %}
-      <article class="bg-white rounded-lg shadow-md overflow-hidden">
+      <article class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
         <div class="p-6">
           <h2 class="text-2xl font-bold mb-2">
             <a href="{{ post.url | relative_url }}" class="text-blue-600 hover:text-blue-800">{{ post.title }}</a>
@@ -89,7 +89,7 @@ permalink: /blog/
           <div class="prose max-w-none mb-4">
             {{ post.excerpt }}
           </div>
-          <a href="{{ post.url | relative_url }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+          <a href="{{ post.url | relative_url }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transform hover:translate-x-2 transition-transform">
             Read more 
             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -102,7 +102,7 @@ permalink: /blog/
   
   <!-- Pagination -->
   {% if paginator.total_pages > 1 %}
-    <div class="flex justify-center space-x-2 mt-8">
+    <div class="flex justify-center space-x-2 mt-8 opacity-0" data-animate="fade-in">
       {% if paginator.previous_page %}
         <a href="{{ paginator.previous_page_path | relative_url }}" class="bg-white rounded-lg shadow px-3 py-1 hover:bg-gray-50">
           Previous
@@ -129,12 +129,12 @@ permalink: /blog/
   {% endif %}
   
   <!-- Categories section -->
-  <div class="mt-12">
+  <div class="mt-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-2xl font-bold mb-4">Categories</h2>
     <div class="flex flex-wrap gap-2">
       {% assign categories = site.categories | sort %}
       {% for category in categories %}
-        <a href="{{ '/categories/' | append: category[0] | relative_url }}" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-full transition-colors">
+        <a href="{{ '/categories/' | append: category[0] | relative_url }}" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-full transition-colors transform hover:scale-105">
           {{ category[0] }} ({{ category[1].size }})
         </a>
       {% endfor %}

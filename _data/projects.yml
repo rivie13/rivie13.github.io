@@ -3,6 +3,7 @@
   demo: ""
   repo: "https://github.com/rivie13/codegrind"
   description: "Gamified technical interview preparation platform with AI tutoring assistant that helps users practice for coding interviews."
+  video_id: "P8kmlbjYdI4"
   detailed_description: "CodeGrind transforms technical interview preparation into an engaging experience by combining gamification elements with a sophisticated AI tutor. The platform helps users master data structures, algorithms, and system design through interactive challenges, competitive leaderboards, and personalized feedback without revealing direct solutions."
   challenges:
     - "Developing an AI guidance system that provides meaningful hints without giving away solutions"
@@ -48,6 +49,7 @@
   repo2: "https://github.com/rivie13/Helios"
   repo2_description: "Release product for capstone project"
   description: "Disaster response simulation with Python backend, Unity frontend, and custom visualization tools."
+  video_id: "a-3ocUuVebk"
   detailed_description: "Helios is a comprehensive disaster response simulation system that models swarm robotics behavior in emergency scenarios. The platform combines advanced ROS 2 navigation with a custom Unity visualization engine, allowing researchers and emergency response teams to simulate how robot swarms might coordinate in various disaster conditions while collecting and visualizing critical sensor data."
   challenges:
     - "Integrating ROS 2 navigation systems with Unity for realistic physics and behavior"

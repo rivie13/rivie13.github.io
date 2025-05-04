@@ -22,8 +22,10 @@
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
 </head>
-<body>
+<body class="page-transition enter-active">
     <header class="bg-gray-900 text-white shadow-md">
   <div class="container mx-auto px-4 py-4">
     <nav class="flex flex-wrap items-center justify-between">
@@ -67,26 +69,29 @@
   <!-- Hero Section -->
   <section class="py-12 md:py-16">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-      <div class="md:col-span-3">
+      <div class="md:col-span-3 opacity-0" data-animate="fade-in">
         <h1 class="text-4xl md:text-5xl font-bold mb-4">Riviera Sperduto</h1>
-        <h2 class="text-xl md:text-2xl text-gray-600 mb-6">Full Stack Developer | Cloud/Solutions Architect | AI Developer</h2>
+        <h2 class="text-xl md:text-2xl text-gray-600 mb-6">Philadelphia-based Full Stack Developer | Cloud/Solutions Architect | AI Developer</h2>
         
-        <p class="text-lg mb-6">I craft innovative solutions and leverage cutting-edge technologies to build exceptional digital experiences. With expertise in full-stack development, cloud architecture, and AI, I'm passionate about creating efficient, scalable, and user-friendly applications.</p>
+        <div class="flex mb-6 items-center">
+          <img src="/assets/images/your-image.jpg" alt="Riviera Sperduto" class="w-32 h-32 rounded-full mr-6 shadow-md border-2 border-blue-500" data-hover="scale" />
+          <p class="text-lg">I craft innovative solutions and leverage cutting-edge technologies to build exceptional digital experiences. With expertise in full-stack development, cloud architecture, and AI, I'm passionate about creating efficient, scalable, and user-friendly applications from my home in the City of Brotherly Love.</p>
+        </div>
         
         <div class="flex flex-wrap gap-4">
-          <a href="/projects/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all">
+          <a href="/projects/" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105">
             View My Work
           </a>
-          <a href="/contact/" class="bg-transparent hover:bg-blue-50 text-blue-600 font-bold py-3 px-6 rounded-lg border border-blue-600 transition-all">
+          <a href="/contact/" class="bg-transparent hover:bg-blue-50 text-blue-600 font-bold py-3 px-6 rounded-lg border border-blue-600 transition-all transform hover:scale-105">
             Get In Touch
           </a>
         </div>
       </div>
       
-      <div class="md:col-span-2">
-        <div class="bg-gradient-to-br from-blue-100 to-indigo-100 p-1 rounded-xl shadow-xl">
-          <!-- Profile image -->
-          <img src="/assets/images/your-image.jpg" alt="Riviera Sperduto" class="rounded-lg w-full" />
+      <div class="md:col-span-2 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <div class="bg-gradient-to-br from-blue-100 to-indigo-100 p-1 rounded-xl shadow-xl" data-hover="scale">
+          <!-- Philly image -->
+          <img src="/assets/images/frc-philly-1.gif" alt="Philadelphia Skyline" class="rounded-lg w-full" />
         </div>
       </div>
     </div>
@@ -94,19 +99,14 @@
   
   <!-- Featured Projects Section -->
   <section class="py-12 border-t">
-    <h2 class="text-3xl font-bold mb-8">Featured Projects</h2>
+    <h2 class="text-3xl font-bold mb-8 opacity-0" data-animate="fade-in">Featured Projects</h2>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <!-- CodeGrind Project -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg">
-        <div class="h-48 bg-gray-200 flex items-center justify-center">
-          <!-- Placeholder for project image -->
-          <div class="text-gray-400 text-center">
-            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-            </svg>
-            <p>CodeGrind Screenshot</p>
-          </div>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <div class="h-48 bg-gray-900 flex items-center justify-center overflow-hidden">
+          <!-- Project image -->
+          <img src="/assets/images/logo.png" alt="CodeGrind Logo" class="w-full h-full object-contain" />
         </div>
         <div class="p-6">
           <h3 class="text-xl font-bold mb-2">CodeGrind</h3>
@@ -124,15 +124,10 @@
       </div>
       
       <!-- Helios Project -->
-      <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg">
-        <div class="h-48 bg-gray-200 flex items-center justify-center">
-          <!-- Placeholder for project image -->
-          <div class="text-gray-400 text-center">
-            <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-            </svg>
-            <p>Helios Screenshot</p>
-          </div>
+      <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <div class="h-48 bg-gray-200 flex items-center justify-center overflow-hidden">
+          <!-- Project image -->
+          <img src="/assets/images/Helios.png" alt="Helios Screenshot" class="w-full h-full object-cover" />
         </div>
         <div class="p-6">
           <h3 class="text-xl font-bold mb-2">Helios (Capstone Project)</h3>
@@ -151,17 +146,117 @@
     </div>
     
     <div class="mt-8 text-center">
-      <a href="/projects/" class="inline-block text-blue-600 hover:text-blue-800 font-bold">
+      <a href="/projects/" class="inline-block text-blue-600 hover:text-blue-800 font-bold transform hover:translate-x-2 transition-transform">
         View All Projects →
       </a>
     </div>
   </section>
   
+  <!-- Video Showcase Section -->
+  <section class="py-12 border-t">
+    <h2 class="text-3xl font-bold mb-8 opacity-0" data-animate="fade-in">Project Demos &amp; Performances</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+      <!-- CodeGrind Video -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <div class="p-4 pb-0">
+          <h3 class="text-lg font-bold">CodeGrind Demo</h3>
+          <p class="text-gray-600 text-sm mb-4">Interactive coding platform with gamified learning experience</p>
+        </div>
+        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden ">
+  <iframe src="https://www.youtube.com/embed/P8kmlbjYdI4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="w-full h-full" loading="lazy">
+  </iframe>
+</div>
+ 
+      </div>
+      
+      <!-- Helios Video -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <div class="p-4 pb-0">
+          <h3 class="text-lg font-bold">Helios: Single Robot Fire Demo</h3>
+          <p class="text-gray-600 text-sm mb-4">Disaster response simulation with swarm robotics</p>
+        </div>
+        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden ">
+  <iframe src="https://www.youtube.com/embed/a-3ocUuVebk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="w-full h-full" loading="lazy">
+  </iframe>
+</div>
+ 
+      </div>
+    </div>
+    
+    <!-- Music Performance Video -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- Hermit Songs and Dichterliebe Recital Video -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <div class="p-4 pb-0">
+          <h3 class="text-lg font-bold">Barber and Schuman: Hermit Songs and Dichterliebe Recital</h3>
+          <p class="text-gray-600 text-sm mb-4">Classical vocal performance as tenor soloist</p>
+        </div>
+        <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden ">
+  <iframe src="https://www.youtube.com/embed/ORs265LEYQY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="w-full h-full" loading="lazy">
+  </iframe>
+</div>
+ 
+      </div>
+      
+      <!-- Music Career Overview -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden p-6 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <h3 class="text-lg font-bold mb-3">Multi-Disciplinary Background</h3>
+        <p class="text-gray-700 mb-4">Beyond technology, I bring a diverse set of experiences that enhance my creative problem-solving abilities:</p>
+        <ul class="space-y-2 text-gray-700 mb-4">
+          <li class="flex items-start">
+            <svg class="w-5 h-5 mr-2 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <span class="font-medium">Semi-Professional Singer</span> - Tenor vocalist with performance experience in various concerts and productions
+            </div>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-5 h-5 mr-2 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <span class="font-medium">Music Teacher</span> - Experience teaching music lessons to students of all ages and skill levels
+            </div>
+          </li>
+          <li class="flex items-start">
+            <svg class="w-5 h-5 mr-2 text-blue-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+              <span class="font-medium">Former Small Business Owner</span> - Founded and operated "Philly Personal Shoppers"
+            </div>
+          </li>
+        </ul>
+        <a href="/about/" class="inline-block text-blue-600 hover:text-blue-800 font-medium transform hover:translate-x-2 transition-transform">Learn more about my background →</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Philadelphia Section -->
+  <section class="py-12 border-t">
+    <h2 class="text-3xl font-bold mb-8 opacity-0" data-animate="fade-in">Proudly Based in Philadelphia</h2>
+    
+    <div class="bg-white rounded-lg shadow-md p-6 overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
+      <div class="flex flex-col md:flex-row gap-8 items-center">
+        <div class="md:w-1/2">
+          <img src="/assets/images/9864029d3d105423f29f6f1032bc6f45.gif" alt="Philadelphia Cityscape" class="rounded-lg w-full shadow-sm" data-hover="scale" />
+        </div>
+        <div class="md:w-1/2">
+          <h3 class="text-xl font-bold mb-4">Embracing the City of Brotherly Love</h3>
+          <p class="text-gray-700 mb-4">Since moving to Philadelphia in 2017, I instantly fell in love with this vibrant city. The city's rich history of innovation and creativity inspires my approach to development and problem-solving.</p>
+          <p class="text-gray-700">I'm proud to contribute to Philadelphia's growing tech community and enjoy collaborating with local businesses and organizations to create digital solutions that help our city thrive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- GitHub Activity Section -->
   <section class="py-12 border-t">
-    <h2 class="text-3xl font-bold mb-8">Recent GitHub Activity</h2>
+    <h2 class="text-3xl font-bold mb-8 opacity-0" data-animate="fade-in">Recent GitHub Activity</h2>
     
-    <div id="github-activity-feed" class="bg-white rounded-lg shadow-md p-6 overflow-hidden">
+    <div id="github-activity-feed" class="bg-white rounded-lg shadow-md p-6 overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <div class="text-center">
         <div class="mb-4">
           <svg class="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -177,15 +272,15 @@
   <!-- Services Overview Section -->
   <section class="py-12 border-t">
     <div class="flex justify-between items-center mb-8">
-      <h2 class="text-3xl font-bold">Services</h2>
-      <a href="/services/" class="text-blue-600 hover:text-blue-800 font-medium">
+      <h2 class="text-3xl font-bold opacity-0" data-animate="fade-in">Services</h2>
+      <a href="/services/" class="text-blue-600 hover:text-blue-800 font-medium transform hover:translate-x-2 transition-transform">
         View All Services →
       </a>
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <!-- Full Stack Development -->
-      <div class="bg-white rounded-lg shadow-md p-6">
+      <div class="bg-white rounded-lg shadow-md p-6 opacity-0" data-animate="fade-in" data-scroll="fade-up" data-hover="scale">
         <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
@@ -196,7 +291,7 @@
       </div>
       
       <!-- Cloud/Solutions Architecture -->
-      <div class="bg-white rounded-lg shadow-md p-6">
+      <div class="bg-white rounded-lg shadow-md p-6 opacity-0" data-animate="fade-in" data-scroll="fade-up" data-hover="scale">
         <div class="w-12 h-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
@@ -207,7 +302,7 @@
       </div>
       
       <!-- AI Development -->
-      <div class="bg-white rounded-lg shadow-md p-6">
+      <div class="bg-white rounded-lg shadow-md p-6 opacity-0" data-animate="fade-in" data-scroll="fade-up" data-hover="scale">
         <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mb-4">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
@@ -221,10 +316,10 @@
   
   <!-- Call to Action -->
   <section class="py-12 border-t">
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl p-8 md:p-12 text-white text-center">
+    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl p-8 md:p-12 text-white text-center opacity-0" data-animate="fade-in" data-scroll="fade-up" data-hover="scale">
       <h2 class="text-2xl md:text-3xl font-bold mb-4">Ready to Start Your Project?</h2>
       <p class="text-lg md:text-xl opacity-90 mb-8 max-w-3xl mx-auto">Let's collaborate to bring your ideas to life with tailored solutions that meet your specific needs.</p>
-      <a href="/contact/" class="inline-block bg-white text-blue-600 hover:bg-blue-50 font-bold py-3 px-8 rounded-lg transition-all">
+      <a href="/contact/" class="inline-block bg-white text-blue-600 hover:bg-blue-50 font-bold py-3 px-8 rounded-lg transition-all transform hover:scale-105">
         Get in Touch
       </a>
     </div>
@@ -293,5 +388,7 @@
     
     <script src="/assets/js/github-activity.js"></script>
     <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/animations.js"></script>
+    <script src="/assets/js/responsive.js"></script>
 </body>
 </html> 
