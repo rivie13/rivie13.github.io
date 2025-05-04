@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-<div class="max-w-6xl mx-auto">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
   <!-- Hero Section -->
   <section class="py-12 md:py-16">
     <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
@@ -25,8 +25,8 @@ title: Home
       
       <div class="md:col-span-2">
         <div class="bg-gradient-to-br from-blue-100 to-indigo-100 p-1 rounded-xl shadow-xl">
-          <!-- Placeholder for profile image -->
-          <img src="{{ '/assets/images/placeholder-profile.jpg' | relative_url }}" alt="Riviera Sperduto" class="rounded-lg w-full">
+          <!-- Profile image -->
+          <img src="{{ '/assets/images/your-image.jpg' | relative_url }}" alt="Riviera Sperduto" class="rounded-lg w-full">
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@ title: Home
   <section class="py-12 border-t">
     <h2 class="text-3xl font-bold mb-8">Recent GitHub Activity</h2>
     
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div id="github-activity-feed" class="bg-white rounded-lg shadow-md p-6 overflow-hidden">
       <div class="text-center">
         <div class="mb-4">
           <svg class="w-16 h-16 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
-  // Placeholder for GitHub activity fetcher
-  // This will be implemented in Phase 2
-  const githubActivitySection = document.querySelector('#github-activity');
+  // GitHub activity section initialization is handled in github-activity.js
+  // This prevents the "GitHub activity container not found" error
+  const githubActivitySection = document.querySelector('#github-activity-feed');
   if(githubActivitySection) {
-    console.log('GitHub activity section found - will be implemented in Phase 2');
+    console.log('GitHub activity section found, initialization handled by github-activity.js');
   }
   
   // Mobile menu toggle
@@ -61,15 +61,4 @@ document.addEventListener('DOMContentLoaded', function() {
       document.documentElement.classList.add('dark');
     }
   }
-});
-
-// Load external scripts
-function loadScript(src, callback) {
-  const script = document.createElement('script');
-  script.src = src;
-  script.onload = callback;
-  document.head.appendChild(script);
-}
-
-// Load GitHub activity script
-loadScript('/assets/js/github-activity.js'); 
+}); 

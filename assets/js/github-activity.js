@@ -118,13 +118,13 @@ class GitHubActivityFetcher {
         const repoName = activity.repo.name.split('/')[1];
         content = `
           <div class="flex items-start">
-            <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1">
+            <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-1 flex-shrink-0">
               <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
               </svg>
             </div>
-            <div class="flex-1">
-              <p class="text-sm">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm truncate">
                 Pushed ${commits.length} commit${commits.length === 1 ? '' : 's'} to 
                 <a href="https://github.com/${activity.repo.name}" target="_blank" class="font-medium hover:text-blue-600">${repoName}</a>
               </p>
@@ -313,11 +313,13 @@ class GitHubLastUpdatedFetcher {
     this.element = document.querySelector(elementSelector);
     this.options = {
       cacheTime: options.cacheTime || 3600000, // Default: 1 hour in milliseconds
-      fallbackText: options.fallbackText || 'Recently updated'
+      fallbackText: options.fallbackText || 'Recently updated',
+      includeLastCommit: options.includeLastCommit !== false
     };
     
     this.cacheKey = `github_last_updated_${this.username}_${this.repositoryName}`;
     this.lastFetchedKey = `github_last_updated_fetched_${this.username}_${this.repositoryName}`;
+    this.lastCommitKey = `github_last_commit_${this.username}_${this.repositoryName}`;
     
     if (this.element) {
       this.init();
@@ -337,11 +339,12 @@ class GitHubLastUpdatedFetcher {
   loadLastUpdated() {
     const cached = localStorage.getItem(this.cacheKey);
     const lastFetched = localStorage.getItem(this.lastFetchedKey);
+    const cachedCommit = localStorage.getItem(this.lastCommitKey);
     const now = new Date().getTime();
     
     if (cached && lastFetched && (now - parseInt(lastFetched) < this.options.cacheTime)) {
       // Use cached data if it's still valid
-      this.displayLastUpdated(cached);
+      this.displayLastUpdated(cached, cachedCommit);
     } else {
       // Fetch new data
       this.fetchLastUpdated();
@@ -353,22 +356,47 @@ class GitHubLastUpdatedFetcher {
    */
   async fetchLastUpdated() {
     try {
-      const response = await fetch(`https://api.github.com/repos/${this.username}/${this.repositoryName}`);
+      // First check if repository exists to avoid 404 errors
+      const checkRepoResponse = await fetch(`https://api.github.com/repos/${this.username}/${this.repositoryName}`);
       
-      if (!response.ok) {
-        throw new Error(`GitHub API returned ${response.status}`);
+      if (!checkRepoResponse.ok) {
+        // If repo doesn't exist, use fallback
+        console.warn(`Repository ${this.repositoryName} not found or private. Using fallback.`);
+        this.displayLastUpdated(null);
+        return;
       }
       
-      const data = await response.json();
-      const lastUpdated = data.pushed_at || data.updated_at;
+      const repoData = await checkRepoResponse.json();
+      const lastUpdated = repoData.pushed_at || repoData.updated_at;
       
-      // Cache the results
+      // Cache repo data
       localStorage.setItem(this.cacheKey, lastUpdated);
       localStorage.setItem(this.lastFetchedKey, new Date().getTime().toString());
       
-      this.displayLastUpdated(lastUpdated);
+      // If option is enabled, fetch last commit information
+      let lastCommitInfo = null;
+      if (this.options.includeLastCommit) {
+        try {
+          const commitsResponse = await fetch(`https://api.github.com/repos/${this.username}/${this.repositoryName}/commits?per_page=1`);
+          if (commitsResponse.ok) {
+            const commitsData = await commitsResponse.json();
+            if (commitsData && commitsData.length > 0) {
+              lastCommitInfo = {
+                message: commitsData[0].commit.message,
+                url: commitsData[0].html_url,
+                date: commitsData[0].commit.author.date
+              };
+              localStorage.setItem(this.lastCommitKey, JSON.stringify(lastCommitInfo));
+            }
+          }
+        } catch (commitError) {
+          console.warn(`Error fetching commits for ${this.repositoryName}:`, commitError);
+        }
+      }
+      
+      this.displayLastUpdated(lastUpdated, lastCommitInfo);
     } catch (error) {
-      console.error(`Error fetching last updated time for ${this.repositoryName}:`, error);
+      console.warn(`Error fetching last updated time for ${this.repositoryName}:`, error);
       this.displayLastUpdated(null);
     }
   }
@@ -376,7 +404,7 @@ class GitHubLastUpdatedFetcher {
   /**
    * Display last updated time in the element
    */
-  displayLastUpdated(lastUpdated) {
+  displayLastUpdated(lastUpdated, lastCommitInfo = null) {
     if (!lastUpdated) {
       this.element.textContent = this.options.fallbackText;
       return;
@@ -385,7 +413,33 @@ class GitHubLastUpdatedFetcher {
     const date = new Date(lastUpdated);
     const timeAgo = this.getTimeAgo(date);
     
-    this.element.textContent = `Last updated: ${timeAgo}`;
+    if (lastCommitInfo) {
+      if (typeof lastCommitInfo === 'string') {
+        try {
+          lastCommitInfo = JSON.parse(lastCommitInfo);
+        } catch (e) {
+          lastCommitInfo = null;
+        }
+      }
+      
+      if (lastCommitInfo && lastCommitInfo.message) {
+        // Show the last commit message and time
+        const commitMsg = lastCommitInfo.message.length > 50 
+          ? lastCommitInfo.message.substring(0, 47) + '...' 
+          : lastCommitInfo.message;
+          
+        const commitTimeAgo = this.getTimeAgo(new Date(lastCommitInfo.date));
+        
+        this.element.innerHTML = `
+          Last commit: <span class="font-medium">${commitTimeAgo}</span>
+          <span class="block text-xs opacity-80 mt-1">${this.escapeHTML(commitMsg.split('\n')[0])}</span>
+        `;
+      } else {
+        this.element.textContent = `Last updated: ${timeAgo}`;
+      }
+    } else {
+      this.element.textContent = `Last updated: ${timeAgo}`;
+    }
   }
   
   /**
@@ -415,6 +469,18 @@ class GitHubLastUpdatedFetcher {
     const years = Math.floor(days / 365);
     return `${years} year${years === 1 ? '' : 's'} ago`;
   }
+  
+  /**
+   * Escape HTML to prevent XSS
+   */
+  escapeHTML(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 }
 
 // Initialize GitHub activity fetchers when DOM is loaded
@@ -430,7 +496,19 @@ document.addEventListener('DOMContentLoaded', function() {
   projectLastUpdatedElements.forEach(element => {
     const repo = element.getAttribute('data-github-last-updated');
     if (repo) {
-      new GitHubLastUpdatedFetcher('rivie13', repo, `[data-github-last-updated="${repo}"]`);
+      // Map repository slugs to actual repository names if needed
+      const repoMapping = {
+        'codegrind': 'codegrind',
+        'helios': 'Helios', // Adjusted to match actual repo name
+        'helios-swarm-robotics': 'Helios', // Alternative name mapping
+        'bestnotes': 'BestNotes', // Adjusted to match actual repo name
+        'projectile-launcher-rework': 'Projectile-Launcher-Rework', // Adjusted to match actual repo name
+        'robotics-nav2-slam-example': 'Robotics-Nav2-SLAM-Example'
+      };
+      
+      const actualRepo = repoMapping[repo.toLowerCase()] || repo;
+      console.log('Initializing last updated fetcher for repo:', repo, '(mapped to:', actualRepo, ')');
+      new GitHubLastUpdatedFetcher('rivie13', actualRepo, `[data-github-last-updated="${repo}"]`);
     }
   });
 }); 
