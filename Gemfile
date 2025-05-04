@@ -1,12 +1,12 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.4.0"
-gem "jekyll-sass-converter", "~> 3.0"
+# Use GitHub Pages
+gem "github-pages", group: :jekyll_plugins
 
-# Jekyll plugins
+# If you have any plugins, put them here!
 group :jekyll_plugins do
-  gem "jekyll-seo-tag", "~> 2.7.1"
-  gem "jekyll-paginate", "~> 1.1.0"
+  gem "jekyll-seo-tag"
+  gem "jekyll-paginate"
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -23,8 +23,8 @@ gem "wdm", ">= 0.1.0", :platforms => [:mingw, :x64_mingw, :mswin]
 # do not have a Java counterpart.
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 
-# Required for Jekyll
-gem "webrick"
+# Required for modern Ruby
+gem "webrick", "~> 1.7"
 
 # Add these gems to fix Ruby 3.3 compatibility warnings
 gem "csv"
