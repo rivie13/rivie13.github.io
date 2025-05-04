@@ -153,3 +153,107 @@ The site automatically deploys when changes are pushed to the main branch:
    ```
 5. GitHub Actions will build and deploy the site
 6. Wait 1-2 minutes, then verify at https://rivie13.github.io 
+
+## Email Newsletter with Mailchimp
+
+### Initial Mailchimp Setup
+
+1. **Create a Mailchimp account**:
+   - Go to [mailchimp.com](https://mailchimp.com) and sign up for a free account
+   - The free plan allows up to 2,000 subscribers and 10,000 emails per month
+
+2. **Create an audience**:
+   - In your Mailchimp dashboard, go to Audience → Audience dashboard
+   - Click "Create Audience" if you don't have one
+   - Name your list "Blog Subscribers" or similar
+   - Complete the audience setup wizard
+
+3. **Create an embedded signup form**:
+   - Go to Audience → Signup forms → Embedded forms
+   - Choose "Slim form" or "Horizontal form" for best integration
+   - Customize fields (email is sufficient, but you can add name if desired)
+   - Customize form design to match your site's style
+
+4. **Get your embed code**:
+   - In the form builder, find the "Copy/paste onto your site" section
+   - Copy the entire HTML code provided
+
+5. **Update the blog subscription form**:
+   - Open `blog.md`
+   - Locate the Mailchimp form section
+   - Replace the placeholder form action URL with your actual Mailchimp URL
+   - It will look similar to: `https://yourdomain.us1.list-manage.com/subscribe/post?u=a1b2c3d4e5f6&amp;id=1a2b3c4d5e`
+
+### Complete Blog Post Publishing Workflow
+
+1. **Create and write your blog post**:
+   - Follow the "Adding New Blog Posts" instructions above
+   - Create a new file in the `_posts` directory with the filename format: `YYYY-MM-DD-post-title.md`
+   - Add front matter and write your content in Markdown
+
+2. **Add images and assets**:
+   - Add any images to `/assets/images/posts/`
+   - Optimize images before uploading
+   - Reference images in your post using proper Markdown syntax
+
+3. **Preview your post locally**:
+   - Run `bundle exec jekyll serve`
+   - View your post at http://localhost:4000/blog/
+   - Make any necessary adjustments
+
+4. **Commit and push to GitHub**:
+   ```
+   git add .
+   git commit -m "Add new blog post: Your Post Title"
+   git push origin main
+   ```
+
+5. **Verify deployment**:
+   - Wait 1-2 minutes for GitHub Pages to build and deploy
+   - Visit your live site to ensure the post appears correctly
+   - Check that all links and images work properly
+
+6. **Notify subscribers with Mailchimp**:
+   - Log in to Mailchimp and go to Campaigns → Email templates
+   - Click "Create Campaign" and select "Regular Campaign"
+   - Choose your "Blog Subscribers" audience 
+   - Set up email details:
+     * Subject: "New Blog Post: [Your Post Title]"
+     * From name: Your name
+     * From email: Your email address
+
+7. **Design your email**:
+   - Choose a template or start from scratch
+   - Add your blog post title as a heading
+   - Include a brief excerpt or summary of your post
+   - Add a clear "Read More" button linking to your full blog post
+   - Include your branding and sign-off
+
+8. **Test and send**:
+   - Send a test email to yourself to verify everything looks correct
+   - Make any necessary adjustments
+   - Schedule or send immediately to your subscribers
+
+### Email Newsletter Best Practices
+
+1. **Consistent schedule**: Try to maintain a regular posting and emailing schedule
+2. **Compelling subject lines**: Keep them under 50 characters and make them interesting
+3. **Mobile-friendly**: Ensure your emails are readable on mobile devices
+4. **Personalization**: Include the subscriber's name if you collected it
+5. **Branding**: Maintain consistent visual identity across your site and emails
+6. **Analytics**: Review open rates and click-through rates to improve future emails
+7. **Unsubscribe option**: Ensure this works properly (Mailchimp handles this automatically)
+
+### Mailchimp Account Maintenance
+
+1. **List hygiene**:
+   - Periodically check for and remove invalid email addresses
+   - Monitor bounce rates and unsubscribe requests
+
+2. **Compliance**:
+   - Ensure you're following email marketing regulations (GDPR, CAN-SPAM)
+   - Never add people to your list without their consent
+
+3. **Usage limits**:
+   - Monitor your subscriber count to stay within the free plan limits
+   - Consider upgrading if you exceed 2,000 subscribers 
