@@ -54,37 +54,6 @@ permalink: /blog/
       </div>
     </div>
   </div>
-  
-  <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
-    <h2 class="text-xl font-bold mb-4">Subscribe for Updates</h2>
-    <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
-    
-    <!-- Mailchimp Signup Form -->
-    <div id="mc_embed_signup">
-      <!-- Replace 'YOUR_MAILCHIMP_URL_HERE' with your actual Mailchimp form action URL -->
-      <form action="https://YOUR_MAILCHIMP_URL_HERE.list-manage.com/subscribe/post?u=XXXXXXXX&amp;id=XXXXXXXX" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate flex flex-col sm:flex-row gap-2" target="_blank" novalidate>
-        <input type="email" value="" name="EMAIL" class="required email flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="mce-EMAIL" placeholder="Your email address" required>
-        <!-- This is the hidden field to prevent spam bots - do not remove -->
-        <div style="position: absolute; left: -5000px;" aria-hidden="true">
-          <input type="text" name="b_XXXXXXXX_XXXXXXXX" tabindex="-1" value="">
-        </div>
-        <div class="clear">
-          <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all transform hover:scale-105">Subscribe</button>
-        </div>
-      </form>
-    </div>
-    <!--End Mailchimp-->
-    
-    <!-- How to complete setup -->
-    <!-- 
-    To finish setting up:
-    1. Create a Mailchimp account at mailchimp.com
-    2. Create an audience for your subscribers
-    3. Create an embedded form (Audience → Signup forms → Embedded forms)
-    4. Replace the form action URL above with your Mailchimp URL
-    5. Delete these instructions
-    -->
-  </div>
   {% else %}
   <!-- This section will display when blog posts are available -->
   <div class="space-y-8">
@@ -118,6 +87,46 @@ permalink: /blog/
       </article>
     {% endfor %}
   </div>
+  {% endif %}
+  
+  <!-- Subscription form (always visible regardless of post count) -->
+  <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    <h2 class="text-xl font-bold mb-4">Subscribe for Updates</h2>
+    <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
+    
+    <!-- Mailchimp Signup Form -->
+    <div id="mc_embed_shell">
+      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+        #mc_embed_signup{background:#fff; false;clear:left; font:14px Helvetica,Arial,sans-serif; width: 600px;}
+        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+    <form action="https://github.us14.list-manage.com/subscribe/post?u=4c5f3cb9e9f5dfc6c64a01f23&amp;id=28ff2a557d&amp;f_id=00c351e0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll"><h2>Subscribe</h2>
+            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+        <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display: none;"></div>
+            <div class="response" id="mce-success-response" style="display: none;"></div>
+        </div>
+    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+        /* real people should not fill this in and expect good things - do not remove this or risk form bot signups */
+        <input type="text" name="b_4c5f3cb9e9f5dfc6c64a01f23_28ff2a557d" tabindex="-1" value="">
+    </div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                <p style="margin: 0px auto;"><a href="http://eepurl.com/jdZ9VY" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';fnames[6]='COMPANY';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
+    <!--End Mailchimp-->
+  </div>
   
   <!-- Pagination -->
   {% if paginator.total_pages > 1 %}
@@ -144,7 +153,6 @@ permalink: /blog/
         </a>
       {% endif %}
     </div>
-  {% endif %}
   {% endif %}
   
   <!-- Categories section -->
