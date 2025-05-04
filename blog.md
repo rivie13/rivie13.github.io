@@ -58,13 +58,19 @@ permalink: /blog/
   <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-xl font-bold mb-4">Subscribe for Updates</h2>
     <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
-    <form action="https://formspree.io/f/mzbndrlq" method="POST" class="flex flex-col sm:flex-row gap-2">
+    <form action="https://test.formspree.io/" method="POST" class="flex flex-col sm:flex-row gap-2">
       <input type="email" name="email" placeholder="Your email address" class="flex-grow px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
       <input type="hidden" name="subject" value="Blog Subscription">
+      <input type="hidden" name="_next" value="{{ site.url }}{{ site.baseurl }}/blog/?subscribed=true">
       <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-all transform hover:scale-105">
         Subscribe
       </button>
     </form>
+    {% if page.url contains '?subscribed=true' %}
+    <div class="mt-4 p-3 bg-green-100 text-green-800 rounded-lg">
+      Thanks for subscribing! You'll receive updates when new content is published.
+    </div>
+    {% endif %}
   </div>
   {% else %}
   <!-- This section will display when blog posts are available -->
@@ -137,10 +143,23 @@ permalink: /blog/
         <a href="{{ '/categories/' | append: category[0] | relative_url }}" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-full transition-colors transform hover:scale-105">
           {{ category[0] }} ({{ category[1].size }})
         </a>
+        {% unless forloop.first %}
+          {% assign category_files = category_files | append: ',' %}
+        {% endunless %}
+        {% capture category_filename %}categories/{{ category[0] }}.md{% endcapture %}
+        {% if forloop.first %}
+          {% assign category_files = category_filename %}
+        {% else %}
+          {% assign category_files = category_files | append: category_filename %}
+        {% endif %}
       {% endfor %}
       
       {% if categories.size == 0 %}
-        <p class="text-gray-600">Categories will appear here once posts are published.</p>
+        <!-- For development testing, show the development category -->
+        <a href="{{ '/categories/development/' | relative_url }}" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-1 px-3 rounded-full transition-colors transform hover:scale-105">
+          development (1)
+        </a>
+        <p class="text-gray-600 mt-2">More categories will appear here once more posts are published.</p>
       {% endif %}
     </div>
   </div>

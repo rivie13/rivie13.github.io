@@ -168,53 +168,40 @@ permalink: /about/
       Music & Media Content
     </h2>
     
-    <p class="text-gray-700 mb-6">Check out some of my project demos and musical performances:</p>
+    <p class="text-gray-700 mb-4">Check out some of my project demos and musical performances:</p>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <!-- CodeGrind Demo Video -->
-      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg" data-hover="scale">
+      <div class="rounded-lg overflow-hidden shadow-lg" data-hover="scale">
         {% include video-embed.html video_id="P8kmlbjYdI4" caption="CodeGrind Demo: Interactive Coding Platform" %}
+        <p class="text-sm text-gray-600 p-2">An interactive coding platform designed to teach data structures and algorithms through practice.</p>
       </div>
       
       <!-- Helios Demo Video -->
-      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg" data-hover="scale">
+      <div class="rounded-lg overflow-hidden shadow-lg" data-hover="scale">
         {% include video-embed.html video_id="a-3ocUuVebk" caption="Helios: Single Robot Fire Demo" %}
+        <p class="text-sm text-gray-600 p-2">Simulation demonstrating a single robot's fire detection and response capabilities.</p>
       </div>
     </div>
     
-    <h3 class="text-lg font-semibold mb-4">Musical Performances</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <h3 class="text-lg font-semibold mb-3">Musical Performances</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
       <!-- Barber and Schuman: Hermit Songs and Dichterliebe Recital -->
-      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg" data-hover="scale">
+      <div class="rounded-lg overflow-hidden shadow-lg" data-hover="scale">
         {% include video-embed.html video_id="ORs265LEYQY" caption="Barber and Schuman: Hermit Songs and Dichterliebe Recital" %}
+        <p class="text-sm text-gray-600 p-2">Classical vocal recital featuring works by Samuel Barber and Robert Schumann.</p>
       </div>
       
       <!-- Oh, is there not one maiden breast -->
-      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg" data-hover="scale">
+      <div class="rounded-lg overflow-hidden shadow-lg" data-hover="scale">
         {% include video-embed.html video_id="Cu6mpEBG0PE" caption="Oh, is there not one maiden breast" %}
+        <p class="text-sm text-gray-600 p-2">Tenor performance of this classic aria by Gilbert and Sullivan.</p>
       </div>
       
       <!-- Si mes vers avaient des ailes -->
-      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg" data-hover="scale">
+      <div class="rounded-lg overflow-hidden shadow-lg" data-hover="scale">
         {% include video-embed.html video_id="Wi5T0OqCjd8" caption="Si mes vers avaient des ailes" %}
-      </div>
-    </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="bg-gray-100 p-4 rounded-lg text-center text-gray-500 flex flex-col items-center justify-center h-48" data-hover="scale">
-        <svg class="w-12 h-12 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-        </svg>
-        <p>More music content coming soon!</p>
-        <p class="text-xs mt-2">Subscribe to my YouTube channel for updates</p>
-      </div>
-      
-      <div class="bg-gray-100 p-4 rounded-lg text-center text-gray-500 flex flex-col items-center justify-center h-48" data-hover="scale">
-        <svg class="w-12 h-12 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-        </svg>
-        <p>Coding tutorials coming soon!</p>
-        <p class="text-xs mt-2">Step-by-step guides for developers</p>
+        <p class="text-sm text-gray-600 p-2">Performance of Reynaldo Hahn's beautiful French art song.</p>
       </div>
     </div>
   </div>

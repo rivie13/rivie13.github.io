@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+<div class="max-w-4xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6 opacity-0" data-animate="fade-in">Category: {{ page.category }}</h1>
+  
+  <div class="mb-6 opacity-0" data-animate="fade-in">
+    <a href="{{ '/blog/' | relative_url }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold">
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to all posts
+    </a>
+  </div>
+  
+  <div class="space-y-8">
+    {% assign filtered_posts = site.posts | where: "categories", page.category %}
+    {% for post in filtered_posts %}
+      <article class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <div class="p-6">
+          <h2 class="text-2xl font-bold mb-2">
+            <a href="{{ post.url | relative_url }}" class="text-blue-600 hover:text-blue-800">{{ post.title }}</a>
+          </h2>
+          <div class="text-gray-600 mb-4">
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+          </div>
+          <div class="prose max-w-none mb-4">
+            {{ post.excerpt }}
+          </div>
+          <a href="{{ post.url | relative_url }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transform hover:translate-x-2 transition-transform">
+            Read more 
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+            </svg>
+          </a>
+        </div>
+      </article>
+    {% endfor %}
+    
+    {% if filtered_posts.size == 0 %}
+      <div class="bg-white rounded-lg shadow-md p-8 text-center opacity-0" data-animate="fade-in">
+        <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <h2 class="text-xl font-bold mb-2">No posts in this category yet</h2>
+        <p class="text-gray-600">Check back later for new content or explore other categories.</p>
+      </div>
+    {% endif %}
+  </div>
+</div> 
