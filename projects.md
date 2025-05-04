@@ -14,7 +14,12 @@ permalink: /projects/
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b">Featured Projects</h2>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {% assign featured_projects = site.data.projects | where_exp: "project", "project.name contains 'CodeGrind' or project.name contains 'Helios'" %}
+      {% assign featured_projects = '' | split: '' %}
+      {% for project in site.data.projects %}
+        {% if project.name contains 'CodeGrind' or project.name contains 'Helios' %}
+          {% assign featured_projects = featured_projects | push: project %}
+        {% endif %}
+      {% endfor %}
       {% for project in featured_projects %}
         <div class="h-full">
           {% include project-card.html project=project %}

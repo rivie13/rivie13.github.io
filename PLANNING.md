@@ -1,3 +1,8 @@
+---
+layout: null
+published: false
+---
+
 # Portfolio Website Redesign Plan (Jekyll on GitHub Pages)
 
 ## 1. Project Goal

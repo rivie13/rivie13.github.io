@@ -1,3 +1,8 @@
+---
+layout: null
+published: false
+---
+
 # Ruby and Jekyll Setup Guide for Windows
 
 ## Table of Contents
