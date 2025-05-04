@@ -139,7 +139,7 @@ permalink: /about/
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
       </svg>
-      Philadelphia Roots
+      My Philadelphia Journey
     </h2>
     
     <div class="flex flex-col md:flex-row gap-6 items-center">
@@ -175,12 +175,30 @@ permalink: /about/
       </div>
     </div>
     
+    <h3 class="text-lg font-semibold mb-4">Musical Performances</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+      <!-- Barber and Schuman: Hermit Songs and Dichterliebe Recital -->
+      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
+        {% include video-embed.html video_id="ORs265LEYQY" caption="Barber and Schuman: Hermit Songs and Dichterliebe Recital" %}
+      </div>
+      
+      <!-- Oh, is there not one maiden breast -->
+      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
+        {% include video-embed.html video_id="Cu6mpEBG0PE" caption="Oh, is there not one maiden breast" %}
+      </div>
+      
+      <!-- Si mes vers avaient des ailes -->
+      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
+        {% include video-embed.html video_id="Wi5T0OqCjd8" caption="Si mes vers avaient des ailes" %}
+      </div>
+    </div>
+    
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="bg-gray-100 p-4 rounded-lg text-center text-gray-500 flex flex-col items-center justify-center h-48">
         <svg class="w-12 h-12 mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
         </svg>
-        <p>Music content coming soon!</p>
+        <p>More music content coming soon!</p>
         <p class="text-xs mt-2">Subscribe to my YouTube channel for updates</p>
       </div>
       
@@ -191,6 +209,71 @@ permalink: /about/
         <p>Coding tutorials coming soon!</p>
         <p class="text-xs mt-2">Step-by-step guides for developers</p>
       </div>
+    </div>
+  </div>
+  
+  <!-- Music Career Section -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <h2 class="text-xl font-bold mb-4 flex items-center">
+      <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+      </svg>
+      Music Career
+    </h2>
+    
+    <div class="flex flex-col md:flex-row gap-8">
+      <div class="md:w-1/2">
+        <h3 class="font-semibold text-lg mb-3">Semi-Professional Singer</h3>
+        <p class="text-gray-700 mb-4">As a tenor vocalist, I've performed in various concerts and productions throughout the Philadelphia area. My musical journey complements my technical career, providing a creative outlet that enhances my problem-solving abilities.</p>
+        
+        <h4 class="font-medium text-gray-900 mb-2">Current Position:</h4>
+        <ul class="list-disc pl-5 mb-4 text-gray-700">
+          <li>Tenor Section Leader at Church of the Good Samaritan (2021-Current)</li>
+          <li>Music Teacher - voice and piano in Philadelphia city (Jan 2025-Current)</li>
+        </ul>
+        
+        <h4 class="font-medium text-gray-900 mb-2">Teaching Experience:</h4>
+        <p class="text-gray-700 mb-4">I have experience teaching music lessons to students of various ages and skill levels. I enjoy sharing my passion for music and helping others develop their musical abilities.</p>
+      </div>
+      
+      <div class="md:w-1/2">
+        <h4 class="font-medium text-gray-900 mb-2">Concert Experience:</h4>
+        <ul class="list-disc pl-5 mb-4 text-gray-700">
+          <li>Tenor Soloist - Mendelssohn's Ave Maria (Temple University Singers, Fall 2023)</li>
+          <li>Tenor 1 - Glen Loch Men's Chorale Concert (Glen Loch Men's Chorale, Fall 2023)</li>
+          <li>Tenor Soloist - Hermit Songs (Church of the Good Samaritan Concert Series, Summer 2023)</li>
+          <li>Tenor Soloist - Dichterliebe (Church of the Good Samaritan Concert Series, Summer 2023)</li>
+          <li>Tenor 1 - Beauty of The Day with Chanticleer (Philadelphia Chorale, Spring 2022*)</li>
+          <li>Tenor 2 - Bent But Not Broken Conference (Choir School of Delaware, Spring 2022)</li>
+          <li>Tenor 1 - Carmen (Boheme Opera NJ, Spring 2024)</li>
+          <li>Tenor 1 - Missa Pro Gloria Dei (Valley Forge Chorale, Spring 2024*)</li>
+          <li><em>* - world premiere</em></li>
+        </ul>
+        
+        <h4 class="font-medium text-gray-900 mb-2">Education:</h4>
+        <ul class="list-disc pl-5 mb-4 text-gray-700">
+          <li>Penn State University - BM Vocal Performance (2014-2016)</li>
+          <li>Community College of Philadelphia - AS Mathematics (2021-2023)</li>
+          <li>Temple University - BS Computer Science (2023-2025)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Small Business Experience Section -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <h2 class="text-xl font-bold mb-4 flex items-center">
+      <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      Entrepreneurial Experience
+    </h2>
+    
+    <div class="mb-6">
+      <h3 class="font-semibold text-lg mb-3">Former Small Business Owner</h3>
+      <p class="text-gray-700 mb-4">I previously founded and operated "Philly Personal Shoppers," a local business that provided personalized shopping services to clients in the Philadelphia area. This entrepreneurial experience taught me valuable lessons about customer service, time management, and business operations that I apply to my technical projects.</p>
+      
+      <p class="text-gray-700">My background as a small business owner gives me unique insight into the challenges faced by entrepreneurs and businesses of all sizes. This perspective helps me create more effective and practical technical solutions that address real business needs.</p>
     </div>
   </div>
   
