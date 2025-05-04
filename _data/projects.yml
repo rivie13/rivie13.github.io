@@ -3,13 +3,33 @@
   demo: ""
   repo: "https://github.com/rivie13/codegrind"
   description: "Gamified technical interview preparation platform with AI tutoring assistant that helps users practice for coding interviews."
+  detailed_description: "CodeGrind transforms technical interview preparation into an engaging experience by combining gamification elements with a sophisticated AI tutor. The platform helps users master data structures, algorithms, and system design through interactive challenges, competitive leaderboards, and personalized feedback without revealing direct solutions."
+  challenges:
+    - "Developing an AI guidance system that provides meaningful hints without giving away solutions"
+    - "Creating a scalable architecture to handle concurrent users solving code problems"
+    - "Implementing a fair rating and ranking system for user progress and competition"
+    - "Balancing game mechanics with educational value to maintain engagement"
+  solutions:
+    - "Used a sophisticated ML model to generate contextual hints based on partial solutions"
+    - "Implemented PostgreSQL with efficient indexing and caching strategies for performance"
+    - "Developed a ranking algorithm that considers problem difficulty, solution efficiency, and consistency"
+    - "Created a tower defense game that requires solving coding challenges to advance"
+  lessons_learned:
+    - "The balance between gamification and educational content is critical for user retention"
+    - "AI models require careful tuning to provide helpful guidance without solving problems outright"
+    - "Community contributions improve platform diversity but require robust validation systems"
+  achievements:
+    - "Actively growing user base with a month-over-month increase in active users"
+    - "Average session time of 45+ minutes indicating strong user engagement"
+    - "Community-contributed and LeetCode-style problem set expanded to over 2000 unique challenges"
   features:
     - "AI guidance without explicit answers"
     - "Community-contributed problem sets"
     - "Tower defense coding game that mixes gameplay with coding challenges"
     - "LeetCode-style competitive leaderboards"
     - "Tracked progress and skill development metrics"
-  future_plans: "Expansion into comprehensive learning platform"
+    - "Problem Generation System"
+  future_plans: "Expanding into a comprehensive learning platform that combines gamified coding challenges with structured interview preparation. Plans include adding interactive tutorials for programming fundamentals, expanding the tower defense game with difficulty progression tied to coding concepts, implementing spaced repetition for data structures and algorithms practice, and developing a mock interview system with AI-powered feedback. The platform will guide users from basic programming through advanced interview topics while maintaining engagement through achievement systems and competitive elements."
   technologies:
     - React
     - Node.js
@@ -28,6 +48,25 @@
   repo2: "https://github.com/rivie13/Helios"
   repo2_description: "Release product for capstone project"
   description: "Disaster response simulation with Python backend, Unity frontend, and custom visualization tools."
+  detailed_description: "Helios is a comprehensive disaster response simulation system that models swarm robotics behavior in emergency scenarios. The platform combines advanced ROS 2 navigation with a custom Unity visualization engine, allowing researchers and emergency response teams to simulate how robot swarms might coordinate in various disaster conditions while collecting and visualizing critical sensor data."
+  challenges:
+    - "Integrating ROS 2 navigation systems with Unity for realistic physics and behavior"
+    - "Creating efficient bidirectional communication between Python backend and Unity frontend"
+    - "Modeling realistic disaster scenarios with appropriate environmental variables"
+    - "Building a visualization system for real-time and exported data analysis"
+  solutions:
+    - "Developed a custom socket-based communication layer between ROS 2 and Unity"
+    - "Implemented frameless PyQt5 interface with dynamic scenario loading"
+    - "Created parametrized disaster scenario generators for different emergency types"
+    - "Built a comprehensive data visualization and export system with PDF reporting"
+  lessons_learned:
+    - "Cross-platform integration between robotics frameworks and game engines requires careful architecture planning"
+    - "Realistic simulation parameters significantly impact the validity of research outcomes"
+    - "Real-time data visualization is as important as the simulation itself for practical applications"
+  achievements:
+    - "Successfully modeled 4 distinct disaster scenarios with configurable parameters"
+    - "Achieved 83% code coverage through comprehensive test suites"
+    - "Developed reusable architecture that can be extended to new disaster types"
   features:
     - "Frameless PyQt5 GUI with custom title bar"
     - "Dynamically loaded Unity scenarios for disaster simulations (wildfire, earthquake, flood, tornado, search & rescue, hazmat)"
@@ -49,6 +88,23 @@
   demo: ""
   repo: "https://github.com/rivie13/01-BestNotes"
   description: "Free, open-source note-taking application with customizable features."
+  detailed_description: "BestNotes is a lightweight, customizable note-taking application built with Python and Qt that emphasizes user freedom and flexibility. Unlike many commercial alternatives, BestNotes focuses on providing a distraction-free writing experience with intuitive tools that can be positioned according to user preferences."
+  challenges:
+    - "Creating a moveable toolbar that maintains state across application sessions"
+    - "Implementing customizable eraser features that work across different input types"
+    - "Ensuring consistent behavior across different operating systems"
+  solutions:
+    - "Developed a persistent state management system using local configuration files"
+    - "Created a modular eraser system with configurable size, pressure, and behavior"
+    - "Implemented comprehensive platform-specific testing to ensure consistent behavior"
+  lessons_learned:
+    - "GUI applications require careful consideration of user workflow patterns"
+    - "Preferences and customization options significantly increase user satisfaction"
+    - "Testing is essential for ensuring consistent cross-platform behavior"
+  achievements:
+    - "Achieved zero-crash reliability through extensive error handling"
+    - "Created an intuitive user interface requiring minimal documentation"
+    - "Successfully implemented all planned features within project timeline"
   features:
     - "Moveable toolbar"
     - "Customizable eraser features"
@@ -64,6 +120,25 @@
   downloads: "45k+"
   repo: "https://github.com/rivie13/PLR"
   description: "Mod for Cyberpunk 2077 that modifies game mechanics with new variants, attachments, and ammo."
+  detailed_description: "Projectile Launcher Rework (PLR) is a comprehensive overhaul mod for Cyberpunk 2077 that reimagines the game's projectile weapon system with expanded customization options, new variants, and realistic ballistic mechanics. With over 45,000 downloads, it has become a pretty popular gameplay enhancement mod for the game."
+  challenges:
+    - "Reverse engineering the game's weapon systems without source code access"
+    - "Balancing new weapon variants and ammunition types for gameplay integrity"
+    - "Creating compatible systems that work with the game's existing framework"
+    - "Managing a large user base with varying hardware configurations"
+  solutions:
+    - "Utilized Lua and RedScript to hook into the game's weapon systems"
+    - "Created an extensive testing protocol to ensure balance across all game scenarios"
+    - "Implemented YAML configuration for easy community tweaking and customization"
+    - "Developed comprehensive documentation and responsive community support"
+  lessons_learned:
+    - "Modding popular games requires understanding both technical and community aspects"
+    - "Configuration-based approaches allow for easier maintenance and updates"
+    - "User feedback is essential for balancing gameplay mechanics"
+  achievements:
+    - "Over 45,000 downloads from the gaming community"
+    - "Consistent high rating on mod platforms"
+    - "Active community of users contributing ideas and feedback"
   features:
     - "Modified game mechanics"
     - "New variants and attachments"
@@ -80,6 +155,25 @@
   demo: ""
   repo: "https://github.com/rivie13/assignment-10-rivie13"
   description: "Mobile application for reading and listening to books on Android devices, featuring a clean Material Design interface."
+  detailed_description: "This Android application provides a seamless experience for both reading and listening to books on mobile devices. Built with Kotlin and Material Design principles, it offers an intuitive interface for managing a digital library, reading with customizable pagination, and audio playback with background service support."
+  challenges:
+    - "Implementing efficient storage and retrieval of book content and audio files"
+    - "Creating a responsive reading interface with customizable pagination"
+    - "Developing background audio playback that handles interruptions gracefully"
+    - "Ensuring accessibility across different Android devices and screen sizes"
+  solutions:
+    - "Utilized Android's Room database for efficient local storage and caching"
+    - "Implemented custom pagination algorithms with user preference storage"
+    - "Created a robust service-based audio player with MediaSession integration"
+    - "Applied Material Design components with responsive layouts"
+  lessons_learned:
+    - "Audio playback on mobile requires careful handling of system interruptions"
+    - "Local storage strategies significantly impact application performance"
+    - "Material Design guidelines provide excellent UX patterns for reading interfaces"
+  achievements:
+    - "Developed complete application within tight academic deadline"
+    - "Successfully implemented all core features with clean architecture"
+    - "Created reusable components that could be applied to future projects"
   features:
     - "Audio playback for books"
     - "Reading interface with pagination"

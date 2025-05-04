@@ -47,41 +47,81 @@ permalink: /projects/
       <div id="{{ project.name | slugify }}-details" class="hidden project-details my-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
         <h2 class="text-2xl font-bold mb-4">{{ project.name }}</h2>
         
-        <div class="mb-4">
-          <p class="text-gray-700 dark:text-gray-300">{{ project.description }}</p>
+        <div class="mb-6">
+          <p class="text-gray-700 dark:text-gray-300 text-lg">{{ project.detailed_description }}</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <h3 class="text-xl font-bold mb-2">Features</h3>
-            <ul class="list-disc list-inside mb-4">
-              {% for feature in project.features %}
-                <li class="mb-1 text-gray-700 dark:text-gray-300">{{ feature }}</li>
-              {% endfor %}
-            </ul>
-            
-            <h3 class="text-xl font-bold mb-2">Technologies</h3>
-            <div class="flex flex-wrap mb-4">
-              {% for tech in project.technologies %}
-                <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full px-3 py-1 text-sm font-medium mr-2 mb-2">{{ tech }}</span>
-              {% endfor %}
+            <div class="mb-6">
+              <h3 class="text-xl font-bold mb-3">Challenges</h3>
+              <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                {% for challenge in project.challenges %}
+                  <li>{{ challenge }}</li>
+                {% endfor %}
+              </ul>
             </div>
             
-            <div class="mb-4">
-              <h3 class="text-xl font-bold mb-2">Timeline</h3>
-              <p class="text-gray-700 dark:text-gray-300">{{ project.period }}</p>
+            <div class="mb-6">
+              <h3 class="text-xl font-bold mb-3">Our Solutions</h3>
+              <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                {% for solution in project.solutions %}
+                  <li>{{ solution }}</li>
+                {% endfor %}
+              </ul>
             </div>
             
-            {% if project.future_plans %}
-              <div class="mb-4">
-                <h3 class="text-xl font-bold mb-2">Future Plans</h3>
-                <p class="text-gray-700 dark:text-gray-300">{{ project.future_plans }}</p>
+            <div class="mb-6">
+              <h3 class="text-xl font-bold mb-3">Key Features</h3>
+              <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                {% for feature in project.features %}
+                  <li>{{ feature }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            
+            <div class="mb-6">
+              <h3 class="text-xl font-bold mb-3">Technologies</h3>
+              <div class="flex flex-wrap">
+                {% for tech in project.technologies %}
+                  <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full px-3 py-1 text-sm font-medium mr-2 mb-2">{{ tech }}</span>
+                {% endfor %}
               </div>
-            {% endif %}
+            </div>
           </div>
           
           <div>
-            <h3 class="text-xl font-bold mb-2">Links</h3>
+            <div class="mb-6">
+              <h3 class="text-xl font-bold mb-3">Achievements</h3>
+              <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                {% for achievement in project.achievements %}
+                  <li>{{ achievement }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            
+            <div class="mb-6">
+              <h3 class="text-xl font-bold mb-3">Lessons Learned</h3>
+              <ul class="list-disc list-inside text-gray-700 dark:text-gray-300 space-y-2">
+                {% for lesson in project.lessons_learned %}
+                  <li>{{ lesson }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            
+            {% if project.future_plans %}
+              <div class="mb-6">
+                <h3 class="text-xl font-bold mb-3">Future Plans</h3>
+                <p class="text-gray-700 dark:text-gray-300">{{ project.future_plans }}</p>
+              </div>
+            {% endif %}
+            
+            <div class="mb-6">
+              <h3 class="text-xl font-bold mb-3">Timeline</h3>
+              <p class="text-gray-700 dark:text-gray-300">{{ project.period }}</p>
+            </div>
+            
+            <h3 class="text-xl font-bold mb-3">Links</h3>
             <div class="space-y-2">
               {% if project.url != "" %}
                 <div>
