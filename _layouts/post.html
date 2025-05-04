@@ -3,7 +3,7 @@ layout: default
 ---
 
 <article class="max-w-4xl mx-auto">
-  <header class="mb-8">
+  <header class="mb-8 opacity-0" data-animate="fade-in">
     <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ page.title }}</h1>
     
     <div class="flex flex-wrap items-center text-gray-600 mb-6">
@@ -36,18 +36,18 @@ layout: default
     </div>
     
     {% if page.image %}
-      <div class="mb-6 rounded-lg overflow-hidden shadow-lg">
+      <div class="mb-6 rounded-lg overflow-hidden shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
         <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" class="w-full">
       </div>
     {% endif %}
   </header>
   
-  <div class="prose prose-blue max-w-none mb-12">
+  <div class="prose prose-blue max-w-none mb-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     {{ content }}
   </div>
   
   {% if page.tags.size > 0 %}
-    <div class="mb-8 pb-8 border-b">
+    <div class="mb-8 pb-8 border-b opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <h3 class="text-lg font-bold mb-4">Tags</h3>
       <div class="flex flex-wrap gap-2">
         {% for tag in page.tags %}
@@ -59,7 +59,7 @@ layout: default
     </div>
   {% endif %}
   
-  <div class="flex justify-between items-center mb-8">
+  <div class="flex justify-between items-center mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <a href="{{ '/blog/' | relative_url }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
       <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
@@ -84,11 +84,11 @@ layout: default
   </div>
   
   {% if site.related_posts.size > 0 %}
-    <div class="mt-12 mb-8">
+    <div class="mt-12 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <h3 class="text-2xl font-bold mb-6">Related Posts</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         {% for post in site.related_posts limit:2 %}
-          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg">
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
             <div class="p-6">
               <h4 class="text-lg font-bold mb-2">
                 <a href="{{ post.url | relative_url }}" class="text-gray-900 hover:text-blue-600">{{ post.title }}</a>
@@ -110,7 +110,7 @@ layout: default
     </div>
   {% endif %}
   
-  <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm">
+  <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h3 class="text-xl font-bold mb-4">Subscribe for Updates</h3>
     <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
     
