@@ -491,25 +491,169 @@ document.addEventListener('DOMContentLoaded', function() {
     new GitHubActivityFetcher('rivie13', '#github-activity-feed', { count: 5 });
   }
   
+  // First, gather all repository data needed for fetching
+  const repoMapping = {
+    'codegrind': 'codegrind',
+    'helios': 'Helios', 
+    'helios-swarm-robotics': 'Helios',
+    'bestnotes': '01-BestNotes',
+    'projectile-launcher-rework': 'PLR',
+    'robotics-nav2-slam-example': 'Robotics-Nav2-SLAM-Example',
+    'book-player-application': 'assignment-10-rivie13'
+  };
+  
+  // Cache for repository data to avoid multiple fetches for the same repo
+  const repoDataCache = {};
+  
+  // Process each unique repository once
+  const processedRepos = new Set();
+  
   // Initialize last updated fetchers for each project
   const projectLastUpdatedElements = document.querySelectorAll('[data-github-last-updated]');
+  
+  // First pass: collect all unique repos we need to fetch
   projectLastUpdatedElements.forEach(element => {
     const repo = element.getAttribute('data-github-last-updated');
-    if (repo) {
-      // Map repository slugs to actual repository names if needed
-      const repoMapping = {
-        'codegrind': 'codegrind',
-        'helios': 'Helios', 
-        'helios-swarm-robotics': 'Helios',
-        'bestnotes': '01-BestNotes',
-        'projectile-launcher-rework': 'PLR',
-        'robotics-nav2-slam-example': 'Robotics-Nav2-SLAM-Example',
-        'book-player-application': 'assignment-10-rivie13'
-      };
-      
+    if (repo && !processedRepos.has(repo)) {
       const actualRepo = repoMapping[repo.toLowerCase()] || repo;
-      console.log('Initializing last updated fetcher for repo:', repo, '(mapped to:', actualRepo, ')');
-      new GitHubLastUpdatedFetcher('rivie13', actualRepo, `[data-github-last-updated="${repo}"]`);
+      processedRepos.add(repo);
+      
+      // Fetch repo data once
+      fetchRepoData('rivie13', actualRepo)
+        .then(data => {
+          repoDataCache[repo] = data;
+          
+          // Update all elements with this repo attribute
+          updateAllElementsForRepo(repo, data);
+        })
+        .catch(error => {
+          console.warn(`Error fetching data for ${actualRepo}:`, error);
+          
+          // Update all elements with fallback
+          updateAllElementsForRepo(repo, null);
+        });
     }
   });
+  
+  /**
+   * Fetch repository data from GitHub API
+   */
+  async function fetchRepoData(username, repoName) {
+    console.log(`Fetching data for ${repoName}...`);
+    
+    // First check if repository exists to avoid 404 errors
+    const checkRepoResponse = await fetch(`https://api.github.com/repos/${username}/${repoName}`);
+    
+    if (!checkRepoResponse.ok) {
+      // If repo doesn't exist, use fallback
+      console.warn(`Repository ${repoName} not found or private. Using fallback.`);
+      return null;
+    }
+    
+    const repoData = await checkRepoResponse.json();
+    const lastUpdated = repoData.pushed_at || repoData.updated_at;
+    
+    // If option is enabled, fetch last commit information
+    let lastCommitInfo = null;
+    try {
+      const commitsResponse = await fetch(`https://api.github.com/repos/${username}/${repoName}/commits?per_page=1`);
+      if (commitsResponse.ok) {
+        const commitsData = await commitsResponse.json();
+        if (commitsData && commitsData.length > 0) {
+          lastCommitInfo = {
+            message: commitsData[0].commit.message,
+            url: commitsData[0].html_url,
+            date: commitsData[0].commit.author.date
+          };
+        }
+      }
+    } catch (commitError) {
+      console.warn(`Error fetching commits for ${repoName}:`, commitError);
+    }
+    
+    return { lastUpdated, lastCommitInfo };
+  }
+  
+  /**
+   * Update all elements with a specific repo attribute
+   */
+  function updateAllElementsForRepo(repo, data) {
+    // Get all elements with this repo
+    const elements = document.querySelectorAll(`[data-github-last-updated="${repo}"]`);
+    
+    // Loop through them and update each one
+    elements.forEach(element => {
+      if (!data) {
+        element.textContent = 'Recently updated';
+        return;
+      }
+      
+      const { lastUpdated, lastCommitInfo } = data;
+      
+      if (!lastUpdated) {
+        element.textContent = 'Recently updated';
+        return;
+      }
+      
+      const date = new Date(lastUpdated);
+      const timeAgo = getTimeAgo(date);
+      
+      if (lastCommitInfo && lastCommitInfo.message) {
+        // Show the last commit message and time
+        const commitMsg = lastCommitInfo.message.length > 50 
+          ? lastCommitInfo.message.substring(0, 47) + '...' 
+          : lastCommitInfo.message;
+          
+        const commitTimeAgo = getTimeAgo(new Date(lastCommitInfo.date));
+        
+        element.innerHTML = `
+          Last commit: <span class="font-medium">${commitTimeAgo}</span>
+          <span class="block text-xs opacity-80 mt-1">${escapeHTML(commitMsg.split('\n')[0])}</span>
+        `;
+      } else {
+        element.textContent = `Last updated: ${timeAgo}`;
+      }
+    });
+  }
+  
+  /**
+   * Format date to time ago string
+   */
+  function getTimeAgo(date) {
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+    
+    if (seconds < 60) return 'just now';
+    
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+    
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+    
+    const days = Math.floor(hours / 24);
+    if (days < 7) return `${days} day${days === 1 ? '' : 's'} ago`;
+    
+    const weeks = Math.floor(days / 7);
+    if (weeks < 4) return `${weeks} week${weeks === 1 ? '' : 's'} ago`;
+    
+    const months = Math.floor(days / 30);
+    if (months < 12) return `${months} month${months === 1 ? '' : 's'} ago`;
+    
+    const years = Math.floor(days / 365);
+    return `${years} year${years === 1 ? '' : 's'} ago`;
+  }
+  
+  /**
+   * Escape HTML to prevent XSS
+   */
+  function escapeHTML(str) {
+    if (!str) return '';
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 }); 

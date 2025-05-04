@@ -39,6 +39,11 @@ permalink: /projects/
   <!-- Individual Project Details -->
   <section class="mt-16">
     {% for project in site.data.projects %}
+      {% assign github_data_id = project.name | slugify %}
+      {% if project.name contains "Helios" %}
+        {% assign github_data_id = "helios-swarm-robotics" %}
+      {% endif %}
+      
       <div id="{{ project.name | slugify }}-details" class="hidden project-details my-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
         <h2 class="text-2xl font-bold mb-4">{{ project.name }}</h2>
         
@@ -135,7 +140,7 @@ permalink: /projects/
             </div>
             
             <div class="mt-4">
-              <span class="text-sm text-gray-500" data-github-last-updated="{{ project.name | slugify }}">
+              <span class="text-sm text-gray-500" data-github-last-updated="{{ github_data_id }}">
                 Checking for updates...
               </span>
             </div>
