@@ -12,11 +12,13 @@ permalink: /about/
       <div class="md:col-span-2">
         <h2 class="text-2xl font-bold mb-4">Riviera Sperduto</h2>
         <p class="mb-4 text-gray-700">Philadelphia-based Full Stack Developer, Cloud/Solutions Architect, and AI Developer with a strong foundation in mathematics and computer science. I blend analytical thinking with creative problem-solving to build elegant, efficient, and user-friendly solutions.</p>
+        <p class="mb-4 text-gray-700">Beyond technology, I'm a classically trained tenor vocalist and former small business owner. This unique combination of technical expertise, musical training, and entrepreneurial experience gives me a diverse perspective that enhances my approach to problem-solving and project development.</p>
         <div class="flex flex-wrap gap-2 mb-4">
           <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Full Stack Development</span>
           <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Cloud Architecture</span>
           <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">AI Development</span>
           <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Mathematics</span>
+          <span class="bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Music</span>
           <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Philadelphia</span>
         </div>
       </div>
@@ -59,7 +61,12 @@ permalink: /about/
         <p class="text-gray-700">Community College of Philadelphia | Philadelphia, PA</p>
         <p class="text-gray-600 text-sm">GPA: 3.73</p>
       </div>
-      <p class="text-gray-700">My dual background in computer science and mathematics gives me a unique perspective for solving complex problems. The analytical skills from mathematics complement my technical abilities in computer science.</p>
+      <div class="mb-4">
+        <h3 class="font-semibold text-gray-900">Bachelor of Music in Vocal Performance (Partial)</h3>
+        <p class="text-gray-700">Penn State University | State College, PA</p>
+        <p class="text-gray-600 text-sm">2014-2016</p>
+      </div>
+      <p class="text-gray-700">My multidisciplinary educational background provides me with a unique perspective for solving complex problems. The analytical skills from mathematics, technical expertise from computer science, and creative training from music complement each other in my professional work.</p>
     </div>
   </div>
   
@@ -226,13 +233,16 @@ permalink: /about/
         <h3 class="font-semibold text-lg mb-3">Semi-Professional Singer</h3>
         <p class="text-gray-700 mb-4">As a tenor vocalist, I've performed in various concerts and productions throughout the Philadelphia area. My musical journey complements my technical career, providing a creative outlet that enhances my problem-solving abilities.</p>
         
-        <h4 class="font-medium text-gray-900 mb-2">Current Position:</h4>
+        <h4 class="font-medium text-gray-900 mb-2">Current Positions:</h4>
         <ul class="list-disc pl-5 mb-4 text-gray-700">
-          <li>Tenor Section Leader at Church of the Good Samaritan (2021-Current)</li>
+          <li>Tenor Section Leader at Church of the Good Samaritan (Oct 2021-Current)</li>
           <li>Music Teacher - voice and piano in Philadelphia city (Jan 2025-Current)</li>
         </ul>
         
         <h4 class="font-medium text-gray-900 mb-2">Teaching Experience:</h4>
+        <ul class="list-disc pl-5 mb-4 text-gray-700">
+          <li>Music Teacher at Meridee Winters School of Music (Aug 2023-Aug 2024)</li>
+        </ul>
         <p class="text-gray-700 mb-4">I have experience teaching music lessons to students of various ages and skill levels. I enjoy sharing my passion for music and helping others develop their musical abilities.</p>
       </div>
       
