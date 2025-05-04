@@ -41,6 +41,43 @@ permalink: /projects/
     </div>
   </section>
   
+  <!-- Project Demo Videos -->
+  <section class="mt-16">
+    <h2 class="text-2xl font-bold mb-6 pb-2 border-b">Project Demo Videos</h2>
+    
+    <div class="mb-8">
+      <h3 class="text-xl font-bold mb-4">CodeGrind Demos</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div>
+          <h4 class="font-medium mb-2">Code Breach Demo Trailer</h4>
+          {% include video-embed.html video_id="P8kmlbjYdI4" caption="A short trailer showcasing the CodeGrind platform" %}
+        </div>
+        <div>
+          <h4 class="font-medium mb-2">Code Breach Demo Full Length</h4>
+          {% include video-embed.html video_id="VZYFaoyLr_4" caption="Full walkthrough of the CodeGrind platform" %}
+        </div>
+      </div>
+    </div>
+    
+    <div class="mb-8">
+      <h3 class="text-xl font-bold mb-4">Helios Demos</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div>
+          <h4 class="font-medium mb-2">Single Robot Fire Demo</h4>
+          {% include video-embed.html video_id="a-3ocUuVebk" caption="Demonstration of a single robot responding to a fire scenario" %}
+        </div>
+        <div>
+          <h4 class="font-medium mb-2">Multi Robot Fire Demo</h4>
+          {% include video-embed.html video_id="SAaDaRRwqLo" caption="Swarm robotics approach to fire response" %}
+        </div>
+        <div>
+          <h4 class="font-medium mb-2">Supply Run Demo</h4>
+          {% include video-embed.html video_id="8w49PEwId00" caption="Robots performing supply delivery in disaster scenarios" %}
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <!-- Additional GitHub Projects -->
   <section class="mt-16">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b">More Projects from GitHub</h2>
@@ -63,6 +100,13 @@ permalink: /projects/
         <div class="mb-6">
           <p class="text-gray-700 dark:text-gray-300 text-lg">{{ project.detailed_description }}</p>
         </div>
+        
+        {% if project.video_id %}
+        <div class="mb-8">
+          <h3 class="text-xl font-bold mb-4">Project Demo</h3>
+          {% include video-embed.html video_id=project.video_id caption=project.name %}
+        </div>
+        {% endif %}
         
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>

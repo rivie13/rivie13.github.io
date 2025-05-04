@@ -161,7 +161,19 @@ permalink: /about/
       Music & Media Content
     </h2>
     
-    <p class="text-gray-700 mb-6">I'll be sharing video content related to music performances, coding tutorials, and project walkthroughs. Stay tuned for updates!</p>
+    <p class="text-gray-700 mb-6">Check out some of my project demos and musical performances:</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <!-- CodeGrind Demo Video -->
+      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
+        {% include video-embed.html video_id="P8kmlbjYdI4" caption="CodeGrind Demo: Interactive Coding Platform" %}
+      </div>
+      
+      <!-- Helios Demo Video -->
+      <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
+        {% include video-embed.html video_id="a-3ocUuVebk" caption="Helios: Single Robot Fire Demo" %}
+      </div>
+    </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="bg-gray-100 p-4 rounded-lg text-center text-gray-500 flex flex-col items-center justify-center h-48">

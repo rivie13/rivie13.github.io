@@ -90,6 +90,31 @@ title: Home
     </div>
   </section>
   
+  <!-- Video Showcase Section -->
+  <section class="py-12 border-t">
+    <h2 class="text-3xl font-bold mb-8">Project Demos</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <!-- CodeGrind Video -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-4 pb-0">
+          <h3 class="text-lg font-bold">CodeGrind Demo</h3>
+          <p class="text-gray-600 text-sm mb-4">Interactive coding platform with gamified learning experience</p>
+        </div>
+        {% include video-embed.html video_id="P8kmlbjYdI4" %}
+      </div>
+      
+      <!-- Helios Video -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-4 pb-0">
+          <h3 class="text-lg font-bold">Helios: Single Robot Fire Demo</h3>
+          <p class="text-gray-600 text-sm mb-4">Disaster response simulation with swarm robotics</p>
+        </div>
+        {% include video-embed.html video_id="a-3ocUuVebk" %}
+      </div>
+    </div>
+  </section>
+  
   <!-- Philadelphia Section -->
   <section class="py-12 border-t">
     <h2 class="text-3xl font-bold mb-8">Proudly Based in Philadelphia</h2>
