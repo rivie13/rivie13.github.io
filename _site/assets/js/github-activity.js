@@ -3,6 +3,28 @@
  * Fetches and displays GitHub activity for a given username
  */
 
+// RequestQueueClient - Use shared RequestQueue object from github-repos.js
+// to avoid duplicate declarations
+const RequestQueueClient = {
+  add: function(url, callback) {
+    // Check if RequestQueue exists in global scope, otherwise fetch directly
+    if (window.RequestQueue) {
+      window.RequestQueue.add(url, callback);
+    } else {
+      fetch(url)
+        .then(response => {
+          return response.json().then(data => ({ response, data }));
+        })
+        .then(({ response, data }) => {
+          callback(response, data);
+        })
+        .catch(error => {
+          callback({ ok: false, status: 500 }, { message: error.message });
+        });
+    }
+  }
+};
+
 class GitHubActivityFetcher {
   constructor(username, containerSelector, options = {}) {
     this.username = username || window.GitHubConfig.username;
@@ -38,12 +60,12 @@ class GitHubActivityFetcher {
    * Load activities from cache or fetch from API
    */
   loadActivities() {
-    const cachedActivity = localStorage.getItem(this.cacheKey);
-    const lastUpdated = localStorage.getItem(this.lastUpdatedKey);
-    const now = new Date().getTime();
+    // Use the centralized cache helper
+    const cachedActivity = window.GitHubConfig.getCachedData(this.cacheKey);
     
-    if (cachedActivity && lastUpdated && (now - parseInt(lastUpdated) < this.options.cacheTime)) {
-      this.displayActivities(JSON.parse(cachedActivity));
+    if (cachedActivity) {
+      console.log('Using cached GitHub activity data');
+      this.displayActivities(cachedActivity);
     } else {
       this.fetchActivities();
     }
@@ -67,32 +89,36 @@ class GitHubActivityFetcher {
         `https://api.github.com/users/${this.username}/events?per_page=${this.options.count}`
       );
       
-      const response = await fetch(eventsUrl);
-      
-      if (response.status === 403) {
-        // Handle rate limiting with fallback data
-        console.warn('GitHub API rate limit exceeded for activity data. Using fallback.');
-        this.displayFallbackActivities();
-        return;
-      }
-      
-      if (!response.ok) {
-        throw new Error(`GitHub API returned ${response.status}`);
-      }
-      
-      const events = await response.json();
-      
-      // Filter events based on preferences
-      const filteredEvents = events.filter(event => 
-        this.options.filterEvents.includes(event.type)
-      ).slice(0, this.options.count);
-      
-      // Cache the results
-      localStorage.setItem(this.cacheKey, JSON.stringify(filteredEvents));
-      localStorage.setItem(this.lastUpdatedKey, new Date().getTime().toString());
-      
-      this.displayActivities(filteredEvents);
-      
+      // Use RequestQueueClient instead of direct fetch
+      await new Promise(resolve => {
+        RequestQueueClient.add(eventsUrl, async (response, events) => {
+          if (response.status === 403) {
+            // Handle rate limiting with fallback data
+            console.warn('GitHub API rate limit exceeded for activity data. Using fallback.');
+            this.displayFallbackActivities();
+            resolve();
+            return;
+          }
+          
+          if (!response.ok) {
+            console.error(`GitHub API returned ${response.status}`);
+            this.displayFallbackActivities();
+            resolve();
+            return;
+          }
+          
+          // Filter events based on preferences
+          const filteredEvents = events.filter(event => 
+            this.options.filterEvents.includes(event.type)
+          ).slice(0, this.options.count);
+          
+          // Cache the results
+          window.GitHubConfig.cacheData(this.cacheKey, filteredEvents);
+          
+          this.displayActivities(filteredEvents);
+          resolve();
+        });
+      });
     } catch (error) {
       console.error('Error fetching GitHub activity:', error);
       this.displayFallbackActivities();
@@ -649,54 +675,98 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(`Fetching data for ${repoName}...`);
     
     try {
+      // Check local cache first
+      const cacheKey = `github_repo_${username}_${repoName}`;
+      const cachedData = localStorage.getItem(cacheKey);
+      const cacheExpiry = localStorage.getItem(`${cacheKey}_expiry`);
+      const now = Date.now();
+      const cacheAge = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+      
+      if (cachedData && cacheExpiry && now < parseInt(cacheExpiry)) {
+        console.log(`Using cached data for ${repoName}`);
+        return JSON.parse(cachedData);
+      }
+      
       // First check if repository exists to avoid 404 errors
-      const checkRepoResponse = await fetch(window.GitHubConfig.addClientId(
+      const repoUrl = window.GitHubConfig.addClientId(
         `https://api.github.com/repos/${username}/${repoName}`
-      ));
+      );
       
-      if (checkRepoResponse.status === 403) {
-        // Rate limit exceeded, log once and provide a clean fallback
-        console.warn(`GitHub API rate limit exceeded. Using fallback for ${repoName}.`);
-        return null;
-      }
+      console.log(`DEBUG Auth - URL with client_id: ${repoUrl}`);
+      console.log(`DEBUG Auth - Client ID used: ${window.GitHubConfig.clientId}`);
       
-      if (!checkRepoResponse.ok) {
-        // If repo doesn't exist, use fallback
-        console.warn(`Repository ${repoName} not found or private. Using fallback.`);
-        return null;
-      }
-      
-      const repoData = await checkRepoResponse.json();
-      const lastUpdated = repoData.pushed_at || repoData.updated_at;
-      
-      // If option is enabled, fetch last commit information
-      let lastCommitInfo = null;
-      try {
-        const commitsResponse = await fetch(window.GitHubConfig.addClientId(
-          `https://api.github.com/repos/${username}/${repoName}/commits?per_page=1`
-        ));
-        
-        if (commitsResponse.ok) {
-          const commitsData = await commitsResponse.json();
-          if (commitsData && commitsData.length > 0) {
-            lastCommitInfo = {
-              message: commitsData[0].commit.message,
-              url: commitsData[0].html_url,
-              date: commitsData[0].commit.author.date
-            };
+      // Use RequestQueueClient to add request to queue
+      return new Promise(resolve => {
+        RequestQueueClient.add(repoUrl, async (checkRepoResponse, repoData) => {
+          // Log the response headers to check rate limit info
+          console.log(`DEBUG Auth - Response status: ${checkRepoResponse.status}`);
+          console.log(`DEBUG Auth - Rate limit info:`, 
+            checkRepoResponse.headers ? {
+              remaining: checkRepoResponse.headers.get('x-ratelimit-remaining'),
+              limit: checkRepoResponse.headers.get('x-ratelimit-limit'),
+              reset: checkRepoResponse.headers.get('x-ratelimit-reset')
+            } : 'No headers available'
+          );
+          
+          if (checkRepoResponse.status === 403) {
+            // Rate limit exceeded, log once and provide a clean fallback
+            console.warn(`GitHub API rate limit exceeded. Using fallback for ${repoName}.`);
+            resolve(null);
+            return;
           }
-        }
-      } catch (commitError) {
-        // Suppress repeated console warnings for commit errors
-        if (!window._commitErrorLogged) {
-          console.warn(`Error fetching commits. This may be due to API rate limits.`);
-          window._commitErrorLogged = true;
-        }
-      }
-      
-      return { lastUpdated, lastCommitInfo };
+          
+          if (!checkRepoResponse.ok) {
+            // If repo doesn't exist, use fallback
+            console.warn(`Repository ${repoName} not found or private. Using fallback.`);
+            resolve(null);
+            return;
+          }
+          
+          const lastUpdated = repoData.pushed_at || repoData.updated_at;
+          
+          // If option is enabled, fetch last commit information
+          let lastCommitInfo = null;
+          
+          try {
+            const commitsUrl = window.GitHubConfig.addClientId(
+              `https://api.github.com/repos/${username}/${repoName}/commits?per_page=1`
+            );
+            
+            // Use RequestQueueClient for commits too
+            await new Promise(resolveCommits => {
+              RequestQueueClient.add(commitsUrl, (commitsResponse, commitsData) => {
+                if (commitsResponse.ok && commitsData && commitsData.length > 0) {
+                  lastCommitInfo = {
+                    message: commitsData[0].commit.message,
+                    url: commitsData[0].html_url,
+                    date: commitsData[0].commit.author.date
+                  };
+                }
+                resolveCommits();
+              });
+            });
+          } catch (commitError) {
+            // Suppress repeated console warnings for commit errors
+            if (!window._commitErrorLogged) {
+              console.warn(`Error fetching commits. This may be due to API rate limits.`);
+              window._commitErrorLogged = true;
+            }
+          }
+          
+          // Save to cache with expiry
+          const result = { lastUpdated, lastCommitInfo };
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify(result));
+            localStorage.setItem(`${cacheKey}_expiry`, (now + cacheAge).toString());
+          } catch (e) {
+            console.warn('Failed to cache repo data:', e);
+          }
+          
+          resolve(result);
+        });
+      });
     } catch (error) {
-      console.warn(`Error fetching data for ${repoName}:`, error);
+      console.error(`Error fetching data for ${repoName}:`, error);
       return null;
     }
   }

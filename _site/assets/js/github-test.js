@@ -1,5 +1,6 @@
 /**
  * GitHub API Test Script
+ * This script tests GitHub API authentication
  */
 
 console.log('GitHub API test script loaded');
@@ -62,6 +63,58 @@ async function testGitHubAPI() {
 
 // Run the test when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM loaded, initializing GitHub activity');
-  testGitHubAPI();
+  console.log("Running GitHub API authentication test...");
+  
+  // Test 1: Direct fetch with client_id
+  const directUrl = `https://api.github.com/rate_limit?client_id=${window.GitHubConfig.clientId}`;
+  
+  console.log("TEST 1: Direct fetch with client_id");
+  console.log(`URL: ${directUrl}`);
+  
+  fetch(directUrl)
+    .then(response => {
+      console.log("TEST 1 Response status:", response.status);
+      console.log("TEST 1 Response headers:", {
+        'x-ratelimit-limit': response.headers.get('x-ratelimit-limit'),
+        'x-ratelimit-remaining': response.headers.get('x-ratelimit-remaining'),
+        'x-ratelimit-used': response.headers.get('x-ratelimit-used')
+      });
+      return response.json();
+    })
+    .then(data => {
+      console.log("TEST 1 Response data:", data);
+    })
+    .catch(error => {
+      console.error("TEST 1 Error:", error);
+    });
+  
+  // Test 2: Using GitHubConfig.addClientId
+  const configUrl = window.GitHubConfig.addClientId('https://api.github.com/rate_limit');
+  
+  console.log("TEST 2: Using GitHubConfig.addClientId");
+  console.log(`URL: ${configUrl}`);
+  
+  fetch(configUrl)
+    .then(response => {
+      console.log("TEST 2 Response status:", response.status);
+      console.log("TEST 2 Response headers:", {
+        'x-ratelimit-limit': response.headers.get('x-ratelimit-limit'),
+        'x-ratelimit-remaining': response.headers.get('x-ratelimit-remaining'),
+        'x-ratelimit-used': response.headers.get('x-ratelimit-used')
+      });
+      return response.json();
+    })
+    .then(data => {
+      console.log("TEST 2 Response data:", data);
+    })
+    .catch(error => {
+      console.error("TEST 2 Error:", error);
+    });
+    
+  // Test 3: Using RequestQueue
+  console.log("TEST 3: Using RequestQueue");
+  window.RequestQueue.add(configUrl, (response, data) => {
+    console.log("TEST 3 Response status:", response.status);
+    console.log("TEST 3 Response data:", data);
+  });
 }); 

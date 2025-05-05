@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log("DOM Content Loaded - Starting language update");
   const username = window.GitHubConfig.username;
   
-  // Hardcoded language data for specific projects
+  // EXPANDED: Hardcoded language data for ALL projects to avoid API calls completely
   const hardcodedLanguageData = {
     'helios-swarm-robotics': [
       { name: 'ASP.NET', percentage: 43 },
@@ -21,6 +21,22 @@ document.addEventListener('DOMContentLoaded', function() {
     ],
     'book-player-application': [
       { name: 'Kotlin', percentage: 100 }
+    ],
+    'codegrind': [
+      { name: 'JavaScript', percentage: 48 },
+      { name: 'Node.js', percentage: 30 },
+      { name: 'React', percentage: 18 },
+      { name: 'CSS', percentage: 4 }
+    ],
+    'bestnotes': [
+      { name: 'JavaScript', percentage: 55 },
+      { name: 'HTML', percentage: 25 },
+      { name: 'CSS', percentage: 20 }
+    ],
+    'projectile-launcher-rework': [
+      { name: 'Lua', percentage: 75 },
+      { name: 'RedScript', percentage: 15 },
+      { name: 'YAML', percentage: 10 }
     ]
   };
   
@@ -225,31 +241,50 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       `;
       
+      // Check cache first
+      const cacheKey = `project_languages_${repos.join('_')}`;
+      const cachedData = localStorage.getItem(cacheKey);
+      const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+      const now = Date.now();
+      const cacheDuration = 7 * 24 * 60 * 60 * 1000; // 7 days cache
+      
+      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+        console.log(`Using cached language data for: ${repos.join(', ')}`);
+        const languages = JSON.parse(cachedData);
+        updateLanguageBar(container, languages);
+        return;
+      }
+      
       // Combine data from multiple repos
       let combinedData = {};
       
       // Limit to only one API request at a time to reduce rate limiting
       for (const repo of repos) {
         try {
-          const response = await fetch(window.GitHubConfig.addClientId(
+          const langUrl = window.GitHubConfig.addClientId(
             `https://api.github.com/repos/${username}/${repo}/languages`
-          ));
+          );
           
-          if (response.ok) {
-            const data = await response.json();
-            
-            // Add each language's bytes to the combined data
-            for (const [lang, bytes] of Object.entries(data)) {
-              combinedData[lang] = (combinedData[lang] || 0) + bytes;
-            }
-          } else if (response.status === 403) {
-            console.warn(`Rate limited for ${repo}. Using fallback.`);
-            container.innerHTML = `<div class="text-xs text-gray-500 py-1">Language data unavailable (rate limited)</div>`;
-            return;
-          }
+          console.log(`DEBUG Cards - Getting language data for ${repo}: ${langUrl}`);
           
-          // Add delay between requests to avoid rate limiting
-          await new Promise(resolve => setTimeout(resolve, 1000));
+          // Use the global RequestQueueClient for proper authentication
+          await new Promise(resolve => {
+            window.RequestQueue.add(langUrl, (response, data) => {
+              if (response.ok) {
+                // Add each language's bytes to the combined data
+                for (const [lang, bytes] of Object.entries(data)) {
+                  combinedData[lang] = (combinedData[lang] || 0) + bytes;
+                }
+              } else if (response.status === 403) {
+                console.warn(`Rate limited for ${repo}. Using fallback.`);
+                container.innerHTML = `<div class="text-xs text-gray-500 py-1">Language data unavailable (rate limited)</div>`;
+                resolve();
+                return;
+              }
+              
+              resolve();
+            });
+          });
           
         } catch (err) {
           console.warn(`Failed to fetch language data for ${repo}:`, err);
@@ -270,53 +305,67 @@ document.addEventListener('DOMContentLoaded', function() {
         }))
         .sort((a, b) => b.percentage - a.percentage);
       
-      // Create HTML for language bar
-      const colorMap = {
-        "JavaScript": "bg-yellow-400",
-        "TypeScript": "bg-blue-500",
-        "Python": "bg-blue-600",
-        "Java": "bg-orange-600",
-        "C#": "bg-green-600",
-        "C++": "bg-pink-600",
-        "HTML": "bg-red-500",
-        "CSS": "bg-purple-500",
-        "Ruby": "bg-red-600",
-        "Go": "bg-blue-300",
-        "Swift": "bg-orange-500",
-        "Kotlin": "bg-purple-600",
-        "PHP": "bg-indigo-400",
-        "C": "bg-gray-500",
-        "Shell": "bg-green-400",
-        "Rust": "bg-orange-800",
-        "Batchfile": "bg-gray-600",
-        "ASP.NET": "bg-blue-800",
-        "Vue": "bg-green-500",
-        "CMake": "bg-indigo-600",
-        "Makefile": "bg-gray-600",
-        "Lua": "bg-blue-400",
-        "YAML": "bg-purple-300",
-        "RedScript": "bg-red-700",
-        "XML": "bg-orange-300"
-      };
+      // Cache the results
+      try {
+        localStorage.setItem(cacheKey, JSON.stringify(languages));
+        localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+      } catch (e) {
+        console.warn('Failed to cache language data:', e);
+      }
       
-      let languageHTML = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
-      let languageTextHTML = `<div class="flex flex-wrap mt-1 text-xs">`;
-      
-      languages.forEach(lang => {
-        const bgClass = colorMap[lang.name] || "bg-gray-400";
-        languageHTML += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-        languageTextHTML += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
-      });
-      
-      languageHTML += `</div>`;
-      languageTextHTML += `</div>`;
-      
-      // Update the container
-      container.innerHTML = languageHTML + languageTextHTML;
-      
+      updateLanguageBar(container, languages);
     } catch (error) {
       console.error('Error updating language data:', error);
       container.innerHTML = `<div class="text-xs text-gray-500 py-1">Failed to load language data</div>`;
     }
+  }
+  
+  /**
+   * Updates the language bar in the container
+   */
+  function updateLanguageBar(container, languages) {
+    // Create HTML for language bar
+    const colorMap = {
+      "JavaScript": "bg-yellow-400",
+      "TypeScript": "bg-blue-500",
+      "Python": "bg-blue-600",
+      "Java": "bg-orange-600",
+      "C#": "bg-green-600",
+      "C++": "bg-pink-600",
+      "HTML": "bg-red-500",
+      "CSS": "bg-purple-500",
+      "Ruby": "bg-red-600",
+      "Go": "bg-blue-300",
+      "Swift": "bg-orange-500",
+      "Kotlin": "bg-purple-600",
+      "PHP": "bg-indigo-400",
+      "C": "bg-gray-500",
+      "Shell": "bg-green-400",
+      "Rust": "bg-orange-800",
+      "Batchfile": "bg-gray-600",
+      "ASP.NET": "bg-blue-800",
+      "Vue": "bg-green-500",
+      "CMake": "bg-indigo-600",
+      "Makefile": "bg-gray-600",
+      "Lua": "bg-blue-400",
+      "YAML": "bg-purple-300",
+      "RedScript": "bg-red-700",
+      "XML": "bg-orange-300"
+    };
+    
+    let languageHTML = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+    let languageTextHTML = `<div class="flex flex-wrap mt-1 text-xs">`;
+    
+    languages.forEach(lang => {
+      const bgClass = colorMap[lang.name] || "bg-gray-400";
+      languageHTML += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
+      languageTextHTML += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+    });
+    
+    languageHTML += `</div>`;
+    languageTextHTML += `</div>`;
+    
+    // Update the container
+    container.innerHTML = languageHTML + languageTextHTML;
   }
 });

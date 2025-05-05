@@ -4,14 +4,73 @@
  */
 
 // Create a request queue to prevent hitting secondary rate limits
-const RequestQueue = {
+window.RequestQueue = {
   queue: [],
   running: false,
-  maxConcurrent: 2,
+  maxConcurrent: 1, // Reduce to 1 concurrent request
   activeRequests: 0,
+  requestCounter: 0,
+  
+  // Initialize request counter from localStorage if it exists
+  init: function() {
+    const storedCounter = localStorage.getItem('github_api_request_counter');
+    const counterTimestamp = localStorage.getItem('github_api_counter_timestamp');
+    const now = Date.now();
+    
+    // Reset counter if it's been more than an hour
+    if (!storedCounter || !counterTimestamp || (now - parseInt(counterTimestamp) > 3600000)) {
+      this.requestCounter = 0;
+      localStorage.setItem('github_api_request_counter', '0');
+      localStorage.setItem('github_api_counter_timestamp', now.toString());
+    } else {
+      this.requestCounter = parseInt(storedCounter);
+    }
+    console.log(`GitHub API Request Counter: ${this.requestCounter}/5000`);
+  },
 
   add: function(url, callback) {
-    this.queue.push({ url, callback });
+    // First check cache
+    const cacheKey = `github_cache_${url}`;
+    const cachedData = localStorage.getItem(cacheKey);
+    const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+    const now = Date.now();
+    const cacheDuration = 24 * 60 * 60 * 1000; // 24 hours
+    
+    // Use cache if available and not expired
+    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+      console.log(`Using cached data for: ${url}`);
+      // Simulate async behavior to maintain expected flow
+      setTimeout(() => {
+        callback({ ok: true, status: 200, cached: true }, JSON.parse(cachedData));
+      }, 0);
+      return;
+    }
+    
+    // Check rate limit - if over 4900 requests, only use cache
+    if (this.requestCounter > 4900) {
+      console.warn("GitHub API rate limit almost reached. Using fallback data only.");
+      callback({ ok: false, status: 403, cached: false }, { message: "Rate limit proactively avoided" });
+      return;
+    }
+    
+    this.queue.push({ url, callback: (response, data) => {
+      // Increment counter for actual API requests (not cached)
+      if (!response.cached) {
+        this.requestCounter++;
+        localStorage.setItem('github_api_request_counter', this.requestCounter.toString());
+      }
+      
+      // Cache successful responses
+      if (response.ok) {
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify(data));
+          localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+        } catch (e) {
+          console.warn('Could not cache response data:', e);
+        }
+      }
+      callback(response, data);
+    }});
     this.process();
   },
 
@@ -32,26 +91,46 @@ const RequestQueue = {
     const { url, callback } = this.queue.shift();
     this.activeRequests++;
 
-    fetch(url)
-      .then(response => {
-        return response.json().then(data => ({ response, data }));
-      })
-      .then(({ response, data }) => {
-        this.activeRequests--;
-        callback(response, data);
-        this.processNext();
-      })
-      .catch(error => {
-        this.activeRequests--;
-        callback({ ok: false, status: 500 }, { message: error.message });
-        this.processNext();
-      });
-
-    this.processNext();
+    // Debug log the URL
+    console.log(`DEBUG - Fetching URL: ${url}`);
+    console.log(`DEBUG - Client ID present in URL: ${url.includes('client_id=')}`);
+    
+    // Add a delay to avoid hitting secondary rate limits
+    setTimeout(() => {
+      fetch(url)
+        .then(response => {
+          console.log(`DEBUG - Response status for ${url}: ${response.status}`);
+          console.log(`DEBUG - Rate limit remaining: ${response.headers.get('x-ratelimit-remaining')}`);
+          console.log(`DEBUG - Rate limit limit: ${response.headers.get('x-ratelimit-limit')}`);
+          
+          return response.json().then(data => ({ response, data }));
+        })
+        .then(({ response, data }) => {
+          this.activeRequests--;
+          callback(response, data);
+          
+          // Add delay between requests
+          setTimeout(() => {
+            this.processNext();
+          }, 1000); // 1 second delay between requests
+        })
+        .catch(error => {
+          this.activeRequests--;
+          callback({ ok: false, status: 500 }, { message: error.message });
+          
+          // Add delay between requests
+          setTimeout(() => {
+            this.processNext();
+          }, 1000); // 1 second delay between requests
+        });
+    }, 1000); // Wait 1 second before starting the request
   }
 };
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize request counter
+  window.RequestQueue.init();
+  
   const additionalProjectsContainer = document.getElementById('additional-projects');
   if (!additionalProjectsContainer) return;
 
