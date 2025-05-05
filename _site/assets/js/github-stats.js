@@ -141,8 +141,9 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    const privateRepos = stats.profile.private_repos || 0;
-    const totalRepos = stats.profile.total_repos || stats.profile.public_repos;
+    // Get the repository counts
+    const publicRepos = stats.public_repos || 0;
+    const privateRepos = 0; // GitHub API doesn't expose private repo count with client_id auth
     
     statsContainer.innerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -151,24 +152,24 @@ document.addEventListener('DOMContentLoaded', function() {
           <h3 class="text-lg font-bold mb-4">General Stats</h3>
           <div class="space-y-3">
             <div class="flex justify-between items-center">
-              <span class="text-gray-600 dark:text-gray-400">Total Repositories</span>
-              <span class="font-semibold">${totalRepos} (${privateRepos} private)</span>
+              <span class="text-gray-600 dark:text-gray-400">Public Repositories</span>
+              <span class="font-semibold">${publicRepos}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-gray-600 dark:text-gray-400">Total Stars</span>
-              <span class="font-semibold">${stats.repos.totalStars}</span>
+              <span class="font-semibold">${stats.total_stars}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-gray-600 dark:text-gray-400">Total Forks</span>
-              <span class="font-semibold">${stats.repos.totalForks}</span>
+              <span class="font-semibold">${stats.total_forks}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-gray-600 dark:text-gray-400">Followers</span>
-              <span class="font-semibold">${stats.profile.followers}</span>
+              <span class="font-semibold">${stats.followers}</span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-gray-600 dark:text-gray-400">Following</span>
-              <span class="font-semibold">${stats.profile.following}</span>
+              <span class="font-semibold">${stats.following}</span>
             </div>
           </div>
         </div>
@@ -176,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Language Stats Card -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <h3 class="text-lg font-bold mb-4">Top Languages</h3>
-          ${stats.languages.length > 0 ? `
+          ${stats.languages && stats.languages.length > 0 ? `
             <div class="space-y-4">
               ${stats.languages.map(lang => `
                 <div>
@@ -198,16 +199,16 @@ document.addEventListener('DOMContentLoaded', function() {
         <!-- Top Repositories Card -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
           <h3 class="text-lg font-bold mb-4">Top Repositories</h3>
-          ${stats.topRepos.length > 0 ? `
+          ${stats.top_repos && stats.top_repos.length > 0 ? `
             <div class="space-y-4">
-              ${stats.topRepos.map(repo => `
+              ${stats.top_repos.map(repo => `
                 <div class="border-b border-gray-200 dark:border-gray-700 pb-3 last:border-0">
-                  <a href="${repo.url}" target="_blank" class="font-medium hover:text-blue-600">${repo.name}</a>
+                  <a href="${repo.html_url}" target="_blank" class="font-medium hover:text-blue-600">${repo.name}</a>
                   <div class="text-sm text-gray-600 dark:text-gray-400 flex items-center mt-1">
                     <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
                     </svg>
-                    ${repo.stars} stars
+                    ${repo.stargazers_count} stars
                   </div>
                 </div>
               `).join('')}
