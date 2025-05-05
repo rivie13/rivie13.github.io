@@ -4,7 +4,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-  const username = 'rivie13';
+  console.log("DOM Content Loaded - Starting language update");
+  const username = window.GitHubConfig.username;
   
   // Hardcoded language data for specific projects
   const hardcodedLanguageData = {
@@ -20,12 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
     ],
     'book-player-application': [
       { name: 'Kotlin', percentage: 100 }
-    ],
-    'codegrind': [
-      { name: 'JavaScript', percentage: 93.3 },
-      { name: 'CSS', percentage: 3.3 },
-      { name: 'Python', percentage: 3.2 },
-      { name: 'Other', percentage: 0.2 }
     ]
   };
   
@@ -38,44 +33,78 @@ document.addEventListener('DOMContentLoaded', function() {
     'book-player-application': ['assignment-10-rivie13']
   };
   
-  // Handle CodeGrind card - override private repository message
-  document.querySelectorAll('#codegrind').forEach(card => {
-    // Find the private repository message
-    const privateMessage = card.querySelector('.flex.flex-wrap span.bg-gray-100');
-    if (privateMessage) {
-      // Get the parent container
-      const parentContainer = privateMessage.closest('.flex.flex-wrap').parentNode;
-      if (parentContainer) {
-        // Generate language bar HTML
-        let languageHTML = createLanguageHTML(hardcodedLanguageData['codegrind']);
-        
-        // Replace the parent container's content
-        parentContainer.innerHTML = languageHTML;
+  // AGGRESSIVE APPROACH - Find all Helios cards everywhere
+  console.log("Finding all Helios cards on the page");
+  
+  // 1. Find any element containing Helios text
+  document.querySelectorAll('*').forEach(element => {
+    if (element.textContent && element.textContent.includes("Helios: Swarm Robotics")) {
+      console.log("Found Helios text in:", element);
+      
+      // Try to find the card container
+      let card = element;
+      // Walk up to find the card container
+      while (card && !card.classList.contains('bg-white') && !card.classList.contains('bg-gray-800')) {
+        card = card.parentElement;
+        if (!card) break;
+      }
+      
+      if (card) {
+        console.log("Found Helios card:", card);
+        // Find language container in the card
+        const languageContainer = card.querySelector('.languages-container');
+        if (languageContainer) {
+          console.log("Found language container:", languageContainer);
+          updateWithHardcodedData(languageContainer, hardcodedLanguageData['helios-swarm-robotics']);
+        } else {
+          console.log("No language container found in card");
+        }
       }
     }
   });
   
-  // Process all project cards for the targeted projects
-  document.querySelectorAll('[id^="helios"], [id^="book-player"]').forEach(card => {
-    let projectId;
-    if (card.id.split('-')[0] === 'helios') {
-      projectId = 'helios-swarm-robotics';
-    } else if (card.id.split('-')[0] === 'book') {
-      projectId = 'book-player-application';
-    }
+  // SPECIAL HANDLING FOR FEATURED PROJECTS SECTION
+  // Get all project cards in the featured projects section
+  const featuredSection = document.querySelector('section.mb-16');
+  if (featuredSection) {
+    console.log("Found featured section:", featuredSection);
+    // Find all Helios cards in the featured section
+    featuredSection.querySelectorAll('.languages-container').forEach(container => {
+      // Check if this is a Helios card by examining nearby text
+      const cardDiv = container.closest('.p-6');
+      if (cardDiv && cardDiv.textContent.includes('Helios: Swarm Robotics')) {
+        console.log("Found Helios language container in featured section:", container);
+        updateWithHardcodedData(container, hardcodedLanguageData['helios-swarm-robotics']);
+      } 
+      else if (cardDiv && cardDiv.textContent.includes('Book Player Application')) {
+        updateWithHardcodedData(container, hardcodedLanguageData['book-player-application']);
+      }
+    });
+  } else {
+    console.log("Featured section not found");
+  }
+  
+  // Apply hardcoded data to ALL Helios and Book Player cards by ID
+  document.querySelectorAll('[id*="helios"], [id*="book-player"]').forEach(card => {
+    const projectId = card.id.includes('helios') ? 'helios-swarm-robotics' : 'book-player-application';
+    console.log("Found card by ID:", card.id);
     
     // Get the language container
     const languageContainer = card.querySelector('.languages-container');
-    if (!languageContainer) return;
+    if (!languageContainer) {
+      console.log("No language container found in:", card.id);
+      return;
+    }
     
     // Use hardcoded data
     if (hardcodedLanguageData[projectId]) {
+      console.log("Updating language container for:", projectId);
       updateWithHardcodedData(languageContainer, hardcodedLanguageData[projectId]);
     }
   });
   
   // Process other project cards that need dynamic data
-  document.querySelectorAll('[id^="bestnotes"], [id^="projectile"]').forEach(card => {
+  document.querySelectorAll('[id^="codegrind"], [id^="bestnotes"], [id^="projectile"]').forEach(card => {
     const cardId = card.id.split('-')[0].toLowerCase();
     
     // Skip if it's a project with hardcoded data
@@ -94,9 +123,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   /**
-   * Create HTML for language bar
+   * Update language container with hardcoded data
    */
-  function createLanguageHTML(languages) {
+  function updateWithHardcodedData(container, languages) {
+    console.log("Updating container with languages:", languages);
     // Create HTML for language bar
     const colorMap = {
       "JavaScript": "bg-yellow-400",
@@ -140,14 +170,9 @@ document.addEventListener('DOMContentLoaded', function() {
     languageHTML += `</div>`;
     languageTextHTML += `</div>`;
     
-    return languageHTML + languageTextHTML;
-  }
-  
-  /**
-   * Update language container with hardcoded data
-   */
-  function updateWithHardcodedData(container, languages) {
-    container.innerHTML = createLanguageHTML(languages);
+    // Update the container
+    container.innerHTML = languageHTML + languageTextHTML;
+    console.log("Container updated successfully");
   }
   
   /**
@@ -160,7 +185,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
       for (const repo of repos) {
         try {
-          const response = await fetch(`https://api.github.com/repos/${username}/${repo}/languages`);
+          const response = await fetch(window.GitHubConfig.addClientId(
+            `https://api.github.com/repos/${username}/${repo}/languages`
+          ));
+          
           if (response.ok) {
             const data = await response.json();
             
@@ -233,4 +261,4 @@ document.addEventListener('DOMContentLoaded', function() {
       console.error('Error updating language data:', error);
     }
   }
-}); 
+});

@@ -1,178 +1,150 @@
 /**
  * GitHub Stats Fetcher
- * Fetches and displays GitHub statistics for a given username
+ * Displays summary statistics about GitHub activity
  */
 
-class GitHubStatsFetcher {
-  constructor(username, containerSelector, options = {}) {
-    this.username = username;
-    this.container = document.querySelector(containerSelector);
-    this.options = {
-      cacheTime: options.cacheTime || 3600000, // Default: 1 hour in milliseconds
-      showLanguages: options.showLanguages !== false,
-      showStarCount: options.showStarCount !== false,
-      showRepoCount: options.showRepoCount !== false,
-      showContributions: options.showContributions !== false
-    };
-    
-    this.cacheKey = `github_stats_${this.username}`;
-    this.lastUpdatedKey = `github_stats_last_updated_${this.username}`;
-    
-    this.init();
-  }
+document.addEventListener('DOMContentLoaded', function() {
+  const username = window.GitHubConfig.username;
+  const statsContainer = document.getElementById('github-stats');
   
-  /**
-   * Initialize the fetcher
-   */
-  init() {
-    if (!this.container) {
-      console.error('GitHub Stats container not found');
-      return;
-    }
-    
-    this.loadStats();
-  }
+  if (!statsContainer) return; // Exit if container not found
   
-  /**
-   * Load stats from cache or fetch from API
-   */
-  loadStats() {
-    const cached = localStorage.getItem(this.cacheKey);
-    const lastUpdated = localStorage.getItem(this.lastUpdatedKey);
+  // Load stats from cache or fetch from API
+  loadStats();
+  
+  function loadStats() {
+    const cachedStats = localStorage.getItem('github_stats');
+    const lastUpdated = localStorage.getItem('github_stats_last_updated');
     const now = new Date().getTime();
     
-    if (cached && lastUpdated && (now - parseInt(lastUpdated) < this.options.cacheTime)) {
-      // Use cached data if it's still valid
-      this.displayStats(JSON.parse(cached));
+    // Use cached data if available and less than 1 hour old
+    if (cachedStats && lastUpdated && (now - parseInt(lastUpdated) < 3600000)) {
+      displayStats(JSON.parse(cachedStats));
     } else {
-      // Fetch new data
-      this.fetchStats();
+      fetchStats();
     }
   }
   
-  /**
-   * Fetch stats from GitHub API
-   */
-  async fetchStats() {
-    this.container.innerHTML = '<div class="flex justify-center py-4"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>';
-    
+  async function fetchStats() {
     try {
-      // Fetch user profile data
-      const profileResponse = await fetch(`https://api.github.com/users/${this.username}`);
+      statsContainer.innerHTML = `
+        <div class="text-center py-4">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+          <p class="mt-2 text-sm text-gray-600">Fetching GitHub stats...</p>
+        </div>
+      `;
       
-      if (!profileResponse.ok) {
-        throw new Error(`GitHub API returned ${profileResponse.status}`);
+      // Use centralized config for GitHub API requests
+      const response = await fetch(window.GitHubConfig.addClientId(
+        `https://api.github.com/users/${username}`
+      ));
+      
+      if (response.status === 403) {
+        // Handle rate limiting
+        statsContainer.innerHTML = `
+          <div class="bg-amber-100 border border-amber-400 text-amber-700 p-3 rounded text-sm">
+            <p><strong>GitHub API rate limit exceeded</strong></p>
+            <p class="mt-1">Please try again later or view my stats directly on GitHub.</p>
+          </div>
+        `;
+        return;
       }
       
-      const profileData = await profileResponse.json();
-      
-      // Fetch repositories - use per_page=100 to get as many as possible
-      const reposResponse = await fetch(`https://api.github.com/users/${this.username}/repos?per_page=100`);
-      
-      if (!reposResponse.ok) {
-        throw new Error(`GitHub API returned ${reposResponse.status}`);
+      if (!response.ok) {
+        throw new Error(`GitHub API returned ${response.status}`);
       }
       
+      const userData = await response.json();
+      
+      // Fetch repositories for more detailed information
+      const reposResponse = await fetch(window.GitHubConfig.addClientId(
+        `https://api.github.com/users/${username}/repos?per_page=100`
+      ));
       const reposData = await reposResponse.json();
       
-      // Calculate stats
-      const stats = this.calculateStats(profileData, reposData);
+      // Calculate language statistics
+      const languageStats = {};
+      const topRepos = [];
+      let totalStars = 0;
+      let totalForks = 0;
+      
+      await Promise.all(reposData.map(async (repo) => {
+        // Skip forked repositories for language stats
+        if (!repo.fork) {
+          try {
+            const langResponse = await fetch(window.GitHubConfig.addClientId(repo.languages_url));
+            if (langResponse.ok) {
+              const langData = await langResponse.json();
+              
+              // Add language bytes to total
+              for (const [lang, bytes] of Object.entries(langData)) {
+                languageStats[lang] = (languageStats[lang] || 0) + bytes;
+              }
+            }
+          } catch (error) {
+            console.warn(`Failed to fetch language data for ${repo.name}`);
+          }
+        }
+        
+        // Track stars and forks
+        totalStars += repo.stargazers_count;
+        totalForks += repo.forks_count;
+        
+        // Add to top repos if it has stars
+        if (repo.stargazers_count > 0) {
+          topRepos.push(repo);
+        }
+      }));
+      
+      // Sort repos by stars
+      topRepos.sort((a, b) => b.stargazers_count - a.stargazers_count);
+      
+      // Calculate language percentages
+      const totalBytes = Object.values(languageStats).reduce((a, b) => a + b, 0);
+      const languages = Object.entries(languageStats)
+        .map(([name, bytes]) => ({
+          name,
+          percentage: Math.round((bytes / totalBytes) * 100)
+        }))
+        .sort((a, b) => b.percentage - a.percentage);
+      
+      // Prepare stats object
+      const stats = {
+        followers: userData.followers,
+        following: userData.following,
+        public_repos: userData.public_repos,
+        total_stars: totalStars,
+        total_forks: totalForks,
+        languages: languages.slice(0, 5), // Top 5 languages
+        top_repos: topRepos.slice(0, 3), // Top 3 repos
+        fetched_at: new Date().toISOString()
+      };
       
       // Cache the results
-      localStorage.setItem(this.cacheKey, JSON.stringify(stats));
-      localStorage.setItem(this.lastUpdatedKey, new Date().getTime().toString());
+      localStorage.setItem('github_stats', JSON.stringify(stats));
+      localStorage.setItem('github_stats_last_updated', new Date().getTime().toString());
       
-      this.displayStats(stats);
+      displayStats(stats);
     } catch (error) {
       console.error('Error fetching GitHub stats:', error);
-      this.container.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-        Failed to load GitHub statistics. Please try again later.
-      </div>`;
+      statsContainer.innerHTML = `
+        <div class="bg-red-100 border border-red-400 text-red-700 p-3 rounded">
+          <p>Failed to load GitHub stats. Please try again later.</p>
+        </div>
+      `;
     }
   }
   
-  /**
-   * Calculate various statistics from the fetched data
-   */
-  calculateStats(profile, repos) {
-    // Count all repositories
-    const ownRepos = repos.filter(repo => !repo.fork);
-    const publicRepoCount = ownRepos.length;
-    const totalRepoCount = profile.public_repos + profile.owned_private_repos;
-    
-    // Count stars
-    const totalStars = repos.reduce((total, repo) => total + repo.stargazers_count, 0);
-    
-    // Count forks received
-    const totalForks = repos.reduce((total, repo) => total + repo.forks_count, 0);
-    
-    // Calculate top languages
-    const languages = {};
-    repos.forEach(repo => {
-      if (repo.language && !repo.fork) {
-        languages[repo.language] = (languages[repo.language] || 0) + 1;
-      }
-    });
-    
-    const topLanguages = Object.entries(languages)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 5)
-      .map(([language, count]) => ({
-        name: language,
-        count,
-        percentage: Math.round((count / ownRepos.length) * 100)
-      }));
-    
-    // Most starred repos
-    const topRepos = [...repos]
-      .sort((a, b) => b.stargazers_count - a.stargazers_count)
-      .slice(0, 3)
-      .map(repo => ({
-        name: repo.name,
-        stars: repo.stargazers_count,
-        url: repo.html_url
-      }));
-    
-    return {
-      profile: {
-        name: profile.name || profile.login,
-        login: profile.login,
-        avatar_url: profile.avatar_url,
-        html_url: profile.html_url,
-        bio: profile.bio,
-        public_repos: profile.public_repos,
-        private_repos: profile.owned_private_repos || 0,
-        total_repos: totalRepoCount,
-        followers: profile.followers,
-        following: profile.following
-      },
-      repos: {
-        count: publicRepoCount,
-        ownRepos: ownRepos.length,
-        forkedRepos: repos.length - ownRepos.length,
-        totalStars,
-        totalForks,
-        privateRepoCount: profile.owned_private_repos || 0,
-        totalRepoCount: totalRepoCount
-      },
-      languages: topLanguages,
-      topRepos
-    };
-  }
-  
-  /**
-   * Display stats in the container
-   */
-  displayStats(stats) {
+  function displayStats(stats) {
     if (!stats) {
-      this.container.innerHTML = '<p class="text-gray-500">No GitHub statistics available.</p>';
+      statsContainer.innerHTML = '<p class="text-gray-500">No GitHub statistics available.</p>';
       return;
     }
     
     const privateRepos = stats.profile.private_repos || 0;
     const totalRepos = stats.profile.total_repos || stats.profile.public_repos;
     
-    this.container.innerHTML = `
+    statsContainer.innerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- General Stats Card -->
         <div class="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
@@ -247,20 +219,10 @@ class GitHubStatsFetcher {
       </div>
       
       <div class="mt-4 text-right">
-        <a href="https://github.com/${this.username}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+        <a href="https://github.com/${username}" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
           View Full Profile →
         </a>
       </div>
     `;
-  }
-}
-
-// Initialize GitHub stats fetcher when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-  const statsContainer = document.getElementById('github-stats');
-  if (statsContainer) {
-    new GitHubStatsFetcher('rivie13', '#github-stats', {
-      cacheTime: 1800000 // 30 minutes to ensure more up-to-date data
-    });
   }
 });

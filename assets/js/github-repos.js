@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const additionalProjectsContainer = document.getElementById('additional-projects');
   if (!additionalProjectsContainer) return;
 
-  const username = 'rivie13'; // Your GitHub username
+  const username = window.GitHubConfig.username;
   const excludedRepos = [
     'rivie13.github.io',
     'codegrind',
@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'assignment-10-rivie13'
   ]; // Exclude both portfolio and manually defined projects
   
+  // Use the centralized GitHub config
   fetchAdditionalRepos(username, excludedRepos);
   
   /**
@@ -32,8 +33,24 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       `;
       
-      // Fetch ALL repositories with no limit on per_page
-      const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+      // Use the helper method to add client_id
+      const response = await fetch(window.GitHubConfig.addClientId(
+        `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`
+      ));
+      
+      if (response.status === 403) {
+        // Handle rate limiting specifically
+        const rateLimitMessage = `
+          <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3 rounded text-center mb-4">
+            <p class="font-bold">GitHub API rate limit exceeded</p>
+            <p class="text-sm mt-1">Please try again later or check out my projects directly on GitHub.</p>
+            <p class="text-sm mt-1"><a href="https://github.com/${username}" target="_blank" class="underline">Visit my GitHub Profile</a></p>
+          </div>
+        `;
+        additionalProjectsContainer.innerHTML = rateLimitMessage;
+        throw new Error('GitHub API rate limit exceeded. Please try again later.');
+      }
+      
       if (!response.ok) {
         throw new Error(`GitHub API returned ${response.status}`);
       }
@@ -60,7 +77,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const reposWithLanguages = await Promise.all(validRepos.map(async (repo) => {
         try {
           if (repo.languages_url && !repo.private) {
-            const langResponse = await fetch(repo.languages_url);
+            // Add client_id to language requests
+            const langResponse = await fetch(window.GitHubConfig.addClientId(repo.languages_url));
             if (langResponse.ok) {
               const langData = await langResponse.json();
               // Calculate total bytes
