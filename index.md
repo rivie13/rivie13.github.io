@@ -5,28 +5,28 @@ title: Home
 
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
   <!-- Hero Section -->
-  <section class="py-12 md:py-16">
-    <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-      <div class="md:col-span-3 opacity-0" data-animate="fade-in">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">Riviera Sperduto</h1>
-        <h2 class="text-xl md:text-2xl text-gray-600 mb-6">Philadelphia-based Full Stack Developer | Cloud/Solutions Architect | AI Developer</h2>
+  <section class="py-8 md:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8 items-center">
+      <div class="md:col-span-3 opacity-0 px-2 md:px-0" data-animate="fade-in">
+        <h1 class="text-3xl md:text-5xl font-bold mb-3 md:mb-4">Riviera Sperduto</h1>
+        <h2 class="text-lg md:text-2xl text-gray-600 mb-4 md:mb-6">Philadelphia-based Full Stack Developer | Cloud/Solutions Architect | AI Developer</h2>
         
-        <div class="flex mb-6 items-center">
-          <img src="{{ '/assets/images/your-image.jpg' | relative_url }}" alt="Riviera Sperduto" class="w-32 h-32 rounded-full mr-6 shadow-md border-2 border-blue-500" data-hover="scale">
-          <p class="text-lg">I craft innovative solutions and leverage cutting-edge technologies to build exceptional digital experiences. With expertise in full-stack development, cloud architecture, and AI, I'm passionate about creating efficient, scalable, and user-friendly applications from my home in the City of Brotherly Love.</p>
+        <div class="flex flex-col sm:flex-row mb-4 md:mb-6 items-center">
+          <img src="{{ '/assets/images/your-image.jpg' | relative_url }}" alt="Riviera Sperduto" class="w-24 h-24 md:w-32 md:h-32 rounded-full mb-4 sm:mb-0 sm:mr-6 shadow-md border-2 border-blue-500" data-hover="scale">
+          <p class="text-base md:text-lg text-center sm:text-left">I craft innovative solutions and leverage cutting-edge technologies to build exceptional digital experiences. With expertise in full-stack development, cloud architecture, and AI, I'm passionate about creating efficient, scalable, and user-friendly applications from my home in the City of Brotherly Love.</p>
         </div>
         
-        <div class="flex flex-wrap gap-4">
-          <a href="{{ '/projects/' | relative_url }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all transform hover:scale-105">
+        <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
+          <a href="{{ '/projects/' | relative_url }}" class="w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 md:py-3 px-4 md:px-6 rounded-lg transition-all transform hover:scale-105">
             View My Work
           </a>
-          <a href="{{ '/contact/' | relative_url }}" class="bg-transparent hover:bg-blue-50 text-blue-600 font-bold py-3 px-6 rounded-lg border border-blue-600 transition-all transform hover:scale-105">
+          <a href="{{ '/contact/' | relative_url }}" class="w-full sm:w-auto text-center bg-transparent hover:bg-blue-50 text-blue-600 font-bold py-2.5 md:py-3 px-4 md:px-6 rounded-lg border border-blue-600 transition-all transform hover:scale-105">
             Get In Touch
           </a>
         </div>
       </div>
       
-      <div class="md:col-span-2 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+      <div class="md:col-span-2 opacity-0 mt-6 md:mt-0" data-animate="fade-in" data-scroll="fade-up">
         <div class="bg-gradient-to-br from-blue-100 to-indigo-100 p-1 rounded-xl shadow-xl" data-hover="scale">
           <!-- Philly image -->
           <img src="{{ '/assets/images/frc-philly-1.gif' | relative_url }}" alt="Philadelphia Skyline" class="rounded-lg w-full">
