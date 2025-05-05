@@ -33,6 +33,43 @@ document.addEventListener('DOMContentLoaded', function() {
     'book-player-application': ['assignment-10-rivie13']
   };
   
+  // Project cards queue to process them one by one
+  const projectQueue = [];
+  let isProcessingQueue = false;
+  
+  // Process next project in queue
+  function processNextProject() {
+    if (projectQueue.length === 0) {
+      isProcessingQueue = false;
+      return;
+    }
+    
+    isProcessingQueue = true;
+    const { id, repos, container } = projectQueue.shift();
+    
+    // Use hardcoded data if available
+    if (hardcodedLanguageData[id]) {
+      updateWithHardcodedData(container, hardcodedLanguageData[id]);
+      // Wait 500ms before processing the next project to avoid rate limits
+      setTimeout(processNextProject, 500);
+    } else {
+      // Use API for other projects
+      updateLanguageData(username, repos, container).then(() => {
+        // Wait 1s before processing the next project
+        setTimeout(processNextProject, 1000);
+      });
+    }
+  }
+  
+  // Add project to queue for processing
+  function queueProject(id, repos, container) {
+    projectQueue.push({ id, repos, container });
+    
+    if (!isProcessingQueue) {
+      processNextProject();
+    }
+  }
+  
   // AGGRESSIVE APPROACH - Find all Helios cards everywhere
   console.log("Finding all Helios cards on the page");
   
@@ -118,8 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const languageContainer = card.querySelector('.languages-container');
     if (!languageContainer) return;
     
-    // Fetch and combine language data from all repos
-    updateLanguageData(username, repos, languageContainer);
+    // Add to queue instead of immediate processing
+    queueProject(cardId, repos, languageContainer);
   });
   
   /**
@@ -180,9 +217,18 @@ document.addEventListener('DOMContentLoaded', function() {
    */
   async function updateLanguageData(username, repos, container) {
     try {
+      // Display loading state
+      container.innerHTML = `
+        <div class="text-center py-2">
+          <div class="animate-spin h-4 w-4 border-b-2 border-blue-600 rounded-full mx-auto mb-1"></div>
+          <div class="text-xs text-gray-500">Loading language data...</div>
+        </div>
+      `;
+      
       // Combine data from multiple repos
       let combinedData = {};
       
+      // Limit to only one API request at a time to reduce rate limiting
       for (const repo of repos) {
         try {
           const response = await fetch(window.GitHubConfig.addClientId(
@@ -196,7 +242,15 @@ document.addEventListener('DOMContentLoaded', function() {
             for (const [lang, bytes] of Object.entries(data)) {
               combinedData[lang] = (combinedData[lang] || 0) + bytes;
             }
+          } else if (response.status === 403) {
+            console.warn(`Rate limited for ${repo}. Using fallback.`);
+            container.innerHTML = `<div class="text-xs text-gray-500 py-1">Language data unavailable (rate limited)</div>`;
+            return;
           }
+          
+          // Add delay between requests to avoid rate limiting
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          
         } catch (err) {
           console.warn(`Failed to fetch language data for ${repo}:`, err);
         }
@@ -204,7 +258,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Calculate percentages
       const totalBytes = Object.values(combinedData).reduce((a, b) => a + b, 0);
-      if (totalBytes === 0) return;
+      if (totalBytes === 0) {
+        container.innerHTML = `<div class="text-xs text-gray-500 py-1">No language data available</div>`;
+        return;
+      }
       
       const languages = Object.entries(combinedData)
         .map(([name, bytes]) => ({
@@ -259,6 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
     } catch (error) {
       console.error('Error updating language data:', error);
+      container.innerHTML = `<div class="text-xs text-gray-500 py-1">Failed to load language data</div>`;
     }
   }
 });
