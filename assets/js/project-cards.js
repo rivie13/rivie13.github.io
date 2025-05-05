@@ -20,6 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
     ],
     'book-player-application': [
       { name: 'Kotlin', percentage: 100 }
+    ],
+    'codegrind': [
+      { name: 'JavaScript', percentage: 93.3 },
+      { name: 'CSS', percentage: 3.3 },
+      { name: 'Python', percentage: 3.2 },
+      { name: 'Other', percentage: 0.2 }
     ]
   };
   
@@ -32,9 +38,31 @@ document.addEventListener('DOMContentLoaded', function() {
     'book-player-application': ['assignment-10-rivie13']
   };
   
+  // Handle CodeGrind card - override private repository message
+  document.querySelectorAll('#codegrind').forEach(card => {
+    // Find the private repository message
+    const privateMessage = card.querySelector('.flex.flex-wrap span.bg-gray-100');
+    if (privateMessage) {
+      // Get the parent container
+      const parentContainer = privateMessage.closest('.flex.flex-wrap').parentNode;
+      if (parentContainer) {
+        // Generate language bar HTML
+        let languageHTML = createLanguageHTML(hardcodedLanguageData['codegrind']);
+        
+        // Replace the parent container's content
+        parentContainer.innerHTML = languageHTML;
+      }
+    }
+  });
+  
   // Process all project cards for the targeted projects
   document.querySelectorAll('[id^="helios"], [id^="book-player"]').forEach(card => {
-    const projectId = card.id.split('-')[0] === 'helios' ? 'helios-swarm-robotics' : 'book-player-application';
+    let projectId;
+    if (card.id.split('-')[0] === 'helios') {
+      projectId = 'helios-swarm-robotics';
+    } else if (card.id.split('-')[0] === 'book') {
+      projectId = 'book-player-application';
+    }
     
     // Get the language container
     const languageContainer = card.querySelector('.languages-container');
@@ -47,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Process other project cards that need dynamic data
-  document.querySelectorAll('[id^="codegrind"], [id^="bestnotes"], [id^="projectile"]').forEach(card => {
+  document.querySelectorAll('[id^="bestnotes"], [id^="projectile"]').forEach(card => {
     const cardId = card.id.split('-')[0].toLowerCase();
     
     // Skip if it's a project with hardcoded data
@@ -66,9 +94,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   /**
-   * Update language container with hardcoded data
+   * Create HTML for language bar
    */
-  function updateWithHardcodedData(container, languages) {
+  function createLanguageHTML(languages) {
     // Create HTML for language bar
     const colorMap = {
       "JavaScript": "bg-yellow-400",
@@ -112,8 +140,14 @@ document.addEventListener('DOMContentLoaded', function() {
     languageHTML += `</div>`;
     languageTextHTML += `</div>`;
     
-    // Update the container
-    container.innerHTML = languageHTML + languageTextHTML;
+    return languageHTML + languageTextHTML;
+  }
+  
+  /**
+   * Update language container with hardcoded data
+   */
+  function updateWithHardcodedData(container, languages) {
+    container.innerHTML = createLanguageHTML(languages);
   }
   
   /**
