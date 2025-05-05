@@ -4,7 +4,17 @@
   repo: "https://github.com/rivie13/codegrind"
   description: "Gamified technical interview preparation platform with AI tutoring assistant that helps users practice for coding interviews."
   video_id: "P8kmlbjYdI4"
+  private: true
   detailed_description: "CodeGrind transforms technical interview preparation into an engaging experience by combining gamification elements with a sophisticated AI tutor. The platform helps users master data structures, algorithms, and system design through interactive challenges, competitive leaderboards, and personalized feedback without revealing direct solutions."
+  languages:
+    - name: "JavaScript"
+      percentage: 66
+    - name: "TypeScript"
+      percentage: 23
+    - name: "HTML"
+      percentage: 6
+    - name: "CSS"
+      percentage: 5
   challenges:
     - "Developing an AI guidance system that provides meaningful hints without giving away solutions"
     - "Creating a scalable architecture to handle concurrent users solving code problems"
@@ -50,6 +60,23 @@
   repo2_description: "Release product for capstone project"
   description: "Disaster response simulation with Python backend, Unity frontend, and custom visualization tools."
   video_id: "a-3ocUuVebk"
+  languages:
+    - name: "Python"
+      percentage: 45
+    - name: "C#"
+      percentage: 30
+    - name: "CMake"
+      percentage: 11
+    - name: "C++"
+      percentage: 7
+    - name: "Shell"
+      percentage: 2
+    - name: "Lua"
+      percentage: 3
+    - name: "Batchfile"
+      percentage: 1
+    - name: "Makefile"
+      percentage: 1
   detailed_description: "Helios is a comprehensive disaster response simulation system that models swarm robotics behavior in emergency scenarios. The platform combines advanced ROS 2 navigation with a custom Unity visualization engine, allowing researchers and emergency response teams to simulate how robot swarms might coordinate in various disaster conditions while collecting and visualizing critical sensor data."
   challenges:
     - "Integrating ROS 2 navigation systems with Unity for realistic physics and behavior"
@@ -90,6 +117,9 @@
   demo: ""
   repo: "https://github.com/rivie13/01-BestNotes"
   description: "Free, open-source note-taking application with customizable features."
+  languages:
+    - name: "Python"
+      percentage: 100
   detailed_description: "BestNotes is a lightweight, customizable note-taking application built with Python and Qt that emphasizes user freedom and flexibility. Unlike many commercial alternatives, BestNotes focuses on providing a distraction-free writing experience with intuitive tools that can be positioned according to user preferences."
   challenges:
     - "Creating a moveable toolbar that maintains state across application sessions"
@@ -122,6 +152,13 @@
   downloads: "45k+"
   repo: "https://github.com/rivie13/PLR"
   description: "Mod for Cyberpunk 2077 that modifies game mechanics with new variants, attachments, and ammo."
+  languages:
+    - name: "Lua"
+      percentage: 75
+    - name: "RedScript"
+      percentage: 15
+    - name: "YAML"
+      percentage: 10
   detailed_description: "Projectile Launcher Rework (PLR) is a comprehensive overhaul mod for Cyberpunk 2077 that reimagines the game's projectile weapon system with expanded customization options, new variants, and realistic ballistic mechanics. With over 45,000 downloads, it has become a pretty popular gameplay enhancement mod for the game."
   challenges:
     - "Reverse engineering the game's weapon systems without source code access"
@@ -157,6 +194,11 @@
   demo: ""
   repo: "https://github.com/rivie13/assignment-10-rivie13"
   description: "Mobile application for reading and listening to books on Android devices, featuring a clean Material Design interface."
+  languages:
+    - name: "Kotlin"
+      percentage: 85
+    - name: "XML"
+      percentage: 15
   detailed_description: "This Android application provides a seamless experience for both reading and listening to books on mobile devices. Built with Kotlin and Material Design principles, it offers an intuitive interface for managing a digital library, reading with customizable pagination, and audio playback with background service support."
   challenges:
     - "Implementing efficient storage and retrieval of book content and audio files"
@@ -186,4 +228,4 @@
     - Kotlin
     - Android SDK
     - Material Design
-  period: "April 2025" 
+  period: "April 2025"

@@ -28,21 +28,8 @@ permalink: /projects/
     </div>
   </section>
   
-  <!-- All Projects -->
-  <section>
-    <h2 class="text-2xl font-bold mb-6 pb-2 border-b opacity-0" data-animate="fade-in">All Projects</h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {% for project in site.data.projects %}
-        <div class="h-full opacity-0" id="{{ project.name | slugify }}" data-animate="fade-in" data-scroll="fade-up">
-          {% include project-card.html project=project %}
-        </div>
-      {% endfor %}
-    </div>
-  </section>
-  
   <!-- Project Demo Videos -->
-  <section class="mt-16">
+  <section class="mb-16">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b opacity-0" data-animate="fade-in">Project Demo Videos</h2>
     
     <div class="mb-8">
@@ -78,10 +65,20 @@ permalink: /projects/
     </div>
   </section>
   
-  <!-- Additional GitHub Projects -->
-  <section class="mt-16">
-    <h2 class="text-2xl font-bold mb-6 pb-2 border-b opacity-0" data-animate="fade-in">More Projects from GitHub</h2>
-    <div id="additional-projects" class="opacity-0" data-animate="fade-in" data-scroll="fade-up">
+  <!-- All Projects -->
+  <section>
+    <h2 class="text-2xl font-bold mb-6 pb-2 border-b opacity-0" data-animate="fade-in">All Projects</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {% for project in site.data.projects %}
+        <div class="h-full opacity-0" id="{{ project.name | slugify }}" data-animate="fade-in" data-scroll="fade-up">
+          {% include project-card.html project=project %}
+        </div>
+      {% endfor %}
+    </div>
+    
+    <!-- GitHub Projects -->
+    <div id="additional-projects" class="mt-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <!-- Dynamic content will be loaded here by JavaScript -->
     </div>
   </section>
@@ -290,4 +287,4 @@ permalink: /projects/
       });
     });
   });
-</script> 
+</script>

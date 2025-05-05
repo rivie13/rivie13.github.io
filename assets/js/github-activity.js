@@ -5,7 +5,7 @@
 
 class GitHubActivityFetcher {
   constructor(username, containerSelector, options = {}) {
-    this.username = username;
+    this.username = username || window.GitHubConfig.username;
     this.container = document.querySelector(containerSelector);
     this.options = {
       count: options.count || 5,
@@ -55,7 +55,22 @@ class GitHubActivityFetcher {
     this.container.innerHTML = '<div class="flex justify-center py-4"><div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div></div>';
     
     try {
-      const response = await fetch(`https://api.github.com/users/${this.username}/events/public`);
+      // Use centralized config for GitHub API requests
+      const response = await fetch(window.GitHubConfig.addClientId(
+        `https://api.github.com/users/${this.username}/events/public`
+      ));
+      
+      if (response.status === 403) {
+        // Show a helpful message about rate limits
+        this.container.innerHTML = `
+          <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3 rounded">
+            <p class="font-bold">GitHub API rate limit exceeded</p>
+            <p class="text-sm mt-1">Please try again later or check out my activity directly on GitHub.</p>
+            <p class="text-sm mt-1"><a href="https://github.com/${this.username}" target="_blank" class="underline">Visit my GitHub Profile</a></p>
+          </div>
+        `;
+        return;
+      }
       
       if (!response.ok) {
         throw new Error(`GitHub API returned ${response.status}`);
@@ -357,7 +372,16 @@ class GitHubLastUpdatedFetcher {
   async fetchLastUpdated() {
     try {
       // First check if repository exists to avoid 404 errors
-      const checkRepoResponse = await fetch(`https://api.github.com/repos/${this.username}/${this.repositoryName}`);
+      const checkRepoResponse = await fetch(window.GitHubConfig.addClientId(
+        `https://api.github.com/repos/${this.username}/${this.repositoryName}`
+      ));
+      
+      if (checkRepoResponse.status === 403) {
+        // Rate limit exceeded, log once and provide a clean fallback
+        console.warn(`GitHub API rate limit exceeded. Using fallback for ${this.repositoryName}.`);
+        this.displayLastUpdated(null);
+        return;
+      }
       
       if (!checkRepoResponse.ok) {
         // If repo doesn't exist, use fallback
@@ -377,7 +401,9 @@ class GitHubLastUpdatedFetcher {
       let lastCommitInfo = null;
       if (this.options.includeLastCommit) {
         try {
-          const commitsResponse = await fetch(`https://api.github.com/repos/${this.username}/${this.repositoryName}/commits?per_page=1`);
+          const commitsResponse = await fetch(window.GitHubConfig.addClientId(
+            `https://api.github.com/repos/${this.username}/${this.repositoryName}/commits?per_page=1`
+          ));
           if (commitsResponse.ok) {
             const commitsData = await commitsResponse.json();
             if (commitsData && commitsData.length > 0) {
@@ -390,7 +416,11 @@ class GitHubLastUpdatedFetcher {
             }
           }
         } catch (commitError) {
-          console.warn(`Error fetching commits for ${this.repositoryName}:`, commitError);
+          // Suppress repeated console warnings for commit errors
+          if (!window._commitErrorLogged) {
+            console.warn(`Error fetching commits. This may be due to API rate limits.`);
+            window._commitErrorLogged = true;
+          }
         }
       }
       
@@ -541,37 +571,57 @@ document.addEventListener('DOMContentLoaded', function() {
   async function fetchRepoData(username, repoName) {
     console.log(`Fetching data for ${repoName}...`);
     
-    // First check if repository exists to avoid 404 errors
-    const checkRepoResponse = await fetch(`https://api.github.com/repos/${username}/${repoName}`);
-    
-    if (!checkRepoResponse.ok) {
-      // If repo doesn't exist, use fallback
-      console.warn(`Repository ${repoName} not found or private. Using fallback.`);
-      return null;
-    }
-    
-    const repoData = await checkRepoResponse.json();
-    const lastUpdated = repoData.pushed_at || repoData.updated_at;
-    
-    // If option is enabled, fetch last commit information
-    let lastCommitInfo = null;
     try {
-      const commitsResponse = await fetch(`https://api.github.com/repos/${username}/${repoName}/commits?per_page=1`);
-      if (commitsResponse.ok) {
-        const commitsData = await commitsResponse.json();
-        if (commitsData && commitsData.length > 0) {
-          lastCommitInfo = {
-            message: commitsData[0].commit.message,
-            url: commitsData[0].html_url,
-            date: commitsData[0].commit.author.date
-          };
+      // First check if repository exists to avoid 404 errors
+      const checkRepoResponse = await fetch(window.GitHubConfig.addClientId(
+        `https://api.github.com/repos/${username}/${repoName}`
+      ));
+      
+      if (checkRepoResponse.status === 403) {
+        // Rate limit exceeded, log once and provide a clean fallback
+        console.warn(`GitHub API rate limit exceeded. Using fallback for ${repoName}.`);
+        return null;
+      }
+      
+      if (!checkRepoResponse.ok) {
+        // If repo doesn't exist, use fallback
+        console.warn(`Repository ${repoName} not found or private. Using fallback.`);
+        return null;
+      }
+      
+      const repoData = await checkRepoResponse.json();
+      const lastUpdated = repoData.pushed_at || repoData.updated_at;
+      
+      // If option is enabled, fetch last commit information
+      let lastCommitInfo = null;
+      try {
+        const commitsResponse = await fetch(window.GitHubConfig.addClientId(
+          `https://api.github.com/repos/${username}/${repoName}/commits?per_page=1`
+        ));
+        
+        if (commitsResponse.ok) {
+          const commitsData = await commitsResponse.json();
+          if (commitsData && commitsData.length > 0) {
+            lastCommitInfo = {
+              message: commitsData[0].commit.message,
+              url: commitsData[0].html_url,
+              date: commitsData[0].commit.author.date
+            };
+          }
+        }
+      } catch (commitError) {
+        // Suppress repeated console warnings for commit errors
+        if (!window._commitErrorLogged) {
+          console.warn(`Error fetching commits. This may be due to API rate limits.`);
+          window._commitErrorLogged = true;
         }
       }
-    } catch (commitError) {
-      console.warn(`Error fetching commits for ${repoName}:`, commitError);
+      
+      return { lastUpdated, lastCommitInfo };
+    } catch (error) {
+      console.warn(`Error fetching data for ${repoName}:`, error);
+      return null;
     }
-    
-    return { lastUpdated, lastCommitInfo };
   }
   
   /**
