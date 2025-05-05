@@ -3,7 +3,134 @@
  * This script dynamically fetches and displays all repositories from GitHub
  */
 
+// Create a request queue to prevent hitting secondary rate limits
+window.RequestQueue = {
+  queue: [],
+  running: false,
+  maxConcurrent: 1, // Reduce to 1 concurrent request
+  activeRequests: 0,
+  requestCounter: 0,
+  
+  // Initialize request counter from localStorage if it exists
+  init: function() {
+    const storedCounter = localStorage.getItem('github_api_request_counter');
+    const counterTimestamp = localStorage.getItem('github_api_counter_timestamp');
+    const now = Date.now();
+    
+    // Reset counter if it's been more than an hour
+    if (!storedCounter || !counterTimestamp || (now - parseInt(counterTimestamp) > 3600000)) {
+      this.requestCounter = 0;
+      localStorage.setItem('github_api_request_counter', '0');
+      localStorage.setItem('github_api_counter_timestamp', now.toString());
+    } else {
+      this.requestCounter = parseInt(storedCounter);
+    }
+    console.log(`GitHub API Request Counter: ${this.requestCounter}/5000`);
+  },
+
+  add: function(url, callback) {
+    // First check cache
+    const cacheKey = `github_cache_${url}`;
+    const cachedData = localStorage.getItem(cacheKey);
+    const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+    const now = Date.now();
+    const cacheDuration = 24 * 60 * 60 * 1000; // 24 hours
+    
+    // Use cache if available and not expired
+    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+      console.log(`Using cached data for: ${url}`);
+      // Simulate async behavior to maintain expected flow
+      setTimeout(() => {
+        callback({ ok: true, status: 200, cached: true }, JSON.parse(cachedData));
+      }, 0);
+      return;
+    }
+    
+    // Check rate limit - if over 4900 requests, only use cache
+    if (this.requestCounter > 4900) {
+      console.warn("GitHub API rate limit almost reached. Using fallback data only.");
+      callback({ ok: false, status: 403, cached: false }, { message: "Rate limit proactively avoided" });
+      return;
+    }
+    
+    this.queue.push({ url, callback: (response, data) => {
+      // Increment counter for actual API requests (not cached)
+      if (!response.cached) {
+        this.requestCounter++;
+        localStorage.setItem('github_api_request_counter', this.requestCounter.toString());
+      }
+      
+      // Cache successful responses
+      if (response.ok) {
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify(data));
+          localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+        } catch (e) {
+          console.warn('Could not cache response data:', e);
+        }
+      }
+      callback(response, data);
+    }});
+    this.process();
+  },
+
+  process: function() {
+    if (this.running) return;
+    this.running = true;
+    this.processNext();
+  },
+
+  processNext: function() {
+    if (this.queue.length === 0 || this.activeRequests >= this.maxConcurrent) {
+      if (this.activeRequests === 0) {
+        this.running = false;
+      }
+      return;
+    }
+
+    const { url, callback } = this.queue.shift();
+    this.activeRequests++;
+
+    // Debug log the URL
+    console.log(`DEBUG - Fetching URL: ${url}`);
+    console.log(`DEBUG - Client ID present in URL: ${url.includes('client_id=')}`);
+    
+    // Add a delay to avoid hitting secondary rate limits
+    setTimeout(() => {
+      fetch(url)
+        .then(response => {
+          console.log(`DEBUG - Response status for ${url}: ${response.status}`);
+          console.log(`DEBUG - Rate limit remaining: ${response.headers.get('x-ratelimit-remaining')}`);
+          console.log(`DEBUG - Rate limit limit: ${response.headers.get('x-ratelimit-limit')}`);
+          
+          return response.json().then(data => ({ response, data }));
+        })
+        .then(({ response, data }) => {
+          this.activeRequests--;
+          callback(response, data);
+          
+          // Add delay between requests
+          setTimeout(() => {
+            this.processNext();
+          }, 1000); // 1 second delay between requests
+        })
+        .catch(error => {
+          this.activeRequests--;
+          callback({ ok: false, status: 500 }, { message: error.message });
+          
+          // Add delay between requests
+          setTimeout(() => {
+            this.processNext();
+          }, 1000); // 1 second delay between requests
+        });
+    }, 1000); // Wait 1 second before starting the request
+  }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize request counter
+  window.RequestQueue.init();
+  
   const additionalProjectsContainer = document.getElementById('additional-projects');
   if (!additionalProjectsContainer) return;
 
@@ -33,115 +160,128 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       `;
       
-      // Use the helper method to add client_id
-      const response = await fetch(window.GitHubConfig.addClientId(
+      // Use the helper method to add client_id and queue the request
+      const reposUrl = window.GitHubConfig.addClientId(
         `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`
-      ));
-      
-      if (response.status === 403) {
-        // Handle rate limiting specifically
-        const rateLimitMessage = `
-          <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3 rounded text-center mb-4">
-            <p class="font-bold">GitHub API rate limit exceeded</p>
-            <p class="text-sm mt-1">Please try again later or check out my projects directly on GitHub.</p>
-            <p class="text-sm mt-1"><a href="https://github.com/${username}" target="_blank" class="underline">Visit my GitHub Profile</a></p>
-          </div>
-        `;
-        additionalProjectsContainer.innerHTML = rateLimitMessage;
-        throw new Error('GitHub API rate limit exceeded. Please try again later.');
-      }
-      
-      if (!response.ok) {
-        throw new Error(`GitHub API returned ${response.status}`);
-      }
-      
-      const repos = await response.json();
-      
-      // Filter out excluded repos and empty repos
-      const validRepos = repos.filter(repo => 
-        !excludedRepos.includes(repo.name.toLowerCase()) && 
-        !repo.archived
       );
       
-      if (validRepos.length === 0) {
-        additionalProjectsContainer.innerHTML = `
-          <p class="text-center text-gray-500 py-6">No additional projects found on GitHub.</p>
-        `;
-        return;
-      }
-      
-      // Sort by most recently updated
-      validRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-      
-      // Fetch language data for each repository
-      const reposWithLanguages = await Promise.all(validRepos.map(async (repo) => {
-        try {
-          if (repo.languages_url && !repo.private) {
-            // Add client_id to language requests
-            const langResponse = await fetch(window.GitHubConfig.addClientId(repo.languages_url));
-            if (langResponse.ok) {
-              const langData = await langResponse.json();
-              // Calculate total bytes
-              const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-              // Convert to percentages
-              const languages = Object.entries(langData).map(([name, bytes]) => ({
-                name,
-                percentage: Math.round((bytes / totalBytes) * 100)
-              })).sort((a, b) => b.percentage - a.percentage);
-              
-              return { ...repo, languageData: languages };
-            }
-          }
-          return repo;
-        } catch (e) {
-          console.warn(`Failed to fetch language data for ${repo.name}`, e);
-          return repo;
-        }
-      }));
-      
-      // Create HTML for the repositories
-      const reposHTML = reposWithLanguages.map(repo => createRepoCard(repo)).join('');
-      
-      additionalProjectsContainer.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          ${reposHTML}
-        </div>
-      `;
-      
-      // Add GitHub profile stats section
-      const totalRepos = repos.length;
-      const publicRepos = repos.filter(r => !r.private).length;
-      const privateRepos = totalRepos - publicRepos;
-      
-      const profileStatsHTML = `
-        <div class="mt-10 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-          <h3 class="text-xl font-bold mb-4">More on GitHub</h3>
-          <p class="mb-4 text-gray-700 dark:text-gray-300">
-            Check out my GitHub profile for more projects, contributions, and open source work.
-          </p>
-          <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex flex-col gap-2">
-              <div>
-                <span class="font-medium">Total repositories:</span> ${totalRepos} (${privateRepos} private)
-              </div>
-              <div>
-                <span class="font-medium">Total stars:</span> ${repos.reduce((sum, repo) => sum + repo.stargazers_count, 0)}
-              </div>
-              <div>
-                <span class="font-medium">Total forks:</span> ${repos.reduce((sum, repo) => sum + repo.forks_count, 0)}
-              </div>
+      // Use the request queue instead of direct fetch
+      RequestQueue.add(reposUrl, async (response, repos) => {
+        if (response.status === 403) {
+          // Handle rate limiting specifically
+          const rateLimitMessage = `
+            <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3 rounded text-center mb-4">
+              <p class="font-bold">GitHub API rate limit exceeded</p>
+              <p class="text-sm mt-1">Please try again later or check out my projects directly on GitHub.</p>
+              <p class="text-sm mt-1"><a href="https://github.com/${username}" target="_blank" class="underline">Visit my GitHub Profile</a></p>
             </div>
-            <a href="https://github.com/${username}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
-              </svg>
-              View GitHub Profile
-            </a>
+          `;
+          additionalProjectsContainer.innerHTML = rateLimitMessage;
+          return;
+        }
+        
+        if (!response.ok) {
+          throw new Error(`GitHub API returned ${response.status}`);
+        }
+        
+        // Filter out excluded repos and empty repos
+        const validRepos = repos.filter(repo => 
+          !excludedRepos.includes(repo.name.toLowerCase()) && 
+          !repo.archived
+        );
+        
+        if (validRepos.length === 0) {
+          additionalProjectsContainer.innerHTML = `
+            <p class="text-center text-gray-500 py-6">No additional projects found on GitHub.</p>
+          `;
+          return;
+        }
+        
+        // Sort by most recently updated
+        validRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+        
+        // Fetch language data for each repository - but limit to 5 repos max
+        const reposToShow = validRepos.slice(0, 5); // Only process the first 5 repos to avoid rate limits
+        const reposWithLanguages = [];
+        
+        for (const repo of reposToShow) {
+          try {
+            if (repo.languages_url && !repo.private) {
+              // Add to queue instead of direct fetch
+              const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
+              
+              // Use Promise to allow async/await with our queue
+              await new Promise(resolve => {
+                RequestQueue.add(langUrl, (langResponse, langData) => {
+                  if (langResponse.ok) {
+                    // Calculate total bytes
+                    const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
+                    // Convert to percentages
+                    const languages = Object.entries(langData).map(([name, bytes]) => ({
+                      name,
+                      percentage: Math.round((bytes / totalBytes) * 100)
+                    })).sort((a, b) => b.percentage - a.percentage);
+                    
+                    reposWithLanguages.push({ ...repo, languageData: languages });
+                  } else {
+                    reposWithLanguages.push(repo);
+                  }
+                  resolve();
+                });
+              });
+            } else {
+              reposWithLanguages.push(repo);
+            }
+          } catch (e) {
+            console.warn(`Failed to fetch language data for ${repo.name}`, e);
+            reposWithLanguages.push(repo);
+          }
+        }
+        
+        // Create HTML for the repositories
+        const reposHTML = reposWithLanguages.map(repo => createRepoCard(repo)).join('');
+        
+        additionalProjectsContainer.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            ${reposHTML}
           </div>
-        </div>
-      `;
-      
-      additionalProjectsContainer.insertAdjacentHTML('beforeend', profileStatsHTML);
+        `;
+        
+        // Add GitHub profile stats section
+        const totalRepos = repos.length;
+        const publicRepos = repos.filter(r => !r.private).length;
+        const privateRepos = totalRepos - publicRepos;
+        
+        const profileStatsHTML = `
+          <div class="mt-10 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold mb-4">More on GitHub</h3>
+            <p class="mb-4 text-gray-700 dark:text-gray-300">
+              Check out my GitHub profile for more projects, contributions, and open source work.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+              <div class="flex flex-col gap-2">
+                <div>
+                  <span class="font-medium">Total repositories:</span> ${totalRepos} (${privateRepos} private)
+                </div>
+                <div>
+                  <span class="font-medium">Total stars:</span> ${repos.reduce((sum, repo) => sum + repo.stargazers_count, 0)}
+                </div>
+                <div>
+                  <span class="font-medium">Total forks:</span> ${repos.reduce((sum, repo) => sum + repo.forks_count, 0)}
+                </div>
+              </div>
+              <a href="https://github.com/${username}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+                </svg>
+                View GitHub Profile
+              </a>
+            </div>
+          </div>
+        `;
+        
+        additionalProjectsContainer.insertAdjacentHTML('beforeend', profileStatsHTML);
+      });
       
     } catch (error) {
       console.error('Error fetching GitHub repositories:', error);
