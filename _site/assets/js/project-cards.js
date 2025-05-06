@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Map project slugs to their actual repository names
   const projectRepoMap = {
-    'codegrind': ['codegrind'], // Even though private, we'll try to fetch with auth
+    'codegrind': ['codegrind'],
     'helios-swarm-robotics': ['robotics-nav2-slam-example', 'helios'],
     'bestnotes': ['01-bestnotes'],
     'projectile-launcher-rework': ['plr'],
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Find all project cards in both featured and all projects sections
     console.log("Finding all project cards on the page");
     findAndProcessCards();
+    
   }, 100);
   
   // Process next project in queue
@@ -49,8 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
     const now = Date.now();
     const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
+    const forceRefresh = window.location.search.includes('force_refresh');
     
-    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+    if (!forceRefresh && cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
       console.log(`Using cached language data for: ${repos.join(', ')}`);
       const languages = JSON.parse(cachedData);
       updateLanguageBar(container, languages);
@@ -60,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    // Use API for all projects
+    // Use API for all projects with authentication
     updateLanguageData(username, repos, container, id).then(() => {
       // Wait a shorter time (500ms) before processing the next project
       setTimeout(processNextProject, 500);
@@ -78,10 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Find all project cards and process them
   function findAndProcessCards() {
-    // Find all project cards, whether they have language containers or technology bubbles
-    const projectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg.shadow-lg');
+    // Find all project cards - include cards without specific IDs to catch featured cards
+    const allProjectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg');
     
-    projectCards.forEach(card => {
+    allProjectCards.forEach(card => {
       // Find the project title to identify which project this is
       const titleElem = card.querySelector('h3');
       if (!titleElem) return;
@@ -104,15 +106,41 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (!projectId || !projectRepoMap[projectId]) return;
       
-      // Find language section
-      const languageSection = card.querySelector('.mb-4 h4');
-      if (!languageSection || !languageSection.textContent.includes('LANGUAGE')) return;
+      console.log(`Found project card for: ${projectId} with title "${titleText}"`);
       
-      // Get the parent of the language section
-      const languageContainer = languageSection.closest('.mb-4');
-      if (!languageContainer) return;
+      // Find language section - try multiple selectors to ensure we find it
+      let languageContainer = null;
       
-      console.log(`Found project card for: ${projectId}`);
+      // Try looking for a language heading first
+      const languageHeading = card.querySelector('.mb-4 h4');
+      if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
+        languageContainer = languageHeading.closest('.mb-4');
+      }
+      
+      // If not found, try looking for a dedicated language container
+      if (!languageContainer) {
+        languageContainer = card.querySelector('.languages-container');
+        if (languageContainer) {
+          console.log(`Found language container for ${projectId} with class`);
+        }
+      }
+      
+      // If still not found, look for any section that might contain language info
+      if (!languageContainer) {
+        const sections = card.querySelectorAll('.mb-4');
+        for (const section of sections) {
+          const heading = section.querySelector('h4');
+          if (heading && heading.textContent.includes('LANGUAGE')) {
+            languageContainer = section;
+            break;
+          }
+        }
+      }
+      
+      if (!languageContainer) {
+        console.warn(`Could not find language container for ${projectId}`);
+        return;
+      }
       
       // Initially show loading state
       showLanguageLoading(languageContainer);
@@ -234,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       if (isPrivate) {
-        // For private repos, we still try to fetch language data with auth
+        // For private repos, use authentication to get real data
         console.log(`Attempting to fetch language data for private repo(s): ${repos.join(', ')}`);
       }
       
@@ -324,6 +352,9 @@ document.addEventListener('DOMContentLoaded', function() {
    * Updates the language bar in the container
    */
   function updateLanguageBar(container, languages) {
+    // Log the container we're updating to debug
+    console.log("Updating language bar in container:", container);
+    
     // Create HTML for language bar
     const colorMap = {
       "JavaScript": "bg-yellow-400",
@@ -354,23 +385,54 @@ document.addEventListener('DOMContentLoaded', function() {
       "JSON": "bg-amber-300"
     };
     
-    let html = `<h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>`;
-    html += `<div class="languages-container">`;
-    html += `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+    // Check if we're updating the inner languages-container div or the parent section
+    const isLangContainer = container.classList.contains('languages-container');
     
-    languages.forEach(lang => {
-      const bgClass = colorMap[lang.name] || "bg-gray-400";
-      html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-    });
+    let html = '';
     
-    html += `</div>`;
-    html += `<div class="flex flex-wrap mt-1 text-xs">`;
-    
-    languages.forEach(lang => {
-      html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
-    });
-    
-    html += `</div></div>`;
+    // If this is the inner languages-container, we need to preserve the parent's heading
+    // by not including the heading in our HTML replacement
+    if (isLangContainer) {
+      // Just add the language bar itself without the heading
+      html = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+      
+      // Add language bars
+      languages.forEach(lang => {
+        const bgClass = colorMap[lang.name] || "bg-gray-400";
+        html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
+      });
+      
+      html += `</div>`;
+      html += `<div class="flex flex-wrap mt-1 text-xs">`;
+      
+      // Add language text
+      languages.forEach(lang => {
+        html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+      });
+      
+      html += `</div>`;
+    } else {
+      // For the parent container, include the heading and everything
+      html = `<h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>`;
+      html += `<div class="languages-container">`;
+      html += `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+      
+      // Add language bars
+      languages.forEach(lang => {
+        const bgClass = colorMap[lang.name] || "bg-gray-400";
+        html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
+      });
+      
+      html += `</div>`;
+      html += `<div class="flex flex-wrap mt-1 text-xs">`;
+      
+      // Add language text
+      languages.forEach(lang => {
+        html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+      });
+      
+      html += `</div></div>`;
+    }
     
     // Update the container
     container.innerHTML = html;
@@ -472,9 +534,8 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
     
-    // Also handle special case for CodeGrind
-    updateCodeGrindLastUpdated();
   }
+  
   
   /**
    * Update a last updated element with repo data
@@ -525,75 +586,6 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       element.textContent = "Last updated: Unknown";
     }
-  }
-  
-  /**
-   * Special case for CodeGrind to ensure it shows last updated info
-   */
-  function updateCodeGrindLastUpdated() {
-    // Find CodeGrind cards that don't have last updated info already
-    const codegrindCards = document.querySelectorAll('[id*="codegrind"]');
-    
-    codegrindCards.forEach(card => {
-      // Check if the card already has a last updated element
-      const existingUpdated = card.querySelector('[data-github-last-updated="codegrind"]');
-      if (existingUpdated) return; // Already has update info
-      
-      // Find a place to add the last updated info
-      const keyFeaturesSection = card.querySelector('.mb-4 h4');
-      if (!keyFeaturesSection) return;
-      
-      const featuresSection = keyFeaturesSection.closest('.mb-4');
-      if (!featuresSection) return;
-      
-      // Create a new div for last updated info
-      const updatedDiv = document.createElement('div');
-      updatedDiv.className = 'flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4';
-      updatedDiv.innerHTML = `
-        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-        </svg>
-        <span data-github-last-updated="codegrind">Loading update info...</span>
-      `;
-      
-      // Insert after features section
-      featuresSection.parentNode.insertBefore(updatedDiv, featuresSection.nextSibling);
-      
-      // Check cache first
-      const cacheKey = `repo_details_${username}_codegrind`;
-      const cachedData = localStorage.getItem(cacheKey);
-      const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
-      const now = Date.now();
-      const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
-      
-      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
-        console.log(`Using cached repo details for CodeGrind`);
-        updateLastUpdatedElement(updatedDiv.querySelector('span'), JSON.parse(cachedData));
-        return;
-      }
-      
-      // Update the last updated timestamp
-      const repoUrl = window.GitHubConfig ? 
-        window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/codegrind`) :
-        `https://api.github.com/repos/${username}/codegrind`;
-      
-      window.RequestQueue.add(repoUrl, (response, data) => {
-        const span = updatedDiv.querySelector('span');
-        if (response.ok) {
-          // Cache the data
-          try {
-            localStorage.setItem(cacheKey, JSON.stringify(data));
-            localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
-          } catch (e) {
-            console.warn('Failed to cache CodeGrind repo details:', e);
-          }
-          
-          updateLastUpdatedElement(span, data);
-        } else {
-          span.textContent = "Last updated: Unknown";
-        }
-      });
-    });
   }
   
   /**
