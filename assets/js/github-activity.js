@@ -32,7 +32,8 @@ class GitHubActivityFetcher {
     this.options = {
       count: options.count || 15, // Increased from 10 to 15
       cacheTime: options.cacheTime || 300000, // 5 minutes (decreased from 30 minutes)
-      filterEvents: options.filterEvents || ['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent', 'ReleaseEvent', 'ForkEvent', 'WatchEvent', 'PublicEvent', 'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewEvent']
+      filterEvents: options.filterEvents || ['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent', 'ReleaseEvent', 'ForkEvent', 'WatchEvent', 'PublicEvent', 'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewEvent'],
+      forceClearCache: options.forceClearCache || false
     };
     
     this.cacheKey = `github_activity_${this.username}`;
@@ -70,8 +71,8 @@ class GitHubActivityFetcher {
    */
   async fetchActivities(isBackgroundFetch = false, forceClearCache = false) {
     try {
-      // Clear cache if forced
-      if (forceClearCache) {
+      // Clear cache if forced or if forceClearCache option is set
+      if (forceClearCache || this.options.forceClearCache) {
         console.log('Clearing GitHub activity cache');
         localStorage.removeItem(this.cacheKey);
         localStorage.removeItem(`${this.cacheKey}_timestamp`);
@@ -245,7 +246,8 @@ class GitHubActivityFetcher {
           Refresh
         </button>
       </div>
-      <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-3">
+      <div class="max-h-[500px] overflow-y-auto pr-2">
+        <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-6">
     `;
     
     events.forEach(event => {
@@ -255,7 +257,7 @@ class GitHubActivityFetcher {
       }
     });
     
-    timelineHTML += `</div>`;
+    timelineHTML += `</div></div>`;
     
     // Add link to GitHub profile
     timelineHTML += `
@@ -319,10 +321,10 @@ class GitHubActivityFetcher {
     // Create event HTML
     let eventHTML = `
       <div class="mb-6 relative">
-        <div class="absolute -left-4 mt-1 w-6 h-6 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center">
+        <div class="absolute -left-4 top-0.5 w-8 h-8 rounded-full bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center">
           ${icon}
         </div>
-        <div class="ml-6">
+        <div class="ml-8">
           <div class="text-sm text-gray-500 dark:text-gray-400 mb-1">${formattedDate}</div>
           <div class="mb-2 font-medium">${title}</div>
     `;
@@ -447,7 +449,7 @@ class GitHubActivityFetcher {
   
   getEventDetails(event) {
     // Default icon (code)
-    let icon = `<svg class="w-3 h-3 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294l4-13zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0zm6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0z"/></svg>`;
+    let icon = `<svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path><path d="M9 11.75a.75.75 0 01-.75.75h-.5a.75.75 0 010-1.5h.5a.75.75 0 01.75.75zM6.25 4.5a.75.75 0 01.75-.75h2a.75.75 0 010 1.5h-2a.75.75 0 01-.75-.75z"></path></svg>`;
     let title = `Activity in ${event.repo.name.split('/')[1]}`;
     
     // Get repository name without owner
@@ -455,12 +457,12 @@ class GitHubActivityFetcher {
     
     switch (event.type) {
       case 'PushEvent':
-        icon = `<svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M7 9V5h2v4h2l-3 3-3-3h2z"/><path d="M13 2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-7.59l1.4-1.4a.5.5 0 0 0-.4-.86H16v-.15a.5.5 0 0 0-.15-.35l-1.4-1.4a.5.5 0 0 0-.7 0l-1.4 1.4a.5.5 0 0 0-.15.35V9h-.95a.5.5 0 0 0-.4.86l1.4 1.4a.5.5 0 0 0 .7 0l1.4-1.4a.5.5 0 0 0 .15-.35v-.15H15v-2a2 2 0 0 0-2-2z"/></svg>`;
+        icon = `<svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 1a1.993 1.993 0 00-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 002 1a1.993 1.993 0 00-1 3.72V6.5l3 3v1.78A1.993 1.993 0 005 15a1.993 1.993 0 001-3.72V9.5l3-3V4.72A1.993 1.993 0 008 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z" clip-rule="evenodd"></path></svg>`;
         title = `Pushed to ${repoName}`;
         break;
         
       case 'CreateEvent':
-        icon = `<svg class="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/></svg>`;
+        icon = `<svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zm.75 4.75a.75.75 0 00-1.5 0v2.5h-2.5a.75.75 0 000 1.5h2.5v2.5a.75.75 0 001.5 0v-2.5h2.5a.75.75 0 000-1.5h-2.5v-2.5z" clip-rule="evenodd"></path></svg>`;
         if (event.payload.ref_type === 'repository') {
           title = `Created repository ${repoName}`;
         } else {
@@ -469,34 +471,48 @@ class GitHubActivityFetcher {
         break;
         
       case 'PullRequestEvent':
-        icon = `<svg class="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM2 3a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm8.98 2H10a.5.5 0 0 0 0 1h.98a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-.5.5H3.5a.5.5 0 0 1-.5-.5v-5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 6.5v5A1.5 1.5 0 0 0 3.5 13h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 10.98 5z"/></svg>`;
+        icon = `<svg class="w-4 h-4 text-purple-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.177 3.073L9.573.677A.25.25 0 0110 .854v4.792a.25.25 0 01-.427.177L7.177 3.427a.25.25 0 010-.354zM3.75 2.5a.75.75 0 100 1.5.75.75 0 000-1.5zm-2.25.75a2.25 2.25 0 113 2.122v5.256a2.251 2.251 0 11-1.5 0V5.372A2.25 2.25 0 011.5 3.25zM11 2.5h-1V4h1a1 1 0 011 1v5.628a2.251 2.251 0 101.5 0V5A2.5 2.5 0 0011 2.5zm1 10.25a.75.75 0 111.5 0 .75.75 0 01-1.5 0zM3.75 12a.75.75 0 100 1.5.75.75 0 000-1.5z" clip-rule="evenodd"></path></svg>`;
         title = `${this.capitalizeFirst(event.payload.action)} pull request in ${repoName}`;
         break;
         
       case 'IssuesEvent':
-        icon = `<svg class="w-3 h-3 text-yellow-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/></svg>`;
+        icon = `<svg class="w-4 h-4 text-yellow-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9 3a1 1 0 11-2 0 1 1 0 012 0zm-.25-6.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z" clip-rule="evenodd"></path></svg>`;
         title = `${this.capitalizeFirst(event.payload.action)} issue in ${repoName}`;
         break;
         
       case 'ReleaseEvent':
-        // Fixed SVG icon with proper paths
-        icon = `<svg class="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 1a1 1 0 0 1 0.68 0.31l4.2 4.2A1 1 0 0 1 12.6 7.13l-4.24 4.24a1 1 0 0 1-1.36 0L2.89 7.13a1 1 0 0 1 0-1.42l4.2-4.2A1 1 0 0 1 8 1z M8 2.41L4.41 6 8 9.59 11.59 6 8 2.41z"></path><circle cx="8" cy="6" r="1"></circle><circle cx="5" cy="6" r="1"></circle><circle cx="11" cy="6" r="1"></circle></svg>`;
+        icon = `<svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>`;
         title = `Released ${event.payload.release.name || event.payload.release.tag_name} for ${repoName}`;
         break;
         
       case 'ForkEvent':
-        icon = `<svg class="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg>`;
+        icon = `<svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"></path></svg>`;
         title = `Forked ${repoName}`;
         break;
         
       case 'WatchEvent':
-        icon = `<svg class="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path></svg>`;
+        icon = `<svg class="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.22 2.22v-2.19a.75.75 0 01.75-.75h1a.25.25 0 00.25-.25v-5.5z" clip-rule="evenodd"></path></svg>`;
         title = `Starred ${repoName}`;
         break;
         
       case 'IssueCommentEvent':
-        icon = `<svg class="w-3 h-3 text-blue-500" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12h-4.072l-3.528 3.53A.75.75 0 014 15v-3.025A1.75 1.75 0 012.25 10.25v-7.5z"></path></svg>`;
+        icon = `<svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12h-4.072l-3.528 3.53A.75.75 0 014 15v-3.025A1.75 1.75 0 012.25 10.25v-7.5z" clip-rule="evenodd"></path></svg>`;
         title = `Commented on issue in ${repoName}`;
+        break;
+      
+      case 'PullRequestReviewEvent':
+        icon = `<svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M0 1.5A.5.5 0 01.5 1H2a.5.5 0 01.485.379L2.89 3H14.5a.5.5 0 01.491.592l-1.5 8A.5.5 0 0113 12H4a.5.5 0 01-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 01-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 100 4 2 2 0 000-4zm7 0a2 2 0 100 4 2 2 0 000-4zm-7 1a1 1 0 110 2 1 1 0 010-2zm7 0a1 1 0 110 2 1 1 0 010-2z" clip-rule="evenodd"></path></svg>`;
+        title = `Reviewed pull request in ${repoName}`;
+        break;
+      
+      case 'PublicEvent':
+        icon = `<svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z" clip-rule="evenodd"></path></svg>`;
+        title = `Made ${repoName} public`;
+        break;
+        
+      case 'CommitCommentEvent':
+        icon = `<svg class="w-4 h-4 text-teal-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M1.5 2.75a.25.25 0 01.25-.25h8.5a.25.25 0 01.25.25v5.5a.25.25 0 01-.25.25h-3.5a.75.75 0 00-.53.22L3.5 11.44V9.25a.75.75 0 00-.75-.75h-1a.25.25 0 01-.25-.25v-5.5zM1.75 1A1.75 1.75 0 000 2.75v5.5C0 9.216.784 10 1.75 10H2v1.543a1.457 1.457 0 002.487 1.03L7.061 10h3.189A1.75 1.75 0 0012 8.25v-5.5A1.75 1.75 0 0010.25 1h-8.5zM14.5 4.75a.25.25 0 00-.25-.25h-.5a.75.75 0 110-1.5h.5c.966 0 1.75.784 1.75 1.75v5.5A1.75 1.75 0 0114.25 12H14v1.543a1.457 1.457 0 01-2.487 1.03L9.22 12.28a.75.75 0 111.06-1.06l2.22 2.22v-2.19a.75.75 0 01.75-.75h1a.25.25 0 00.25-.25v-5.5z" clip-rule="evenodd"></path></svg>`;
+        title = `Commented on commit in ${repoName}`;
         break;
     }
     
@@ -732,7 +748,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize activity feed on home page
   const activityContainer = document.getElementById('github-activity-feed');
   if (activityContainer) {
-    new GitHubActivityFetcher('rivie13', '#github-activity-feed', { count: 5 });
+    new GitHubActivityFetcher('rivie13', '#github-activity-feed', { 
+      count: 10,
+      forceClearCache: true  // Always get fresh data
+    });
   }
   
   // First, gather all repository data needed for fetching
