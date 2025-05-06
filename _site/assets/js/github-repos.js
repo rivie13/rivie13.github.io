@@ -518,11 +518,11 @@ function initGitHubRepos() {
       
       const loadMoreHTML = `
         <div class="text-center mt-8" id="load-more-container">
-          <button id="load-more-button" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+          <button id="load-more-button" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
             </svg>
-            Load ${remainingCount} More Repositories
+            Load ${remainingCount} More Projects
           </button>
           <div class="text-sm text-gray-500 mt-2">
             Showing ${endIdx} of ${reposWithLanguages.length} repositories
@@ -530,35 +530,42 @@ function initGitHubRepos() {
         </div>
       `;
       
-      // CRITICAL FIX: Make sure we're adding this to the document properly
       additionalProjectsContainer.insertAdjacentHTML('beforeend', loadMoreHTML);
       
-      // Add click event listener to the button with explicit checks
-      setTimeout(() => {
-        const loadMoreButton = document.getElementById('load-more-button');
-        if (loadMoreButton) {
-          console.log("Load more button found, adding click handler");
-          loadMoreButton.addEventListener('click', function() {
-            console.log("Load more button clicked");
-            
-            // Update button to show loading state
-            this.disabled = true;
-            this.innerHTML = `
-              <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Loading...
-            `;
-            
-            // CRITICAL FIX: Increment page and call loadMoreRepos directly
-            currentPage++;
-            loadMoreRepos();
-          });
-        } else {
-          console.error("Could not find load more button after adding it to the DOM");
+      // Directly attach the event handler instead of using setTimeout
+      const loadMoreButton = document.getElementById('load-more-button');
+      if (loadMoreButton) {
+        console.log("FIXED: Load more button found, adding direct click handler");
+        
+        // Make sure we remove any existing listeners
+        const newButton = loadMoreButton.cloneNode(true);
+        if (loadMoreButton.parentNode) {
+          loadMoreButton.parentNode.replaceChild(newButton, loadMoreButton);
         }
-      }, 100); // Short delay to ensure DOM is updated
+        
+        // Add the new listener
+        newButton.addEventListener('click', function(e) {
+          // Prevent default to ensure it doesn't use any existing href
+          e.preventDefault();
+          console.log("Load more button clicked - DIRECT HANDLER");
+          
+          // Update button to show loading state
+          this.disabled = true;
+          this.innerHTML = `
+            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Loading...
+          `;
+          
+          // Increment page and load more repos
+          currentPage++;
+          loadMoreRepos();
+        });
+      } else {
+        console.error("CRITICAL ERROR: Could not find load more button after adding it to the DOM");
+      }
     } else {
       console.log("All repositories shown, no load more button needed");
       // Add a "showing all" indicator
@@ -696,7 +703,7 @@ function initGitHubRepos() {
           <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
           <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
             ${topLanguages.map(lang => {
-              // Get color for language
+              // Get color for language - FIXED COLORS
               const colorMap = {
                 "JavaScript": "bg-yellow-400",
                 "TypeScript": "bg-blue-500",
@@ -731,11 +738,25 @@ function initGitHubRepos() {
       `;
     } else if (repo.language) {
       // Fallback if we don't have detailed language data
+      // FIXED: Use the correct color for specific languages in fallback too
+      let bgColorClass = "bg-gray-400";
+      if (repo.language === "Kotlin") {
+        bgColorClass = "bg-purple-600"; // Kotlin is purple
+      } else if (repo.language === "JavaScript") {
+        bgColorClass = "bg-yellow-400";
+      } else if (repo.language === "Python") {
+        bgColorClass = "bg-blue-600";
+      } else if (repo.language === "Java") {
+        bgColorClass = "bg-orange-600";
+      } else if (repo.language === "Jupyter Notebook") {
+        bgColorClass = "bg-orange-300";
+      }
+      
       languageBar = `
         <div class="mb-4">
           <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
           <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-            <div class="bg-blue-500 h-2 w-full"></div>
+            <div class="${bgColorClass} h-2 w-full"></div>
           </div>
           <div class="flex flex-wrap mt-1 text-xs">
             <span class="mr-2">${repo.language} (100%)</span>
@@ -882,10 +903,7 @@ function initGitHubRepos() {
             "ASP.NET": "bg-blue-800",
             "Vue": "bg-green-500",
             "Lua": "bg-blue-400",
-            "YAML": "bg-purple-300",
-            "RedScript": "bg-red-700",
-            "XML": "bg-orange-300",
-            "JSON": "bg-amber-300"
+            "Jupyter Notebook": "bg-orange-300"
           };
           const bgClass = colorMap[lang.name] || "bg-gray-400";
           return `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
@@ -1061,11 +1079,11 @@ function initGitHubRepos() {
    * Load more repositories when the "Load More" button is clicked
    */
   function loadMoreRepos() {
-    console.log(`Loading more repos, page ${currentPage}`);
+    console.log(`Loading more repos, DIRECT FUNCTION CALL page ${currentPage}`);
     
     // Get the next batch of repositories
     const startIdx = (currentPage - 1) * reposPerPage;
-    const endIdx = currentPage * reposPerPage;
+    const endIdx = Math.min(currentPage * reposPerPage, reposWithLanguages.length);
     const reposToRender = reposWithLanguages.slice(startIdx, endIdx);
     
     console.log(`Loading repos from index ${startIdx} to ${endIdx-1}. Loading ${reposToRender.length} repos.`);
