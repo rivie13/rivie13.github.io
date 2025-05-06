@@ -4,8 +4,8 @@
 
 ### Index Page
 - **Animation Missing**: "View All Projects" button is missing the animation that other elements have (THIS IS DONE)
-- **GitHub Stats Accuracy**: Current GitHub stats may not be fully accurate despite using authentication - I am not sure if language stats are accurate, I want more stats added to this section
-- **Contribution Chart**: The contribution chart needs to be implemented/created
+- **GitHub Stats Accuracy**: Current GitHub stats may not be fully accurate despite using authentication - I am not sure if language stats are accurate, I want more stats added to this section (THIS IS DONE)
+- **Contribution Chart**: The contribution chart needs to be implemented/created (THIS IS DONE)
 
 ### Projects Page
 - **Loading Behavior Issues**: 
