@@ -173,11 +173,12 @@ function initGitHubRepos() {
   
   const username = window.GitHubConfig.username;
   const excludedRepos = [
-    'rivie13.github.io',
     'Helios',
     '01-BestNotes',
     'Robotics-Nav2-SLAM-Example',
-    'codegrind'
+    'codegrind',
+    'plr',
+    'PLR'
   ]; // Reduce excluded repos to show more
   
   // Define repositories per page globally
