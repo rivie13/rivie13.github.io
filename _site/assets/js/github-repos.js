@@ -7,7 +7,7 @@
 window.RequestQueue = {
   queue: [],
   running: false,
-  maxConcurrent: 3, // Increased from 1 to 3 for better performance
+  maxConcurrent: 10, // Increased from 3 to 10 for much better performance
   activeRequests: 0,
   requestCounter: 0,
   
@@ -38,7 +38,7 @@ window.RequestQueue = {
       const cachedData = localStorage.getItem(cacheKey);
       const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
       const now = Date.now();
-      const cacheDuration = 60 * 60 * 1000; // Increase to 1 hour for better performance
+      const cacheDuration = 4 * 60 * 60 * 1000; // Increase to 4 hours for better performance
       
       // Use cache if available and not expired
       if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
@@ -103,41 +103,39 @@ window.RequestQueue = {
     // Debug log the URL
     console.log(`DEBUG - Fetching URL: ${url}`);
     
-    // Add a delay to avoid hitting secondary rate limits
-    setTimeout(() => {
-      fetch(url)
-        .then(response => {
-          console.log(`DEBUG - Response status for ${url}: ${response.status}`);
-          const rateLimit = {
-            limit: response.headers.get('x-ratelimit-limit'),
-            remaining: response.headers.get('x-ratelimit-remaining'),
-            reset: response.headers.get('x-ratelimit-reset')
-          };
-          
-          console.log(`DEBUG - Rate limit info:`, rateLimit);
-          
-          return response.json().then(data => ({ response, data }));
-        })
-        .then(({ response, data }) => {
-          this.activeRequests--;
-          callback(response, data);
-          
-          // Add delay between requests
-          setTimeout(() => {
-            this.processNext();
-          }, 500); // Reduced from 1000ms to 500ms for faster loading
-        })
-        .catch(error => {
-          console.error(`Error fetching ${url}:`, error);
-          this.activeRequests--;
-          callback({ ok: false, status: 500 }, { message: error.message });
-          
-          // Add delay between requests
-          setTimeout(() => {
-            this.processNext();
-          }, 500); // Reduced from 1000ms to 500ms for faster loading
-        });
-    }, 500); // Reduced from 1000ms to 500ms for faster loading
+    // Reduced delay to avoid hitting secondary rate limits
+    fetch(url)
+      .then(response => {
+        console.log(`DEBUG - Response status for ${url}: ${response.status}`);
+        const rateLimit = {
+          limit: response.headers.get('x-ratelimit-limit'),
+          remaining: response.headers.get('x-ratelimit-remaining'),
+          reset: response.headers.get('x-ratelimit-reset')
+        };
+        
+        console.log(`DEBUG - Rate limit info:`, rateLimit);
+        
+        return response.json().then(data => ({ response, data }));
+      })
+      .then(({ response, data }) => {
+        this.activeRequests--;
+        callback(response, data);
+        
+        // Decreased delay between requests for faster loading
+        setTimeout(() => {
+          this.processNext();
+        }, 100); // Reduced from 500ms to 100ms for much faster loading
+      })
+      .catch(error => {
+        console.error(`Error fetching ${url}:`, error);
+        this.activeRequests--;
+        callback({ ok: false, status: 500 }, { message: error.message });
+        
+        // Decreased delay between requests for faster loading
+        setTimeout(() => {
+          this.processNext();
+        }, 100); // Reduced from 500ms to 100ms for much faster loading
+      });
   }
 };
 
@@ -197,31 +195,6 @@ function initGitHubRepos() {
 
   // Use the centralized GitHub config
   fetchAdditionalRepos(username, excludedRepos);
-  
-  // Clean up any leftover global loading indicators after a reasonable time
-  setTimeout(() => {
-    const loadingMessage = document.querySelector('.animate-spin');
-    if (loadingMessage) {
-      const loadingContainer = loadingMessage.closest('div.text-center');
-      if (loadingContainer) {
-        loadingContainer.remove();
-      }
-    }
-    
-    // Also clean up any "Loading language data (x/y)" messages
-    const loadingText = document.getElementById('loading-status');
-    if (loadingText && loadingText.textContent.includes('Loading')) {
-      loadingText.remove();
-    }
-    
-    // Remove global loading message like "Loading language data (8/33)..."
-    const allDivs = document.querySelectorAll('div');
-    allDivs.forEach(div => {
-      if (div.textContent.includes('Loading language data')) {
-        div.remove();
-      }
-    });
-  }, 5000); // Give it 5 seconds to load initial data
   
   /**
    * Fetch additional repositories from GitHub
@@ -467,18 +440,25 @@ function initGitHubRepos() {
       // Clear the global reposWithLanguages array
       reposWithLanguages = [];
       
-      // CRITICAL FIX: Process language data for all repositories at once
-      // to ensure we have everything ready before rendering
-      for (const repo of reposToShow) {
-        // Add to reposWithLanguages array immediately so we have correct count
-        reposWithLanguages.push(repo);
+      // OPTIMIZED: Fetch language data in parallel batches to improve performance
+      updateLoadingStatus(`Fetching language data (0/${reposToShow.length})...`, 60);
+      
+      // Fetch language data in parallel batches
+      const BATCH_SIZE = 8; // Process 8 repos at a time
+      
+      // Add all repos to reposWithLanguages first
+      reposToShow.forEach(repo => reposWithLanguages.push(repo));
+      
+      // Process language data in batches for better performance
+      const processBatch = async (startIdx, endIdx) => {
+        const promises = [];
         
-        // Then fetch language data if available
-        if (repo.languages_url) {
-          try {
+        for (let i = startIdx; i < endIdx && i < reposToShow.length; i++) {
+          const repo = reposToShow[i];
+          if (repo.languages_url) {
             const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
             
-            await new Promise(resolve => {
+            promises.push(new Promise(resolve => {
               RequestQueue.add(langUrl, (langResponse, langData) => {
                 if (langResponse.ok) {
                   // Calculate total bytes
@@ -491,14 +471,20 @@ function initGitHubRepos() {
                   
                   repo.languageData = languages;
                 }
-                
                 resolve();
               });
-            });
-          } catch (e) {
-            console.warn(`Failed to fetch language data for repo ${repo.name}`, e);
+            }));
           }
         }
+        
+        await Promise.all(promises);
+        updateLoadingStatus(`Fetching language data (${Math.min(endIdx, reposToShow.length)}/${reposToShow.length})...`, 
+                           60 + (Math.min(endIdx, reposToShow.length) / reposToShow.length) * 30);
+      };
+      
+      // Process all repos in batches
+      for (let i = 0; i < reposToShow.length; i += BATCH_SIZE) {
+        await processBatch(i, i + BATCH_SIZE);
       }
       
       console.log(`Ready to render ${reposWithLanguages.length} repositories with language data`);
@@ -518,18 +504,6 @@ function initGitHubRepos() {
       
       // Complete loading
       updateLoadingStatus(`Loading complete!`, 100);
-      
-      // CRITICAL FIX: Remove loading indicator after a short delay
-      // TEST TAKE THIS OUT AND SEE IF LOADING STAYS.....
-      // setTimeout(() => {
-      //   const loadingElement = document.querySelector('#loading-status');
-      //   if (loadingElement) {
-      //     const loadingContainer = loadingElement.closest('.text-center');
-      //     if (loadingContainer) {
-      //       loadingContainer.remove();
-      //     }
-      //   }
-      // }, 1000);
       
     } catch (error) {
       console.error('Error fetching GitHub repositories:', error);
@@ -554,15 +528,14 @@ function initGitHubRepos() {
     
     console.log(`Rendering repos from index ${startIdx} to ${endIdx-1}. Rendering ${reposToRender.length} repos.`);
     
-    // Create HTML for the repositories
+    // Create HTML for the repositories - Build the entire HTML string at once
     const reposHTML = reposToRender.map(repo => {
-      // Wrap each repo card in a div with the same class used in loadMoreReposFixed
       return `<div class="repo-grid-item">${createRepoCard(repo)}</div>`;
     }).join('');
     
-    // Replace or append content
+    // Performance optimization: Create the grid container once, then insert all HTML in a single operation
     if (page === 1) {
-      // First page: replace content
+      // First page: use innerHTML once with complete grid
       console.log("Replacing container content with first page of repos");
       additionalProjectsContainer.innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid" style="display:grid;">
@@ -570,18 +543,22 @@ function initGitHubRepos() {
         </div>
       `;
     } else {
-      // Subsequent pages: append content
+      // Subsequent pages: find the grid and append all at once
       console.log("Appending repositories to existing grid");
       const reposGrid = document.getElementById('repos-grid');
       if (reposGrid) {
-        // Create a temporary div to hold the new HTML
+        // Create a document fragment to improve performance
+        const fragment = document.createDocumentFragment();
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = reposHTML;
         
-        // Append each child individually to maintain grid structure
+        // Move elements to fragment
         while (tempDiv.firstChild) {
-          reposGrid.appendChild(tempDiv.firstChild);
+          fragment.appendChild(tempDiv.firstChild);
         }
+        
+        // Single DOM insertion
+        reposGrid.appendChild(fragment);
       } else {
         console.error("Could not find repos-grid element for appending repositories");
         // Fallback: replace entire content
@@ -596,10 +573,16 @@ function initGitHubRepos() {
     // Add "Load More" button if there are more repos to show
     updateLoadMoreButton(endIdx);
     
-    // Ensure any animations or lazy-loaded content renders properly
+    // Force layout recalculation to ensure proper display
     setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
-    }, 50);
+      const grid = document.getElementById('repos-grid');
+      if (grid) {
+        grid.style.opacity = '0';
+        setTimeout(() => {
+          grid.style.opacity = '1';
+        }, 10);
+      }
+    }, 10);
   }
   
   // FIXED: Completely rewritten updateLoadMoreButton function
