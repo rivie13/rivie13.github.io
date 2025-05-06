@@ -4,61 +4,14 @@
     
     <p class="text-gray-600 dark:text-gray-300 mb-4">{{ project.description }}</p>
     
-    <div class="mb-4">
+    <div class="mb-4" id="language-section-{{ project.name | slugify }}">
       <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-      {% if project.private == true %}
-      <div class="flex flex-wrap">
-        <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">Private repository - stats not available</span>
-      </div>
-      {% elsif project.languages %}
       <div class="languages-container">
-        <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-          {% for lang in project.languages %}
-            {% assign bg_class = "bg-gray-400" %}
-            {% case lang.name %}
-              {% when "JavaScript" %}{% assign bg_class = "bg-yellow-400" %}
-              {% when "TypeScript" %}{% assign bg_class = "bg-blue-500" %}
-              {% when "Python" %}{% assign bg_class = "bg-blue-600" %}
-              {% when "Java" %}{% assign bg_class = "bg-orange-600" %}
-              {% when "C#" %}{% assign bg_class = "bg-green-600" %}
-              {% when "C++" %}{% assign bg_class = "bg-pink-600" %}
-              {% when "HTML" %}{% assign bg_class = "bg-red-500" %}
-              {% when "CSS" %}{% assign bg_class = "bg-purple-500" %}
-              {% when "Ruby" %}{% assign bg_class = "bg-red-600" %}
-              {% when "Go" %}{% assign bg_class = "bg-blue-300" %}
-              {% when "Swift" %}{% assign bg_class = "bg-orange-500" %}
-              {% when "Kotlin" %}{% assign bg_class = "bg-purple-600" %}
-              {% when "PHP" %}{% assign bg_class = "bg-indigo-400" %}
-              {% when "C" %}{% assign bg_class = "bg-gray-500" %}
-              {% when "Shell" %}{% assign bg_class = "bg-green-400" %}
-              {% when "Rust" %}{% assign bg_class = "bg-orange-800" %}
-              {% when "Batchfile" %}{% assign bg_class = "bg-gray-600" %}
-              {% when "ASP.NET" %}{% assign bg_class = "bg-blue-800" %}
-              {% when "Vue" %}{% assign bg_class = "bg-green-500" %}
-              {% when "QML" %}{% assign bg_class = "bg-green-300" %}
-              {% when "RedScript" %}{% assign bg_class = "bg-red-700" %}
-              {% when "YAML" %}{% assign bg_class = "bg-purple-300" %}
-              {% when "Lua" %}{% assign bg_class = "bg-blue-400" %}
-              {% when "XML" %}{% assign bg_class = "bg-orange-300" %}
-              {% when "CMake" %}{% assign bg_class = "bg-indigo-600" %}
-              {% when "Makefile" %}{% assign bg_class = "bg-gray-600" %}
-            {% endcase %}
-            <div class="{{ bg_class }}" style="width: {{ lang.percentage }}%; height: 100%; float: left;" title="{{ lang.name }}: {{ lang.percentage }}%"></div>
-          {% endfor %}
-        </div>
-        <div class="flex flex-wrap mt-1 text-xs">
-          {% for lang in project.languages %}
-            <span class="mr-2">{{ lang.name }} ({{ lang.percentage }}%)</span>
-          {% endfor %}
+        <div class="text-center py-2">
+          <div class="animate-spin h-4 w-4 border-b-2 border-blue-600 rounded-full mx-auto mb-1"></div>
+          <div class="text-xs text-gray-500">Loading language data...</div>
         </div>
       </div>
-      {% else %}
-      <div class="flex flex-wrap">
-        {% for tech in project.technologies %}
-          <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">{{ tech }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
     </div>
     
     <div class="mb-4">
@@ -91,12 +44,12 @@
       {% assign github_data_id = "helios-swarm-robotics" %}
     {% endif %}
     
-    {% if repo_name != "" and project.private != true %}
+    {% if repo_name != "" %}
     <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
       <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v10H5V5z" clip-rule="evenodd"></path>
       </svg>
-      <span data-github-last-updated="{{ github_data_id }}">Checking for updates...</span>
+      <span data-github-last-updated="{{ github_data_id }}">Loading update info...</span>
     </div>
     {% endif %}
     
