@@ -465,14 +465,17 @@ function initGitHubRepos() {
     console.log(`Rendering repos from index ${startIdx} to ${endIdx-1}. Rendering ${reposToRender.length} repos.`);
     
     // Create HTML for the repositories
-    const reposHTML = reposToRender.map(repo => createRepoCard(repo)).join('');
+    const reposHTML = reposToRender.map(repo => {
+      // Wrap each repo card in a div with the same class used in loadMoreReposFixed
+      return `<div class="repo-grid-item">${createRepoCard(repo)}</div>`;
+    }).join('');
     
     // Replace or append content
     if (page === 1) {
       // First page: replace content
       console.log("Replacing container content with first page of repos");
       additionalProjectsContainer.innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid" style="display:grid;">
           ${reposHTML}
         </div>
       `;
@@ -490,11 +493,11 @@ function initGitHubRepos() {
           reposGrid.appendChild(tempDiv.firstChild);
         }
       } else {
-        console.error("Could not find repos-grid element for appending more repositories");
+        console.error("Could not find repos-grid element for appending repositories");
         // Fallback: replace entire content
         additionalProjectsContainer.innerHTML = `
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
-            ${reposWithLanguages.slice(0, endIdx).map(repo => createRepoCard(repo)).join('')}
+            ${reposWithLanguages.slice(0, endIdx).map(repo => `<div class="repo-grid-item">${createRepoCard(repo)}</div>`).join('')}
           </div>
         `;
       }
@@ -502,81 +505,124 @@ function initGitHubRepos() {
     
     // Add "Load More" button if there are more repos to show
     updateLoadMoreButton(endIdx);
+    
+    // Ensure any animations or lazy-loaded content renders properly
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 50);
   }
   
-  // Function to update or add the load more button
+  // FIXED: Completely rewritten updateLoadMoreButton function
   function updateLoadMoreButton(endIdx) {
-    // Remove existing button if any
-    const existingButton = document.getElementById('load-more-container');
-    if (existingButton) {
-      existingButton.remove();
-    }
+    console.log(`DEBUGGING LOAD MORE: Current endIdx=${endIdx}, total repos=${reposWithLanguages.length}`);
     
+    // Remove any existing button first
+    const existingButtons = document.querySelectorAll('.load-more-container, #load-more-container');
+    existingButtons.forEach(button => button.remove());
+    
+    // If we have more repos to show, add the button
     if (endIdx < reposWithLanguages.length) {
-      console.log(`Adding Load More button. Showing ${endIdx}/${reposWithLanguages.length} repos`);
-      const remainingCount = Math.min(reposPerPage, reposWithLanguages.length - endIdx);
+      const remainingCount = reposWithLanguages.length - endIdx;
+      const nextBatchSize = Math.min(reposPerPage, remainingCount);
       
-      const loadMoreHTML = `
-        <div class="text-center mt-8" id="load-more-container">
-          <button id="load-more-button" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
-            </svg>
-            Load ${remainingCount} More Projects
-          </button>
-          <div class="text-sm text-gray-500 mt-2">
-            Showing ${endIdx} of ${reposWithLanguages.length} repositories
-          </div>
+      console.log(`Adding Load More button. Showing ${endIdx}/${reposWithLanguages.length} repos. Next batch: ${nextBatchSize}`);
+      
+      // Create container and button elements directly
+      const loadMoreContainer = document.createElement('div');
+      loadMoreContainer.className = 'text-center mt-8 load-more-container';
+      loadMoreContainer.id = 'load-more-container';
+      
+      // CRITICAL: Make sure currentPage is accessible globally and tracks the next page to load
+      window.currentPage = currentPage;
+      window.startIndex = endIdx; // Store where to start for next batch
+      window.loadMoreReposFixed = function() {
+        // Use the stored startIndex to determine what to load next
+        const nextEndIdx = Math.min(window.startIndex + reposPerPage, reposWithLanguages.length);
+        const reposToLoad = reposWithLanguages.slice(window.startIndex, nextEndIdx);
+        
+        console.log(`FIXED LOAD MORE: Loading repos from index ${window.startIndex} to ${nextEndIdx-1}. Loading ${reposToLoad.length} repos.`);
+        
+        // Find the grid container
+        const reposGrid = document.getElementById('repos-grid');
+        if (!reposGrid) {
+          console.error("CRITICAL: Could not find repos-grid element for appending repositories");
+          return;
+        }
+        
+        // Create and append each repo card
+        reposToLoad.forEach(repo => {
+          // Create the card HTML
+          const cardHTML = createRepoCard(repo);
+          
+          // Create a temporary container - Make it a div with grid item classes
+          const temp = document.createElement('div');
+          temp.className = 'repo-grid-item'; // Add a class to help with debugging
+          temp.innerHTML = cardHTML;
+          
+          // Debug the element being added
+          console.log("Adding new repo to grid:", repo.name);
+          
+          // Add the ENTIRE temp element to the grid to preserve grid structure
+          reposGrid.appendChild(temp);
+        });
+        
+        // Update the startIndex for the next batch
+        window.startIndex = nextEndIdx;
+        
+        // Update the load more button or remove it if we've shown all repos
+        updateLoadMoreButton(nextEndIdx);
+        
+        // Make sure repos are visible by forcing layout recalculation
+        reposGrid.style.display = 'none';
+        setTimeout(() => {
+          reposGrid.style.display = 'grid';
+          // Trigger resize to help any responsive elements
+          window.dispatchEvent(new Event('resize'));
+        }, 10);
+      };
+      
+      // Create the button directly with inline event handler for maximum reliability
+      loadMoreContainer.innerHTML = `
+        <button id="load-more-button" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium" 
+                onclick="console.log('Load more button clicked'); document.getElementById('load-more-button').disabled = true; document.getElementById('load-more-button').innerHTML = '<svg class=\\'animate-spin h-4 w-4 mr-2\\' xmlns=\\'http://www.w3.org/2000/svg\\' fill=\\'none\\' viewBox=\\'0 0 24 24\\'><circle class=\\'opacity-25\\' cx=\\'12\\' cy=\\'12\\' r=\\'10\\' stroke=\\'currentColor\\' stroke-width=\\'4\\'></circle><path class=\\'opacity-75\\' fill=\\'currentColor\\' d=\\'M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\\'></path></svg>Loading...'; window.loadMoreReposFixed();">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
+          </svg>
+          Load ${nextBatchSize} More Projects
+        </button>
+        <div class="text-sm text-gray-500 mt-2">
+          Showing ${endIdx} of ${reposWithLanguages.length} repositories
         </div>
       `;
       
-      additionalProjectsContainer.insertAdjacentHTML('beforeend', loadMoreHTML);
+      // First append the container to the DOM
+      additionalProjectsContainer.appendChild(loadMoreContainer);
       
-      // Directly attach the event handler instead of using setTimeout
-      const loadMoreButton = document.getElementById('load-more-button');
-      if (loadMoreButton) {
-        console.log("FIXED: Load more button found, adding direct click handler");
-        
-        // Make sure we remove any existing listeners
-        const newButton = loadMoreButton.cloneNode(true);
-        if (loadMoreButton.parentNode) {
-          loadMoreButton.parentNode.replaceChild(newButton, loadMoreButton);
-        }
-        
-        // Add the new listener
-        newButton.addEventListener('click', function(e) {
-          // Prevent default to ensure it doesn't use any existing href
-          e.preventDefault();
-          console.log("Load more button clicked - DIRECT HANDLER");
-          
-          // Update button to show loading state
-          this.disabled = true;
-          this.innerHTML = `
-            <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-            Loading...
-          `;
-          
-          // Increment page and load more repos
-          currentPage++;
-          loadMoreRepos();
-        });
-      } else {
-        console.error("CRITICAL ERROR: Could not find load more button after adding it to the DOM");
-      }
     } else {
       console.log("All repositories shown, no load more button needed");
       // Add a "showing all" indicator
-      additionalProjectsContainer.insertAdjacentHTML('beforeend', `
-        <div class="text-center mt-4 text-sm text-gray-500" id="load-more-container">
-          Showing all ${reposWithLanguages.length} repositories
-        </div>
-      `);
+      const allShownContainer = document.createElement('div');
+      allShownContainer.className = 'text-center mt-4 text-sm text-gray-500 load-more-container';
+      allShownContainer.id = 'load-more-container';
+      allShownContainer.textContent = `Showing all ${reposWithLanguages.length} repositories`;
+      additionalProjectsContainer.appendChild(allShownContainer);
+    }
+  }
+
+  // Compatibility function for any code that might call the original loadMoreRepos
+  function loadMoreRepos() {
+    if (window.loadMoreReposFixed) {
+      window.loadMoreReposFixed();
     }
   }
   
+  // Compatibility function for original implementation
+  function loadMoreReposFixed() {
+    if (window.loadMoreReposFixed) {
+      window.loadMoreReposFixed();
+    }
+  }
+
   /**
    * Update repo card language data after background loading
    */
@@ -777,9 +823,10 @@ function initGitHubRepos() {
       `;
     }
     
+    // NEW: Mark this as a simplified card structure to work better with grid
     return `
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 h-full">
-        <div class="p-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl h-full flex flex-col">
+        <div class="p-6 flex flex-col flex-grow">
           <h3 class="text-xl font-bold mb-2 flex items-center">
             <svg class="w-5 h-5 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
@@ -1073,48 +1120,5 @@ function initGitHubRepos() {
     } else {
       element.textContent = "Last updated: Unknown";
     }
-  }
-
-  /**
-   * Load more repositories when the "Load More" button is clicked
-   */
-  function loadMoreRepos() {
-    console.log(`Loading more repos, DIRECT FUNCTION CALL page ${currentPage}`);
-    
-    // Get the next batch of repositories
-    const startIdx = (currentPage - 1) * reposPerPage;
-    const endIdx = Math.min(currentPage * reposPerPage, reposWithLanguages.length);
-    const reposToRender = reposWithLanguages.slice(startIdx, endIdx);
-    
-    console.log(`Loading repos from index ${startIdx} to ${endIdx-1}. Loading ${reposToRender.length} repos.`);
-    
-    // Get the repository grid container
-    const reposGrid = document.getElementById('repos-grid');
-    if (!reposGrid) {
-      console.error("Could not find repos-grid element for appending more repositories");
-      return;
-    }
-    
-    // Create HTML for each repository and append to the grid
-    reposToRender.forEach(repo => {
-      const repoHTML = createRepoCard(repo);
-      
-      // Create a temporary div to hold the new HTML
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = repoHTML;
-      
-      // Append the repo card to the grid
-      if (tempDiv.firstChild) {
-        reposGrid.appendChild(tempDiv.firstChild);
-      }
-    });
-    
-    // Update the "Load More" button
-    updateLoadMoreButton(endIdx);
-    
-    // Force layout recalculation to ensure grid elements are properly positioned
-    setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
-    }, 100);
   }
 }
