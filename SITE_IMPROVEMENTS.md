@@ -8,37 +8,37 @@
 - **Contribution Chart**: The contribution chart needs to be implemented/created (THIS IS DONE)
 
 ### Projects Page
-- **Loading Behavior Issues**: 
+- **Loading Behavior Issues**: (THIS IS DONE)
   - Shows "failed to load projects" message while still loading
   - Displays "no additional projects found" incorrectly
   - Loads everything at once and very slowly instead of progressively
   - Languages/stats only appear properly after page refresh, not on initial load
   - Loading appears to complete on second refresh but not first
-- **Caching Problems**:
+- **Caching Problems**: (THIS IS DONE)
   - Lack of proper caching mechanism for projects
   - Projects should refresh once a day to check for new repos, language stats updates
   - Should only go through the full load process once a day to avoid GitHub API rate limits
 
 #### Technical Details
-- **Cache Mechanism**: Implement a cache mechanism for projects, activity, contributions, and stats
-- **Cache Duration**: Currently set to 30 minutes in github-config.js, needs to be extended to 24 hours, will change depending on which cache is being used
-- **Loading Timeout**: Hard-coded 5-second timeout in github-repos.js removes loading indicators regardless of actual completion
-- **Error Handling**: "Failed to load projects" message appears when hitting rate limits or during slow loading
-- **Request Queue**: 
+- **Cache Mechanism**: Implement a cache mechanism for projects, activity, contributions, and stats (THIS IS DONE)
+- **Cache Duration**: Currently set to 30 minutes in github-config.js, needs to be extended to 24 hours, will change depending on which cache is being used (THIS IS DONE)
+- **Loading Timeout**: Hard-coded 5-second timeout in github-repos.js removes loading indicators regardless of actual completion (THIS IS DONE)
+- **Error Handling**: "Failed to load projects" message appears when hitting rate limits or during slow loading (THIS IS DONE)
+- **Request Queue**: (THIS IS DONE)
   - Low concurrency (maxConcurrent: 1) with 1-second delays between requests causes very slow loading
   - No proper coordination between DOMContentLoaded events and API request completion
-- **Loading Indicators**: No progress indicators showing how many repos/languages have been loaded
-- **Race Conditions**: Possible race conditions between different scripts (project-cards.js, github-repos.js) accessing the API simultaneously
-- **Cache Coordination**: Different caching mechanisms in different files (github-config.js, github-repos.js, project-cards.js) not properly coordinated
+- **Loading Indicators**: No progress indicators showing how many repos/languages have been loaded (THIS IS DONE)
+- **Race Conditions**: Possible race conditions between different scripts (project-cards.js, github-repos.js) accessing the API simultaneously (THIS IS DONE)
+- **Cache Coordination**: Different caching mechanisms in different files (github-config.js, github-repos.js, project-cards.js) not properly coordinated (THIS IS DONE)
 
 ### New Features Needed
 - **GitHub Contribution Chart**: Implement a contribution calendar/heatmap identical to GitHub's contribution graph
   - Should show daily contributions with varying shades of green based on activity level
   - Must be updated daily
-  - Should use GraphQL API for more efficient data fetching
+  - Should use GraphQL API for more efficient data fetching (THIS IS DONE)
 
 #### Technical Implementation Details
-- **New File**: Create `assets/js/github-contributions.js` to implement the contribution chart
+- **New File**: Create `assets/js/github-contributions.js` to implement the contribution chart (THIS IS DONE)
 - **GraphQL Query**: Use GitHub's GraphQL API with the following query structure:
   ```graphql
   query($userName:String!) {
@@ -95,7 +95,7 @@
   - May need to adjust cell size or grid layout on smaller screens
 
 #### Compatibility and Placement
-- **Dark Mode Compatibility**: 
+- **Dark Mode Compatibility**: (NEED TO ADD THIS)
   - Provide alternative color scheme for dark mode
   - Light mode colors: standard GitHub green scale
   - Dark mode colors: #0d1117 (background), #39d353, #26a641, #006d32, #0e4429 (contribution levels)
@@ -116,27 +116,27 @@
 
 ## Potential Future Improvements
 
-### Performance
-- Optimize image loading and compression
-- Implement lazy loading for off-screen content
-- Consider static generation for certain components
+### Performance (DONE)
+- Optimize image loading and compression (DONE)
+- Implement lazy loading for off-screen content (DONE)
+- Consider static generation for certain components (DONE)
 
 ### User Experience
-- Add dark/light mode toggle
+- Add dark/light mode toggle (NEED TO ADD THIS)
 - Improve mobile responsiveness
-- Add animations for page transitions
+- Add animations for page transitions (DONE)
 
-### Technical
+### Technical (NEED TO ADD THIS)
 - Improve SEO optimization
 - Add analytics tracking
-- Implement caching strategies for GitHub API calls
-- Reduce API rate limit issues
+- Implement caching strategies for GitHub API calls (DONE)
+- Reduce API rate limit issues (DONE)
 
 ## Priority Items
 1. Fix animation on "View All Projects" button (DONE)
 2. Implement accurate GitHub contribution chart (DONE)
 3. Improve GitHub stats accuracy (DONE)
-4. Fix Projects page loading and caching issues
+4. Fix Projects page loading and caching issues (DONE)
 
 ## Notes
 This document will be updated as improvements are made and new issues are identified. 
