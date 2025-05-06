@@ -30,9 +30,9 @@ class GitHubActivityFetcher {
     this.username = username || window.GitHubConfig.username;
     this.container = document.querySelector(containerSelector);
     this.options = {
-      count: options.count || 5,
-      cacheTime: options.cacheTime || 3600000, // Default: 1 hour in milliseconds
-      filterEvents: options.filterEvents || ['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent', 'ReleaseEvent']
+      count: options.count || 15, // Increased from 10 to 15
+      cacheTime: options.cacheTime || 300000, // 5 minutes (decreased from 30 minutes)
+      filterEvents: options.filterEvents || ['PushEvent', 'CreateEvent', 'PullRequestEvent', 'IssuesEvent', 'ReleaseEvent', 'ForkEvent', 'WatchEvent', 'PublicEvent', 'CommitCommentEvent', 'IssueCommentEvent', 'PullRequestReviewEvent']
     };
     
     this.cacheKey = `github_activity_${this.username}`;
@@ -50,64 +50,109 @@ class GitHubActivityFetcher {
       return;
     }
     
-    // Increase cache time to reduce API calls (12 hours)
-    this.options.cacheTime = 12 * 3600000;
+    // Very short cache time to keep data fresh
+    this.options.cacheTime = 5 * 60 * 1000; // 5 minutes
     
-    this.loadActivities();
+    // Always fetch fresh data first, fall back to cache if needed
+    this.fetchActivities();
   }
   
   /**
    * Load activities from cache or fetch from API
    */
   loadActivities() {
-    // Use the centralized cache helper
-    const cachedActivity = window.GitHubConfig.getCachedData(this.cacheKey);
-    
-    if (cachedActivity) {
-      console.log('Using cached GitHub activity data');
-      this.displayActivities(cachedActivity);
-    } else {
-      this.fetchActivities();
-    }
+    // Immediately try to fetch fresh data
+    this.fetchActivities();
   }
   
   /**
    * Fetch activities from GitHub API
    */
-  async fetchActivities() {
+  async fetchActivities(isBackgroundFetch = false, forceClearCache = false) {
     try {
-      // Display loading state
-      this.container.innerHTML = `
-        <div class="text-center py-4">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p class="mt-2 text-sm text-gray-600">Loading GitHub activity...</p>
-        </div>
-      `;
+      // Clear cache if forced
+      if (forceClearCache) {
+        console.log('Clearing GitHub activity cache');
+        localStorage.removeItem(this.cacheKey);
+        localStorage.removeItem(`${this.cacheKey}_timestamp`);
+      }
       
-      // Use the centralized GitHub config to add client_id
+      // Display loading state if not a background fetch
+      if (!isBackgroundFetch) {
+        this.container.innerHTML = `
+          <div class="text-center py-4">
+            <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+            <p class="mt-2 text-sm text-gray-600" id="activity-loading-status">Loading GitHub activity...</p>
+          </div>
+        `;
+      }
+      
+      // Use the centralized GitHub config to add client_id - use the Azure Function
+      // Get the latest events with a higher per_page limit to ensure we get all recent activity
       const eventsUrl = window.GitHubConfig.addClientId(
-        `https://api.github.com/users/${this.username}/events?per_page=${this.options.count}`
+        `https://api.github.com/users/${this.username}/events?per_page=${this.options.count * 2}`
       );
+      
+      console.log('Fetching fresh GitHub activity from:', eventsUrl);
+      
+      // Add a timestamp parameter to bypass browser cache
+      const noCacheUrl = eventsUrl + (eventsUrl.includes('?') ? '&' : '?') + '_nocache=' + Date.now();
+      
+      // Update loading message
+      if (!isBackgroundFetch) {
+        const loadingStatus = document.getElementById('activity-loading-status');
+        if (loadingStatus) {
+          loadingStatus.textContent = "Fetching activity data from GitHub...";
+        }
+      }
       
       // Use RequestQueueClient instead of direct fetch
       await new Promise(resolve => {
-        RequestQueueClient.add(eventsUrl, async (response, events) => {
+        RequestQueueClient.add(noCacheUrl, async (response, events) => {
           if (response.status === 403) {
-            // Handle rate limiting with fallback data
-            console.warn('GitHub API rate limit exceeded for activity data. Using fallback.');
-            this.displayFallbackActivities();
+            // Handle rate limiting - try to load from cache
+            console.warn('GitHub API rate limit exceeded for activity data. Using cache or fallback.');
+            const cachedActivity = window.GitHubConfig.getCachedData(this.cacheKey);
+            
+            if (cachedActivity) {
+              console.log('Using cached GitHub activity data');
+              this.displayActivities(cachedActivity);
+            } else {
+              if (!isBackgroundFetch) this.displayFallbackActivities();
+            }
+            
             resolve();
             return;
           }
           
           if (!response.ok) {
             console.error(`GitHub API returned ${response.status}`);
-            this.displayFallbackActivities();
+            
+            // Try to load from cache if available
+            const cachedActivity = window.GitHubConfig.getCachedData(this.cacheKey);
+            
+            if (cachedActivity) {
+              console.log('Using cached GitHub activity data due to API error');
+              this.displayActivities(cachedActivity);
+            } else {
+              if (!isBackgroundFetch) this.displayFallbackActivities();
+            }
+            
             resolve();
             return;
           }
           
-          // Filter events based on preferences
+          console.log(`Fetched ${events.length} GitHub events`);
+          
+          // Update loading message
+          if (!isBackgroundFetch) {
+            const loadingStatus = document.getElementById('activity-loading-status');
+            if (loadingStatus) {
+              loadingStatus.textContent = `Processing ${events.length} activity events...`;
+            }
+          }
+          
+          // Filter events based on preferences - include more event types
           const filteredEvents = events.filter(event => 
             this.options.filterEvents.includes(event.type)
           ).slice(0, this.options.count);
@@ -115,13 +160,24 @@ class GitHubActivityFetcher {
           // Cache the results
           window.GitHubConfig.cacheData(this.cacheKey, filteredEvents);
           
-          this.displayActivities(filteredEvents);
+          if (!isBackgroundFetch) {
+            this.displayActivities(filteredEvents);
+          }
           resolve();
         });
       });
     } catch (error) {
       console.error('Error fetching GitHub activity:', error);
-      this.displayFallbackActivities();
+      
+      // Try to load from cache if available
+      const cachedActivity = window.GitHubConfig.getCachedData(this.cacheKey);
+      
+      if (cachedActivity) {
+        console.log('Using cached GitHub activity data due to error');
+        this.displayActivities(cachedActivity);
+      } else {
+        if (!isBackgroundFetch) this.displayFallbackActivities();
+      }
     }
   }
   
@@ -180,6 +236,15 @@ class GitHubActivityFetcher {
     
     // Create HTML for the timeline
     let timelineHTML = `
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-xl font-bold">Recent GitHub Activity</h3>
+        <button id="refresh-github-activity" class="text-sm text-blue-600 hover:text-blue-800 flex items-center">
+          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          Refresh
+        </button>
+      </div>
       <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-3">
     `;
     
@@ -208,6 +273,36 @@ class GitHubActivityFetcher {
     } else {
       // Replace loading state
       this.container.innerHTML = timelineHTML;
+    }
+    
+    // Add event listener to refresh button
+    const refreshButton = document.getElementById('refresh-github-activity');
+    if (refreshButton) {
+      refreshButton.addEventListener('click', () => {
+        console.log('Manually refreshing GitHub activity...');
+        refreshButton.disabled = true;
+        refreshButton.innerHTML = `
+          <svg class="w-4 h-4 mr-1 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          Refreshing...
+        `;
+        // Force clear cache when manually refreshing
+        this.fetchActivities(false, true);
+        
+        // Re-enable button after 3 seconds
+        setTimeout(() => {
+          if (refreshButton) {
+            refreshButton.disabled = false;
+            refreshButton.innerHTML = `
+              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+              </svg>
+              Refresh
+            `;
+          }
+        }, 3000);
+      });
     }
   }
   
@@ -384,8 +479,24 @@ class GitHubActivityFetcher {
         break;
         
       case 'ReleaseEvent':
-        icon = `<svg class="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 1a.752.752 0 0 1 .53.22c.26.26 5.28 5.28 5.28 5.28.29.29.29.77 0 1.06 0 0-5.02 5.02-5.28 5.28a.752.752 0 0 1-.53.22.752.752 0 0 1-.53-.22C7.21 12.58 2.19 7.56 2.19 7.56c-.29-.29-.29-.77 0-1.06C2.19 6.5 7.21 1.48 7.47 1.22A.752.752 0 0 1 8 1zm0 3.9c.55 0 1 .45 1 1 0 .55-.45 1-1 1s-1-.45-1-1c0-.55.45-1 1-1zm3.9 1c0 .55-.45 1-1 1s-1-.45-1-1c0-.55.45-1 1-1s1 .45 1 1zm-7.8 0c0 .55-.45 1-1 1s-1-.45-1-1c0-.55.45-1 1-1s1 .45 1 1zm3.9 3.9c.55 0 1 .45 1 1 0 .55-.45 1-1 1s-1-.45-1-1c0-.55.45-1 1-1z"/></svg>`;
+        // Fixed SVG icon with proper paths
+        icon = `<svg class="w-3 h-3 text-red-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 1a1 1 0 0 1 0.68 0.31l4.2 4.2A1 1 0 0 1 12.6 7.13l-4.24 4.24a1 1 0 0 1-1.36 0L2.89 7.13a1 1 0 0 1 0-1.42l4.2-4.2A1 1 0 0 1 8 1z M8 2.41L4.41 6 8 9.59 11.59 6 8 2.41z"></path><circle cx="8" cy="6" r="1"></circle><circle cx="5" cy="6" r="1"></circle><circle cx="11" cy="6" r="1"></circle></svg>`;
         title = `Released ${event.payload.release.name || event.payload.release.tag_name} for ${repoName}`;
+        break;
+        
+      case 'ForkEvent':
+        icon = `<svg class="w-3 h-3 text-green-600" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg>`;
+        title = `Forked ${repoName}`;
+        break;
+        
+      case 'WatchEvent':
+        icon = `<svg class="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path></svg>`;
+        title = `Starred ${repoName}`;
+        break;
+        
+      case 'IssueCommentEvent':
+        icon = `<svg class="w-3 h-3 text-blue-500" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M2.75 2.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h2a.75.75 0 01.75.75v2.19l2.72-2.72a.75.75 0 01.53-.22h4.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25H2.75zM1 2.75C1 1.784 1.784 1 2.75 1h10.5c.966 0 1.75.784 1.75 1.75v7.5A1.75 1.75 0 0113.25 12h-4.072l-3.528 3.53A.75.75 0 014 15v-3.025A1.75 1.75 0 012.25 10.25v-7.5z"></path></svg>`;
+        title = `Commented on issue in ${repoName}`;
         break;
     }
     
