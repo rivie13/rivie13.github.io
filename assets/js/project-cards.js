@@ -49,32 +49,47 @@ document.addEventListener('DOMContentLoaded', function() {
   // Find all project cards in both featured and all projects sections
   console.log("Finding all project cards on the page");
   
-  // Get all language containers that need updating
-  document.querySelectorAll('.languages-container').forEach(container => {
-    // Find the project card by traversing up
-    const card = container.closest('.p-6');
-    if (!card) return;
+  // Find all project cards, whether they have language containers or technology bubbles
+  const projectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg.shadow-lg');
+  
+  projectCards.forEach(card => {
+    // Find the project title to identify which project this is
+    const titleElem = card.querySelector('h3');
+    if (!titleElem) return;
     
-    // Identify which project this is
+    const titleText = titleElem.textContent.trim();
     let projectId = null;
     
-    // Check for common project names
-    if (card.textContent.includes('CodeGrind')) {
+    // Identify project by name
+    if (titleText.includes('CodeGrind')) {
       projectId = 'codegrind';
-    } else if (card.textContent.includes('Helios')) {
+    } else if (titleText.includes('Helios')) {
       projectId = 'helios-swarm-robotics';
-    } else if (card.textContent.includes('BestNotes')) {
+    } else if (titleText.includes('BestNotes')) {
       projectId = 'bestnotes';
-    } else if (card.textContent.includes('Projectile Launcher')) {
+    } else if (titleText.includes('Projectile Launcher')) {
       projectId = 'projectile-launcher-rework';
-    } else if (card.textContent.includes('Book Player')) {
+    } else if (titleText.includes('Book Player')) {
       projectId = 'book-player-application';
     }
     
-    if (projectId && projectRepoMap[projectId]) {
-      console.log(`Found project card for: ${projectId}`);
-      queueProject(projectId, projectRepoMap[projectId], container);
-    }
+    if (!projectId || !projectRepoMap[projectId]) return;
+    
+    // Find language section
+    const languageSection = card.querySelector('.mb-4 h4');
+    if (!languageSection || !languageSection.textContent.includes('LANGUAGE')) return;
+    
+    // Get the parent of the language section
+    const languageContainer = languageSection.closest('.mb-4');
+    if (!languageContainer) return;
+    
+    console.log(`Found project card for: ${projectId}`);
+    
+    // Initially show loading state
+    showLanguageLoading(languageContainer);
+    
+    // Queue the project for processing
+    queueProject(projectId, projectRepoMap[projectId], languageContainer);
   });
   
   // Also check for cards by ID for special handling
@@ -96,10 +111,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!projectId || !projectRepoMap[projectId]) return;
     
     // Get the language container
-    const languageContainer = card.querySelector('.languages-container');
+    let languageContainer = card.querySelector('.languages-container');
+    
+    // If no language container exists, look for language heading
+    if (!languageContainer) {
+      const languageHeading = card.querySelector('.mb-4 h4');
+      if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
+        languageContainer = languageHeading.closest('.mb-4');
+      }
+    }
+    
     if (!languageContainer) return;
     
     console.log(`Found project card by ID: ${card.id} (${projectId})`);
+    
+    // Initially show loading state
+    showLanguageLoading(languageContainer);
+    
+    // Queue the project for processing
     queueProject(projectId, projectRepoMap[projectId], languageContainer);
   });
   
@@ -107,18 +136,23 @@ document.addEventListener('DOMContentLoaded', function() {
   updateLastUpdatedTimestamps();
   
   /**
+   * Show loading state for language data
+   */
+  function showLanguageLoading(container) {
+    container.innerHTML = `
+      <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
+      <div class="text-center py-2">
+        <div class="animate-spin h-4 w-4 border-b-2 border-blue-600 rounded-full mx-auto mb-1"></div>
+        <div class="text-xs text-gray-500">Loading language data...</div>
+      </div>
+    `;
+  }
+  
+  /**
    * Fetch language data from multiple repos and update the container
    */
   async function updateLanguageData(username, repos, container, projectId) {
     try {
-      // Display loading state
-      container.innerHTML = `
-        <div class="text-center py-2">
-          <div class="animate-spin h-4 w-4 border-b-2 border-blue-600 rounded-full mx-auto mb-1"></div>
-          <div class="text-xs text-gray-500">Loading language data...</div>
-        </div>
-      `;
-      
       // Check cache first
       const cacheKey = `project_languages_${repos.join('_')}`;
       const cachedData = localStorage.getItem(cacheKey);
@@ -215,31 +249,15 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (totalBytes === 0) {
         // No language data available, show appropriate fallback
-        if (isPrivate) {
-          container.innerHTML = `
-            <div class="flex flex-wrap">
-              <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">
-                Private repository - language data not available
-              </span>
-            </div>
-          `;
-        } else if (isFork) {
-          container.innerHTML = `
-            <div class="flex flex-wrap">
-              <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">
-                Forked repository - language data not available
-              </span>
-            </div>
-          `;
-        } else {
-          container.innerHTML = `
-            <div class="flex flex-wrap">
-              <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">
-                No language data available
-              </span>
-            </div>
-          `;
-        }
+        container.innerHTML = `
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
+          <div class="flex flex-wrap">
+            <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">
+              ${isPrivate ? 'Private repository - language data available via API' : 
+                isFork ? 'Forked repository - language data not available' : 'No language data available'}
+            </span>
+          </div>
+        `;
         return;
       }
       
@@ -265,7 +283,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
     } catch (error) {
       console.error('Error updating language data:', error);
-      container.innerHTML = `<div class="text-xs text-gray-500 py-1">Failed to load language data</div>`;
+      container.innerHTML = `
+        <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
+        <div class="text-xs text-gray-500 py-1">Failed to load language data</div>
+      `;
     }
   }
   
@@ -299,23 +320,30 @@ document.addEventListener('DOMContentLoaded', function() {
       "Lua": "bg-blue-400",
       "YAML": "bg-purple-300",
       "RedScript": "bg-red-700",
-      "XML": "bg-orange-300"
+      "XML": "bg-orange-300",
+      "JSON": "bg-amber-300"
     };
     
-    let languageHTML = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
-    let languageTextHTML = `<div class="flex flex-wrap mt-1 text-xs">`;
+    let html = `<h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>`;
+    html += `<div class="languages-container">`;
+    html += `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
     
     languages.forEach(lang => {
       const bgClass = colorMap[lang.name] || "bg-gray-400";
-      languageHTML += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-      languageTextHTML += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+      html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
     });
     
-    languageHTML += `</div>`;
-    languageTextHTML += `</div>`;
+    html += `</div>`;
+    html += `<div class="flex flex-wrap mt-1 text-xs">`;
+    
+    languages.forEach(lang => {
+      html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+    });
+    
+    html += `</div></div>`;
     
     // Update the container
-    container.innerHTML = languageHTML + languageTextHTML;
+    container.innerHTML = html;
   }
   
   /**
@@ -371,6 +399,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Take the first repo to get the timestamp
       const repo = repos[0];
       
+      // Show loading indicator
+      element.textContent = "Loading update info...";
+      
       // Get the last updated timestamp
       const repoUrl = window.GitHubConfig.addClientId(
         `https://api.github.com/repos/${username}/${repo}`
@@ -421,6 +452,97 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         } else {
           element.textContent = "Last updated: Unknown";
+        }
+      });
+    });
+    
+    // Also handle special case for CodeGrind
+    updateCodeGrindLastUpdated();
+  }
+  
+  /**
+   * Special case for CodeGrind to ensure it shows last updated info
+   */
+  function updateCodeGrindLastUpdated() {
+    // Find CodeGrind cards that don't have last updated info already
+    const codegrindCards = document.querySelectorAll('[id*="codegrind"]');
+    
+    codegrindCards.forEach(card => {
+      // Check if the card already has a last updated element
+      const existingUpdated = card.querySelector('[data-github-last-updated="codegrind"]');
+      if (existingUpdated) return; // Already has update info
+      
+      // Find a place to add the last updated info
+      const keyFeaturesSection = card.querySelector('.mb-4 h4');
+      if (!keyFeaturesSection) return;
+      
+      const featuresSection = keyFeaturesSection.closest('.mb-4');
+      if (!featuresSection) return;
+      
+      // Create a new div for last updated info
+      const updatedDiv = document.createElement('div');
+      updatedDiv.className = 'flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4';
+      updatedDiv.innerHTML = `
+        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+        </svg>
+        <span data-github-last-updated="codegrind">Loading update info...</span>
+      `;
+      
+      // Insert after features section
+      featuresSection.parentNode.insertBefore(updatedDiv, featuresSection.nextSibling);
+      
+      // Update the last updated timestamp
+      const repoUrl = window.GitHubConfig.addClientId(
+        `https://api.github.com/repos/${username}/codegrind`
+      );
+      
+      window.RequestQueue.add(repoUrl, (response, data) => {
+        const span = updatedDiv.querySelector('span');
+        if (response.ok && data.updated_at) {
+          // Format the date
+          const updatedDate = new Date(data.updated_at);
+          const formattedDate = updatedDate.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          });
+          
+          // Update the element
+          span.textContent = `Last updated: ${formattedDate}`;
+          
+          // Add GitHub stats if available
+          if (data.stargazers_count || data.forks_count || data.open_issues_count) {
+            const statsContainer = document.createElement('div');
+            statsContainer.className = 'mt-2 text-sm text-gray-500';
+            
+            let statsHTML = '';
+            
+            if (data.stargazers_count) {
+              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>${data.stargazers_count} ${data.stargazers_count === 1 ? 'star' : 'stars'}</span>`;
+            }
+            
+            if (data.forks_count) {
+              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
+              </svg>${data.forks_count} ${data.forks_count === 1 ? 'fork' : 'forks'}</span>`;
+            }
+            
+            if (data.open_issues_count) {
+              statsHTML += `<span><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+              </svg>${data.open_issues_count} ${data.open_issues_count === 1 ? 'issue' : 'issues'}</span>`;
+            }
+            
+            if (statsHTML) {
+              statsContainer.innerHTML = statsHTML;
+              updatedDiv.appendChild(statsContainer);
+            }
+          }
+        } else {
+          span.textContent = "Last updated: Unknown";
         }
       });
     });

@@ -712,7 +712,7 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="mb-4">
           <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
           <div class="flex flex-wrap">
-            <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">Private repository - stats not available</span>
+            <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">Private repository - language data available via API</span>
           </div>
         </div>
       `;
