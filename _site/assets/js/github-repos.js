@@ -474,7 +474,7 @@ function initGitHubRepos() {
         reposWithLanguages.push(repo);
         
         // Then fetch language data if available
-        if (!repo.fork && repo.languages_url) {
+        if (repo.languages_url) {
           try {
             const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
             
@@ -520,15 +520,16 @@ function initGitHubRepos() {
       updateLoadingStatus(`Loading complete!`, 100);
       
       // CRITICAL FIX: Remove loading indicator after a short delay
-      setTimeout(() => {
-        const loadingElement = document.querySelector('#loading-status');
-        if (loadingElement) {
-          const loadingContainer = loadingElement.closest('.text-center');
-          if (loadingContainer) {
-            loadingContainer.remove();
-          }
-        }
-      }, 1000);
+      // TEST TAKE THIS OUT AND SEE IF LOADING STAYS.....
+      // setTimeout(() => {
+      //   const loadingElement = document.querySelector('#loading-status');
+      //   if (loadingElement) {
+      //     const loadingContainer = loadingElement.closest('.text-center');
+      //     if (loadingContainer) {
+      //       loadingContainer.remove();
+      //     }
+      //   }
+      // }, 1000);
       
     } catch (error) {
       console.error('Error fetching GitHub repositories:', error);
@@ -739,7 +740,7 @@ function initGitHubRepos() {
                 "JavaScript": "bg-yellow-400",
                 "TypeScript": "bg-blue-500",
                 "Python": "bg-blue-600",
-                "Java": "bg-orange-600",
+                "Java": "bg-purple-300",
                 "C#": "bg-green-600",
                 "C++": "bg-pink-600",
                 "HTML": "bg-red-500",
@@ -756,7 +757,8 @@ function initGitHubRepos() {
                 "ASP.NET": "bg-blue-800",
                 "Vue": "bg-green-500",
                 "Lua": "bg-blue-400",
-                "Jupyter Notebook": "bg-orange-300"
+                "Jupyter Notebook": "bg-red-800",
+                "TeX": "bg-blue-200"
               };
               const bgClass = colorMap[lang.name] || "bg-gray-400";
               html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
@@ -821,16 +823,7 @@ function initGitHubRepos() {
     
     // CRITICAL FIX: Generate language bar if we have language data
     let languageBar = '';
-    if (repo.private) {
-      languageBar = `
-        <div class="mb-4">
-          <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-          <div class="flex flex-wrap">
-            <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">Private repository - language data available via API</span>
-          </div>
-        </div>
-      `;
-    } else if (repo.languageData && repo.languageData.length > 0) {
+    if (repo.languageData && repo.languageData.length > 0) {
       const topLanguages = repo.languageData; // Show all languages
       
       languageBar = `
@@ -843,7 +836,7 @@ function initGitHubRepos() {
                 "JavaScript": "bg-yellow-400",
                 "TypeScript": "bg-blue-500",
                 "Python": "bg-blue-600",
-                "Java": "bg-orange-600",
+                "Java": "bg-purple-300",
                 "C#": "bg-green-600",
                 "C++": "bg-pink-600",
                 "HTML": "bg-red-500",
@@ -860,7 +853,8 @@ function initGitHubRepos() {
                 "ASP.NET": "bg-blue-800",
                 "Vue": "bg-green-500",
                 "Lua": "bg-blue-400",
-                "Jupyter Notebook": "bg-orange-300"
+                "Jupyter Notebook": "bg-red-800",
+                "TeX": "bg-blue-200"
               };
               const bgClass = colorMap[lang.name] || "bg-gray-400";
               return `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
@@ -882,9 +876,9 @@ function initGitHubRepos() {
       } else if (repo.language === "Python") {
         bgColorClass = "bg-blue-600";
       } else if (repo.language === "Java") {
-        bgColorClass = "bg-orange-600";
+        bgColorClass = "bg-purple-300";
       } else if (repo.language === "Jupyter Notebook") {
-        bgColorClass = "bg-orange-300";
+        bgColorClass = "bg-red-800";
       }
       
       languageBar = `
@@ -902,7 +896,7 @@ function initGitHubRepos() {
       languageBar = `
         <div class="mb-4">
           <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-          <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+          <div class="h-2 rounded-full bg-gray-200 dark-bg-gray-700 overflow-hidden">
             <div class="bg-gray-400 h-2 w-full"></div>
           </div>
           <div class="flex flex-wrap mt-1 text-xs">
@@ -981,23 +975,18 @@ function initGitHubRepos() {
           </div>
           
           <div class="flex flex-wrap gap-2 mt-auto">
+            ${!repo.private ? `
             <a href="${repo.html_url}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
               </svg>
               View Repository
             </a>
-            
-            ${repo.homepage ? `
-            <a href="${repo.homepage}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors">
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-              </svg>
-              Live Demo
-            </a>
             ` : ''}
             
-            ${repo.fork ? `
+            
+            
+            ${repo.fork && !repo.private ? `
             <a href="${repo.source ? repo.source.html_url : repo.html_url.replace(/\/[^/]+\/[^/]+$/, `/${repo.full_name.split('/')[0]}/${repo.name}`)}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors">
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
@@ -1022,7 +1011,7 @@ function initGitHubRepos() {
             "JavaScript": "bg-yellow-400",
             "TypeScript": "bg-blue-500",
             "Python": "bg-blue-600",
-            "Java": "bg-orange-600",
+            "Java": "bg-purple-300",
             "C#": "bg-green-600",
             "C++": "bg-pink-600",
             "HTML": "bg-red-500",
@@ -1039,7 +1028,8 @@ function initGitHubRepos() {
             "ASP.NET": "bg-blue-800",
             "Vue": "bg-green-500",
             "Lua": "bg-blue-400",
-            "Jupyter Notebook": "bg-orange-300"
+            "Jupyter Notebook": "bg-red-800",
+            "TeX": "bg-blue-200"
           };
           const bgClass = colorMap[lang.name] || "bg-gray-400";
           return `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
@@ -1101,7 +1091,7 @@ function initGitHubRepos() {
           <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex flex-col gap-2">
               <div>
-                <span class="font-medium">Total repositories:</span> ${totalRepos} (${privateRepos} private)
+                <span class="font-medium">Total repositories worked on (owned and not owned):</span> ${totalRepos} (${privateRepos} private)
               </div>
               <div>
                 <span class="font-medium">Total stars:</span> ${allRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)}
