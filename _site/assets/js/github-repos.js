@@ -592,7 +592,7 @@ function initGitHubRepos() {
           Load ${nextBatchSize} More Projects
         </button>
         <div class="text-sm text-gray-500 mt-2">
-          Showing ${endIdx} of ${reposWithLanguages.length} repositories
+          Showing ${endIdx} of ${reposWithLanguages.length} additional repositories
         </div>
       `;
       
