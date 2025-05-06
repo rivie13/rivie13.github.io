@@ -20,7 +20,8 @@
   - Should only go through the full load process once a day to avoid GitHub API rate limits
 
 #### Technical Details
-- **Cache Duration**: Currently set to 30 minutes in github-config.js, needs to be extended to 24 hours
+- **Cache Mechanism**: Implement a cache mechanism for projects, activity, contributions, and stats
+- **Cache Duration**: Currently set to 30 minutes in github-config.js, needs to be extended to 24 hours, will change depending on which cache is being used
 - **Loading Timeout**: Hard-coded 5-second timeout in github-repos.js removes loading indicators regardless of actual completion
 - **Error Handling**: "Failed to load projects" message appears when hitting rate limits or during slow loading
 - **Request Queue**: 
@@ -133,8 +134,8 @@
 
 ## Priority Items
 1. Fix animation on "View All Projects" button (DONE)
-2. Implement accurate GitHub contribution chart
-3. Improve GitHub stats accuracy
+2. Implement accurate GitHub contribution chart (DONE)
+3. Improve GitHub stats accuracy (DONE)
 4. Fix Projects page loading and caching issues
 
 ## Notes

@@ -12,7 +12,7 @@ const FUNCTION_APP_URL = 'https://portfoliowebsitegithubauth.azurewebsites.net/a
 // Export configuration
 window.GitHubConfig = {
   username: GITHUB_USERNAME,
-  cacheDuration: 30 * 60 * 1000, // 30 minutes default cache duration (reduced from 24 hours)
+  cacheDuration: 24 * 60 * 60 * 1000, // 24 hours default cache duration (changed from 30 minutes)
   
   // Helper function to use the proxy for GitHub API requests
   addClientId: function(url) {

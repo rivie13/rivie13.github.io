@@ -20,6 +20,19 @@ document.addEventListener('DOMContentLoaded', function() {
     'book-player-application': ['assignment-10-rivie13']
   };
   
+  // Wait for any RequestQueue initialization to complete
+  setTimeout(() => {
+    // Make sure we have the RequestQueue available from github-repos.js
+    if (!window.RequestQueue) {
+      console.error("RequestQueue not available. Creating local fallback.");
+      window.RequestQueue = createFallbackQueue();
+    }
+    
+    // Find all project cards in both featured and all projects sections
+    console.log("Finding all project cards on the page");
+    findAndProcessCards();
+  }, 100);
+  
   // Process next project in queue
   function processNextProject() {
     if (projectQueue.length === 0) {
@@ -30,10 +43,27 @@ document.addEventListener('DOMContentLoaded', function() {
     isProcessingQueue = true;
     const { id, repos, container } = projectQueue.shift();
     
+    // First check if data is already cached by github-repos.js
+    const cacheKey = `project_languages_${repos.join('_')}`;
+    const cachedData = localStorage.getItem(cacheKey);
+    const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+    const now = Date.now();
+    const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
+    
+    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+      console.log(`Using cached language data for: ${repos.join(', ')}`);
+      const languages = JSON.parse(cachedData);
+      updateLanguageBar(container, languages);
+      
+      // Wait before processing the next project to avoid too many UI updates at once
+      setTimeout(processNextProject, 100);
+      return;
+    }
+    
     // Use API for all projects
     updateLanguageData(username, repos, container, id).then(() => {
-      // Wait 1s before processing the next project
-      setTimeout(processNextProject, 1000);
+      // Wait a shorter time (500ms) before processing the next project
+      setTimeout(processNextProject, 500);
     });
   }
   
@@ -46,94 +76,94 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // Find all project cards in both featured and all projects sections
-  console.log("Finding all project cards on the page");
-  
-  // Find all project cards, whether they have language containers or technology bubbles
-  const projectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg.shadow-lg');
-  
-  projectCards.forEach(card => {
-    // Find the project title to identify which project this is
-    const titleElem = card.querySelector('h3');
-    if (!titleElem) return;
+  // Find all project cards and process them
+  function findAndProcessCards() {
+    // Find all project cards, whether they have language containers or technology bubbles
+    const projectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg.shadow-lg');
     
-    const titleText = titleElem.textContent.trim();
-    let projectId = null;
-    
-    // Identify project by name
-    if (titleText.includes('CodeGrind')) {
-      projectId = 'codegrind';
-    } else if (titleText.includes('Helios')) {
-      projectId = 'helios-swarm-robotics';
-    } else if (titleText.includes('BestNotes')) {
-      projectId = 'bestnotes';
-    } else if (titleText.includes('Projectile Launcher')) {
-      projectId = 'projectile-launcher-rework';
-    } else if (titleText.includes('Book Player')) {
-      projectId = 'book-player-application';
-    }
-    
-    if (!projectId || !projectRepoMap[projectId]) return;
-    
-    // Find language section
-    const languageSection = card.querySelector('.mb-4 h4');
-    if (!languageSection || !languageSection.textContent.includes('LANGUAGE')) return;
-    
-    // Get the parent of the language section
-    const languageContainer = languageSection.closest('.mb-4');
-    if (!languageContainer) return;
-    
-    console.log(`Found project card for: ${projectId}`);
-    
-    // Initially show loading state
-    showLanguageLoading(languageContainer);
-    
-    // Queue the project for processing
-    queueProject(projectId, projectRepoMap[projectId], languageContainer);
-  });
-  
-  // Also check for cards by ID for special handling
-  document.querySelectorAll('[id*="codegrind"], [id*="helios"], [id*="bestnotes"], [id*="projectile"], [id*="book-player"]').forEach(card => {
-    let projectId = null;
-    
-    if (card.id.includes('codegrind')) {
-      projectId = 'codegrind';
-    } else if (card.id.includes('helios')) {
-      projectId = 'helios-swarm-robotics';
-    } else if (card.id.includes('bestnotes')) {
-      projectId = 'bestnotes';
-    } else if (card.id.includes('projectile')) {
-      projectId = 'projectile-launcher-rework';
-    } else if (card.id.includes('book-player')) {
-      projectId = 'book-player-application';
-    }
-    
-    if (!projectId || !projectRepoMap[projectId]) return;
-    
-    // Get the language container
-    let languageContainer = card.querySelector('.languages-container');
-    
-    // If no language container exists, look for language heading
-    if (!languageContainer) {
-      const languageHeading = card.querySelector('.mb-4 h4');
-      if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
-        languageContainer = languageHeading.closest('.mb-4');
+    projectCards.forEach(card => {
+      // Find the project title to identify which project this is
+      const titleElem = card.querySelector('h3');
+      if (!titleElem) return;
+      
+      const titleText = titleElem.textContent.trim();
+      let projectId = null;
+      
+      // Identify project by name
+      if (titleText.includes('CodeGrind')) {
+        projectId = 'codegrind';
+      } else if (titleText.includes('Helios')) {
+        projectId = 'helios-swarm-robotics';
+      } else if (titleText.includes('BestNotes')) {
+        projectId = 'bestnotes';
+      } else if (titleText.includes('Projectile Launcher')) {
+        projectId = 'projectile-launcher-rework';
+      } else if (titleText.includes('Book Player')) {
+        projectId = 'book-player-application';
       }
-    }
+      
+      if (!projectId || !projectRepoMap[projectId]) return;
+      
+      // Find language section
+      const languageSection = card.querySelector('.mb-4 h4');
+      if (!languageSection || !languageSection.textContent.includes('LANGUAGE')) return;
+      
+      // Get the parent of the language section
+      const languageContainer = languageSection.closest('.mb-4');
+      if (!languageContainer) return;
+      
+      console.log(`Found project card for: ${projectId}`);
+      
+      // Initially show loading state
+      showLanguageLoading(languageContainer);
+      
+      // Queue the project for processing
+      queueProject(projectId, projectRepoMap[projectId], languageContainer);
+    });
     
-    if (!languageContainer) return;
+    // Also check for cards by ID for special handling
+    document.querySelectorAll('[id*="codegrind"], [id*="helios"], [id*="bestnotes"], [id*="projectile"], [id*="book-player"]').forEach(card => {
+      let projectId = null;
+      
+      if (card.id.includes('codegrind')) {
+        projectId = 'codegrind';
+      } else if (card.id.includes('helios')) {
+        projectId = 'helios-swarm-robotics';
+      } else if (card.id.includes('bestnotes')) {
+        projectId = 'bestnotes';
+      } else if (card.id.includes('projectile')) {
+        projectId = 'projectile-launcher-rework';
+      } else if (card.id.includes('book-player')) {
+        projectId = 'book-player-application';
+      }
+      
+      if (!projectId || !projectRepoMap[projectId]) return;
+      
+      // Get the language container
+      let languageContainer = card.querySelector('.languages-container');
+      
+      // If no language container exists, look for language heading
+      if (!languageContainer) {
+        const languageHeading = card.querySelector('.mb-4 h4');
+        if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
+          languageContainer = languageHeading.closest('.mb-4');
+        }
+      }
+      
+      if (!languageContainer) return;
+      
+      console.log(`Found project card by ID: ${card.id} (${projectId})`);
+      
+      // Initially show loading state
+      showLanguageLoading(languageContainer);
+      
+      // Queue the project for processing
+      queueProject(projectId, projectRepoMap[projectId], languageContainer);
+    });
     
-    console.log(`Found project card by ID: ${card.id} (${projectId})`);
-    
-    // Initially show loading state
-    showLanguageLoading(languageContainer);
-    
-    // Queue the project for processing
-    queueProject(projectId, projectRepoMap[projectId], languageContainer);
-  });
-  
-  // Update last updated timestamps for all repos
-  updateLastUpdatedTimestamps();
+    // Update last updated timestamps for all repos
+    updateLastUpdatedTimestamps();
+  }
   
   /**
    * Show loading state for language data
@@ -158,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const cachedData = localStorage.getItem(cacheKey);
       const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
       const now = Date.now();
-      const cacheDuration = 30 * 60 * 1000; // Reduced to 30 minutes for development
+      const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
       const forceRefresh = window.location.search.includes('force_refresh');
       
       if (!forceRefresh && cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
@@ -176,9 +206,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // First, check if any of the repos are private or forks
       for (const repo of repos) {
         try {
-          const repoUrl = window.GitHubConfig.addClientId(
-            `https://api.github.com/repos/${username}/${repo}`
-          );
+          const repoUrl = window.GitHubConfig ? 
+            window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/${repo}`) :
+            `https://api.github.com/repos/${username}/${repo}`;
           
           console.log(`DEBUG Cards - Getting repo metadata for ${repo}: ${repoUrl}`);
           
@@ -211,9 +241,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // Limit to only one API request at a time to reduce rate limiting
       for (const repo of repos) {
         try {
-          const langUrl = window.GitHubConfig.addClientId(
-            `https://api.github.com/repos/${username}/${repo}/languages`
-          );
+          const langUrl = window.GitHubConfig ? 
+            window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/${repo}/languages`) :
+            `https://api.github.com/repos/${username}/${repo}/languages`;
           
           console.log(`DEBUG Cards - Getting language data for ${repo}: ${langUrl}`);
           
@@ -399,57 +429,43 @@ document.addEventListener('DOMContentLoaded', function() {
       // Take the first repo to get the timestamp
       const repo = repos[0];
       
+      // Check if we already have last updated info
+      if (element.textContent && element.textContent.includes('Last updated') && !element.textContent.includes('Loading')) {
+        return; // Skip if already updated
+      }
+      
       // Show loading indicator
       element.textContent = "Loading update info...";
       
       // Get the last updated timestamp
-      const repoUrl = window.GitHubConfig.addClientId(
-        `https://api.github.com/repos/${username}/${repo}`
-      );
+      const repoUrl = window.GitHubConfig ? 
+        window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/${repo}`) :
+        `https://api.github.com/repos/${username}/${repo}`;
+      
+      // Check cache first
+      const cacheKey = `repo_details_${username}_${repo}`;
+      const cachedData = localStorage.getItem(cacheKey);
+      const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+      const now = Date.now();
+      const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
+      
+      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+        console.log(`Using cached repo details for: ${repo}`);
+        updateLastUpdatedElement(element, JSON.parse(cachedData));
+        return;
+      }
       
       window.RequestQueue.add(repoUrl, (response, data) => {
-        if (response.ok && data.updated_at) {
-          // Format the date
-          const updatedDate = new Date(data.updated_at);
-          const formattedDate = updatedDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
-          
-          // Update the element
-          element.textContent = `Last updated: ${formattedDate}`;
-          
-          // Add additional GitHub stats if available
-          if (data.stargazers_count || data.forks_count || data.open_issues_count) {
-            const statsContainer = document.createElement('div');
-            statsContainer.className = 'mt-2 text-sm text-gray-500';
-            
-            let statsHTML = '';
-            
-            if (data.stargazers_count) {
-              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>${data.stargazers_count} ${data.stargazers_count === 1 ? 'star' : 'stars'}</span>`;
-            }
-            
-            if (data.forks_count) {
-              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
-              </svg>${data.forks_count} ${data.forks_count === 1 ? 'fork' : 'forks'}</span>`;
-            }
-            
-            if (data.open_issues_count) {
-              statsHTML += `<span><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-              </svg>${data.open_issues_count} ${data.open_issues_count === 1 ? 'issue' : 'issues'}</span>`;
-            }
-            
-            if (statsHTML) {
-              statsContainer.innerHTML = statsHTML;
-              element.parentNode.appendChild(statsContainer);
-            }
+        if (response.ok) {
+          // Cache the data
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify(data));
+            localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+          } catch (e) {
+            console.warn('Failed to cache repo details:', e);
           }
+          
+          updateLastUpdatedElement(element, data);
         } else {
           element.textContent = "Last updated: Unknown";
         }
@@ -458,6 +474,57 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Also handle special case for CodeGrind
     updateCodeGrindLastUpdated();
+  }
+  
+  /**
+   * Update a last updated element with repo data
+   */
+  function updateLastUpdatedElement(element, data) {
+    if (data.updated_at) {
+      // Format the date
+      const updatedDate = new Date(data.updated_at);
+      const formattedDate = updatedDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      // Update the element
+      element.textContent = `Last updated: ${formattedDate}`;
+      
+      // Add additional GitHub stats if available
+      if (data.stargazers_count || data.forks_count || data.open_issues_count) {
+        const statsContainer = document.createElement('div');
+        statsContainer.className = 'mt-2 text-sm text-gray-500';
+        
+        let statsHTML = '';
+        
+        if (data.stargazers_count) {
+          statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+          </svg>${data.stargazers_count} ${data.stargazers_count === 1 ? 'star' : 'stars'}</span>`;
+        }
+        
+        if (data.forks_count) {
+          statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
+          </svg>${data.forks_count} ${data.forks_count === 1 ? 'fork' : 'forks'}</span>`;
+        }
+        
+        if (data.open_issues_count) {
+          statsHTML += `<span><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+          </svg>${data.open_issues_count} ${data.open_issues_count === 1 ? 'issue' : 'issues'}</span>`;
+        }
+        
+        if (statsHTML) {
+          statsContainer.innerHTML = statsHTML;
+          element.parentNode.appendChild(statsContainer);
+        }
+      }
+    } else {
+      element.textContent = "Last updated: Unknown";
+    }
   }
   
   /**
@@ -492,59 +559,96 @@ document.addEventListener('DOMContentLoaded', function() {
       // Insert after features section
       featuresSection.parentNode.insertBefore(updatedDiv, featuresSection.nextSibling);
       
+      // Check cache first
+      const cacheKey = `repo_details_${username}_codegrind`;
+      const cachedData = localStorage.getItem(cacheKey);
+      const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+      const now = Date.now();
+      const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
+      
+      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+        console.log(`Using cached repo details for CodeGrind`);
+        updateLastUpdatedElement(updatedDiv.querySelector('span'), JSON.parse(cachedData));
+        return;
+      }
+      
       // Update the last updated timestamp
-      const repoUrl = window.GitHubConfig.addClientId(
-        `https://api.github.com/repos/${username}/codegrind`
-      );
+      const repoUrl = window.GitHubConfig ? 
+        window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/codegrind`) :
+        `https://api.github.com/repos/${username}/codegrind`;
       
       window.RequestQueue.add(repoUrl, (response, data) => {
         const span = updatedDiv.querySelector('span');
-        if (response.ok && data.updated_at) {
-          // Format the date
-          const updatedDate = new Date(data.updated_at);
-          const formattedDate = updatedDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
-          
-          // Update the element
-          span.textContent = `Last updated: ${formattedDate}`;
-          
-          // Add GitHub stats if available
-          if (data.stargazers_count || data.forks_count || data.open_issues_count) {
-            const statsContainer = document.createElement('div');
-            statsContainer.className = 'mt-2 text-sm text-gray-500';
-            
-            let statsHTML = '';
-            
-            if (data.stargazers_count) {
-              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>${data.stargazers_count} ${data.stargazers_count === 1 ? 'star' : 'stars'}</span>`;
-            }
-            
-            if (data.forks_count) {
-              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
-              </svg>${data.forks_count} ${data.forks_count === 1 ? 'fork' : 'forks'}</span>`;
-            }
-            
-            if (data.open_issues_count) {
-              statsHTML += `<span><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-              </svg>${data.open_issues_count} ${data.open_issues_count === 1 ? 'issue' : 'issues'}</span>`;
-            }
-            
-            if (statsHTML) {
-              statsContainer.innerHTML = statsHTML;
-              updatedDiv.appendChild(statsContainer);
-            }
+        if (response.ok) {
+          // Cache the data
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify(data));
+            localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+          } catch (e) {
+            console.warn('Failed to cache CodeGrind repo details:', e);
           }
+          
+          updateLastUpdatedElement(span, data);
         } else {
           span.textContent = "Last updated: Unknown";
         }
       });
     });
+  }
+  
+  /**
+   * Create a fallback queue if RequestQueue isn't available from github-repos.js
+   */
+  function createFallbackQueue() {
+    return {
+      queue: [],
+      running: false,
+      maxConcurrent: 3,
+      activeRequests: 0,
+      
+      add: function(url, callback) {
+        this.queue.push({ url, callback });
+        if (!this.running) {
+          this.process();
+        }
+      },
+      
+      process: function() {
+        this.running = true;
+        this.processNext();
+      },
+      
+      processNext: function() {
+        if (this.queue.length === 0 || this.activeRequests >= this.maxConcurrent) {
+          if (this.activeRequests === 0) {
+            this.running = false;
+          }
+          return;
+        }
+        
+        const { url, callback } = this.queue.shift();
+        this.activeRequests++;
+        
+        fetch(url)
+          .then(response => response.json().then(data => ({ response, data })))
+          .then(({ response, data }) => {
+            this.activeRequests--;
+            callback(response, data);
+            
+            setTimeout(() => {
+              this.processNext();
+            }, 500);
+          })
+          .catch(error => {
+            console.error(`Error fetching ${url}:`, error);
+            this.activeRequests--;
+            callback({ ok: false, status: 500 }, { message: error.message });
+            
+            setTimeout(() => {
+              this.processNext();
+            }, 500);
+          });
+      }
+    };
   }
 });

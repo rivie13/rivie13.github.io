@@ -7,7 +7,7 @@
 window.RequestQueue = {
   queue: [],
   running: false,
-  maxConcurrent: 1, // Reduce to 1 concurrent request
+  maxConcurrent: 3, // Increased from 1 to 3 for better performance
   activeRequests: 0,
   requestCounter: 0,
   
@@ -125,7 +125,7 @@ window.RequestQueue = {
           // Add delay between requests
           setTimeout(() => {
             this.processNext();
-          }, 1000); // 1 second delay between requests
+          }, 500); // Reduced from 1000ms to 500ms for faster loading
         })
         .catch(error => {
           console.error(`Error fetching ${url}:`, error);
@@ -135,9 +135,9 @@ window.RequestQueue = {
           // Add delay between requests
           setTimeout(() => {
             this.processNext();
-          }, 1000); // 1 second delay between requests
+          }, 500); // Reduced from 1000ms to 500ms for faster loading
         });
-    }, 1000); // Wait 1 second before starting the request
+    }, 500); // Reduced from 1000ms to 500ms for faster loading
   }
 };
 
@@ -156,6 +156,10 @@ document.addEventListener('DOMContentLoaded', function() {
     'Robotics-Nav2-SLAM-Example',
     'codegrind'
   ]; // Reduce excluded repos to show more
+  
+  // Define repositories per page globally
+  const reposPerPage = 8; // Show 8 repos initially
+  let currentPage = 1;
   
   // Use the centralized GitHub config
   fetchAdditionalRepos(username, excludedRepos);
@@ -191,7 +195,10 @@ document.addEventListener('DOMContentLoaded', function() {
       additionalProjectsContainer.innerHTML = `
         <div class="text-center py-6">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p class="mt-2 text-gray-600" id="loading-status">Loading all projects from GitHub...</p>
+          <p class="mt-2 text-gray-600" id="loading-status">Starting to fetch GitHub repositories...</p>
+          <div class="w-full max-w-md mx-auto mt-2 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" id="loading-progress-bar">
+            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 5%" id="loading-progress-indicator"></div>
+          </div>
         </div>
       `;
       
@@ -202,6 +209,8 @@ document.addEventListener('DOMContentLoaded', function() {
       let codegrindInfo = null;
       try {
         console.log("Attempting to fetch data for private CodeGrind repository...");
+        updateLoadingStatus("Checking private repositories...", 10);
+        
         const codegrindUrl = window.GitHubConfig.addClientId(
           `https://api.github.com/repos/${username}/codegrind`
         );
@@ -234,17 +243,18 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Get user info to determine total repo count
       try {
+        updateLoadingStatus("Checking repository count...", 15);
         const userResponse = await fetch(totalReposUrl);
         if (userResponse.ok) {
           const userData = await userResponse.json();
           totalRepos = userData.public_repos || 0;
           
           // Update loading message with total count
-          document.getElementById('loading-status').textContent = 
-            `Loading repositories (0/${totalRepos})...`;
+          updateLoadingStatus(`Found ${totalRepos} repositories, starting to fetch...`, 20);
         }
       } catch (e) {
         console.warn('Could not determine total repo count:', e);
+        updateLoadingStatus("Fetching repositories (count unknown)...", 20);
       }
       
       // Track all repositories across pages
@@ -262,10 +272,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log(`Fetching repositories page ${page} from:`, reposUrl);
         
-        // Update loading status
-        document.getElementById('loading-status').textContent = 
-          `Loading repositories (${reposFetched}/${totalRepos || '?'})...`;
-          
+        // Update loading status with progress percentage
+        const progressPercentage = Math.min(20 + (reposFetched / Math.max(totalRepos, 1)) * 30, 50);
+        updateLoadingStatus(`Loading repositories (${reposFetched}/${totalRepos || '?'})...`, progressPercentage);
+        
         // Use await with a Promise to make the request queue work with async/await
         const pageRepos = await new Promise(resolve => {
           RequestQueue.add(reposUrl, (response, repos) => {
@@ -297,10 +307,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update count
             reposFetched += repos.length;
             
-            // Update loading message
-            document.getElementById('loading-status').textContent = 
-              `Loading repositories (${reposFetched}/${totalRepos || '?'})...`;
-              
+            // Update loading message with progress percentage
+            const progressPercentage = Math.min(20 + (reposFetched / Math.max(totalRepos, 1)) * 30, 50);
+            updateLoadingStatus(`Loading repositories (${reposFetched}/${totalRepos || '?'})...`, progressPercentage);
+            
             resolve(repos);
           });
         });
@@ -340,105 +350,21 @@ document.addEventListener('DOMContentLoaded', function() {
       const reposWithLanguages = [];
       
       // Update loading message
-      const loadingStatus = document.getElementById('loading-status');
-      if (loadingStatus) {
-        loadingStatus.textContent = `Loading language data for repositories...`;
-      }
-        
+      updateLoadingStatus(`Preparing ${validRepos.length} repositories...`, 55);
+      
       // Use a simple counter for language data progress
       let languagesLoaded = 0;
+      const totalToLoad = reposToShow.length;
       
-      for (const repo of reposToShow) {
+      // First, fetch the first batch of repositories' language data to display them faster
+      const firstBatchSize = Math.min(reposPerPage, reposToShow.length);
+      for (let i = 0; i < firstBatchSize; i++) {
+        const repo = reposToShow[i];
         try {
-          // First try to get topics for this repository
-          // Topics require an explicit accept header
-          try {
-            if (!repo.private) {
-              const topicsUrl = window.GitHubConfig.addClientId(
-                `https://api.github.com/repos/${username}/${repo.name}/topics`
-              );
-              
-              await new Promise(resolve => {
-                RequestQueue.add(topicsUrl, (topicsResponse, topicsData) => {
-                  if (topicsResponse.ok && topicsData && topicsData.names) {
-                    repo.topics = topicsData.names;
-                    console.log(`Got ${repo.topics.length} topics for ${repo.name}`);
-                  }
-                  resolve();
-                });
-              });
-            }
-          } catch (e) {
-            console.warn(`Failed to fetch topics for ${repo.name}`, e);
-          }
-          
-          // Skip language fetch for forked repos to save API calls
-          if (repo.fork) {
-            // Don't use a simplified language object for forked repos
-            // Instead, fetch the actual language data
-            try {
-              if (repo.languages_url && !repo.private) {
-                // Add to queue instead of direct fetch
-                const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
-                
-                // Use Promise to allow async/await with our queue
-                await new Promise(resolve => {
-                  RequestQueue.add(langUrl, (langResponse, langData) => {
-                    if (langResponse.ok) {
-                      // Calculate total bytes
-                      const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                      // Convert to percentages
-                      const languages = Object.entries(langData).map(([name, bytes]) => ({
-                        name,
-                        percentage: Math.round((bytes / totalBytes) * 100)
-                      })).sort((a, b) => b.percentage - a.percentage);
-                      
-                      reposWithLanguages.push({ ...repo, languageData: languages });
-                    } else {
-                      // If language fetch fails for forked repo, use a fallback
-                      reposWithLanguages.push({ 
-                        ...repo, 
-                        languageData: [{ name: "No language data available", percentage: 100 }] 
-                      });
-                    }
-                    
-                    // Update progress
-                    languagesLoaded++;
-                    const loadingStatus = document.getElementById('loading-status');
-                    if (loadingStatus) {
-                      loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-                    }
-                    
-                    resolve();
-                  });
-                });
-              } else {
-                // For private forked repos
-                reposWithLanguages.push(repo);
-                
-                // Update progress
-                languagesLoaded++;
-                const loadingStatus = document.getElementById('loading-status');
-                if (loadingStatus) {
-                  loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-                }
-              }
-            } catch (e) {
-              console.warn(`Failed to fetch language data for forked repo ${repo.name}`, e);
-              reposWithLanguages.push(repo);
-              
-              // Update progress
-              languagesLoaded++;
-              const loadingStatus = document.getElementById('loading-status');
-              if (loadingStatus) {
-                loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-              }
-            }
-          } else if (repo.languages_url && !repo.private) {
-            // Add to queue instead of direct fetch
+          // Skip language fetch for forked repos in first batch to save API calls
+          if (!repo.fork && repo.languages_url && !repo.private) {
             const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
             
-            // Use Promise to allow async/await with our queue
             await new Promise(resolve => {
               RequestQueue.add(langUrl, (langResponse, langData) => {
                 if (langResponse.ok) {
@@ -450,391 +376,100 @@ document.addEventListener('DOMContentLoaded', function() {
                     percentage: Math.round((bytes / totalBytes) * 100)
                   })).sort((a, b) => b.percentage - a.percentage);
                   
-                  reposWithLanguages.push({ ...repo, languageData: languages });
-                } else {
-                  // Even if language data fetch fails, still include the repo
-                  reposWithLanguages.push(repo);
+                  repo.languageData = languages;
                 }
                 
                 // Update progress
                 languagesLoaded++;
-                const loadingStatus = document.getElementById('loading-status');
-                if (loadingStatus) {
-                  loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-                }
+                const progressPercentage = Math.min(55 + (languagesLoaded / totalToLoad) * 40, 95);
+                updateLoadingStatus(`Loading language data (${languagesLoaded}/${totalToLoad})...`, progressPercentage);
                 
                 resolve();
               });
             });
           } else {
-            // Include private repos too
-            reposWithLanguages.push(repo);
-            
-            // Update progress
+            // For private or forked repos
             languagesLoaded++;
-            const loadingStatus = document.getElementById('loading-status');
-            if (loadingStatus) {
-              loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-            }
           }
         } catch (e) {
-          console.warn(`Failed to fetch language data for ${repo.name}`, e);
-          reposWithLanguages.push(repo);
-          
-          // Update progress even on error
+          console.warn(`Failed to fetch language data for repo ${repo.name}`, e);
           languagesLoaded++;
-          const loadingStatus = document.getElementById('loading-status');
-          if (loadingStatus) {
-            loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
+        }
+        
+        // Add to repositories array
+        reposWithLanguages.push(repo);
+      }
+      
+      // Render first batch immediately
+      updateLoadingStatus(`Rendering first batch of repositories...`, 70);
+      currentPage = 1;
+      renderRepos(currentPage);
+      
+      // Then load the rest of the repositories in the background
+      for (let i = firstBatchSize; i < reposToShow.length; i++) {
+        const repo = reposToShow[i];
+        reposWithLanguages.push(repo);
+        
+        // Continue fetching language data in the background
+        if (!repo.fork && repo.languages_url && !repo.private) {
+          try {
+            const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
+            
+            // Don't await this promise - let it run in the background
+            RequestQueue.add(langUrl, (langResponse, langData) => {
+              if (langResponse.ok) {
+                // Calculate total bytes
+                const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
+                // Convert to percentages
+                const languages = Object.entries(langData).map(([name, bytes]) => ({
+                  name,
+                  percentage: Math.round((bytes / totalBytes) * 100)
+                })).sort((a, b) => b.percentage - a.percentage);
+                
+                repo.languageData = languages;
+                
+                // Update the card if it's already visible
+                updateRepoCardLanguages(repo);
+              }
+              
+              // Update progress
+              languagesLoaded++;
+              const progressPercentage = Math.min(70 + (languagesLoaded / totalToLoad) * 25, 95);
+              updateLoadingStatus(`Loading language data (${languagesLoaded}/${totalToLoad})...`, progressPercentage);
+            });
+          } catch (e) {
+            console.warn(`Failed to fetch language data for repo ${repo.name}`, e);
+            languagesLoaded++;
           }
+        } else {
+          // Count it as loaded
+          languagesLoaded++;
         }
       }
       
       // Update loading message before rendering
-      const loadingStatus2 = document.getElementById('loading-status');
-      if (loadingStatus2) {
-        loadingStatus2.textContent = `Rendering ${reposWithLanguages.length} repositories...`;
-      }
-        
-      // Implement pagination to show repositories in batches
-      const reposPerPage = 8; // Show 8 repos initially
-      let currentPage = 1;
+      updateLoadingStatus(`Finalizing repository display...`, 95);
       
-      // Function to render a batch of repositories
-      function renderRepos(page) {
-        console.log(`Rendering page ${page} of repositories. Total repos: ${reposWithLanguages.length}`);
-        const startIdx = (page - 1) * reposPerPage;
-        const endIdx = page * reposPerPage;
-        const reposToRender = reposWithLanguages.slice(startIdx, endIdx);
-        
-        console.log(`Rendering repos from index ${startIdx} to ${endIdx-1}. Rendering ${reposToRender.length} repos.`);
-        
-        // Create HTML for the repositories
-        const reposHTML = reposToRender.map(repo => createRepoCard(repo)).join('');
-        
-        // Replace or append content
-        if (page === 1) {
-          // First page: replace content
-          console.log("Replacing container content with first page of repos");
-          additionalProjectsContainer.innerHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
-              ${reposHTML}
-            </div>
-          `;
-        } else {
-          // Subsequent pages: append content
-          console.log("Appending repositories to existing grid");
-          const reposGrid = document.getElementById('repos-grid');
-          if (reposGrid) {
-            // Create a temporary div to hold the new HTML
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = reposHTML;
-            
-            // Append each child individually to maintain grid structure
-            while (tempDiv.firstChild) {
-              reposGrid.appendChild(tempDiv.firstChild);
-            }
-          } else {
-            console.error("Could not find repos-grid element for appending more repositories");
-            // Fallback: replace entire content
-            additionalProjectsContainer.innerHTML = `
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
-                ${reposWithLanguages.slice(0, endIdx).map(repo => createRepoCard(repo)).join('')}
-              </div>
-            `;
-          }
-        }
-        
-        // Add "Load More" button if there are more repos to show
-        updateLoadMoreButton(endIdx);
-        
-        // Start loading language data for displayed repositories first
-        loadLanguageDataForDisplayedRepos(reposToRender);
-      }
+      // Update last updated timestamps for all repos
+      updateLastUpdatedTimestamps();
       
-      // Function to update or add the load more button
-      function updateLoadMoreButton(endIdx) {
-        // Remove existing button if any
-        const existingButton = document.getElementById('load-more-container');
-        if (existingButton) {
-          existingButton.remove();
-        }
-        
-        if (endIdx < reposWithLanguages.length) {
-          console.log(`Adding Load More button. Showing ${endIdx}/${reposWithLanguages.length} repos`);
-          const remainingCount = Math.min(reposPerPage, reposWithLanguages.length - endIdx);
-          
-          const loadMoreHTML = `
-            <div class="text-center mt-8" id="load-more-container">
-              <button id="load-more-button" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
-                </svg>
-                Load ${remainingCount} More Repositories
-              </button>
-              <div class="text-sm text-gray-500 mt-2">
-                Showing ${endIdx} of ${reposWithLanguages.length} repositories
-              </div>
-            </div>
-          `;
-          additionalProjectsContainer.insertAdjacentHTML('beforeend', loadMoreHTML);
-          
-          // Add click event listener to the button
-          document.getElementById('load-more-button').addEventListener('click', function() {
-            console.log("Load more button clicked");
-            
-            // Update button to show loading state
-            this.disabled = true;
-            this.innerHTML = `
-              <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Loading...
-            `;
-            
-            // Delay slightly to let the button update render
-            setTimeout(() => {
-              currentPage++;
-              renderRepos(currentPage);
-            }, 50);
-          });
-        } else {
-          console.log("All repositories shown, no load more button needed");
-          // Add a "showing all" indicator
-          additionalProjectsContainer.insertAdjacentHTML('beforeend', `
-            <div class="text-center mt-4 text-sm text-gray-500" id="load-more-container">
-              Showing all ${reposWithLanguages.length} repositories
-            </div>
-          `);
-        }
-      }
-      
-      // Function to load language data for displayed repositories first
-      async function loadLanguageDataForDisplayedRepos(displayedRepos) {
-        for (const repo of displayedRepos) {
-          if (!repo.languageData && repo.languages_url && !repo.private) {
-            try {
-              // Add to queue instead of direct fetch
-              const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
-              
-              // Use Promise to allow async/await with our queue
-              await new Promise(resolve => {
-                RequestQueue.add(langUrl, (langResponse, langData) => {
-                  if (langResponse.ok) {
-                    // Calculate total bytes
-                    const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                    // Convert to percentages
-                    const languages = Object.entries(langData).map(([name, bytes]) => ({
-                      name,
-                      percentage: Math.round((bytes / totalBytes) * 100)
-                    })).sort((a, b) => b.percentage - a.percentage);
-                    
-                    repo.languageData = languages;
-                    
-                    // Find and update the repo card in the DOM
-                    updateRepoCardLanguages(repo);
-                  }
-                  resolve();
-                });
-              });
-            } catch (e) {
-              console.warn(`Failed to load language data for displayed repo ${repo.name}:`, e);
-            }
-          }
-        }
-        
-        // After loading visible repos, start loading the rest
-        loadRemainingLanguageData();
-      }
-      
-      // Function to load language data for remaining repositories
-      async function loadRemainingLanguageData() {
-        const currentlyDisplayed = reposPerPage * currentPage;
-        const remainingRepos = reposWithLanguages.slice(currentlyDisplayed);
-        
-        for (const repo of remainingRepos) {
-          if (!repo.languageData && repo.languages_url && !repo.private) {
-            try {
-              // Add to queue instead of direct fetch
-              const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
-              
-              // Use Promise to allow async/await with our queue
-              await new Promise(resolve => {
-                RequestQueue.add(langUrl, (langResponse, langData) => {
-                  if (langResponse.ok) {
-                    // Calculate total bytes
-                    const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                    // Convert to percentages
-                    const languages = Object.entries(langData).map(([name, bytes]) => ({
-                      name,
-                      percentage: Math.round((bytes / totalBytes) * 100)
-                    })).sort((a, b) => b.percentage - a.percentage);
-                    
-                    repo.languageData = languages;
-                  }
-                  resolve();
-                });
-              });
-            } catch (e) {
-              console.warn(`Failed to load language data for remaining repo ${repo.name}:`, e);
-            }
-          }
-        }
-      }
-      
-      // Function to update a specific repo card's language display
-      function updateRepoCardLanguages(repo) {
-        // Find the repo card in the DOM
-        const repoCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg');
-        
-        for (const card of repoCards) {
-          const titleElem = card.querySelector('h3');
-          if (titleElem && titleElem.textContent.includes(repo.name)) {
-            const languageContainer = card.querySelector('.languages-container');
-            if (languageContainer && repo.languageData) {
-              // Create HTML for language bar
-              const colorMap = {
-                "JavaScript": "bg-yellow-400",
-                "TypeScript": "bg-blue-500",
-                "Python": "bg-blue-600",
-                "Java": "bg-orange-600",
-                "C#": "bg-green-600",
-                "C++": "bg-pink-600",
-                "HTML": "bg-red-500",
-                "CSS": "bg-purple-500",
-                "Ruby": "bg-red-600",
-                "Go": "bg-blue-300",
-                "Swift": "bg-orange-500",
-                "Kotlin": "bg-purple-600",
-                "PHP": "bg-indigo-400",
-                "C": "bg-gray-500",
-                "Shell": "bg-green-400",
-                "Rust": "bg-orange-800",
-                "Batchfile": "bg-gray-600",
-                "ASP.NET": "bg-blue-800",
-                "Vue": "bg-green-500",
-                "CMake": "bg-indigo-600",
-                "Makefile": "bg-gray-600",
-                "Lua": "bg-blue-400",
-                "YAML": "bg-purple-300",
-                "RedScript": "bg-red-700",
-                "XML": "bg-orange-300",
-                "JSON": "bg-amber-300"
-              };
-              
-              let html = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
-              repo.languageData.forEach(lang => {
-                const bgClass = colorMap[lang.name] || "bg-gray-400";
-                html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-              });
-              
-              html += `</div>`;
-              html += `<div class="flex flex-wrap mt-1 text-xs">`;
-              
-              repo.languageData.forEach(lang => {
-                html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
-              });
-              
-              html += `</div>`;
-              
-              // Update the container
-              languageContainer.innerHTML = html;
-            }
-            break;
-          }
-        }
-      }
-      
-      // Render the first page of repositories
-      console.log(`Starting to render repositories. Found ${reposWithLanguages.length} repos with languages`);
-      renderRepos(currentPage);
-      
-      // Add additional GitHub stats section
-      const totalRepoCount = allRepos.length;
-      const publicRepos = allRepos.filter(r => !r.private).length;
-      const privateRepos = totalRepoCount - publicRepos;
-      
-      // Add CodeGrind section if we successfully retrieved it
+      // Update CodeGrind section if we successfully retrieved it
       if (codegrindInfo) {
         console.log("Processing CodeGrind repository information");
-        
-        // Fetch language data for CodeGrind if available
-        let codegrindLanguages = [];
+        // Fetch language data for CodeGrind and update cards
         try {
-          if (codegrindInfo.languages_url) {
-            const langUrl = window.GitHubConfig.addClientId(codegrindInfo.languages_url);
-            await new Promise(resolve => {
-              RequestQueue.add(langUrl, (langResponse, langData) => {
-                if (langResponse.ok) {
-                  // Calculate total bytes
-                  const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                  // Convert to percentages
-                  codegrindLanguages = Object.entries(langData).map(([name, bytes]) => ({
-                    name,
-                    percentage: Math.round((bytes / totalBytes) * 100)
-                  })).sort((a, b) => b.percentage - a.percentage);
-                }
-                resolve();
-              });
-            });
-          }
+          // This code will continue updating in the background
+          updateExistingCodegrindCards(codegrindInfo, []);
         } catch (e) {
-          console.warn("Error fetching CodeGrind language data:", e);
+          console.warn("Error updating CodeGrind cards:", e);
         }
-        
-        // Find and update existing CodeGrind cards instead of creating a new section
-        updateExistingCodegrindCards(codegrindInfo, codegrindLanguages);
       }
       
-      // Check if "More on GitHub" section already exists to avoid duplication
-      const existingGitHubSection = document.querySelector('.more-on-github-section');
-      if (!existingGitHubSection) {
-        const profileStatsHTML = `
-          <div class="mt-10 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 more-on-github-section">
-            <h3 class="text-xl font-bold mb-4">More on GitHub</h3>
-            <p class="mb-4 text-gray-700 dark:text-gray-300">
-              Check out my GitHub profile for more projects, contributions, and open source work.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div class="flex flex-col gap-2">
-                <div>
-                  <span class="font-medium">Total repositories:</span> ${totalRepoCount} (${privateRepos} private)
-                </div>
-                <div>
-                  <span class="font-medium">Total stars:</span> ${allRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)}
-                </div>
-                <div>
-                  <span class="font-medium">Total forks:</span> ${allRepos.reduce((sum, repo) => sum + repo.forks_count, 0)}
-                </div>
-              </div>
-              <a href="https://github.com/${username}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
-                </svg>
-                View GitHub Profile
-              </a>
-            </div>
-          </div>
-        `;
-        
-        additionalProjectsContainer.insertAdjacentHTML('beforeend', profileStatsHTML);
-      }
+      // Add GitHub stats section
+      updateGitHubStatsSection(allRepos);
       
-      // Add a "Force Refresh" button for development
-      if (document.querySelector('#dev-tools')) {
-        const refreshButton = `
-          <div class="mt-4 text-right">
-            <a href="?force_refresh=true" class="inline-flex items-center px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 text-xs transition-colors">
-              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-              </svg>
-              Force Refresh Data
-            </a>
-          </div>
-        `;
-        additionalProjectsContainer.insertAdjacentHTML('beforeend', refreshButton);
-      }
+      // Complete loading
+      updateLoadingStatus(`Loading complete!`, 100);
       
     } catch (error) {
       console.error('Error fetching GitHub repositories:', error);
@@ -1245,5 +880,59 @@ document.addEventListener('DOMContentLoaded', function() {
         <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">Private repository - GitHub data available via API</span>
       </div>
     `;
+  }
+
+  // Helper function to update loading status with progress
+  function updateLoadingStatus(message, percentage) {
+    const loadingStatus = document.getElementById('loading-status');
+    if (loadingStatus) {
+      loadingStatus.textContent = message;
+    }
+    
+    const progressIndicator = document.getElementById('loading-progress-indicator');
+    if (progressIndicator) {
+      progressIndicator.style.width = `${percentage}%`;
+    }
+  }
+
+  // Helper function to add GitHub stats section
+  function updateGitHubStatsSection(allRepos) {
+    const totalRepoCount = allRepos.length;
+    const publicRepos = allRepos.filter(r => !r.private).length;
+    const privateRepos = totalRepoCount - publicRepos;
+    
+    // Check if "More on GitHub" section already exists to avoid duplication
+    const existingGitHubSection = document.querySelector('.more-on-github-section');
+    if (!existingGitHubSection) {
+      const profileStatsHTML = `
+        <div class="mt-10 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 more-on-github-section">
+          <h3 class="text-xl font-bold mb-4">More on GitHub</h3>
+          <p class="mb-4 text-gray-700 dark:text-gray-300">
+            Check out my GitHub profile for more projects, contributions, and open source work.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex flex-col gap-2">
+              <div>
+                <span class="font-medium">Total repositories:</span> ${totalRepoCount} (${privateRepos} private)
+              </div>
+              <div>
+                <span class="font-medium">Total stars:</span> ${allRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)}
+              </div>
+              <div>
+                <span class="font-medium">Total forks:</span> ${allRepos.reduce((sum, repo) => sum + repo.forks_count, 0)}
+              </div>
+            </div>
+            <a href="https://github.com/${window.GitHubConfig.username}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+              </svg>
+              View GitHub Profile
+            </a>
+          </div>
+        </div>
+      `;
+      
+      additionalProjectsContainer.insertAdjacentHTML('beforeend', profileStatsHTML);
+    }
   }
 });
