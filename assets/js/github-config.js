@@ -16,6 +16,11 @@ window.GitHubConfig = {
   
   // Helper function to use the proxy for GitHub API requests
   addClientId: function(url) {
+    // Special case for GraphQL API
+    if (url === 'graphql') {
+      return this.getGraphQLProxyUrl();
+    }
+    
     // Extract the path from the GitHub API URL
     const githubApiPrefix = 'https://api.github.com/';
     if (!url.startsWith(githubApiPrefix)) {
@@ -58,6 +63,57 @@ window.GitHubConfig = {
     console.log(`DEBUG CONFIG - Original URL: ${url}`);
     console.log(`DEBUG CONFIG - Proxied URL: ${result}`);
     return result;
+  },
+  
+  // Get the URL for GraphQL API proxy
+  getGraphQLProxyUrl: function() {
+    // NOTE: Current Azure Function setup doesn't support GraphQL correctly
+    // When implementing GraphQL support, uncomment this code and remove the fallback
+    
+     const graphqlProxyUrl = `${FUNCTION_APP_URL}/graphql`;
+     console.log(`DEBUG CONFIG - GraphQL proxy URL: ${graphqlProxyUrl}`);
+     return graphqlProxyUrl;
+    
+    // Fallback to REST API until GraphQL is supported
+    //console.warn('GraphQL API not currently supported by proxy. Using REST API fallback.');
+    //return null;
+  },
+  
+  // Make a GraphQL request (for future use when the proxy supports it)
+  makeGraphQLRequest: async function(query, variables) {
+    try {
+      // Check if GraphQL proxy is available
+      const proxyUrl = this.getGraphQLProxyUrl();
+      
+      // If no proxy URL, throw error to trigger fallback
+      if (!proxyUrl) {
+        throw new Error('GraphQL API proxy not available');
+      }
+      
+      // Make the request
+      const response = await fetch(proxyUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query,
+          variables
+        })
+      });
+      
+      // Check for errors
+      if (!response.ok) {
+        throw new Error(`GraphQL request failed: ${response.status}`);
+      }
+      
+      // Parse and return the response
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('GraphQL request failed:', error);
+      throw error;
+    }
   },
 
   // Get cached data or return null
