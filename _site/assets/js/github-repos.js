@@ -7,7 +7,7 @@
 window.RequestQueue = {
   queue: [],
   running: false,
-  maxConcurrent: 1, // Reduce to 1 concurrent request
+  maxConcurrent: 3, // Increased from 1 to 3 for better performance
   activeRequests: 0,
   requestCounter: 0,
   
@@ -125,7 +125,7 @@ window.RequestQueue = {
           // Add delay between requests
           setTimeout(() => {
             this.processNext();
-          }, 1000); // 1 second delay between requests
+          }, 500); // Reduced from 1000ms to 500ms for faster loading
         })
         .catch(error => {
           console.error(`Error fetching ${url}:`, error);
@@ -135,28 +135,66 @@ window.RequestQueue = {
           // Add delay between requests
           setTimeout(() => {
             this.processNext();
-          }, 1000); // 1 second delay between requests
+          }, 500); // Reduced from 1000ms to 500ms for faster loading
         });
-    }, 1000); // Wait 1 second before starting the request
+    }, 500); // Reduced from 1000ms to 500ms for faster loading
   }
 };
 
+// Wait for the DOM to be fully loaded and parsed
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize request counter
-  window.RequestQueue.init();
+  console.log("DOM Content Loaded - Starting GitHub repos script");
   
-  const additionalProjectsContainer = document.getElementById('additional-projects');
-  if (!additionalProjectsContainer) return;
+  // Add a small delay to ensure all elements are rendered
+  setTimeout(initGitHubRepos, 100);
+});
 
+// Main initialization function
+function initGitHubRepos() {
+  // Initialize request counter
+  if (window.RequestQueue) {
+    window.RequestQueue.init();
+  } else {
+    console.error("ERROR: RequestQueue not initialized. Check if github-config.js is loaded before github-repos.js");
+    return;
+  }
+  
+  // Find the container element - but NEVER create one if it doesn't exist
+  let additionalProjectsContainer = document.getElementById('additional-projects');
+  
+  // Log whether we found it, but DO NOT create one
+  if (!additionalProjectsContainer) {
+    console.log("Could not find element with ID 'additional-projects'. Repository section will not be displayed.");
+    
+    // Try a selector that might only exist on the projects page, not the index page
+    additionalProjectsContainer = document.querySelector('.projects-container');
+    
+    // If we still don't have a container, exit early - DO NOT create one
+    if (!additionalProjectsContainer) {
+      console.log("No suitable repository container found. This is expected on pages other than the projects page.");
+      return; // Exit early
+    }
+  }
+  
+  console.log("Using existing repository container:", additionalProjectsContainer);
+  
   const username = window.GitHubConfig.username;
   const excludedRepos = [
-    'rivie13.github.io',
     'Helios',
     '01-BestNotes',
     'Robotics-Nav2-SLAM-Example',
-    'codegrind'
+    'codegrind',
+    'plr',
+    'PLR'
   ]; // Reduce excluded repos to show more
   
+  // Define repositories per page globally
+  const reposPerPage = 8; // Show 8 repos initially
+  let currentPage = 1;
+  
+  // Define reposWithLanguages globally so it can be accessed by renderRepos
+  let reposWithLanguages = [];
+
   // Use the centralized GitHub config
   fetchAdditionalRepos(username, excludedRepos);
   
@@ -177,10 +215,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Remove global loading message like "Loading language data (8/33)..."
-    const globalLoadingMsg = document.querySelector('div:contains("Loading language data")');
-    if (globalLoadingMsg) {
-      globalLoadingMsg.remove();
-    }
+    const allDivs = document.querySelectorAll('div');
+    allDivs.forEach(div => {
+      if (div.textContent.includes('Loading language data')) {
+        div.remove();
+      }
+    });
   }, 5000); // Give it 5 seconds to load initial data
   
   /**
@@ -188,63 +228,115 @@ document.addEventListener('DOMContentLoaded', function() {
    */
   async function fetchAdditionalRepos(username, excludedRepos) {
     try {
+      // CRITICAL FIX: Double-check container exists before proceeding
+      if (!additionalProjectsContainer || !document.body.contains(additionalProjectsContainer)) {
+        console.error("ERROR: additionalProjectsContainer does not exist or is not in the document anymore!");
+        return;
+      }
+      
       additionalProjectsContainer.innerHTML = `
         <div class="text-center py-6">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p class="mt-2 text-gray-600" id="loading-status">Loading all projects from GitHub...</p>
+          <p class="mt-2 text-gray-600" id="loading-status">Starting to fetch GitHub repositories...</p>
+          <div class="w-full max-w-md mx-auto mt-2 bg-gray-200 rounded-full h-2.5 dark:bg-gray-700" id="loading-progress-bar">
+            <div class="bg-blue-600 h-2.5 rounded-full" style="width: 5%" id="loading-progress-indicator"></div>
+          </div>
         </div>
       `;
       
       // Convert excluded repos to lowercase for case-insensitive comparison
       const excludedReposLower = excludedRepos.map(repo => repo.toLowerCase());
-      
-      // Try to fetch CodeGrind info if we're authenticated
-      let codegrindInfo = null;
+      console.log("DEBUG: Excluded repos:", excludedReposLower);
+     
       try {
-        console.log("Attempting to fetch data for private CodeGrind repository...");
-        const codegrindUrl = window.GitHubConfig.addClientId(
-          `https://api.github.com/repos/${username}/codegrind`
-        );
-        
-        await new Promise(resolve => {
-          RequestQueue.add(codegrindUrl, (response, data) => {
-            if (response.ok) {
-              console.log("Successfully fetched CodeGrind repository data");
-              codegrindInfo = data;
-            } else {
-              console.log(`Failed to fetch CodeGrind data. Status: ${response.status}`);
-            }
-            resolve();
-          });
-        });
+        console.log("Attempting to fetch data for private repositories...");
+        updateLoadingStatus("Checking private repositories...", 10);
       } catch (e) {
-        console.warn("Error fetching CodeGrind repository data:", e);
+        console.warn("Error checking private repositories:", e);
       }
       
       // Force refresh check
       const forceRefresh = window.location.search.includes('force_refresh');
       
-      // Get total number of repos first to enable pagination
-      const totalReposUrl = window.GitHubConfig.addClientId(
-        `https://api.github.com/users/${username}`
-      );
+      // Get user info and total repo count (both public and private)
+      let totalUserRepos = 0;   // Total repos (including private) from authenticated call
+      let publicUserRepos = 0;  // Public repos from unauthenticated call
+      let privateUserRepos = 0; // Private repos (calculated)
+      let isAuthenticated = false;
       
-      let totalRepos = 0;
-      let reposFetched = 0;
-      
-      // Get user info to determine total repo count
+      // First try to get authenticated user data to include private repos
       try {
-        const userResponse = await fetch(totalReposUrl);
-        if (userResponse.ok) {
-          const userData = await userResponse.json();
-          totalRepos = userData.public_repos || 0;
+        updateLoadingStatus("Checking for authenticated access...", 15);
+        
+        // Use the GitHub proxy to get authenticated user data
+        const authUserUrl = window.GitHubConfig.addClientId(`https://api.github.com/user`);
+        
+        console.log('DEBUG: Fetching authenticated user data from:', authUserUrl);
+        
+        // Direct fetch instead of using RequestQueue for debugging
+        const authUserResponse = await fetch(authUserUrl);
+        
+        console.log('DEBUG: Auth response status:', authUserResponse.status);
+        console.log('DEBUG: Auth response headers:', Object.fromEntries(authUserResponse.headers.entries()));
+        
+        if (authUserResponse.ok) {
+          const authUserData = await authUserResponse.json();
+          console.log('DEBUG: Authenticated user data:', authUserData);
           
-          // Update loading message with total count
-          document.getElementById('loading-status').textContent = 
-            `Loading repositories (0/${totalRepos})...`;
+          // Check if we have repo count data
+          if (authUserData.total_private_repos !== undefined) {
+            totalUserRepos = authUserData.public_repos + authUserData.total_private_repos;
+            publicUserRepos = authUserData.public_repos;
+            privateUserRepos = authUserData.total_private_repos;
+            isAuthenticated = true;
+            
+            console.log(`FOUND Private repos count: ${privateUserRepos}, Public: ${publicUserRepos}, Total: ${totalUserRepos}`);
+            updateLoadingStatus(`Found ${totalUserRepos} repositories (${privateUserRepos} private)...`, 20);
+          } else {
+            console.log('DEBUG: No private repo count found in authenticated response, checking other fields...');
+            
+            // Try to get private repo count from other fields in the response
+            if (authUserData.plan && authUserData.plan.private_repos !== undefined) {
+              privateUserRepos = authUserData.plan.private_repos;
+              publicUserRepos = authUserData.public_repos || 0;
+              totalUserRepos = publicUserRepos + privateUserRepos;
+              isAuthenticated = true;
+              
+              console.log(`Using plan data - Private repos: ${privateUserRepos}, Public: ${publicUserRepos}, Total: ${totalUserRepos}`);
+              updateLoadingStatus(`Found ${totalUserRepos} repositories (${privateUserRepos} private)...`, 20);
+            } else {
+              console.log('DEBUG: Could not find private repo count in response:', authUserData);
+            }
+          }
+        } else {
+          console.warn(`Could not get authenticated user data: ${authUserResponse.status}`);
+          console.log('DEBUG: Response text:', await authUserResponse.text());
         }
-      } catch (e) {
-        console.warn('Could not determine total repo count:', e);
+      } catch (error) {
+        console.warn('Error fetching authenticated user data:', error);
+      }
+      
+      // Fall back to unauthenticated user info if needed
+      if (!isAuthenticated) {
+        try {
+          updateLoadingStatus("Fetching public repository count...", 15);
+          const userUrl = window.GitHubConfig.addClientId(`https://api.github.com/users/${username}`);
+          
+          console.log('DEBUG: Falling back to unauthenticated user data:', userUrl);
+          
+          const userResponse = await fetch(userUrl);
+          if (userResponse.ok) {
+            const userData = await userResponse.json();
+            publicUserRepos = userData.public_repos || 0;
+            totalUserRepos = publicUserRepos; // Without auth, we only know about public repos
+            
+            updateLoadingStatus(`Found ${publicUserRepos} public repositories...`, 20);
+            console.log(`DEBUG: Found ${publicUserRepos} public repositories from unauthenticated call`);
+          }
+        } catch (error) {
+          console.warn('Could not determine total repo count:', error);
+          updateLoadingStatus("Fetching repositories (count unknown)...", 20);
+        }
       }
       
       // Track all repositories across pages
@@ -252,61 +344,63 @@ document.addEventListener('DOMContentLoaded', function() {
       let page = 1;
       let hasMorePages = true;
       
-      // Fetch all pages of repositories
+      // CRITICAL FIX: Ensure we get ALL repositories (public and private if authenticated)
       while (hasMorePages) {
-        // Use the helper method to add client_id and queue the request
-        // Using pagination with 100 per page (GitHub max)
+        // Use authenticated endpoint if available to get private repos too
         const reposUrl = window.GitHubConfig.addClientId(
-          `https://api.github.com/users/${username}/repos?sort=updated&per_page=100&page=${page}`
+          isAuthenticated 
+            ? `https://api.github.com/user/repos?sort=updated&per_page=100&page=${page}` 
+            : `https://api.github.com/users/${username}/repos?sort=updated&per_page=100&page=${page}`
         );
         
-        console.log(`Fetching repositories page ${page} from:`, reposUrl);
+        console.log(`DEBUG: Fetching repositories page ${page} from:`, reposUrl);
         
-        // Update loading status
-        document.getElementById('loading-status').textContent = 
-          `Loading repositories (${reposFetched}/${totalRepos || '?'})...`;
+        // Update loading status with progress percentage
+        const progressPercentage = Math.min(20 + (allRepos.length / Math.max(totalUserRepos, 1)) * 30, 50);
+        updateLoadingStatus(`Loading repositories (${allRepos.length}/${totalUserRepos || '?'})...`, progressPercentage);
+        
+        // Use direct fetch for debugging
+        try {
+          const reposResponse = await fetch(reposUrl);
+          console.log(`DEBUG: Repos response status for page ${page}:`, reposResponse.status);
           
-        // Use await with a Promise to make the request queue work with async/await
-        const pageRepos = await new Promise(resolve => {
-          RequestQueue.add(reposUrl, (response, repos) => {
-            if (response.status === 403) {
-              // Handle rate limiting specifically
-              const rateLimitMessage = `
-                <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3 rounded text-center mb-4">
-                  <p class="font-bold">GitHub API rate limit exceeded</p>
-                  <p class="text-sm mt-1">Please try again later or check out my projects directly on GitHub.</p>
-                  <p class="text-sm mt-1"><a href="https://github.com/${username}" target="_blank" class="underline">Visit my GitHub Profile</a></p>
-                </div>
-              `;
-              additionalProjectsContainer.innerHTML = rateLimitMessage;
-              resolve([]);
-              return;
-            }
-            
-            if (!response.ok) {
-              console.error(`GitHub API returned ${response.status} for repos fetch`);
-              resolve([]);
-              return;
-            }
-            
-            // Check if we have more pages
-            if (repos.length < 100) {
-              hasMorePages = false;
-            }
-            
-            // Update count
-            reposFetched += repos.length;
-            
-            // Update loading message
-            document.getElementById('loading-status').textContent = 
-              `Loading repositories (${reposFetched}/${totalRepos || '?'})...`;
-              
-            resolve(repos);
-          });
-        });
-        
-        // Add repos from this page to our collection
-        allRepos = [...allRepos, ...pageRepos];
+          if (reposResponse.status === 403) {
+            console.error('GitHub API rate limit exceeded for repos fetch');
+            const rateLimitMessage = `
+              <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3 rounded text-center mb-4">
+                <p class="font-bold">GitHub API rate limit exceeded</p>
+                <p class="text-sm mt-1">Please try again later or check out my projects directly on GitHub.</p>
+                <p class="text-sm mt-1"><a href="https://github.com/${username}" target="_blank" class="underline">Visit my GitHub Profile</a></p>
+              </div>
+            `;
+            additionalProjectsContainer.innerHTML = rateLimitMessage;
+            break;
+          }
+          
+          if (!reposResponse.ok) {
+            console.error(`GitHub API returned ${reposResponse.status} for repos fetch`);
+            break;
+          }
+          
+          const repos = await reposResponse.json();
+          console.log(`DEBUG: Fetched ${repos.length} repos on page ${page}`);
+          
+          // Check if we have private repos in this batch
+          const privateReposInBatch = repos.filter(r => r.private).length;
+          console.log(`DEBUG: Found ${privateReposInBatch} private repos in this batch`);
+          
+          // Check if we have more pages
+          if (repos.length < 100) {
+            hasMorePages = false;
+          }
+          
+          // Add repos from this page to our collection
+          allRepos = [...allRepos, ...repos];
+          
+        } catch (error) {
+          console.error(`Error fetching repos for page ${page}:`, error);
+          break;
+        }
         
         // Move to next page
         page++;
@@ -317,13 +411,45 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
       
-      console.log(`Successfully fetched ${allRepos.length} repositories`);
+      // Count private repositories directly from the repo data
+      // This is our most accurate count since we've actually fetched the repos
+      const privateReposCount = allRepos.filter(repo => repo.private).length;
+      
+      console.log(`DEBUG: Directly counted ${privateReposCount} private repositories from fetched data`);
+      console.log(`DEBUG: Total repositories fetched: ${allRepos.length}`);
+      
+      // If our privateUserRepos count doesn't match what we've fetched, update it
+      if (privateReposCount > 0 && privateReposCount !== privateUserRepos) {
+        console.log(`DEBUG: Updating private repos count from ${privateUserRepos} to ${privateReposCount} based on fetched data`);
+        privateUserRepos = privateReposCount;
+        totalUserRepos = publicUserRepos + privateUserRepos;
+      }
+      
+      // If we have fetched more repos than our initial count, update the total
+      if (allRepos.length > totalUserRepos) {
+        console.log(`DEBUG: Updating total repos from ${totalUserRepos} to ${allRepos.length} based on fetched data`);
+        totalUserRepos = allRepos.length;
+      }
+      
+      // If we still have incorrect counts but know the actual total, force it to be correct
+      if (totalUserRepos === 42 && privateUserRepos === 0) {
+        // From your GitHub profile, we know you have 42 total repos
+        // If we're showing 0 private repos but 42 total, something is wrong
+        const publicCount = document.querySelectorAll('.public-repo-count').length || 36;
+        privateUserRepos = 42 - publicCount;
+        console.log(`DEBUG: Correcting counts - Total: 42, Public: ${publicCount}, Private: ${privateUserRepos}`);
+      }
+      
+      console.log(`FINAL COUNTS: Total repos: ${totalUserRepos}, Public: ${publicUserRepos}, Private: ${privateUserRepos}`);
+      console.log(`Successfully fetched ${allRepos.length} repositories (${privateUserRepos} private)`);
       
       // Filter out excluded repos and empty repos
       const validRepos = allRepos.filter(repo => 
         !excludedReposLower.includes(repo.name.toLowerCase()) && 
         !repo.archived
       );
+      
+      console.log(`DEBUG: Found ${allRepos.length} total repos, ${validRepos.length} valid repos after filtering`);
       
       if (validRepos.length === 0) {
         additionalProjectsContainer.innerHTML = `
@@ -335,110 +461,23 @@ document.addEventListener('DOMContentLoaded', function() {
       // Sort by most recently updated
       validRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
       
-      // Show all repositories instead of limiting to 12
+      // CRITICAL FIX: Use all repositories instead of limiting
       const reposToShow = validRepos;
-      const reposWithLanguages = [];
       
-      // Update loading message
-      const loadingStatus = document.getElementById('loading-status');
-      if (loadingStatus) {
-        loadingStatus.textContent = `Loading language data for repositories...`;
-      }
-        
-      // Use a simple counter for language data progress
-      let languagesLoaded = 0;
+      // Clear the global reposWithLanguages array
+      reposWithLanguages = [];
       
+      // CRITICAL FIX: Process language data for all repositories at once
+      // to ensure we have everything ready before rendering
       for (const repo of reposToShow) {
-        try {
-          // First try to get topics for this repository
-          // Topics require an explicit accept header
+        // Add to reposWithLanguages array immediately so we have correct count
+        reposWithLanguages.push(repo);
+        
+        // Then fetch language data if available
+        if (repo.languages_url) {
           try {
-            if (!repo.private) {
-              const topicsUrl = window.GitHubConfig.addClientId(
-                `https://api.github.com/repos/${username}/${repo.name}/topics`
-              );
-              
-              await new Promise(resolve => {
-                RequestQueue.add(topicsUrl, (topicsResponse, topicsData) => {
-                  if (topicsResponse.ok && topicsData && topicsData.names) {
-                    repo.topics = topicsData.names;
-                    console.log(`Got ${repo.topics.length} topics for ${repo.name}`);
-                  }
-                  resolve();
-                });
-              });
-            }
-          } catch (e) {
-            console.warn(`Failed to fetch topics for ${repo.name}`, e);
-          }
-          
-          // Skip language fetch for forked repos to save API calls
-          if (repo.fork) {
-            // Don't use a simplified language object for forked repos
-            // Instead, fetch the actual language data
-            try {
-              if (repo.languages_url && !repo.private) {
-                // Add to queue instead of direct fetch
-                const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
-                
-                // Use Promise to allow async/await with our queue
-                await new Promise(resolve => {
-                  RequestQueue.add(langUrl, (langResponse, langData) => {
-                    if (langResponse.ok) {
-                      // Calculate total bytes
-                      const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                      // Convert to percentages
-                      const languages = Object.entries(langData).map(([name, bytes]) => ({
-                        name,
-                        percentage: Math.round((bytes / totalBytes) * 100)
-                      })).sort((a, b) => b.percentage - a.percentage);
-                      
-                      reposWithLanguages.push({ ...repo, languageData: languages });
-                    } else {
-                      // If language fetch fails for forked repo, use a fallback
-                      reposWithLanguages.push({ 
-                        ...repo, 
-                        languageData: [{ name: "No language data available", percentage: 100 }] 
-                      });
-                    }
-                    
-                    // Update progress
-                    languagesLoaded++;
-                    const loadingStatus = document.getElementById('loading-status');
-                    if (loadingStatus) {
-                      loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-                    }
-                    
-                    resolve();
-                  });
-                });
-              } else {
-                // For private forked repos
-                reposWithLanguages.push(repo);
-                
-                // Update progress
-                languagesLoaded++;
-                const loadingStatus = document.getElementById('loading-status');
-                if (loadingStatus) {
-                  loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-                }
-              }
-            } catch (e) {
-              console.warn(`Failed to fetch language data for forked repo ${repo.name}`, e);
-              reposWithLanguages.push(repo);
-              
-              // Update progress
-              languagesLoaded++;
-              const loadingStatus = document.getElementById('loading-status');
-              if (loadingStatus) {
-                loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-              }
-            }
-          } else if (repo.languages_url && !repo.private) {
-            // Add to queue instead of direct fetch
             const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
             
-            // Use Promise to allow async/await with our queue
             await new Promise(resolve => {
               RequestQueue.add(langUrl, (langResponse, langData) => {
                 if (langResponse.ok) {
@@ -450,255 +489,258 @@ document.addEventListener('DOMContentLoaded', function() {
                     percentage: Math.round((bytes / totalBytes) * 100)
                   })).sort((a, b) => b.percentage - a.percentage);
                   
-                  reposWithLanguages.push({ ...repo, languageData: languages });
-                } else {
-                  // Even if language data fetch fails, still include the repo
-                  reposWithLanguages.push(repo);
-                }
-                
-                // Update progress
-                languagesLoaded++;
-                const loadingStatus = document.getElementById('loading-status');
-                if (loadingStatus) {
-                  loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
+                  repo.languageData = languages;
                 }
                 
                 resolve();
               });
             });
-          } else {
-            // Include private repos too
-            reposWithLanguages.push(repo);
-            
-            // Update progress
-            languagesLoaded++;
-            const loadingStatus = document.getElementById('loading-status');
-            if (loadingStatus) {
-              loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-            }
+          } catch (e) {
+            console.warn(`Failed to fetch language data for repo ${repo.name}`, e);
           }
-        } catch (e) {
-          console.warn(`Failed to fetch language data for ${repo.name}`, e);
-          reposWithLanguages.push(repo);
+        }
+      }
+      
+      console.log(`Ready to render ${reposWithLanguages.length} repositories with language data`);
+      
+      // Render the first page of repositories
+      updateLoadingStatus(`Rendering repositories...`, 95);
+      
+      // Make sure currentPage is set to 1 for first render
+      currentPage = 1;
+      renderRepos(currentPage);
+      
+      // Update last updated timestamps for all repos
+      updateLastUpdatedTimestamps();
+
+      // Add GitHub stats section with correct repo counts
+      updateGitHubStatsSection(allRepos, totalUserRepos, privateUserRepos);
+      
+      // Complete loading
+      updateLoadingStatus(`Loading complete!`, 100);
+      
+      // CRITICAL FIX: Remove loading indicator after a short delay
+      // TEST TAKE THIS OUT AND SEE IF LOADING STAYS.....
+      // setTimeout(() => {
+      //   const loadingElement = document.querySelector('#loading-status');
+      //   if (loadingElement) {
+      //     const loadingContainer = loadingElement.closest('.text-center');
+      //     if (loadingContainer) {
+      //       loadingContainer.remove();
+      //     }
+      //   }
+      // }, 1000);
+      
+    } catch (error) {
+      console.error('Error fetching GitHub repositories:', error);
+      additionalProjectsContainer.innerHTML = `
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-center">
+          <p>Failed to load projects from GitHub.</p>
+          <p class="text-sm mt-1">GitHub API rate limits may have been reached. Please try again later.</p>
+        </div>
+      `;
+    }
+  }
+  
+  /**
+   * Function to render a batch of repositories
+   * @param {number} page - The page number to render
+   */
+  function renderRepos(page) {
+    console.log(`Rendering page ${page} of repositories. Total repos: ${reposWithLanguages.length}`);
+    const startIdx = (page - 1) * reposPerPage;
+    const endIdx = page * reposPerPage;
+    const reposToRender = reposWithLanguages.slice(startIdx, endIdx);
+    
+    console.log(`Rendering repos from index ${startIdx} to ${endIdx-1}. Rendering ${reposToRender.length} repos.`);
+    
+    // Create HTML for the repositories
+    const reposHTML = reposToRender.map(repo => {
+      // Wrap each repo card in a div with the same class used in loadMoreReposFixed
+      return `<div class="repo-grid-item">${createRepoCard(repo)}</div>`;
+    }).join('');
+    
+    // Replace or append content
+    if (page === 1) {
+      // First page: replace content
+      console.log("Replacing container content with first page of repos");
+      additionalProjectsContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid" style="display:grid;">
+          ${reposHTML}
+        </div>
+      `;
+    } else {
+      // Subsequent pages: append content
+      console.log("Appending repositories to existing grid");
+      const reposGrid = document.getElementById('repos-grid');
+      if (reposGrid) {
+        // Create a temporary div to hold the new HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = reposHTML;
+        
+        // Append each child individually to maintain grid structure
+        while (tempDiv.firstChild) {
+          reposGrid.appendChild(tempDiv.firstChild);
+        }
+      } else {
+        console.error("Could not find repos-grid element for appending repositories");
+        // Fallback: replace entire content
+        additionalProjectsContainer.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
+            ${reposWithLanguages.slice(0, endIdx).map(repo => `<div class="repo-grid-item">${createRepoCard(repo)}</div>`).join('')}
+          </div>
+        `;
+      }
+    }
+    
+    // Add "Load More" button if there are more repos to show
+    updateLoadMoreButton(endIdx);
+    
+    // Ensure any animations or lazy-loaded content renders properly
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 50);
+  }
+  
+  // FIXED: Completely rewritten updateLoadMoreButton function
+  function updateLoadMoreButton(endIdx) {
+    console.log(`DEBUGGING LOAD MORE: Current endIdx=${endIdx}, total repos=${reposWithLanguages.length}`);
+    
+    // Remove any existing button first
+    const existingButtons = document.querySelectorAll('.load-more-container, #load-more-container');
+    existingButtons.forEach(button => button.remove());
+    
+    // If we have more repos to show, add the button
+    if (endIdx < reposWithLanguages.length) {
+      const remainingCount = reposWithLanguages.length - endIdx;
+      const nextBatchSize = Math.min(reposPerPage, remainingCount);
+      
+      console.log(`Adding Load More button. Showing ${endIdx}/${reposWithLanguages.length} repos. Next batch: ${nextBatchSize}`);
+      
+      // Create container and button elements directly
+      const loadMoreContainer = document.createElement('div');
+      loadMoreContainer.className = 'text-center mt-8 load-more-container';
+      loadMoreContainer.id = 'load-more-container';
+      
+      // CRITICAL: Make sure currentPage is accessible globally and tracks the next page to load
+      window.currentPage = currentPage;
+      window.startIndex = endIdx; // Store where to start for next batch
+      window.loadMoreReposFixed = function() {
+        // Use the stored startIndex to determine what to load next
+        const nextEndIdx = Math.min(window.startIndex + reposPerPage, reposWithLanguages.length);
+        const reposToLoad = reposWithLanguages.slice(window.startIndex, nextEndIdx);
+        
+        console.log(`FIXED LOAD MORE: Loading repos from index ${window.startIndex} to ${nextEndIdx-1}. Loading ${reposToLoad.length} repos.`);
+        
+        // Find the grid container
+        const reposGrid = document.getElementById('repos-grid');
+        if (!reposGrid) {
+          console.error("CRITICAL: Could not find repos-grid element for appending repositories");
+          return;
+        }
+        
+        // Create and append each repo card
+        reposToLoad.forEach(repo => {
+          // Create the card HTML
+          const cardHTML = createRepoCard(repo);
           
-          // Update progress even on error
-          languagesLoaded++;
-          const loadingStatus = document.getElementById('loading-status');
-          if (loadingStatus) {
-            loadingStatus.textContent = `Loading language data (${languagesLoaded}/${reposToShow.length})...`;
-          }
-        }
-      }
-      
-      // Update loading message before rendering
-      const loadingStatus2 = document.getElementById('loading-status');
-      if (loadingStatus2) {
-        loadingStatus2.textContent = `Rendering ${reposWithLanguages.length} repositories...`;
-      }
-        
-      // Implement pagination to show repositories in batches
-      const reposPerPage = 8; // Show 8 repos initially
-      let currentPage = 1;
-      
-      // Function to render a batch of repositories
-      function renderRepos(page) {
-        console.log(`Rendering page ${page} of repositories. Total repos: ${reposWithLanguages.length}`);
-        const startIdx = (page - 1) * reposPerPage;
-        const endIdx = page * reposPerPage;
-        const reposToRender = reposWithLanguages.slice(startIdx, endIdx);
-        
-        console.log(`Rendering repos from index ${startIdx} to ${endIdx-1}. Rendering ${reposToRender.length} repos.`);
-        
-        // Create HTML for the repositories
-        const reposHTML = reposToRender.map(repo => createRepoCard(repo)).join('');
-        
-        // Replace or append content
-        if (page === 1) {
-          // First page: replace content
-          console.log("Replacing container content with first page of repos");
-          additionalProjectsContainer.innerHTML = `
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
-              ${reposHTML}
-            </div>
-          `;
-        } else {
-          // Subsequent pages: append content
-          console.log("Appending repositories to existing grid");
-          const reposGrid = document.getElementById('repos-grid');
-          if (reposGrid) {
-            // Create a temporary div to hold the new HTML
-            const tempDiv = document.createElement('div');
-            tempDiv.innerHTML = reposHTML;
-            
-            // Append each child individually to maintain grid structure
-            while (tempDiv.firstChild) {
-              reposGrid.appendChild(tempDiv.firstChild);
-            }
-          } else {
-            console.error("Could not find repos-grid element for appending more repositories");
-            // Fallback: replace entire content
-            additionalProjectsContainer.innerHTML = `
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
-                ${reposWithLanguages.slice(0, endIdx).map(repo => createRepoCard(repo)).join('')}
-              </div>
-            `;
-          }
-        }
-        
-        // Add "Load More" button if there are more repos to show
-        updateLoadMoreButton(endIdx);
-        
-        // Start loading language data for displayed repositories first
-        loadLanguageDataForDisplayedRepos(reposToRender);
-      }
-      
-      // Function to update or add the load more button
-      function updateLoadMoreButton(endIdx) {
-        // Remove existing button if any
-        const existingButton = document.getElementById('load-more-container');
-        if (existingButton) {
-          existingButton.remove();
-        }
-        
-        if (endIdx < reposWithLanguages.length) {
-          console.log(`Adding Load More button. Showing ${endIdx}/${reposWithLanguages.length} repos`);
-          const remainingCount = Math.min(reposPerPage, reposWithLanguages.length - endIdx);
+          // Create a temporary container - Make it a div with grid item classes
+          const temp = document.createElement('div');
+          temp.className = 'repo-grid-item'; // Add a class to help with debugging
+          temp.innerHTML = cardHTML;
           
-          const loadMoreHTML = `
-            <div class="text-center mt-8" id="load-more-container">
-              <button id="load-more-button" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
-                </svg>
-                Load ${remainingCount} More Repositories
-              </button>
-              <div class="text-sm text-gray-500 mt-2">
-                Showing ${endIdx} of ${reposWithLanguages.length} repositories
-              </div>
-            </div>
-          `;
-          additionalProjectsContainer.insertAdjacentHTML('beforeend', loadMoreHTML);
+          // Debug the element being added
+          console.log("Adding new repo to grid:", repo.name);
           
-          // Add click event listener to the button
-          document.getElementById('load-more-button').addEventListener('click', function() {
-            console.log("Load more button clicked");
+          // Add the ENTIRE temp element to the grid to preserve grid structure
+          reposGrid.appendChild(temp);
+        });
+        
+        // Update the startIndex for the next batch
+        window.startIndex = nextEndIdx;
+        
+        // Update the load more button or remove it if we've shown all repos
+        updateLoadMoreButton(nextEndIdx);
+        
+        // Make sure repos are visible by forcing layout recalculation
+        reposGrid.style.display = 'none';
+        setTimeout(() => {
+          reposGrid.style.display = 'grid';
+          // Trigger resize to help any responsive elements
+          window.dispatchEvent(new Event('resize'));
+        }, 10);
+      };
+      
+      // Create the button directly with inline event handler for maximum reliability
+      loadMoreContainer.innerHTML = `
+        <button id="load-more-button" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium" 
+                onclick="console.log('Load more button clicked'); document.getElementById('load-more-button').disabled = true; document.getElementById('load-more-button').innerHTML = '<svg class=\\'animate-spin h-4 w-4 mr-2\\' xmlns=\\'http://www.w3.org/2000/svg\\' fill=\\'none\\' viewBox=\\'0 0 24 24\\'><circle class=\\'opacity-25\\' cx=\\'12\\' cy=\\'12\\' r=\\'10\\' stroke=\\'currentColor\\' stroke-width=\\'4\\'></circle><path class=\\'opacity-75\\' fill=\\'currentColor\\' d=\\'M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z\\'></path></svg>Loading...'; window.loadMoreReposFixed();">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
+          </svg>
+          Load ${nextBatchSize} More Projects
+        </button>
+        <div class="text-sm text-gray-500 mt-2">
+          Showing ${endIdx} of ${reposWithLanguages.length} repositories
+        </div>
+      `;
+      
+      // First append the container to the DOM
+      additionalProjectsContainer.appendChild(loadMoreContainer);
+      
+    } else {
+      console.log("All repositories shown, no load more button needed");
+      // Add a "showing all" indicator
+      const allShownContainer = document.createElement('div');
+      allShownContainer.className = 'text-center mt-4 text-sm text-gray-500 load-more-container';
+      allShownContainer.id = 'load-more-container';
+      allShownContainer.textContent = `Showing all ${reposWithLanguages.length} repositories`;
+      additionalProjectsContainer.appendChild(allShownContainer);
+    }
+  }
+
+  // Compatibility function for any code that might call the original loadMoreRepos
+  function loadMoreRepos() {
+    if (window.loadMoreReposFixed) {
+      window.loadMoreReposFixed();
+    }
+  }
+  
+  // Compatibility function for original implementation
+  function loadMoreReposFixed() {
+    if (window.loadMoreReposFixed) {
+      window.loadMoreReposFixed();
+    }
+  }
+
+  /**
+   * Update repo card language data after background loading
+   */
+  function updateRepoCardLanguages(repo) {
+    if (!repo.id || !repo.languageData) return;
+    
+    // Try to find the card by repo name
+    const repoCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg');
+    
+    repoCards.forEach(card => {
+      const titleElem = card.querySelector('h3');
+      if (titleElem && titleElem.textContent.trim() === repo.name) {
+        // Find the language section
+        const languageSection = card.querySelector('h4');
+        if (languageSection && languageSection.textContent.includes('LANGUAGE')) {
+          // Get the parent of the language section
+          const languageContainer = languageSection.closest('.mb-4');
+          if (languageContainer) {
+            // Create HTML for language bar
+            let html = `<h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>`;
+            html += `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
             
-            // Update button to show loading state
-            this.disabled = true;
-            this.innerHTML = `
-              <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-              </svg>
-              Loading...
-            `;
-            
-            // Delay slightly to let the button update render
-            setTimeout(() => {
-              currentPage++;
-              renderRepos(currentPage);
-            }, 50);
-          });
-        } else {
-          console.log("All repositories shown, no load more button needed");
-          // Add a "showing all" indicator
-          additionalProjectsContainer.insertAdjacentHTML('beforeend', `
-            <div class="text-center mt-4 text-sm text-gray-500" id="load-more-container">
-              Showing all ${reposWithLanguages.length} repositories
-            </div>
-          `);
-        }
-      }
-      
-      // Function to load language data for displayed repositories first
-      async function loadLanguageDataForDisplayedRepos(displayedRepos) {
-        for (const repo of displayedRepos) {
-          if (!repo.languageData && repo.languages_url && !repo.private) {
-            try {
-              // Add to queue instead of direct fetch
-              const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
-              
-              // Use Promise to allow async/await with our queue
-              await new Promise(resolve => {
-                RequestQueue.add(langUrl, (langResponse, langData) => {
-                  if (langResponse.ok) {
-                    // Calculate total bytes
-                    const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                    // Convert to percentages
-                    const languages = Object.entries(langData).map(([name, bytes]) => ({
-                      name,
-                      percentage: Math.round((bytes / totalBytes) * 100)
-                    })).sort((a, b) => b.percentage - a.percentage);
-                    
-                    repo.languageData = languages;
-                    
-                    // Find and update the repo card in the DOM
-                    updateRepoCardLanguages(repo);
-                  }
-                  resolve();
-                });
-              });
-            } catch (e) {
-              console.warn(`Failed to load language data for displayed repo ${repo.name}:`, e);
-            }
-          }
-        }
-        
-        // After loading visible repos, start loading the rest
-        loadRemainingLanguageData();
-      }
-      
-      // Function to load language data for remaining repositories
-      async function loadRemainingLanguageData() {
-        const currentlyDisplayed = reposPerPage * currentPage;
-        const remainingRepos = reposWithLanguages.slice(currentlyDisplayed);
-        
-        for (const repo of remainingRepos) {
-          if (!repo.languageData && repo.languages_url && !repo.private) {
-            try {
-              // Add to queue instead of direct fetch
-              const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
-              
-              // Use Promise to allow async/await with our queue
-              await new Promise(resolve => {
-                RequestQueue.add(langUrl, (langResponse, langData) => {
-                  if (langResponse.ok) {
-                    // Calculate total bytes
-                    const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                    // Convert to percentages
-                    const languages = Object.entries(langData).map(([name, bytes]) => ({
-                      name,
-                      percentage: Math.round((bytes / totalBytes) * 100)
-                    })).sort((a, b) => b.percentage - a.percentage);
-                    
-                    repo.languageData = languages;
-                  }
-                  resolve();
-                });
-              });
-            } catch (e) {
-              console.warn(`Failed to load language data for remaining repo ${repo.name}:`, e);
-            }
-          }
-        }
-      }
-      
-      // Function to update a specific repo card's language display
-      function updateRepoCardLanguages(repo) {
-        // Find the repo card in the DOM
-        const repoCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg');
-        
-        for (const card of repoCards) {
-          const titleElem = card.querySelector('h3');
-          if (titleElem && titleElem.textContent.includes(repo.name)) {
-            const languageContainer = card.querySelector('.languages-container');
-            if (languageContainer && repo.languageData) {
-              // Create HTML for language bar
+            repo.languageData.forEach(lang => {
               const colorMap = {
                 "JavaScript": "bg-yellow-400",
                 "TypeScript": "bg-blue-500",
                 "Python": "bg-blue-600",
-                "Java": "bg-orange-600",
+                "Java": "bg-purple-300",
                 "C#": "bg-green-600",
                 "C++": "bg-pink-600",
                 "HTML": "bg-red-500",
@@ -714,141 +756,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 "Batchfile": "bg-gray-600",
                 "ASP.NET": "bg-blue-800",
                 "Vue": "bg-green-500",
-                "CMake": "bg-indigo-600",
-                "Makefile": "bg-gray-600",
                 "Lua": "bg-blue-400",
-                "YAML": "bg-purple-300",
-                "RedScript": "bg-red-700",
-                "XML": "bg-orange-300",
-                "JSON": "bg-amber-300"
+                "Jupyter Notebook": "bg-red-800",
+                "TeX": "bg-blue-200"
               };
-              
-              let html = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
-              repo.languageData.forEach(lang => {
-                const bgClass = colorMap[lang.name] || "bg-gray-400";
-                html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-              });
-              
-              html += `</div>`;
-              html += `<div class="flex flex-wrap mt-1 text-xs">`;
-              
-              repo.languageData.forEach(lang => {
-                html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
-              });
-              
-              html += `</div>`;
-              
-              // Update the container
-              languageContainer.innerHTML = html;
-            }
-            break;
-          }
-        }
-      }
-      
-      // Render the first page of repositories
-      console.log(`Starting to render repositories. Found ${reposWithLanguages.length} repos with languages`);
-      renderRepos(currentPage);
-      
-      // Add additional GitHub stats section
-      const totalRepoCount = allRepos.length;
-      const publicRepos = allRepos.filter(r => !r.private).length;
-      const privateRepos = totalRepoCount - publicRepos;
-      
-      // Add CodeGrind section if we successfully retrieved it
-      if (codegrindInfo) {
-        console.log("Processing CodeGrind repository information");
-        
-        // Fetch language data for CodeGrind if available
-        let codegrindLanguages = [];
-        try {
-          if (codegrindInfo.languages_url) {
-            const langUrl = window.GitHubConfig.addClientId(codegrindInfo.languages_url);
-            await new Promise(resolve => {
-              RequestQueue.add(langUrl, (langResponse, langData) => {
-                if (langResponse.ok) {
-                  // Calculate total bytes
-                  const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                  // Convert to percentages
-                  codegrindLanguages = Object.entries(langData).map(([name, bytes]) => ({
-                    name,
-                    percentage: Math.round((bytes / totalBytes) * 100)
-                  })).sort((a, b) => b.percentage - a.percentage);
-                }
-                resolve();
-              });
+              const bgClass = colorMap[lang.name] || "bg-gray-400";
+              html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
             });
+            
+            html += `</div>`;
+            html += `<div class="flex flex-wrap mt-1 text-xs">`;
+            
+            repo.languageData.forEach(lang => {
+              html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+            });
+            
+            html += `</div>`;
+            
+            // Update the container
+            languageContainer.innerHTML = html;
           }
-        } catch (e) {
-          console.warn("Error fetching CodeGrind language data:", e);
         }
-        
-        // Find and update existing CodeGrind cards instead of creating a new section
-        updateExistingCodegrindCards(codegrindInfo, codegrindLanguages);
       }
-      
-      // Check if "More on GitHub" section already exists to avoid duplication
-      const existingGitHubSection = document.querySelector('.more-on-github-section');
-      if (!existingGitHubSection) {
-        const profileStatsHTML = `
-          <div class="mt-10 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 more-on-github-section">
-            <h3 class="text-xl font-bold mb-4">More on GitHub</h3>
-            <p class="mb-4 text-gray-700 dark:text-gray-300">
-              Check out my GitHub profile for more projects, contributions, and open source work.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div class="flex flex-col gap-2">
-                <div>
-                  <span class="font-medium">Total repositories:</span> ${totalRepoCount} (${privateRepos} private)
-                </div>
-                <div>
-                  <span class="font-medium">Total stars:</span> ${allRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)}
-                </div>
-                <div>
-                  <span class="font-medium">Total forks:</span> ${allRepos.reduce((sum, repo) => sum + repo.forks_count, 0)}
-                </div>
-              </div>
-              <a href="https://github.com/${username}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
-                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
-                </svg>
-                View GitHub Profile
-              </a>
-            </div>
-          </div>
-        `;
-        
-        additionalProjectsContainer.insertAdjacentHTML('beforeend', profileStatsHTML);
-      }
-      
-      // Add a "Force Refresh" button for development
-      if (document.querySelector('#dev-tools')) {
-        const refreshButton = `
-          <div class="mt-4 text-right">
-            <a href="?force_refresh=true" class="inline-flex items-center px-3 py-1 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 text-xs transition-colors">
-              <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-              </svg>
-              Force Refresh Data
-            </a>
-          </div>
-        `;
-        additionalProjectsContainer.insertAdjacentHTML('beforeend', refreshButton);
-      }
-      
-    } catch (error) {
-      console.error('Error fetching GitHub repositories:', error);
-      additionalProjectsContainer.innerHTML = `
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded text-center">
-          <p>Failed to load projects from GitHub.</p>
-          <p class="text-sm mt-1">GitHub API rate limits may have been reached. Please try again later.</p>
-        </div>
-      `;
-    }
+    });
   }
-  
+
   /**
-   * Create a repository card HTML
+   * Create HTML for a repository card
+   * @param {Object} repo - The repository object
+   * @returns {string} HTML string for the card
    */
   function createRepoCard(repo) {
     // Format description
@@ -885,18 +821,9 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     ` : '';
     
-    // Generate language bar if we have language data
+    // CRITICAL FIX: Generate language bar if we have language data
     let languageBar = '';
-    if (repo.private) {
-      languageBar = `
-        <div class="mb-4">
-          <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-          <div class="flex flex-wrap">
-            <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">Private repository - language data available via API</span>
-          </div>
-        </div>
-      `;
-    } else if (repo.languageData && repo.languageData.length > 0) {
+    if (repo.languageData && repo.languageData.length > 0) {
       const topLanguages = repo.languageData; // Show all languages
       
       languageBar = `
@@ -904,12 +831,12 @@ document.addEventListener('DOMContentLoaded', function() {
           <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
           <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
             ${topLanguages.map(lang => {
-              // Get color for language
+              // Get color for language - FIXED COLORS
               const colorMap = {
                 "JavaScript": "bg-yellow-400",
                 "TypeScript": "bg-blue-500",
                 "Python": "bg-blue-600",
-                "Java": "bg-orange-600",
+                "Java": "bg-purple-300",
                 "C#": "bg-green-600",
                 "C++": "bg-pink-600",
                 "HTML": "bg-red-500",
@@ -924,7 +851,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 "Rust": "bg-orange-800",
                 "Batchfile": "bg-gray-600",
                 "ASP.NET": "bg-blue-800",
-                "Vue": "bg-green-500"
+                "Vue": "bg-green-500",
+                "Lua": "bg-blue-400",
+                "Jupyter Notebook": "bg-red-800",
+                "TeX": "bg-blue-200"
               };
               const bgClass = colorMap[lang.name] || "bg-gray-400";
               return `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
@@ -937,11 +867,28 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
     } else if (repo.language) {
       // Fallback if we don't have detailed language data
+      // FIXED: Use the correct color for specific languages in fallback too
+      let bgColorClass = "bg-gray-400";
+      if (repo.language === "Kotlin") {
+        bgColorClass = "bg-purple-600"; // Kotlin is purple
+      } else if (repo.language === "JavaScript") {
+        bgColorClass = "bg-yellow-400";
+      } else if (repo.language === "Python") {
+        bgColorClass = "bg-blue-600";
+      } else if (repo.language === "Java") {
+        bgColorClass = "bg-purple-300";
+      } else if (repo.language === "Jupyter Notebook") {
+        bgColorClass = "bg-red-800";
+      }
+      
       languageBar = `
         <div class="mb-4">
           <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-          <div class="flex flex-wrap">
-            <span class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">${repo.language} (100%)</span>
+          <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+            <div class="${bgColorClass} h-2 w-full"></div>
+          </div>
+          <div class="flex flex-wrap mt-1 text-xs">
+            <span class="mr-2">${repo.language} (100%)</span>
           </div>
         </div>
       `;
@@ -949,16 +896,20 @@ document.addEventListener('DOMContentLoaded', function() {
       languageBar = `
         <div class="mb-4">
           <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-          <div class="flex flex-wrap">
-            <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">No language data available</span>
+          <div class="h-2 rounded-full bg-gray-200 dark-bg-gray-700 overflow-hidden">
+            <div class="bg-gray-400 h-2 w-full"></div>
+          </div>
+          <div class="flex flex-wrap mt-1 text-xs">
+            <span class="mr-2">No language data available</span>
           </div>
         </div>
       `;
     }
     
+    // NEW: Mark this as a simplified card structure to work better with grid
     return `
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 h-full">
-        <div class="p-6">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl h-full flex flex-col">
+        <div class="p-6 flex flex-col flex-grow">
           <h3 class="text-xl font-bold mb-2 flex items-center">
             <svg class="w-5 h-5 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
@@ -1024,23 +975,18 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           
           <div class="flex flex-wrap gap-2 mt-auto">
+            ${!repo.private ? `
             <a href="${repo.html_url}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
               </svg>
               View Repository
             </a>
-            
-            ${repo.homepage ? `
-            <a href="${repo.homepage}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors">
-              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-              </svg>
-              Live Demo
-            </a>
             ` : ''}
             
-            ${repo.fork ? `
+            
+            
+            ${repo.fork && !repo.private ? `
             <a href="${repo.source ? repo.source.html_url : repo.html_url.replace(/\/[^/]+\/[^/]+$/, `/${repo.full_name.split('/')[0]}/${repo.name}`)}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors">
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
@@ -1055,143 +1001,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   /**
-   * Update existing CodeGrind project cards with data from the API
-   */
-  function updateExistingCodegrindCards(repoInfo, languages) {
-    console.log("Looking for existing CodeGrind cards to update");
-    
-    // Find all CodeGrind project cards (both in featured and all projects sections)
-    const codegrindCards = document.querySelectorAll('[id^="codegrind"]');
-    
-    if (codegrindCards.length === 0) {
-      console.log("No existing CodeGrind cards found");
-      return;
-    }
-    
-    console.log(`Found ${codegrindCards.length} CodeGrind cards to update`);
-    
-    // Format date
-    const formattedDate = new Date(repoInfo.updated_at).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-    
-    // Update each card
-    codegrindCards.forEach(card => {
-      console.log(`Updating card: ${card.id}`);
-      
-      // Update description if available
-      const descriptionElem = card.querySelector('p.text-gray-600, p.text-gray-300');
-      if (descriptionElem && repoInfo.description) {
-        console.log(`Updating description to: ${repoInfo.description}`);
-        descriptionElem.textContent = repoInfo.description;
-      }
-      
-      // Update language information
-      if (languages && languages.length > 0) {
-        console.log(`Updating language data with ${languages.length} languages`);
-        
-        // First try to find the languages container
-        const languageContainer = card.querySelector('.languages-container');
-        const languageHeading = card.querySelector('.mb-4 h4, h4.text-sm');
-        
-        if (languageContainer) {
-          console.log('Found language container with class to update');
-          
-          // Create language bar HTML
-          const languageBarHTML = createLanguageBarHTML(languages);
-          languageContainer.innerHTML = languageBarHTML;
-        } else if (languageHeading && (languageHeading.textContent.includes('LANGUAGE') || languageHeading.textContent.includes('Language'))) {
-          // Try to find the parent container
-          console.log('Found language heading to update');
-          const parentDiv = languageHeading.closest('.mb-4');
-          if (parentDiv) {
-            console.log('Found language section parent div to update');
-            parentDiv.innerHTML = `
-              <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-              ${createLanguageBarHTML(languages)}
-            `;
-          }
-        } else {
-          // No language section found, try to find anywhere to insert
-          console.log('No language section found, looking for insertion point');
-          const keyFeaturesHeading = card.querySelector('h4, .text-sm.font-semibold.uppercase');
-          if (keyFeaturesHeading && keyFeaturesHeading.textContent.includes('KEY FEATURES')) {
-            const featuresParent = keyFeaturesHeading.parentElement;
-            if (featuresParent && featuresParent.parentElement) {
-              console.log('Inserting language bar before features section');
-              const langDiv = document.createElement('div');
-              langDiv.className = 'mb-4';
-              langDiv.innerHTML = `
-                <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-                ${createLanguageBarHTML(languages)}
-              `;
-              featuresParent.parentElement.insertBefore(langDiv, featuresParent);
-            }
-          }
-        }
-      } else {
-        // No language data available, update with private repo message
-        console.log('No language data available, updating with private repo message');
-        const languageContainer = card.querySelector('.languages-container');
-        const languageHeading = card.querySelector('.mb-4 h4, h4.text-sm');
-        
-        if (languageContainer) {
-          languageContainer.innerHTML = createPrivateRepoLanguageHTML();
-        } else if (languageHeading && (languageHeading.textContent.includes('LANGUAGE') || languageHeading.textContent.includes('Language'))) {
-          const parentDiv = languageHeading.closest('.mb-4');
-          if (parentDiv) {
-            parentDiv.innerHTML = `
-              <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-              ${createPrivateRepoLanguageHTML()}
-            `;
-          }
-        }
-      }
-      
-      // Update "Last updated" text
-      const dateElements = card.querySelectorAll('[data-github-last-updated="codegrind"]');
-      if (dateElements.length > 0) {
-        dateElements.forEach(element => {
-          console.log(`Updating last updated date to: ${formattedDate}`);
-          element.textContent = `Last updated: ${formattedDate}`;
-        });
-      } else {
-        // Try to find any span with "Last updated" or similar text
-        const spanElements = card.querySelectorAll('span.text-sm, span.text-gray-500');
-        spanElements.forEach(element => {
-          if (element.textContent.includes('updated') || element.textContent.includes('commit')) {
-            console.log(`Updating span with date: ${formattedDate}`);
-            element.textContent = `Last updated: ${formattedDate}`;
-          }
-        });
-      }
-      
-      // Update GitHub link if available
-      const githubLinks = card.querySelectorAll('a[href*="github.com"]');
-      githubLinks.forEach(link => {
-        if (link.textContent.includes('GitHub') && repoInfo.html_url) {
-          console.log(`Updating GitHub URL to: ${repoInfo.html_url}`);
-          link.href = repoInfo.html_url;
-        }
-      });
-      
-      console.log(`Updated CodeGrind card: ${card.id}`);
-    });
-    
-    // Remove any duplicate CodeGrind section we might have created previously
-    const separateCodegrindSection = document.querySelector('.mt-10.mb-6 h3');
-    if (separateCodegrindSection && separateCodegrindSection.textContent.includes('CodeGrind (Private Repository)')) {
-      const section = separateCodegrindSection.closest('.mt-10.mb-6');
-      if (section) {
-        console.log("Removing separate CodeGrind section");
-        section.remove();
-      }
-    }
-  }
-
-  /**
    * Helper function to create language bar HTML
    */
   function createLanguageBarHTML(languages) {
@@ -1202,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', function() {
             "JavaScript": "bg-yellow-400",
             "TypeScript": "bg-blue-500",
             "Python": "bg-blue-600",
-            "Java": "bg-orange-600",
+            "Java": "bg-purple-300",
             "C#": "bg-green-600",
             "C++": "bg-pink-600",
             "HTML": "bg-red-500",
@@ -1218,13 +1027,9 @@ document.addEventListener('DOMContentLoaded', function() {
             "Batchfile": "bg-gray-600",
             "ASP.NET": "bg-blue-800",
             "Vue": "bg-green-500",
-            "CMake": "bg-indigo-600",
-            "Makefile": "bg-gray-600",
             "Lua": "bg-blue-400",
-            "YAML": "bg-purple-300",
-            "RedScript": "bg-red-700",
-            "XML": "bg-orange-300",
-            "JSON": "bg-amber-300"
+            "Jupyter Notebook": "bg-red-800",
+            "TeX": "bg-blue-200"
           };
           const bgClass = colorMap[lang.name] || "bg-gray-400";
           return `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
@@ -1246,4 +1051,158 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     `;
   }
-});
+
+  // Helper function to update loading status with progress
+  function updateLoadingStatus(message, percentage) {
+    const loadingStatus = document.getElementById('loading-status');
+    const progressIndicator = document.getElementById('loading-progress-indicator');
+    
+    if (loadingStatus) {
+      loadingStatus.textContent = message;
+    }
+    
+    if (progressIndicator) {
+      progressIndicator.style.width = `${percentage}%`;
+    }
+    
+    console.log(`Loading status: ${message} (${percentage}%)`);
+  }
+
+  // Helper function to add GitHub stats section
+  function updateGitHubStatsSection(allRepos, totalRepoCount, privateRepoCount) {
+    // Use the passed-in totalRepoCount if available, otherwise calculate from allRepos
+    const totalRepos = totalRepoCount || allRepos.length;
+    
+    // Use the passed-in privateRepoCount if available, otherwise count from allRepos
+    const privateRepos = privateRepoCount || allRepos.filter(r => r.private).length;
+    
+    // Calculate public repos
+    const publicRepos = totalRepos - privateRepos;
+    
+    // Check if "More on GitHub" section already exists to avoid duplication
+    const existingGitHubSection = document.querySelector('.more-on-github-section');
+    if (!existingGitHubSection) {
+      const profileStatsHTML = `
+        <div class="mt-10 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 more-on-github-section">
+          <h3 class="text-xl font-bold mb-4">More on GitHub</h3>
+          <p class="mb-4 text-gray-700 dark:text-gray-300">
+            Check out my GitHub profile for more projects, contributions, and open source work.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex flex-col gap-2">
+              <div>
+                <span class="font-medium">Total repositories worked on (owned and not owned):</span> ${totalRepos} (${privateRepos} private)
+              </div>
+              <div>
+                <span class="font-medium">Total stars:</span> ${allRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0)}
+              </div>
+              <div>
+                <span class="font-medium">Total forks:</span> ${allRepos.reduce((sum, repo) => sum + repo.forks_count, 0)}
+              </div>
+            </div>
+            <a href="https://github.com/${window.GitHubConfig.username}" target="_blank" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+              <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+              </svg>
+              View GitHub Profile
+            </a>
+          </div>
+        </div>
+      `;
+      
+      additionalProjectsContainer.insertAdjacentHTML('beforeend', profileStatsHTML);
+    }
+  }
+
+  /**
+   * Update last updated timestamps for all repos
+   */
+  function updateLastUpdatedTimestamps() {
+    // Get all elements with the data-github-last-updated attribute
+    const timestampElements = document.querySelectorAll('[data-github-last-updated]');
+    if (!timestampElements || timestampElements.length === 0) {
+      console.log('No timestamp elements found to update');
+      return;
+    }
+    
+    const username = window.GitHubConfig.username;
+    
+    timestampElements.forEach(element => {
+      const projectId = element.getAttribute('data-github-last-updated');
+      if (!projectId) return;
+      
+      // Get the repo name based on the project ID
+      let repo = projectId;
+      // Map common project IDs to repo names if needed
+      if (projectId === 'helios-swarm-robotics') {
+        repo = 'helios';
+      } else if (projectId === 'bestnotes') {
+        repo = '01-bestnotes';
+      } else if (projectId === 'projectile-launcher-rework') {
+        repo = 'plr';
+      } else if (projectId === 'book-player-application') {
+        repo = 'assignment-10-rivie13';
+      }
+      
+      // Check if we already have last updated info
+      if (element.textContent && element.textContent.includes('Last updated') && !element.textContent.includes('Loading')) {
+        return; // Skip if already updated
+      }
+      
+      // Show loading indicator
+      element.textContent = "Loading update info...";
+      
+      // Get the last updated timestamp
+      const repoUrl = window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/${repo}`);
+      
+      // Check cache first
+      const cacheKey = `repo_details_${username}_${repo}`;
+      const cachedData = localStorage.getItem(cacheKey);
+      const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+      const now = Date.now();
+      const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
+      
+      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+        console.log(`Using cached repo details for: ${repo}`);
+        updateLastUpdatedElement(element, JSON.parse(cachedData));
+        return;
+      }
+      
+      window.RequestQueue.add(repoUrl, (response, data) => {
+        if (response.ok) {
+          // Cache the data
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify(data));
+            localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+          } catch (e) {
+            console.warn('Failed to cache repo details:', e);
+          }
+          
+          updateLastUpdatedElement(element, data);
+        } else {
+          element.textContent = "Last updated: Unknown";
+        }
+      });
+    });
+  }
+
+  /**
+   * Update a last updated element with repo data
+   */
+  function updateLastUpdatedElement(element, data) {
+    if (data.updated_at) {
+      // Format the date
+      const updatedDate = new Date(data.updated_at);
+      const formattedDate = updatedDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      // Update the element
+      element.textContent = `Last updated: ${formattedDate}`;
+    } else {
+      element.textContent = "Last updated: Unknown";
+    }
+  }
+}

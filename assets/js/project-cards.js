@@ -13,12 +13,26 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Map project slugs to their actual repository names
   const projectRepoMap = {
-    'codegrind': ['codegrind'], // Even though private, we'll try to fetch with auth
+    'codegrind': ['codegrind'],
     'helios-swarm-robotics': ['robotics-nav2-slam-example', 'helios'],
     'bestnotes': ['01-bestnotes'],
     'projectile-launcher-rework': ['plr'],
     'book-player-application': ['assignment-10-rivie13']
   };
+  
+  // Wait for any RequestQueue initialization to complete
+  setTimeout(() => {
+    // Make sure we have the RequestQueue available from github-repos.js
+    if (!window.RequestQueue) {
+      console.error("RequestQueue not available. Creating local fallback.");
+      window.RequestQueue = createFallbackQueue();
+    }
+    
+    // Find all project cards in both featured and all projects sections
+    console.log("Finding all project cards on the page");
+    findAndProcessCards();
+    
+  }, 100);
   
   // Process next project in queue
   function processNextProject() {
@@ -30,10 +44,28 @@ document.addEventListener('DOMContentLoaded', function() {
     isProcessingQueue = true;
     const { id, repos, container } = projectQueue.shift();
     
-    // Use API for all projects
+    // First check if data is already cached by github-repos.js
+    const cacheKey = `project_languages_${repos.join('_')}`;
+    const cachedData = localStorage.getItem(cacheKey);
+    const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+    const now = Date.now();
+    const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
+    const forceRefresh = window.location.search.includes('force_refresh');
+    
+    if (!forceRefresh && cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+      console.log(`Using cached language data for: ${repos.join(', ')}`);
+      const languages = JSON.parse(cachedData);
+      updateLanguageBar(container, languages);
+      
+      // Wait before processing the next project to avoid too many UI updates at once
+      setTimeout(processNextProject, 100);
+      return;
+    }
+    
+    // Use API for all projects with authentication
     updateLanguageData(username, repos, container, id).then(() => {
-      // Wait 1s before processing the next project
-      setTimeout(processNextProject, 1000);
+      // Wait a shorter time (500ms) before processing the next project
+      setTimeout(processNextProject, 500);
     });
   }
   
@@ -46,94 +78,120 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // Find all project cards in both featured and all projects sections
-  console.log("Finding all project cards on the page");
-  
-  // Find all project cards, whether they have language containers or technology bubbles
-  const projectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg.shadow-lg');
-  
-  projectCards.forEach(card => {
-    // Find the project title to identify which project this is
-    const titleElem = card.querySelector('h3');
-    if (!titleElem) return;
+  // Find all project cards and process them
+  function findAndProcessCards() {
+    // Find all project cards - include cards without specific IDs to catch featured cards
+    const allProjectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg');
     
-    const titleText = titleElem.textContent.trim();
-    let projectId = null;
-    
-    // Identify project by name
-    if (titleText.includes('CodeGrind')) {
-      projectId = 'codegrind';
-    } else if (titleText.includes('Helios')) {
-      projectId = 'helios-swarm-robotics';
-    } else if (titleText.includes('BestNotes')) {
-      projectId = 'bestnotes';
-    } else if (titleText.includes('Projectile Launcher')) {
-      projectId = 'projectile-launcher-rework';
-    } else if (titleText.includes('Book Player')) {
-      projectId = 'book-player-application';
-    }
-    
-    if (!projectId || !projectRepoMap[projectId]) return;
-    
-    // Find language section
-    const languageSection = card.querySelector('.mb-4 h4');
-    if (!languageSection || !languageSection.textContent.includes('LANGUAGE')) return;
-    
-    // Get the parent of the language section
-    const languageContainer = languageSection.closest('.mb-4');
-    if (!languageContainer) return;
-    
-    console.log(`Found project card for: ${projectId}`);
-    
-    // Initially show loading state
-    showLanguageLoading(languageContainer);
-    
-    // Queue the project for processing
-    queueProject(projectId, projectRepoMap[projectId], languageContainer);
-  });
-  
-  // Also check for cards by ID for special handling
-  document.querySelectorAll('[id*="codegrind"], [id*="helios"], [id*="bestnotes"], [id*="projectile"], [id*="book-player"]').forEach(card => {
-    let projectId = null;
-    
-    if (card.id.includes('codegrind')) {
-      projectId = 'codegrind';
-    } else if (card.id.includes('helios')) {
-      projectId = 'helios-swarm-robotics';
-    } else if (card.id.includes('bestnotes')) {
-      projectId = 'bestnotes';
-    } else if (card.id.includes('projectile')) {
-      projectId = 'projectile-launcher-rework';
-    } else if (card.id.includes('book-player')) {
-      projectId = 'book-player-application';
-    }
-    
-    if (!projectId || !projectRepoMap[projectId]) return;
-    
-    // Get the language container
-    let languageContainer = card.querySelector('.languages-container');
-    
-    // If no language container exists, look for language heading
-    if (!languageContainer) {
+    allProjectCards.forEach(card => {
+      // Find the project title to identify which project this is
+      const titleElem = card.querySelector('h3');
+      if (!titleElem) return;
+      
+      const titleText = titleElem.textContent.trim();
+      let projectId = null;
+      
+      // Identify project by name
+      if (titleText.includes('CodeGrind')) {
+        projectId = 'codegrind';
+      } else if (titleText.includes('Helios')) {
+        projectId = 'helios-swarm-robotics';
+      } else if (titleText.includes('BestNotes')) {
+        projectId = 'bestnotes';
+      } else if (titleText.includes('Projectile Launcher')) {
+        projectId = 'projectile-launcher-rework';
+      } else if (titleText.includes('Book Player')) {
+        projectId = 'book-player-application';
+      }
+      
+      if (!projectId || !projectRepoMap[projectId]) return;
+      
+      console.log(`Found project card for: ${projectId} with title "${titleText}"`);
+      
+      // Find language section - try multiple selectors to ensure we find it
+      let languageContainer = null;
+      
+      // Try looking for a language heading first
       const languageHeading = card.querySelector('.mb-4 h4');
       if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
         languageContainer = languageHeading.closest('.mb-4');
       }
-    }
+      
+      // If not found, try looking for a dedicated language container
+      if (!languageContainer) {
+        languageContainer = card.querySelector('.languages-container');
+        if (languageContainer) {
+          console.log(`Found language container for ${projectId} with class`);
+        }
+      }
+      
+      // If still not found, look for any section that might contain language info
+      if (!languageContainer) {
+        const sections = card.querySelectorAll('.mb-4');
+        for (const section of sections) {
+          const heading = section.querySelector('h4');
+          if (heading && heading.textContent.includes('LANGUAGE')) {
+            languageContainer = section;
+            break;
+          }
+        }
+      }
+      
+      if (!languageContainer) {
+        console.warn(`Could not find language container for ${projectId}`);
+        return;
+      }
+      
+      // Initially show loading state
+      showLanguageLoading(languageContainer);
+      
+      // Queue the project for processing
+      queueProject(projectId, projectRepoMap[projectId], languageContainer);
+    });
     
-    if (!languageContainer) return;
+    // Also check for cards by ID for special handling
+    document.querySelectorAll('[id*="codegrind"], [id*="helios"], [id*="bestnotes"], [id*="projectile"], [id*="book-player"]').forEach(card => {
+      let projectId = null;
+      
+      if (card.id.includes('codegrind')) {
+        projectId = 'codegrind';
+      } else if (card.id.includes('helios')) {
+        projectId = 'helios-swarm-robotics';
+      } else if (card.id.includes('bestnotes')) {
+        projectId = 'bestnotes';
+      } else if (card.id.includes('projectile')) {
+        projectId = 'projectile-launcher-rework';
+      } else if (card.id.includes('book-player')) {
+        projectId = 'book-player-application';
+      }
+      
+      if (!projectId || !projectRepoMap[projectId]) return;
+      
+      // Get the language container
+      let languageContainer = card.querySelector('.languages-container');
+      
+      // If no language container exists, look for language heading
+      if (!languageContainer) {
+        const languageHeading = card.querySelector('.mb-4 h4');
+        if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
+          languageContainer = languageHeading.closest('.mb-4');
+        }
+      }
+      
+      if (!languageContainer) return;
+      
+      console.log(`Found project card by ID: ${card.id} (${projectId})`);
+      
+      // Initially show loading state
+      showLanguageLoading(languageContainer);
+      
+      // Queue the project for processing
+      queueProject(projectId, projectRepoMap[projectId], languageContainer);
+    });
     
-    console.log(`Found project card by ID: ${card.id} (${projectId})`);
-    
-    // Initially show loading state
-    showLanguageLoading(languageContainer);
-    
-    // Queue the project for processing
-    queueProject(projectId, projectRepoMap[projectId], languageContainer);
-  });
-  
-  // Update last updated timestamps for all repos
-  updateLastUpdatedTimestamps();
+    // Update last updated timestamps for all repos
+    updateLastUpdatedTimestamps();
+  }
   
   /**
    * Show loading state for language data
@@ -158,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const cachedData = localStorage.getItem(cacheKey);
       const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
       const now = Date.now();
-      const cacheDuration = 30 * 60 * 1000; // Reduced to 30 minutes for development
+      const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
       const forceRefresh = window.location.search.includes('force_refresh');
       
       if (!forceRefresh && cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
@@ -176,9 +234,9 @@ document.addEventListener('DOMContentLoaded', function() {
       // First, check if any of the repos are private or forks
       for (const repo of repos) {
         try {
-          const repoUrl = window.GitHubConfig.addClientId(
-            `https://api.github.com/repos/${username}/${repo}`
-          );
+          const repoUrl = window.GitHubConfig ? 
+            window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/${repo}`) :
+            `https://api.github.com/repos/${username}/${repo}`;
           
           console.log(`DEBUG Cards - Getting repo metadata for ${repo}: ${repoUrl}`);
           
@@ -204,16 +262,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       if (isPrivate) {
-        // For private repos, we still try to fetch language data with auth
+        // For private repos, use authentication to get real data
         console.log(`Attempting to fetch language data for private repo(s): ${repos.join(', ')}`);
       }
       
       // Limit to only one API request at a time to reduce rate limiting
       for (const repo of repos) {
         try {
-          const langUrl = window.GitHubConfig.addClientId(
-            `https://api.github.com/repos/${username}/${repo}/languages`
-          );
+          const langUrl = window.GitHubConfig ? 
+            window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/${repo}/languages`) :
+            `https://api.github.com/repos/${username}/${repo}/languages`;
           
           console.log(`DEBUG Cards - Getting language data for ${repo}: ${langUrl}`);
           
@@ -294,6 +352,9 @@ document.addEventListener('DOMContentLoaded', function() {
    * Updates the language bar in the container
    */
   function updateLanguageBar(container, languages) {
+    // Log the container we're updating to debug
+    console.log("Updating language bar in container:", container);
+    
     // Create HTML for language bar
     const colorMap = {
       "JavaScript": "bg-yellow-400",
@@ -324,23 +385,54 @@ document.addEventListener('DOMContentLoaded', function() {
       "JSON": "bg-amber-300"
     };
     
-    let html = `<h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>`;
-    html += `<div class="languages-container">`;
-    html += `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+    // Check if we're updating the inner languages-container div or the parent section
+    const isLangContainer = container.classList.contains('languages-container');
     
-    languages.forEach(lang => {
-      const bgClass = colorMap[lang.name] || "bg-gray-400";
-      html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-    });
+    let html = '';
     
-    html += `</div>`;
-    html += `<div class="flex flex-wrap mt-1 text-xs">`;
-    
-    languages.forEach(lang => {
-      html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
-    });
-    
-    html += `</div></div>`;
+    // If this is the inner languages-container, we need to preserve the parent's heading
+    // by not including the heading in our HTML replacement
+    if (isLangContainer) {
+      // Just add the language bar itself without the heading
+      html = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+      
+      // Add language bars
+      languages.forEach(lang => {
+        const bgClass = colorMap[lang.name] || "bg-gray-400";
+        html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
+      });
+      
+      html += `</div>`;
+      html += `<div class="flex flex-wrap mt-1 text-xs">`;
+      
+      // Add language text
+      languages.forEach(lang => {
+        html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+      });
+      
+      html += `</div>`;
+    } else {
+      // For the parent container, include the heading and everything
+      html = `<h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>`;
+      html += `<div class="languages-container">`;
+      html += `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+      
+      // Add language bars
+      languages.forEach(lang => {
+        const bgClass = colorMap[lang.name] || "bg-gray-400";
+        html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
+      });
+      
+      html += `</div>`;
+      html += `<div class="flex flex-wrap mt-1 text-xs">`;
+      
+      // Add language text
+      languages.forEach(lang => {
+        html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+      });
+      
+      html += `</div></div>`;
+    }
     
     // Update the container
     container.innerHTML = html;
@@ -399,152 +491,127 @@ document.addEventListener('DOMContentLoaded', function() {
       // Take the first repo to get the timestamp
       const repo = repos[0];
       
+      // Check if we already have last updated info
+      if (element.textContent && element.textContent.includes('Last updated') && !element.textContent.includes('Loading')) {
+        return; // Skip if already updated
+      }
+      
       // Show loading indicator
       element.textContent = "Loading update info...";
       
       // Get the last updated timestamp
-      const repoUrl = window.GitHubConfig.addClientId(
-        `https://api.github.com/repos/${username}/${repo}`
-      );
+      const repoUrl = window.GitHubConfig ? 
+        window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/${repo}`) :
+        `https://api.github.com/repos/${username}/${repo}`;
+      
+      // Check cache first
+      const cacheKey = `repo_details_${username}_${repo}`;
+      const cachedData = localStorage.getItem(cacheKey);
+      const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
+      const now = Date.now();
+      const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
+      
+      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+        console.log(`Using cached repo details for: ${repo}`);
+        updateLastUpdatedElement(element, JSON.parse(cachedData));
+        return;
+      }
       
       window.RequestQueue.add(repoUrl, (response, data) => {
-        if (response.ok && data.updated_at) {
-          // Format the date
-          const updatedDate = new Date(data.updated_at);
-          const formattedDate = updatedDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
-          
-          // Update the element
-          element.textContent = `Last updated: ${formattedDate}`;
-          
-          // Add additional GitHub stats if available
-          if (data.stargazers_count || data.forks_count || data.open_issues_count) {
-            const statsContainer = document.createElement('div');
-            statsContainer.className = 'mt-2 text-sm text-gray-500';
-            
-            let statsHTML = '';
-            
-            if (data.stargazers_count) {
-              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>${data.stargazers_count} ${data.stargazers_count === 1 ? 'star' : 'stars'}</span>`;
-            }
-            
-            if (data.forks_count) {
-              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
-              </svg>${data.forks_count} ${data.forks_count === 1 ? 'fork' : 'forks'}</span>`;
-            }
-            
-            if (data.open_issues_count) {
-              statsHTML += `<span><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-              </svg>${data.open_issues_count} ${data.open_issues_count === 1 ? 'issue' : 'issues'}</span>`;
-            }
-            
-            if (statsHTML) {
-              statsContainer.innerHTML = statsHTML;
-              element.parentNode.appendChild(statsContainer);
-            }
+        if (response.ok) {
+          // Cache the data
+          try {
+            localStorage.setItem(cacheKey, JSON.stringify(data));
+            localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+          } catch (e) {
+            console.warn('Failed to cache repo details:', e);
           }
+          
+          updateLastUpdatedElement(element, data);
         } else {
           element.textContent = "Last updated: Unknown";
         }
       });
     });
     
-    // Also handle special case for CodeGrind
-    updateCodeGrindLastUpdated();
+  }
+  
+  
+  /**
+   * Update a last updated element with repo data
+   */
+  function updateLastUpdatedElement(element, data) {
+    if (data.updated_at) {
+      // Format the date
+      const updatedDate = new Date(data.updated_at);
+      const formattedDate = updatedDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      
+      // Update the element
+      element.textContent = `Last updated: ${formattedDate}`;
+      
+      // Stars and other GitHub stats removed as requested
+    } else {
+      element.textContent = "Last updated: Unknown";
+    }
   }
   
   /**
-   * Special case for CodeGrind to ensure it shows last updated info
+   * Create a fallback queue if RequestQueue isn't available from github-repos.js
    */
-  function updateCodeGrindLastUpdated() {
-    // Find CodeGrind cards that don't have last updated info already
-    const codegrindCards = document.querySelectorAll('[id*="codegrind"]');
-    
-    codegrindCards.forEach(card => {
-      // Check if the card already has a last updated element
-      const existingUpdated = card.querySelector('[data-github-last-updated="codegrind"]');
-      if (existingUpdated) return; // Already has update info
+  function createFallbackQueue() {
+    return {
+      queue: [],
+      running: false,
+      maxConcurrent: 3,
+      activeRequests: 0,
       
-      // Find a place to add the last updated info
-      const keyFeaturesSection = card.querySelector('.mb-4 h4');
-      if (!keyFeaturesSection) return;
-      
-      const featuresSection = keyFeaturesSection.closest('.mb-4');
-      if (!featuresSection) return;
-      
-      // Create a new div for last updated info
-      const updatedDiv = document.createElement('div');
-      updatedDiv.className = 'flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4';
-      updatedDiv.innerHTML = `
-        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
-        </svg>
-        <span data-github-last-updated="codegrind">Loading update info...</span>
-      `;
-      
-      // Insert after features section
-      featuresSection.parentNode.insertBefore(updatedDiv, featuresSection.nextSibling);
-      
-      // Update the last updated timestamp
-      const repoUrl = window.GitHubConfig.addClientId(
-        `https://api.github.com/repos/${username}/codegrind`
-      );
-      
-      window.RequestQueue.add(repoUrl, (response, data) => {
-        const span = updatedDiv.querySelector('span');
-        if (response.ok && data.updated_at) {
-          // Format the date
-          const updatedDate = new Date(data.updated_at);
-          const formattedDate = updatedDate.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          });
-          
-          // Update the element
-          span.textContent = `Last updated: ${formattedDate}`;
-          
-          // Add GitHub stats if available
-          if (data.stargazers_count || data.forks_count || data.open_issues_count) {
-            const statsContainer = document.createElement('div');
-            statsContainer.className = 'mt-2 text-sm text-gray-500';
-            
-            let statsHTML = '';
-            
-            if (data.stargazers_count) {
-              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>${data.stargazers_count} ${data.stargazers_count === 1 ? 'star' : 'stars'}</span>`;
-            }
-            
-            if (data.forks_count) {
-              statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
-              </svg>${data.forks_count} ${data.forks_count === 1 ? 'fork' : 'forks'}</span>`;
-            }
-            
-            if (data.open_issues_count) {
-              statsHTML += `<span><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-              </svg>${data.open_issues_count} ${data.open_issues_count === 1 ? 'issue' : 'issues'}</span>`;
-            }
-            
-            if (statsHTML) {
-              statsContainer.innerHTML = statsHTML;
-              updatedDiv.appendChild(statsContainer);
-            }
-          }
-        } else {
-          span.textContent = "Last updated: Unknown";
+      add: function(url, callback) {
+        this.queue.push({ url, callback });
+        if (!this.running) {
+          this.process();
         }
-      });
-    });
+      },
+      
+      process: function() {
+        this.running = true;
+        this.processNext();
+      },
+      
+      processNext: function() {
+        if (this.queue.length === 0 || this.activeRequests >= this.maxConcurrent) {
+          if (this.activeRequests === 0) {
+            this.running = false;
+          }
+          return;
+        }
+        
+        const { url, callback } = this.queue.shift();
+        this.activeRequests++;
+        
+        fetch(url)
+          .then(response => response.json().then(data => ({ response, data })))
+          .then(({ response, data }) => {
+            this.activeRequests--;
+            callback(response, data);
+            
+            setTimeout(() => {
+              this.processNext();
+            }, 500);
+          })
+          .catch(error => {
+            console.error(`Error fetching ${url}:`, error);
+            this.activeRequests--;
+            callback({ ok: false, status: 500 }, { message: error.message });
+            
+            setTimeout(() => {
+              this.processNext();
+            }, 500);
+          });
+      }
+    };
   }
 });
