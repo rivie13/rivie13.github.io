@@ -12,8 +12,45 @@ github_username: rivie13
 markdown: kramdown
 future: true
 plugins:
+  - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
   - jekyll-paginate
+
+# SEO settings
+twitter:
+  username: # your Twitter username (if you have one)
+  card: summary_large_image
+logo: /assets/images/logo.png  # Make sure this path exists
+social:
+  name: Riviera Sperduto
+  links:
+    - https://github.com/rivie13
+    - https://www.linkedin.com/in/riviera-sperduto-219a54203/  # Update with your actual LinkedIn URL
+    - https://bsky.app/profile/riviesperduto.bsky.social
+
+# Google Analytics
+google_analytics: G-XXXXXXXXXX  # Replace with your actual Google Analytics ID when ready
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/default-social-image.jpg  # Create this image in your assets folder
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Riviera Sperduto"
+      image: /assets/images/blog-social-image.jpg  # Create this image in your assets folder
 
 # Pagination settings for blog
 paginate: 5

@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Dark mode toggle (if implemented)
+  // Dark mode toggle
   const darkModeToggle = document.getElementById('dark-mode-toggle');
   if (darkModeToggle) {
     darkModeToggle.addEventListener('click', function() {
@@ -51,14 +51,32 @@ document.addEventListener('DOMContentLoaded', function() {
       // Save preference to localStorage
       if (document.documentElement.classList.contains('dark')) {
         localStorage.setItem('darkMode', 'true');
+        console.log('Dark mode enabled');
       } else {
         localStorage.setItem('darkMode', 'false');
+        console.log('Dark mode disabled');
+      }
+      
+      // Force redraw of Github contribution chart if it exists
+      const contributionChart = document.getElementById('github-contribution-chart');
+      if (contributionChart && window.renderGithubContributions) {
+        window.renderGithubContributions();
       }
     });
     
-    // Check for saved preference
-    if (localStorage.getItem('darkMode') === 'true') {
-      document.documentElement.classList.add('dark');
-    }
+    // Check for saved preference (already handled in default.html)
+    console.log('Dark mode preference:', localStorage.getItem('darkMode'));
+  } else {
+    console.log('Dark mode toggle not found');
+  }
+  
+  // Toggle menu for mobile
+  const menuToggleBtn = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+  
+  if (menuToggleBtn && menu) {
+    menuToggleBtn.addEventListener('click', function() {
+      menu.classList.toggle('hidden');
+    });
   }
 }); 

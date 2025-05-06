@@ -95,7 +95,7 @@
   - May need to adjust cell size or grid layout on smaller screens
 
 #### Compatibility and Placement
-- **Dark Mode Compatibility**: (NEED TO ADD THIS)
+- **Dark Mode Compatibility**: (THIS IS DONE)
   - Provide alternative color scheme for dark mode
   - Light mode colors: standard GitHub green scale
   - Dark mode colors: #0d1117 (background), #39d353, #26a641, #006d32, #0e4429 (contribution levels)
@@ -103,7 +103,7 @@
   - Test across Chrome, Firefox, Safari, and Edge
   - Use CSS Grid with appropriate fallbacks for older browsers
   - Ensure tooltip functionality works on touch devices
-- **Placement in Index Page**:
+- **Placement in Index Page**: (THIS IS DONE)
   - Add to the GitHub statistics section in a new dedicated div
   - Title: "My GitHub Contributions"
   - Include total contributions count for the year
@@ -122,13 +122,13 @@
 - Consider static generation for certain components (DONE)
 
 ### User Experience
-- Add dark/light mode toggle (NEED TO ADD THIS)
+- Add dark/light mode toggle (THIS IS DONE)
 - Improve mobile responsiveness
 - Add animations for page transitions (DONE)
 
-### Technical (NEED TO ADD THIS)
-- Improve SEO optimization
-- Add analytics tracking
+### Technical (THIS IS DONE)
+- Improve SEO optimization (THIS IS DONE)
+- Add analytics tracking (THIS IS DONE) (NEED TO FINISH THIS BY GETTING GOOGLE ANALYTICS SET UP!!!!!)
 - Implement caching strategies for GitHub API calls (DONE)
 - Reduce API rate limit issues (DONE)
 
@@ -137,6 +137,9 @@
 2. Implement accurate GitHub contribution chart (DONE)
 3. Improve GitHub stats accuracy (DONE)
 4. Fix Projects page loading and caching issues (DONE)
+5. Add dark/light mode toggle (DONE)
+6. Improve SEO optimization (DONE)
+7. Add analytics tracking integration (DONE) (NEED TO FINISH THIS BY GETTING GOOGLE ANALYTICS SET UP!!!!!)
 
 ## Notes
 This document will be updated as improvements are made and new issues are identified. 
