@@ -141,13 +141,36 @@ window.RequestQueue = {
   }
 };
 
+// Wait for the DOM to be fully loaded and parsed
 document.addEventListener('DOMContentLoaded', function() {
-  // Initialize request counter
-  window.RequestQueue.init();
+  console.log("DOM Content Loaded - Starting GitHub repos script");
   
-  const additionalProjectsContainer = document.getElementById('additional-projects');
-  if (!additionalProjectsContainer) return;
+  // Add a small delay to ensure all elements are rendered
+  setTimeout(initGitHubRepos, 100);
+});
 
+// Main initialization function
+function initGitHubRepos() {
+  // Initialize request counter
+  if (window.RequestQueue) {
+    window.RequestQueue.init();
+  } else {
+    console.error("ERROR: RequestQueue not initialized. Check if github-config.js is loaded before github-repos.js");
+    return;
+  }
+  
+  // Find the container element
+  let additionalProjectsContainer = document.getElementById('additional-projects');
+  console.log("DEBUG: Found additionalProjectsContainer:", additionalProjectsContainer);
+  
+  if (!additionalProjectsContainer) {
+    console.error("ERROR: Could not find element with ID 'additional-projects'. Repositories cannot be displayed.");
+    // Check if we can find the element by other means
+    const possibleContainers = document.querySelectorAll('.mt-8[data-animate="fade-in"]');
+    console.log("DEBUG: Attempting to find by class. Found alternatives:", possibleContainers.length);
+    return;
+  }
+  
   const username = window.GitHubConfig.username;
   const excludedRepos = [
     'rivie13.github.io',
@@ -197,6 +220,21 @@ document.addEventListener('DOMContentLoaded', function() {
    */
   async function fetchAdditionalRepos(username, excludedRepos) {
     try {
+      // CRITICAL FIX: Double-check container exists before proceeding
+      if (!additionalProjectsContainer || !document.body.contains(additionalProjectsContainer)) {
+        console.error("ERROR: additionalProjectsContainer does not exist or is not in the document anymore!");
+        // Try to find it again
+        const newContainer = document.getElementById('additional-projects');
+        if (!newContainer) {
+          console.error("ERROR: Still can't find the container. Aborting.");
+          return;
+        } else {
+          console.log("DEBUG: Found container on retry.");
+          // Use the newly found container
+          additionalProjectsContainer = newContainer;
+        }
+      }
+      
       additionalProjectsContainer.innerHTML = `
         <div class="text-center py-6">
           <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
@@ -209,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Convert excluded repos to lowercase for case-insensitive comparison
       const excludedReposLower = excludedRepos.map(repo => repo.toLowerCase());
-      
+      console.log("DEBUG: Excluded repos:", excludedReposLower);
      
       try {
         console.log("Attempting to fetch data for private CodeGrind repository...");
@@ -250,9 +288,8 @@ document.addEventListener('DOMContentLoaded', function() {
       let page = 1;
       let hasMorePages = true;
       
-      // Fetch all pages of repositories
+      // CRITICAL FIX: Ensure we get ALL repositories - Fetch all pages of repositories
       while (hasMorePages) {
-        // Use the helper method to add client_id and queue the request
         // Using pagination with 100 per page (GitHub max)
         const reposUrl = window.GitHubConfig.addClientId(
           `https://api.github.com/users/${username}/repos?sort=updated&per_page=100&page=${page}`
@@ -323,6 +360,8 @@ document.addEventListener('DOMContentLoaded', function() {
         !repo.archived
       );
       
+      console.log(`DEBUG: Found ${allRepos.length} total repos, ${validRepos.length} valid repos after filtering`);
+      
       if (validRepos.length === 0) {
         additionalProjectsContainer.innerHTML = `
           <p class="text-center text-gray-500 py-6">No additional projects found on GitHub.</p>
@@ -333,24 +372,21 @@ document.addEventListener('DOMContentLoaded', function() {
       // Sort by most recently updated
       validRepos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
       
-      // Show all repositories instead of limiting to 12
+      // CRITICAL FIX: Use all repositories instead of limiting
       const reposToShow = validRepos;
-      const reposWithLanguages = [];
       
-      // Update loading message
-      updateLoadingStatus(`Preparing ${validRepos.length} repositories...`, 55);
+      // Clear the global reposWithLanguages array
+      reposWithLanguages = [];
       
-      // Use a simple counter for language data progress
-      let languagesLoaded = 0;
-      const totalToLoad = reposToShow.length;
-      
-      // First, fetch the first batch of repositories' language data to display them faster
-      const firstBatchSize = Math.min(reposPerPage, reposToShow.length);
-      for (let i = 0; i < firstBatchSize; i++) {
-        const repo = reposToShow[i];
-        try {
-          // Skip language fetch for forked repos in first batch to save API calls
-          if (!repo.fork && repo.languages_url && !repo.private) {
+      // CRITICAL FIX: Process language data for all repositories at once
+      // to ensure we have everything ready before rendering
+      for (const repo of reposToShow) {
+        // Add to reposWithLanguages array immediately so we have correct count
+        reposWithLanguages.push(repo);
+        
+        // Then fetch language data if available
+        if (!repo.fork && repo.languages_url && !repo.private) {
+          try {
             const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
             
             await new Promise(resolve => {
@@ -367,85 +403,43 @@ document.addEventListener('DOMContentLoaded', function() {
                   repo.languageData = languages;
                 }
                 
-                // Update progress
-                languagesLoaded++;
-                const progressPercentage = Math.min(55 + (languagesLoaded / totalToLoad) * 40, 95);
-                updateLoadingStatus(`Loading language data (${languagesLoaded}/${totalToLoad})...`, progressPercentage);
-                
                 resolve();
               });
             });
-          } else {
-            // For private or forked repos
-            languagesLoaded++;
+          } catch (e) {
+            console.warn(`Failed to fetch language data for repo ${repo.name}`, e);
           }
-        } catch (e) {
-          console.warn(`Failed to fetch language data for repo ${repo.name}`, e);
-          languagesLoaded++;
         }
-        
-        // Add to repositories array
-        reposWithLanguages.push(repo);
       }
       
-      // Render first batch immediately
-      updateLoadingStatus(`Rendering first batch of repositories...`, 70);
+      console.log(`Ready to render ${reposWithLanguages.length} repositories with language data`);
+      
+      // Render the first page of repositories
+      updateLoadingStatus(`Rendering repositories...`, 95);
+      
+      // Make sure currentPage is set to 1 for first render
       currentPage = 1;
       renderRepos(currentPage);
       
-      // Then load the rest of the repositories in the background
-      for (let i = firstBatchSize; i < reposToShow.length; i++) {
-        const repo = reposToShow[i];
-        reposWithLanguages.push(repo);
-        
-        // Continue fetching language data in the background
-        if (!repo.fork && repo.languages_url && !repo.private) {
-          try {
-            const langUrl = window.GitHubConfig.addClientId(repo.languages_url);
-            
-            // Don't await this promise - let it run in the background
-            RequestQueue.add(langUrl, (langResponse, langData) => {
-              if (langResponse.ok) {
-                // Calculate total bytes
-                const totalBytes = Object.values(langData).reduce((a, b) => a + b, 0);
-                // Convert to percentages
-                const languages = Object.entries(langData).map(([name, bytes]) => ({
-                  name,
-                  percentage: Math.round((bytes / totalBytes) * 100)
-                })).sort((a, b) => b.percentage - a.percentage);
-                
-                repo.languageData = languages;
-                
-                // Update the card if it's already visible
-                updateRepoCardLanguages(repo);
-              }
-              
-              // Update progress
-              languagesLoaded++;
-              const progressPercentage = Math.min(70 + (languagesLoaded / totalToLoad) * 25, 95);
-              updateLoadingStatus(`Loading language data (${languagesLoaded}/${totalToLoad})...`, progressPercentage);
-            });
-          } catch (e) {
-            console.warn(`Failed to fetch language data for repo ${repo.name}`, e);
-            languagesLoaded++;
-          }
-        } else {
-          // Count it as loaded
-          languagesLoaded++;
-        }
-      }
-      
-      // Update loading message before rendering
-      updateLoadingStatus(`Finalizing repository display...`, 95);
-      
       // Update last updated timestamps for all repos
       updateLastUpdatedTimestamps();
-  
+
       // Add GitHub stats section
       updateGitHubStatsSection(allRepos);
       
       // Complete loading
       updateLoadingStatus(`Loading complete!`, 100);
+      
+      // CRITICAL FIX: Remove loading indicator after a short delay
+      setTimeout(() => {
+        const loadingElement = document.querySelector('#loading-status');
+        if (loadingElement) {
+          const loadingContainer = loadingElement.closest('.text-center');
+          if (loadingContainer) {
+            loadingContainer.remove();
+          }
+        }
+      }, 1000);
       
     } catch (error) {
       console.error('Error fetching GitHub repositories:', error);
@@ -470,78 +464,110 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log(`Rendering repos from index ${startIdx} to ${endIdx-1}. Rendering ${reposToRender.length} repos.`);
     
-    // If no repositories to render, show a message
-    if (reposToRender.length === 0 && page === 1) {
-      additionalProjectsContainer.innerHTML = `
-        <p class="text-center text-gray-500 py-6">No additional projects found on GitHub.</p>
-      `;
-      return;
-    }
-    
     // Create HTML for the repositories
-    let reposHTML = '';
+    const reposHTML = reposToRender.map(repo => createRepoCard(repo)).join('');
     
-    // Add heading if this is the first page
+    // Replace or append content
     if (page === 1) {
-      reposHTML += `
-        <h3 class="text-2xl font-bold mb-6 pb-2 border-b opacity-0" data-animate="fade-in">Additional GitHub Projects</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="github-repos-container">
+      // First page: replace content
+      console.log("Replacing container content with first page of repos");
+      additionalProjectsContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
+          ${reposHTML}
+        </div>
       `;
-    }
-    
-    // Add repo cards
-    reposToRender.forEach(repo => {
-      reposHTML += createRepoCard(repo);
-    });
-    
-    // Close the grid container if this is the first page
-    if (page === 1) {
-      reposHTML += `</div>`;
-      
-      // Add load more button if there are more repos to show
-      if (reposWithLanguages.length > reposPerPage) {
-        reposHTML += `
-          <div class="text-center mt-8">
-            <button id="load-more-repos" class="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-              Load More Projects
-            </button>
+    } else {
+      // Subsequent pages: append content
+      console.log("Appending repositories to existing grid");
+      const reposGrid = document.getElementById('repos-grid');
+      if (reposGrid) {
+        // Create a temporary div to hold the new HTML
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = reposHTML;
+        
+        // Append each child individually to maintain grid structure
+        while (tempDiv.firstChild) {
+          reposGrid.appendChild(tempDiv.firstChild);
+        }
+      } else {
+        console.error("Could not find repos-grid element for appending more repositories");
+        // Fallback: replace entire content
+        additionalProjectsContainer.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="repos-grid">
+            ${reposWithLanguages.slice(0, endIdx).map(repo => createRepoCard(repo)).join('')}
           </div>
         `;
       }
-      
-      // Set the HTML
-      additionalProjectsContainer.innerHTML = reposHTML;
-      
-      // Add click event to the load more button
-      const loadMoreButton = document.getElementById('load-more-repos');
-      if (loadMoreButton) {
-        loadMoreButton.addEventListener('click', function() {
-          currentPage++;
-          loadMoreRepos();
-        });
-      }
-    } else {
-      // For subsequent pages, append to the existing container
-      const reposContainer = document.getElementById('github-repos-container');
-      if (reposContainer) {
-        reposContainer.insertAdjacentHTML('beforeend', reposToRender.map(repo => createRepoCard(repo)).join(''));
-      }
-      
-      // Hide the load more button if we've loaded all repos
-      const loadMoreButton = document.getElementById('load-more-repos');
-      if (loadMoreButton && (currentPage * reposPerPage) >= reposWithLanguages.length) {
-        loadMoreButton.style.display = 'none';
-      }
     }
-  
+    
+    // Add "Load More" button if there are more repos to show
+    updateLoadMoreButton(endIdx);
   }
   
-  /**
-   * Load more repositories when the "Load More" button is clicked
-   */
-  function loadMoreRepos() {
-    console.log(`Loading more repos, page ${currentPage}`);
-    renderRepos(currentPage);
+  // Function to update or add the load more button
+  function updateLoadMoreButton(endIdx) {
+    // Remove existing button if any
+    const existingButton = document.getElementById('load-more-container');
+    if (existingButton) {
+      existingButton.remove();
+    }
+    
+    if (endIdx < reposWithLanguages.length) {
+      console.log(`Adding Load More button. Showing ${endIdx}/${reposWithLanguages.length} repos`);
+      const remainingCount = Math.min(reposPerPage, reposWithLanguages.length - endIdx);
+      
+      const loadMoreHTML = `
+        <div class="text-center mt-8" id="load-more-container">
+          <button id="load-more-button" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"></path>
+            </svg>
+            Load ${remainingCount} More Repositories
+          </button>
+          <div class="text-sm text-gray-500 mt-2">
+            Showing ${endIdx} of ${reposWithLanguages.length} repositories
+          </div>
+        </div>
+      `;
+      
+      // CRITICAL FIX: Make sure we're adding this to the document properly
+      additionalProjectsContainer.insertAdjacentHTML('beforeend', loadMoreHTML);
+      
+      // Add click event listener to the button with explicit checks
+      setTimeout(() => {
+        const loadMoreButton = document.getElementById('load-more-button');
+        if (loadMoreButton) {
+          console.log("Load more button found, adding click handler");
+          loadMoreButton.addEventListener('click', function() {
+            console.log("Load more button clicked");
+            
+            // Update button to show loading state
+            this.disabled = true;
+            this.innerHTML = `
+              <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              Loading...
+            `;
+            
+            // CRITICAL FIX: Increment page and call loadMoreRepos directly
+            currentPage++;
+            loadMoreRepos();
+          });
+        } else {
+          console.error("Could not find load more button after adding it to the DOM");
+        }
+      }, 100); // Short delay to ensure DOM is updated
+    } else {
+      console.log("All repositories shown, no load more button needed");
+      // Add a "showing all" indicator
+      additionalProjectsContainer.insertAdjacentHTML('beforeend', `
+        <div class="text-center mt-4 text-sm text-gray-500" id="load-more-container">
+          Showing all ${reposWithLanguages.length} repositories
+        </div>
+      `);
+    }
   }
   
   /**
@@ -587,13 +613,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 "Batchfile": "bg-gray-600",
                 "ASP.NET": "bg-blue-800",
                 "Vue": "bg-green-500",
-                "CMake": "bg-indigo-600",
-                "Makefile": "bg-gray-600",
                 "Lua": "bg-blue-400",
-                "YAML": "bg-purple-300",
-                "RedScript": "bg-red-700",
-                "XML": "bg-orange-300",
-                "JSON": "bg-amber-300"
+                "Jupyter Notebook": "bg-orange-300"
               };
               const bgClass = colorMap[lang.name] || "bg-gray-400";
               html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
@@ -622,102 +643,212 @@ document.addEventListener('DOMContentLoaded', function() {
    * @returns {string} HTML string for the card
    */
   function createRepoCard(repo) {
+    // Format description
+    const description = repo.description || `A ${repo.language || ''} repository`;
+    
     // Format date
     const updatedDate = new Date(repo.updated_at);
-    const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-    const formattedDate = updatedDate.toLocaleDateString('en-US', dateOptions);
+    const formattedDate = updatedDate.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
     
-    // Check if repo has a description
-    const description = repo.description || 'No description provided';
+    // Get repo topics if available
+    const topics = repo.topics || [];
+    const topicsHTML = topics.length > 0 ? `
+      <div class="mb-4">
+        <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">TOPICS</h4>
+        <div class="flex flex-wrap">
+          ${topics.map(topic => `
+            <span class="bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">${topic}</span>
+          `).join('')}
+        </div>
+      </div>
+    ` : '';
     
-    // Build language HTML if available
-    let languageHTML = '';
-    if (repo.languageData && repo.languageData.length > 0) {
-      languageHTML += `<div class="mb-4">
-        <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-        <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+    // Get license info if available
+    const licenseHTML = repo.license ? `
+      <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10 2a8 8 0 100 16 8 8 0 000-16zm0 2a6 6 0 100 12 6 6 0 000-12zm-1 5a1 1 0 112 0v3a1 1 0 11-2 0V9zm1-3a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path>
+        </svg>
+        <span>${repo.license.name || repo.license.spdx_id || 'Licensed'}</span>
+      </div>
+    ` : '';
+    
+    // CRITICAL FIX: Generate language bar if we have language data
+    let languageBar = '';
+    if (repo.private) {
+      languageBar = `
+        <div class="mb-4">
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
+          <div class="flex flex-wrap">
+            <span class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200 rounded-full px-3 py-1 text-xs font-medium mr-2 mb-2">Private repository - language data available via API</span>
+          </div>
+        </div>
+      `;
+    } else if (repo.languageData && repo.languageData.length > 0) {
+      const topLanguages = repo.languageData; // Show all languages
       
-      repo.languageData.forEach(lang => {
-        const colorMap = {
-          "JavaScript": "bg-yellow-400",
-          "TypeScript": "bg-blue-500",
-          "Python": "bg-blue-600",
-          "Java": "bg-orange-600",
-          "C#": "bg-green-600",
-          "C++": "bg-pink-600",
-          "HTML": "bg-red-500",
-          "CSS": "bg-purple-500",
-          "Ruby": "bg-red-600",
-          "Go": "bg-blue-300",
-          "Swift": "bg-orange-500",
-          "Kotlin": "bg-purple-600",
-          "PHP": "bg-indigo-400",
-          "C": "bg-gray-500",
-          "Shell": "bg-green-400",
-          "Rust": "bg-orange-800",
-          "Batchfile": "bg-gray-600",
-          "ASP.NET": "bg-blue-800",
-          "Vue": "bg-green-500",
-          "CMake": "bg-indigo-600",
-          "Makefile": "bg-gray-600",
-          "Lua": "bg-blue-400",
-          "YAML": "bg-purple-300",
-          "RedScript": "bg-red-700",
-          "XML": "bg-orange-300",
-          "JSON": "bg-amber-300"
-        };
-        const bgClass = colorMap[lang.name] || "bg-gray-400";
-        languageHTML += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-      });
-      
-      languageHTML += `</div>
-        <div class="flex flex-wrap mt-1 text-xs">`;
-      
-      repo.languageData.forEach(lang => {
-        languageHTML += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
-      });
-      
-      languageHTML += `</div>
-      </div>`;
+      languageBar = `
+        <div class="mb-4">
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
+          <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+            ${topLanguages.map(lang => {
+              // Get color for language
+              const colorMap = {
+                "JavaScript": "bg-yellow-400",
+                "TypeScript": "bg-blue-500",
+                "Python": "bg-blue-600",
+                "Java": "bg-orange-600",
+                "C#": "bg-green-600",
+                "C++": "bg-pink-600",
+                "HTML": "bg-red-500",
+                "CSS": "bg-purple-500",
+                "Ruby": "bg-red-600",
+                "Go": "bg-blue-300",
+                "Swift": "bg-orange-500",
+                "Kotlin": "bg-purple-600",
+                "PHP": "bg-indigo-400",
+                "C": "bg-gray-500",
+                "Shell": "bg-green-400",
+                "Rust": "bg-orange-800",
+                "Batchfile": "bg-gray-600",
+                "ASP.NET": "bg-blue-800",
+                "Vue": "bg-green-500",
+                "Lua": "bg-blue-400",
+                "Jupyter Notebook": "bg-orange-300"
+              };
+              const bgClass = colorMap[lang.name] || "bg-gray-400";
+              return `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
+            }).join('')}
+          </div>
+          <div class="flex flex-wrap mt-1 text-xs">
+            ${topLanguages.map(lang => `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`).join('')}
+          </div>
+        </div>
+      `;
+    } else if (repo.language) {
+      // Fallback if we don't have detailed language data
+      languageBar = `
+        <div class="mb-4">
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
+          <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+            <div class="bg-blue-500 h-2 w-full"></div>
+          </div>
+          <div class="flex flex-wrap mt-1 text-xs">
+            <span class="mr-2">${repo.language} (100%)</span>
+          </div>
+        </div>
+      `;
     } else {
-      // If we don't have language data yet, show a placeholder
-      languageHTML = `<div class="mb-4" id="lang-${repo.id}">
-        <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
-        <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
-          <div class="bg-gray-400 animate-pulse h-2 w-full"></div>
+      languageBar = `
+        <div class="mb-4">
+          <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
+          <div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+            <div class="bg-gray-400 h-2 w-full"></div>
+          </div>
+          <div class="flex flex-wrap mt-1 text-xs">
+            <span class="mr-2">No language data available</span>
+          </div>
         </div>
-        <div class="flex flex-wrap mt-1 text-xs">
-          <span class="mr-2">Loading language data...</span>
-        </div>
-      </div>`;
+      `;
     }
     
-    // Card HTML
     return `
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow p-6" data-repo-id="${repo.id}" data-animate="fade-up">
-        <h3 class="text-xl font-bold mb-2 text-blue-600 dark:text-blue-400">
-          <a href="${repo.html_url}" target="_blank" rel="noopener" class="hover:underline">
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 h-full">
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2 flex items-center">
+            <svg class="w-5 h-5 mr-2 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
+            </svg>
             ${repo.name}
-          </a>
-        </h3>
-        
-        <p class="text-gray-600 dark:text-gray-300 mb-4">${description}</p>
-        
-        ${languageHTML}
-        
-        <div class="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400">
-          <span>
-            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            ${repo.private ? `<span class="ml-2 bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded">Private</span>` : ''}
+            ${repo.fork ? `<span class="ml-2 bg-blue-200 text-blue-800 text-xs px-2 py-1 rounded">Fork</span>` : ''}
+            ${repo.archived ? `<span class="ml-2 bg-yellow-200 text-yellow-800 text-xs px-2 py-1 rounded">Archived</span>` : ''}
+          </h3>
+          
+          <p class="text-gray-600 dark:text-gray-300 mb-4">${description}</p>
+          
+          ${languageBar}
+          
+          ${topicsHTML}
+          
+          <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
             </svg>
-            Last updated: ${formattedDate}
-          </span>
-          <span>
-            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path>
-            </svg>
-            ${repo.stargazers_count} stars
-          </span>
+            <span>Last updated: ${formattedDate}</span>
+          </div>
+          
+          ${licenseHTML}
+          
+          <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+            ${repo.stargazers_count > 0 ? `
+            <div class="flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+              </svg>
+              <span>${repo.stargazers_count} ${repo.stargazers_count === 1 ? 'star' : 'stars'}</span>
+            </div>
+            ` : ''}
+            
+            ${repo.forks_count > 0 ? `
+            <div class="flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v10H5V5z" clip-rule="evenodd"></path>
+              </svg>
+              <span>${repo.forks_count} ${repo.forks_count === 1 ? 'fork' : 'forks'}</span>
+            </div>
+            ` : ''}
+
+            ${repo.watchers_count > 0 ? `
+            <div class="flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span>${repo.watchers_count} ${repo.watchers_count === 1 ? 'watcher' : 'watchers'}</span>
+            </div>
+            ` : ''}
+
+            ${repo.open_issues_count > 0 ? `
+            <div class="flex items-center">
+              <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+              </svg>
+              <span>${repo.open_issues_count} ${repo.open_issues_count === 1 ? 'issue' : 'issues'}</span>
+            </div>
+            ` : ''}
+          </div>
+          
+          <div class="flex flex-wrap gap-2 mt-auto">
+            <a href="${repo.html_url}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+              </svg>
+              View Repository
+            </a>
+            
+            ${repo.homepage ? `
+            <a href="${repo.homepage}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+              </svg>
+              Live Demo
+            </a>
+            ` : ''}
+            
+            ${repo.fork ? `
+            <a href="${repo.source ? repo.source.html_url : repo.html_url.replace(/\/[^/]+\/[^/]+$/, `/${repo.full_name.split('/')[0]}/${repo.name}`)}" target="_blank" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
+              </svg>
+              Original Repo
+            </a>
+            ` : ''}
+          </div>
         </div>
       </div>
     `;
@@ -750,8 +881,6 @@ document.addEventListener('DOMContentLoaded', function() {
             "Batchfile": "bg-gray-600",
             "ASP.NET": "bg-blue-800",
             "Vue": "bg-green-500",
-            "CMake": "bg-indigo-600",
-            "Makefile": "bg-gray-600",
             "Lua": "bg-blue-400",
             "YAML": "bg-purple-300",
             "RedScript": "bg-red-700",
@@ -927,4 +1056,47 @@ document.addEventListener('DOMContentLoaded', function() {
       element.textContent = "Last updated: Unknown";
     }
   }
-});
+
+  /**
+   * Load more repositories when the "Load More" button is clicked
+   */
+  function loadMoreRepos() {
+    console.log(`Loading more repos, page ${currentPage}`);
+    
+    // Get the next batch of repositories
+    const startIdx = (currentPage - 1) * reposPerPage;
+    const endIdx = currentPage * reposPerPage;
+    const reposToRender = reposWithLanguages.slice(startIdx, endIdx);
+    
+    console.log(`Loading repos from index ${startIdx} to ${endIdx-1}. Loading ${reposToRender.length} repos.`);
+    
+    // Get the repository grid container
+    const reposGrid = document.getElementById('repos-grid');
+    if (!reposGrid) {
+      console.error("Could not find repos-grid element for appending more repositories");
+      return;
+    }
+    
+    // Create HTML for each repository and append to the grid
+    reposToRender.forEach(repo => {
+      const repoHTML = createRepoCard(repo);
+      
+      // Create a temporary div to hold the new HTML
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = repoHTML;
+      
+      // Append the repo card to the grid
+      if (tempDiv.firstChild) {
+        reposGrid.appendChild(tempDiv.firstChild);
+      }
+    });
+    
+    // Update the "Load More" button
+    updateLoadMoreButton(endIdx);
+    
+    // Force layout recalculation to ensure grid elements are properly positioned
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 100);
+  }
+}
