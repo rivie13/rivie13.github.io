@@ -553,36 +553,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Update the element
       element.textContent = `Last updated: ${formattedDate}`;
       
-      // Add additional GitHub stats if available
-      if (data.stargazers_count || data.forks_count || data.open_issues_count) {
-        const statsContainer = document.createElement('div');
-        statsContainer.className = 'mt-2 text-sm text-gray-500';
-        
-        let statsHTML = '';
-        
-        if (data.stargazers_count) {
-          statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-          </svg>${data.stargazers_count} ${data.stargazers_count === 1 ? 'star' : 'stars'}</span>`;
-        }
-        
-        if (data.forks_count) {
-          statsHTML += `<span class="mr-3"><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path>
-          </svg>${data.forks_count} ${data.forks_count === 1 ? 'fork' : 'forks'}</span>`;
-        }
-        
-        if (data.open_issues_count) {
-          statsHTML += `<span><svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
-          </svg>${data.open_issues_count} ${data.open_issues_count === 1 ? 'issue' : 'issues'}</span>`;
-        }
-        
-        if (statsHTML) {
-          statsContainer.innerHTML = statsHTML;
-          element.parentNode.appendChild(statsContainer);
-        }
-      }
+      // Stars and other GitHub stats removed as requested
     } else {
       element.textContent = "Last updated: Unknown";
     }
