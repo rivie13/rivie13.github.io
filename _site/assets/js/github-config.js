@@ -38,6 +38,13 @@ window.GitHubConfig = {
     // Check if this is a topics request which needs special headers
     const isTopicsRequest = pathWithoutQuery.includes('/topics');
     
+    // Check if this is an authenticated request (/user or /user/*) which needs special handling
+    const isAuthRequest = pathWithoutQuery === 'user' || pathWithoutQuery.startsWith('user/');
+    
+    if (isAuthRequest) {
+      console.log(`DEBUG CONFIG - Detected authenticated request: ${pathWithoutQuery}`);
+    }
+    
     // Build the new URL using the function app
     let result = `${FUNCTION_APP_URL}/${pathWithoutQuery}`;
     
@@ -52,6 +59,11 @@ window.GitHubConfig = {
     // Add special headers for topics API
     if (isTopicsRequest) {
       params.append('accept', 'application/vnd.github.mercy-preview+json');
+    }
+    
+    // Add authentication indicator for /user endpoints
+    if (isAuthRequest) {
+      params.append('auth_required', 'true');
     }
     
     // Add the query string if we have parameters
