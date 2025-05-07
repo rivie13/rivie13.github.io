@@ -25,14 +25,8 @@
 
     
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C9WDMTWS34"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-C9WDMTWS34');
-</script> 
+<!-- This file is now a placeholder. The actual Google Analytics code will be loaded by cookie-consent.html after user gives consent. -->
+<!-- The G-C9WDMTWS34 ID is configured in _config.yml as google_analytics -->
     
     <!-- Google AdSense -->
     
@@ -486,5 +480,135 @@
     <script src="/assets/js/main.js"></script>
     <script src="/assets/js/animations.js"></script>
     <script src="/assets/js/responsive.js"></script>
+    
+    <!-- Cookie Consent Banner -->
+<style>
+    #cookie-notice {
+        padding: 20px;
+        display: none;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #222;
+        color: rgba(255, 255, 255, 0.8);
+        z-index: 1000;
+    }
+
+    #cookie-notice a {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    #cookie-notice #cookie-notice-accept {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #cookie-notice #cookie-notice-deny {
+        background-color: #f44336;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #cookie-notice #cookie-notice-info {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 767px) {
+        #cookie-notice {
+            padding: 15px;
+        }
+        #cookie-notice a {
+            display: block;
+            margin: 8px auto;
+            max-width: 170px;
+        }
+    }
+</style>
+<div id="cookie-notice">
+    <span>We would like to use cookies to improve your experience on our website and to analyze site traffic.</span>
+    <a id="cookie-notice-accept">Accept</a>
+    <a id="cookie-notice-deny">Deny</a>
+    <a id="cookie-notice-info" href="/privacy">More info</a>
+</div>
+
+<script>
+    function createCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function loadAnalytics() {
+        // Load GA script
+        var script = document.createElement('script');
+        script.innerHTML = `/*This function will load script and call the callback once the script has loaded*/
+
+function loadScriptAsync(scriptSrc, callback) {
+    if (typeof callback !== 'function') {
+        throw new Error('Not a valid callback for async script load');
+    }
+    var script = document.createElement('script');
+    script.onload = callback;
+    script.src = scriptSrc;
+    document.head.appendChild(script);
+}
+
+/* This is the part where you call the above defined function and "calls back" your code which gets executed after the script has loaded */
+
+loadScriptAsync('https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX', function () {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
+}) `;
+        document.head.appendChild(script);
+    }
+
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    // Show the cookie notice if consent hasn't been given
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if we need to show the notice (only in production)
+        
+    });
+
+    // Button click handlers
+    document.getElementById('cookie-notice-accept').addEventListener('click', function () {
+        createCookie('cookie-notice-dismissed', 'true', 365);
+        document.getElementById('cookie-notice').style.display = 'none';
+        loadAnalytics();
+    });
+
+    document.getElementById('cookie-notice-deny').addEventListener('click', function () {
+        createCookie('cookie-notice-dismissed', 'false', 365);
+        document.getElementById('cookie-notice').style.display = 'none';
+    });
+</script> 
 </body>
 </html> 
