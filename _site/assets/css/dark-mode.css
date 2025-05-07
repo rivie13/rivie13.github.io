@@ -565,4 +565,8 @@ article > header {
 .dark .bg-blue-400,
 .dark [class*="bg-blue-400"] {
   background-color: #63b3ed !important; /* Much lighter blue for Lua in dark mode */
+}
+
+.dark .bg-blue-600.hover\:bg-blue-700.text-white {
+  color: #ffffff !important;
 } 
