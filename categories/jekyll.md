@@ -1,6 +1,6 @@
 ---
 layout: category
 title: Jekyll
-category: jekyll
-permalink: /categories/jekyll/
+category: Jekyll
+permalink: /categories/Jekyll/
 --- 

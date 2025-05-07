@@ -1,6 +1,6 @@
 ---
 layout: tag
 title: Jekyll
-tag: jekyll
-permalink: /tags/jekyll/
+tag: Jekyll
+permalink: /tag/Jekyll/
 --- 

@@ -1,6 +1,6 @@
 ---
 layout: category
 title: Planning
-category: planning
-permalink: /categories/planning/
+category: Planning
+permalink: /categories/Planning/
 --- 

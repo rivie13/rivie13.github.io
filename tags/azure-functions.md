@@ -1,6 +1,6 @@
 ---
 layout: tag
 title: Azure Functions
-tag: azure-functions
-permalink: /tags/azure-functions/
+tag: Azure Functions
+permalink: /tag/Azure Functions/
 --- 

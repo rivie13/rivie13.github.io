@@ -1,6 +1,6 @@
 ---
 layout: category
 title: Portfolio Tutorial
-category: portfolio-tutorial
-permalink: /categories/portfolio-tutorial/
+category: Portfolio Tutorial
+permalink: /categories/Portfolio Tutorial/
 --- 

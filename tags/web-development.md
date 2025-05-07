@@ -1,6 +1,6 @@
 ---
 layout: tag
 title: Web Development
-tag: web-development
-permalink: /tags/web-development/
+tag: Web Development
+permalink: /tag/Web Development/
 --- 

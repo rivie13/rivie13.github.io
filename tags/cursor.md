@@ -1,6 +1,6 @@
 ---
 layout: tag
 title: Cursor
-tag: cursor
-permalink: /tags/cursor/
+tag: Cursor
+permalink: /tag/Cursor/
 --- 

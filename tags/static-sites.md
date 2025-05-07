@@ -1,6 +1,6 @@
 ---
 layout: tag
 title: Static Sites
-tag: static-sites
-permalink: /tags/static-sites/
+tag: Static Sites
+permalink: /tag/Static Sites/
 --- 

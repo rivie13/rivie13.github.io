@@ -1,6 +1,6 @@
 ---
 layout: category
 title: AI
-category: ai
-permalink: /categories/ai/
+category: AI
+permalink: /categories/AI/
 --- 
