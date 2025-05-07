@@ -517,14 +517,119 @@ document.addEventListener('DOMContentLoaded', function() {
           const count = reference.getAttribute('data-count');
           return `${formatDateForTooltip(date)}: ${count} contribution${count !== '1' ? 's' : ''}`;
         },
-        // Enable mobile touch support with better settings for tooltips
-        touch: ['hold', 300], // Show tooltip on hold for 300ms
-        touchHold: true,      // Require hold to show
-        placement: 'top',     // Position above the square
-        arrow: true,          // Add an arrow
-        theme: isDarkMode ? 'dark' : 'light' // Match current theme
+        // Improved mobile touch support
+        touch: 'hold',     // Show on touch and hold
+        touchHold: true,   // Require hold to show tooltip
+        hideOnClick: false, // Prevent tooltip from hiding when clicking on the element
+        placement: 'top',  // Position above the square
+        arrow: true,       // Add an arrow
+        duration: [300, 200], // Show faster, hide slower
+        theme: isDarkMode ? 'dark' : 'light', // Match current theme
+        appendTo: document.body // Ensure tooltips are visible outside overflow containers
       });
+    } else {
+      // Fallback for when tippy.js is not available
+      const cells = document.querySelectorAll('.day[data-count]');
+      cells.forEach(cell => {
+        // Add mobile-friendly touch event listeners
+        cell.addEventListener('touchstart', handleTouchStart, {passive: true});
+        cell.addEventListener('touchend', handleTouchEnd, {passive: true});
+      });
+      
+      let touchTimer;
+      let activeTooltip = null;
+      
+      // Handle touch start by starting a timer
+      function handleTouchStart(e) {
+        const cell = e.currentTarget;
+        clearTimeout(touchTimer);
+        
+        // Hide any existing tooltip
+        if (activeTooltip) {
+          activeTooltip.remove();
+          activeTooltip = null;
+        }
+        
+        // Create timer for showing tooltip after a short delay
+        touchTimer = setTimeout(() => {
+          const date = cell.getAttribute('data-date');
+          const count = cell.getAttribute('data-count');
+          const tooltipText = `${formatDateForTooltip(date)}: ${count} contribution${count !== '1' ? 's' : ''}`;
+          
+          // Create and show custom tooltip
+          const tooltip = document.createElement('div');
+          tooltip.className = `fixed z-50 px-2 py-1 text-sm rounded shadow-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`;
+          tooltip.textContent = tooltipText;
+          document.body.appendChild(tooltip);
+          
+          // Position tooltip above the cell
+          const rect = cell.getBoundingClientRect();
+          tooltip.style.left = `${rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2)}px`;
+          tooltip.style.top = `${rect.top - tooltip.offsetHeight - 5}px`;
+          
+          // Store reference to active tooltip
+          activeTooltip = tooltip;
+          
+          // Auto-hide after 2 seconds
+          setTimeout(() => {
+            if (activeTooltip === tooltip) {
+              tooltip.remove();
+              activeTooltip = null;
+            }
+          }, 2000);
+        }, 300);
+      }
+      
+      // Handle touch end by canceling the timer if touch duration was too short
+      function handleTouchEnd() {
+        clearTimeout(touchTimer);
+      }
     }
+    
+    // Add scroll event listener to hide tooltips when scrolling
+    document.addEventListener('scroll', () => {
+      // Hide tippy tooltips if available
+      if (window.tippy) {
+        const activeInstances = document.querySelectorAll('.tippy-box[data-state="visible"]');
+        if (activeInstances.length > 0) {
+          // Use tippy's hideAll method if available
+          if (window.tippy.hideAll) {
+            window.tippy.hideAll();
+          } else {
+            // Manual fallback
+            activeInstances.forEach(instance => {
+              const id = instance.getAttribute('id');
+              if (id && id.startsWith('tippy-')) {
+                const tippyTarget = document.querySelector(`[aria-describedby="${id}"]`);
+                if (tippyTarget && tippyTarget._tippy) {
+                  tippyTarget._tippy.hide();
+                }
+              }
+            });
+          }
+        }
+      } else if (activeTooltip) {
+        // Hide custom tooltip
+        activeTooltip.remove();
+        activeTooltip = null;
+      }
+    }, { passive: true });
+    
+    // Add touch event listener to dismiss tooltips when tapping elsewhere
+    document.addEventListener('touchstart', (e) => {
+      // For custom tooltips
+      if (activeTooltip && !e.target.closest('.day[data-count]')) {
+        activeTooltip.remove();
+        activeTooltip = null;
+      }
+      
+      // For tippy tooltips
+      if (window.tippy && !e.target.closest('.day[data-count]') && !e.target.closest('.tippy-box')) {
+        if (window.tippy.hideAll) {
+          window.tippy.hideAll();
+        }
+      }
+    }, { passive: true });
     
     // Clear localStorage cache after viewing - helps with seeing test changes
     // localStorage.removeItem(`github_contributions_${username}`);
