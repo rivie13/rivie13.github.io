@@ -78,7 +78,7 @@ This document outlines a schedule and strategy for maintaining the portfolio web
 - Consider implementing Content Security Policy headers
 - Monitor GitHub repository dependencies for vulnerabilities
 
-### SEO Maintenance
+### SEO Maintenance (Check if this is done properly, I'm not sure)
 - Ensure all pages have appropriate meta descriptions
 - Use semantic HTML throughout the site
 - Verify heading hierarchy is logical and consistent
@@ -89,7 +89,7 @@ This document outlines a schedule and strategy for maintaining the portfolio web
 
 Consider implementing these features as your portfolio grows:
 
-1. **Dark Mode Toggle**: Allow users to switch between light and dark themes
+1. **Dark Mode Toggle**: Allow users to switch between light and dark themes (This is done)
 2. **Project Filtering**: Add ability to filter projects by technology or category
 3. **Interactive Resume**: Create a more interactive version of your resume with visual elements
 4. **Testimonials Section**: Add client or colleague testimonials as your freelance work grows
@@ -114,7 +114,7 @@ Consider implementing these features as your portfolio grows:
 
 ## Analytics and Improvement
 
-1. **Implement Analytics**:
+1. **Implement Analytics**: (This is done)
    - Consider adding Google Analytics or a privacy-focused alternative like Plausible or Fathom
    - Track which projects and content get the most attention
    - Monitor user behavior to identify potential usability improvements
