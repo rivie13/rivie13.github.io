@@ -90,6 +90,8 @@ title: Home
     </div>
   </section>
   
+  {% include homepage-ad.html %}
+  
   <!-- Video Showcase Section -->
   <section class="py-12 border-t">
     <h2 class="text-3xl font-bold mb-8 opacity-0" data-animate="fade-in">Project Demos & Performances</h2>

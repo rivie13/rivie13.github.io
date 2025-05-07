@@ -6,15 +6,19 @@
     <title>{{ page.title }} | {{ site.title }}</title>
     {% seo %}
     
-    <!-- Google Analytics -->
-    {% if site.google_analytics %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C9WDMTWS34"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', '{{ site.google_analytics }}');
+      gtag('config', 'G-C9WDMTWS34');
     </script>
+    
+    <!-- Google AdSense -->
+    {% if site.google_adsense %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_adsense }}"
+     crossorigin="anonymous"></script>
     {% endif %}
     
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -32,9 +36,13 @@
 <body class="page-transition enter-active">
     {% include header.html %}
     
+    {% include header-ad.html %}
+    
     <main class="container mx-auto px-4 py-8">
         {{ content }}
     </main>
+    
+    {% include footer-ad.html %}
     
     {% include footer.html %}
     

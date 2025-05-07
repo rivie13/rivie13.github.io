@@ -1,0 +1,59 @@
+{% comment %}
+  AdSense Ad Include - Place this file in your _includes directory
+  
+  Usage examples:
+  {% include adsense-ad.html type="display" format="auto" slot="YOURSLOTID" %}
+  {% include adsense-ad.html type="in-article" slot="YOURSLOTID" %}
+  {% include adsense-ad.html type="in-feed" slot="YOURSLOTID" %}
+  
+  Parameters:
+  - type: The type of ad (display, in-article, in-feed)
+  - format: The format of the ad (auto, responsive, horizontal, vertical)
+  - slot: Your AdSense ad unit slot ID
+{% endcomment %}
+
+{% if site.google_adsense %}
+  {% case include.type %}
+    {% when 'display' %}
+      <div class="adsense-container my-4">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="{{ site.google_adsense }}"
+             data-ad-slot="{{ include.slot }}"
+             data-ad-format="{{ include.format | default: 'auto' }}"
+             data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    {% when 'in-article' %}
+      <div class="adsense-container my-4">
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="{{ site.google_adsense }}"
+             data-ad-slot="{{ include.slot }}"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    {% when 'in-feed' %}
+      <div class="adsense-container my-4">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-format="fluid"
+             data-ad-layout-key="-fb+5w+4e-db+86"
+             data-ad-client="{{ site.google_adsense }}"
+             data-ad-slot="{{ include.slot }}"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    {% else %}
+      <!-- Invalid ad type specified -->
+  {% endcase %}
+{% endif %} 
