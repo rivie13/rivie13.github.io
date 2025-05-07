@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Show loading state
       contributionsContainer.innerHTML = `
         <div class="text-center py-6">
-          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
-          <p class="mt-2 text-gray-600">Loading GitHub contribution data...</p>
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto" aria-hidden="true"></div>
+          <p class="mt-2 text-gray-600" aria-live="polite">Loading GitHub contribution data...</p>
         </div>
       `;
       
@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Also show a notice about using estimated data
       const noticeElement = document.createElement('div');
       noticeElement.className = 'text-amber-600 text-xs mt-2 text-center';
+      noticeElement.setAttribute('aria-live', 'polite');
       noticeElement.innerHTML = 'Using estimated contribution data. Working on fixing the direct GitHub GraphQL API access.';
       contributionsContainer.appendChild(noticeElement);
       
@@ -317,14 +318,31 @@ document.addEventListener('DOMContentLoaded', function() {
       weeks.push(week);
     }
     
+    // Create a text summary of contributions for screen readers
+    const activeDays = data.contributions.filter(day => day.count > 0).length;
+    const percentActive = Math.round((activeDays / data.contributions.length) * 100);
+    const mostActiveDay = [...data.contributions].sort((a, b) => b.count - a.count)[0];
+    const mostActiveDateObj = new Date(mostActiveDay.date + "T00:00:00Z");
+    const mostActiveDate = mostActiveDateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    
+    const textSummary = `
+      Made ${data.totalContributions} GitHub contributions in the last year.
+      Contributed on ${activeDays} days (${percentActive}% of the year).
+      Most active day was ${mostActiveDate} with ${mostActiveDay.count} contributions.
+    `;
+    
     // Generate HTML for the contribution graph
     let html = `
       <h3 class="text-xl font-bold mb-4">GitHub Contributions</h3>
       <p class="mb-2 text-gray-700 dark:text-gray-300">
         <span class="font-semibold">${data.totalContributions}</span> contributions in the last year
       </p>
+      
+      <!-- Text summary for screen readers -->
+      <div class="sr-only" aria-label="Contribution summary">${textSummary}</div>
+      
       <div class="overflow-x-auto">
-        <div class="contribution-graph min-w-max">
+        <div class="contribution-graph min-w-max" aria-label="GitHub contribution heatmap" role="img">
           <div class="graph-labels flex">
             <div class="w-8"></div>
             <div class="months-labels relative flex-grow text-xs text-gray-500" style="height: 20px">
@@ -417,7 +435,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!day) {
           // Empty cell
-          html += `<div class="day w-3 h-3 rounded-sm bg-transparent"></div>`;
+          html += `<div class="day w-3 h-3 rounded-sm bg-transparent" aria-hidden="true"></div>`;
         } else {
           // Contribution cell with color based on level
           const levelClass = getLevelClass(day.level, isDarkMode);
@@ -427,11 +445,17 @@ document.addEventListener('DOMContentLoaded', function() {
           const isToday = adjustedDate === today;
           const borderClass = isToday ? 'ring-1 ring-blue-500' : '';
           
+          // Create an appropriate aria-label for screen readers
+          const formattedDate = formatDateForTooltip(adjustedDate);
+          const contribText = day.count === 1 ? 'contribution' : 'contributions';
+          const ariaLabel = `${formattedDate}: ${day.count} ${contribText}`;
+          
           html += `
             <div class="day w-3 h-3 rounded-sm ${levelClass} ${borderClass}" 
                  data-date="${adjustedDate}" 
                  data-count="${day.count}"
-                 title="${formatDateForTooltip(adjustedDate)}: ${day.count} contribution${day.count !== 1 ? 's' : ''}">
+                 aria-label="${ariaLabel}"
+                 title="${ariaLabel}">
             </div>
           `;
         }
@@ -446,12 +470,12 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="flex justify-end mt-2">
             <div class="flex items-center text-xs text-gray-500">
               <span class="mr-1">Less</span>
-              <div class="flex gap-1">
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(0, isDarkMode)}"></div>
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(1, isDarkMode)}"></div>
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(2, isDarkMode)}"></div>
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(3, isDarkMode)}"></div>
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(4, isDarkMode)}"></div>
+              <div class="flex gap-1" aria-label="Contribution level scale from less to more">
+                <div class="w-3 h-3 rounded-sm ${getLevelClass(0, isDarkMode)}" aria-label="No contributions"></div>
+                <div class="w-3 h-3 rounded-sm ${getLevelClass(1, isDarkMode)}" aria-label="1-3 contributions"></div>
+                <div class="w-3 h-3 rounded-sm ${getLevelClass(2, isDarkMode)}" aria-label="4-7 contributions"></div>
+                <div class="w-3 h-3 rounded-sm ${getLevelClass(3, isDarkMode)}" aria-label="8-12 contributions"></div>
+                <div class="w-3 h-3 rounded-sm ${getLevelClass(4, isDarkMode)}" aria-label="13+ contributions"></div>
               </div>
               <span class="ml-1">More</span>
             </div>
@@ -487,61 +511,61 @@ document.addEventListener('DOMContentLoaded', function() {
    */
   function getLevelClass(level, isDarkMode) {
     if (isDarkMode) {
-      // Dark mode colors
+      // Dark mode colors - with improved contrast for accessibility
       switch (level) {
         case 0: return 'bg-gray-800';
-        case 1: return 'bg-green-900';
+        case 1: return 'bg-green-800'; // Darker green for better contrast in dark mode
         case 2: return 'bg-green-700';
-        case 3: return 'bg-green-600';
-        case 4: return 'bg-green-500';
+        case 3: return 'bg-green-500';
+        case 4: return 'bg-green-400'; // Lighter green for better contrast in dark mode
         default: return 'bg-gray-800';
       }
     } else {
-      // Light mode colors
+      // Light mode colors - with improved contrast for accessibility
       switch (level) {
-        case 0: return 'bg-gray-100';
-        case 1: return 'bg-green-100';
-        case 2: return 'bg-green-300';
-        case 3: return 'bg-green-500';
-        case 4: return 'bg-green-700';
-        default: return 'bg-gray-100';
+        case 0: return 'bg-gray-200';
+        case 1: return 'bg-green-200';
+        case 2: return 'bg-green-400';
+        case 3: return 'bg-green-600'; // Darker green for better contrast
+        case 4: return 'bg-green-800'; // Even darker green for highest contrast
+        default: return 'bg-gray-200';
       }
     }
   }
   
   /**
-   * Format date for tooltip display
+   * Format a date string for display in tooltips
    */
   function formatDateForTooltip(dateStr) {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', { 
-      month: 'long', 
-      day: 'numeric', 
+    return date.toLocaleDateString('en-US', {
+      weekday: 'long',
       year: 'numeric',
-      weekday: 'long'
+      month: 'long',
+      day: 'numeric'
     });
   }
   
   /**
-   * Display error message
+   * Display an error message in the container
    */
   function displayError(message) {
     contributionsContainer.innerHTML = `
-      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-        <p class="font-bold">Error</p>
+      <div class="text-red-500 p-4 rounded-md border border-red-300 mb-4" role="alert" aria-live="assertive">
+        <p class="font-semibold">Error loading GitHub contributions</p>
         <p>${message}</p>
       </div>
     `;
   }
   
   /**
-   * Display fallback data when API fails
+   * Display a fallback message in the container
    */
   function displayFallbackData() {
     contributionsContainer.innerHTML = `
-      <div class="bg-amber-100 border border-amber-400 text-amber-700 px-4 py-3 rounded mb-4">
-        <p class="font-bold">GitHub API Error</p>
-        <p>Unable to load GitHub contribution data. Please try again later.</p>
+      <div class="p-4 rounded-md border border-amber-300 mb-4" role="alert" aria-live="polite">
+        <p class="font-semibold">GitHub contribution data unavailable</p>
+        <p>Please check back later to see contribution activity.</p>
       </div>
     `;
   }
