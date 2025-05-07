@@ -125,16 +125,15 @@ textarea:focus {
 /* ARIA live region styling */
 [aria-live="polite"],
 [aria-live="assertive"] {
-  border: 0;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  width: 1px;
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
 }
 
+/* Make visually hidden elements visible when they have a visible class */
 [aria-live="polite"].visible,
 [aria-live="assertive"].visible {
   clip: auto;
