@@ -108,21 +108,21 @@
   - [x] Successfully pushed to GitHub
 - [x] **Step 3.5:** Verify Deployment
   - [x] Confirmed successful deployment to rivie13.github.io
-  - [ ] Need to test on various mobile devices and screen sizes
-  - [ ] Verify all functionality across different browsers
+  - [x] Need to test on various mobile devices and screen sizes
+  - [x] Verify all functionality across different browsers
 - [ ] **Step 3.1:** Review & Polish
   - [ ] Proofread all text content
   - [ ] Verify all internal and external links
   - [ ] Optimize remaining images if needed
   - [ ] Ensure consistent styling throughout site
-- [ ] **Step 3.6:** Create Maintenance Workflow Document
-  - [ ] Create MAINTENANCE.md with detailed instructions
-  - [ ] Document blog post creation process
-  - [ ] Document project update process
-  - [ ] Add instructions for adding YouTube videos
-  - [ ] Include image optimization guidelines
-- [ ] **Step 3.7:** Future Maintenance Plan
-  - [ ] Document update procedures for projects
-  - [ ] Create schedule for blog content
-  - [ ] Plan for periodic design refreshes
-  - [ ] Set up GitHub API usage monitoring
+- [x] **Step 3.6:** Create Maintenance Workflow Document
+  - [x] Create MAINTENANCE.md with detailed instructions
+  - [x] Document blog post creation process
+  - [x] Document project update process
+  - [x] Add instructions for adding YouTube videos
+  - [x] Include image optimization guidelines
+- [x] **Step 3.7:** Future Maintenance Plan
+  - [x] Document update procedures for projects
+  - [x] Create schedule for blog content
+  - [x] Plan for periodic design refreshes
+  - [x] Set up GitHub API usage monitoring
