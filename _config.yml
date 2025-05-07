@@ -50,7 +50,7 @@ defaults:
     values:
       layout: "post"
       author: "Riviera Sperduto"
-      image: /assets/images/blog-social-image.jpg  # Create this image in your assets folder
+      image: /assets/images/blog-social-image.png  # Create this image in your assets folder
 
 # Pagination settings for blog
 paginate: 5

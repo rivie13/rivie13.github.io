@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const cacheDuration = 24 * 60 * 60 * 1000; // 24 hours cache duration
     
     if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
-      console.log('Using cached GitHub contributions data');
+      //console.log('Using cached GitHub contributions data');
       displayContributions(JSON.parse(cachedData));
     } else {
-      console.log('Fetching fresh GitHub contributions data');
+      //console.log('Fetching fresh GitHub contributions data');
       fetchContributions();
     }
   }
@@ -248,18 +248,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // DEBUG: Log the data structure
-    console.log("Contribution data structure:", JSON.stringify(data, null, 2));
+    //console.log("Contribution data structure:", JSON.stringify(data, null, 2));
     
     // Get first week of data for debugging
     if (data.contributions.length > 0) {
       const firstWeekData = data.contributions.slice(0, 7);
-      console.log("First week days with day names:");
+      //console.log("First week days with day names:");
       firstWeekData.forEach(day => {
         // Create date with timezone handling
         const dateStr = day.date + "T00:00:00Z"; // Add time component and Z for UTC
         const date = new Date(dateStr);
         const dayName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][date.getUTCDay()];
-        console.log(`${day.date}: ${dayName}, Count: ${day.count}`);
+        //console.log(`${day.date}: ${dayName}, Count: ${day.count}`);
       });
     }
     

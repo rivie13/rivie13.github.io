@@ -42,7 +42,7 @@ window.GitHubConfig = {
     const isAuthRequest = pathWithoutQuery === 'user' || pathWithoutQuery.startsWith('user/');
     
     if (isAuthRequest) {
-      console.log(`DEBUG CONFIG - Detected authenticated request: ${pathWithoutQuery}`);
+      //console.log(`DEBUG CONFIG - Detected authenticated request: ${pathWithoutQuery}`);
     }
     
     // Build the new URL using the function app
@@ -72,8 +72,8 @@ window.GitHubConfig = {
       result += `?${queryString}`;
     }
     
-    console.log(`DEBUG CONFIG - Original URL: ${url}`);
-    console.log(`DEBUG CONFIG - Proxied URL: ${result}`);
+    //console.log(`DEBUG CONFIG - Original URL: ${url}`);
+    //console.log(`DEBUG CONFIG - Proxied URL: ${result}`);
     return result;
   },
   
@@ -83,7 +83,7 @@ window.GitHubConfig = {
     // When implementing GraphQL support, uncomment this code and remove the fallback
     
      const graphqlProxyUrl = `${FUNCTION_APP_URL}/graphql`;
-     console.log(`DEBUG CONFIG - GraphQL proxy URL: ${graphqlProxyUrl}`);
+     //console.log(`DEBUG CONFIG - GraphQL proxy URL: ${graphqlProxyUrl}`);
      return graphqlProxyUrl;
     
     // Fallback to REST API until GraphQL is supported

@@ -46,6 +46,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
       }
       
+      // Fix for total repos worked on
+      if (!stats.total_repos_worked_on || stats.total_repos_worked_on < 65) {
+        console.log("CACHE FIX: Updating total repositories worked on to 65");
+        stats.total_repos_worked_on = 65;
+        stats.total_private_repos_worked_on = 25;
+        
+        // Update the cache with fixed data
+        localStorage.setItem('github_stats', JSON.stringify(stats));
+      }
+      
       displayStats(stats);
     } else {
       fetchStats();
@@ -93,6 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
         public_repos: userData.public_repos,
         total_private_repos: 0, // Will be updated with authenticated call
         total_repos: userData.public_repos, // Will update this when we get private count
+        total_repos_worked_on: 65, // ACCURATE: Total repos worked on including owned and contributed to
+        total_private_repos_worked_on: 25, // ACCURATE: Private repos out of the total
         total_stars: 0,
         total_forks: 0,
         languages: [],
@@ -196,7 +208,11 @@ document.addEventListener('DOMContentLoaded', function() {
           stats.total_repos = stats.public_repos + manualPrivateRepoCount;
         }
         
-        console.log(`DEBUG STATS: FINAL COUNTS - Public: ${stats.public_repos}, Private: ${stats.total_private_repos}, Total: ${stats.total_repos}`);
+        // Ensure the total repositories worked on is set correctly to 65
+        stats.total_repos_worked_on = 65; // ACCURATE: Total repos worked on including owned and contributed to
+        stats.total_private_repos_worked_on = 25; // ACCURATE: Private repos out of the total
+        
+        console.log(`DEBUG STATS: FINAL COUNTS - Public: ${stats.public_repos}, Private: ${stats.total_private_repos}, Total: ${stats.total_repos}, Total Worked On: ${stats.total_repos_worked_on}`);
         
         // Update stats with repo data
         let totalStars = 0;
@@ -279,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('DEBUG STATS: Language stats calculated:', stats.languages);
         console.log('DEBUG STATS: Forks calculation - My forks:', myForksCount, 'Forks of my repos:', forksOfMyRepos, 'Total:', stats.total_forks);
-        console.log('DEBUG STATS: Repo counts - Public:', stats.public_repos, 'Private:', stats.total_private_repos, 'Total:', stats.total_repos);
+        console.log('DEBUG STATS: Repo counts - Public:', stats.public_repos, 'Private:', stats.total_private_repos, 'Total:', stats.total_repos, 'Total Worked On:', stats.total_repos_worked_on);
         
         // Final verification before saving
         if (stats.total_private_repos !== 6) {
@@ -296,7 +312,8 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log("RIGHT BEFORE DISPLAY - Stats object:", {
           public_repos: stats.public_repos,
           total_private_repos: stats.total_private_repos,
-          total_repos: stats.total_repos
+          total_repos: stats.total_repos,
+          total_repos_worked_on: stats.total_repos_worked_on
         });
         
         // Update the display with enhanced stats
@@ -322,6 +339,8 @@ document.addEventListener('DOMContentLoaded', function() {
       public_repos: 36,
       total_private_repos: 6,  // Correct count
       total_repos: 42,  // 36 + 6 = 42
+      total_repos_worked_on: 65, // Total including contributions
+      total_private_repos_worked_on: 25, // Private out of total worked on
       total_stars: 25,
       total_forks: 10,
       languages: [
@@ -358,11 +377,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const publicRepos = stats.public_repos || 0;
     const privateRepos = stats.total_private_repos || 0;
     const totalRepos = stats.total_repos || publicRepos + privateRepos;
+    const totalReposWorkedOn = stats.total_repos_worked_on || 65; // Default to 65 if not set
+    const privateReposWorkedOn = stats.total_private_repos_worked_on || 25; // Default to 25 if not set
     
     console.log("DISPLAY STATS - Using these values:", { 
       publicRepos, 
       privateRepos, 
-      totalRepos, 
+      totalRepos,
+      totalReposWorkedOn,
+      privateReposWorkedOn, 
       total_private_repos_original: stats.total_private_repos 
     });
     
@@ -397,7 +420,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <h3 class="text-lg font-bold mb-4">General Stats</h3>
           <div class="space-y-3">
             <div class="flex justify-between items-center">
-              <span class="text-gray-600 dark:text-gray-400">Total Repositories</span>
+              <span class="text-gray-600 dark:text-gray-400">Total Repositories (Owned)</span>
               <span class="font-semibold">${totalRepos}</span>
             </div>
             <div class="flex justify-between items-center">
@@ -407,6 +430,14 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="flex justify-between items-center">
               <span class="text-gray-600 dark:text-gray-400">Private Repositories</span>
               <span class="font-semibold">${privateRepos}</span>
+            </div>
+            <div class="flex justify-between items-center font-medium text-blue-600">
+              <span class="dark:text-blue-400">Total Repositories Worked On</span>
+              <span>${totalReposWorkedOn}</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-600 dark:text-gray-400">(Includes ${privateReposWorkedOn} private)</span>
+              <span></span>
             </div>
             <div class="flex justify-between items-center">
               <span class="text-gray-600 dark:text-gray-400">Total Stars</span>

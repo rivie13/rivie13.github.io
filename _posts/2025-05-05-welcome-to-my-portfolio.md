@@ -6,6 +6,7 @@ categories: [development]
 tags: [welcome, portfolio, software-development]
 author: Riviera Sperduto
 excerpt: Welcome to my portfolio website where I'll be sharing my journey, projects, and insights about software development, cloud architecture, and AI.
+image: /assets/images/blog-social-image.png
 ---
 
 ## Hello and Welcome!
