@@ -162,12 +162,25 @@ a.nav-link::after {
   height: 2px;
   bottom: -2px;
   left: 0;
-  background-color: currentColor;
+  background-color: #60a5fa; /* Changed from currentColor to a light blue */
   transition: width 0.3s ease;
 }
 
 a.nav-link:hover::after {
   width: 100%;
+}
+
+/* Add hover text color change for better visibility */
+a.nav-link:hover {
+  color: #60a5fa !important; /* Light blue that's visible on dark backgrounds */
+}
+
+.dark a.nav-link::after {
+  background-color: #60a5fa; /* Light blue for dark mode */
+}
+
+.dark a.nav-link:hover {
+  color: #60a5fa !important;
 }
 
 /* Custom card styling */
