@@ -8,7 +8,7 @@ console.log('GitHub API test script loaded');
 // Function to display debug results (only during development)
 function displayDebugResults(container, message, isError = false) {
   // For debugging purposes only
-  console.log(isError ? 'Error: ' : 'Success: ', message);
+  //console.log(isError ? 'Error: ' : 'Success: ', message);
 }
 
 // Create a test div if it doesn't exist already
@@ -31,7 +31,7 @@ function logToTestDiv(message, isError = false) {
   logEntry.className = isError ? 'text-red-600 mb-1' : 'text-green-600 mb-1';
   logEntry.innerHTML = message;
   testDiv.appendChild(logEntry);
-  console.log(message);
+  //console.log(message);
 }
 
 // Function to check if URL is using the Azure Function
@@ -41,7 +41,7 @@ function isUsingAzureFunction(url) {
 
 // Run the test when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("Running GitHub API authentication test...");
+  //console.log("Running GitHub API authentication test...");
   
   // Show results on page if URL has 'test' parameter
   const showResults = window.location.search.includes('test');
@@ -91,17 +91,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // Test 1: Using GitHubConfig.addClientId (previously was direct fetch)
   const configUrl = window.GitHubConfig.addClientId('https://api.github.com/rate_limit');
   
-  console.log("TEST 1: Using GitHubConfig.addClientId");
-  console.log(`URL: ${configUrl}`);
+  //console.log("TEST 1: Using GitHubConfig.addClientId");
+  //console.log(`URL: ${configUrl}`);
   
   fetch(configUrl)
     .then(response => {
-      console.log("TEST 1 Response status:", response.status);
-      console.log("TEST 1 Response headers:", {
-        'x-ratelimit-limit': response.headers.get('x-ratelimit-limit'),
-        'x-ratelimit-remaining': response.headers.get('x-ratelimit-remaining'),
-        'x-ratelimit-used': response.headers.get('x-ratelimit-used')
-      });
+      //console.log("TEST 1 Response status:", response.status);
+      //console.log("TEST 1 Response headers:", {
+      //  'x-ratelimit-limit': response.headers.get('x-ratelimit-limit'),
+      //  'x-ratelimit-remaining': response.headers.get('x-ratelimit-remaining'),
+      //  'x-ratelimit-used': response.headers.get('x-ratelimit-used')
+      //});
       if (showResults) {
         logToTestDiv(`TEST 1 - Using Azure Function: <strong>${response.status === 200 ? 'SUCCESS' : 'FAIL'}</strong><br>
           Status: ${response.status}<br>
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return response.json();
     })
     .then(data => {
-      console.log("TEST 1 Response data:", data);
+      //console.log("TEST 1 Response data:", data);
       if (data && data.resources && data.resources.core) {
         const limit = data.resources.core.limit;
         const remaining = data.resources.core.remaining;
@@ -130,17 +130,17 @@ document.addEventListener('DOMContentLoaded', function() {
   // Test 2: Using GitHubConfig.addClientId with a different endpoint
   const reposUrl = window.GitHubConfig.addClientId('https://api.github.com/users/rivie13/repos?per_page=2');
   
-  console.log("TEST 2: Using GitHubConfig.addClientId for repos");
-  console.log(`URL: ${reposUrl}`);
+  //console.log("TEST 2: Using GitHubConfig.addClientId for repos");
+  //console.log(`URL: ${reposUrl}`);
   
   fetch(reposUrl)
     .then(response => {
-      console.log("TEST 2 Response status:", response.status);
-      console.log("TEST 2 Response headers:", {
-        'x-ratelimit-limit': response.headers.get('x-ratelimit-limit'),
-        'x-ratelimit-remaining': response.headers.get('x-ratelimit-remaining'),
-        'x-ratelimit-used': response.headers.get('x-ratelimit-used')
-      });
+      //console.log("TEST 2 Response status:", response.status);
+      //console.log("TEST 2 Response headers:", {
+      //  'x-ratelimit-limit': response.headers.get('x-ratelimit-limit'),
+      //  'x-ratelimit-remaining': response.headers.get('x-ratelimit-remaining'),
+      //  'x-ratelimit-used': response.headers.get('x-ratelimit-used')
+      //});
       if (showResults) {
         logToTestDiv(`TEST 2 - Using Azure Function for repos: <strong>${response.status === 200 ? 'SUCCESS' : 'FAIL'}</strong><br>
           Status: ${response.status}<br>
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return response.json();
     })
     .then(data => {
-      console.log("TEST 2 Response data:", data);
+      //console.log("TEST 2 Response data:", data);
       if (showResults && Array.isArray(data)) {
         logToTestDiv(`TEST 2 - Fetched ${data.length} repositories`);
       }
@@ -163,10 +163,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
   // Test 3: Using RequestQueue
-  console.log("TEST 3: Using RequestQueue");
+  //console.log("TEST 3: Using RequestQueue");
   window.RequestQueue.add(configUrl, (response, data) => {
-    console.log("TEST 3 Response status:", response.status);
-    console.log("TEST 3 Response data:", data);
+    //console.log("TEST 3 Response status:", response.status);
+    //console.log("TEST 3 Response data:", data);
     if (showResults) {
       if (response.ok) {
         logToTestDiv(`TEST 3 - Using RequestQueue: <strong>SUCCESS</strong><br>
