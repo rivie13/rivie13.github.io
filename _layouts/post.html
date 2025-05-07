@@ -46,6 +46,9 @@ layout: default
     {{ content }}
   </div>
   
+  <!-- In-article ad after content -->
+  {% include adsense-ad.html type="in-article" slot="YOUR_IN_ARTICLE_SLOT_ID" %}
+  
   {% if page.tags.size > 0 %}
     <div class="mb-8 pb-8 border-b opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <h3 class="text-lg font-bold mb-4">Tags</h3>
@@ -84,6 +87,9 @@ layout: default
   </div>
   
   {% if site.related_posts.size > 0 %}
+    <!-- Display ad before related posts -->
+    {% include adsense-ad.html type="display" format="auto" slot="YOUR_DISPLAY_AD_SLOT_ID" %}
+    
     <div class="mt-12 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <h3 class="text-2xl font-bold mb-6">Related Posts</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

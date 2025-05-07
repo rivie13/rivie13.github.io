@@ -32,6 +32,9 @@ social:
 # Google Analytics
 google_analytics: G-XXXXXXXXXX  # Replace with your actual Google Analytics ID when ready
 
+# Google AdSense
+google_adsense: ca-pub-7733001105026476
+
 # Collections
 collections:
   posts:
