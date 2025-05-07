@@ -254,7 +254,7 @@ permalink: /projects/
   </section>
 </div>
 
-<script src="{{ '/assets/js/github-repos.js' | relative_url }}"></script>
+<!-- <script src="{{ '/assets/js/github-repos.js' | relative_url }}"></script> -->
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
