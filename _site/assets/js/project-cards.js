@@ -71,6 +71,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Add project to queue for processing
   function queueProject(id, repos, container) {
+    // Check if this container is already in the queue or has been processed
+    if (container.dataset.languageProcessed === 'true') {
+      console.log(`Container for ${id} already processed, skipping`);
+      return;
+    }
+    
+    // Mark container as being processed
+    container.dataset.languageProcessed = 'true';
+    
     projectQueue.push({ id, repos, container });
     
     if (!isProcessingQueue) {
@@ -80,6 +89,9 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Find all project cards and process them
   function findAndProcessCards() {
+    // Track processed containers to avoid duplicates
+    const processedContainers = new Set();
+    
     // Find all project cards - include cards without specific IDs to catch featured cards
     const allProjectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg');
     
@@ -108,32 +120,16 @@ document.addEventListener('DOMContentLoaded', function() {
       
       console.log(`Found project card for: ${projectId} with title "${titleText}"`);
       
-      // Find language section - try multiple selectors to ensure we find it
-      let languageContainer = null;
+      // SIMPLIFIED: Always look for the parent language container with class language-container,
+      // NOT the inner .languages-container as that's what we'll be updating
+      let languageContainer = card.querySelector('.language-container');
       
-      // Try looking for a language heading first
-      const languageHeading = card.querySelector('.mb-4 h4');
-      if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
-        languageContainer = languageHeading.closest('.mb-4');
-      }
-      
-      // If not found, try looking for a dedicated language container
+      // Fallback to other methods only if we don't find a dedicated container
       if (!languageContainer) {
-        languageContainer = card.querySelector('.languages-container');
-        if (languageContainer) {
-          console.log(`Found language container for ${projectId} with class`);
-        }
-      }
-      
-      // If still not found, look for any section that might contain language info
-      if (!languageContainer) {
-        const sections = card.querySelectorAll('.mb-4');
-        for (const section of sections) {
-          const heading = section.querySelector('h4');
-          if (heading && heading.textContent.includes('LANGUAGE')) {
-            languageContainer = section;
-            break;
-          }
+        // Try looking for a language heading 
+        const languageHeading = card.querySelector('.mb-4 h4');
+        if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
+          languageContainer = languageHeading.closest('.mb-4');
         }
       }
       
@@ -142,6 +138,15 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
       }
       
+      // Skip if this exact container has already been processed
+      if (processedContainers.has(languageContainer)) {
+        console.log(`Container for ${projectId} already processed, skipping`);
+        return;
+      }
+      
+      // Mark this container as processed
+      processedContainers.add(languageContainer);
+      
       // Initially show loading state
       showLanguageLoading(languageContainer);
       
@@ -149,7 +154,8 @@ document.addEventListener('DOMContentLoaded', function() {
       queueProject(projectId, projectRepoMap[projectId], languageContainer);
     });
     
-    // Also check for cards by ID for special handling
+    // SIMPLIFIED: We ONLY need to look for cards with ID if we missed any
+    // But we'll now look for the SAME container class as above
     document.querySelectorAll('[id*="codegrind"], [id*="helios"], [id*="bestnotes"], [id*="projectile"], [id*="book-player"]').forEach(card => {
       let projectId = null;
       
@@ -167,10 +173,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (!projectId || !projectRepoMap[projectId]) return;
       
-      // Get the language container
-      let languageContainer = card.querySelector('.languages-container');
+      // CONSISTENT: Always look for parent container, NOT the inner container
+      let languageContainer = card.querySelector('.language-container');
       
-      // If no language container exists, look for language heading
+      // Fallback only if needed
       if (!languageContainer) {
         const languageHeading = card.querySelector('.mb-4 h4');
         if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
@@ -180,7 +186,16 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (!languageContainer) return;
       
+      // Skip if this exact container has already been processed
+      if (processedContainers.has(languageContainer)) {
+        console.log(`Container for ${projectId} already processed (by ID), skipping`);
+        return;
+      }
+      
       console.log(`Found project card by ID: ${card.id} (${projectId})`);
+      
+      // Mark this container as processed
+      processedContainers.add(languageContainer);
       
       // Initially show loading state
       showLanguageLoading(languageContainer);
@@ -197,8 +212,16 @@ document.addEventListener('DOMContentLoaded', function() {
    * Show loading state for language data
    */
   function showLanguageLoading(container) {
-    container.innerHTML = `
-      <h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>
+    // Find the inner languages-container
+    let innerContainer = container.querySelector('.languages-container');
+    
+    // If container doesn't have an inner languages-container, it means it's the inner container itself
+    if (!innerContainer) {
+      innerContainer = container;
+    }
+    
+    // Update only the inner container
+    innerContainer.innerHTML = `
       <div class="text-center py-2">
         <div class="animate-spin h-4 w-4 border-b-2 border-blue-600 rounded-full mx-auto mb-1"></div>
         <div class="text-xs text-gray-500">Loading language data...</div>
@@ -385,57 +408,35 @@ document.addEventListener('DOMContentLoaded', function() {
       "JSON": "bg-amber-300"
     };
     
-    // Check if we're updating the inner languages-container div or the parent section
-    const isLangContainer = container.classList.contains('languages-container');
+    // Find the inner languages-container
+    let innerContainer = container.querySelector('.languages-container');
     
-    let html = '';
-    
-    // If this is the inner languages-container, we need to preserve the parent's heading
-    // by not including the heading in our HTML replacement
-    if (isLangContainer) {
-      // Just add the language bar itself without the heading
-      html = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
-      
-      // Add language bars
-      languages.forEach(lang => {
-        const bgClass = colorMap[lang.name] || "bg-gray-400";
-        html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-      });
-      
-      html += `</div>`;
-      html += `<div class="flex flex-wrap mt-1 text-xs">`;
-      
-      // Add language text
-      languages.forEach(lang => {
-        html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
-      });
-      
-      html += `</div>`;
-    } else {
-      // For the parent container, include the heading and everything
-      html = `<h4 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">LANGUAGES</h4>`;
-      html += `<div class="languages-container">`;
-      html += `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
-      
-      // Add language bars
-      languages.forEach(lang => {
-        const bgClass = colorMap[lang.name] || "bg-gray-400";
-        html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
-      });
-      
-      html += `</div>`;
-      html += `<div class="flex flex-wrap mt-1 text-xs">`;
-      
-      // Add language text
-      languages.forEach(lang => {
-        html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
-      });
-      
-      html += `</div></div>`;
+    // If container doesn't have an inner languages-container, it means it's the inner container itself
+    if (!innerContainer) {
+      innerContainer = container;
     }
     
-    // Update the container
-    container.innerHTML = html;
+    // Generate the language bar HTML (without heading)
+    let html = `<div class="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden">`;
+    
+    // Add language bars
+    languages.forEach(lang => {
+      const bgClass = colorMap[lang.name] || "bg-gray-400";
+      html += `<div class="${bgClass}" style="width: ${lang.percentage}%; height: 100%; float: left;" title="${lang.name}: ${lang.percentage}%"></div>`;
+    });
+    
+    html += `</div>`;
+    html += `<div class="flex flex-wrap mt-1 text-xs">`;
+    
+    // Add language text
+    languages.forEach(lang => {
+      html += `<span class="mr-2">${lang.name} (${lang.percentage}%)</span>`;
+    });
+    
+    html += `</div>`;
+    
+    // Update only the inner container
+    innerContainer.innerHTML = html;
   }
   
   /**

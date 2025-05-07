@@ -1,0 +1,6 @@
+# Allow all web crawlers to access the entire site
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://rivie13.github.io/sitemap.xml 
