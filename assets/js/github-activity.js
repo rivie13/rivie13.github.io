@@ -246,7 +246,7 @@ class GitHubActivityFetcher {
           Refresh
         </button>
       </div>
-      <div class="max-h-[500px] overflow-y-auto pr-2">
+      <div class="max-h-[500px] overflow-y-auto pr-2" id="github-activity-container">
         <div class="relative border-l-2 border-gray-200 dark:border-gray-700 ml-6">
     `;
     
