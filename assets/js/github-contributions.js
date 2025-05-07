@@ -256,6 +256,10 @@ document.addEventListener('DOMContentLoaded', function() {
     return date.toISOString().split('T')[0];
   }
   
+  // Declare activeTooltip at a higher scope so it's accessible throughout the function
+  let touchTimer;
+  let activeTooltip = null;
+  
   /**
    * Display contributions in a heatmap visualization
    */
@@ -535,9 +539,6 @@ document.addEventListener('DOMContentLoaded', function() {
         cell.addEventListener('touchstart', handleTouchStart, {passive: true});
         cell.addEventListener('touchend', handleTouchEnd, {passive: true});
       });
-      
-      let touchTimer;
-      let activeTooltip = null;
       
       // Handle touch start by starting a timer
       function handleTouchStart(e) {
