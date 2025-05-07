@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const cachedData = localStorage.getItem(cacheKey);
     const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
     const now = Date.now();
-    const cacheDuration = 24 * 60 * 60 * 1000; // 24 hours cache duration
+    const cacheDuration = 4 * 60 * 60 * 1000; // 4 hours cache duration
     
     if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
       //console.log('Using cached GitHub contributions data');
@@ -145,6 +145,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Generate exactly one year of data, matching GitHub's timeframe
     const today = new Date();
+    // Make sure we're using UTC date strings
+    const todayStr = today.toISOString().split('T')[0];
+    
     const oneYearAgo = new Date(today);
     oneYearAgo.setFullYear(today.getFullYear() - 1);
     oneYearAgo.setDate(oneYearAgo.getDate() - 1); // Start exactly one year and one day ago (GitHub's approach)
@@ -183,6 +186,20 @@ document.addEventListener('DOMContentLoaded', function() {
       // Move to next day
       currentDate.setDate(currentDate.getDate() + 1);
     }
+    
+    // Ensure today is included
+    const hasToday = contributions.some(day => day.date === todayStr);
+    if (!hasToday) {
+      // Add today if missing
+      contributions.push({
+        date: todayStr,
+        count: Math.floor(Math.random() * 5) + 1,
+        level: getLevelFromCount(Math.floor(Math.random() * 5) + 1)
+      });
+    }
+    
+    // Sort contributions by date
+    contributions.sort((a, b) => new Date(a.date) - new Date(b.date));
     
     return {
       totalContributions,
@@ -248,6 +265,17 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
+    // Force refresh if last day is not today
+    const today = new Date().toISOString().split('T')[0];
+    const lastDate = data.contributions[data.contributions.length - 1].date;
+    if (lastDate < today) {
+      // Clear the cache to force a refresh
+      localStorage.removeItem(`github_contributions_${username}`);
+      localStorage.removeItem(`github_contributions_${username}_timestamp`);
+      fetchContributions();
+      return;
+    }
+    
     // DEBUG: Log the data structure
     //console.log("Contribution data structure:", JSON.stringify(data, null, 2));
     
@@ -265,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Get current date to highlight today
-    const today = new Date().toISOString().split('T')[0];
+    // const today = new Date().toISOString().split('T')[0]; // Already defined above
     
     // Determine if we're in dark mode
     const isDarkMode = document.documentElement.classList.contains('dark');
@@ -343,19 +371,13 @@ document.addEventListener('DOMContentLoaded', function() {
       
       <div class="overflow-x-auto">
         <div class="contribution-graph min-w-max" aria-label="GitHub contribution heatmap" role="img">
-          <div class="graph-labels flex">
-            <div class="w-8"></div>
-            <div class="months-labels relative flex-grow text-xs text-gray-500" style="height: 20px">
     `;
-    
-    // Store month labels for rendering after all data has been processed
-    const monthPositions = [];
-    
-    // First identify the true start of each month - the first column with 4+ days of that month
-    const monthStarts = new Map(); // Maps month number to column index
     
     // Define month names
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    
+    // Find month starts - the first column with 4+ days of that month
+    const monthStarts = new Map(); // Maps month number to column index
     
     // Calculate the position of each month label
     for (let weekIndex = 0; weekIndex < weeks.length; weekIndex++) {
@@ -363,13 +385,11 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Count days for each month in this week
       const daysInMonth = {};
-      let totalDays = 0;
       
       for (let dayIndex = 0; dayIndex < week.length; dayIndex++) {
         const day = week[dayIndex];
         if (!day) continue;
         
-        totalDays++;
         const date = new Date(day.date + "T00:00:00Z");
         const month = date.getUTCMonth();
         
@@ -387,47 +407,45 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     
-    // Now place month labels at their correct positions
+    // Now create a structure where we know which month label goes with which week
+    const weeksWithMonths = new Array(weeks.length).fill(null);
+    
     // Sort months to make sure they're in order
     const sortedMonths = Array.from(monthStarts.entries()).sort((a, b) => a[1] - b[1]);
     
-    // Each cell is about 15px wide plus 0.25rem gap
-    const cellWidth = 15;
-    const cellGap = 4; // Approximating 0.25rem as 4px
-    
     for (let i = 0; i < sortedMonths.length; i++) {
       const [month, weekIndex] = sortedMonths[i];
-      // Calculate pixel position from left edge
-      const position = weekIndex * (cellWidth + cellGap);
-      
-      html += `
-        <div class="month-label absolute font-medium" style="left: ${position}px;">
-          ${months[month]}
-        </div>
-      `;
+      weeksWithMonths[weekIndex] = months[month];
     }
     
-    html += `</div>`;
-    
+    // Build the month labels row that perfectly aligns with the weeks grid
     html += `
-            </div>
-          </div>
-          <div class="flex">
-            <div class="day-labels grid grid-rows-7 gap-1 w-8 text-xs text-gray-500 text-right pr-2">
-              <div>Sun</div>
-              <div>Mon</div>
-              <div>Tue</div>
-              <div>Wed</div>
-              <div>Thu</div>
-              <div>Fri</div>
-              <div>Sat</div>
-            </div>
-            <div class="weeks-grid grid grid-flow-col gap-1 flex-grow">
+      <div class="grid" style="grid-template-columns: 2rem repeat(${weeks.length}, 1fr); grid-gap: 0.25rem;">
+        <!-- Empty cell above day labels -->
+        <div class="h-5 text-xs"></div>
+        
+        <!-- Month labels that align perfectly with week columns -->
+        ${weeksWithMonths.map((month, i) => 
+          `<div class="h-5 text-xs text-gray-500 text-center ${month ? 'font-medium' : 'opacity-0'}">${month || '.'}</div>`
+        ).join('')}
+        
+        <!-- Day labels column -->
+        <div class="grid grid-rows-7 gap-1 text-xs text-gray-500 text-right pr-2">
+          <div>Sun</div>
+          <div>Mon</div>
+          <div>Tue</div>
+          <div>Wed</div>
+          <div>Thu</div>
+          <div>Fri</div>
+          <div>Sat</div>
+        </div>
     `;
     
-    // Add contribution cells, one column per week
+    // Add contribution cells, one column per week (perfectly aligned with month labels)
     weeks.forEach(week => {
-      html += `<div class="week grid grid-rows-7 gap-1">`;
+      html += `
+        <div class="week grid grid-rows-7 gap-1">
+      `;
       
       // Each week column has 7 cells, Sunday to Saturday
       for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
@@ -465,24 +483,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     html += `
-            </div>
+      </div> <!-- End of grid -->
+      <div class="flex justify-end mt-2">
+        <div class="flex items-center text-xs text-gray-500">
+          <span class="mr-1">Less</span>
+          <div class="flex gap-1" aria-label="Contribution level scale from less to more">
+            <div class="w-3 h-3 rounded-sm ${getLevelClass(0, isDarkMode)}" aria-label="No contributions"></div>
+            <div class="w-3 h-3 rounded-sm ${getLevelClass(1, isDarkMode)}" aria-label="1-3 contributions"></div>
+            <div class="w-3 h-3 rounded-sm ${getLevelClass(2, isDarkMode)}" aria-label="4-7 contributions"></div>
+            <div class="w-3 h-3 rounded-sm ${getLevelClass(3, isDarkMode)}" aria-label="8-12 contributions"></div>
+            <div class="w-3 h-3 rounded-sm ${getLevelClass(4, isDarkMode)}" aria-label="13+ contributions"></div>
           </div>
-          <div class="flex justify-end mt-2">
-            <div class="flex items-center text-xs text-gray-500">
-              <span class="mr-1">Less</span>
-              <div class="flex gap-1" aria-label="Contribution level scale from less to more">
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(0, isDarkMode)}" aria-label="No contributions"></div>
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(1, isDarkMode)}" aria-label="1-3 contributions"></div>
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(2, isDarkMode)}" aria-label="4-7 contributions"></div>
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(3, isDarkMode)}" aria-label="8-12 contributions"></div>
-                <div class="w-3 h-3 rounded-sm ${getLevelClass(4, isDarkMode)}" aria-label="13+ contributions"></div>
-              </div>
-              <span class="ml-1">More</span>
-            </div>
-          </div>
-          <div class="text-xs text-gray-500 mt-1 text-right">
-            Last updated: ${new Date().toLocaleDateString()}
-          </div>
+          <span class="ml-1">More</span>
+        </div>
+      </div>
+      <div class="text-xs text-gray-500 mt-1 text-right">
+        Last updated: ${new Date().toLocaleDateString()}
+      </div>
         </div>
       </div>
     `;
@@ -545,28 +562,4 @@ document.addEventListener('DOMContentLoaded', function() {
       day: 'numeric'
     });
   }
-  
-  /**
-   * Display an error message in the container
-   */
-  function displayError(message) {
-    contributionsContainer.innerHTML = `
-      <div class="text-red-500 p-4 rounded-md border border-red-300 mb-4" role="alert" aria-live="assertive">
-        <p class="font-semibold">Error loading GitHub contributions</p>
-        <p>${message}</p>
-      </div>
-    `;
-  }
-  
-  /**
-   * Display a fallback message in the container
-   */
-  function displayFallbackData() {
-    contributionsContainer.innerHTML = `
-      <div class="p-4 rounded-md border border-amber-300 mb-4" role="alert" aria-live="polite">
-        <p class="font-semibold">GitHub contribution data unavailable</p>
-        <p>Please check back later to see contribution activity.</p>
-      </div>
-    `;
-  }
-}); 
+});
