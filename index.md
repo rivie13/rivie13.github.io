@@ -3,6 +3,14 @@ layout: default
 title: Home
 ---
 
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C9WDMTWS34"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-C9WDMTWS34');
+</script>
+
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
   <!-- Hero Section -->
   <section class="py-8 md:py-16">
