@@ -266,9 +266,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Force refresh if last day is not today
-    const today = new Date().toISOString().split('T')[0];
+    const todayRaw = new Date().toISOString().split('T')[0];
+    const todayAdjusted = adjustDateToGitHub(todayRaw); // Adjust today's date the same way as other dates
     const lastDate = data.contributions[data.contributions.length - 1].date;
-    if (lastDate < today) {
+    if (lastDate < todayRaw) {
       // Clear the cache to force a refresh
       localStorage.removeItem(`github_contributions_${username}`);
       localStorage.removeItem(`github_contributions_${username}_timestamp`);
@@ -293,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Get current date to highlight today
-    // const today = new Date().toISOString().split('T')[0]; // Already defined above
+    // Use the adjusted today value consistently
     
     // Determine if we're in dark mode
     const isDarkMode = document.documentElement.classList.contains('dark');
@@ -460,8 +461,9 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Fix the date discrepancy by using adjusted date for comparison and display
           const adjustedDate = adjustDateToGitHub(day.date);
-          const isToday = adjustedDate === today;
-          const borderClass = isToday ? 'ring-1 ring-blue-500' : '';
+          const isToday = adjustedDate === todayAdjusted;
+          // Make the today highlight more visible with a thicker border
+          const borderClass = isToday ? 'ring-2 ring-offset-1 ring-blue-600' : '';
           
           // Create an appropriate aria-label for screen readers
           const formattedDate = formatDateForTooltip(adjustedDate);
@@ -514,7 +516,13 @@ document.addEventListener('DOMContentLoaded', function() {
           const date = reference.getAttribute('data-date');
           const count = reference.getAttribute('data-count');
           return `${formatDateForTooltip(date)}: ${count} contribution${count !== '1' ? 's' : ''}`;
-        }
+        },
+        // Enable mobile touch support with better settings for tooltips
+        touch: ['hold', 300], // Show tooltip on hold for 300ms
+        touchHold: true,      // Require hold to show
+        placement: 'top',     // Position above the square
+        arrow: true,          // Add an arrow
+        theme: isDarkMode ? 'dark' : 'light' // Match current theme
       });
     }
     
