@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Mobile menu toggle functionality
 function initResponsiveMenu() {
-  const menuToggle = document.querySelector('[data-menu-toggle]');
-  const mobileMenu = document.querySelector('[data-mobile-menu]');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('menu');
   
   if (menuToggle && mobileMenu) {
     menuToggle.addEventListener('click', () => {

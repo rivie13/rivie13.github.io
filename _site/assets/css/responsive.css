@@ -39,6 +39,32 @@ img {
   height: auto;
 }
 
+/* GitHub activity mobile fix */
+@media (max-width: 767px) {
+  #github-activity-container {
+    display: block !important;
+    max-height: 400px !important;
+    overflow-y: auto !important;
+  }
+  
+  /* Fix month labels spacing in contribution chart */
+  #github-contributions .months-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.7rem;
+  }
+  
+  #github-contributions .months-labels .month-label {
+    flex: 0 0 auto;
+    width: calc(100% / 12) !important;
+    text-align: center;
+    padding: 0 !important;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
 /* Simplified animations for mobile */
 .animate-simple {
   animation-duration: 0.3s;
