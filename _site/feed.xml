@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-07T15:16:16-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Welcome to My Portfolio Website</title><link href="http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio/" rel="alternate" type="text/html" title="Welcome to My Portfolio Website" /><published>2025-05-05T10:00:00-04:00</published><updated>2025-05-05T10:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio/">&lt;h2 id=&quot;hello-and-welcome&quot;&gt;Hello and Welcome!&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-07T17:46:01-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Part 1: Conception &amp;amp; Collaboration - Planning a Dynamic Portfolio with AI</title><link href="http://localhost:4000/blog/2025/05/08/conception-and-collaboration-planning-dynamic-portfolio-with-ai/" rel="alternate" type="text/html" title="Part 1: Conception &amp;amp; Collaboration - Planning a Dynamic Portfolio with AI" /><published>2025-05-08T10:00:00-04:00</published><updated>2025-05-08T10:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/08/conception-and-collaboration-planning-dynamic-portfolio-with-ai</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/08/conception-and-collaboration-planning-dynamic-portfolio-with-ai/">&lt;p&gt;Welcome to the first part of a multi-part series where I’ll take you through the journey of how I built my current portfolio website! This wasn’t just any coding project; it was a rapid development sprint, completed in less than a week, heavily influenced by collaboration with AI assistants, and focused on overcoming the typical limitations of a static website to create something truly dynamic and professional – all while aiming for a free, no-cost hosting solution.&lt;/p&gt;
+
+&lt;p&gt;This series will dive into the nitty-gritty, from initial planning with AI to deploying a feature-rich site. In this first post, we’ll focus on the crucial initial phase: &lt;strong&gt;conception and collaboration&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;11-the-vision-more-than-just-static&quot;&gt;1.1. The Vision: More Than Just Static&lt;/h2&gt;
+
+&lt;p&gt;My initial ambition was clear: I wanted a professional portfolio that did more than just list my skills. It needed to be &lt;em&gt;dynamic&lt;/em&gt;, showcasing my expertise in Full Stack Development, Cloud/Solutions Architecture, and AI Development, alongside my personal interests in coding, music, and math. And, I wanted this built &lt;em&gt;quickly&lt;/em&gt; and hosted for &lt;em&gt;free&lt;/em&gt; on GitHub Pages.&lt;/p&gt;
+
+&lt;p&gt;But what did “dynamic” mean for a static site? For me, it included:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Live display of my recent GitHub activity.&lt;/li&gt;
+  &lt;li&gt;Automatically updated “last modified” dates for my projects.&lt;/li&gt;
+  &lt;li&gt;A platform that felt alive and reflected my ongoing work.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;12-the-github-pages-challenge-static-site-dynamic-dreams&quot;&gt;1.2. The GitHub Pages Challenge: Static Site, Dynamic Dreams&lt;/h2&gt;
+
+&lt;p&gt;The biggest hurdle? GitHub Pages, my hosting platform of choice for its simplicity and free tier, serves static files. This means no traditional backend server to run databases or server-side code that could easily fetch and display dynamic data. How could I reconcile my dynamic dreams with this static reality? This was the central question that kicked off my planning.&lt;/p&gt;
+
+&lt;h2 id=&quot;13-partnering-with-ai-claude--gemini-as-co-planners&quot;&gt;1.3. Partnering with AI: Claude &amp;amp; Gemini as Co-Planners&lt;/h2&gt;
+
+&lt;p&gt;This is where my AI assistants, Claude and Gemini, became invaluable co-planners. I didn’t just dive into coding; my AI assistants and I embarked on a planning spree.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Development Environment:&lt;/strong&gt; I primarily used &lt;strong&gt;Cursor&lt;/strong&gt;, an AI-first code editor. This IDE was instrumental as it allowed for seamless integration and collaboration with AI models directly within my development workflow, making the process of brainstorming, coding, and refining significantly more efficient.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Brainstorming Technologies:&lt;/strong&gt; We explored various options.
+    &lt;ul&gt;
+      &lt;li&gt;Why Jekyll? AI helped confirm its suitability due to its native support on GitHub Pages, its simplicity for content management (especially blogs), and its extensibility.&lt;/li&gt;
+      &lt;li&gt;Why Tailwind CSS? For rapid UI development and a modern look, AI discussions highlighted its utility-first approach as a major advantage.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Exploring Dynamic Data Solutions:&lt;/strong&gt; This was a big topic with my AI partners. We discussed initial ideas for fetching GitHub data, and they helped identify potential pitfalls, such as security risks and API rate limits. For instance, a conceptual interaction might have been: “I asked Claude, ‘How can I display my latest GitHub commits on a static Jekyll site securely without exposing API tokens?’” or “Gemini, help me outline the structure for a portfolio that needs to fetch real-time project updates.”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Structuring the Plan:&lt;/strong&gt; The AI assistants were also instrumental in helping me structure the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PLANNING.MD&lt;/code&gt; document in my repository. This document became the detailed roadmap for the entire project, capturing all the decisions and steps we had fleshed out.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;14-the-architectural-cornerstone-secure-github-api-access&quot;&gt;1.4. The Architectural Cornerstone: Secure GitHub API Access&lt;/h2&gt;
+
+&lt;p&gt;One of the most critical challenges was securely accessing the GitHub API. To get rich data and avoid stringent rate limits, authentication is often necessary. However, embedding API keys or tokens directly in client-side JavaScript on a public static site is a major security no-no – anyone could grab them!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;The AI-Informed Solution:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Through discussions with my AI collaborators, we converged on the idea of using a server-side proxy. Specifically, we decided that a serverless function would be the perfect fit: lightweight, cost-effective (often free for typical portfolio traffic), and scalable.&lt;/p&gt;
+
+&lt;p&gt;This led to the design of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portfolioWebsitegithubAuth&lt;/code&gt; Azure Function App, the code for which you can find in my public repository: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rivie13/github-api-proxy-function&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Its purpose is simple but vital:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Act as a secure intermediary between my portfolio website and the GitHub API.&lt;/li&gt;
+  &lt;li&gt;Handle authentication with the GitHub API (using a token stored securely in the Azure Function’s settings, not in my website’s code).&lt;/li&gt;
+  &lt;li&gt;Forward requests from my website to the GitHub API and then pass the responses back.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Implementing this secure bridge was a key learning goal for me in this project, and it’s a pattern I highly recommend for anyone facing similar challenges with static sites.&lt;/p&gt;
+
+&lt;h2 id=&quot;15-from-ideas-to-blueprint-solidifying-the-plan&quot;&gt;1.5. From Ideas to Blueprint: Solidifying the Plan&lt;/h2&gt;
+
+&lt;p&gt;The iterative discussions, brainstorming sessions, and problem-solving with AI didn’t just float in the air. They were distilled into the comprehensive &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PLANNING.MD&lt;/code&gt; document. This step was crucial. It transformed abstract ideas and AI-generated suggestions into a concrete, actionable blueprint, giving me the confidence to move into the development phase with a clear direction.&lt;/p&gt;
+
+&lt;h2 id=&quot;16-the-less-than-a-week-feat-setting-the-pace&quot;&gt;1.6. The “Less Than a Week” Feat: Setting the Pace&lt;/h2&gt;
+
+&lt;p&gt;I keep mentioning the “less than a week” development timeline because it underscores the power of this collaborative planning approach. By investing time upfront with my AI partners to define the architecture, choose the right technologies, and anticipate challenges, the actual coding process became incredibly streamlined and efficient. Clear architectural decisions, especially regarding the Azure Function proxy, prevented potential roadblocks later on.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;That wraps up Part 1! We’ve covered the all-important conceptualization and planning phase, highlighting how AI collaboration and strategic architectural decisions laid the groundwork for building a dynamic portfolio on a static platform.&lt;/p&gt;
+
+&lt;p&gt;Stay tuned for &lt;strong&gt;Part 2&lt;/strong&gt;, where we’ll roll up our sleeves and dive into:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Setting up the Jekyll environment.&lt;/li&gt;
+  &lt;li&gt;Crafting the basic site structure and layouts.&lt;/li&gt;
+  &lt;li&gt;Getting started with styling using Tailwind CSS.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’m excited to share the next steps with you!&lt;/p&gt;</content><author><name>Riviera Sperduto</name></author><category term="Portfolio Tutorial" /><category term="AI" /><category term="Jekyll" /><category term="Planning" /><category term="Jekyll" /><category term="AI Collaboration" /><category term="Portfolio Development" /><category term="Static Sites" /><category term="Azure Functions" /><category term="Planning" /><category term="Cursor" /><category term="Web Development" /><summary type="html">Welcome to the first part of a multi-part series where I’ll take you through the journey of how I built my current portfolio website! This wasn’t just any coding project; it was a rapid development sprint, completed in less than a week, heavily influenced by collaboration with AI assistants, and focused on overcoming the typical limitations of a static website to create something truly dynamic and professional – all while aiming for a free, no-cost hosting solution.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/tutorial-part1-banner.png" /><media:content medium="image" url="http://localhost:4000/assets/images/tutorial-part1-banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Welcome to My Portfolio Website</title><link href="http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio/" rel="alternate" type="text/html" title="Welcome to My Portfolio Website" /><published>2025-05-05T10:00:00-04:00</published><updated>2025-05-05T10:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio/">&lt;h2 id=&quot;hello-and-welcome&quot;&gt;Hello and Welcome!&lt;/h2&gt;
 
 &lt;p&gt;Thank you for visiting my portfolio website. This is my first official blog post, marking the launch of this site where I’ll be documenting my professional journey and sharing knowledge about software development, cloud architecture, and artificial intelligence.&lt;/p&gt;
 
