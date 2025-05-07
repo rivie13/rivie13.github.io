@@ -499,7 +499,7 @@ h3.font-semibold.text-lg.mb-3 {
 
 /* Direct high-contrast override for headings in both light and dark mode */
 :root h3.text-lg.font-bold.mb-4 {
-  color: #000000 !important; /* Black for maximum contrast in light mode */
+  color: #a6c0e2 !important; /* no black!!!!!!! black is to dark for maximum contrast in light mode */
 }
 .dark h3.text-lg.font-bold.mb-4 {
   color: #ffffff !important; /* White for maximum contrast in dark mode */
