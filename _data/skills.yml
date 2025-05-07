@@ -10,12 +10,15 @@ languages:
   - YAML
   - Lua
   - RedScript
+  - Ruby
+  - Liquid
 
 frameworks:
   - Testim.io
   - MS Active Directory
   - Tailwind
   - Unity
+  - Jekyll
 
 developer_tools:
   - Git/GitHub
@@ -30,6 +33,11 @@ developer_tools:
   - Power Automate
   - Prisma
   - Ollama
+  - GitHub Pages
+  - Google Analytics
+  - Google AdSense
+  - Formspree
+  - SEO optimization
 
 libraries:
   - Qt Core

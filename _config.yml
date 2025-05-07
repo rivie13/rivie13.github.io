@@ -46,7 +46,7 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /assets/images/default-social-image.jpg  # Create this image in your assets folder
+      image: /assets/images/default-social-image.png  # Create this image in your assets folder
   - scope:
       path: ""
       type: "posts"
