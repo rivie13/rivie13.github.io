@@ -535,4 +535,34 @@ article > header {
 /* Fix text colors in article header for dark mode */
 .dark article > header .text-gray-600 {
   color: #cbd5e0 !important; /* lighter gray for better contrast on dark bg */
+}
+
+/* Fix for text in Live Demo buttons - more specific selectors */
+.dark a.inline-flex.items-center.justify-center.px-4.py-2.text-sm.font-medium.text-white.bg-blue-600,
+.dark a.inline-flex.items-center.justify-center.px-4.py-2.text-sm.font-medium.text-white.bg-blue-600:hover,
+.dark [aria-label*="Open live demo"] {
+  color: #ffffff !important; /* Force white text for better contrast */
+}
+
+/* Fix for text-white class to ensure it remains white in dark mode */
+.dark .text-white,
+.dark [class*="text-white"] {
+  color: #ffffff !important;
+}
+
+/* Fix for C language color (bg-gray-500) in dark mode */
+.dark .bg-gray-500,
+.dark [class*="bg-gray-500"] {
+  background-color: #a0aec0 !important; /* Use a lighter gray for better visibility */
+}
+
+/* Fix for Python and Lua colors to differentiate in dark mode */
+.dark .bg-blue-600,
+.dark [class*="bg-blue-600"] {
+  background-color: #3182ce !important; /* Brighter blue for Python in dark mode */
+}
+
+.dark .bg-blue-400,
+.dark [class*="bg-blue-400"] {
+  background-color: #63b3ed !important; /* Much lighter blue for Lua in dark mode */
 } 
