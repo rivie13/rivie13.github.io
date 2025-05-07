@@ -30,6 +30,9 @@
     
     <!-- Google AdSense -->
     
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7733001105026476"
+     crossorigin="anonymous"></script>
+    
     
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css">
@@ -81,6 +84,7 @@
           <li><a href="/resume/" class="nav-link block py-2 md:py-0">Resume</a></li>
           <li><a href="/blog/" class="nav-link block py-2 md:py-0">Blog</a></li>
           <li><a href="/contact/" class="nav-link block py-2 md:py-0">Contact</a></li>
+          <li><a href="/privacy/" class="nav-link block py-2 md:py-0">Privacy Policy</a></li>
         </ul>
       </div>
     </nav>
@@ -94,7 +98,21 @@
   });
 </script> 
     
-     
+    
+<div class="header-ad-container w-full py-3 bg-gray-100 border-b border-gray-200">
+  <div class="container mx-auto px-4">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7733001105026476"
+         data-ad-slot="YOUR_HEADER_AD_SLOT_ID"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
     
     <main class="container mx-auto px-4 py-8">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -184,7 +202,17 @@
     </div>
   </section>
   
-   
+  
+<div class="homepage-ad my-8 py-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg shadow-sm">
+  <div class="container mx-auto px-4">
+    <h4 class="text-xs uppercase text-gray-500 mb-3 text-center">Sponsored Content</h4>
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7733001105026476" data-ad-slot="YOUR_HOMEPAGE_AD_SLOT_ID" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
   
   <!-- Video Showcase Section -->
   <section class="py-12 border-t">
@@ -392,7 +420,22 @@
 
     </main>
     
-     
+    
+<div class="footer-ad-container w-full py-4 bg-gray-50 border-t border-gray-200 mt-8">
+  <div class="container mx-auto px-4">
+    <h4 class="text-xs uppercase text-gray-500 mb-2 text-center">Advertisement</h4>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7733001105026476"
+         data-ad-slot="YOUR_FOOTER_AD_SLOT_ID"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
     
     <footer class="bg-gray-900 text-white py-8 mt-12">
   <div class="container mx-auto px-4">
@@ -562,11 +605,11 @@ function loadScriptAsync(scriptSrc, callback) {
 
 /* This is the part where you call the above defined function and "calls back" your code which gets executed after the script has loaded */
 
-loadScriptAsync('https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX', function () {
+loadScriptAsync('https://www.googletagmanager.com/gtag/js?id=G-C9WDMTWS34', function () {
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
+    gtag('config', 'G-C9WDMTWS34', { 'anonymize_ip': true });
 }) `;
         document.head.appendChild(script);
     }
