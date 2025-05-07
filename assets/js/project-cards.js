@@ -203,9 +203,6 @@ document.addEventListener('DOMContentLoaded', function() {
       // Queue the project for processing
       queueProject(projectId, projectRepoMap[projectId], languageContainer);
     });
-    
-    // Update last updated timestamps for all repos
-    updateLastUpdatedTimestamps();
   }
   
   /**
@@ -472,92 +469,6 @@ document.addEventListener('DOMContentLoaded', function() {
         titleElem.appendChild(indicator);
       }
     });
-  }
-  
-  /**
-   * Update last updated timestamps for all repos
-   */
-  function updateLastUpdatedTimestamps() {
-    // Get all elements with the data-github-last-updated attribute
-    const timestampElements = document.querySelectorAll('[data-github-last-updated]');
-    
-    timestampElements.forEach(element => {
-      const projectId = element.getAttribute('data-github-last-updated');
-      if (!projectId || !projectRepoMap[projectId]) return;
-      
-      // Get the repos for this project
-      const repos = projectRepoMap[projectId];
-      if (!repos || repos.length === 0) return;
-      
-      // Take the first repo to get the timestamp
-      const repo = repos[0];
-      
-      // Check if we already have last updated info
-      if (element.textContent && element.textContent.includes('Last updated') && !element.textContent.includes('Loading')) {
-        return; // Skip if already updated
-      }
-      
-      // Show loading indicator
-      element.textContent = "Loading update info...";
-      
-      // Get the last updated timestamp
-      const repoUrl = window.GitHubConfig ? 
-        window.GitHubConfig.addClientId(`https://api.github.com/repos/${username}/${repo}`) :
-        `https://api.github.com/repos/${username}/${repo}`;
-      
-      // Check cache first
-      const cacheKey = `repo_details_${username}_${repo}`;
-      const cachedData = localStorage.getItem(cacheKey);
-      const cacheTimestamp = localStorage.getItem(`${cacheKey}_timestamp`);
-      const now = Date.now();
-      const cacheDuration = window.GitHubConfig ? window.GitHubConfig.cacheDuration : 24 * 60 * 60 * 1000;
-      
-      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
-        console.log(`Using cached repo details for: ${repo}`);
-        updateLastUpdatedElement(element, JSON.parse(cachedData));
-        return;
-      }
-      
-      window.RequestQueue.add(repoUrl, (response, data) => {
-        if (response.ok) {
-          // Cache the data
-          try {
-            localStorage.setItem(cacheKey, JSON.stringify(data));
-            localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
-          } catch (e) {
-            console.warn('Failed to cache repo details:', e);
-          }
-          
-          updateLastUpdatedElement(element, data);
-        } else {
-          element.textContent = "Last updated: Unknown";
-        }
-      });
-    });
-    
-  }
-  
-  
-  /**
-   * Update a last updated element with repo data
-   */
-  function updateLastUpdatedElement(element, data) {
-    if (data.updated_at) {
-      // Format the date
-      const updatedDate = new Date(data.updated_at);
-      const formattedDate = updatedDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-      
-      // Update the element
-      element.textContent = `Last updated: ${formattedDate}`;
-      
-      // Stars and other GitHub stats removed as requested
-    } else {
-      element.textContent = "Last updated: Unknown";
-    }
   }
   
   /**
