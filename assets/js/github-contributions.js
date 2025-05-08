@@ -10,6 +10,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (!contributionsContainer) return; // Exit if container not found
   
+  // Force clear cache if needed for debugging
+  const forceRefresh = window.location.search.includes('force_refresh');
+  if (forceRefresh) {
+    console.log('Forcing refresh of GitHub contributions data');
+    const cacheKey = `github_contributions_${username}`;
+    localStorage.removeItem(cacheKey);
+    localStorage.removeItem(`${cacheKey}_timestamp`);
+  }
+  
   // Load contributions from cache or fetch from API
   loadContributions();
   
@@ -23,11 +32,23 @@ document.addEventListener('DOMContentLoaded', function() {
     const now = Date.now();
     const cacheDuration = 4 * 60 * 60 * 1000; // 4 hours cache duration
     
-    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
-      //console.log('Using cached GitHub contributions data');
-      displayContributions(JSON.parse(cachedData));
+    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration) && !forceRefresh) {
+      console.log('Using cached GitHub contributions data');
+      try {
+        const parsedData = JSON.parse(cachedData);
+        // Check if this is fallback data and force a refresh if possible
+        if (parsedData && parsedData._is_fallback_data) {
+          console.log('Cached data is fallback data - attempting to fetch real data');
+          fetchContributions();
+        } else {
+          displayContributions(parsedData);
+        }
+      } catch (e) {
+        console.error('Error parsing cached data:', e);
+        fetchContributions();
+      }
     } else {
-      //console.log('Fetching fresh GitHub contributions data');
+      console.log('Fetching fresh GitHub contributions data');
       fetchContributions();
     }
   }
@@ -45,9 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       `;
       
+      // Clear existing cache to ensure fresh data
+      const cacheKey = `github_contributions_${username}`;
+      localStorage.removeItem(cacheKey);
+      localStorage.removeItem(`${cacheKey}_timestamp`);
+      
       // GraphQL query to get contribution data
       const query = `
-        query($username: String!) {
+        query UserContributions($username: String!) {
           user(login: $username) {
             contributionsCollection {
               contributionCalendar {
@@ -68,70 +94,109 @@ document.addEventListener('DOMContentLoaded', function() {
       // Variables for the query
       const variables = { username };
       
-      // Try to use GraphQL API first
-      try {
-        const graphQLData = await window.GitHubConfig.makeGraphQLRequest(query, variables);
+      // Directly fetch from the GraphQL endpoint
+      const proxyUrl = window.GitHubConfig.getGraphQLProxyUrl();
+      
+      if (!proxyUrl) {
+        throw new Error('GraphQL URL is not available');
+      }
+      
+      console.log(`[GitHub Contributions] Making direct GraphQL request to: ${proxyUrl}`);
+      
+      const response = await fetch(proxyUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          query: query,
+          variables: variables
+        })
+      });
+      
+      console.log(`[GitHub Contributions] GraphQL response status: ${response.status}`);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error(`[GitHub Contributions] GraphQL error response: ${errorText}`);
+        throw new Error(`GraphQL request failed with status ${response.status}`);
+      }
+      
+      const graphQLData = await response.json();
+      console.log('[GitHub Contributions] GraphQL data received:', graphQLData);
+      
+      // Check if we got valid data
+      if (graphQLData.data && graphQLData.data.user && 
+          graphQLData.data.user.contributionsCollection && 
+          graphQLData.data.user.contributionsCollection.contributionCalendar) {
         
-        // If we get here, the GraphQL request succeeded
-        if (graphQLData.data && graphQLData.data.user && 
-            graphQLData.data.user.contributionsCollection && 
-            graphQLData.data.user.contributionsCollection.contributionCalendar) {
-          
-          const calendarData = graphQLData.data.user.contributionsCollection.contributionCalendar;
-          
-          // Process the data into a more usable format
-          const contributions = processContributionData(calendarData);
-          
-          // Cache the data
-          const cacheKey = `github_contributions_${username}`;
-          const now = Date.now();
-          localStorage.setItem(cacheKey, JSON.stringify(contributions));
-          localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
-          
-          // Display the contributions
-          displayContributions(contributions);
-          return; // Exit function if GraphQL was successful
-        }
-      } catch (graphQLError) {
-        // GraphQL request failed, log and continue to fallback
-        console.warn('GraphQL request failed, using REST API fallback:', graphQLError);
+        const calendarData = graphQLData.data.user.contributionsCollection.contributionCalendar;
+        console.log('[GitHub Contributions] Successfully extracted calendar data');
+        
+        // Process the data into a more usable format
+        const contributions = processContributionData(calendarData);
+        
+        // Cache the data
+        const now = Date.now();
+        localStorage.setItem(cacheKey, JSON.stringify(contributions));
+        localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+        
+        // Display the contributions
+        displayContributions(contributions);
+        return; // Success! Exit function
+      } else if (graphQLData.errors) {
+        console.error('[GitHub Contributions] GraphQL returned errors:', graphQLData.errors);
+        throw new Error(`GraphQL API errors: ${graphQLData.errors[0]?.message || 'Unknown error'}`);
+      } else {
+        console.error('[GitHub Contributions] Invalid GraphQL response structure:', graphQLData);
+        throw new Error('Invalid GraphQL response structure');
       }
-      
-      // FALLBACK: Use REST API to get basic profile data and generate mock contributions
-      const userUrl = window.GitHubConfig.addClientId(
-        `https://api.github.com/users/${username}`
-      );
-      
-      // Fetch basic user data
-      const userResponse = await fetch(userUrl);
-      
-      if (!userResponse.ok) {
-        throw new Error(`GitHub API returned ${userResponse.status}`);
-      }
-      
-      // Generate mock contribution data based on public activity
-      const userData = await userResponse.json();
-      const mockContributions = generateMockContributions(userData);
-      
-      // Cache the mock data
-      const cacheKey = `github_contributions_${username}`;
-      const now = Date.now();
-      localStorage.setItem(cacheKey, JSON.stringify(mockContributions));
-      localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
-      
-      // Display the mock contributions
-      displayContributions(mockContributions);
-      
-      // Also show a notice about using estimated data
-      const noticeElement = document.createElement('div');
-      noticeElement.className = 'text-amber-600 text-xs mt-2 text-center';
-      noticeElement.setAttribute('aria-live', 'polite');
-      noticeElement.innerHTML = 'Using estimated contribution data. Working on fixing the direct GitHub GraphQL API access.';
-      contributionsContainer.appendChild(noticeElement);
       
     } catch (error) {
-      console.error('Error fetching GitHub contributions:', error);
-      displayFallbackData();
+      console.error('[GitHub Contributions] Error fetching GitHub contributions:', error);
+      
+      // If we reach here, use the fallback method
+      try {
+        console.warn('[GitHub Contributions] Using fallback REST API method');
+        
+        const userUrl = window.GitHubConfig.addClientId(
+          `https://api.github.com/users/${username}`
+        );
+        
+        // Fetch basic user data
+        const userResponse = await fetch(userUrl);
+        
+        if (!userResponse.ok) {
+          throw new Error(`GitHub API returned ${userResponse.status}`);
+        }
+        
+        // Generate mock contribution data based on public activity
+        const userData = await userResponse.json();
+        const mockContributions = generateMockContributions(userData);
+        
+        // Mark this as fallback data
+        mockContributions._is_fallback_data = true;
+        
+        // Cache the mock data
+        const cacheKey = `github_contributions_${username}`;
+        const now = Date.now();
+        localStorage.setItem(cacheKey, JSON.stringify(mockContributions));
+        localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+        
+        // Display the mock contributions
+        displayContributions(mockContributions);
+        
+        // Also show a notice about using estimated data
+        const noticeElement = document.createElement('div');
+        noticeElement.className = 'text-amber-600 text-xs mt-2 text-center';
+        noticeElement.setAttribute('aria-live', 'polite');
+        noticeElement.innerHTML = 'Using estimated contribution data. Working on fixing the direct GitHub GraphQL API access.';
+        contributionsContainer.appendChild(noticeElement);
+      } catch (fallbackError) {
+        console.error('[GitHub Contributions] Even fallback method failed:', fallbackError);
+        displayFallbackData('Failed to load contribution data. Please try again later.');
+      }
     }
   }
   
@@ -675,5 +740,45 @@ document.addEventListener('DOMContentLoaded', function() {
       month: 'long',
       day: 'numeric'
     });
+  }
+
+  /**
+   * Display fallback message when contributions can't be loaded
+   */
+  function displayFallbackData(message = "Unable to load GitHub contribution data") {
+    if (!contributionsContainer) return;
+    
+    contributionsContainer.innerHTML = `
+      <div class="text-center py-6">
+        <svg class="w-12 h-12 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+        <h3 class="text-xl font-bold mb-2">GitHub Contribution Data Unavailable</h3>
+        <p class="text-gray-600 mb-4">${message}</p>
+        <button onclick="window.location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
+          Try Again
+        </button>
+      </div>
+    `;
+  }
+  
+  /**
+   * Display error message for specific contribution chart errors
+   */
+  function displayError(message = "Error loading contribution data") {
+    if (!contributionsContainer) return;
+    
+    contributionsContainer.innerHTML = `
+      <div class="text-center py-6">
+        <svg class="w-12 h-12 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+        </svg>
+        <h3 class="text-xl font-bold mb-2">Error</h3>
+        <p class="text-gray-600 mb-4">${message}</p>
+        <button onclick="window.location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
+          Try Again
+        </button>
+      </div>
+    `;
   }
 });

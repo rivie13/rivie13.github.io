@@ -79,19 +79,15 @@ window.GitHubConfig = {
   
   // Get the URL for GraphQL API proxy
   getGraphQLProxyUrl: function() {
-    // NOTE: Current Azure Function setup doesn't support GraphQL correctly
-    // When implementing GraphQL support, uncomment this code and remove the fallback
+    // Correctly format the GraphQL proxy URL
+    const graphqlProxyUrl = `${FUNCTION_APP_URL}/graphql`;
+    console.log(`[GitHub Config] GraphQL proxy URL: ${graphqlProxyUrl}`);
     
-     const graphqlProxyUrl = `${FUNCTION_APP_URL}/graphql`;
-     //console.log(`DEBUG CONFIG - GraphQL proxy URL: ${graphqlProxyUrl}`);
-     return graphqlProxyUrl;
-    
-    // Fallback to REST API until GraphQL is supported
-    //console.warn('GraphQL API not currently supported by proxy. Using REST API fallback.');
-    //return null;
+    // Return the URL that we'll use directly in the contributions file
+    return graphqlProxyUrl;
   },
   
-  // Make a GraphQL request (for future use when the proxy supports it)
+  // Make a GraphQL request
   makeGraphQLRequest: async function(query, variables) {
     try {
       // Check if GraphQL proxy is available
@@ -102,11 +98,18 @@ window.GitHubConfig = {
         throw new Error('GraphQL API proxy not available');
       }
       
+      console.log('[GitHub Config] Making GraphQL request to:', proxyUrl);
+      console.log('[GitHub Config] Request payload:', JSON.stringify({
+        query,
+        variables
+      }, null, 2));
+      
       // Make the request
       const response = await fetch(proxyUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
           query,
@@ -116,14 +119,25 @@ window.GitHubConfig = {
       
       // Check for errors
       if (!response.ok) {
+        console.error('[GitHub Config] GraphQL request failed with status:', response.status);
+        const errorText = await response.text();
+        console.error('[GitHub Config] Error response body:', errorText);
         throw new Error(`GraphQL request failed: ${response.status}`);
       }
       
       // Parse and return the response
       const data = await response.json();
+      
+      // Check if the response contains GraphQL errors
+      if (data.errors && data.errors.length > 0) {
+        console.error('[GitHub Config] GraphQL request returned errors:', data.errors);
+        throw new Error(`GraphQL API returned errors: ${data.errors[0].message}`);
+      }
+      
+      console.log('[GitHub Config] GraphQL request successful with data:', data);
       return data;
     } catch (error) {
-      console.error('GraphQL request failed:', error);
+      console.error('[GitHub Config] GraphQL request failed:', error);
       throw error;
     }
   },
