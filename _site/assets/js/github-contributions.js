@@ -479,7 +479,7 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Fix the date discrepancy by using adjusted date for comparison and display
           const adjustedDate = adjustDateToGitHub(day.date);
-          const isToday = adjustedDate === todayForHighlight; // Use local date string for comparison
+          const isToday = day.date === todayForHighlight; // Use local date string for comparison
           const borderClass = isToday ? 'ring-1 ring-blue-500' : '';
           
           // Create an appropriate aria-label for screen readers
