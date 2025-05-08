@@ -68,12 +68,25 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Clear existing cache to ensure fresh data
       const cacheKey = `github_contributions_${username}`;
-      localStorage.removeItem(cacheKey);
-      localStorage.removeItem(`${cacheKey}_timestamp`);
+      if (forceRefresh) {
+        console.log('[GitHub Contributions] Force refresh requested - clearing cache');
+        localStorage.removeItem(cacheKey);
+        localStorage.removeItem(`${cacheKey}_timestamp`);
+      }
       
       // GraphQL query to get contribution data
       const query = `
         query UserContributions($username: String!) {
+          viewer {
+            login
+          }
+          rateLimit {
+            limit
+            cost
+            remaining
+            resetAt
+            used
+          }
           user(login: $username) {
             contributionsCollection {
               contributionCalendar {
@@ -94,6 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
       // Variables for the query
       const variables = { username };
       
+      // Log exact query being sent
+      console.log('======== GITHUB CONTRIBUTIONS DEBUG ========');
+      console.log('[GitHub Contributions] Query:', query);
+      console.log('[GitHub Contributions] Variables:', variables);
+      
       // Directly fetch from the GraphQL endpoint
       const proxyUrl = window.GitHubConfig.getGraphQLProxyUrl();
       
@@ -102,6 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       console.log(`[GitHub Contributions] Making direct GraphQL request to: ${proxyUrl}`);
+      
+      // Check time to measure performance
+      const requestStartTime = performance.now();
       
       const response = await fetch(proxyUrl, {
         method: 'POST',
@@ -115,7 +136,21 @@ document.addEventListener('DOMContentLoaded', function() {
         })
       });
       
+      const requestEndTime = performance.now();
+      console.log(`[GitHub Contributions] Request took ${requestEndTime - requestStartTime}ms`);
       console.log(`[GitHub Contributions] GraphQL response status: ${response.status}`);
+      
+      // Log response headers - especially rate limit headers
+      console.log('[GitHub Contributions] Response headers:');
+      const headersToLog = ['x-ratelimit-limit', 'x-ratelimit-remaining', 'x-ratelimit-used', 
+                           'x-ratelimit-reset', 'x-ratelimit-resource', 'retry-after'];
+      
+      headersToLog.forEach(header => {
+        const value = response.headers.get(header);
+        if (value) {
+          console.log(`  ${header}: ${value}`);
+        }
+      });
       
       if (!response.ok) {
         const errorText = await response.text();
@@ -125,6 +160,43 @@ document.addEventListener('DOMContentLoaded', function() {
       
       const graphQLData = await response.json();
       console.log('[GitHub Contributions] GraphQL data received:', graphQLData);
+      
+      // Log rate limit information from the response
+      if (graphQLData.data && graphQLData.data.rateLimit) {
+        const rateLimit = graphQLData.data.rateLimit;
+        console.log('[GitHub Contributions] Rate limit details:');
+        console.log(`  Query cost: ${rateLimit.cost} points`);
+        console.log(`  Remaining: ${rateLimit.remaining}/${rateLimit.limit} points`);
+        console.log(`  Used: ${rateLimit.used} points`);
+        console.log(`  Reset at: ${rateLimit.resetAt}`);
+        
+        // Calculate approximate time until reset
+        const resetTime = new Date(rateLimit.resetAt);
+        const timeUntilReset = resetTime - new Date();
+        const minutesUntilReset = Math.round(timeUntilReset / 60000);
+        console.log(`  Reset in approximately ${minutesUntilReset} minutes`);
+        
+        // Warn if getting close to limits
+        if (rateLimit.remaining < 1000) {
+          console.warn(`[GitHub Contributions] WARNING: Only ${rateLimit.remaining} points remaining until rate limit reset!`);
+        }
+      }
+      
+      // Calculate query complexity estimate
+      try {
+        // The contributed calendar query has approximately:
+        // 1 request for the user
+        // 1 request for the contribution collection
+        // 52 requests for weeks (1 year)
+        // 52 * 7 = 364 requests for contribution days
+        // Total = 1 + 1 + 52 + 364 = 418 requests
+        // Points = 418 / 100 rounded = 5 points (estimated)
+        console.log('[GitHub Contributions] Estimated query complexity: ~5 points');
+      } catch (e) {
+        console.error('[GitHub Contributions] Error calculating complexity:', e);
+      }
+      
+      console.log('======== END GITHUB CONTRIBUTIONS DEBUG ========');
       
       // Check if we got valid data
       if (graphQLData.data && graphQLData.data.user && 
@@ -139,6 +211,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Cache the data
         const now = Date.now();
+        
+        // Store rate limit info in the cache to help track usage patterns
+        if (graphQLData.data.rateLimit) {
+          contributions._rateLimit = graphQLData.data.rateLimit;
+        }
+        
         localStorage.setItem(cacheKey, JSON.stringify(contributions));
         localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
         
@@ -147,6 +225,26 @@ document.addEventListener('DOMContentLoaded', function() {
         return; // Success! Exit function
       } else if (graphQLData.errors) {
         console.error('[GitHub Contributions] GraphQL returned errors:', graphQLData.errors);
+        
+        // Detailed error logging
+        graphQLData.errors.forEach((error, index) => {
+          console.error(`[GitHub Contributions] Error ${index + 1}:`, error);
+          
+          // Check for rate limiting errors specifically
+          if (error.type === 'RATE_LIMITED') {
+            console.error('[GitHub Contributions] RATE LIMIT EXCEEDED! Check your usage patterns:');
+            console.error('1. Are you making too many requests per minute? (Secondary limit: 2000 points/minute)');
+            console.error('2. Have you exceeded your hourly quota? (Primary limit: 5000 points/hour)');
+            console.error('3. Is your query too complex?');
+            
+            // Check if retry-after header was present
+            const retryAfter = response.headers.get('retry-after');
+            if (retryAfter) {
+              console.error(`Wait at least ${retryAfter} seconds before trying again.`);
+            }
+          }
+        });
+        
         throw new Error(`GraphQL API errors: ${graphQLData.errors[0]?.message || 'Unknown error'}`);
       } else {
         console.error('[GitHub Contributions] Invalid GraphQL response structure:', graphQLData);
