@@ -3,21 +3,22 @@
  * Fetches and displays a user's GitHub contribution activity in a heatmap similar to GitHub's profile
  */
 
+// Add global initialization flag to prevent multiple instances
+window.githubContributionsInitialized = window.githubContributionsInitialized || false;
+
 document.addEventListener('DOMContentLoaded', function() {
+  // Prevent multiple initializations
+  if (window.githubContributionsInitialized) {
+    console.log('[GitHub Contributions] Already initialized, skipping duplicate initialization');
+    return;
+  }
+  window.githubContributionsInitialized = true; // Set flag
+
   // Get configuration
   const username = window.GitHubConfig.username;
   const contributionsContainer = document.getElementById('github-contributions');
   
   if (!contributionsContainer) return; // Exit if container not found
-  
-  // Force clear cache if needed for debugging
-  const forceRefresh = window.location.search.includes('force_refresh');
-  if (forceRefresh) {
-    console.log('Forcing refresh of GitHub contributions data');
-    const cacheKey = `github_contributions_${username}`;
-    localStorage.removeItem(cacheKey);
-    localStorage.removeItem(`${cacheKey}_timestamp`);
-  }
   
   // Load contributions from cache or fetch from API
   loadContributions();
@@ -32,23 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const now = Date.now();
     const cacheDuration = 4 * 60 * 60 * 1000; // 4 hours cache duration
     
-    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration) && !forceRefresh) {
-      console.log('Using cached GitHub contributions data');
-      try {
-        const parsedData = JSON.parse(cachedData);
-        // Check if this is fallback data and force a refresh if possible
-        if (parsedData && parsedData._is_fallback_data) {
-          console.log('Cached data is fallback data - attempting to fetch real data');
-          fetchContributions();
-        } else {
-          displayContributions(parsedData);
-        }
-      } catch (e) {
-        console.error('Error parsing cached data:', e);
-        fetchContributions();
-      }
+    if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp) < cacheDuration)) {
+      //console.log('Using cached GitHub contributions data');
+      displayContributions(JSON.parse(cachedData));
     } else {
-      console.log('Fetching fresh GitHub contributions data');
+      //console.log('Fetching fresh GitHub contributions data');
       fetchContributions();
     }
   }
@@ -66,27 +55,9 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>
       `;
       
-      // Clear existing cache to ensure fresh data
-      const cacheKey = `github_contributions_${username}`;
-      if (forceRefresh) {
-        console.log('[GitHub Contributions] Force refresh requested - clearing cache');
-        localStorage.removeItem(cacheKey);
-        localStorage.removeItem(`${cacheKey}_timestamp`);
-      }
-      
       // GraphQL query to get contribution data
       const query = `
-        query UserContributions($username: String!) {
-          viewer {
-            login
-          }
-          rateLimit {
-            limit
-            cost
-            remaining
-            resetAt
-            used
-          }
+        query($username: String!) {
           user(login: $username) {
             contributionsCollection {
               contributionCalendar {
@@ -107,194 +78,70 @@ document.addEventListener('DOMContentLoaded', function() {
       // Variables for the query
       const variables = { username };
       
-      // Log exact query being sent
-      console.log('======== GITHUB CONTRIBUTIONS DEBUG ========');
-      console.log('[GitHub Contributions] Query:', query);
-      console.log('[GitHub Contributions] Variables:', variables);
-      
-      // Directly fetch from the GraphQL endpoint
-      const proxyUrl = window.GitHubConfig.getGraphQLProxyUrl();
-      
-      if (!proxyUrl) {
-        throw new Error('GraphQL URL is not available');
-      }
-      
-      console.log(`[GitHub Contributions] Making direct GraphQL request to: ${proxyUrl}`);
-      
-      // Check time to measure performance
-      const requestStartTime = performance.now();
-      
-      const response = await fetch(proxyUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          query: query,
-          variables: variables
-        })
-      });
-      
-      const requestEndTime = performance.now();
-      console.log(`[GitHub Contributions] Request took ${requestEndTime - requestStartTime}ms`);
-      console.log(`[GitHub Contributions] GraphQL response status: ${response.status}`);
-      
-      // Log response headers - especially rate limit headers
-      console.log('[GitHub Contributions] Response headers:');
-      const headersToLog = ['x-ratelimit-limit', 'x-ratelimit-remaining', 'x-ratelimit-used', 
-                           'x-ratelimit-reset', 'x-ratelimit-resource', 'retry-after'];
-      
-      headersToLog.forEach(header => {
-        const value = response.headers.get(header);
-        if (value) {
-          console.log(`  ${header}: ${value}`);
-        }
-      });
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error(`[GitHub Contributions] GraphQL error response: ${errorText}`);
-        throw new Error(`GraphQL request failed with status ${response.status}`);
-      }
-      
-      const graphQLData = await response.json();
-      console.log('[GitHub Contributions] GraphQL data received:', graphQLData);
-      
-      // Log rate limit information from the response
-      if (graphQLData.data && graphQLData.data.rateLimit) {
-        const rateLimit = graphQLData.data.rateLimit;
-        console.log('[GitHub Contributions] Rate limit details:');
-        console.log(`  Query cost: ${rateLimit.cost} points`);
-        console.log(`  Remaining: ${rateLimit.remaining}/${rateLimit.limit} points`);
-        console.log(`  Used: ${rateLimit.used} points`);
-        console.log(`  Reset at: ${rateLimit.resetAt}`);
-        
-        // Calculate approximate time until reset
-        const resetTime = new Date(rateLimit.resetAt);
-        const timeUntilReset = resetTime - new Date();
-        const minutesUntilReset = Math.round(timeUntilReset / 60000);
-        console.log(`  Reset in approximately ${minutesUntilReset} minutes`);
-        
-        // Warn if getting close to limits
-        if (rateLimit.remaining < 1000) {
-          console.warn(`[GitHub Contributions] WARNING: Only ${rateLimit.remaining} points remaining until rate limit reset!`);
-        }
-      }
-      
-      // Calculate query complexity estimate
+      // Try to use GraphQL API first
       try {
-        // The contributed calendar query has approximately:
-        // 1 request for the user
-        // 1 request for the contribution collection
-        // 52 requests for weeks (1 year)
-        // 52 * 7 = 364 requests for contribution days
-        // Total = 1 + 1 + 52 + 364 = 418 requests
-        // Points = 418 / 100 rounded = 5 points (estimated)
-        console.log('[GitHub Contributions] Estimated query complexity: ~5 points');
-      } catch (e) {
-        console.error('[GitHub Contributions] Error calculating complexity:', e);
-      }
-      
-      console.log('======== END GITHUB CONTRIBUTIONS DEBUG ========');
-      
-      // Check if we got valid data
-      if (graphQLData.data && graphQLData.data.user && 
-          graphQLData.data.user.contributionsCollection && 
-          graphQLData.data.user.contributionsCollection.contributionCalendar) {
+        const graphQLData = await window.GitHubConfig.makeGraphQLRequest(query, variables);
         
-        const calendarData = graphQLData.data.user.contributionsCollection.contributionCalendar;
-        console.log('[GitHub Contributions] Successfully extracted calendar data');
-        
-        // Process the data into a more usable format
-        const contributions = processContributionData(calendarData);
-        
-        // Cache the data
-        const now = Date.now();
-        
-        // Store rate limit info in the cache to help track usage patterns
-        if (graphQLData.data.rateLimit) {
-          contributions._rateLimit = graphQLData.data.rateLimit;
-        }
-        
-        localStorage.setItem(cacheKey, JSON.stringify(contributions));
-        localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
-        
-        // Display the contributions
-        displayContributions(contributions);
-        return; // Success! Exit function
-      } else if (graphQLData.errors) {
-        console.error('[GitHub Contributions] GraphQL returned errors:', graphQLData.errors);
-        
-        // Detailed error logging
-        graphQLData.errors.forEach((error, index) => {
-          console.error(`[GitHub Contributions] Error ${index + 1}:`, error);
+        // If we get here, the GraphQL request succeeded
+        if (graphQLData.data && graphQLData.data.user && 
+            graphQLData.data.user.contributionsCollection && 
+            graphQLData.data.user.contributionsCollection.contributionCalendar) {
           
-          // Check for rate limiting errors specifically
-          if (error.type === 'RATE_LIMITED') {
-            console.error('[GitHub Contributions] RATE LIMIT EXCEEDED! Check your usage patterns:');
-            console.error('1. Are you making too many requests per minute? (Secondary limit: 2000 points/minute)');
-            console.error('2. Have you exceeded your hourly quota? (Primary limit: 5000 points/hour)');
-            console.error('3. Is your query too complex?');
-            
-            // Check if retry-after header was present
-            const retryAfter = response.headers.get('retry-after');
-            if (retryAfter) {
-              console.error(`Wait at least ${retryAfter} seconds before trying again.`);
-            }
-          }
-        });
-        
-        throw new Error(`GraphQL API errors: ${graphQLData.errors[0]?.message || 'Unknown error'}`);
-      } else {
-        console.error('[GitHub Contributions] Invalid GraphQL response structure:', graphQLData);
-        throw new Error('Invalid GraphQL response structure');
+          const calendarData = graphQLData.data.user.contributionsCollection.contributionCalendar;
+          
+          // Process the data into a more usable format
+          const contributions = processContributionData(calendarData);
+          
+          // Cache the data
+          const cacheKey = `github_contributions_${username}`;
+          const now = Date.now();
+          localStorage.setItem(cacheKey, JSON.stringify(contributions));
+          localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+          
+          // Display the contributions
+          displayContributions(contributions);
+          return; // Exit function if GraphQL was successful
+        }
+      } catch (graphQLError) {
+        // GraphQL request failed, log and continue to fallback
+        console.warn('GraphQL request failed, using REST API fallback:', graphQLError);
       }
+      
+      // FALLBACK: Use REST API to get basic profile data and generate mock contributions
+      const userUrl = window.GitHubConfig.addClientId(
+        `https://api.github.com/users/${username}`
+      );
+      
+      // Fetch basic user data
+      const userResponse = await fetch(userUrl);
+      
+      if (!userResponse.ok) {
+        throw new Error(`GitHub API returned ${userResponse.status}`);
+      }
+      
+      // Generate mock contribution data based on public activity
+      const userData = await userResponse.json();
+      const mockContributions = generateMockContributions(userData);
+      
+      // Cache the mock data
+      const cacheKey = `github_contributions_${username}`;
+      const now = Date.now();
+      localStorage.setItem(cacheKey, JSON.stringify(mockContributions));
+      localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
+      
+      // Display the mock contributions
+      displayContributions(mockContributions);
+      
+      // Also show a notice about using estimated data
+      const noticeElement = document.createElement('div');
+      noticeElement.className = 'text-amber-600 text-xs mt-2 text-center';
+      noticeElement.setAttribute('aria-live', 'polite');
+      noticeElement.innerHTML = 'Using estimated contribution data. Working on fixing the direct GitHub GraphQL API access.';
+      contributionsContainer.appendChild(noticeElement);
       
     } catch (error) {
-      console.error('[GitHub Contributions] Error fetching GitHub contributions:', error);
-      
-      // If we reach here, use the fallback method
-      try {
-        console.warn('[GitHub Contributions] Using fallback REST API method');
-        
-        const userUrl = window.GitHubConfig.addClientId(
-          `https://api.github.com/users/${username}`
-        );
-        
-        // Fetch basic user data
-        const userResponse = await fetch(userUrl);
-        
-        if (!userResponse.ok) {
-          throw new Error(`GitHub API returned ${userResponse.status}`);
-        }
-        
-        // Generate mock contribution data based on public activity
-        const userData = await userResponse.json();
-        const mockContributions = generateMockContributions(userData);
-        
-        // Mark this as fallback data
-        mockContributions._is_fallback_data = true;
-        
-        // Cache the mock data
-        const cacheKey = `github_contributions_${username}`;
-        const now = Date.now();
-        localStorage.setItem(cacheKey, JSON.stringify(mockContributions));
-        localStorage.setItem(`${cacheKey}_timestamp`, now.toString());
-        
-        // Display the mock contributions
-        displayContributions(mockContributions);
-        
-        // Also show a notice about using estimated data
-        const noticeElement = document.createElement('div');
-        noticeElement.className = 'text-amber-600 text-xs mt-2 text-center';
-        noticeElement.setAttribute('aria-live', 'polite');
-        noticeElement.innerHTML = 'Using estimated contribution data. Working on fixing the direct GitHub GraphQL API access.';
-        contributionsContainer.appendChild(noticeElement);
-      } catch (fallbackError) {
-        console.error('[GitHub Contributions] Even fallback method failed:', fallbackError);
-        displayFallbackData('Failed to load contribution data. Please try again later.');
-      }
+      console.error('Error fetching GitHub contributions:', error);
+      displayFallbackData();
     }
   }
   
@@ -419,10 +266,6 @@ document.addEventListener('DOMContentLoaded', function() {
     return date.toISOString().split('T')[0];
   }
   
-  // Declare activeTooltip at a higher scope so it's accessible throughout the function
-  let touchTimer;
-  let activeTooltip = null;
-  
   /**
    * Display contributions in a heatmap visualization
    */
@@ -432,11 +275,18 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    // Force refresh if last day is not today
-    const todayRaw = new Date().toISOString().split('T')[0];
-    const todayAdjusted = adjustDateToGitHub(todayRaw); // Adjust today's date the same way as other dates
-    const lastDate = data.contributions[data.contributions.length - 1].date;
-    if (lastDate < todayRaw) {
+    // Force refresh if last day is not today - FIX: Compare against local date string
+    const lastDateStr = data.contributions[data.contributions.length - 1].date;
+    const nowLocal = new Date();
+    const year = nowLocal.getFullYear();
+    const month = String(nowLocal.getMonth() + 1).padStart(2, '0');
+    const day = String(nowLocal.getDate()).padStart(2, '0');
+    const todayLocalStr = `${year}-${month}-${day}`;
+    
+    console.log(`[GitHub Contributions] Date Check - Last API Date: ${lastDateStr}, Today Local: ${todayLocalStr}`);
+
+    if (lastDateStr < todayLocalStr) {
+      console.warn(`[GitHub Contributions] Last contribution date (${lastDateStr}) is before today (${todayLocalStr}). Forcing refresh.`);
       // Clear the cache to force a refresh
       localStorage.removeItem(`github_contributions_${username}`);
       localStorage.removeItem(`github_contributions_${username}_timestamp`);
@@ -460,8 +310,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
     
-    // Get current date to highlight today
-    // Use the adjusted today value consistently
+    // Get current date to highlight today - FIX: Use local date string for comparison
+    // const today = new Date().toISOString().split('T')[0]; // Already defined above
+    const todayForHighlight = todayLocalStr; // Use the calculated local date string
     
     // Determine if we're in dark mode
     const isDarkMode = document.documentElement.classList.contains('dark');
@@ -628,9 +479,8 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Fix the date discrepancy by using adjusted date for comparison and display
           const adjustedDate = adjustDateToGitHub(day.date);
-          const isToday = adjustedDate === todayAdjusted;
-          // Make the today highlight more visible with a thicker border
-          const borderClass = isToday ? 'ring-2 ring-offset-1 ring-blue-600' : '';
+          const isToday = adjustedDate === todayForHighlight; // Use local date string for comparison
+          const borderClass = isToday ? 'ring-1 ring-blue-500' : '';
           
           // Create an appropriate aria-label for screen readers
           const formattedDate = formatDateForTooltip(adjustedDate);
@@ -683,117 +533,9 @@ document.addEventListener('DOMContentLoaded', function() {
           const date = reference.getAttribute('data-date');
           const count = reference.getAttribute('data-count');
           return `${formatDateForTooltip(date)}: ${count} contribution${count !== '1' ? 's' : ''}`;
-        },
-        // Improved mobile touch support
-        touch: 'hold',     // Show on touch and hold
-        touchHold: true,   // Require hold to show tooltip
-        hideOnClick: false, // Prevent tooltip from hiding when clicking on the element
-        placement: 'top',  // Position above the square
-        arrow: true,       // Add an arrow
-        duration: [300, 200], // Show faster, hide slower
-        theme: isDarkMode ? 'dark' : 'light', // Match current theme
-        appendTo: document.body // Ensure tooltips are visible outside overflow containers
-      });
-    } else {
-      // Fallback for when tippy.js is not available
-      const cells = document.querySelectorAll('.day[data-count]');
-      cells.forEach(cell => {
-        // Add mobile-friendly touch event listeners
-        cell.addEventListener('touchstart', handleTouchStart, {passive: true});
-        cell.addEventListener('touchend', handleTouchEnd, {passive: true});
-      });
-      
-      // Handle touch start by starting a timer
-      function handleTouchStart(e) {
-        const cell = e.currentTarget;
-        clearTimeout(touchTimer);
-        
-        // Hide any existing tooltip
-        if (activeTooltip) {
-          activeTooltip.remove();
-          activeTooltip = null;
         }
-        
-        // Create timer for showing tooltip after a short delay
-        touchTimer = setTimeout(() => {
-          const date = cell.getAttribute('data-date');
-          const count = cell.getAttribute('data-count');
-          const tooltipText = `${formatDateForTooltip(date)}: ${count} contribution${count !== '1' ? 's' : ''}`;
-          
-          // Create and show custom tooltip
-          const tooltip = document.createElement('div');
-          tooltip.className = `fixed z-50 px-2 py-1 text-sm rounded shadow-lg ${isDarkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`;
-          tooltip.textContent = tooltipText;
-          document.body.appendChild(tooltip);
-          
-          // Position tooltip above the cell
-          const rect = cell.getBoundingClientRect();
-          tooltip.style.left = `${rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2)}px`;
-          tooltip.style.top = `${rect.top - tooltip.offsetHeight - 5}px`;
-          
-          // Store reference to active tooltip
-          activeTooltip = tooltip;
-          
-          // Auto-hide after 2 seconds
-          setTimeout(() => {
-            if (activeTooltip === tooltip) {
-              tooltip.remove();
-              activeTooltip = null;
-            }
-          }, 2000);
-        }, 300);
-      }
-      
-      // Handle touch end by canceling the timer if touch duration was too short
-      function handleTouchEnd() {
-        clearTimeout(touchTimer);
-      }
+      });
     }
-    
-    // Add scroll event listener to hide tooltips when scrolling
-    document.addEventListener('scroll', () => {
-      // Hide tippy tooltips if available
-      if (window.tippy) {
-        const activeInstances = document.querySelectorAll('.tippy-box[data-state="visible"]');
-        if (activeInstances.length > 0) {
-          // Use tippy's hideAll method if available
-          if (window.tippy.hideAll) {
-            window.tippy.hideAll();
-          } else {
-            // Manual fallback
-            activeInstances.forEach(instance => {
-              const id = instance.getAttribute('id');
-              if (id && id.startsWith('tippy-')) {
-                const tippyTarget = document.querySelector(`[aria-describedby="${id}"]`);
-                if (tippyTarget && tippyTarget._tippy) {
-                  tippyTarget._tippy.hide();
-                }
-              }
-            });
-          }
-        }
-      } else if (activeTooltip) {
-        // Hide custom tooltip
-        activeTooltip.remove();
-        activeTooltip = null;
-      }
-    }, { passive: true });
-    
-    // Add touch event listener to dismiss tooltips when tapping elsewhere
-    document.addEventListener('touchstart', (e) => {
-      // For custom tooltips
-      if (activeTooltip && !e.target.closest('.day[data-count]')) {
-        activeTooltip.remove();
-        activeTooltip = null;
-      }
-      
-      // For tippy tooltips
-      if (window.tippy && !e.target.closest('.day[data-count]') && !e.target.closest('.tippy-box')) {
-        if (window.tippy.hideAll) {
-          window.tippy.hideAll();
-        }
-      }
-    }, { passive: true });
     
     // Clear localStorage cache after viewing - helps with seeing test changes
     // localStorage.removeItem(`github_contributions_${username}`);
@@ -838,45 +580,5 @@ document.addEventListener('DOMContentLoaded', function() {
       month: 'long',
       day: 'numeric'
     });
-  }
-
-  /**
-   * Display fallback message when contributions can't be loaded
-   */
-  function displayFallbackData(message = "Unable to load GitHub contribution data") {
-    if (!contributionsContainer) return;
-    
-    contributionsContainer.innerHTML = `
-      <div class="text-center py-6">
-        <svg class="w-12 h-12 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-        </svg>
-        <h3 class="text-xl font-bold mb-2">GitHub Contribution Data Unavailable</h3>
-        <p class="text-gray-600 mb-4">${message}</p>
-        <button onclick="window.location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
-          Try Again
-        </button>
-      </div>
-    `;
-  }
-  
-  /**
-   * Display error message for specific contribution chart errors
-   */
-  function displayError(message = "Error loading contribution data") {
-    if (!contributionsContainer) return;
-    
-    contributionsContainer.innerHTML = `
-      <div class="text-center py-6">
-        <svg class="w-12 h-12 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
-        </svg>
-        <h3 class="text-xl font-bold mb-2">Error</h3>
-        <p class="text-gray-600 mb-4">${message}</p>
-        <button onclick="window.location.reload()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded">
-          Try Again
-        </button>
-      </div>
-    `;
   }
 });
