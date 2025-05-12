@@ -42,7 +42,7 @@ layout: default
     {% endif %}
   </header>
   
-  <div class="prose prose-blue max-w-none mb-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+  <div class="prose prose-blue max-w-none mb-12 opacity-0 post-content" data-animate="fade-in" data-scroll="fade-up">
     {{ content }}
   </div>
   
@@ -160,3 +160,57 @@ layout: default
     <!--End Mailchimp-->
   </div>
 </article> 
+
+<!-- Code block styling enhancements -->
+<script>
+// Add copy button to code blocks
+document.addEventListener('DOMContentLoaded', () => {
+    const codeBlocks = document.querySelectorAll('.highlight');
+    
+    codeBlocks.forEach((block) => {
+        // Create copy button
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-code-button absolute top-2 right-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded px-2 py-1 text-xs font-mono';
+        copyButton.textContent = 'Copy';
+        
+        // Position the code block container relatively
+        block.style.position = 'relative';
+        
+        // Add button to block
+        block.appendChild(copyButton);
+        
+        // Add click event
+        copyButton.addEventListener('click', () => {
+            const code = block.querySelector('code').innerText;
+            navigator.clipboard.writeText(code);
+            
+            // Visual feedback
+            copyButton.textContent = 'Copied!';
+            copyButton.classList.add('bg-green-200', 'dark:bg-green-800', 'text-green-800', 'dark:text-green-200');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                copyButton.textContent = 'Copy';
+                copyButton.classList.remove('bg-green-200', 'dark:bg-green-800', 'text-green-800', 'dark:text-green-200');
+            }, 2000);
+        });
+    });
+});
+</script>
+
+<style>
+/* Specific styling for code blocks in posts */
+.post-content .highlight {
+    margin: 2rem 0;
+}
+
+/* Style for code copy button on hover */
+.copy-code-button {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.highlight:hover .copy-code-button {
+    opacity: 1;
+}
+</style> 
