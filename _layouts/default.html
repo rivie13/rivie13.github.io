@@ -32,7 +32,9 @@
     
     {% include header.html %}
     
+{% unless page.url == '/' %}
     {% include header-ad.html %}
+{% endunless %}
     
     <main id="main-content" class="container mx-auto px-4 py-8">
         {{ content }}
