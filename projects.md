@@ -28,6 +28,11 @@ permalink: /projects/
     </div>
   </section>
   
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
+  </div>
+  
   <!-- Project Demo Videos -->
   <section class="mb-16">
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b opacity-0" data-animate="fade-in">Project Demo Videos</h2>
@@ -64,6 +69,11 @@ permalink: /projects/
       </div>
     </div>
   </section>
+  
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
+  </div>
   
   <!-- All Projects -->
   <section>

@@ -15,7 +15,8 @@
 {% if site.google_adsense %}
   {% case include.type %}
     {% when 'display' %}
-      <div class="adsense-container my-4">
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="{{ site.google_adsense }}"
@@ -25,10 +26,12 @@
         <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
+        <p class="text-gray-400 text-xs mt-2">Ad content will appear here after approval</p>
       </div>
     
     {% when 'in-article' %}
-      <div class="adsense-container my-4">
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
         <ins class="adsbygoogle"
              style="display:block; text-align:center;"
              data-ad-layout="in-article"
@@ -38,10 +41,12 @@
         <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
+        <p class="text-gray-400 text-xs mt-2">Ad content will appear here after approval</p>
       </div>
     
     {% when 'in-feed' %}
-      <div class="adsense-container my-4">
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-format="fluid"
@@ -51,9 +56,15 @@
         <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
+        <p class="text-gray-400 text-xs mt-2">Ad content will appear here after approval</p>
       </div>
     
     {% else %}
       <!-- Invalid ad type specified -->
   {% endcase %}
+{% else %}
+  <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+    <p class="text-gray-500">Advertisement Space</p>
+    <p class="text-gray-400 text-xs mt-2">Google AdSense not configured. Add google_adsense in _config.yml</p>
+  </div>
 {% endif %} 

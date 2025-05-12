@@ -91,6 +91,11 @@ permalink: /services/
     </div>
   </div>
   
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
+  </div>
+  
   <!-- Music Teaching Services -->
   <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg mb-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <div class="h-2 bg-yellow-600"></div>
@@ -204,6 +209,11 @@ permalink: /services/
     </div>
   </div>
   
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
+  </div>
+  
   <!-- Philadelphia Clients Section -->
   <div class="bg-white rounded-lg shadow-md p-8 mb-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -264,6 +274,11 @@ permalink: /services/
         <p class="text-gray-700">I'm committed to staying at the forefront of technology through continuous learning and professional development. This ensures that I bring the latest and most effective solutions to your projects.</p>
       </div>
     </div>
+  </div>
+  
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
   </div>
   
   <div class="bg-white p-8 rounded-lg shadow-md mb-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">

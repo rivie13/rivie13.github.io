@@ -13,6 +13,8 @@ image: /assets/images/blog-social-image.png
 
 Thank you for visiting my portfolio website. This is my first official blog post, marking the launch of this site where I'll be documenting my professional journey and sharing knowledge about software development, cloud architecture, and artificial intelligence.
 
+{% include blog-ad.html %}
+
 ## What to Expect
 
 On this blog, you can expect to find:

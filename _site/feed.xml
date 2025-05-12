@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-12T12:42:32-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS</title><link href="http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/" rel="alternate" type="text/html" title="Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS" /><published>2025-05-10T10:00:00-04:00</published><updated>2025-05-10T10:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/">&lt;style&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-12T13:08:50-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS</title><link href="http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/" rel="alternate" type="text/html" title="Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS" /><published>2025-05-10T10:00:00-04:00</published><updated>2025-05-10T10:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/">&lt;style&gt;
 /* Custom code block styling for this post */
 .highlight {
   border-radius: 6px;
@@ -110,6 +110,19 @@ Additionally, I set up the `Gemfile` to manage Jekyll and plugin versions (you m
 
 &lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
 &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;2.2. Crafting the Skeleton: Default Layout and Includes&lt;/h2&gt;
+
+
+&lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
+  &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
+  &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;script&gt;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    &lt;/script&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
+&lt;/div&gt;
+ 
 
 The default layout is the primary template that provides the common structure for all pages on the site. In Jekyll, this is typically defined in `_layouts/default.html`. Here&apos;s a breakdown of this crucial file:
 
@@ -701,6 +714,17 @@ Stay tuned for the next installment, and as always, feel free to reach out with 
 
 &lt;p&gt;The biggest hurdle? GitHub Pages, my hosting platform of choice for its simplicity and free tier, serves static files. This means no traditional backend server to run databases or server-side code that could easily fetch and display dynamic data. How could I reconcile my dynamic dreams with this static reality? This was the central question that kicked off my planning.&lt;/p&gt;
 
+&lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
+  &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
+  &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;script&gt;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    &lt;/script&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
+&lt;/div&gt;
+
 &lt;h2 id=&quot;13-partnering-with-ai-claude--gemini-as-co-planners&quot;&gt;1.3. Partnering with AI: Claude &amp;amp; Gemini as Co-Planners&lt;/h2&gt;
 
 &lt;p&gt;This is where my AI assistants, Claude and Gemini, became invaluable co-planners. I didn’t just dive into coding; my AI assistants and I embarked on a planning spree.&lt;/p&gt;
@@ -762,6 +786,17 @@ Stay tuned for the next installment, and as always, feel free to reach out with 
 &lt;p&gt;I’m excited to share the next steps with you!&lt;/p&gt;</content><author><name>Riviera Sperduto</name></author><category term="Portfolio Tutorial" /><category term="AI" /><category term="Jekyll" /><category term="Planning" /><category term="Jekyll" /><category term="AI Collaboration" /><category term="Portfolio Development" /><category term="Static Sites" /><category term="Azure Functions" /><category term="Planning" /><category term="Cursor" /><category term="Web Development" /><summary type="html">Welcome to the first part of a multi-part series where I’ll take you through the journey of how I built my current portfolio website! This wasn’t just any coding project; it was a rapid development sprint, completed in less than a week, heavily influenced by collaboration with AI assistants, and focused on overcoming the typical limitations of a static website to create something truly dynamic and professional – all while aiming for a free, no-cost hosting solution.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/tutorial-part1-banner.png" /><media:content medium="image" url="http://localhost:4000/assets/images/tutorial-part1-banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Welcome to My Portfolio Website</title><link href="http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio/" rel="alternate" type="text/html" title="Welcome to My Portfolio Website" /><published>2025-05-05T10:00:00-04:00</published><updated>2025-05-05T10:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/05/welcome-to-my-portfolio/">&lt;h2 id=&quot;hello-and-welcome&quot;&gt;Hello and Welcome!&lt;/h2&gt;
 
 &lt;p&gt;Thank you for visiting my portfolio website. This is my first official blog post, marking the launch of this site where I’ll be documenting my professional journey and sharing knowledge about software development, cloud architecture, and artificial intelligence.&lt;/p&gt;
+
+&lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
+  &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
+  &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;script&gt;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    &lt;/script&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;h2 id=&quot;what-to-expect&quot;&gt;What to Expect&lt;/h2&gt;
 

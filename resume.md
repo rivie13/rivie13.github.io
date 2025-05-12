@@ -86,6 +86,11 @@ permalink: /resume/
     </div>
   </section>
   
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
+  </div>
+  
   <!-- Experience Section -->
   <section class="mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-2xl font-bold mb-4 pb-2 border-b">Experience</h2>
@@ -129,6 +134,11 @@ permalink: /resume/
     </div>
     {% endfor %}
   </section>
+  
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
+  </div>
   
   <!-- Certifications Section -->
   <section class="mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
