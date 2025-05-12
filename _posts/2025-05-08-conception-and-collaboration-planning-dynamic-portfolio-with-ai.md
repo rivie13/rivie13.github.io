@@ -25,6 +25,8 @@ But what did "dynamic" mean for a static site? For me, it included:
 
 The biggest hurdle? GitHub Pages, my hosting platform of choice for its simplicity and free tier, serves static files. This means no traditional backend server to run databases or server-side code that could easily fetch and display dynamic data. How could I reconcile my dynamic dreams with this static reality? This was the central question that kicked off my planning.
 
+{% include blog-ad.html %}
+
 ## 1.3. Partnering with AI: Claude & Gemini as Co-Planners
 
 This is where my AI assistants, Claude and Gemini, became invaluable co-planners. I didn't just dive into coding; my AI assistants and I embarked on a planning spree.

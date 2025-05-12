@@ -120,6 +120,8 @@ gem "wdm", "~> 0.1.1", :platforms => [:mingw, :mswin, :x64_mingw]
 <div class="opacity-0" data-scroll="fade-up">
 <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2.2. Crafting the Skeleton: Default Layout and Includes</h2>
 
+{% include blog-ad.html %}
+
 The default layout is the primary template that provides the common structure for all pages on the site. In Jekyll, this is typically defined in `_layouts/default.html`. Here's a breakdown of this crucial file:
 
 {% highlight html %}

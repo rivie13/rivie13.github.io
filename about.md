@@ -70,6 +70,11 @@ permalink: /about/
     </div>
   </div>
   
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
+  </div>
+  
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
     <div class="bg-white rounded-lg shadow-md p-6 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <h2 class="text-xl font-bold mb-4 flex items-center">
@@ -158,6 +163,11 @@ permalink: /about/
         <p class="text-gray-700">My educational journey at Temple University and the Community College of Philadelphia has given me a strong foundation and local perspective that I bring to all my projects. I'm passionate about contributing to Philadelphia's growing reputation as a technology hub.</p>
       </div>
     </div>
+  </div>
+  
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
   </div>
   
   <div class="bg-white rounded-lg shadow-md p-6 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">

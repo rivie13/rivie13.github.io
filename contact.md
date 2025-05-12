@@ -147,6 +147,11 @@ permalink: /contact/
     </div>
   </div>
   
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
+  </div>
+  
   <!-- Music Services Section -->
   <div class="bg-white rounded-lg shadow-md p-6 mb-8 hover-card opacity-0" data-animate="fade-in" data-scroll="fade-up">
     <h2 class="text-xl font-bold mb-4">Music Services</h2>
@@ -200,6 +205,11 @@ permalink: /contact/
         </div>
       </div>
     </div>
+  </div>
+  
+  <!-- Page Advertisement -->
+  <div class="my-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    {% include page-ad.html %}
   </div>
   
   <!-- Philadelphia Services Section -->
