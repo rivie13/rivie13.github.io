@@ -6,7 +6,7 @@ permalink: /privacy/
 
 # Privacy Policy
 
-Effective Date: {% assign date_format = site.minima.date_format | default: "%B %-d, %Y" %}{{ "now" | date: date_format }}
+Effective Date: May 2025
 
 ## Introduction
 
