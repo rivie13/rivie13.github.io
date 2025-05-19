@@ -1,4 +1,217 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-19T14:40:03-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp;amp; Client-Side JavaScript</title><link href="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/" rel="alternate" type="text/html" title="Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp;amp; Client-Side JavaScript" /><published>2025-05-18T11:00:00-04:00</published><updated>2025-05-18T11:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/">&lt;style&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-19T18:27:40-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Introducing CodeGrind: A New Way to Practice Coding</title><link href="http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding/" rel="alternate" type="text/html" title="Introducing CodeGrind: A New Way to Practice Coding" /><published>2025-05-19T11:00:00-04:00</published><updated>2025-05-19T11:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding/">&lt;style&gt;
+/* Custom code block styling for this post */
+.highlight {
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.highlight pre {
+  padding: 1.25rem;
+  margin: 0;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.highlight code {
+  font-family: &apos;Consolas&apos;, &apos;Monaco&apos;, &apos;Courier New&apos;, monospace;
+  font-size: 0.9rem;
+}
+
+/* Dark mode considerations */
+html.dark .highlight {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Different background colors for different language blocks */
+.language-yaml .highlight { background-color: #f8fafc; border-left: 4px solid #4f46e5; }
+.language-ruby .highlight { background-color: #fef2f2; border-left: 4px solid #dc2626; }
+.language-html .highlight { background-color: #f0f9ff; border-left: 4px solid #0ea5e9; }
+.language-css .highlight { background-color: #f5f3ff; border-left: 4px solid #a855f7; }
+.language-bash .highlight { background-color: #f0fdf4; border-left: 4px solid #16a34a; }
+
+/* Dark mode versions */
+html.dark .language-yaml .highlight { background-color: #1e293b; border-left: 4px solid #4f46e5; }
+html.dark .language-ruby .highlight { background-color: #350c0c; border-left: 4px solid #dc2626; }
+html.dark .language-html .highlight { background-color: #082f49; border-left: 4px solid #0ea5e9; }
+html.dark .language-css .highlight { background-color: #2e1065; border-left: 4px solid #a855f7; }
+html.dark .language-bash .highlight { background-color: #052e16; border-left: 4px solid #16a34a; }
+&lt;/style&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-animate=&quot;fade-in&quot;&gt;
+  &lt;p class=&quot;text-lg text-gray-700 dark:text-gray-300 mb-6&quot;&gt;
+    Welcome to the first post in our series about building CodeGrind, a modern coding practice platform that combines the best of LeetCode-style problem solving with innovative gamification and AI-powered learning. In this series, we&apos;ll take you through the journey of building CodeGrind, from its initial conception to its current state and future plans.
+  &lt;/p&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Our Mission&lt;/h2&gt;
+  &lt;p&gt;
+    CodeGrind was born from a simple observation: learning to code should be as engaging as playing a game. While platforms like LeetCode have revolutionized coding practice, they often feel more like work than play. We set out to change that by creating a platform that makes coding practice not just educational, but genuinely fun.
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;What Makes CodeGrind Unique?&lt;/h2&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;1. Gamified Learning Experience&lt;/h3&gt;
+  &lt;p&gt;
+    Unlike traditional coding practice platforms, CodeGrind transforms coding challenges into an engaging game. Each problem solved contributes to your progress, unlocking new challenges and achievements. This gamification approach keeps users motivated and makes the learning process more enjoyable.
+  &lt;/p&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;2. Tower Defense Coding Game&lt;/h3&gt;
+  &lt;img src=&quot;/assets/images/codegrind/tower-defense-screenshot.png&quot; alt=&quot;Tower Defense Coding Game&quot; class=&quot;rounded-lg shadow-md w-full max-w-2xl mx-auto my-6&quot; /&gt;
+  &lt;p&gt;
+    One of our most innovative features is the Tower Defense coding game. Players write or generate code by placing towers to defend their solution and structures against waves of enemies. Each level presents unique coding challenges that must be solved to progress.
+  &lt;/p&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;AI-generated levels for endless gameplay&lt;/li&gt;
+    &lt;li&gt;Multiple programming language support&lt;/li&gt;
+    &lt;li&gt;Real-time code execution&lt;/li&gt;
+    &lt;li&gt;Progressive difficulty scaling&lt;/li&gt;
+    &lt;li&gt;Achievement system&lt;/li&gt;
+    &lt;li&gt;Code generation and editing&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;3. AI-Powered Learning Assistant&lt;/h3&gt;
+  &lt;p&gt;
+    CodeGrind integrates an AI coding assistant powered by OpenAI&apos;s technology. This assistant helps users by:
+  &lt;/p&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;Providing hints and explanations&lt;/li&gt;
+    &lt;li&gt;Suggesting code improvements&lt;/li&gt;
+    &lt;li&gt;Explaining complex concepts&lt;/li&gt;
+    &lt;li&gt;Offering alternative solutions&lt;/li&gt;
+    &lt;li&gt;Helping debug code issues&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;4. Real-time Code Execution&lt;/h3&gt;
+  &lt;p&gt;
+    Powered by the Judge0 engine, CodeGrind provides instant feedback on your code. This real-time execution environment supports multiple programming languages and ensures a seamless coding experience.
+  &lt;/p&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;5. Progress Tracking and Analytics&lt;/h3&gt;
+  &lt;p&gt;
+    CodeGrind helps users track their learning journey with:
+  &lt;/p&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;Detailed progress statistics&lt;/li&gt;
+    &lt;li&gt;Skill level assessments (coming soon)&lt;/li&gt;
+    &lt;li&gt;Learning path visualization (coming soon)&lt;/li&gt;
+    &lt;li&gt;Achievement tracking&lt;/li&gt;
+    &lt;li&gt;Performance analytics&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Current Features&lt;/h2&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Core Platform&lt;/h3&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;LeetCode-style problem solving with a twist&lt;/li&gt;
+    &lt;li&gt;Real-time code execution environment&lt;/li&gt;
+    &lt;li&gt;User profiles and statistics&lt;/li&gt;
+    &lt;li&gt;Progress tracking system&lt;/li&gt;
+    &lt;li&gt;Achievement system&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Tower Defense Game&lt;/h3&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;AI-generated levels&lt;/li&gt;
+    &lt;li&gt;Multiple programming language support&lt;/li&gt;
+    &lt;li&gt;Real-time code execution&lt;/li&gt;
+    &lt;li&gt;Progressive difficulty&lt;/li&gt;
+    &lt;li&gt;Achievement system&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;AI Integration&lt;/h3&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;OpenAI-powered coding assistant&lt;/li&gt;
+    &lt;li&gt;AI-generated coding challenges&lt;/li&gt;
+    &lt;li&gt;Natural language code analysis&lt;/li&gt;
+    &lt;li&gt;Personalized learning paths&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Target Audience&lt;/h2&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;Programming students&lt;/li&gt;
+    &lt;li&gt;Coding interview preparation&lt;/li&gt;
+    &lt;li&gt;Self-taught developers&lt;/li&gt;
+    &lt;li&gt;Professional developers looking to practice&lt;/li&gt;
+    &lt;li&gt;Anyone interested in learning to code in a fun way&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;What&apos;s Next?&lt;/h2&gt;
+  &lt;p&gt;In the upcoming posts in this series, we&apos;ll dive deeper into:&lt;/p&gt;
+  &lt;ol class=&quot;list-decimal ml-8&quot;&gt;
+    &lt;li&gt;The technical architecture behind CodeGrind&lt;/li&gt;
+    &lt;li&gt;The development of the Tower Defense game&lt;/li&gt;
+    &lt;li&gt;Our AI integration journey&lt;/li&gt;
+    &lt;li&gt;The user experience design process&lt;/li&gt;
+    &lt;li&gt;Future features and improvements&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Try CodeGrind Today&lt;/h2&gt;
+  &lt;p&gt;
+    Ready to experience a new way of learning to code? Visit &lt;a href=&quot;https://codegrind.online&quot; class=&quot;text-blue-600 hover:text-blue-800&quot;&gt;CodeGrind&lt;/a&gt; and start your coding journey today. Whether you&apos;re preparing for coding interviews, learning a new programming language, or just want to practice coding in a fun way, CodeGrind offers a unique and engaging platform for your needs.
+  &lt;/p&gt;
+  &lt;p&gt;
+    Stay tuned for the next post in our series, where we&apos;ll explore the technical architecture that powers CodeGrind!
+  &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Technical Implementation Details&lt;/h2&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Frontend Technologies&lt;/h3&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;React&lt;/li&gt;
+    &lt;li&gt;Vite&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Backend Infrastructure&lt;/h3&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;Node.js with Express&lt;/li&gt;
+    &lt;li&gt;PostgreSQL for data persistence&lt;/li&gt;
+    &lt;li&gt;Redis for caching and real-time features&lt;/li&gt;
+    &lt;li&gt;Azure Functions for serverless operations&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Code Execution Engine&lt;/h3&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;Judge0 integration for secure code execution&lt;/li&gt;
+    &lt;li&gt;Docker containers for isolation&lt;/li&gt;
+    &lt;li&gt;Real-time output streaming&lt;/li&gt;
+    &lt;li&gt;Multiple language support&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;AI Integration&lt;/h3&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;OpenAI API for the coding assistant&lt;/li&gt;
+    &lt;li&gt;Custom AI models for question generation&lt;/li&gt;
+    &lt;li&gt;Natural language processing for code analysis&lt;/li&gt;
+    &lt;li&gt;Machine learning for personalized learning paths&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Security Measures&lt;/h3&gt;
+  &lt;ul class=&quot;list-disc ml-8&quot;&gt;
+    &lt;li&gt;Code execution sandboxing&lt;/li&gt;
+    &lt;li&gt;Rate limiting and abuse prevention&lt;/li&gt;
+    &lt;li&gt;Secure API authentication&lt;/li&gt;
+    &lt;li&gt;Data encryption at rest and in transit&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Getting Started with CodeGrind&lt;/h2&gt;
+  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;For New Users&lt;/h3&gt;
+  &lt;ol class=&quot;list-decimal ml-8&quot;&gt;
+    &lt;li&gt;Create an account at &lt;a href=&quot;https://codegrind.online&quot;&gt;CodeGrind&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;Try the tower defense demo&lt;/li&gt;
+    &lt;li&gt;Or go for traditional problems&lt;/li&gt;
+    &lt;li&gt;Use the AI assistant when you need help&lt;/li&gt;
+  &lt;/ol&gt;
+ 
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Next in the Series&lt;/h2&gt;
+  &lt;p&gt;
+    In our next post, we&apos;ll dive deep into the technical architecture of CodeGrind, exploring how we&apos;ve built a scalable, secure, and performant platform that can handle real-time code execution and AI-powered features. Stay tuned!
+  &lt;/p&gt;
+&lt;/div&gt;</content><author><name>Riviera Sperduto</name></author><category term="CodeGrind" /><category term="Development" /><category term="AI" /><category term="Game Development" /><category term="Web Development" /><category term="CodeGrind" /><category term="Coding Practice" /><category term="AI Integration" /><category term="Tower Defense" /><category term="Game Development" /><category term="Learning Platform" /><category term="Real-Time Execution" /><category term="Gamification" /><category term="OpenAI" /><category term="Judge0" /><category term="Tech Stack" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/codegrind/codegrind-banner.png" /><media:content medium="image" url="http://localhost:4000/assets/images/codegrind/codegrind-banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp;amp; Client-Side JavaScript</title><link href="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/" rel="alternate" type="text/html" title="Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp;amp; Client-Side JavaScript" /><published>2025-05-18T11:00:00-04:00</published><updated>2025-05-18T11:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/">&lt;style&gt;
 /* Custom code block styling for this post */
 .highlight {
   border-radius: 6px;

@@ -93,8 +93,6 @@ layout: default
   </div>
   
   {% if site.related_posts.size > 0 %}
-    <!-- Display ad before related posts -->
-    {% include adsense-ad.html type="display" format="auto" slot="YOUR_DISPLAY_AD_SLOT_ID" %}
     
     <div class="mt-12 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <h3 class="text-2xl font-bold mb-6">Related Posts</h3>
@@ -118,7 +116,11 @@ layout: default
             </div>
           </div>
         {% endfor %}
+        
+    
       </div>
+      <!-- Display ad after related posts -->
+      {% include adsense-ad.html type="display" format="auto" slot="YOUR_DISPLAY_AD_SLOT_ID" %}
     </div>
   {% endif %}
   
