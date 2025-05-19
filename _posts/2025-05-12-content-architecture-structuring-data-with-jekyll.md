@@ -2,7 +2,7 @@
 layout: post
 title: "Part 3: Content Architecture - Structuring Data with Jekyll and Building Reusable Components"
 date: 2025-05-12 09:00:00 -0500
-categories: [Portfolio Tutorial, Jekyll, development]
+categories: [Portfolio Tutorial, Jekyll, Development]
 tags: [Jekyll, Data Management, Component Design, Web Development, Portfolio Development]
 image: /assets/images/tutorial-part3-banner.png # Placeholder - remember to create this image!
 ---

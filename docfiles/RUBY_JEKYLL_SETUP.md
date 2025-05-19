@@ -164,9 +164,10 @@ To stop the server, press `Ctrl+C` in the command prompt.
 
 **Solutions**:
 1. Add `bundle exec` before any Jekyll commands:
+   cmd prompt:
    ```
    bundle exec jekyll -v
-   bundle exec jekyll serve
+   bundle exec jekyll serve # this is to run the server/start the site locally
    ```
 
 2. Update your Gemfile to explicitly use the newer version:

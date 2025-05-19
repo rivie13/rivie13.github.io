@@ -1,6 +1,6 @@
 ---
 layout: category
 title: Development
-category: development
+category: Development
 permalink: /categories/development/
 --- 
