@@ -2,5 +2,5 @@
 layout: category
 title: Azure
 category: Azure
-permalink: /categories/azure/
+permalink: /categories/Azure/
 --- 

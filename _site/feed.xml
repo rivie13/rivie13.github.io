@@ -1,309 +1,427 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-19T13:09:33-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp;amp; Client-Side JavaScript</title><link href="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/" rel="alternate" type="text/html" title="Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp;amp; Client-Side JavaScript" /><published>2025-05-18T11:00:00-04:00</published><updated>2025-05-18T11:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/">&lt;p&gt;Welcome to the final and most exciting part of our tutorial series on building a dynamic portfolio with Jekyll, AI, and a sprinkle of serverless magic! In the previous installments, we laid the conceptual groundwork, set up our Jekyll site with Tailwind CSS, and structured our content for easy management. Now, we dive into the heart of the “dynamic” aspect: securely fetching and displaying GitHub data using an Azure Function App as a proxy and orchestrating it all with client-side JavaScript.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-19T13:38:47-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp;amp; Client-Side JavaScript</title><link href="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/" rel="alternate" type="text/html" title="Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp;amp; Client-Side JavaScript" /><published>2025-05-18T11:00:00-04:00</published><updated>2025-05-18T11:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/">&lt;style&gt;
+/* Custom code block styling for this post */
+.highlight {
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
 
-&lt;p&gt;This is where our static site truly comes alive, showcasing real-time project updates and GitHub activity. We’ll also cover the finishing touches like analytics, ads, and the automated deployment pipeline that makes it all seamless. Let’s get started!&lt;/p&gt;
+.highlight pre {
+  padding: 1.25rem;
+  margin: 0;
+  overflow-x: auto;
+  line-height: 1.5;
+}
 
-&lt;h2 id=&quot;41-the-secure-gateway-azure-function-app-portfoliowebsitegithubauth&quot;&gt;4.1. The Secure Gateway: Azure Function App (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portfolioWebsitegithubAuth&lt;/code&gt;)&lt;/h2&gt;
+.highlight code {
+  font-family: &apos;Consolas&apos;, &apos;Monaco&apos;, &apos;Courier New&apos;, monospace;
+  font-size: 0.9rem;
+}
 
-&lt;p&gt;As we discussed in Part 1, one of the primary challenges with displaying dynamic data from APIs on a static site like GitHub Pages is security. We need to interact with the GitHub API, which often requires authentication (like a personal access token) to get better rate limits and access certain information. Embedding such a token directly in client-side JavaScript would be a major security risk, as it would be visible to anyone inspecting the site’s code.&lt;/p&gt;
+/* Dark mode considerations */
+html.dark .highlight {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
 
-&lt;p&gt;&lt;strong&gt;The “Why” Revisited:&lt;/strong&gt;
-Exposing API keys or tokens in your frontend code is like leaving your house keys under the doormat – convenient, but not secure. Malicious actors could easily find and misuse your token, potentially exhausting your API rate limits, accessing private data (if your token has those permissions), or even performing actions on your behalf.&lt;/p&gt;
+/* Different background colors for different language blocks */
+.language-yaml .highlight { background-color: #f8fafc; border-left: 4px solid #4f46e5; }
+.language-ruby .highlight { background-color: #fef2f2; border-left: 4px solid #dc2626; }
+.language-html .highlight { background-color: #f0f9ff; border-left: 4px solid #0ea5e9; }
+.language-css .highlight { background-color: #f5f3ff; border-left: 4px solid #a855f7; }
+.language-bash .highlight { background-color: #f0fdf4; border-left: 4px solid #16a34a; }
 
-&lt;p&gt;&lt;strong&gt;Our Solution: The Serverless Proxy&lt;/strong&gt;
-To circumvent this, we implemented a server-side proxy using Azure Functions. This serverless function, named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;portfolioWebsitegithubAuth&lt;/code&gt; (you can find its codebase at &lt;a href=&quot;https://github.com/rivie13/github-api-proxy-function&quot;&gt;rivie13/github-api-proxy-function&lt;/a&gt; on GitHub), acts as a secure intermediary:&lt;/p&gt;
+/* Dark mode versions */
+html.dark .language-yaml .highlight { background-color: #1e293b; border-left: 4px solid #4f46e5; }
+html.dark .language-ruby .highlight { background-color: #350c0c; border-left: 4px solid #dc2626; }
+html.dark .language-html .highlight { background-color: #082f49; border-left: 4px solid #0ea5e9; }
+html.dark .language-css .highlight { background-color: #2e1065; border-left: 4px solid #a855f7; }
+html.dark .language-bash .highlight { background-color: #052e16; border-left: 4px solid #16a34a; }
+&lt;/style&gt;
 
+&lt;style&gt;
+/* Enhanced code block styling */
+.highlight {
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.highlight pre {
+  padding: 1.25rem;
+  margin: 0;
+  overflow-x: auto;
+  line-height: 1.7;
+}
+
+.highlight code {
+  font-family: &apos;Consolas&apos;, &apos;Monaco&apos;, &apos;Courier New&apos;, monospace;
+  font-size: 0.95rem;
+}
+
+/* Dark mode adjustments */
+html.dark .highlight {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Different background colors for different language blocks */
+.language-yaml .highlight { background-color: #f8fafc; border-left: 4px solid #4f46e5; }
+.language-ruby .highlight { background-color: #fef2f2; border-left: 4px solid #dc2626; }
+.language-html .highlight { background-color: #f0f9ff; border-left: 4px solid #0ea5e9; }
+.language-css .highlight { background-color: #f5f3ff; border-left: 4px solid #a855f7; }
+.language-bash .highlight { background-color: #f0fdf4; border-left: 4px solid #16a34a; }
+.language-javascript .highlight { background-color: #fffbeb; border-left: 4px solid #eab308; }
+.language-markdown .highlight { background-color: #f8fafc; border-left: 4px solid #64748b; }
+
+/* Dark mode versions */
+html.dark .language-yaml .highlight { background-color: #1e293b; border-left: 4px solid #4f46e5; }
+html.dark .language-ruby .highlight { background-color: #350c0c; border-left: 4px solid #dc2626; }
+html.dark .language-html .highlight { background-color: #082f49; border-left: 4px solid #0ea5e9; }
+html.dark .language-css .highlight { background-color: #2e1065; border-left: 4px solid #a855f7; }
+html.dark .language-bash .highlight { background-color: #052e16; border-left: 4px solid #16a34a; }
+html.dark .language-javascript .highlight { background-color: #422006; border-left: 4px solid #eab308; }
+html.dark .language-markdown .highlight { background-color: #0f172a; border-left: 4px solid #64748b; }
+
+/* Syntax highlighting tokens - light mode */
+.highlight .c { color: #6b7280; } /* Comment */
+.highlight .k { color: #8b5cf6; font-weight: bold; } /* Keyword */
+.highlight .o { color: #0f172a; } /* Operator */
+.highlight .cm { color: #6b7280; font-style: italic; } /* Comment.Multiline */
+.highlight .cp { color: #6b7280; } /* Comment.Preproc */
+.highlight .c1 { color: #6b7280; font-style: italic; } /* Comment.Single */
+.highlight .cs { color: #6b7280; font-style: italic; } /* Comment.Special */
+.highlight .gd { color: #b91c1c; background-color: #fee2e2; } /* Generic.Deleted */
+.highlight .ge { font-style: italic; } /* Generic.Emph */
+.highlight .gr { color: #b91c1c; } /* Generic.Error */
+.highlight .gh { color: #1e40af; font-weight: bold; } /* Generic.Heading */
+.highlight .gi { color: #15803d; background-color: #dcfce7; } /* Generic.Inserted */
+.highlight .go { color: #4b5563; } /* Generic.Output */
+.highlight .gp { color: #4b5563; font-weight: bold; } /* Generic.Prompt */
+.highlight .gs { font-weight: bold; } /* Generic.Strong */
+.highlight .gu { color: #1e40af; font-weight: bold; } /* Generic.Subheading */
+.highlight .gt { color: #b91c1c; } /* Generic.Traceback */
+.highlight .kc { color: #8b5cf6; font-weight: bold; } /* Keyword.Constant */
+.highlight .kd { color: #8b5cf6; font-weight: bold; } /* Keyword.Declaration */
+.highlight .kn { color: #8b5cf6; font-weight: bold; } /* Keyword.Namespace */
+.highlight .kp { color: #8b5cf6; } /* Keyword.Pseudo */
+.highlight .kr { color: #8b5cf6; font-weight: bold; } /* Keyword.Reserved */
+.highlight .kt { color: #0369a1; font-weight: bold; } /* Keyword.Type */
+.highlight .m { color: #0e7490; } /* Literal.Number */
+.highlight .s { color: #b91c1c; } /* Literal.String */
+.highlight .na { color: #2563eb; } /* Name.Attribute */
+.highlight .nb { color: #0e7490; } /* Name.Builtin */
+.highlight .nc { color: #0891b2; font-weight: bold; } /* Name.Class */
+.highlight .no { color: #0e7490; } /* Name.Constant */
+.highlight .nd { color: #6366f1; } /* Name.Decorator */
+.highlight .ni { color: #0f172a; font-weight: bold; } /* Name.Entity */
+.highlight .ne { color: #b91c1c; font-weight: bold; } /* Name.Exception */
+.highlight .nf { color: #b91c1c; } /* Name.Function */
+.highlight .nl { color: #0f172a; } /* Name.Label */
+.highlight .nn { color: #0e7490; font-weight: bold; } /* Name.Namespace */
+.highlight .nt { color: #2563eb; } /* Name.Tag */
+.highlight .nv { color: #0c4a6e; } /* Name.Variable */
+.highlight .ow { color: #0f172a; font-weight: bold; } /* Operator.Word */
+.highlight .w { color: #d1d5db; } /* Text.Whitespace */
+.highlight .mf { color: #0e7490; } /* Literal.Number.Float */
+.highlight .mh { color: #0e7490; } /* Literal.Number.Hex */
+.highlight .mi { color: #0e7490; } /* Literal.Number.Integer */
+.highlight .mo { color: #0e7490; } /* Literal.Number.Oct */
+.highlight .sb { color: #b91c1c; } /* Literal.String.Backtick */
+.highlight .sc { color: #b91c1c; } /* Literal.String.Char */
+.highlight .sd { color: #b91c1c; font-style: italic; } /* Literal.String.Doc */
+.highlight .s2 { color: #b91c1c; } /* Literal.String.Double */
+.highlight .se { color: #b91c1c; font-weight: bold; } /* Literal.String.Escape */
+.highlight .sh { color: #b91c1c; } /* Literal.String.Heredoc */
+.highlight .si { color: #b91c1c; font-style: italic; } /* Literal.String.Interpol */
+.highlight .sx { color: #b91c1c; } /* Literal.String.Other */
+.highlight .sr { color: #059669; } /* Literal.String.Regex */
+.highlight .s1 { color: #b91c1c; } /* Literal.String.Single */
+.highlight .ss { color: #9333ea; } /* Literal.String.Symbol */
+.highlight .bp { color: #0e7490; } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #0c4a6e; } /* Name.Variable.Class */
+.highlight .vg { color: #0c4a6e; } /* Name.Variable.Global */
+.highlight .vi { color: #0c4a6e; } /* Name.Variable.Instance */
+.highlight .il { color: #0e7490; } /* Literal.Number.Integer.Long */
+
+/* Syntax highlighting tokens - dark mode */
+html.dark .highlight .c { color: #94a3b8; } /* Comment */
+html.dark .highlight .k { color: #a78bfa; font-weight: bold; } /* Keyword */
+html.dark .highlight .o { color: #e2e8f0; } /* Operator */
+html.dark .highlight .cm { color: #94a3b8; font-style: italic; } /* Comment.Multiline */
+html.dark .highlight .cp { color: #94a3b8; } /* Comment.Preproc */
+html.dark .highlight .c1 { color: #94a3b8; font-style: italic; } /* Comment.Single */
+html.dark .highlight .cs { color: #94a3b8; font-style: italic; } /* Comment.Special */
+html.dark .highlight .gd { color: #f87171; background-color: #fecaca30; } /* Generic.Deleted */
+html.dark .highlight .ge { font-style: italic; } /* Generic.Emph */
+html.dark .highlight .gr { color: #f87171; } /* Generic.Error */
+html.dark .highlight .gh { color: #60a5fa; font-weight: bold; } /* Generic.Heading */
+html.dark .highlight .gi { color: #4ade80; background-color: #dcfce730; } /* Generic.Inserted */
+html.dark .highlight .go { color: #94a3b8; } /* Generic.Output */
+html.dark .highlight .gp { color: #94a3b8; font-weight: bold; } /* Generic.Prompt */
+html.dark .highlight .gs { font-weight: bold; } /* Generic.Strong */
+html.dark .highlight .gu { color: #60a5fa; font-weight: bold; } /* Generic.Subheading */
+html.dark .highlight .gt { color: #f87171; } /* Generic.Traceback */
+html.dark .highlight .kc { color: #a78bfa; font-weight: bold; } /* Keyword.Constant */
+html.dark .highlight .kd { color: #a78bfa; font-weight: bold; } /* Keyword.Declaration */
+html.dark .highlight .kn { color: #a78bfa; font-weight: bold; } /* Keyword.Namespace */
+html.dark .highlight .kp { color: #a78bfa; } /* Keyword.Pseudo */
+html.dark .highlight .kr { color: #a78bfa; font-weight: bold; } /* Keyword.Reserved */
+html.dark .highlight .kt { color: #38bdf8; font-weight: bold; } /* Keyword.Type */
+html.dark .highlight .m { color: #22d3ee; } /* Literal.Number */
+html.dark .highlight .s { color: #f87171; } /* Literal.String */
+html.dark .highlight .na { color: #60a5fa; } /* Name.Attribute */
+html.dark .highlight .nb { color: #22d3ee; } /* Name.Builtin */
+html.dark .highlight .nc { color: #22d3ee; font-weight: bold; } /* Name.Class */
+html.dark .highlight .no { color: #22d3ee; } /* Name.Constant */
+html.dark .highlight .nd { color: #a5b4fc; } /* Name.Decorator */
+html.dark .highlight .ni { color: #e2e8f0; font-weight: bold; } /* Name.Entity */
+html.dark .highlight .ne { color: #f87171; font-weight: bold; } /* Name.Exception */
+html.dark .highlight .nf { color: #f87171; } /* Name.Function */
+html.dark .highlight .nl { color: #e2e8f0; } /* Name.Label */
+html.dark .highlight .nn { color: #22d3ee; font-weight: bold; } /* Name.Namespace */
+html.dark .highlight .nt { color: #60a5fa; } /* Name.Tag */
+html.dark .highlight .nv { color: #38bdf8; } /* Name.Variable */
+html.dark .highlight .ow { color: #e2e8f0; font-weight: bold; } /* Operator.Word */
+html.dark .highlight .w { color: #64748b; } /* Text.Whitespace */
+html.dark .highlight .mf { color: #22d3ee; } /* Literal.Number.Float */
+html.dark .highlight .mh { color: #22d3ee; } /* Literal.Number.Hex */
+html.dark .highlight .mi { color: #22d3ee; } /* Literal.Number.Integer */
+html.dark .highlight .mo { color: #22d3ee; } /* Literal.Number.Oct */
+html.dark .highlight .sb { color: #f87171; } /* Literal.String.Backtick */
+html.dark .highlight .sc { color: #f87171; } /* Literal.String.Char */
+html.dark .highlight .sd { color: #f87171; font-style: italic; } /* Literal.String.Doc */
+html.dark .highlight .s2 { color: #f87171; } /* Literal.String.Double */
+html.dark .highlight .se { color: #f87171; font-weight: bold; } /* Literal.String.Escape */
+html.dark .highlight .sh { color: #f87171; } /* Literal.String.Heredoc */
+html.dark .highlight .si { color: #f87171; font-style: italic; } /* Literal.String.Interpol */
+html.dark .highlight .sx { color: #f87171; } /* Literal.String.Other */
+html.dark .highlight .sr { color: #34d399; } /* Literal.String.Regex */
+html.dark .highlight .s1 { color: #f87171; } /* Literal.String.Single */
+html.dark .highlight .ss { color: #c084fc; } /* Literal.String.Symbol */
+html.dark .highlight .bp { color: #22d3ee; } /* Name.Builtin.Pseudo */
+html.dark .highlight .vc { color: #38bdf8; } /* Name.Variable.Class */
+html.dark .highlight .vg { color: #38bdf8; } /* Name.Variable.Global */
+html.dark .highlight .vi { color: #38bdf8; } /* Name.Variable.Instance */
+html.dark .highlight .il { color: #22d3ee; } /* Literal.Number.Integer.Long */
+&lt;/style&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-animate=&quot;fade-in&quot;&gt;
+Welcome to the final and most exciting part of our tutorial series on building a dynamic portfolio with Jekyll, AI, and a sprinkle of serverless magic! In the previous installments, we laid the conceptual groundwork, set up our Jekyll site with Tailwind CSS, and structured our content for easy management. Now, we dive into the heart of the &quot;dynamic&quot; aspect: securely fetching and displaying GitHub data using an Azure Function App as a proxy and orchestrating it all with client-side JavaScript.
+
+This is where our static site truly comes alive, showcasing real-time project updates and GitHub activity. We&apos;ll also cover the finishing touches like analytics, ads, and the automated deployment pipeline that makes it all seamless. Let&apos;s get started!
+&lt;/div&gt;
+
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+&lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;4.1. The Secure Gateway: Azure Function App (&lt;code&gt;portfolioWebsitegithubAuth&lt;/code&gt;)&lt;/h2&gt;
+&lt;p&gt;
+As we discussed in Part 1, one of the primary challenges with displaying dynamic data from APIs on a static site like GitHub Pages is security. We need to interact with the GitHub API, which often requires authentication (like a personal access token) to get better rate limits and access certain information. Embedding such a token directly in client-side JavaScript would be a major security risk, as it would be visible to anyone inspecting the site&apos;s code.
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The &quot;Why&quot; Revisited:&lt;/strong&gt;&lt;br /&gt;
+Exposing API keys or tokens in your frontend code is like leaving your house keys under the doormat – convenient, but not secure. Malicious actors could easily find and misuse your token, potentially exhausting your API rate limits, accessing private data (if your token has those permissions), or even performing actions on your behalf.
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Our Solution: The Serverless Proxy&lt;/strong&gt;&lt;br /&gt;
+To circumvent this, we implemented a server-side proxy using Azure Functions. This serverless function, named &lt;code&gt;portfolioWebsitegithubAuth&lt;/code&gt; (you can find its codebase at &lt;a href=&quot;https://github.com/rivie13/github-api-proxy-function&quot;&gt;rivie13/github-api-proxy-function&lt;/a&gt; on GitHub), acts as a secure intermediary:
+&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Client-Side Request:&lt;/strong&gt; Our Jekyll site’s JavaScript makes API requests to our Azure Function’s endpoint.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Secure Authentication &amp;amp; Secret Retrieval:&lt;/strong&gt; The Azure Function, running on the server-side, uses its managed identity to securely fetch sensitive configurations like the GitHub API token from Azure Key Vault (in this project, a vault named &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;codegrind-platform-kv&lt;/code&gt;). The Function App’s application settings use Key Vault References instead of storing secrets directly. This token is then used to authenticate with the actual GitHub API.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Client-Side Request:&lt;/strong&gt; Our Jekyll site&apos;s JavaScript makes API requests to our Azure Function&apos;s endpoint.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Secure Authentication &amp;amp; Secret Retrieval:&lt;/strong&gt; The Azure Function, running on the server-side, uses its managed identity to securely fetch sensitive configurations like the GitHub API token from Azure Key Vault (in this project, a vault named &lt;code&gt;codegrind-platform-kv&lt;/code&gt;). The Function App&apos;s application settings use Key Vault References instead of storing secrets directly. This token is then used to authenticate with the actual GitHub API.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Data Forwarding:&lt;/strong&gt; It fetches the requested data from GitHub.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Response to Client:&lt;/strong&gt; It then forwards the data back to our client-side JavaScript, without ever exposing the sensitive token.&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;&lt;strong&gt;Key Features of the Azure Function Proxy:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Handles Authentication:&lt;/strong&gt; Securely manages the GitHub API token by retrieving it from Azure Key Vault at runtime using Key Vault references. This means the token isn’t stored directly in the Function App’s configuration or code.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Passes Rate Limit Information:&lt;/strong&gt; It can also relay GitHub’s API rate limit headers back to the client, which helps in debugging and managing API usage.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;CORS (Cross-Origin Resource Sharing):&lt;/strong&gt; Configured to allow requests from our portfolio’s domain.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Handles Authentication:&lt;/strong&gt; Securely manages the GitHub API token by retrieving it from Azure Key Vault at runtime using Key Vault references. This means the token isn&apos;t stored directly in the Function App&apos;s configuration or code.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Passes Rate Limit Information:&lt;/strong&gt; It can also relay GitHub&apos;s API rate limit headers back to the client, which helps in debugging and managing API usage.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CORS (Cross-Origin Resource Sharing):&lt;/strong&gt; Configured to allow requests from our portfolio&apos;s domain.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;Here’s a conceptual peek at where you might find your deployed function in the Azure portal (actual UI may vary):&lt;/p&gt;
-
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;[Conceptual Screenshot of Azure Function App in Azure Portal - e.g., a simple diagram or a placeholder text like &quot;Imagine Azure Portal UI here showing the &apos;portfolioWebsitegithubAuth&apos; Function App details.&quot;]
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;The Connection:&lt;/strong&gt;
-All our frontend JavaScript that needs GitHub data is configured to make API calls to this Azure Function’s URL (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://portfolioWebsitegithubAuth.azurewebsites.net/api/github/...&lt;/code&gt;) instead of directly to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://api.github.com/...&lt;/code&gt;.&lt;/p&gt;
-
+&lt;p&gt;Here&apos;s a conceptual peek at where you might find your deployed function in the Azure portal (actual UI may vary):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;[Conceptual Screenshot of Azure Function App in Azure Portal - e.g., a simple diagram or a placeholder text like &quot;Imagine Azure Portal UI here showing the &apos;portfolioWebsitegithubAuth&apos; Function App details.&quot;]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;The Connection:&lt;/strong&gt;&lt;br /&gt;
+All our frontend JavaScript that needs GitHub data is configured to make API calls to this Azure Function&apos;s URL (e.g., &lt;code&gt;https://portfolioWebsitegithubAuth.azurewebsites.net/api/github/...&lt;/code&gt;) instead of directly to &lt;code&gt;https://api.github.com/...&lt;/code&gt;.
+&lt;/p&gt;
 &lt;p&gt;This setup not only secures our API token by keeping it out of direct application settings but also provides a centralized point for managing API interactions, which can be beneficial for logging, monitoring, or adding more complex logic in the future. This was a key learning goal for the project – to implement a secure and efficient bridge for API data on a static platform, following best practices for secrets management using Azure Key Vault.&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;h2 id=&quot;42-orchestrating-api-calls-assetsjsgithub-configjs&quot;&gt;4.2. Orchestrating API Calls: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/github-config.js&lt;/code&gt;&lt;/h2&gt;
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+&lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;4.2. Orchestrating API Calls: &lt;code&gt;assets/js/github-config.js&lt;/code&gt;&lt;/h2&gt;
 
-&lt;p&gt;With our secure Azure Function proxy in place, the next step is to ensure our client-side JavaScript knows how to use it. This is where &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/github-config.js&lt;/code&gt; comes into play.&lt;/p&gt;
+&lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
+  &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
+  &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;script&gt;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    &lt;/script&gt;
+  &lt;/div&gt;
+  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
+&lt;/div&gt;
+ 
 
+
+
+
+
+&lt;p&gt;With our secure Azure Function proxy in place, the next step is to ensure our client-side JavaScript knows how to use it. This is where &lt;code&gt;assets/js/github-config.js&lt;/code&gt; comes into play.&lt;/p&gt;
 &lt;p&gt;This small but crucial file serves two main purposes:&lt;/p&gt;
-
 &lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;Centralizing GitHub Username:&lt;/strong&gt; It stores your GitHub username, making it easy to update if needed.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Rewriting API URLs:&lt;/strong&gt; Most importantly, it contains the logic to transform standard GitHub API URLs (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://api.github.com/...&lt;/code&gt;) into URLs that point to our Azure Function proxy.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Rewriting API URLs:&lt;/strong&gt; Most importantly, it contains the logic to transform standard GitHub API URLs (&lt;code&gt;https://api.github.com/...&lt;/code&gt;) into URLs that point to our Azure Function proxy.&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;Let&apos;s look at a simplified version of the key function (the actual implementation might have more features like query parameter handling):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;// assets/js/github-config.js (Simplified Example)
+const GITHUB_USERNAME = &apos;your-github-username&apos;; // Replace with your username
+const PROXY_URL_BASE = &apos;https://portfolioWebsitegithubAuth.azurewebsites.net/api/github&apos;; // Your Azure Function URL
 
-&lt;p&gt;Let’s look at a simplified version of the key function (the actual implementation might have more features like query parameter handling):&lt;/p&gt;
+function getProxiedGithubApiUrl(apiPath) {
+  // Example: apiPath might be &apos;/users/your-github-username/events&apos;
+  // Ensures no double slashes if apiPath starts with one
+  const cleanApiPath = apiPath.startsWith(&apos;/&apos;) ? apiPath.substring(1) : apiPath;
+  return `${PROXY_URL_BASE}/${cleanApiPath}`;
+}
 
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// assets/js/github-config.js (Simplified Example)&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;GITHUB_USERNAME&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;your-github-username&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Replace with your username&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;PROXY_URL_BASE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;https://portfolioWebsitegithubAuth.azurewebsites.net/api/github&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Your Azure Function URL&lt;/span&gt;
+// Example usage (not in github-config.js itself, but how other scripts would use it):
+// const userEventsUrl = getProxiedGithubApiUrl(`/users/${GITHUB_USERNAME}/events`);
+// console.log(userEventsUrl); 
+// Output: https://portfolioWebsitegithubAuth.azurewebsites.net/api/github/users/your-github-username/events
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By abstracting this logic into &lt;code&gt;github-config.js&lt;/code&gt;, all other JavaScript files that need to fetch GitHub data can simply call &lt;code&gt;getProxiedGithubApiUrl()&lt;/code&gt; with the desired GitHub API path. This keeps the rest of our codebase cleaner and makes it easy to change the proxy URL or logic in one place if ever needed.&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getProxiedGithubApiUrl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;apiPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// Example: apiPath might be &apos;/users/your-github-username/events&apos;&lt;/span&gt;
-  &lt;span class=&quot;c1&quot;&gt;// Ensures no double slashes if apiPath starts with one&lt;/span&gt;
-  &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;cleanApiPath&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;apiPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;startsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;dl&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;apiPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;substring&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;apiPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;PROXY_URL_BASE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;cleanApiPath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;// Example usage (not in github-config.js itself, but how other scripts would use it):&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// const userEventsUrl = getProxiedGithubApiUrl(`/users/${GITHUB_USERNAME}/events`);&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// console.log(userEventsUrl); &lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;// Output: https://portfolioWebsitegithubAuth.azurewebsites.net/api/github/users/your-github-username/events&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;By abstracting this logic into &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;github-config.js&lt;/code&gt;, all other JavaScript files that need to fetch GitHub data can simply call &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;getProxiedGithubApiUrl()&lt;/code&gt; with the desired GitHub API path. This keeps the rest of our codebase cleaner and makes it easy to change the proxy URL or logic in one place if ever needed.&lt;/p&gt;
-
-&lt;h2 id=&quot;43-fetching-and-displaying-github-data-the-javascript-workhorses&quot;&gt;4.3. Fetching and Displaying GitHub Data: The JavaScript Workhorses&lt;/h2&gt;
-
-&lt;p&gt;Now for the client-side JavaScript files that do the heavy lifting of fetching data (via our proxy, of course) and dynamically updating our portfolio’s content. This is where the “AI-assisted vibe coding” I mentioned in Part 1 often came in handy, especially for structuring classes, handling asynchronous operations, and implementing caching.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/github-activity.js&lt;/code&gt; Deep Dive:&lt;/strong&gt;
-This script is responsible for fetching and displaying your recent GitHub activity on the homepage, creating that “live” feel. It typically involves two main classes:&lt;/p&gt;
-
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+&lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;4.3. Fetching and Displaying GitHub Data: The JavaScript Workhorses&lt;/h2&gt;
+&lt;p&gt;Now for the client-side JavaScript files that do the heavy lifting of fetching data (via our proxy, of course) and dynamically updating our portfolio&apos;s content. This is where the &quot;AI-assisted vibe coding&quot; I mentioned in Part 1 often came in handy, especially for structuring classes, handling asynchronous operations, and implementing caching.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;assets/js/github-activity.js&lt;/code&gt; Deep Dive:&lt;/strong&gt;&lt;br /&gt;
+This script is responsible for fetching and displaying your recent GitHub activity on the homepage, creating that &quot;live&quot; feel. It typically involves two main classes:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GitHubActivityFetcher&lt;/code&gt; Class:&lt;/strong&gt;
+  &lt;li&gt;&lt;strong&gt;GitHubActivityFetcher Class:&lt;/strong&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Fetching User Events:&lt;/strong&gt; Makes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fetch&lt;/code&gt; requests to the proxied endpoint for user events (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/users/${GITHUB_USERNAME}/events&lt;/code&gt;). These events can include pushes, pull request creations, issue comments, etc.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Event Filtering &amp;amp; Formatting:&lt;/strong&gt; Not all events might be relevant. This class filters them (e.g., only show ‘PushEvent’, ‘PullRequestEvent’, ‘IssuesEvent’) and formats them into a more readable HTML structure for the timeline.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Fetching User Events:&lt;/strong&gt; Makes &lt;code&gt;fetch&lt;/code&gt; requests to the proxied endpoint for user events (e.g., &lt;code&gt;/users/${GITHUB_USERNAME}/events&lt;/code&gt;). These events can include pushes, pull request creations, issue comments, etc.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Event Filtering &amp;amp; Formatting:&lt;/strong&gt; Not all events might be relevant. This class filters them (e.g., only show &apos;PushEvent&apos;, &apos;PullRequestEvent&apos;, &apos;IssuesEvent&apos;) and formats them into a more readable HTML structure for the timeline.&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;Rendering the Timeline:&lt;/strong&gt; Dynamically injects the formatted activity into a designated container on your homepage.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Client-Side Caching (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localStorage&lt;/code&gt;):&lt;/strong&gt; To avoid hitting the GitHub API (even via the proxy) on every single page load, which can be excessive and lead to rate limiting, this class implements client-side caching. Fetched activity is stored in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localStorage&lt;/code&gt; with an expiry time. Subsequent visits will load from cache if the data is still fresh, significantly speeding up load times and reducing API calls.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;“Refresh” Button Functionality:&lt;/strong&gt; Often includes a button that allows users (or you, during development) to manually clear the cache and fetch the latest activity.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Client-Side Caching (&lt;code&gt;localStorage&lt;/code&gt;):&lt;/strong&gt; To avoid hitting the GitHub API (even via the proxy) on every single page load, which can be excessive and lead to rate limiting, this class implements client-side caching. Fetched activity is stored in &lt;code&gt;localStorage&lt;/code&gt; with an expiry time. Subsequent visits will load from cache if the data is still fresh, significantly speeding up load times and reducing API calls.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;&quot;Refresh&quot; Button Functionality:&lt;/strong&gt; Often includes a button that allows users (or you, during development) to manually clear the cache and fetch the latest activity.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GitHubLastUpdatedFetcher&lt;/code&gt; Class:&lt;/strong&gt;
+  &lt;li&gt;&lt;strong&gt;GitHubLastUpdatedFetcher Class:&lt;/strong&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Fetching Repository Data:&lt;/strong&gt; For each project listed in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_data/projects.yml&lt;/code&gt; that has a GitHub repository URL, this class fetches repository data, specifically looking for the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pushed_at&lt;/code&gt; timestamp or the date of the last commit. This allows us to display “Last updated: …” information on project cards.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Populating Fields:&lt;/strong&gt; It finds the corresponding &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;span data-github-last-updated=&quot;&quot;&amp;gt;Loading...&amp;lt;/span&amp;gt;&lt;/code&gt; elements (as discussed in Part 3) and updates their content with the fetched date.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Client-Side Caching:&lt;/strong&gt; Similar to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GitHubActivityFetcher&lt;/code&gt;, this class also uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localStorage&lt;/code&gt; to cache the last updated timestamps, improving performance.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Fetching Repository Data:&lt;/strong&gt; For each project listed in &lt;code&gt;_data/projects.yml&lt;/code&gt; that has a GitHub repository URL, this class fetches repository data, specifically looking for the &lt;code&gt;pushed_at&lt;/code&gt; timestamp or the date of the last commit. This allows us to display &quot;Last updated: ...&quot; information on project cards.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Populating Fields:&lt;/strong&gt; It finds the corresponding &lt;code&gt;&amp;lt;span data-github-last-updated=&quot;&quot;&amp;gt;Loading...&amp;lt;/span&amp;gt;&lt;/code&gt; elements (as discussed in Part 3) and updates their content with the fetched date.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Client-Side Caching:&lt;/strong&gt; Similar to &lt;code&gt;GitHubActivityFetcher&lt;/code&gt;, this class also uses &lt;code&gt;localStorage&lt;/code&gt; to cache the last updated timestamps, improving performance.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;&lt;strong&gt;Other Key JavaScript Files:&lt;/strong&gt;&lt;/p&gt;
-
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/github-repos.js&lt;/code&gt;:&lt;/strong&gt; If you have a dedicated section to list your public repositories, this script would fetch that list (e.g., from &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/users/${GITHUB_USERNAME}/repos&lt;/code&gt;) and display them, often with details like descriptions, stars, and languages. It also uses the proxy and caching.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/github-stats.js&lt;/code&gt; &amp;amp; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/github-contributions.js&lt;/code&gt;:&lt;/strong&gt; These might be used to fetch and display contribution statistics, like a contribution graph (though embedding GitHub’s own graph image is often simpler) or language usage stats across your repositories. Again, all API calls are routed through the Azure proxy.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/project-cards.js&lt;/code&gt;:&lt;/strong&gt; This script might be responsible for more dynamic elements within project cards beyond just the “last updated” date. For example, if you wanted to dynamically fetch and display the primary programming languages used in each project repository, this script (or a similar one) would handle that. It would parse the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;languages_url&lt;/code&gt; provided by the GitHub Repos API for each project.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;assets/js/github-repos.js&lt;/code&gt;: If you have a dedicated section to list your public repositories, this script would fetch that list (e.g., from &lt;code&gt;/users/${GITHUB_USERNAME}/repos&lt;/code&gt;) and display them, often with details like descriptions, stars, and languages. It also uses the proxy and caching.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;assets/js/github-stats.js&lt;/code&gt; &amp;amp; &lt;code&gt;assets/js/github-contributions.js&lt;/code&gt;: These might be used to fetch and display contribution statistics, like a contribution graph (though embedding GitHub&apos;s own graph image is often simpler) or language usage stats across your repositories. Again, all API calls are routed through the Azure proxy.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;assets/js/project-cards.js&lt;/code&gt;: This script might be responsible for more dynamic elements within project cards beyond just the &quot;last updated&quot; date. For example, if you wanted to dynamically fetch and display the primary programming languages used in each project repository, this script (or a similar one) would handle that. It would parse the &lt;code&gt;languages_url&lt;/code&gt; provided by the GitHub Repos API for each project.&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RequestQueueClient&lt;/code&gt; (Advanced Technique):&lt;/strong&gt;
-In some implementations, especially if you’re making many API calls in quick succession (e.g., fetching language data for 20 projects), you might find a utility class like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RequestQueueClient&lt;/code&gt;. My AI assistants were particularly helpful in conceptualizing and refining this. Its purpose is to:&lt;/p&gt;
-
+&lt;p&gt;&lt;strong&gt;The &lt;code&gt;RequestQueueClient&lt;/code&gt; (Advanced Technique):&lt;/strong&gt;&lt;br /&gt;
+In some implementations, especially if you&apos;re making many API calls in quick succession (e.g., fetching language data for 20 projects), you might find a utility class like &lt;code&gt;RequestQueueClient&lt;/code&gt;. My AI assistants were particularly helpful in conceptualizing and refining this. Its purpose is to:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Manage Multiple API Requests:&lt;/strong&gt; Instead of firing off all requests simultaneously, which could overwhelm the browser, the Azure proxy, or even hit GitHub’s secondary rate limits (which are more complex than the primary hourly limit), a queue manages requests.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Manage Multiple API Requests:&lt;/strong&gt; Instead of firing off all requests simultaneously, which could overwhelm the browser, the Azure proxy, or even hit GitHub&apos;s secondary rate limits (which are more complex than the primary hourly limit), a queue manages requests.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Concurrency Control:&lt;/strong&gt; It sends a limited number of requests at a time (e.g., 3-5 concurrent requests).&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Delay/Backoff:&lt;/strong&gt; It can introduce slight delays between batches of requests.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;This ensures a smoother experience and more robust data fetching, especially for users with slower connections or when many data points need to be loaded.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;AI in JS Development:&lt;/strong&gt;
+&lt;p&gt;&lt;strong&gt;AI in JS Development:&lt;/strong&gt;&lt;br /&gt;
 Throughout the development of these JavaScript modules, AI played a significant role:&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Boilerplate Generation:&lt;/strong&gt; “Generate a JavaScript class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GitHubFetcher&lt;/code&gt; that takes a URL, fetches JSON, and has a method to get the data.”&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Asynchronous Logic:&lt;/strong&gt; Helping structure &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;async/await&lt;/code&gt; calls and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Promise&lt;/code&gt; handling correctly.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Debugging:&lt;/strong&gt; “Why is this &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fetch&lt;/code&gt; call returning undefined?” or “How do I properly handle errors in this Promise chain?”&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Caching Implementation:&lt;/strong&gt; “Show me how to cache API responses in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localStorage&lt;/code&gt; with an expiration time.”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Boilerplate Generation:&lt;/strong&gt; &quot;Generate a JavaScript class &lt;code&gt;GitHubFetcher&lt;/code&gt; that takes a URL, fetches JSON, and has a method to get the data.&quot;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Asynchronous Logic:&lt;/strong&gt; Helping structure &lt;code&gt;async/await&lt;/code&gt; calls and &lt;code&gt;Promise&lt;/code&gt; handling correctly.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Debugging:&lt;/strong&gt; &quot;Why is this &lt;code&gt;fetch&lt;/code&gt; call returning undefined?&quot; or &quot;How do I properly handle errors in this Promise chain?&quot;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Caching Implementation:&lt;/strong&gt; &quot;Show me how to cache API responses in &lt;code&gt;localStorage&lt;/code&gt; with an expiration time.&quot;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Refinement:&lt;/strong&gt; Suggesting better variable names, ways to break down complex functions, or more efficient data manipulation techniques.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;The ability to quickly iterate on JavaScript logic with an AI assistant like those in Cursor dramatically sped up the development of these dynamic features.&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;h2 id=&quot;44-enhancing-user-experience-animations-and-responsiveness&quot;&gt;4.4. Enhancing User Experience: Animations and Responsiveness&lt;/h2&gt;
-
-&lt;p&gt;A dynamic site isn’t just about data; it’s also about how the user experiences that data. Subtle animations and a responsive design contribute significantly to a polished feel.&lt;/p&gt;
-
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+&lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;4.4. Enhancing User Experience: Animations and Responsiveness&lt;/h2&gt;
+&lt;p&gt;A dynamic site isn&apos;t just about data; it&apos;s also about how the user experiences that data. Subtle animations and a responsive design contribute significantly to a polished feel.&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/animations.js&lt;/code&gt;:&lt;/strong&gt; This script typically handles UI effects. For instance:
+  &lt;li&gt;&lt;code&gt;assets/js/animations.js&lt;/code&gt;: This script typically handles UI effects. For instance:
     &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Scroll-based Animations:&lt;/strong&gt; Elements fading in or sliding into view as the user scrolls down the page (often using the Intersection Observer API for performance). You might have seen &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data-animate=&quot;fade-in&quot;&lt;/code&gt; attributes in the HTML – this script would bring them to life.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Scroll-based Animations:&lt;/strong&gt; Elements fading in or sliding into view as the user scrolls down the page (often using the Intersection Observer API for performance). You might have seen &lt;code&gt;data-animate=&quot;fade-in&quot;&lt;/code&gt; attributes in the HTML – this script would bring them to life.&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;Hover Effects:&lt;/strong&gt; More complex hover effects that might require JavaScript.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/responsive.js&lt;/code&gt;:&lt;/strong&gt; While most responsiveness is handled by Tailwind CSS’s utility classes and custom CSS in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/css/responsive.css&lt;/code&gt;, there might be cases where JavaScript is needed to enhance responsive behavior. For example, dynamically changing an element’s properties or behavior based on screen size if CSS alone isn’t sufficient.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;assets/js/main.js&lt;/code&gt;:&lt;/strong&gt; This can be a catch-all for general site-wide JavaScript functionalities, like:
+  &lt;li&gt;&lt;code&gt;assets/js/responsive.js&lt;/code&gt;: While most responsiveness is handled by Tailwind CSS&apos;s utility classes and custom CSS in &lt;code&gt;assets/css/responsive.css&lt;/code&gt;, there might be cases where JavaScript is needed to enhance responsive behavior. For example, dynamically changing an element&apos;s properties or behavior based on screen size if CSS alone isn&apos;t sufficient.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;assets/js/main.js&lt;/code&gt;: This can be a catch-all for general site-wide JavaScript functionalities, like:
     &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Dark Mode Toggle:&lt;/strong&gt; The logic to switch between light and dark themes and save the user’s preference in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localStorage&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Dark Mode Toggle:&lt;/strong&gt; The logic to switch between light and dark themes and save the user&apos;s preference in &lt;code&gt;localStorage&lt;/code&gt;.&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;Mobile Navigation Toggle:&lt;/strong&gt; Handling the opening and closing of a mobile menu.&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;Smooth Scrolling:&lt;/strong&gt; Implementing smooth scrolling for anchor links.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;These scripts add that layer of polish that makes the site feel modern and engaging.&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;h2 id=&quot;45-final-touches-and-going-live&quot;&gt;4.5. Final Touches and Going Live&lt;/h2&gt;
-
-&lt;p&gt;With the core dynamic features in place, it’s time for the final touches before fully going live and setting up the automated deployment.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Contact Form (Formspree):&lt;/strong&gt;
-As detailed in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;PLANNING.MD&lt;/code&gt; and briefly in Part 1, integrating a contact form on a static site usually requires a third-party service. I used &lt;a href=&quot;https://formspree.io/&quot;&gt;Formspree&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+&lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;4.5. Final Touches and Going Live&lt;/h2&gt;
+&lt;p&gt;With the core dynamic features in place, it&apos;s time for the final touches before fully going live and setting up the automated deployment.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Contact Form (Formspree):&lt;/strong&gt;&lt;br /&gt;
+As detailed in &lt;code&gt;PLANNING.MD&lt;/code&gt; and briefly in Part 1, integrating a contact form on a static site usually requires a third-party service. I used &lt;a href=&quot;https://formspree.io/&quot;&gt;Formspree&lt;/a&gt;.
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Setup:&lt;/strong&gt; You create an account, set up a new form, and Formspree provides you with an endpoint URL.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;HTML:&lt;/strong&gt; You add a standard HTML form to your contact page, pointing its &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;action&lt;/code&gt; attribute to your Formspree endpoint and setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;method&lt;/code&gt; to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;POST&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;HTML:&lt;/strong&gt; You add a standard HTML form to your contact page, pointing its &lt;code&gt;action&lt;/code&gt; attribute to your Formspree endpoint and setting the &lt;code&gt;method&lt;/code&gt; to &lt;code&gt;POST&lt;/code&gt;.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Result:&lt;/strong&gt; When a user submits the form, the data is sent to Formspree, which then forwards it to your email address. No backend code needed on your site!&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;Cookie Consent:&lt;/strong&gt;
-To comply with privacy regulations like GDPR, a cookie consent banner is often necessary, especially if you’re using analytics or ads.&lt;/p&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Cookie Consent:&lt;/strong&gt;&lt;br /&gt;
+To comply with privacy regulations like GDPR, a cookie consent banner is often necessary, especially if you&apos;re using analytics or ads.
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/cookie-consent.html&lt;/code&gt;:&lt;/strong&gt; This include likely contains the HTML markup for the banner.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Associated JS:&lt;/strong&gt; A small JavaScript snippet (perhaps in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main.js&lt;/code&gt; or its own file) handles showing the banner, and then hiding and setting a cookie or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;localStorage&lt;/code&gt; item when the user accepts, so they don’t see the banner on every page or visit.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;_includes/cookie-consent.html&lt;/code&gt;: This include likely contains the HTML markup for the banner.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Associated JS:&lt;/strong&gt; A small JavaScript snippet (perhaps in &lt;code&gt;main.js&lt;/code&gt; or its own file) handles showing the banner, and then hiding and setting a cookie or &lt;code&gt;localStorage&lt;/code&gt; item when the user accepts, so they don&apos;t see the banner on every page or visit.&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Analytics &amp;amp; Monetization:&lt;/strong&gt;&lt;/p&gt;
-
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Google Analytics:&lt;/strong&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Integration:&lt;/strong&gt; This is typically done by including a JavaScript snippet provided by Google Analytics. In our Jekyll setup, this is neatly handled by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/google-tag.html&lt;/code&gt;, which is then included in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt;.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Integration:&lt;/strong&gt; This is typically done by including a JavaScript snippet provided by Google Analytics. In our Jekyll setup, this is neatly handled by &lt;code&gt;_includes/google-tag.html&lt;/code&gt;, which is then included in &lt;code&gt;_layouts/default.html&lt;/code&gt;.&lt;/li&gt;
       &lt;li&gt;&lt;strong&gt;Purpose:&lt;/strong&gt; Allows you to track website traffic, user behavior (pages visited, time on site), referral sources, and much more. Essential for understanding your audience and improving your content.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Google AdSense:&lt;/strong&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;Integration:&lt;/strong&gt; If you choose to monetize your site with ads, Google AdSense provides ad code snippets. These are placed in your HTML where you want ads to appear. We used includes like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/header-ad.html&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/footer-ad.html&lt;/code&gt; (and potentially in-article ad includes) to manage these.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Purpose:&lt;/strong&gt; Displays targeted ads on your site, allowing you to earn revenue from impressions or clicks. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; might have a setting to easily enable/disable ads site-wide.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Integration:&lt;/strong&gt; If you choose to monetize your site with ads, Google AdSense provides ad code snippets. These are placed in your HTML where you want ads to appear. We used includes like &lt;code&gt;_includes/header-ad.html&lt;/code&gt; and &lt;code&gt;_includes/footer-ad.html&lt;/code&gt; (and potentially in-article ad includes) to manage these.&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Purpose:&lt;/strong&gt; Displays targeted ads on your site, allowing you to earn revenue from impressions or clicks. The &lt;code&gt;_config.yml&lt;/code&gt; might have a setting to easily enable/disable ads site-wide.&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;This automated workflow means your site is always up-to-date with the latest changes in your &lt;code&gt;main&lt;/code&gt; branch, without any manual intervention for deployment.&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;Deployment: Automated with GitHub Actions for GitHub Pages&lt;/strong&gt;
-One of the beauties of using Jekyll with GitHub Pages is the seamless, automated deployment process.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;The Simplicity:&lt;/strong&gt; Once set up, you simply &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git push&lt;/code&gt; your changes to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; (or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;master&lt;/code&gt;) branch of your GitHub repository.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;GitHub Actions Workflow:&lt;/strong&gt; A workflow file, typically located at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.github/workflows/jekyll.yml&lt;/code&gt; (or a similar name), defines the automated build and deployment process.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Let’s break down a typical &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll.yml&lt;/code&gt; workflow file:&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# .github/workflows/jekyll.yml (Example)&lt;/span&gt;
-&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Build and Deploy Jekyll Site&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Or your default branch&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;pull_request&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Or your default branch&lt;/span&gt;
-
-&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout code&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v3&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Setup Ruby&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ruby/setup-ruby@v1&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;ruby-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;3.0&apos;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Specify your Ruby version&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;bundler-cache&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Automatically caches gems&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Install dependencies (if not cached)&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle install&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Build the Jekyll site&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;bundle exec jekyll build&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;JEKYLL_ENV&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;production&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Set environment to production&lt;/span&gt;
-
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Upload artifact&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/upload-pages-artifact@v2&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-          &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;./_site&apos;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Jekyll&apos;s default output folder&lt;/span&gt;
-
-  &lt;span class=&quot;na&quot;&gt;deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;needs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;build&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;github.event_name == &apos;push&apos; &amp;amp;&amp;amp; github.ref == &apos;refs/heads/main&apos;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Only deploy on push to main&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;permissions&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;read&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;pages&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;id-token&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;write&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# Required for OIDC token&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;environment&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;github-pages&lt;/span&gt;
-      &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy to GitHub Pages&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;deployment&lt;/span&gt;
-        &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/deploy-pages@v4&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Key Parts of the Workflow:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on: push&lt;/code&gt; / &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on: pull_request&lt;/code&gt;:&lt;/strong&gt; Triggers the workflow on pushes or pull requests to the specified branches. The build job runs on both, but the deploy job typically only runs on pushes to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;build&lt;/code&gt; Job:&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;actions/checkout@v3&lt;/code&gt;: Checks out your repository’s code.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ruby/setup-ruby@v1&lt;/code&gt;: Sets up the specified Ruby version and uses &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundler-cache: true&lt;/code&gt; to speed up dependency installation by caching gems between runs.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle install&lt;/code&gt;: Installs your Jekyll plugins and other dependencies from the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Gemfile&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;bundle exec jekyll build&lt;/code&gt;: Builds your Jekyll site. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;JEKYLL_ENV: production&lt;/code&gt; ensures production-specific settings are used (e.g., not showing draft posts, applying full asset compilation/minification if configured).&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;actions/upload-pages-artifact@v2&lt;/code&gt;: Uploads the built site (the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_site&lt;/code&gt; folder) as an artifact.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;deploy&lt;/code&gt; Job:&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;needs: build&lt;/code&gt;: Ensures the build job completes successfully before this job runs.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if: github.event_name == &apos;push&apos; &amp;amp;&amp;amp; github.ref == &apos;refs/heads/main&apos;&lt;/code&gt;: Critically, this ensures deployment only happens when changes are pushed directly to the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; branch.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;permissions&lt;/code&gt;: Sets the necessary permissions for the GitHub Actions token to write to GitHub Pages.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;environment&lt;/code&gt;: Configures the GitHub Pages environment, including setting the deployment URL.&lt;/li&gt;
-      &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;actions/deploy-pages@v4&lt;/code&gt;: This official action takes the artifact uploaded by the build job and deploys it to GitHub Pages.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This automated workflow means your site is always up-to-date with the latest changes in your &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main&lt;/code&gt; branch, without any manual intervention for deployment.&lt;/p&gt;
-
-&lt;h2 id=&quot;46-reflection-dynamic-power-in-under-a-week--the-grand-finale&quot;&gt;4.6. Reflection: Dynamic Power in Under a Week – The Grand Finale!&lt;/h2&gt;
-
+&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+&lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;4.6. Reflection: Dynamic Power in Under a Week – The Grand Finale!&lt;/h2&gt;
 &lt;p&gt;And there we have it! From initial concept to a fully dynamic, feature-rich portfolio, all built on a static hosting platform (GitHub Pages) and accomplished in &lt;strong&gt;less than a week&lt;/strong&gt;.&lt;/p&gt;
-
 &lt;p&gt;This journey has showcased several key themes:&lt;/p&gt;
-
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Strategic Planning is Paramount:&lt;/strong&gt; The initial planning phase, heavily assisted by AI, was crucial in defining the architecture and identifying solutions to potential roadblocks (like secure API access). This upfront investment saved immense time during development.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;AI as a True Collaborator:&lt;/strong&gt; Throughout this project, AI tools (Claude, Gemini, particularly within the Cursor IDE) served as invaluable partners. They helped brainstorm, generate code, debug complex JavaScript, refine content, and even structure documentation. This isn’t about AI replacing developers, but augmenting their capabilities for incredible speed and efficiency.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;AI as a True Collaborator:&lt;/strong&gt; Throughout this project, AI tools (Claude, Gemini, particularly within the Cursor IDE) served as invaluable partners. They helped brainstorm, generate code, debug complex JavaScript, refine content, and even structure documentation. This isn&apos;t about AI replacing developers, but augmenting their capabilities for incredible speed and efficiency.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Overcoming Static Site Limitations:&lt;/strong&gt; The Azure Function App proxy is a testament to how creative architectural choices can bring dynamic capabilities to static hosting environments, securely and cost-effectively.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;The Power of Modern Tooling:&lt;/strong&gt; Jekyll for content management, Tailwind CSS for rapid UI development, GitHub Actions for CI/CD, and serverless functions like Azure Functions collectively provide a powerful, efficient, and often free (or very low-cost) stack for building sophisticated web projects.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Continuous Learning:&lt;/strong&gt; Implementing the Azure Function proxy and some of the more complex JavaScript interactions were fantastic learning experiences, pushing the boundaries of what I thought was quickly achievable on a static site.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Building this portfolio was not just about creating an online presence; it was an exercise in rapid development, problem-solving, and effective AI collaboration. The result is a site that not only showcases my work but also tells the story of its own creation – a story I hope has been insightful and inspiring for you through this tutorial series.&lt;/p&gt;
-
-&lt;p&gt;Thank you for following along! I encourage you to experiment with these technologies and see how AI can supercharge your own development workflows.&lt;/p&gt;
+&lt;p&gt;Thank you for following along! I encourage you to experiment with these technologies and see how AI can supercharge your own development workflows.&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;What’s Next?&lt;/strong&gt;&lt;/p&gt;
-
+&lt;br /&gt;
+&lt;p&gt;&lt;strong&gt;What&apos;s Next?&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;Explore the live portfolio and see these features in action!&lt;/li&gt;
   &lt;li&gt;Dive into the &lt;a href=&quot;https://github.com/rivie13/rivie13.github.io&quot;&gt;source code on GitHub&lt;/a&gt; to see all the details.&lt;/li&gt;
   &lt;li&gt;Check out the &lt;a href=&quot;https://github.com/rivie13/github-api-proxy-function&quot;&gt;Azure Function proxy code&lt;/a&gt;.&lt;/li&gt;
   &lt;li&gt;Leave a comment below with your thoughts or questions!&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;Happy coding!&lt;/p&gt;</content><author><name>Riviera Sperduto</name></author><category term="Portfolio Tutorial" /><category term="Development" /><category term="Jekyll" /><category term="JavaScript" /><category term="Azure" /><category term="Key Vault" /><category term="Function App" /><category term="Jekyll" /><category term="Static Sites" /><category term="GitHub API" /><category term="Azure Functions" /><category term="Serverless" /><category term="JavaScript" /><category term="API Integration" /><category term="Web Development" /><category term="AI Collaboration" /><category term="Portfolio Development" /><summary type="html">Welcome to the final and most exciting part of our tutorial series on building a dynamic portfolio with Jekyll, AI, and a sprinkle of serverless magic! In the previous installments, we laid the conceptual groundwork, set up our Jekyll site with Tailwind CSS, and structured our content for easy management. Now, we dive into the heart of the “dynamic” aspect: securely fetching and displaying GitHub data using an Azure Function App as a proxy and orchestrating it all with client-side JavaScript.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/tutorial-part4-banner.png" /><media:content medium="image" url="http://localhost:4000/assets/images/tutorial-part4-banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Part 3: Content Architecture - Structuring Data with Jekyll and Building Reusable Components</title><link href="http://localhost:4000/blog/2025/05/12/content-architecture-structuring-data-with-jekyll/" rel="alternate" type="text/html" title="Part 3: Content Architecture - Structuring Data with Jekyll and Building Reusable Components" /><published>2025-05-12T10:00:00-04:00</published><updated>2025-05-12T10:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/12/content-architecture-structuring-data-with-jekyll</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/12/content-architecture-structuring-data-with-jekyll/">&lt;style&gt;
+&lt;p&gt;Happy coding!&lt;/p&gt;
+&lt;/div&gt;</content><author><name>Riviera Sperduto</name></author><category term="Portfolio Tutorial" /><category term="Development" /><category term="Jekyll" /><category term="JavaScript" /><category term="Azure" /><category term="Key Vault" /><category term="Function App" /><category term="Jekyll" /><category term="Static Sites" /><category term="GitHub API" /><category term="Azure Functions" /><category term="Serverless" /><category term="JavaScript" /><category term="API Integration" /><category term="Web Development" /><category term="AI Collaboration" /><category term="Portfolio Development" /><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/tutorial-part4-banner.png" /><media:content medium="image" url="http://localhost:4000/assets/images/tutorial-part4-banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Part 3: Content Architecture - Structuring Data with Jekyll and Building Reusable Components</title><link href="http://localhost:4000/blog/2025/05/12/content-architecture-structuring-data-with-jekyll/" rel="alternate" type="text/html" title="Part 3: Content Architecture - Structuring Data with Jekyll and Building Reusable Components" /><published>2025-05-12T10:00:00-04:00</published><updated>2025-05-12T10:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/12/content-architecture-structuring-data-with-jekyll</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/12/content-architecture-structuring-data-with-jekyll/">&lt;style&gt;
 /* Custom code block styling for this post */
 .highlight {
   border-radius: 6px;
