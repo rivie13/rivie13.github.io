@@ -93,7 +93,7 @@
     // Show the cookie notice if consent hasn't been given
     document.addEventListener('DOMContentLoaded', function () {
         // Check if we need to show the notice (only in production)
-        {% if jekyll.environment == 'production' %}
+        /* {% if jekyll.environment == 'production' %} */
             // If user already made a choice, respect it
             if (readCookie('cookie-notice-dismissed') === 'true') {
                 // User accepted cookies
@@ -104,7 +104,7 @@
                 // New visitor - show the cookie notice
                 document.getElementById('cookie-notice').style.display = 'block';
             }
-        {% endif %}
+        /* {% endif %} */
     });
 
     // Button click handlers

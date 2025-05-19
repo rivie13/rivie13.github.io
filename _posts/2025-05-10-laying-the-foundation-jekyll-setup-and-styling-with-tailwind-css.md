@@ -2,7 +2,7 @@
 layout: post
 title: "Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS"
 date: 2025-05-10 09:00:00 -0500
-categories: [Portfolio Tutorial, Jekyll, development]
+categories: [Portfolio Tutorial, Jekyll, Development]
 tags: [Jekyll, Tailwind CSS, Web Development, Portfolio Development, Static Sites]
 image: /assets/images/tutorial-part2-banner.png # Placeholder - remember to create this image!
 ---

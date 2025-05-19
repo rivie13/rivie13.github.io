@@ -2,7 +2,7 @@
 layout: post
 title: "Welcome to My Portfolio Website"
 date: 2025-05-05 09:00:00 -0500
-categories: [development]
+categories: [Development]
 tags: [welcome, portfolio, software-development]
 author: Riviera Sperduto
 excerpt: Welcome to my portfolio website where I'll be sharing my journey, projects, and insights about software development, cloud architecture, and AI.
