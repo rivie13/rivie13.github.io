@@ -21,7 +21,7 @@ plugins:
 twitter:
   username: # your Twitter username (if you have one)
   card: summary_large_image
-logo: /assets/images/logo.png  # Make sure this path exists
+logo: /assets/images/default-social-image.png  # Make sure this path exists
 social:
   name: Riviera Sperduto
   links:
@@ -62,7 +62,8 @@ paginate_path: "/blog/page:num/"
 # Social media links
 social_links:
   github: rivie13
-  linkedin: # Add your LinkedIn username when available 
+  linkedin: https://www.linkedin.com/in/riviera-sperduto-219a54203/
+  bsky: https://bsky.app/profile/riviesperduto.bsky.social
 
 # Exclude from processing
 exclude:
