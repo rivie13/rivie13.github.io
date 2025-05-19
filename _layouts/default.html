@@ -30,7 +30,7 @@
     
     {% include header.html %}
     
-{% unless page.url == '/' %}
+{% unless page.url == '/' or page.url == '/privacy/' %} <!-- This is to prevent the header ad from appearing on the home page need to also hide on privacy policy page -->
     {% include header-ad.html %}
 {% endunless %}
     
@@ -38,7 +38,9 @@
         {{ content }}
     </main>
     
+    {% unless page.url == '/privacy/' %} <!-- This is to prevent the footer ad from appearing on the home page need to also hide on privacy policy page -->
     {% include footer-ad.html %}
+    {% endunless %}
     
     {% include footer.html %}
     

@@ -80,7 +80,6 @@ title: Home
     </div>
   </section>
   
-  {% include homepage-ad.html %}
   
   <!-- Philadelphia Section -->
   <section class="py-12 border-t">
@@ -99,7 +98,7 @@ title: Home
       </div>
     </div>
   </section>
-  
+
   <!-- New Call to Action Between Philadelphia and Projects -->
   <section class="py-12 border-t">
     <div class="bg-gradient-to-r from-indigo-600 to-purple-700 rounded-xl p-8 md:p-12 text-white text-center opacity-0" data-animate="fade-in" data-scroll="fade-up" data-hover="scale">
@@ -110,6 +109,8 @@ title: Home
       </a>
     </div>
   </section>
+
+  {% include homepage-ad.html %}
   
   <!-- Combined Projects Section -->
   <section class="py-12 border-t">
