@@ -81,7 +81,8 @@ To circumvent this, we implemented a server-side proxy using Azure Functions. Th
   <li><strong>CORS (Cross-Origin Resource Sharing):</strong> Configured to allow requests from our portfolio's domain.</li>
 </ul>
 <p>Here's a conceptual peek at where you might find your deployed function in the Azure portal (actual UI may vary):</p>
-<pre><code>[Conceptual Screenshot of Azure Function App in Azure Portal - e.g., a simple diagram or a placeholder text like "Imagine Azure Portal UI here showing the 'portfolioWebsitegithubAuth' Function App details."]</code></pre>
+<img src="/assets/images/azure_function_app_screenshot.png" alt="Azure Function App Screenshot" style="width: 100%; height: auto;" class="mb-4">
+
 <p><strong>The Connection:</strong><br>
 All our frontend JavaScript that needs GitHub data is configured to make API calls to this Azure Function's URL (e.g., <code>https://portfolioWebsitegithubAuth.azurewebsites.net/api/github/...</code>) instead of directly to <code>https://api.github.com/...</code>.
 </p>
