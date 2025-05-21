@@ -30,7 +30,7 @@
     
     {% include header.html %}
     
-{% unless page.url == '/' or page.url == '/privacy/' %} <!-- This is to prevent the header ad from appearing on the home page need to also hide on privacy policy page -->
+{% unless page.url == '/' or page.url == '/privacy/' %}
     {% include header-ad.html %}
 {% endunless %}
     

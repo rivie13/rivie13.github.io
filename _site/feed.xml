@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-19T18:27:40-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Introducing CodeGrind: A New Way to Practice Coding</title><link href="http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding/" rel="alternate" type="text/html" title="Introducing CodeGrind: A New Way to Practice Coding" /><published>2025-05-19T11:00:00-04:00</published><updated>2025-05-19T11:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding/">&lt;style&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-20T20:06:54-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Introducing CodeGrind: A New Way to Practice Coding</title><link href="http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding/" rel="alternate" type="text/html" title="Introducing CodeGrind: A New Way to Practice Coding" /><published>2025-05-19T11:00:00-04:00</published><updated>2025-05-19T11:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding/">&lt;style&gt;
 /* Custom code block styling for this post */
 .highlight {
   border-radius: 6px;
@@ -465,12 +465,11 @@ All our frontend JavaScript that needs GitHub data is configured to make API cal
 &lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
   &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
   &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
-    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;5855397645&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
     &lt;script&gt;
       (adsbygoogle = window.adsbygoogle || []).push({});
     &lt;/script&gt;
   &lt;/div&gt;
-  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
 &lt;/div&gt;
  
 
@@ -801,12 +800,11 @@ And here&apos;s an example structure for education in `_data/education.yml`. Thi
 &lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
   &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
   &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
-    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;5855397645&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
     &lt;script&gt;
       (adsbygoogle = window.adsbygoogle || []).push({});
     &lt;/script&gt;
   &lt;/div&gt;
-  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
 &lt;/div&gt;
  
 
@@ -1238,12 +1236,11 @@ Additionally, I set up the `Gemfile` to manage Jekyll and plugin versions (you m
 &lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
   &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
   &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
-    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;5855397645&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
     &lt;script&gt;
       (adsbygoogle = window.adsbygoogle || []).push({});
     &lt;/script&gt;
   &lt;/div&gt;
-  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
 &lt;/div&gt;
  
 
@@ -1840,12 +1837,11 @@ Stay tuned for the next installment, and as always, feel free to reach out with 
 &lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
   &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
   &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
-    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;5855397645&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
     &lt;script&gt;
       (adsbygoogle = window.adsbygoogle || []).push({});
     &lt;/script&gt;
   &lt;/div&gt;
-  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&quot;13-partnering-with-ai-claude--gemini-as-co-planners&quot;&gt;1.3. Partnering with AI: Claude &amp;amp; Gemini as Co-Planners&lt;/h2&gt;
@@ -1913,12 +1909,11 @@ Stay tuned for the next installment, and as always, feel free to reach out with 
 &lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
   &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
   &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
-    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;YOUR_SIDEBAR_AD_SLOT_ID&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;5855397645&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
     &lt;script&gt;
       (adsbygoogle = window.adsbygoogle || []).push({});
     &lt;/script&gt;
   &lt;/div&gt;
-  &lt;p class=&quot;text-gray-400 text-xs mt-2&quot;&gt;Ad content will appear here after approval&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;h2 id=&quot;what-to-expect&quot;&gt;What to Expect&lt;/h2&gt;
