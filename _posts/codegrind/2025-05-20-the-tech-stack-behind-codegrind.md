@@ -88,6 +88,18 @@ CodeGrind's tech stack is a practical combination of proven technologies that wo
 
 In the next post, I'll dive into how we implemented the learning features and the Tower Defense game. Stay tuned!
 
+<br>
+<br>
+
+<!--add the image of tower defense game here -->
+<img src="/assets/images/codegrind/tower-defense-solution-verified.png" alt="Tower Defense Game" class="img-fluid">
+
+<br>
+
+<br>
+
 ---
 
-*Want to learn more about CodeGrind? Try the platform yourself at [codegrind.io](https://codegrind.io).* 
+<br>
+
+*Want to learn more about CodeGrind? Try the platform yourself at [codegrind.online](https://codegrind.online).* 
