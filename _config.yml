@@ -76,3 +76,4 @@ exclude:
   - fix_jekyll.bat
   - .gitignore
   - .nojekyll 
+  - /docfiles

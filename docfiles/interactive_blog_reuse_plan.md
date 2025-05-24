@@ -102,7 +102,7 @@ Implementation will adhere to the guidelines in `docfiles/SECURITY_FOR_INTERACTI
 
 ## 7. Deployment
 
-*   The new Azure Functions will be created, likely in a new Azure Function App. This could reside in the `portfolio_website-affe` resource group (assuming this RG is for the blog's Azure assets) or another suitable resource group. The portfolio_website-affe resource group is the one that contains the existing Azure Function App for the blog. We can add another to it
+*   The new Azure Functions will be created, likely in a new Azure Function App. This could reside in the `portfolio_website` resource group (assuming this RG is for the blog's Azure assets) or another suitable resource group. The portfolio_website resource group is the one that contains the existing Azure Function App for the blog. We can add another to it.
 
 ## 8. Next Steps in Implementation
 
