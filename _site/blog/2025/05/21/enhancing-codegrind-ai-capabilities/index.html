@@ -10,8 +10,8 @@
 <meta property="og:title" content="Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement" />
 <meta name="author" content="Riviera Sperduto" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="In this post, I’ll share the journey of enhancing CodeGrind’s AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI." />
-<meta property="og:description" content="In this post, I’ll share the journey of enhancing CodeGrind’s AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI." />
+<meta name="description" content="Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services." />
+<meta property="og:description" content="Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services." />
 <link rel="canonical" href="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" />
 <meta property="og:url" content="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" />
 <meta property="og:site_name" content="Riviera Sperduto - Developer Portfolio" />
@@ -24,7 +24,7 @@
 <meta name="twitter:site" content="@" />
 <meta name="twitter:creator" content="@Riviera Sperduto" />
 <script type="application/ld+json">
-{"headline":"Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement","dateModified":"2025-05-21T13:00:00-04:00","datePublished":"2025-05-21T13:00:00-04:00","@type":"BlogPosting","url":"http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/default-social-image.png"},"name":"Riviera Sperduto"},"description":"In this post, I’ll share the journey of enhancing CodeGrind’s AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/"},"author":{"@type":"Person","name":"Riviera Sperduto"},"image":"http://localhost:4000/assets/images/codegrind/ai-improvements-banner.png","@context":"https://schema.org"}</script>
+{"headline":"Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement","dateModified":"2025-05-21T13:00:00-04:00","datePublished":"2025-05-21T13:00:00-04:00","@type":"BlogPosting","url":"http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/default-social-image.png"},"name":"Riviera Sperduto"},"description":"Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/"},"author":{"@type":"Person","name":"Riviera Sperduto"},"image":"http://localhost:4000/assets/images/codegrind/ai-improvements-banner.png","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     
@@ -169,214 +169,226 @@
   </header>
   
   <div class="prose prose-blue max-w-none mb-12 opacity-0 post-content" data-animate="fade-in" data-scroll="fade-up">
-    <p>In this post, I’ll share the journey of enhancing CodeGrind’s AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI.</p>
+    <style>
+/* Custom code block styling for this post */
+.highlight {
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+.highlight pre {
+  padding: 1.25rem;
+  margin: 0;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+.highlight code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+html.dark .highlight {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+</style>
 
-<h2 id="the-evolution-of-ai-assistance">The Evolution of AI Assistance</h2>
-
-<h3 id="initial-implementation">Initial Implementation</h3>
-<p>Our first version of the AI coding assistant was straightforward:</p>
-<ul>
-  <li>Basic code completion</li>
-  <li>Simple error explanations</li>
-  <li>Limited context awareness</li>
-</ul>
-
-<h3 id="major-improvements">Major Improvements</h3>
-<p>We’ve significantly enhanced the system with:</p>
-<ul>
-  <li>Context-aware code suggestions</li>
-  <li>Intelligent error analysis</li>
-  <li>Learning path recommendations</li>
-  <li>Real-time code optimization tips</li>
-</ul>
-
-<h2 id="tower-defense-ai-integration">Tower Defense AI Integration</h2>
-
-<h3 id="code-generation-system">Code Generation System</h3>
-<p>The Tower Defense game now features:</p>
-<ul>
-  <li>AI-generated code snippets for tower behaviors</li>
-  <li>Dynamic difficulty adjustment</li>
-  <li>Personalized challenge generation</li>
-  <li>Smart hint system</li>
-</ul>
-
-<p><img src="/assets/images/codegrind/tower-defense.png" alt="Tower Defense Game Screenshot" /></p>
-
-<h3 id="implementation-details">Implementation Details</h3>
-<p>Our AI service has been completely revamped to provide more precise and context-aware assistance. Here’s how it works:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Core AI service structure</span>
-<span class="kd">class</span> <span class="nc">AIService</span> <span class="p">{</span>
-  <span class="nf">constructor</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">this</span><span class="p">.</span><span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">AzureOpenAI</span><span class="p">({</span>
-      <span class="na">endpoint</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AZURE_OPENAI_ENDPOINT</span><span class="p">,</span>
-      <span class="na">apiKey</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AZURE_OPENAI_API_KEY</span><span class="p">,</span>
-      <span class="na">apiVersion</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2024-02-15-preview</span><span class="dl">"</span><span class="p">,</span>
-      <span class="na">deployment</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">AZURE_DEPLOYMENT_NAME</span> <span class="o">||</span> <span class="dl">"</span><span class="s2">gpt-4o</span><span class="dl">"</span>
-    <span class="p">});</span>
-  <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The service uses different system prompts for various use cases:</p>
-<ul>
-  <li>Hints and guidance</li>
-  <li>Problem generation</li>
-  <li>Code solution generation</li>
-  <li>Code refinement</li>
-  <li>Tower Defense snippet generation</li>
-</ul>
-
-<p><img src="/assets/images/codegrind/AI_Problem_Generation.png" alt="AI Problem Generation" /></p>
-
-<h2 id="interactive-learning-experience">Interactive Learning Experience</h2>
-
-<h3 id="real-time-code-execution">Real-Time Code Execution</h3>
-<p>One of our key improvements is the real-time code execution and feedback system:</p>
-
-<p><img src="/assets/images/codegrind/AI_Problem_Generation-testing-solution.png" alt="Testing Solution" /></p>
-
-<h3 id="ai-assisted-problem-solving">AI-Assisted Problem Solving</h3>
-<p>The system now provides:</p>
-<ul>
-  <li>Step-by-step guidance</li>
-  <li>Contextual hints</li>
-  <li>Code refinement suggestions</li>
-  <li>Performance optimization tips</li>
-</ul>
-
-<p><img src="/assets/images/codegrind/AI_Problem_Generation-AI-assistance.png" alt="AI Assistance" /></p>
-
-<h2 id="technical-implementation">Technical Implementation</h2>
-
-<h3 id="ai-service-architecture">AI Service Architecture</h3>
-<p>Our AI service is built with modularity and extensibility in mind:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">SYSTEM_PROMPTS</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">hints</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">role</span><span class="p">:</span> <span class="dl">"</span><span class="s2">system</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">You are CodeGrind's AI teaching assistant. Your role is to help users learn programming concepts and problem-solving strategies, but never to provide direct code solutions.</span><span class="dl">"</span>
-  <span class="p">},</span>
-  <span class="na">problemGeneration</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">role</span><span class="p">:</span> <span class="dl">"</span><span class="s2">system</span><span class="dl">"</span><span class="p">,</span>
-    <span class="na">content</span><span class="p">:</span> <span class="dl">"</span><span class="s2">You are a programming problem generator for CodeGrind. You're designed to create high-quality programming problems in JSON format.</span><span class="dl">"</span>
-  <span class="p">},</span>
-  <span class="c1">// ... other specialized prompts</span>
-<span class="p">};</span>
-</code></pre></div></div>
-
-<h3 id="performance-optimizations">Performance Optimizations</h3>
-<ul>
-  <li>Caching frequently used responses</li>
-  <li>Implementing rate limiting</li>
-  <li>Optimizing prompt engineering</li>
-  <li>Managing API costs</li>
-</ul>
-
-<h2 id="results-and-impact">Results and Impact</h2>
-
-<h3 id="user-engagement">User Engagement</h3>
-<ul>
-  <li>40% increase in user retention</li>
-  <li>60% improvement in code completion rates</li>
-  <li>75% user satisfaction with AI assistance</li>
-</ul>
-
-<h3 id="learning-outcomes">Learning Outcomes</h3>
-<ul>
-  <li>Faster problem-solving times</li>
-  <li>Better code quality</li>
-  <li>Improved learning curve</li>
-  <li>Higher completion rates</li>
-</ul>
-
-<h2 id="interactive-demo-tower-defense-code-generation">Interactive Demo: Tower Defense Code Generation</h2>
-
-<div id="tower-demo" style="border:1px solid #e5e7eb; border-radius:8px; padding:1.5rem; margin:2rem 0; background:#f9fafb; max-width:600px;">
-  <h3 style="font-size:1.25rem; font-weight:bold; margin-bottom:1rem;">Try the Tower Defense Code Snippet Generator</h3>
-  <label for="towerType" style="font-weight:500;">Tower Type:</label>
-  <select id="towerType" style="margin:0 0.5rem 1rem 0.5rem;">
-    <option value="ForLoop">For Loop</option>
-    <option value="IfCondition">If Condition</option>
-    <option value="ReturnStatement">Return Statement</option>
-    <option value="Variable">Variable</option>
-    <option value="Function">Function</option>
-  </select>
-  <button id="generateBtn" style="background:#2563eb; color:white; border:none; border-radius:4px; padding:0.5rem 1rem; font-weight:600; cursor:pointer;">Generate Code</button>
-  <pre id="codeOutput" style="background:#1e293b; color:#f1f5f9; padding:1rem; border-radius:6px; margin-top:1.5rem; min-height:2.5rem; font-size:1rem;"></pre>
+<div class="opacity-0" data-animate="fade-in">
+  <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+    In this post, I'll share the journey of enhancing CodeGrind's AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI.
+  </p>
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">The Evolution of AI Assistance</h2>
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Initial Implementation</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Basic code completion</li>
+    <li>Simple error explanations</li>
+    <li>Limited context awareness</li>
+  </ul>
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Major Improvements</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Context-aware code suggestions</li>
+    <li>Intelligent error analysis</li>
+    <li>Learning path recommendations</li>
+    <li>Real-time code optimization tips</li>
+  </ul>
 </div>
 
-<script>
-// Simple mock AI code generator for demo purposes
-const codeSnippets = {
-  ForLoop: {
-    python: 'for i in range(len(items)):',
-    javascript: 'for (let i = 0; i < items.length; i++) {'
-  },
-  IfCondition: {
-    python: 'if x > y:',
-    javascript: 'if (x > y) {'
-  },
-  ReturnStatement: {
-    python: 'return result',
-    javascript: 'return result;'
-  },
-  Variable: {
-    python: 'total = 0',
-    javascript: 'let total = 0;'
-  },
-  Function: {
-    python: 'def my_function(param):',
-    javascript: 'function myFunction(param) {'
+<div class="opacity-0" data-scroll="fade-up">
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Tower Defense AI Integration</h2>
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Code Generation System</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>AI-generated code snippets for tower behaviors</li>
+    <li>Dynamic difficulty adjustment</li>
+    <li>Personalized challenge generation</li>
+    <li>Smart hint system</li>
+  </ul>
+  <img src="/assets/images/codegrind/tower-defense.png" alt="Tower Defense Game Screenshot" class="rounded-lg shadow-md w-full max-w-2xl mx-auto my-6" />
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Implementation Details</h3>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">Our AI service has been completely revamped to provide more precise and context-aware assistance. Here's how it works:</p>
+  <pre class="highlight"><code class="language-javascript">// Core AI service structure
+class AIService {
+  constructor() {
+    this.client = new AzureOpenAI({
+      endpoint: process.env.AZURE_OPENAI_ENDPOINT,
+      apiKey: process.env.AZURE_OPENAI_API_KEY,
+      apiVersion: "2024-02-15-preview",
+      deployment: process.env.AZURE_DEPLOYMENT_NAME || "gpt-4o"
+    });
   }
+}
+</code></pre>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">The service uses different system prompts for various use cases:</p>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Hints and guidance</li>
+    <li>Problem generation</li>
+    <li>Code solution generation</li>
+    <li>Code refinement</li>
+    <li>Tower Defense snippet generation</li>
+  </ul>
+  <img src="/assets/images/codegrind/AI_Problem_Generation.png" alt="AI Problem Generation" class="rounded-lg shadow-md w-full max-w-2xl mx-auto my-6" />
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Interactive Learning Experience</h2>
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Real-Time Code Execution</h3>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">One of our key improvements is the real-time code execution and feedback system:</p>
+  <img src="/assets/images/codegrind/AI_Problem_Generation-testing-solution.png" alt="Testing Solution" class="rounded-lg shadow-md w-full max-w-2xl mx-auto my-6" />
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">AI-Assisted Problem Solving</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Step-by-step guidance</li>
+    <li>Contextual hints</li>
+    <li>Code refinement suggestions</li>
+    <li>Performance optimization tips</li>
+  </ul>
+  <img src="/assets/images/codegrind/AI_Problem_Generation-AI-assistance.png" alt="AI Assistance" class="rounded-lg shadow-md w-full max-w-2xl mx-auto my-6" />
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Technical Implementation</h2>
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">AI Service Architecture</h3>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">Our AI service is built with modularity and extensibility in mind:</p>
+  <pre class="highlight"><code class="language-javascript">const SYSTEM_PROMPTS = {
+  hints: {
+    role: "system",
+    content: "You are CodeGrind's AI teaching assistant. Your role is to help users learn programming concepts and problem-solving strategies, but never to provide direct code solutions."
+  },
+  problemGeneration: {
+    role: "system",
+    content: "You are a programming problem generator for CodeGrind. You're designed to create high-quality programming problems in JSON format."
+  },
+  // ... other specialized prompts
 };
+</code></pre>
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Performance Optimizations</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Caching frequently used responses</li>
+    <li>Implementing rate limiting</li>
+    <li>Optimizing prompt engineering</li>
+    <li>Managing API costs</li>
+  </ul>
+</div>
 
-const lang = (navigator.language && navigator.language.startsWith('en')) ? 'python' : 'javascript';
-document.getElementById('generateBtn').onclick = function() {
-  const type = document.getElementById('towerType').value;
-  const code = codeSnippets[type][lang] || codeSnippets[type]['python'];
-  document.getElementById('codeOutput').textContent = code;
-};
-</script>
+<div class="opacity-0" data-scroll="fade-up">
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Results and Impact</h2>
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">User Engagement</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>40% increase in user retention</li>
+    <li>60% improvement in code completion rates</li>
+    <li>75% user satisfaction with AI assistance</li>
+  </ul>
+  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Learning Outcomes</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Faster problem-solving times</li>
+    <li>Better code quality</li>
+    <li>Improved learning curve</li>
+    <li>Higher completion rates</li>
+  </ul>
+</div>
 
-<h3 id="content-strategy">Content Strategy</h3>
-<p>While AI tools are becoming more prevalent, we believe in:</p>
-<ul>
-  <li>Providing unique, hands-on learning experiences</li>
-  <li>Creating interactive, game-based learning</li>
-  <li>Offering real-time feedback and guidance</li>
-  <li>Building a community of learners</li>
-</ul>
+<div class="opacity-0" data-scroll="fade-up">
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-blue-700 dark:text-blue-400">Interactive Demo: Tower Defense Code Generation</h2>
+  <div class="rounded-lg shadow-md bg-blue-50 dark:bg-slate-800 p-6 my-6 max-w-xl mx-auto">
+    <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">Try the Tower Defense Code Snippet Generator</h3>
+    <label for="towerType" class="font-medium text-gray-800 dark:text-gray-200">Tower Type:</label>
+    <select id="towerType" class="ml-2 mb-2 rounded border-gray-300 dark:bg-slate-700 dark:text-white">
+      <option value="ForLoop">For Loop</option>
+      <option value="IfCondition">If Condition</option>
+      <option value="ReturnStatement">Return Statement</option>
+      <option value="Variable">Variable</option>
+      <option value="Function">Function</option>
+    </select>
+    <button id="generateBtn" class="ml-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded transition-colors">Generate Code</button>
+    <pre id="codeOutput" class="mt-4 bg-slate-900 text-blue-200 rounded p-4 min-h-[2.5rem] text-base"></pre>
+  </div>
+  <script>
+  // Simple mock AI code generator for demo purposes
+  const codeSnippets = {
+    ForLoop: {
+      python: 'for i in range(len(items)):',
+      javascript: 'for (let i = 0; i < items.length; i++) {'
+    },
+    IfCondition: {
+      python: 'if x > y:',
+      javascript: 'if (x > y) {'
+    },
+    ReturnStatement: {
+      python: 'return result',
+      javascript: 'return result;'
+    },
+    Variable: {
+      python: 'total = 0',
+      javascript: 'let total = 0;'
+    },
+    Function: {
+      python: 'def my_function(param):',
+      javascript: 'function myFunction(param) {'
+    }
+  };
+  const lang = (navigator.language && navigator.language.startsWith('en')) ? 'python' : 'javascript';
+  document.getElementById('generateBtn').onclick = function() {
+    const type = document.getElementById('towerType').value;
+    const code = codeSnippets[type][lang] || codeSnippets[type]['python'];
+    document.getElementById('codeOutput').textContent = code;
+  };
+  </script>
+</div>
 
-<h3 id="value-proposition">Value Proposition</h3>
-<p>CodeGrind differentiates itself by:</p>
-<ul>
-  <li>Combining AI assistance with human learning principles</li>
-  <li>Offering structured, gamified learning paths</li>
-  <li>Providing immediate, contextual feedback</li>
-  <li>Creating an engaging, interactive environment</li>
-</ul>
+<div class="opacity-0" data-scroll="fade-up">
+  <h3 class="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Content Strategy</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Providing unique, hands-on learning experiences</li>
+    <li>Creating interactive, game-based learning</li>
+    <li>Offering real-time feedback and guidance</li>
+    <li>Building a community of learners</li>
+  </ul>
+  <h3 class="text-xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Value Proposition</h3>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Combining AI assistance with human learning principles</li>
+    <li>Offering structured, gamified learning paths</li>
+    <li>Providing immediate, contextual feedback</li>
+    <li>Creating an engaging, interactive environment</li>
+  </ul>
+</div>
 
-<h2 id="looking-forward">Looking Forward</h2>
+<div class="opacity-0" data-scroll="fade-up">
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Looking Forward</h2>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
+    <li>Research new AI capabilities</li>
+    <li>Gather user feedback</li>
+    <li>Improve our systems</li>
+    <li>Explore innovative features</li>
+  </ul>
+</div>
 
-<p>We’re excited about the future of AI in education and continue to:</p>
-<ul>
-  <li>Research new AI capabilities</li>
-  <li>Gather user feedback</li>
-  <li>Improve our systems</li>
-  <li>Explore innovative features</li>
-</ul>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>The journey of enhancing CodeGrind’s AI capabilities has been both challenging and rewarding. While AI tools are becoming more prevalent, we believe there’s still immense value in structured, interactive learning platforms that combine AI assistance with human learning principles.</p>
-
-<p>Stay tuned for more updates as we continue to evolve and improve CodeGrind’s AI features!</p>
+<div class="opacity-0" data-scroll="fade-up">
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Conclusion</h2>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">The journey of enhancing CodeGrind's AI capabilities has been both challenging and rewarding. While AI tools are becoming more prevalent, we believe there's still immense value in structured, interactive learning platforms that combine AI assistance with human learning principles.</p>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">Stay tuned for more updates as we continue to evolve and improve CodeGrind's AI features!</p>
+</div>
 
 <hr />
 
-<p><em>Want to experience these AI improvements firsthand? Try CodeGrind at <a href="https://codegrind.online">codegrind.online</a>.</em></p>
+<p class="text-gray-700 dark:text-gray-300 mt-8">*Want to experience these AI improvements firsthand? Try CodeGrind at <a href="https://codegrind.online" class="text-blue-600 hover:text-blue-800">codegrind.online</a>.*</p>
 
   </div>
   
