@@ -105,6 +105,70 @@ This document provides instructions for maintaining and updating the Jekyll-base
 4. Aim for file sizes under 500KB per image
 5. Include descriptive alt text for all images
 
+## Tailwind Styling and Animations
+
+### Dark Mode Implementation
+1. Always include dark mode variants for text and background colors:
+   ```html
+   <p class="text-gray-700 dark:text-gray-300">
+   <div class="bg-white dark:bg-slate-800">
+   ```
+2. Common dark mode color pairs:
+   - Text: `text-gray-900 dark:text-white`
+   - Secondary text: `text-gray-700 dark:text-gray-300`
+   - Backgrounds: `bg-white dark:bg-slate-800`
+   - Borders: `border-gray-200 dark:border-gray-700`
+
+### Animation Implementation
+1. Wrap content sections in animation divs:
+   ```html
+   <div class="opacity-0" data-animate="fade-in">
+     <!-- Content here -->
+   </div>
+   ```
+2. Use scroll-triggered animations:
+   ```html
+   <div class="opacity-0" data-scroll="fade-up">
+     <!-- Content here -->
+   </div>
+   ```
+3. Common animation patterns:
+   - Fade in: `data-animate="fade-in"`
+   - Fade up on scroll: `data-scroll="fade-up"`
+   - Slide in: `data-animate="slide-in"`
+4. Ensure animations are subtle and enhance readability
+
+### Code Block Styling
+1. Use the highlight class for code blocks:
+   ```html
+   <pre class="highlight"><code class="language-javascript">
+     // Your code here
+   </code></pre>
+   ```
+2. Include custom styling for code blocks:
+   ```css
+   .highlight {
+     border-radius: 6px;
+     margin: 1.5rem 0;
+     padding: 0;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     overflow: auto;
+   }
+   .highlight pre {
+     padding: 1.25rem;
+     margin: 0;
+     overflow-x: auto;
+     line-height: 1.5;
+   }
+   .highlight code {
+     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+     font-size: 0.9rem;
+   }
+   html.dark .highlight {
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+   }
+   ```
+
 ## Monitoring GitHub API Usage
 
 1. The site uses GitHub's API to fetch:
