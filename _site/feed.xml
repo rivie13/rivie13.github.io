@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-24T13:30:40-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement</title><link href="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" rel="alternate" type="text/html" title="Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement" /><published>2025-05-21T13:00:00-04:00</published><updated>2025-05-21T13:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/">&lt;style&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-24T16:14:38-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement</title><link href="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" rel="alternate" type="text/html" title="Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement" /><published>2025-05-21T13:00:00-04:00</published><updated>2025-05-21T13:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/">&lt;style&gt;
 /* Custom code block styling for this post */
 .highlight {
   border-radius: 6px;
@@ -26,6 +26,22 @@ html.dark .highlight {
   &lt;p class=&quot;text-lg text-gray-700 dark:text-gray-300 mb-6&quot;&gt;
     In this post, I&apos;ll share the journey of enhancing CodeGrind&apos;s AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI.
   &lt;/p&gt;
+  &lt;div class=&quot;flex flex-col md:flex-row gap-4 mb-8&quot;&gt;
+    &lt;a href=&quot;https://codegrind.online/&quot; class=&quot;inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors text-center&quot;&gt;Visit CodeGrind&lt;/a&gt;
+    &lt;a href=&quot;https://codegrind.online/games/tower-defense/demo/two-sum&quot; class=&quot;inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors text-center&quot;&gt;Try the Tower Defense Demo&lt;/a&gt;
+  &lt;/div&gt;
+  
+&lt;div class=&quot;blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100&quot;&gt;
+  &lt;h4 class=&quot;text-sm uppercase text-gray-500 mb-2&quot;&gt;Sponsored Content&lt;/h4&gt;
+  &lt;div class=&quot;bg-white p-2 rounded shadow&quot;&gt;
+    &lt;ins class=&quot;adsbygoogle&quot; style=&quot;display:block&quot; data-ad-client=&quot;ca-pub-7733001105026476&quot; data-ad-slot=&quot;5855397645&quot; data-ad-format=&quot;auto&quot; data-full-width-responsive=&quot;true&quot;&gt;&lt;/ins&gt;
+    &lt;script&gt;
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    &lt;/script&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+ 
+
   &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;The Evolution of AI Assistance&lt;/h2&gt;
   &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Initial Implementation&lt;/h3&gt;
   &lt;ul class=&quot;list-disc ml-8 text-gray-700 dark:text-gray-300&quot;&gt;
@@ -42,7 +58,7 @@ html.dark .highlight {
   &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
+&lt;div class=&quot;opacity-0&quot; data-animate=&quot;fade-in&quot;&gt;
   &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Tower Defense AI Integration&lt;/h2&gt;
   &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Code Generation System&lt;/h3&gt;
   &lt;ul class=&quot;list-disc ml-8 text-gray-700 dark:text-gray-300&quot;&gt;
@@ -78,18 +94,193 @@ class AIService {
 &lt;/div&gt;
 
 &lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
-  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Interactive Learning Experience&lt;/h2&gt;
-  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;Real-Time Code Execution&lt;/h3&gt;
-  &lt;p class=&quot;text-gray-700 dark:text-gray-300 mb-4&quot;&gt;One of our key improvements is the real-time code execution and feedback system:&lt;/p&gt;
-  &lt;img src=&quot;/assets/images/codegrind/AI_Problem_Generation-testing-solution.png&quot; alt=&quot;Testing Solution&quot; class=&quot;rounded-lg shadow-md w-full max-w-2xl mx-auto my-6&quot; /&gt;
-  &lt;h3 class=&quot;text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white&quot;&gt;AI-Assisted Problem Solving&lt;/h3&gt;
-  &lt;ul class=&quot;list-disc ml-8 text-gray-700 dark:text-gray-300&quot;&gt;
-    &lt;li&gt;Step-by-step guidance&lt;/li&gt;
-    &lt;li&gt;Contextual hints&lt;/li&gt;
-    &lt;li&gt;Code refinement suggestions&lt;/li&gt;
-    &lt;li&gt;Performance optimization tips&lt;/li&gt;
-  &lt;/ul&gt;
-  &lt;img src=&quot;/assets/images/codegrind/AI_Problem_Generation-AI-assistance.png&quot; alt=&quot;AI Assistance&quot; class=&quot;rounded-lg shadow-md w-full max-w-2xl mx-auto my-6&quot; /&gt;
+  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white&quot;&gt;Interactive Demo: Build a Solution (Tower Defense Style)&lt;/h2&gt;
+  &lt;div class=&quot;mb-4 p-4 bg-blue-100 dark:bg-slate-700 rounded-lg text-gray-800 dark:text-gray-200&quot;&gt;
+    &lt;strong&gt;How to use this demo:&lt;/strong&gt; Select a tower type (programming concept), view its stats and upgrades, and add it to your solution. Compare how the &lt;span class=&quot;text-blue-700 font-semibold&quot;&gt;Old AI&lt;/span&gt; and &lt;span class=&quot;text-green-700 font-semibold&quot;&gt;New AI&lt;/span&gt; would generate code for each tower. Build your solution step-by-step, just like in the real Tower Defense game!&lt;br /&gt;
+    &lt;span class=&quot;block mt-2&quot;&gt;Need help? Use the &lt;span class=&quot;text-purple-400 font-semibold&quot;&gt;Hack Assistant&lt;/span&gt; (bottom right) to get hints, step-by-step help, or even a full solution!&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;rounded-lg shadow-md bg-blue-50 dark:bg-slate-800 p-6 my-6 max-w-2xl mx-auto relative&quot;&gt;
+    &lt;h3 class=&quot;text-lg font-bold mb-4 text-gray-900 dark:text-white&quot;&gt;LeetCode Problem: Two Sum&lt;/h3&gt;
+    &lt;p class=&quot;text-gray-700 dark:text-gray-300 mb-2&quot;&gt;Given an array of integers &lt;code&gt;nums&lt;/code&gt; and an integer &lt;code&gt;target&lt;/code&gt;, return indices of the two numbers such that they add up to &lt;code&gt;target&lt;/code&gt;.&lt;br /&gt;You may assume that each input would have exactly one solution, and you may not use the same element twice.&lt;/p&gt;
+    &lt;a href=&quot;https://codegrind.online/games/tower-defense/demo/two-sum&quot; class=&quot;text-blue-600 hover:text-blue-800 underline text-sm mb-4 inline-block&quot;&gt;Try this problem in the real Tower Defense game &amp;rarr;&lt;/a&gt;
+    &lt;div class=&quot;mb-4&quot;&gt;
+      &lt;label for=&quot;tower-select&quot; class=&quot;font-medium text-gray-800 dark:text-gray-200&quot;&gt;Choose next tower type:&lt;/label&gt;
+      &lt;select id=&quot;tower-select&quot; class=&quot;ml-2 mb-2 rounded border-gray-300 dark:bg-slate-700 dark:text-white&quot;&gt;
+        &lt;option value=&quot;ForLoop&quot;&gt;ForLoop&lt;/option&gt;
+        &lt;option value=&quot;WhileLoop&quot;&gt;WhileLoop&lt;/option&gt;
+        &lt;option value=&quot;IfCondition&quot;&gt;IfCondition&lt;/option&gt;
+        &lt;option value=&quot;Variable&quot;&gt;Variable&lt;/option&gt;
+        &lt;option value=&quot;Function&quot;&gt;Function&lt;/option&gt;
+        &lt;option value=&quot;Array&quot;&gt;Array&lt;/option&gt;
+        &lt;option value=&quot;Object&quot;&gt;Object&lt;/option&gt;
+        &lt;option value=&quot;Return&quot;&gt;Return&lt;/option&gt;
+        &lt;option value=&quot;TryCatch&quot;&gt;TryCatch&lt;/option&gt;
+        &lt;option value=&quot;Switch&quot;&gt;Switch&lt;/option&gt;
+      &lt;/select&gt;
+      &lt;button id=&quot;add-tower&quot; class=&quot;ml-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded transition-colors&quot;&gt;Add Tower&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;tower-info&quot; class=&quot;mb-4 p-4 rounded bg-white dark:bg-slate-900 shadow text-sm&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;flex flex-col md:flex-row gap-4 mb-4&quot;&gt;
+      &lt;div class=&quot;flex-1&quot;&gt;
+        &lt;h4 class=&quot;font-semibold text-blue-700 dark:text-blue-600 mb-2&quot;&gt;Old AI Snippet&lt;/h4&gt;
+        &lt;div id=&quot;old-snippet&quot; class=&quot;bg-slate-900 text-blue-400 rounded p-4 min-h-[2.5rem] text-base mb-2&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;flex-1&quot;&gt;
+        &lt;h4 class=&quot;font-semibold text-green-700 dark:text-green-800 mb-2&quot;&gt;New AI Snippet&lt;/h4&gt;
+        &lt;div id=&quot;new-snippet&quot; class=&quot;bg-slate-900 text-green-400 rounded p-4 min-h-[2.5rem] text-base mb-2&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;h4 class=&quot;font-semibold text-gray-900 dark:text-white mb-2&quot;&gt;Your Solution (as built):&lt;/h4&gt;
+      &lt;pre id=&quot;solution-preview&quot; class=&quot;bg-slate-800 text-blue-400 rounded p-4 min-h-[3rem] text-base&quot;&gt;&lt;/pre&gt;
+      &lt;button id=&quot;test-solution&quot; class=&quot;mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded transition-colors&quot;&gt;Test Solution&lt;/button&gt;
+      &lt;div id=&quot;test-result&quot; class=&quot;mt-4 text-base font-semibold&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Hack Assistant UI - Static Integration --&gt;
+    &lt;div id=&quot;hack-assistant-static&quot; class=&quot;mt-8 p-6 bg-slate-900 rounded-lg shadow-xl border border-purple-700&quot;&gt;
+      &lt;div id=&quot;hack-assistant-header-static&quot; class=&quot;flex items-center justify-between pb-3 border-b border-purple-600&quot;&gt;
+        &lt;h3 class=&quot;text-xl font-bold text-purple-700 flex items-center&quot;&gt;
+          &lt;span class=&quot;mr-3 text-2xl&quot;&gt;&amp;#129302;&lt;/span&gt; &lt;!-- Robot emoji --&gt;
+          Hack Assistant
+        &lt;/h3&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;hack-assistant-body-static&quot; class=&quot;mt-4 space-y-5&quot;&gt;
+        &lt;div&gt;
+          &lt;label for=&quot;assist-level-static&quot; class=&quot;block mb-1 text-sm font-bold text-purple-600&quot;&gt;Assistance Level:&lt;/label&gt;
+          &lt;select id=&quot;assist-level-static&quot; class=&quot;w-full p-2.5 rounded bg-slate-800 text-green-600 border border-purple-600 focus:ring-purple-500 focus:border-purple-500 font-mono text-sm shadow-inner&quot;&gt;
+            &lt;option class=&quot;text-green-600&quot;&gt;Hints Only - Get hints and guidance, but never full code.&lt;/option&gt;
+            &lt;option class=&quot;text-green-600&quot;&gt;Full Solution - Receive a complete code solution.&lt;/option&gt;
+            &lt;option class=&quot;text-green-600&quot;&gt;Step-by-Step - Get a solution broken down into logical steps.&lt;/option&gt;
+            &lt;option class=&quot;text-green-600&quot;&gt;Debug Mode - Get help identifying and fixing bugs in your code.&lt;/option&gt;
+            &lt;option class=&quot;text-green-600&quot;&gt;Learning Mode - Get explanations and teaching for concepts and code.&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+        &lt;div id=&quot;hack-chat-static&quot; class=&quot;p-4 min-h-[100px] bg-slate-950 rounded border border-purple-700 shadow-inner&quot;&gt;
+          &lt;p id=&quot;hack-chat-msg-static&quot; class=&quot;text-sm text-purple-500 font-bold leading-relaxed&quot;&gt;Greetings, hacker. I&apos;m your neural infiltration assistant. How can I aid in your system breach today?&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;flex items-center gap-3&quot;&gt;
+          &lt;input id=&quot;hack-input-static&quot; type=&quot;text&quot; placeholder=&quot;Awaiting your command...&quot; class=&quot;flex-grow p-2.5 rounded bg-slate-800 text-purple-800 border border-purple-600 focus:ring-purple-500 focus:border-purple-500 font-mono text-sm shadow-inner&quot; /&gt;
+          &lt;button id=&quot;transmit-btn-static&quot; class=&quot;px-6 py-2.5 rounded bg-purple-600 hover:bg-purple-700 text-white font-semibold font-mono text-sm transition-colors shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50&quot;&gt;Transmit&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  // Tower data
+  const towers = {
+    ForLoop: {
+      name: &apos;ForLoop&apos;,
+      desc: &apos;Attacks multiple enemies in sequence&apos;,
+      cost: 50, dmg: 12, rng: 3, spd: &apos;1.2/s&apos;,
+      upgrades: [&apos;Faster Iteration (30)&apos;, &apos;Extended Range (40)&apos;, &apos;+1 more...&apos;],
+      old: &apos;for i in range(len(nums)):&apos;,
+      new: &apos;for i, num in enumerate(nums):&apos;
+    },
+    WhileLoop: {
+      name: &apos;WhileLoop&apos;,
+      desc: &apos;Continuous attack on a single path&apos;,
+      cost: 75, dmg: 8, rng: 2, spd: &apos;2.5/s&apos;,
+      upgrades: [&apos;Condition Enhancement (40)&apos;, &apos;Break Statement (60)&apos;],
+      old: &apos;while i &lt; len(nums):&apos;,
+      new: &apos;while left &lt; right:&apos;
+    },
+    IfCondition: {
+      name: &apos;IfCondition&apos;,
+      desc: &apos;Attacks based on enemy type&apos;,
+      cost: 40, dmg: 12, rng: 2, spd: &apos;1/s&apos;,
+      upgrades: [&apos;Additional Branch (35)&apos;, &apos;elif Statement (80)&apos;],
+      old: &apos;if nums[j] == target - nums[i]:&apos;,
+      new: &apos;if target - num in num_to_index:&apos;
+    },
+    Variable: {
+      name: &apos;Variable&apos;,
+      desc: &apos;Stores enemy information, enhances nearby towers&apos;,
+      cost: 30, dmg: 7, rng: 4, spd: &apos;0.8/s&apos;,
+      upgrades: [&apos;Type Specialization (25)&apos;, &apos;Constant Declaration (40)&apos;],
+      old: &apos;result = []&apos;,
+      new: &apos;num_to_index = {}&apos;
+    },
+    Function: {
+      name: &apos;Function&apos;,
+      desc: &apos;Reusable attack pattern with high damage&apos;,
+      cost: 100, dmg: 35, rng: 3, spd: &apos;0.7/s&apos;,
+      upgrades: [&apos;Parameter Expansion (60)&apos;, &apos;Recursive Function (100)&apos;],
+      old: &apos;def two_sum(nums, target):&apos;,
+      new: &apos;def two_sum(nums, target):&apos;
+    },
+    Array: {
+      name: &apos;Array&apos;,
+      desc: &apos;Fires multiple shots in array pattern&apos;,
+      cost: 80, dmg: 10, rng: 4, spd: &apos;1/s&apos;,
+      upgrades: [&apos;Sorting Attack (45)&apos;, &apos;Mapping Attack (65)&apos;, &apos;+1 more...&apos;],
+      old: &apos;nums = [2,7,11,15]&apos;,
+      new: &apos;nums = [2,7,11,15]&apos;
+    },
+    Object: {
+      name: &apos;Object&apos;,
+      desc: &apos;Creates damage fields that persist&apos;,
+      cost: 110, dmg: 25, rng: 3, spd: &apos;0.6/s&apos;,
+      upgrades: [&apos;Inheritance Boost (70)&apos;, &apos;Polymorphic Attack (85)&apos;, &apos;+1 more...&apos;],
+      old: &apos;obj = {}&apos;,
+      new: &apos;num_to_index = {}&apos;
+    },
+    Return: {
+      name: &apos;Return&apos;,
+      desc: &apos;High damage with knockback effect&apos;,
+      cost: 120, dmg: 30, rng: 2, spd: &apos;0.5/s&apos;,
+      upgrades: [&apos;Early Return (75)&apos;, &apos;Multiple Returns (90)&apos;],
+      old: &apos;return [i, j]&apos;,
+      new: &apos;return [num_to_index[target - num], i]&apos;
+    },
+    TryCatch: {
+      name: &apos;TryCatch&apos;,
+      desc: &apos;Traps enemies and deals damage over time&apos;,
+      cost: 65, dmg: 10, rng: 3, spd: &apos;1.1/s&apos;,
+      upgrades: [&apos;Error Handling (50)&apos;, &apos;Finally Block (70)&apos;],
+      old: &apos;try:\n    # code\nexcept Exception as e:&apos;,
+      new: &apos;try:\n    # code\nexcept Exception as e:&apos;
+    },
+    Switch: {
+      name: &apos;Switch&apos;,
+      desc: &apos;Switches attack pattern based on enemies&apos;,
+      cost: 60, dmg: 15, rng: 3, spd: &apos;0.9/s&apos;,
+      upgrades: [&apos;Multiple Cases (45)&apos;, &apos;Default Case (55)&apos;],
+      old: &apos;switch (x) { case 1: ... }&apos;,
+      new: &apos;match x:\n    case 1: ...&apos;
+    }
+  };
+  let builtSolution = [];
+  function updateTowerInfo() {
+    const t = towers[document.getElementById(&apos;tower-select&apos;).value];
+    document.getElementById(&apos;tower-info&apos;).innerHTML =
+      `&lt;div class=&apos;mb-2&apos;&gt;&lt;span class=&apos;font-bold&apos;&gt;${t.name}&lt;/span&gt;: ${t.desc}&lt;/div&gt;` +
+      `&lt;div class=&apos;mb-2&apos;&gt;Cost: &lt;span class=&apos;font-semibold&apos;&gt;${t.cost} BITS&lt;/span&gt; | DMG: &lt;span class=&apos;font-semibold&apos;&gt;${t.dmg}&lt;/span&gt; | RNG: &lt;span class=&apos;font-semibold&apos;&gt;${t.rng}&lt;/span&gt; | SPD: &lt;span class=&apos;font-semibold&apos;&gt;${t.spd}&lt;/span&gt;&lt;/div&gt;` +
+      `&lt;div class=&apos;mb-2&apos;&gt;Upgrades: &lt;span class=&apos;text-xs&apos;&gt;${t.upgrades.join(&apos;, &apos;)}&lt;/span&gt;&lt;/div&gt;`;
+    document.getElementById(&apos;old-snippet&apos;).textContent = t.old;
+    document.getElementById(&apos;new-snippet&apos;).textContent = t.new;
+  }
+  function updateSolutionPreview() {
+    document.getElementById(&apos;solution-preview&apos;).textContent = builtSolution.join(&apos;\n&apos;);
+  }
+  document.getElementById(&apos;tower-select&apos;).onchange = updateTowerInfo;
+  document.getElementById(&apos;add-tower&apos;).onclick = function() {
+    const t = towers[document.getElementById(&apos;tower-select&apos;).value];
+    builtSolution.push(t.new);
+    updateSolutionPreview();
+  };
+  // Test Solution mockup
+  document.getElementById(&apos;test-solution&apos;).onclick = function() {
+    const resultDiv = document.getElementById(&apos;test-result&apos;);
+    if (builtSolution.length &gt;= 4 &amp;&amp; builtSolution.includes(&apos;return [num_to_index[target - num], i]&apos;)) {
+      resultDiv.innerHTML = &apos;&lt;span style=&quot;color:#22c55e;&quot;&gt;✅ Success! Your solution passed all test cases.&lt;/span&gt;&apos;;
+    } else {
+      resultDiv.innerHTML = &apos;&lt;span style=&quot;color:#f87171;&quot;&gt;❌ Oops! Your solution is incomplete or has a bug. Try using more towers or ask the Hack Assistant for help.&lt;/span&gt;&apos;;
+    }
+  };
+  // Initialize demo
+  updateTowerInfo();
+  updateSolutionPreview();
+  &lt;/script&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
@@ -132,54 +323,6 @@ class AIService {
     &lt;li&gt;Improved learning curve&lt;/li&gt;
     &lt;li&gt;Higher completion rates&lt;/li&gt;
   &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;
-  &lt;h2 class=&quot;text-2xl font-bold mt-8 mb-4 text-blue-700 dark:text-blue-400&quot;&gt;Interactive Demo: Tower Defense Code Generation&lt;/h2&gt;
-  &lt;div class=&quot;rounded-lg shadow-md bg-blue-50 dark:bg-slate-800 p-6 my-6 max-w-xl mx-auto&quot;&gt;
-    &lt;h3 class=&quot;text-lg font-bold mb-4 text-gray-900 dark:text-white&quot;&gt;Try the Tower Defense Code Snippet Generator&lt;/h3&gt;
-    &lt;label for=&quot;towerType&quot; class=&quot;font-medium text-gray-800 dark:text-gray-200&quot;&gt;Tower Type:&lt;/label&gt;
-    &lt;select id=&quot;towerType&quot; class=&quot;ml-2 mb-2 rounded border-gray-300 dark:bg-slate-700 dark:text-white&quot;&gt;
-      &lt;option value=&quot;ForLoop&quot;&gt;For Loop&lt;/option&gt;
-      &lt;option value=&quot;IfCondition&quot;&gt;If Condition&lt;/option&gt;
-      &lt;option value=&quot;ReturnStatement&quot;&gt;Return Statement&lt;/option&gt;
-      &lt;option value=&quot;Variable&quot;&gt;Variable&lt;/option&gt;
-      &lt;option value=&quot;Function&quot;&gt;Function&lt;/option&gt;
-    &lt;/select&gt;
-    &lt;button id=&quot;generateBtn&quot; class=&quot;ml-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded transition-colors&quot;&gt;Generate Code&lt;/button&gt;
-    &lt;pre id=&quot;codeOutput&quot; class=&quot;mt-4 bg-slate-900 text-blue-200 rounded p-4 min-h-[2.5rem] text-base&quot;&gt;&lt;/pre&gt;
-  &lt;/div&gt;
-  &lt;script&gt;
-  // Simple mock AI code generator for demo purposes
-  const codeSnippets = {
-    ForLoop: {
-      python: &apos;for i in range(len(items)):&apos;,
-      javascript: &apos;for (let i = 0; i &lt; items.length; i++) {&apos;
-    },
-    IfCondition: {
-      python: &apos;if x &gt; y:&apos;,
-      javascript: &apos;if (x &gt; y) {&apos;
-    },
-    ReturnStatement: {
-      python: &apos;return result&apos;,
-      javascript: &apos;return result;&apos;
-    },
-    Variable: {
-      python: &apos;total = 0&apos;,
-      javascript: &apos;let total = 0;&apos;
-    },
-    Function: {
-      python: &apos;def my_function(param):&apos;,
-      javascript: &apos;function myFunction(param) {&apos;
-    }
-  };
-  const lang = (navigator.language &amp;&amp; navigator.language.startsWith(&apos;en&apos;)) ? &apos;python&apos; : &apos;javascript&apos;;
-  document.getElementById(&apos;generateBtn&apos;).onclick = function() {
-    const type = document.getElementById(&apos;towerType&apos;).value;
-    const code = codeSnippets[type][lang] || codeSnippets[type][&apos;python&apos;];
-    document.getElementById(&apos;codeOutput&apos;).textContent = code;
-  };
-  &lt;/script&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;opacity-0&quot; data-scroll=&quot;fade-up&quot;&gt;

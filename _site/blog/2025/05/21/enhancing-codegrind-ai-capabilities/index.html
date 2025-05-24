@@ -197,6 +197,22 @@ html.dark .highlight {
   <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
     In this post, I'll share the journey of enhancing CodeGrind's AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI.
   </p>
+  <div class="flex flex-col md:flex-row gap-4 mb-8">
+    <a href="https://codegrind.online/" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors text-center">Visit CodeGrind</a>
+    <a href="https://codegrind.online/games/tower-defense/demo/two-sum" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors text-center">Try the Tower Defense Demo</a>
+  </div>
+  
+<div class="blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+  <h4 class="text-sm uppercase text-gray-500 mb-2">Sponsored Content</h4>
+  <div class="bg-white p-2 rounded shadow">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7733001105026476" data-ad-slot="5855397645" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+
   <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">The Evolution of AI Assistance</h2>
   <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Initial Implementation</h3>
   <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
@@ -213,7 +229,7 @@ html.dark .highlight {
   </ul>
 </div>
 
-<div class="opacity-0" data-scroll="fade-up">
+<div class="opacity-0" data-animate="fade-in">
   <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Tower Defense AI Integration</h2>
   <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Code Generation System</h3>
   <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
@@ -249,18 +265,193 @@ class AIService {
 </div>
 
 <div class="opacity-0" data-scroll="fade-up">
-  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Interactive Learning Experience</h2>
-  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Real-Time Code Execution</h3>
-  <p class="text-gray-700 dark:text-gray-300 mb-4">One of our key improvements is the real-time code execution and feedback system:</p>
-  <img src="/assets/images/codegrind/AI_Problem_Generation-testing-solution.png" alt="Testing Solution" class="rounded-lg shadow-md w-full max-w-2xl mx-auto my-6" />
-  <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">AI-Assisted Problem Solving</h3>
-  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
-    <li>Step-by-step guidance</li>
-    <li>Contextual hints</li>
-    <li>Code refinement suggestions</li>
-    <li>Performance optimization tips</li>
-  </ul>
-  <img src="/assets/images/codegrind/AI_Problem_Generation-AI-assistance.png" alt="AI Assistance" class="rounded-lg shadow-md w-full max-w-2xl mx-auto my-6" />
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Interactive Demo: Build a Solution (Tower Defense Style)</h2>
+  <div class="mb-4 p-4 bg-blue-100 dark:bg-slate-700 rounded-lg text-gray-800 dark:text-gray-200">
+    <strong>How to use this demo:</strong> Select a tower type (programming concept), view its stats and upgrades, and add it to your solution. Compare how the <span class="text-blue-700 font-semibold">Old AI</span> and <span class="text-green-700 font-semibold">New AI</span> would generate code for each tower. Build your solution step-by-step, just like in the real Tower Defense game!<br />
+    <span class="block mt-2">Need help? Use the <span class="text-purple-400 font-semibold">Hack Assistant</span> (bottom right) to get hints, step-by-step help, or even a full solution!</span>
+  </div>
+  <div class="rounded-lg shadow-md bg-blue-50 dark:bg-slate-800 p-6 my-6 max-w-2xl mx-auto relative">
+    <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">LeetCode Problem: Two Sum</h3>
+    <p class="text-gray-700 dark:text-gray-300 mb-2">Given an array of integers <code>nums</code> and an integer <code>target</code>, return indices of the two numbers such that they add up to <code>target</code>.<br />You may assume that each input would have exactly one solution, and you may not use the same element twice.</p>
+    <a href="https://codegrind.online/games/tower-defense/demo/two-sum" class="text-blue-600 hover:text-blue-800 underline text-sm mb-4 inline-block">Try this problem in the real Tower Defense game &rarr;</a>
+    <div class="mb-4">
+      <label for="tower-select" class="font-medium text-gray-800 dark:text-gray-200">Choose next tower type:</label>
+      <select id="tower-select" class="ml-2 mb-2 rounded border-gray-300 dark:bg-slate-700 dark:text-white">
+        <option value="ForLoop">ForLoop</option>
+        <option value="WhileLoop">WhileLoop</option>
+        <option value="IfCondition">IfCondition</option>
+        <option value="Variable">Variable</option>
+        <option value="Function">Function</option>
+        <option value="Array">Array</option>
+        <option value="Object">Object</option>
+        <option value="Return">Return</option>
+        <option value="TryCatch">TryCatch</option>
+        <option value="Switch">Switch</option>
+      </select>
+      <button id="add-tower" class="ml-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded transition-colors">Add Tower</button>
+    </div>
+    <div id="tower-info" class="mb-4 p-4 rounded bg-white dark:bg-slate-900 shadow text-sm"></div>
+    <div class="flex flex-col md:flex-row gap-4 mb-4">
+      <div class="flex-1">
+        <h4 class="font-semibold text-blue-700 dark:text-blue-600 mb-2">Old AI Snippet</h4>
+        <div id="old-snippet" class="bg-slate-900 text-blue-400 rounded p-4 min-h-[2.5rem] text-base mb-2"></div>
+      </div>
+      <div class="flex-1">
+        <h4 class="font-semibold text-green-700 dark:text-green-800 mb-2">New AI Snippet</h4>
+        <div id="new-snippet" class="bg-slate-900 text-green-400 rounded p-4 min-h-[2.5rem] text-base mb-2"></div>
+      </div>
+    </div>
+    <div>
+      <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Your Solution (as built):</h4>
+      <pre id="solution-preview" class="bg-slate-800 text-blue-400 rounded p-4 min-h-[3rem] text-base"></pre>
+      <button id="test-solution" class="mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded transition-colors">Test Solution</button>
+      <div id="test-result" class="mt-4 text-base font-semibold"></div>
+    </div>
+    <!-- Hack Assistant UI - Static Integration -->
+    <div id="hack-assistant-static" class="mt-8 p-6 bg-slate-900 rounded-lg shadow-xl border border-purple-700">
+      <div id="hack-assistant-header-static" class="flex items-center justify-between pb-3 border-b border-purple-600">
+        <h3 class="text-xl font-bold text-purple-700 flex items-center">
+          <span class="mr-3 text-2xl">&#129302;</span> <!-- Robot emoji -->
+          Hack Assistant
+        </h3>
+      </div>
+      <div id="hack-assistant-body-static" class="mt-4 space-y-5">
+        <div>
+          <label for="assist-level-static" class="block mb-1 text-sm font-bold text-purple-600">Assistance Level:</label>
+          <select id="assist-level-static" class="w-full p-2.5 rounded bg-slate-800 text-green-600 border border-purple-600 focus:ring-purple-500 focus:border-purple-500 font-mono text-sm shadow-inner">
+            <option class="text-green-600">Hints Only - Get hints and guidance, but never full code.</option>
+            <option class="text-green-600">Full Solution - Receive a complete code solution.</option>
+            <option class="text-green-600">Step-by-Step - Get a solution broken down into logical steps.</option>
+            <option class="text-green-600">Debug Mode - Get help identifying and fixing bugs in your code.</option>
+            <option class="text-green-600">Learning Mode - Get explanations and teaching for concepts and code.</option>
+          </select>
+        </div>
+        <div id="hack-chat-static" class="p-4 min-h-[100px] bg-slate-950 rounded border border-purple-700 shadow-inner">
+          <p id="hack-chat-msg-static" class="text-sm text-purple-500 font-bold leading-relaxed">Greetings, hacker. I'm your neural infiltration assistant. How can I aid in your system breach today?</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <input id="hack-input-static" type="text" placeholder="Awaiting your command..." class="flex-grow p-2.5 rounded bg-slate-800 text-purple-800 border border-purple-600 focus:ring-purple-500 focus:border-purple-500 font-mono text-sm shadow-inner" />
+          <button id="transmit-btn-static" class="px-6 py-2.5 rounded bg-purple-600 hover:bg-purple-700 text-white font-semibold font-mono text-sm transition-colors shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">Transmit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  // Tower data
+  const towers = {
+    ForLoop: {
+      name: 'ForLoop',
+      desc: 'Attacks multiple enemies in sequence',
+      cost: 50, dmg: 12, rng: 3, spd: '1.2/s',
+      upgrades: ['Faster Iteration (30)', 'Extended Range (40)', '+1 more...'],
+      old: 'for i in range(len(nums)):',
+      new: 'for i, num in enumerate(nums):'
+    },
+    WhileLoop: {
+      name: 'WhileLoop',
+      desc: 'Continuous attack on a single path',
+      cost: 75, dmg: 8, rng: 2, spd: '2.5/s',
+      upgrades: ['Condition Enhancement (40)', 'Break Statement (60)'],
+      old: 'while i < len(nums):',
+      new: 'while left < right:'
+    },
+    IfCondition: {
+      name: 'IfCondition',
+      desc: 'Attacks based on enemy type',
+      cost: 40, dmg: 12, rng: 2, spd: '1/s',
+      upgrades: ['Additional Branch (35)', 'elif Statement (80)'],
+      old: 'if nums[j] == target - nums[i]:',
+      new: 'if target - num in num_to_index:'
+    },
+    Variable: {
+      name: 'Variable',
+      desc: 'Stores enemy information, enhances nearby towers',
+      cost: 30, dmg: 7, rng: 4, spd: '0.8/s',
+      upgrades: ['Type Specialization (25)', 'Constant Declaration (40)'],
+      old: 'result = []',
+      new: 'num_to_index = {}'
+    },
+    Function: {
+      name: 'Function',
+      desc: 'Reusable attack pattern with high damage',
+      cost: 100, dmg: 35, rng: 3, spd: '0.7/s',
+      upgrades: ['Parameter Expansion (60)', 'Recursive Function (100)'],
+      old: 'def two_sum(nums, target):',
+      new: 'def two_sum(nums, target):'
+    },
+    Array: {
+      name: 'Array',
+      desc: 'Fires multiple shots in array pattern',
+      cost: 80, dmg: 10, rng: 4, spd: '1/s',
+      upgrades: ['Sorting Attack (45)', 'Mapping Attack (65)', '+1 more...'],
+      old: 'nums = [2,7,11,15]',
+      new: 'nums = [2,7,11,15]'
+    },
+    Object: {
+      name: 'Object',
+      desc: 'Creates damage fields that persist',
+      cost: 110, dmg: 25, rng: 3, spd: '0.6/s',
+      upgrades: ['Inheritance Boost (70)', 'Polymorphic Attack (85)', '+1 more...'],
+      old: 'obj = {}',
+      new: 'num_to_index = {}'
+    },
+    Return: {
+      name: 'Return',
+      desc: 'High damage with knockback effect',
+      cost: 120, dmg: 30, rng: 2, spd: '0.5/s',
+      upgrades: ['Early Return (75)', 'Multiple Returns (90)'],
+      old: 'return [i, j]',
+      new: 'return [num_to_index[target - num], i]'
+    },
+    TryCatch: {
+      name: 'TryCatch',
+      desc: 'Traps enemies and deals damage over time',
+      cost: 65, dmg: 10, rng: 3, spd: '1.1/s',
+      upgrades: ['Error Handling (50)', 'Finally Block (70)'],
+      old: 'try:\n    # code\nexcept Exception as e:',
+      new: 'try:\n    # code\nexcept Exception as e:'
+    },
+    Switch: {
+      name: 'Switch',
+      desc: 'Switches attack pattern based on enemies',
+      cost: 60, dmg: 15, rng: 3, spd: '0.9/s',
+      upgrades: ['Multiple Cases (45)', 'Default Case (55)'],
+      old: 'switch (x) { case 1: ... }',
+      new: 'match x:\n    case 1: ...'
+    }
+  };
+  let builtSolution = [];
+  function updateTowerInfo() {
+    const t = towers[document.getElementById('tower-select').value];
+    document.getElementById('tower-info').innerHTML =
+      `<div class='mb-2'><span class='font-bold'>${t.name}</span>: ${t.desc}</div>` +
+      `<div class='mb-2'>Cost: <span class='font-semibold'>${t.cost} BITS</span> | DMG: <span class='font-semibold'>${t.dmg}</span> | RNG: <span class='font-semibold'>${t.rng}</span> | SPD: <span class='font-semibold'>${t.spd}</span></div>` +
+      `<div class='mb-2'>Upgrades: <span class='text-xs'>${t.upgrades.join(', ')}</span></div>`;
+    document.getElementById('old-snippet').textContent = t.old;
+    document.getElementById('new-snippet').textContent = t.new;
+  }
+  function updateSolutionPreview() {
+    document.getElementById('solution-preview').textContent = builtSolution.join('\n');
+  }
+  document.getElementById('tower-select').onchange = updateTowerInfo;
+  document.getElementById('add-tower').onclick = function() {
+    const t = towers[document.getElementById('tower-select').value];
+    builtSolution.push(t.new);
+    updateSolutionPreview();
+  };
+  // Test Solution mockup
+  document.getElementById('test-solution').onclick = function() {
+    const resultDiv = document.getElementById('test-result');
+    if (builtSolution.length >= 4 && builtSolution.includes('return [num_to_index[target - num], i]')) {
+      resultDiv.innerHTML = '<span style="color:#22c55e;">✅ Success! Your solution passed all test cases.</span>';
+    } else {
+      resultDiv.innerHTML = '<span style="color:#f87171;">❌ Oops! Your solution is incomplete or has a bug. Try using more towers or ask the Hack Assistant for help.</span>';
+    }
+  };
+  // Initialize demo
+  updateTowerInfo();
+  updateSolutionPreview();
+  </script>
 </div>
 
 <div class="opacity-0" data-scroll="fade-up">
@@ -303,54 +494,6 @@ class AIService {
     <li>Improved learning curve</li>
     <li>Higher completion rates</li>
   </ul>
-</div>
-
-<div class="opacity-0" data-scroll="fade-up">
-  <h2 class="text-2xl font-bold mt-8 mb-4 text-blue-700 dark:text-blue-400">Interactive Demo: Tower Defense Code Generation</h2>
-  <div class="rounded-lg shadow-md bg-blue-50 dark:bg-slate-800 p-6 my-6 max-w-xl mx-auto">
-    <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">Try the Tower Defense Code Snippet Generator</h3>
-    <label for="towerType" class="font-medium text-gray-800 dark:text-gray-200">Tower Type:</label>
-    <select id="towerType" class="ml-2 mb-2 rounded border-gray-300 dark:bg-slate-700 dark:text-white">
-      <option value="ForLoop">For Loop</option>
-      <option value="IfCondition">If Condition</option>
-      <option value="ReturnStatement">Return Statement</option>
-      <option value="Variable">Variable</option>
-      <option value="Function">Function</option>
-    </select>
-    <button id="generateBtn" class="ml-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-4 rounded transition-colors">Generate Code</button>
-    <pre id="codeOutput" class="mt-4 bg-slate-900 text-blue-200 rounded p-4 min-h-[2.5rem] text-base"></pre>
-  </div>
-  <script>
-  // Simple mock AI code generator for demo purposes
-  const codeSnippets = {
-    ForLoop: {
-      python: 'for i in range(len(items)):',
-      javascript: 'for (let i = 0; i < items.length; i++) {'
-    },
-    IfCondition: {
-      python: 'if x > y:',
-      javascript: 'if (x > y) {'
-    },
-    ReturnStatement: {
-      python: 'return result',
-      javascript: 'return result;'
-    },
-    Variable: {
-      python: 'total = 0',
-      javascript: 'let total = 0;'
-    },
-    Function: {
-      python: 'def my_function(param):',
-      javascript: 'function myFunction(param) {'
-    }
-  };
-  const lang = (navigator.language && navigator.language.startsWith('en')) ? 'python' : 'javascript';
-  document.getElementById('generateBtn').onclick = function() {
-    const type = document.getElementById('towerType').value;
-    const code = codeSnippets[type][lang] || codeSnippets[type]['python'];
-    document.getElementById('codeOutput').textContent = code;
-  };
-  </script>
 </div>
 
 <div class="opacity-0" data-scroll="fade-up">
