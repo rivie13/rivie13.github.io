@@ -63,6 +63,7 @@ pagination:
   title: ':title - page :num'
   first: '/blog/'
   debug: true
+  sort_reverse: true
 
 # Social media links
 social_links:
