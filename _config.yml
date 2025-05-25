@@ -61,10 +61,8 @@ pagination:
   per_page: 5
   permalink: '/blog/page:num/'
   title: ':title - page :num'
-  category:
-    enabled: true
-    per_page: 5
-    permalink: '/categories/:name/page:num/'
+  first: '/blog/'
+  debug: true
 
 # Social media links
 social_links:

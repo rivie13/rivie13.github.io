@@ -3,10 +3,7 @@ layout: default
 title: Blog
 pagination:
   enabled: true
-  per_page: 5
-  permalink: '/blog/page/:num/'
 ---
-
 <div class="max-w-4xl mx-auto">
   <h1 class="text-3xl font-bold mb-6 opacity-0" data-animate="fade-in">Blog</h1>
   
@@ -187,4 +184,18 @@ pagination:
       {% endif %}
     </div>
   </div>
+
+  <h2>DEBUG: site.posts count = {{ site.posts | size }}</h2>
+  <ul>
+    {% for post in site.posts %}
+      <li>{{ post.path }} | {{ post.date }} | {{ post.title }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>DEBUG: paginator.posts count = {{ paginator.posts | size }}</h2>
+  <ul>
+    {% for post in paginator.posts %}
+      <li>{{ post.path }} | {{ post.date }} | {{ post.title }}</li>
+    {% endfor %}
+  </ul>
 </div> 
