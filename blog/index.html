@@ -140,10 +140,10 @@ pagination:
       {% for page in (1..paginator.total_pages) %}
         {% if page == paginator.page %}
           <span class="bg-blue-600 text-white rounded-lg shadow px-3 py-1">{{ page }}</span>
+        {% elsif page == 1 %}
+          <a href="{{ '/blog/' | relative_url }}" class="bg-white rounded-lg shadow px-3 py-1 hover:bg-gray-50">{{ page }}</a>
         {% else %}
-          <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" class="bg-white rounded-lg shadow px-3 py-1 hover:bg-gray-50">
-            {{ page }}
-          </a>
+          <a href="{{ '/blog/page' | append: page | append: '/' | relative_url }}" class="bg-white rounded-lg shadow px-3 py-1 hover:bg-gray-50">{{ page }}</a>
         {% endif %}
       {% endfor %}
       
@@ -184,18 +184,4 @@ pagination:
       {% endif %}
     </div>
   </div>
-
-  <h2>DEBUG: site.posts count = {{ site.posts | size }}</h2>
-  <ul>
-    {% for post in site.posts %}
-      <li>{{ post.path }} | {{ post.date }} | {{ post.title }}</li>
-    {% endfor %}
-  </ul>
-
-  <h2>DEBUG: paginator.posts count = {{ paginator.posts | size }}</h2>
-  <ul>
-    {% for post in paginator.posts %}
-      <li>{{ post.path }} | {{ post.date }} | {{ post.title }}</li>
-    {% endfor %}
-  </ul>
 </div> 
