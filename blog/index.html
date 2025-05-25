@@ -1,7 +1,10 @@
 ---
 layout: default
 title: Blog
-permalink: /blog/
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/blog/page/:num/'
 ---
 
 <div class="max-w-4xl mx-auto">
@@ -57,7 +60,7 @@ permalink: /blog/
   {% else %}
   <!-- This section will display when blog posts are available -->
   <div class="space-y-8">
-    {% for post in site.posts %}
+    {% for post in paginator.posts %}
       <article class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
         <div class="p-6">
           <h2 class="text-2xl font-bold mb-2">

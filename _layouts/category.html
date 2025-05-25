@@ -15,30 +15,29 @@ layout: default
   </div>
   
   <div class="space-y-8">
-    {% assign filtered_posts = site.posts | where: "categories", page.category %}
-    {% for post in filtered_posts %}
-      <article class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
-        <div class="p-6">
-          <h2 class="text-2xl font-bold mb-2">
-            <a href="{{ post.url | relative_url }}" class="text-blue-600 hover:text-blue-800">{{ post.title }}</a>
-          </h2>
-          <div class="text-gray-600 mb-4">
-            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+    {% if paginator.posts and paginator.posts.size > 0 %}
+      {% for post in paginator.posts %}
+        <article class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
+          <div class="p-6">
+            <h2 class="text-2xl font-bold mb-2">
+              <a href="{{ post.url | relative_url }}" class="text-blue-600 hover:text-blue-800">{{ post.title }}</a>
+            </h2>
+            <div class="text-gray-600 mb-4">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+            </div>
+            <div class="prose max-w-none mb-4">
+              {{ post.excerpt }}
+            </div>
+            <a href="{{ post.url | relative_url }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transform hover:translate-x-2 transition-transform">
+              Read more 
+              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
           </div>
-          <div class="prose max-w-none mb-4">
-            {{ post.excerpt }}
-          </div>
-          <a href="{{ post.url | relative_url }}" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-semibold transform hover:translate-x-2 transition-transform">
-            Read more 
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-            </svg>
-          </a>
-        </div>
-      </article>
-    {% endfor %}
-    
-    {% if filtered_posts.size == 0 %}
+        </article>
+      {% endfor %}
+    {% else %}
       <div class="bg-white rounded-lg shadow-md p-8 text-center opacity-0" data-animate="fade-in">
         <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -48,4 +47,28 @@ layout: default
       </div>
     {% endif %}
   </div>
+
+  {% if paginator.total_pages > 1 %}
+    <div class="flex justify-center space-x-2 mt-8 opacity-0" data-animate="fade-in">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | relative_url }}" class="bg-white rounded-lg shadow px-3 py-1 hover:bg-gray-50">
+          Previous
+        </a>
+      {% endif %}
+      {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+          <span class="bg-blue-600 text-white rounded-lg shadow px-3 py-1">{{ page }}</span>
+        {% else %}
+          <a href="{{ paginator.paginate_path | relative_url | replace: ':num', page }}" class="bg-white rounded-lg shadow px-3 py-1 hover:bg-gray-50">
+            {{ page }}
+          </a>
+        {% endif %}
+      {% endfor %}
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | relative_url }}" class="bg-white rounded-lg shadow px-3 py-1 hover:bg-gray-50">
+          Next
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
 </div> 

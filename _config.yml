@@ -15,7 +15,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-  - jekyll-paginate
+  - jekyll-paginate-v2
 
 # SEO settings
 twitter:
@@ -56,8 +56,15 @@ defaults:
       image: /assets/images/blog-social-image.png  # Create this image in your assets folder
 
 # Pagination settings for blog
-paginate: 5
-paginate_path: "/blog/page:num/"
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/blog/page:num/'
+  title: ':title - page :num'
+  category:
+    enabled: true
+    per_page: 5
+    permalink: '/categories/:name/page:num/'
 
 # Social media links
 social_links:
