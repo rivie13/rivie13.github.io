@@ -1,0 +1,23 @@
+{% if site.google_adsense %}
+<div class="homepage-ad my-8 py-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg shadow-sm border-2 border-dashed border-gray-300">
+  <div class="container mx-auto px-4 text-center">
+    <h4 class="text-sm uppercase text-gray-500 mb-3 text-center">Sponsored Content</h4>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="{{ site.google_adsense }}"
+         data-ad-slot="3865327420" 
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+{% else %}
+<div class="homepage-ad my-8 py-4 bg-gradient-to-r from-gray-50 to-gray-100 rounded-lg shadow-sm border-2 border-dashed border-gray-300">
+  <div class="container mx-auto px-4 text-center">
+    <h4 class="text-sm uppercase text-gray-500 mb-3 text-center">Sponsored Content</h4>
+    <p class="text-gray-400 text-xs mt-2">Google AdSense not configured. Add google_adsense in _config.yml</p>
+  </div>
+</div>
+{% endif %} 

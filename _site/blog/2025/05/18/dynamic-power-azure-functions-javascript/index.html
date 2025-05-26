@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions & Client-Side JavaScript | Riviera Sperduto - Developer Portfolio</title>
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp; Client-Side JavaScript | Riviera Sperduto - Developer Portfolio</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp; Client-Side JavaScript" />
+<meta name="author" content="Riviera Sperduto" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services." />
+<meta property="og:description" content="Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services." />
+<link rel="canonical" href="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/" />
+<meta property="og:url" content="http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/" />
+<meta property="og:site_name" content="Riviera Sperduto - Developer Portfolio" />
+<meta property="og:image" content="http://localhost:4000/assets/images/tutorial-part4-banner.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-18T11:00:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/images/tutorial-part4-banner.png" />
+<meta property="twitter:title" content="Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp; Client-Side JavaScript" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Riviera Sperduto" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/"},"datePublished":"2025-05-18T11:00:00-04:00","@type":"BlogPosting","url":"http://localhost:4000/blog/2025/05/18/dynamic-power-azure-functions-javascript/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/default-social-image.png"},"name":"Riviera Sperduto"},"description":"Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.","image":"http://localhost:4000/assets/images/tutorial-part4-banner.png","author":{"@type":"Person","name":"Riviera Sperduto"},"headline":"Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions &amp; Client-Side JavaScript","dateModified":"2025-05-18T11:00:00-04:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+    <!-- Google AdSense -->
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7733001105026476"
+     crossorigin="anonymous"></script>
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/dark-mode.css">
+    <script>
+        // Check for saved dark mode preference on page load
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</head>
+<body class="page-transition enter-active">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <header class="bg-gray-900 text-white shadow-md">
+  <div class="container mx-auto px-4 py-4">
+    <nav class="flex flex-wrap items-center justify-between">
+      <!-- Logo/Site Title -->
+      <a href="/" class="text-xl font-bold text-gray-400" aria-label="Home page">
+        Riviera Sperduto
+      </a>
+      
+      <div class="flex items-center">
+        <!-- Dark Mode Toggle -->
+        <button id="dark-mode-toggle" class="focus:outline-none mr-4" aria-label="Toggle dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark-mode-sun hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark-mode-moon dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      
+        <!-- Mobile menu button -->
+        <button id="menu-toggle" class="block md:hidden focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Navigation Links -->
+      <div id="menu" class="w-full md:w-auto hidden md:block" role="navigation" aria-label="Main navigation">
+        <ul class="flex flex-col md:flex-row md:space-x-6 mt-4 md:mt-0">
+          <li><a href="/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Home">Home</a></li>
+          <li><a href="/about/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="About">About</a></li>
+          <li><a href="/projects/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Projects">Projects</a></li>
+          <li><a href="/services/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Services">Services</a></li>
+          <li><a href="/resume/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Resume">Resume</a></li>
+          <li><a href="/blog/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Blog">Blog</a></li>
+          <li><a href="/contact/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Contact">Contact</a></li>
+          <li><a href="/privacy/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Privacy Policy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Toggle mobile menu
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('menu').classList.toggle('hidden');
+    // Update aria-expanded state
+    const isExpanded = !document.getElementById('menu').classList.contains('hidden');
+    this.setAttribute('aria-expanded', isExpanded.toString());
+  });
+</script> 
+    
+
+    
+<div class="header-ad-container w-full py-3 bg-gray-100 border-b border-gray-200 border-2 border-dashed border-gray-300">
+  <div class="container mx-auto px-4 text-center">
+    <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7733001105026476"
+         data-ad-slot="4238838304"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+
+    
+    <main id="main-content" class="container mx-auto px-4 py-8">
+        <article class="max-w-4xl mx-auto">
+  <header class="mb-8 opacity-0" data-animate="fade-in">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions & Client-Side JavaScript</h1>
+    
+    <div class="flex flex-wrap items-center text-gray-600 mb-6">
+      <time datetime="2025-05-18T11:00:00-04:00" class="flex items-center mr-4 mb-2">
+        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+        </svg>
+        May 18, 2025
+      </time>
+      
+      
+        <span class="flex items-center mr-4 mb-2">
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+          </svg>
+          Riviera Sperduto
+        </span>
+      
+      
+      
+        <span class="flex items-center mb-2">
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+          </svg>
+          
+            <a href="/categories/Portfolio%20Tutorial" class="hover:text-blue-600 transition-colors">Portfolio Tutorial</a>,&nbsp;
+          
+            <a href="/categories/Development" class="hover:text-blue-600 transition-colors">Development</a>,&nbsp;
+          
+            <a href="/categories/Jekyll" class="hover:text-blue-600 transition-colors">Jekyll</a>,&nbsp;
+          
+            <a href="/categories/JavaScript" class="hover:text-blue-600 transition-colors">JavaScript</a>,&nbsp;
+          
+            <a href="/categories/Azure" class="hover:text-blue-600 transition-colors">Azure</a>,&nbsp;
+          
+            <a href="/categories/Key%20Vault" class="hover:text-blue-600 transition-colors">Key Vault</a>,&nbsp;
+          
+            <a href="/categories/Function%20App" class="hover:text-blue-600 transition-colors">Function App</a>
+          
+        </span>
+      
+    </div>
+    
+    
+      <div class="mb-6 rounded-lg overflow-hidden shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <img src="/assets/images/tutorial-part4-banner.png" alt="Part 4: Dynamic Power - Secure GitHub API Integration via Azure Functions & Client-Side JavaScript" class="w-full">
+      </div>
+    
+  </header>
+  
+  <div class="prose prose-blue max-w-none mb-12 opacity-0 post-content" data-animate="fade-in" data-scroll="fade-up">
+    <style>
+/* Custom code block styling for this post */
+.highlight {
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.highlight pre {
+  padding: 1.25rem;
+  margin: 0;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.highlight code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+/* Dark mode considerations */
+html.dark .highlight {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Different background colors for different language blocks */
+.language-yaml .highlight { background-color: #f8fafc; border-left: 4px solid #4f46e5; }
+.language-ruby .highlight { background-color: #fef2f2; border-left: 4px solid #dc2626; }
+.language-html .highlight { background-color: #f0f9ff; border-left: 4px solid #0ea5e9; }
+.language-css .highlight { background-color: #f5f3ff; border-left: 4px solid #a855f7; }
+.language-bash .highlight { background-color: #f0fdf4; border-left: 4px solid #16a34a; }
+
+/* Dark mode versions */
+html.dark .language-yaml .highlight { background-color: #1e293b; border-left: 4px solid #4f46e5; }
+html.dark .language-ruby .highlight { background-color: #350c0c; border-left: 4px solid #dc2626; }
+html.dark .language-html .highlight { background-color: #082f49; border-left: 4px solid #0ea5e9; }
+html.dark .language-css .highlight { background-color: #2e1065; border-left: 4px solid #a855f7; }
+html.dark .language-bash .highlight { background-color: #052e16; border-left: 4px solid #16a34a; }
+</style>
+
+<style>
+/* Enhanced code block styling */
+.highlight {
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.highlight pre {
+  padding: 1.25rem;
+  margin: 0;
+  overflow-x: auto;
+  line-height: 1.7;
+}
+
+.highlight code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.95rem;
+}
+
+/* Dark mode adjustments */
+html.dark .highlight {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Different background colors for different language blocks */
+.language-yaml .highlight { background-color: #f8fafc; border-left: 4px solid #4f46e5; }
+.language-ruby .highlight { background-color: #fef2f2; border-left: 4px solid #dc2626; }
+.language-html .highlight { background-color: #f0f9ff; border-left: 4px solid #0ea5e9; }
+.language-css .highlight { background-color: #f5f3ff; border-left: 4px solid #a855f7; }
+.language-bash .highlight { background-color: #f0fdf4; border-left: 4px solid #16a34a; }
+.language-javascript .highlight { background-color: #fffbeb; border-left: 4px solid #eab308; }
+.language-markdown .highlight { background-color: #f8fafc; border-left: 4px solid #64748b; }
+
+/* Dark mode versions */
+html.dark .language-yaml .highlight { background-color: #1e293b; border-left: 4px solid #4f46e5; }
+html.dark .language-ruby .highlight { background-color: #350c0c; border-left: 4px solid #dc2626; }
+html.dark .language-html .highlight { background-color: #082f49; border-left: 4px solid #0ea5e9; }
+html.dark .language-css .highlight { background-color: #2e1065; border-left: 4px solid #a855f7; }
+html.dark .language-bash .highlight { background-color: #052e16; border-left: 4px solid #16a34a; }
+html.dark .language-javascript .highlight { background-color: #422006; border-left: 4px solid #eab308; }
+html.dark .language-markdown .highlight { background-color: #0f172a; border-left: 4px solid #64748b; }
+
+/* Syntax highlighting tokens - light mode */
+.highlight .c { color: #6b7280; } /* Comment */
+.highlight .k { color: #8b5cf6; font-weight: bold; } /* Keyword */
+.highlight .o { color: #0f172a; } /* Operator */
+.highlight .cm { color: #6b7280; font-style: italic; } /* Comment.Multiline */
+.highlight .cp { color: #6b7280; } /* Comment.Preproc */
+.highlight .c1 { color: #6b7280; font-style: italic; } /* Comment.Single */
+.highlight .cs { color: #6b7280; font-style: italic; } /* Comment.Special */
+.highlight .gd { color: #b91c1c; background-color: #fee2e2; } /* Generic.Deleted */
+.highlight .ge { font-style: italic; } /* Generic.Emph */
+.highlight .gr { color: #b91c1c; } /* Generic.Error */
+.highlight .gh { color: #1e40af; font-weight: bold; } /* Generic.Heading */
+.highlight .gi { color: #15803d; background-color: #dcfce7; } /* Generic.Inserted */
+.highlight .go { color: #4b5563; } /* Generic.Output */
+.highlight .gp { color: #4b5563; font-weight: bold; } /* Generic.Prompt */
+.highlight .gs { font-weight: bold; } /* Generic.Strong */
+.highlight .gu { color: #1e40af; font-weight: bold; } /* Generic.Subheading */
+.highlight .gt { color: #b91c1c; } /* Generic.Traceback */
+.highlight .kc { color: #8b5cf6; font-weight: bold; } /* Keyword.Constant */
+.highlight .kd { color: #8b5cf6; font-weight: bold; } /* Keyword.Declaration */
+.highlight .kn { color: #8b5cf6; font-weight: bold; } /* Keyword.Namespace */
+.highlight .kp { color: #8b5cf6; } /* Keyword.Pseudo */
+.highlight .kr { color: #8b5cf6; font-weight: bold; } /* Keyword.Reserved */
+.highlight .kt { color: #0369a1; font-weight: bold; } /* Keyword.Type */
+.highlight .m { color: #0e7490; } /* Literal.Number */
+.highlight .s { color: #b91c1c; } /* Literal.String */
+.highlight .na { color: #2563eb; } /* Name.Attribute */
+.highlight .nb { color: #0e7490; } /* Name.Builtin */
+.highlight .nc { color: #0891b2; font-weight: bold; } /* Name.Class */
+.highlight .no { color: #0e7490; } /* Name.Constant */
+.highlight .nd { color: #6366f1; } /* Name.Decorator */
+.highlight .ni { color: #0f172a; font-weight: bold; } /* Name.Entity */
+.highlight .ne { color: #b91c1c; font-weight: bold; } /* Name.Exception */
+.highlight .nf { color: #b91c1c; } /* Name.Function */
+.highlight .nl { color: #0f172a; } /* Name.Label */
+.highlight .nn { color: #0e7490; font-weight: bold; } /* Name.Namespace */
+.highlight .nt { color: #2563eb; } /* Name.Tag */
+.highlight .nv { color: #0c4a6e; } /* Name.Variable */
+.highlight .ow { color: #0f172a; font-weight: bold; } /* Operator.Word */
+.highlight .w { color: #d1d5db; } /* Text.Whitespace */
+.highlight .mf { color: #0e7490; } /* Literal.Number.Float */
+.highlight .mh { color: #0e7490; } /* Literal.Number.Hex */
+.highlight .mi { color: #0e7490; } /* Literal.Number.Integer */
+.highlight .mo { color: #0e7490; } /* Literal.Number.Oct */
+.highlight .sb { color: #b91c1c; } /* Literal.String.Backtick */
+.highlight .sc { color: #b91c1c; } /* Literal.String.Char */
+.highlight .sd { color: #b91c1c; font-style: italic; } /* Literal.String.Doc */
+.highlight .s2 { color: #b91c1c; } /* Literal.String.Double */
+.highlight .se { color: #b91c1c; font-weight: bold; } /* Literal.String.Escape */
+.highlight .sh { color: #b91c1c; } /* Literal.String.Heredoc */
+.highlight .si { color: #b91c1c; font-style: italic; } /* Literal.String.Interpol */
+.highlight .sx { color: #b91c1c; } /* Literal.String.Other */
+.highlight .sr { color: #059669; } /* Literal.String.Regex */
+.highlight .s1 { color: #b91c1c; } /* Literal.String.Single */
+.highlight .ss { color: #9333ea; } /* Literal.String.Symbol */
+.highlight .bp { color: #0e7490; } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #0c4a6e; } /* Name.Variable.Class */
+.highlight .vg { color: #0c4a6e; } /* Name.Variable.Global */
+.highlight .vi { color: #0c4a6e; } /* Name.Variable.Instance */
+.highlight .il { color: #0e7490; } /* Literal.Number.Integer.Long */
+
+/* Syntax highlighting tokens - dark mode */
+html.dark .highlight .c { color: #94a3b8; } /* Comment */
+html.dark .highlight .k { color: #a78bfa; font-weight: bold; } /* Keyword */
+html.dark .highlight .o { color: #e2e8f0; } /* Operator */
+html.dark .highlight .cm { color: #94a3b8; font-style: italic; } /* Comment.Multiline */
+html.dark .highlight .cp { color: #94a3b8; } /* Comment.Preproc */
+html.dark .highlight .c1 { color: #94a3b8; font-style: italic; } /* Comment.Single */
+html.dark .highlight .cs { color: #94a3b8; font-style: italic; } /* Comment.Special */
+html.dark .highlight .gd { color: #f87171; background-color: #fecaca30; } /* Generic.Deleted */
+html.dark .highlight .ge { font-style: italic; } /* Generic.Emph */
+html.dark .highlight .gr { color: #f87171; } /* Generic.Error */
+html.dark .highlight .gh { color: #60a5fa; font-weight: bold; } /* Generic.Heading */
+html.dark .highlight .gi { color: #4ade80; background-color: #dcfce730; } /* Generic.Inserted */
+html.dark .highlight .go { color: #94a3b8; } /* Generic.Output */
+html.dark .highlight .gp { color: #94a3b8; font-weight: bold; } /* Generic.Prompt */
+html.dark .highlight .gs { font-weight: bold; } /* Generic.Strong */
+html.dark .highlight .gu { color: #60a5fa; font-weight: bold; } /* Generic.Subheading */
+html.dark .highlight .gt { color: #f87171; } /* Generic.Traceback */
+html.dark .highlight .kc { color: #a78bfa; font-weight: bold; } /* Keyword.Constant */
+html.dark .highlight .kd { color: #a78bfa; font-weight: bold; } /* Keyword.Declaration */
+html.dark .highlight .kn { color: #a78bfa; font-weight: bold; } /* Keyword.Namespace */
+html.dark .highlight .kp { color: #a78bfa; } /* Keyword.Pseudo */
+html.dark .highlight .kr { color: #a78bfa; font-weight: bold; } /* Keyword.Reserved */
+html.dark .highlight .kt { color: #38bdf8; font-weight: bold; } /* Keyword.Type */
+html.dark .highlight .m { color: #22d3ee; } /* Literal.Number */
+html.dark .highlight .s { color: #f87171; } /* Literal.String */
+html.dark .highlight .na { color: #60a5fa; } /* Name.Attribute */
+html.dark .highlight .nb { color: #22d3ee; } /* Name.Builtin */
+html.dark .highlight .nc { color: #22d3ee; font-weight: bold; } /* Name.Class */
+html.dark .highlight .no { color: #22d3ee; } /* Name.Constant */
+html.dark .highlight .nd { color: #a5b4fc; } /* Name.Decorator */
+html.dark .highlight .ni { color: #e2e8f0; font-weight: bold; } /* Name.Entity */
+html.dark .highlight .ne { color: #f87171; font-weight: bold; } /* Name.Exception */
+html.dark .highlight .nf { color: #f87171; } /* Name.Function */
+html.dark .highlight .nl { color: #e2e8f0; } /* Name.Label */
+html.dark .highlight .nn { color: #22d3ee; font-weight: bold; } /* Name.Namespace */
+html.dark .highlight .nt { color: #60a5fa; } /* Name.Tag */
+html.dark .highlight .nv { color: #38bdf8; } /* Name.Variable */
+html.dark .highlight .ow { color: #e2e8f0; font-weight: bold; } /* Operator.Word */
+html.dark .highlight .w { color: #64748b; } /* Text.Whitespace */
+html.dark .highlight .mf { color: #22d3ee; } /* Literal.Number.Float */
+html.dark .highlight .mh { color: #22d3ee; } /* Literal.Number.Hex */
+html.dark .highlight .mi { color: #22d3ee; } /* Literal.Number.Integer */
+html.dark .highlight .mo { color: #22d3ee; } /* Literal.Number.Oct */
+html.dark .highlight .sb { color: #f87171; } /* Literal.String.Backtick */
+html.dark .highlight .sc { color: #f87171; } /* Literal.String.Char */
+html.dark .highlight .sd { color: #f87171; font-style: italic; } /* Literal.String.Doc */
+html.dark .highlight .s2 { color: #f87171; } /* Literal.String.Double */
+html.dark .highlight .se { color: #f87171; font-weight: bold; } /* Literal.String.Escape */
+html.dark .highlight .sh { color: #f87171; } /* Literal.String.Heredoc */
+html.dark .highlight .si { color: #f87171; font-style: italic; } /* Literal.String.Interpol */
+html.dark .highlight .sx { color: #f87171; } /* Literal.String.Other */
+html.dark .highlight .sr { color: #34d399; } /* Literal.String.Regex */
+html.dark .highlight .s1 { color: #f87171; } /* Literal.String.Single */
+html.dark .highlight .ss { color: #c084fc; } /* Literal.String.Symbol */
+html.dark .highlight .bp { color: #22d3ee; } /* Name.Builtin.Pseudo */
+html.dark .highlight .vc { color: #38bdf8; } /* Name.Variable.Class */
+html.dark .highlight .vg { color: #38bdf8; } /* Name.Variable.Global */
+html.dark .highlight .vi { color: #38bdf8; } /* Name.Variable.Instance */
+html.dark .highlight .il { color: #22d3ee; } /* Literal.Number.Integer.Long */
+</style>
+
+<div class="opacity-0" data-animate="fade-in">
+Welcome to the final and most exciting part of our tutorial series on building a dynamic portfolio with Jekyll, AI, and a sprinkle of serverless magic! In the previous installments, we laid the conceptual groundwork, set up our Jekyll site with Tailwind CSS, and structured our content for easy management. Now, we dive into the heart of the "dynamic" aspect: securely fetching and displaying GitHub data using an Azure Function App as a proxy and orchestrating it all with client-side JavaScript.
+
+This is where our static site truly comes alive, showcasing real-time project updates and GitHub activity. We'll also cover the finishing touches like analytics, ads, and the automated deployment pipeline that makes it all seamless. Let's get started!
+</div>
+
+<div class="opacity-0" data-animate="fade-in">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4.1. The Secure Gateway: Azure Function App (<code>portfolioWebsitegithubAuth</code>)</h2>
+<p>
+As we discussed in Part 1, one of the primary challenges with displaying dynamic data from APIs on a static site like GitHub Pages is security. We need to interact with the GitHub API, which often requires authentication (like a personal access token) to get better rate limits and access certain information. Embedding such a token directly in client-side JavaScript would be a major security risk, as it would be visible to anyone inspecting the site's code.
+</p>
+<p><strong>The "Why" Revisited:</strong><br />
+Exposing API keys or tokens in your frontend code is like leaving your house keys under the doormat – convenient, but not secure. Malicious actors could easily find and misuse your token, potentially exhausting your API rate limits, accessing private data (if your token has those permissions), or even performing actions on your behalf.
+</p>
+<p><strong>Our Solution: The Serverless Proxy</strong><br />
+To circumvent this, we implemented a server-side proxy using Azure Functions. This serverless function, named <code>portfolioWebsitegithubAuth</code> (you can find its codebase at <a href="https://github.com/rivie13/github-api-proxy-function">rivie13/github-api-proxy-function</a> on GitHub), acts as a secure intermediary:
+</p>
+<ol>
+  <li><strong>Client-Side Request:</strong> Our Jekyll site's JavaScript makes API requests to our Azure Function's endpoint.</li>
+  <li><strong>Secure Authentication &amp; Secret Retrieval:</strong> The Azure Function, running on the server-side, uses its managed identity to securely fetch sensitive configurations like the GitHub API token from Azure Key Vault (in this project, a vault named <code>codegrind-platform-kv</code>). The Function App's application settings use Key Vault References instead of storing secrets directly. This token is then used to authenticate with the actual GitHub API.</li>
+  <li><strong>Data Forwarding:</strong> It fetches the requested data from GitHub.</li>
+  <li><strong>Response to Client:</strong> It then forwards the data back to our client-side JavaScript, without ever exposing the sensitive token.</li>
+</ol>
+<p><strong>Key Features of the Azure Function Proxy:</strong></p>
+<ul>
+  <li><strong>Handles Authentication:</strong> Securely manages the GitHub API token by retrieving it from Azure Key Vault at runtime using Key Vault references. This means the token isn't stored directly in the Function App's configuration or code.</li>
+  <li><strong>Passes Rate Limit Information:</strong> It can also relay GitHub's API rate limit headers back to the client, which helps in debugging and managing API usage.</li>
+  <li><strong>CORS (Cross-Origin Resource Sharing):</strong> Configured to allow requests from our portfolio's domain.</li>
+</ul>
+<p>Here's a conceptual peek at where you might find your deployed function in the Azure portal (actual UI may vary):</p>
+<img src="/assets/images/azure_function_app_screenshot.png" alt="Azure Function App Screenshot" style="width: 100%; height: auto;" class="mb-4" />
+
+<p><strong>The Connection:</strong><br />
+All our frontend JavaScript that needs GitHub data is configured to make API calls to this Azure Function's URL (e.g., <code>https://portfolioWebsitegithubAuth.azurewebsites.net/api/github/...</code>) instead of directly to <code>https://api.github.com/...</code>.
+</p>
+<p>This setup not only secures our API token by keeping it out of direct application settings but also provides a centralized point for managing API interactions, which can be beneficial for logging, monitoring, or adding more complex logic in the future. This was a key learning goal for the project – to implement a secure and efficient bridge for API data on a static platform, following best practices for secrets management using Azure Key Vault.</p>
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4.2. Orchestrating API Calls: <code>assets/js/github-config.js</code></h2>
+
+<div class="blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+  <h4 class="text-sm uppercase text-gray-500 mb-2">Sponsored Content</h4>
+  <div class="bg-white p-2 rounded shadow">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7733001105026476" data-ad-slot="5855397645" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+
+
+
+
+
+<p>With our secure Azure Function proxy in place, the next step is to ensure our client-side JavaScript knows how to use it. This is where <code>assets/js/github-config.js</code> comes into play.</p>
+<p>This small but crucial file serves two main purposes:</p>
+<ol>
+  <li><strong>Centralizing GitHub Username:</strong> It stores your GitHub username, making it easy to update if needed.</li>
+  <li><strong>Rewriting API URLs:</strong> Most importantly, it contains the logic to transform standard GitHub API URLs (<code>https://api.github.com/...</code>) into URLs that point to our Azure Function proxy.</li>
+</ol>
+<p>Let's look at a simplified version of the key function (the actual implementation might have more features like query parameter handling):</p>
+<pre><code class="language-javascript">// assets/js/github-config.js (Simplified Example)
+const GITHUB_USERNAME = 'your-github-username'; // Replace with your username
+const PROXY_URL_BASE = 'https://portfolioWebsitegithubAuth.azurewebsites.net/api/github'; // Your Azure Function URL
+
+function getProxiedGithubApiUrl(apiPath) {
+  // Example: apiPath might be '/users/your-github-username/events'
+  // Ensures no double slashes if apiPath starts with one
+  const cleanApiPath = apiPath.startsWith('/') ? apiPath.substring(1) : apiPath;
+  return `${PROXY_URL_BASE}/${cleanApiPath}`;
+}
+
+// Example usage (not in github-config.js itself, but how other scripts would use it):
+// const userEventsUrl = getProxiedGithubApiUrl(`/users/${GITHUB_USERNAME}/events`);
+// console.log(userEventsUrl); 
+// Output: https://portfolioWebsitegithubAuth.azurewebsites.net/api/github/users/your-github-username/events
+</code></pre>
+<p>By abstracting this logic into <code>github-config.js</code>, all other JavaScript files that need to fetch GitHub data can simply call <code>getProxiedGithubApiUrl()</code> with the desired GitHub API path. This keeps the rest of our codebase cleaner and makes it easy to change the proxy URL or logic in one place if ever needed.</p>
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4.3. Fetching and Displaying GitHub Data: The JavaScript Workhorses</h2>
+<p>Now for the client-side JavaScript files that do the heavy lifting of fetching data (via our proxy, of course) and dynamically updating our portfolio's content. This is where the "AI-assisted vibe coding" I mentioned in Part 1 often came in handy, especially for structuring classes, handling asynchronous operations, and implementing caching.</p>
+<p><strong><code>assets/js/github-activity.js</code> Deep Dive:</strong><br />
+This script is responsible for fetching and displaying your recent GitHub activity on the homepage, creating that "live" feel. It typically involves two main classes:</p>
+<ul>
+  <li><strong>GitHubActivityFetcher Class:</strong>
+    <ul>
+      <li><strong>Fetching User Events:</strong> Makes <code>fetch</code> requests to the proxied endpoint for user events (e.g., <code>/users/${GITHUB_USERNAME}/events</code>). These events can include pushes, pull request creations, issue comments, etc.</li>
+      <li><strong>Event Filtering &amp; Formatting:</strong> Not all events might be relevant. This class filters them (e.g., only show 'PushEvent', 'PullRequestEvent', 'IssuesEvent') and formats them into a more readable HTML structure for the timeline.</li>
+      <li><strong>Rendering the Timeline:</strong> Dynamically injects the formatted activity into a designated container on your homepage.</li>
+      <li><strong>Client-Side Caching (<code>localStorage</code>):</strong> To avoid hitting the GitHub API (even via the proxy) on every single page load, which can be excessive and lead to rate limiting, this class implements client-side caching. Fetched activity is stored in <code>localStorage</code> with an expiry time. Subsequent visits will load from cache if the data is still fresh, significantly speeding up load times and reducing API calls.</li>
+      <li><strong>"Refresh" Button Functionality:</strong> Often includes a button that allows users (or you, during development) to manually clear the cache and fetch the latest activity.</li>
+    </ul>
+  </li>
+  <li><strong>GitHubLastUpdatedFetcher Class:</strong>
+    <ul>
+      <li><strong>Fetching Repository Data:</strong> For each project listed in <code>_data/projects.yml</code> that has a GitHub repository URL, this class fetches repository data, specifically looking for the <code>pushed_at</code> timestamp or the date of the last commit. This allows us to display "Last updated: ..." information on project cards.</li>
+      <li><strong>Populating Fields:</strong> It finds the corresponding <code>&lt;span data-github-last-updated=""&gt;Loading...&lt;/span&gt;</code> elements (as discussed in Part 3) and updates their content with the fetched date.</li>
+      <li><strong>Client-Side Caching:</strong> Similar to <code>GitHubActivityFetcher</code>, this class also uses <code>localStorage</code> to cache the last updated timestamps, improving performance.</li>
+    </ul>
+  </li>
+</ul>
+<p><strong>Other Key JavaScript Files:</strong></p>
+<ul>
+  <li><code>assets/js/github-repos.js</code>: If you have a dedicated section to list your public repositories, this script would fetch that list (e.g., from <code>/users/${GITHUB_USERNAME}/repos</code>) and display them, often with details like descriptions, stars, and languages. It also uses the proxy and caching.</li>
+  <li><code>assets/js/github-stats.js</code> &amp; <code>assets/js/github-contributions.js</code>: These might be used to fetch and display contribution statistics, like a contribution graph (though embedding GitHub's own graph image is often simpler) or language usage stats across your repositories. Again, all API calls are routed through the Azure proxy.</li>
+  <li><code>assets/js/project-cards.js</code>: This script might be responsible for more dynamic elements within project cards beyond just the "last updated" date. For example, if you wanted to dynamically fetch and display the primary programming languages used in each project repository, this script (or a similar one) would handle that. It would parse the <code>languages_url</code> provided by the GitHub Repos API for each project.</li>
+</ul>
+<p><strong>The <code>RequestQueueClient</code> (Advanced Technique):</strong><br />
+In some implementations, especially if you're making many API calls in quick succession (e.g., fetching language data for 20 projects), you might find a utility class like <code>RequestQueueClient</code>. My AI assistants were particularly helpful in conceptualizing and refining this. Its purpose is to:</p>
+<ul>
+  <li><strong>Manage Multiple API Requests:</strong> Instead of firing off all requests simultaneously, which could overwhelm the browser, the Azure proxy, or even hit GitHub's secondary rate limits (which are more complex than the primary hourly limit), a queue manages requests.</li>
+  <li><strong>Concurrency Control:</strong> It sends a limited number of requests at a time (e.g., 3-5 concurrent requests).</li>
+  <li><strong>Delay/Backoff:</strong> It can introduce slight delays between batches of requests.</li>
+</ul>
+<p>This ensures a smoother experience and more robust data fetching, especially for users with slower connections or when many data points need to be loaded.</p>
+<p><strong>AI in JS Development:</strong><br />
+Throughout the development of these JavaScript modules, AI played a significant role:</p>
+<ul>
+  <li><strong>Boilerplate Generation:</strong> "Generate a JavaScript class <code>GitHubFetcher</code> that takes a URL, fetches JSON, and has a method to get the data."</li>
+  <li><strong>Asynchronous Logic:</strong> Helping structure <code>async/await</code> calls and <code>Promise</code> handling correctly.</li>
+  <li><strong>Debugging:</strong> "Why is this <code>fetch</code> call returning undefined?" or "How do I properly handle errors in this Promise chain?"</li>
+  <li><strong>Caching Implementation:</strong> "Show me how to cache API responses in <code>localStorage</code> with an expiration time."</li>
+  <li><strong>Refinement:</strong> Suggesting better variable names, ways to break down complex functions, or more efficient data manipulation techniques.</li>
+</ul>
+<p>The ability to quickly iterate on JavaScript logic with an AI assistant like those in Cursor dramatically sped up the development of these dynamic features.</p>
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4.4. Enhancing User Experience: Animations and Responsiveness</h2>
+<p>A dynamic site isn't just about data; it's also about how the user experiences that data. Subtle animations and a responsive design contribute significantly to a polished feel.</p>
+<ul>
+  <li><code>assets/js/animations.js</code>: This script typically handles UI effects. For instance:
+    <ul>
+      <li><strong>Scroll-based Animations:</strong> Elements fading in or sliding into view as the user scrolls down the page (often using the Intersection Observer API for performance). You might have seen <code>data-animate="fade-in"</code> attributes in the HTML – this script would bring them to life.</li>
+      <li><strong>Hover Effects:</strong> More complex hover effects that might require JavaScript.</li>
+    </ul>
+  </li>
+  <li><code>assets/js/responsive.js</code>: While most responsiveness is handled by Tailwind CSS's utility classes and custom CSS in <code>assets/css/responsive.css</code>, there might be cases where JavaScript is needed to enhance responsive behavior. For example, dynamically changing an element's properties or behavior based on screen size if CSS alone isn't sufficient.</li>
+  <li><code>assets/js/main.js</code>: This can be a catch-all for general site-wide JavaScript functionalities, like:
+    <ul>
+      <li><strong>Dark Mode Toggle:</strong> The logic to switch between light and dark themes and save the user's preference in <code>localStorage</code>.</li>
+      <li><strong>Mobile Navigation Toggle:</strong> Handling the opening and closing of a mobile menu.</li>
+      <li><strong>Smooth Scrolling:</strong> Implementing smooth scrolling for anchor links.</li>
+    </ul>
+  </li>
+</ul>
+<p>These scripts add that layer of polish that makes the site feel modern and engaging.</p>
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4.5. Final Touches and Going Live</h2>
+<p>With the core dynamic features in place, it's time for the final touches before fully going live and setting up the automated deployment.</p>
+<p><strong>Contact Form (Formspree):</strong><br />
+As detailed in <code>PLANNING.MD</code> and briefly in Part 1, integrating a contact form on a static site usually requires a third-party service. I used <a href="https://formspree.io/">Formspree</a>.
+<ul>
+  <li><strong>Setup:</strong> You create an account, set up a new form, and Formspree provides you with an endpoint URL.</li>
+  <li><strong>HTML:</strong> You add a standard HTML form to your contact page, pointing its <code>action</code> attribute to your Formspree endpoint and setting the <code>method</code> to <code>POST</code>.</li>
+  <li><strong>Result:</strong> When a user submits the form, the data is sent to Formspree, which then forwards it to your email address. No backend code needed on your site!</li>
+</ul>
+</p>
+<p><strong>Cookie Consent:</strong><br />
+To comply with privacy regulations like GDPR, a cookie consent banner is often necessary, especially if you're using analytics or ads.
+<ul>
+  <li><code>_includes/cookie-consent.html</code>: This include likely contains the HTML markup for the banner.</li>
+  <li><strong>Associated JS:</strong> A small JavaScript snippet (perhaps in <code>main.js</code> or its own file) handles showing the banner, and then hiding and setting a cookie or <code>localStorage</code> item when the user accepts, so they don't see the banner on every page or visit.</li>
+</ul>
+</p>
+<p><strong>Analytics &amp; Monetization:</strong></p>
+<ul>
+  <li><strong>Google Analytics:</strong>
+    <ul>
+      <li><strong>Integration:</strong> This is typically done by including a JavaScript snippet provided by Google Analytics. In our Jekyll setup, this is neatly handled by <code>_includes/google-tag.html</code>, which is then included in <code>_layouts/default.html</code>.</li>
+      <li><strong>Purpose:</strong> Allows you to track website traffic, user behavior (pages visited, time on site), referral sources, and much more. Essential for understanding your audience and improving your content.</li>
+    </ul>
+  </li>
+  <li><strong>Google AdSense:</strong>
+    <ul>
+      <li><strong>Integration:</strong> If you choose to monetize your site with ads, Google AdSense provides ad code snippets. These are placed in your HTML where you want ads to appear. We used includes like <code>_includes/header-ad.html</code> and <code>_includes/footer-ad.html</code> (and potentially in-article ad includes) to manage these.</li>
+      <li><strong>Purpose:</strong> Displays targeted ads on your site, allowing you to earn revenue from impressions or clicks. The <code>_config.yml</code> might have a setting to easily enable/disable ads site-wide.</li>
+    </ul>
+  </li>
+</ul>
+<p>This automated workflow means your site is always up-to-date with the latest changes in your <code>main</code> branch, without any manual intervention for deployment.</p>
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">4.6. Reflection: Dynamic Power in Under a Week – The Grand Finale!</h2>
+<p>And there we have it! From initial concept to a fully dynamic, feature-rich portfolio, all built on a static hosting platform (GitHub Pages) and accomplished in <strong>less than a week</strong>.</p>
+<p>This journey has showcased several key themes:</p>
+<ul>
+  <li><strong>Strategic Planning is Paramount:</strong> The initial planning phase, heavily assisted by AI, was crucial in defining the architecture and identifying solutions to potential roadblocks (like secure API access). This upfront investment saved immense time during development.</li>
+  <li><strong>AI as a True Collaborator:</strong> Throughout this project, AI tools (Claude, Gemini, particularly within the Cursor IDE) served as invaluable partners. They helped brainstorm, generate code, debug complex JavaScript, refine content, and even structure documentation. This isn't about AI replacing developers, but augmenting their capabilities for incredible speed and efficiency.</li>
+  <li><strong>Overcoming Static Site Limitations:</strong> The Azure Function App proxy is a testament to how creative architectural choices can bring dynamic capabilities to static hosting environments, securely and cost-effectively.</li>
+  <li><strong>The Power of Modern Tooling:</strong> Jekyll for content management, Tailwind CSS for rapid UI development, GitHub Actions for CI/CD, and serverless functions like Azure Functions collectively provide a powerful, efficient, and often free (or very low-cost) stack for building sophisticated web projects.</li>
+  <li><strong>Continuous Learning:</strong> Implementing the Azure Function proxy and some of the more complex JavaScript interactions were fantastic learning experiences, pushing the boundaries of what I thought was quickly achievable on a static site.</li>
+</ul>
+<p>Building this portfolio was not just about creating an online presence; it was an exercise in rapid development, problem-solving, and effective AI collaboration. The result is a site that not only showcases my work but also tells the story of its own creation – a story I hope has been insightful and inspiring for you through this tutorial series.</p>
+<p>Thank you for following along! I encourage you to experiment with these technologies and see how AI can supercharge your own development workflows.<br /><br /></p>
+
+<hr />
+<br />
+<p><strong>What's Next?</strong></p>
+<ul>
+  <li>Explore the live portfolio and see these features in action!</li>
+  <li>Dive into the <a href="https://github.com/rivie13/rivie13.github.io">source code on GitHub</a> to see all the details.</li>
+  <li>Check out the <a href="https://github.com/rivie13/github-api-proxy-function">Azure Function proxy code</a>.</li>
+  <li>Leave a comment below with your thoughts or questions!</li>
+</ul>
+<p>Happy coding!</p>
+</div>
+
+  </div>
+  
+  <!-- In-article ad after content -->
+  
+
+
+  
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-7733001105026476"
+             data-ad-slot="YOUR_IN_ARTICLE_SLOT_ID"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    
+ 
+  
+  
+    <div class="mb-8 pb-8 border-b opacity-0" data-animate="fade-in" data-scroll="fade-up">
+      <h3 class="text-lg font-bold mb-4">Tags</h3>
+      <div class="flex flex-wrap gap-2">
+        
+          <a href="/tag/Jekyll" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Jekyll
+          </a>
+        
+          <a href="/tag/Static%20Sites" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Static Sites
+          </a>
+        
+          <a href="/tag/GitHub%20API" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #GitHub API
+          </a>
+        
+          <a href="/tag/Azure%20Functions" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Azure Functions
+          </a>
+        
+          <a href="/tag/Serverless" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Serverless
+          </a>
+        
+          <a href="/tag/JavaScript" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #JavaScript
+          </a>
+        
+          <a href="/tag/API%20Integration" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #API Integration
+          </a>
+        
+          <a href="/tag/Web%20Development" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Web Development
+          </a>
+        
+          <a href="/tag/AI%20Collaboration" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #AI Collaboration
+          </a>
+        
+          <a href="/tag/Portfolio%20Development" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Portfolio Development
+          </a>
+        
+      </div>
+    </div>
+  
+  
+  <div class="flex justify-between items-center mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    <a href="/blog/" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to all posts
+    </a>
+    
+    <div class="flex space-x-4">
+      <a href="https://twitter.com/intent/tweet?text=Part+4%3A+Dynamic+Power+-+Secure+GitHub+API+Integration+via+Azure+Functions+%26+Client-Side+JavaScript&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F18%2Fdynamic-power-azure-functions-javascript%2F" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700">
+        <span class="sr-only">Share on Twitter</span>
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F18%2Fdynamic-power-azure-functions-javascript%2F&title=Part+4%3A+Dynamic+Power+-+Secure+GitHub+API+Integration+via+Azure+Functions+%26+Client-Side+JavaScript" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:text-blue-900">
+        <span class="sr-only">Share on LinkedIn</span>
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+        </svg>
+      </a>
+      <a href="https://bsky.app/intent/compose?text=Part+4%3A+Dynamic+Power+-+Secure+GitHub+API+Integration+via+Azure+Functions+%26+Client-Side+JavaScript%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F18%2Fdynamic-power-azure-functions-javascript%2F" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700">
+        <span class="sr-only">Share on Bluesky</span>
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#0085ff" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+  
+  
+    
+    <div class="mt-12 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+      <h3 class="text-2xl font-bold mb-6">Related Posts</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+            <div class="p-6">
+              <h4 class="text-lg font-bold mb-2">
+                <a href="/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" class="text-gray-900 hover:text-blue-600">Enhancing CodeGrind's AI Capabilities: A Journey of Improvement</a>
+              </h4>
+              <div class="text-gray-600 text-sm mb-3">
+                <time datetime="2025-05-21T13:00:00-04:00">May 21, 2025</time>
+              </div>
+              <p class="text-gray-600 mb-4">In this post, I'll share the journey of enhancing CodeGrind's AI capabilities, focusing on our recent improvements to the AI...</p>
+              <a href="/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                Read more
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+            <div class="p-6">
+              <h4 class="text-lg font-bold mb-2">
+                <a href="/blog/2025/05/20/the-tech-stack-behind-codegrind/" class="text-gray-900 hover:text-blue-600">The Tech Stack Behind CodeGrind</a>
+              </h4>
+              <div class="text-gray-600 text-sm mb-3">
+                <time datetime="2025-05-20T13:00:00-04:00">May 20, 2025</time>
+              </div>
+              <p class="text-gray-600 mb-4">In my previous post, I introduced CodeGrind as a modern coding practice platform. Today, I’ll share the actual technical architecture...</p>
+              <a href="/blog/2025/05/20/the-tech-stack-behind-codegrind/" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                Read more
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        
+        
+    
+      </div>
+      <!-- Display ad after related posts -->
+      
+
+
+  
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-7733001105026476"
+             data-ad-slot="YOUR_DISPLAY_AD_SLOT_ID"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    
+ 
+    </div>
+  
+  
+  <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    <h3 class="text-xl font-bold mb-4">Subscribe for Updates</h3>
+    <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
+    
+    <!-- Mailchimp Signup Form -->
+    <div id="mc_embed_shell" class="bg-white p-5 rounded-lg shadow-md">
+      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%; max-width: 600px; border-radius: 0.5rem;}
+        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+    <form action="https://github.us14.list-manage.com/subscribe/post?u=4c5f3cb9e9f5dfc6c64a01f23&amp;id=28ff2a557d&amp;f_id=00c351e0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll"><h2>Subscribe</h2>
+            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+        <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display: none;"></div>
+            <div class="response" id="mce-success-response" style="display: none;"></div>
+        </div>
+    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
+        <input type="text" name="b_4c5f3cb9e9f5dfc6c64a01f23_28ff2a557d" tabindex="-1" value="">
+    </div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                <p style="margin: 0px auto;"><a href="http://eepurl.com/jdZ9VY" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';fnames[6]='COMPANY';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
+    <!--End Mailchimp-->
+  </div>
+</article> 
+
+<!-- Code block styling enhancements -->
+<script>
+// Add copy button to code blocks
+document.addEventListener('DOMContentLoaded', () => {
+    const codeBlocks = document.querySelectorAll('.highlight');
+    
+    codeBlocks.forEach((block) => {
+        // Create copy button
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-code-button absolute top-2 right-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded px-2 py-1 text-xs font-mono';
+        copyButton.textContent = 'Copy';
+        
+        // Position the code block container relatively
+        block.style.position = 'relative';
+        
+        // Add button to block
+        block.appendChild(copyButton);
+        
+        // Add click event
+        copyButton.addEventListener('click', () => {
+            const code = block.querySelector('code').innerText;
+            navigator.clipboard.writeText(code);
+            
+            // Visual feedback
+            copyButton.textContent = 'Copied!';
+            copyButton.classList.add('bg-green-200', 'dark:bg-green-800', 'text-green-800', 'dark:text-green-200');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                copyButton.textContent = 'Copy';
+                copyButton.classList.remove('bg-green-200', 'dark:bg-green-800', 'text-green-800', 'dark:text-green-200');
+            }, 2000);
+        });
+    });
+});
+</script>
+
+<style>
+/* Specific styling for code blocks in posts */
+.post-content .highlight {
+    margin: 2rem 0;
+}
+
+/* Style for code copy button on hover */
+.copy-code-button {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.highlight:hover .copy-code-button {
+    opacity: 1;
+}
+</style> 
+    </main>
+    
+     <!-- This is to prevent the footer ad from appearing on the home page need to also hide on privacy policy page -->
+    
+<div class="footer-ad-container w-full py-4 bg-gray-50 border-t border-gray-200 mt-8 border-2 border-dashed border-gray-300">
+  <div class="container mx-auto px-4 text-center">
+    <h4 class="text-sm uppercase text-gray-500 mb-2 text-center">Advertisement</h4>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7733001105026476"
+         data-ad-slot="7978772768"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+    
+    
+    <footer class="bg-gray-900 text-white py-12" role="contentinfo">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Riviera Sperduto - Developer Portfolio</h2>
+        <p class="text-gray-400">A collection of my software development projects, skills, and services.</p>
+        
+        <div class="mt-4 flex space-x-4">
+          <a href="https://github.com/rivie13" target="_blank" class="text-gray-400 hover:text-white" aria-label="GitHub profile">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/" target="_blank" class="text-gray-400 hover:text-white" aria-label="LinkedIn profile">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+            </svg>
+          </a>
+          <a href="mailto:riviera.t.sperduto13@gmail.com" class="text-gray-400 hover:text-white" aria-label="Send email">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Quick Links</h2>
+        <nav role="navigation" aria-label="Footer navigation">
+          <ul class="text-gray-400">
+            <li class="mb-2"><a href="/" class="hover:text-white">Home</a></li>
+            <li class="mb-2"><a href="/about/" class="hover:text-white">About</a></li>
+            <li class="mb-2"><a href="/projects/" class="hover:text-white">Projects</a></li>
+            <li class="mb-2"><a href="/services/" class="hover:text-white">Services</a></li>
+            <li class="mb-2"><a href="/resume/" class="hover:text-white">Resume</a></li>
+            <li class="mb-2"><a href="/blog/" class="hover:text-white">Blog</a></li>
+            <li class="mb-2"><a href="/contact/" class="hover:text-white">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+      <div class="w-full lg:w-1/3">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Contact</h2>
+        <p class="text-gray-400 mb-2">
+          <span class="inline-block mr-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
+            </svg>
+          </span>
+          <a href="mailto:riviera.t.sperduto13@gmail.com" class="hover:text-white">riviera.t.sperduto13@gmail.com</a>
+        </p>
+        <p class="text-gray-400">
+          <span class="inline-block mr-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.5 0-10-4.5-10-10s4.5-10 10-10 10 4.5 10 10-4.5 10-10 10zm-1-14v7.59l5.293 5.3 1.414-1.42-4.707-4.71v-6.76h-2z"></path>
+            </svg>
+          </span>
+          Available for freelance projects
+        </p>
+      </div>
+    </div>
+    
+    <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+      <p>&copy; 2025 Riviera Sperduto - Developer Portfolio. All rights reserved.</p>
+    </div>
+  </div>
+</footer> 
+    
+    <!-- Load scripts in proper dependency order -->
+    <script src="/assets/js/github-config.js"></script>
+    <script src="/assets/js/github-repos.js"></script>
+    <script src="/assets/js/github-activity.js"></script>
+    <script src="/assets/js/github-stats.js"></script>
+    <script src="/assets/js/github-contributions.js"></script>
+    <script src="/assets/js/project-cards.js"></script>
+    <script src="/assets/js/github-test.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/animations.js"></script>
+    <script src="/assets/js/responsive.js"></script>
+    
+    <!-- Cookie Consent Banner -->
+<style>
+    #cookie-notice {
+        padding: 20px;
+        display: none;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #222;
+        color: rgba(255, 255, 255, 0.8);
+        z-index: 1000;
+    }
+
+    #cookie-notice a {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    #cookie-notice #cookie-notice-accept {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #cookie-notice #cookie-notice-deny {
+        background-color: #f44336;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #cookie-notice #cookie-notice-info {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 767px) {
+        #cookie-notice {
+            padding: 15px;
+        }
+        #cookie-notice a {
+            display: block;
+            margin: 8px auto;
+            max-width: 170px;
+        }
+    }
+</style>
+<div id="cookie-notice">
+    <span>I would like to use cookies to improve your experience on my website and to analyze site traffic.</span>
+    <a id="cookie-notice-accept">Accept</a>
+    <a id="cookie-notice-deny">Deny</a>
+    <a id="cookie-notice-info" href="/privacy">More info</a>
+</div>
+
+<script>
+    function createCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function loadAnalytics() {
+        // Load GA script
+        var script = document.createElement('script');
+        script.innerHTML = `/*This function will load script and call the callback once the script has loaded*/
+
+function loadScriptAsync(scriptSrc, callback) {
+    if (typeof callback !== 'function') {
+        throw new Error('Not a valid callback for async script load');
+    }
+    var script = document.createElement('script');
+    script.onload = callback;
+    script.src = scriptSrc;
+    document.head.appendChild(script);
+}
+
+/* This is the part where you call the above defined function and "calls back" your code which gets executed after the script has loaded */
+
+loadScriptAsync('https://www.googletagmanager.com/gtag/js?id=G-C9WDHTWS34', function () {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C9WDHTWS34', { 'anonymize_ip': true });
+}) `;
+        document.head.appendChild(script);
+    }
+
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    // Show the cookie notice if consent hasn't been given
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if we need to show the notice (only in production)
+        /*  */
+    });
+
+    // Button click handlers
+    document.getElementById('cookie-notice-accept').addEventListener('click', function () {
+        createCookie('cookie-notice-dismissed', 'true', 365);
+        document.getElementById('cookie-notice').style.display = 'none';
+        loadAnalytics();
+    });
+
+    document.getElementById('cookie-notice-deny').addEventListener('click', function () {
+        createCookie('cookie-notice-dismissed', 'false', 365);
+        document.getElementById('cookie-notice').style.display = 'none';
+    });
+</script> 
+</body>
+</html> 

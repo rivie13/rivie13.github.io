@@ -1,0 +1,23 @@
+- title: "Development Apprentice"
+  company: "BRIO Designs Partners, LLC"
+  location: "Conshohocken, PA"
+  period: "May 2025 - August 2025"
+  responsibilities:
+    - "Developing user interfaces for web/software applications and implementing Salesforce instances in a fast-paced tech environment."
+    - "Collaborating with tech experts on client projects involving C#, MVC, and Microsoft technologies."
+
+- title: "Information Technology Intern"
+  company: "SNIPES USA"
+  location: "Bensalem, PA"
+  period: "September 2024 - December 2024"
+  responsibilities:
+    - "Developed and tested Python tools to automate SDWAN updates and network traffic analysis, reducing desktop support ticket times by around 20 seconds and enabling more accurate traffic analysis."
+    - "Shadowed a System Administrator to learn VM creation in Azure, Microsoft Active Directory, and other Azure tools while fixing critical tests for the staging website."
+
+- title: "Intern"
+  company: "Temple University"
+  location: "Philadelphia, PA"
+  period: "October 2023 - May 2025"
+  responsibilities:
+    - "Designed and optimized programs to automate data verification, cutting runtime from over a minute to under 30 seconds per record and doubling productivity."
+    - "Deciphered SQL files and documentation to help the team understand backend functionality and query operations." 
