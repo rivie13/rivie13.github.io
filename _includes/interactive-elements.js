@@ -1,3 +1,5 @@
+{% raw %}
+<script>
 const ENDPOINTS = {
   newChat: "{{ site.data.config.endpoints.newChat }}",
   newSnippet: "{{ site.data.config.endpoints.newSnippet }}",
@@ -171,4 +173,6 @@ class InteractiveElements {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new InteractiveElements();
-}); 
+});
+</script>
+{% endraw %} 
