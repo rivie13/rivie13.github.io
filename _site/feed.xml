@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-25T21:31:57-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement</title><link href="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" rel="alternate" type="text/html" title="Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement" /><published>2025-05-21T13:00:00-04:00</published><updated>2025-05-21T13:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/">&lt;style&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2025-05-25T22:17:45-04:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Riviera Sperduto - Developer Portfolio</title><subtitle>Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.</subtitle><entry><title type="html">Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement</title><link href="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" rel="alternate" type="text/html" title="Enhancing CodeGrind’s AI Capabilities: A Journey of Improvement" /><published>2025-05-21T13:00:00-04:00</published><updated>2025-05-21T13:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/21/enhancing-codegrind-ai-capabilities/">&lt;style&gt;
 /* Custom code block styling for this post */
 .highlight {
   border-radius: 6px;
@@ -247,7 +247,224 @@ class AIService {
 &lt;p class=&quot;text-gray-700 dark:text-gray-300 mt-8&quot;&gt;*Want to experience these AI improvements firsthand? Try CodeGrind at &lt;a href=&quot;https://codegrind.online&quot; class=&quot;text-blue-600 hover:text-blue-800&quot;&gt;codegrind.online&lt;/a&gt;.*&lt;/p&gt;
 
 &lt;!-- Load interactive elements script --&gt;
-&lt;script src=&quot;/assets/js/interactive-elements.js&quot;&gt;&lt;/script&gt;</content><author><name>Riviera Sperduto</name></author><category term="CodeGrind" /><category term="Development" /><category term="AI" /><category term="CodeGrind" /><category term="AI Integration" /><category term="OpenAI" /><category term="AI Collaboration" /><category term="Real-Time Execution" /><category term="Learning Platform" /><summary type="html">In this post, I&apos;ll share the journey of enhancing CodeGrind&apos;s AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/codegrind/ai-improvements-banner.png" /><media:content medium="image" url="http://localhost:4000/assets/images/codegrind/ai-improvements-banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Tech Stack Behind CodeGrind</title><link href="http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind/" rel="alternate" type="text/html" title="The Tech Stack Behind CodeGrind" /><published>2025-05-20T13:00:00-04:00</published><updated>2025-05-20T13:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind/">&lt;p&gt;In my previous post, I introduced CodeGrind as a modern coding practice platform. Today, I’ll share the actual technical architecture that powers this platform, focusing on the real implementation rather than theoretical choices.&lt;/p&gt;
+&lt;script&gt;
+// Get endpoints from data attributes
+const ENDPOINTS = {
+  newChat: document.getElementById(&apos;endpoints&apos;)?.dataset.newChat || &apos;/api/fallback&apos;,
+  newSnippet: document.getElementById(&apos;endpoints&apos;)?.dataset.newSnippet || &apos;/api/fallback&apos;,
+  oldChat: document.getElementById(&apos;endpoints&apos;)?.dataset.oldChat || &apos;/api/fallback&apos;,
+  oldSnippet: document.getElementById(&apos;endpoints&apos;)?.dataset.oldSnippet || &apos;/api/fallback&apos;,
+  executeTwoSum: document.getElementById(&apos;endpoints&apos;)?.dataset.executeTwoSum || &apos;/api/fallback&apos;
+};
+
+// Add error handling for missing endpoints
+Object.keys(ENDPOINTS).forEach(key =&gt; {
+  if (!ENDPOINTS[key]) {
+    console.error(`Missing or invalid endpoint for ${key}`);
+    ENDPOINTS[key] = &apos;/api/fallback&apos;; // Fallback endpoint
+  }
+});
+
+// Helper function to handle API responses
+async function handleApiResponse(response) {
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(&apos;API Error:&apos;, {
+      status: response.status,
+      statusText: response.statusText,
+      body: errorText
+    });
+    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+  }
+  return response.json();
+}
+
+class InteractiveElements {
+    constructor() {
+        this.initializeTowerDefense();
+    }
+
+    async initializeTowerDefense() {
+        // Initialize tower selection
+        const towerSelect = document.getElementById(&apos;tower-select&apos;);
+        if (towerSelect) {
+            towerSelect.addEventListener(&apos;change&apos;, () =&gt; this.updateTowerInfo());
+        }
+
+        // Initialize add tower button
+        const addTowerBtn = document.getElementById(&apos;add-tower&apos;);
+        if (addTowerBtn) {
+            addTowerBtn.addEventListener(&apos;click&apos;, () =&gt; this.addTower());
+        }
+
+        // Initialize test solution button
+        const testSolutionBtn = document.getElementById(&apos;test-solution&apos;);
+        if (testSolutionBtn) {
+            testSolutionBtn.addEventListener(&apos;click&apos;, () =&gt; this.testSolution());
+        }
+
+        // Initialize hack assistant
+        this.initializeHackAssistant();
+
+        // Initial tower info update
+        this.updateTowerInfo();
+    }
+
+    async updateTowerInfo() {
+        const towerType = document.getElementById(&apos;tower-select&apos;)?.value;
+        if (!towerType) {
+            console.error(&apos;Tower select element not found&apos;);
+            return;
+        }
+
+        const context = {
+            problem: {
+                title: &quot;Two Sum&quot;,
+                description: &quot;Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.&quot;
+            },
+            language: &quot;Python&quot;,
+            code: document.getElementById(&apos;solution-preview&apos;)?.textContent || &apos;&apos;
+        };
+
+        try {
+            // Get old method snippet
+            const oldResponse = await fetch(ENDPOINTS.oldSnippet, {
+                method: &apos;POST&apos;,
+                headers: { &apos;Content-Type&apos;: &apos;application/json&apos; },
+                body: JSON.stringify({
+                    towerType,
+                    context
+                })
+            });
+            const oldData = await handleApiResponse(oldResponse);
+            const oldSnippetElement = document.getElementById(&apos;old-snippet&apos;);
+            if (oldSnippetElement) {
+                oldSnippetElement.textContent = oldData.snippet;
+            }
+
+            // Get new method snippet
+            const newResponse = await fetch(ENDPOINTS.newSnippet, {
+                method: &apos;POST&apos;,
+                headers: { &apos;Content-Type&apos;: &apos;application/json&apos; },
+                body: JSON.stringify({
+                    towerType,
+                    context
+                })
+            });
+            const newData = await handleApiResponse(newResponse);
+            const newSnippetElement = document.getElementById(&apos;new-snippet&apos;);
+            if (newSnippetElement) {
+                newSnippetElement.textContent = newData.snippet;
+            }
+
+            // Update tower info display
+            const tower = towers[towerType];
+            const towerInfoElement = document.getElementById(&apos;tower-info&apos;);
+            if (towerInfoElement &amp;&amp; tower) {
+                towerInfoElement.innerHTML =
+                    `&lt;div class=&apos;mb-2&apos;&gt;&lt;span class=&apos;font-bold&apos;&gt;${tower.name}&lt;/span&gt;: ${tower.desc}&lt;/div&gt;` +
+                    `&lt;div class=&apos;mb-2&apos;&gt;Cost: &lt;span class=&apos;font-semibold&apos;&gt;${tower.cost} BITS&lt;/span&gt; | DMG: &lt;span class=&apos;font-semibold&apos;&gt;${tower.dmg}&lt;/span&gt; | RNG: &lt;span class=&apos;font-semibold&apos;&gt;${tower.rng}&lt;/span&gt; | SPD: &lt;span class=&apos;font-semibold&apos;&gt;${tower.spd}&lt;/span&gt;&lt;/div&gt;` +
+                    `&lt;div class=&apos;mb-2&apos;&gt;Upgrades: &lt;span class=&apos;text-xs&apos;&gt;${tower.upgrades.join(&apos;, &apos;)}&lt;/span&gt;&lt;/div&gt;`;
+            }
+        } catch (error) {
+            console.error(&apos;Error updating tower info:&apos;, error);
+            // Show error to user
+            const towerInfoElement = document.getElementById(&apos;tower-info&apos;);
+            if (towerInfoElement) {
+                towerInfoElement.innerHTML = `&lt;div class=&apos;text-red-500&apos;&gt;Error: Could not load tower information. Please try again later.&lt;/div&gt;`;
+            }
+        }
+    }
+
+    async addTower() {
+        const towerType = document.getElementById(&apos;tower-select&apos;).value;
+        const context = {
+            problem: {
+                title: &quot;Two Sum&quot;,
+                description: &quot;Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.&quot;
+            },
+            language: &quot;Python&quot;,
+            code: document.getElementById(&apos;solution-preview&apos;).textContent
+        };
+
+        try {
+            const response = await fetch(ENDPOINTS.newSnippet, {
+                method: &apos;POST&apos;,
+                headers: { &apos;Content-Type&apos;: &apos;application/json&apos; },
+                body: JSON.stringify({
+                    towerType,
+                    context
+                })
+            });
+            const data = await response.json();
+            builtSolution.push(data.snippet);
+            this.updateSolutionPreview();
+        } catch (error) {
+            console.error(&apos;Error adding tower:&apos;, error);
+        }
+    }
+
+    updateSolutionPreview() {
+        document.getElementById(&apos;solution-preview&apos;).textContent = builtSolution.join(&apos;\n&apos;);
+    }
+
+    async testSolution() {
+        const solution = document.getElementById(&apos;solution-preview&apos;).textContent;
+        try {
+            const response = await fetch(ENDPOINTS.executeTwoSum, {
+                method: &apos;POST&apos;,
+                headers: { &apos;Content-Type&apos;: &apos;application/json&apos; },
+                body: JSON.stringify({ code: solution })
+            });
+            const data = await response.json();
+            const resultDiv = document.getElementById(&apos;test-result&apos;);
+            if (data.all_passed) {
+                resultDiv.innerHTML = &apos;&lt;span style=&quot;color:#22c55e;&quot;&gt;✅ Success! Your solution passed all test cases.&lt;/span&gt;&apos;;
+            } else {
+                resultDiv.innerHTML = &apos;&lt;span style=&quot;color:#f87171;&quot;&gt;❌ Oops! Your solution is incomplete or has a bug. Try using more towers or ask the Hack Assistant for help.&lt;/span&gt;&apos;;
+            }
+        } catch (error) {
+            console.error(&apos;Error testing solution:&apos;, error);
+        }
+    }
+
+    initializeHackAssistant() {
+        const transmitBtn = document.getElementById(&apos;transmit-btn-static&apos;);
+        const hackInput = document.getElementById(&apos;hack-input-static&apos;);
+        const assistLevel = document.getElementById(&apos;assist-level-static&apos;);
+        const chatMsg = document.getElementById(&apos;hack-chat-msg-static&apos;);
+
+        if (transmitBtn &amp;&amp; hackInput) {
+            transmitBtn.addEventListener(&apos;click&apos;, async () =&gt; {
+                const query = hackInput.value.trim();
+                if (!query) return;
+
+                try {
+                    const response = await fetch(ENDPOINTS.newChat, {
+                        method: &apos;POST&apos;,
+                        headers: { &apos;Content-Type&apos;: &apos;application/json&apos; },
+                        body: JSON.stringify({
+                            messages: [{ role: &apos;user&apos;, content: query }],
+                            assistanceLevel: assistLevel.value.toLowerCase().replace(/[^a-z_]/g, &apos;_&apos;)
+                        })
+                    });
+                    const data = await response.json();
+                    chatMsg.textContent = data.response?.content || data.response || &apos;No response.&apos;;
+                    hackInput.value = &apos;&apos;;
+                } catch (error) {
+                    console.error(&apos;Error getting hack assistant response:&apos;, error);
+                    chatMsg.textContent = &apos;Error: Could not get response from Hack Assistant. Please try again.&apos;;
+                }
+            });
+        }
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener(&apos;DOMContentLoaded&apos;, () =&gt; {
+    new InteractiveElements();
+});
+&lt;/script&gt;</content><author><name>Riviera Sperduto</name></author><category term="CodeGrind" /><category term="Development" /><category term="AI" /><category term="CodeGrind" /><category term="AI Integration" /><category term="OpenAI" /><category term="AI Collaboration" /><category term="Real-Time Execution" /><category term="Learning Platform" /><summary type="html">In this post, I&apos;ll share the journey of enhancing CodeGrind&apos;s AI capabilities, focusing on our recent improvements to the AI assistance system and the Tower Defense game integration. This is a story of continuous improvement and adaptation in the age of AI.</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:4000/assets/images/codegrind/ai-improvements-banner.png" /><media:content medium="image" url="http://localhost:4000/assets/images/codegrind/ai-improvements-banner.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The Tech Stack Behind CodeGrind</title><link href="http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind/" rel="alternate" type="text/html" title="The Tech Stack Behind CodeGrind" /><published>2025-05-20T13:00:00-04:00</published><updated>2025-05-20T13:00:00-04:00</updated><id>http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind</id><content type="html" xml:base="http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind/">&lt;p&gt;In my previous post, I introduced CodeGrind as a modern coding practice platform. Today, I’ll share the actual technical architecture that powers this platform, focusing on the real implementation rather than theoretical choices.&lt;/p&gt;
 
 &lt;h2 id=&quot;the-core-architecture&quot;&gt;The Core Architecture&lt;/h2&gt;
 
