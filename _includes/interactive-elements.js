@@ -1,12 +1,34 @@
-
 <script>
+// Get endpoints from data attributes
 const ENDPOINTS = {
-  newChat: "{{ site.data.config.endpoints.newChat }}",
-  newSnippet: "{{ site.data.config.endpoints.newSnippet }}",
-  oldChat: "{{ site.data.config.endpoints.oldChat }}",
-  oldSnippet: "{{ site.data.config.endpoints.oldSnippet }}",
-  executeTwoSum: "{{ site.data.config.endpoints.executeTwoSum }}"
+  newChat: document.getElementById('endpoints')?.dataset.newChat || '/api/fallback',
+  newSnippet: document.getElementById('endpoints')?.dataset.newSnippet || '/api/fallback',
+  oldChat: document.getElementById('endpoints')?.dataset.oldChat || '/api/fallback',
+  oldSnippet: document.getElementById('endpoints')?.dataset.oldSnippet || '/api/fallback',
+  executeTwoSum: document.getElementById('endpoints')?.dataset.executeTwoSum || '/api/fallback'
 };
+
+// Add error handling for missing endpoints
+Object.keys(ENDPOINTS).forEach(key => {
+  if (!ENDPOINTS[key]) {
+    console.error(`Missing or invalid endpoint for ${key}`);
+    ENDPOINTS[key] = '/api/fallback'; // Fallback endpoint
+  }
+});
+
+// Helper function to handle API responses
+async function handleApiResponse(response) {
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error('API Error:', {
+      status: response.status,
+      statusText: response.statusText,
+      body: errorText
+    });
+    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+  }
+  return response.json();
+}
 
 class InteractiveElements {
     constructor() {
@@ -32,7 +54,7 @@ class InteractiveElements {
             testSolutionBtn.addEventListener('click', () => this.testSolution());
         }
 
-        // Initialize hack assistant (now uses newChat endpoint)
+        // Initialize hack assistant
         this.initializeHackAssistant();
 
         // Initial tower info update
@@ -40,14 +62,19 @@ class InteractiveElements {
     }
 
     async updateTowerInfo() {
-        const towerType = document.getElementById('tower-select').value;
+        const towerType = document.getElementById('tower-select')?.value;
+        if (!towerType) {
+            console.error('Tower select element not found');
+            return;
+        }
+
         const context = {
             problem: {
                 title: "Two Sum",
                 description: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target."
             },
             language: "Python",
-            code: document.getElementById('solution-preview').textContent
+            code: document.getElementById('solution-preview')?.textContent || ''
         };
 
         try {
@@ -60,8 +87,11 @@ class InteractiveElements {
                     context
                 })
             });
-            const oldData = await oldResponse.json();
-            document.getElementById('old-snippet').textContent = oldData.snippet;
+            const oldData = await handleApiResponse(oldResponse);
+            const oldSnippetElement = document.getElementById('old-snippet');
+            if (oldSnippetElement) {
+                oldSnippetElement.textContent = oldData.snippet;
+            }
 
             // Get new method snippet
             const newResponse = await fetch(ENDPOINTS.newSnippet, {
@@ -72,17 +102,28 @@ class InteractiveElements {
                     context
                 })
             });
-            const newData = await newResponse.json();
-            document.getElementById('new-snippet').textContent = newData.snippet;
+            const newData = await handleApiResponse(newResponse);
+            const newSnippetElement = document.getElementById('new-snippet');
+            if (newSnippetElement) {
+                newSnippetElement.textContent = newData.snippet;
+            }
 
             // Update tower info display
             const tower = towers[towerType];
-            document.getElementById('tower-info').innerHTML =
-                `<div class='mb-2'><span class='font-bold'>${tower.name}</span>: ${tower.desc}</div>` +
-                `<div class='mb-2'>Cost: <span class='font-semibold'>${tower.cost} BITS</span> | DMG: <span class='font-semibold'>${tower.dmg}</span> | RNG: <span class='font-semibold'>${tower.rng}</span> | SPD: <span class='font-semibold'>${tower.spd}</span></div>` +
-                `<div class='mb-2'>Upgrades: <span class='text-xs'>${tower.upgrades.join(', ')}</span></div>`;
+            const towerInfoElement = document.getElementById('tower-info');
+            if (towerInfoElement && tower) {
+                towerInfoElement.innerHTML =
+                    `<div class='mb-2'><span class='font-bold'>${tower.name}</span>: ${tower.desc}</div>` +
+                    `<div class='mb-2'>Cost: <span class='font-semibold'>${tower.cost} BITS</span> | DMG: <span class='font-semibold'>${tower.dmg}</span> | RNG: <span class='font-semibold'>${tower.rng}</span> | SPD: <span class='font-semibold'>${tower.spd}</span></div>` +
+                    `<div class='mb-2'>Upgrades: <span class='text-xs'>${tower.upgrades.join(', ')}</span></div>`;
+            }
         } catch (error) {
             console.error('Error updating tower info:', error);
+            // Show error to user
+            const towerInfoElement = document.getElementById('tower-info');
+            if (towerInfoElement) {
+                towerInfoElement.innerHTML = `<div class='text-red-500'>Error: Could not load tower information. Please try again later.</div>`;
+            }
         }
     }
 
