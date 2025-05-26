@@ -1,0 +1,568 @@
+/* Dark Mode Styles */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --text-muted: #6b7280;
+  --card-bg: #f8f9fa;
+  --header-bg: #2d3748;
+  --header-text: #ffffff;
+  --border-color: #e2e8f0;
+  --link-color: #3182ce;
+  --github-level-0: #ebedf0;
+  --github-level-1: #9be9a8;
+  --github-level-2: #40c463;
+  --github-level-3: #30a14e;
+  --github-level-4: #216e39;
+  --pill-bg: #e2e8f0;
+  --pill-text: #2d3748;
+  --input-bg: #ffffff;
+  --input-text: #1a202c;
+  --button-bg: #3182ce;
+  --button-text: #ffffff;
+  --checkbox-bg: #ffffff;
+  --checkbox-border: #d1d5db;
+  --gradient-start: #ebf8ff;  /* blue-50 */
+  --gradient-end: #e0e7ff;    /* indigo-50 */
+  --blue-text: #2c5282;       /* blue-800 */
+  --blue-tag-bg: #bee3f8;     /* blue-200 */
+  --blue-tag-text: #2c5282;   /* blue-800 */
+  --heading-color: #1a202c;   /* Adding heading color variable */
+  --contact-heading-color: #1a202c; /* Contact heading specific color for light mode */
+  --article-header-bg: #f7fafc; /* Light background for article header in light mode */
+}
+
+.dark {
+  --bg-color: #1a202c;
+  --text-color: #e2e8f0;
+  --text-muted: #cbd5e0;
+  --card-bg: #2d3748;
+  --header-bg: #0d1117;
+  --header-text: #e2e8f0;
+  --border-color: #4a5568;
+  --link-color: #63b3ed;
+  --github-level-0: #0d1117;
+  --github-level-1: #0e4429;
+  --github-level-2: #006d32;
+  --github-level-3: #26a641;
+  --github-level-4: #39d353;
+  --pill-bg: #4a5568;
+  --pill-text: #e2e8f0;
+  --input-bg: #2d3748;
+  --input-text: #e2e8f0;
+  --button-bg: #4299e1;
+  --button-text: #ffffff;
+  --checkbox-bg: #2d3748;
+  --checkbox-border: #4a5568;
+  --gradient-start: #2a4365;  /* darker blue for dark mode */
+  --gradient-end: #434190;    /* darker indigo for dark mode */
+  --blue-text: #90cdf4;       /* blue-300 for dark mode */
+  --blue-tag-bg: #2c5282;     /* blue-800 for dark mode */
+  --blue-tag-text: #ebf8ff;   /* blue-100 for dark mode */
+  --heading-color: #f7fafc;   /* Light color for headings in dark mode */
+  --contact-heading-color: #f7fafc; /* Contact heading specific color for dark mode */
+  --article-header-bg: #2d3748; /* Dark background for article header in dark mode */
+}
+
+/* Apply variables to elements */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  background-color: var(--header-bg) !important;
+  color: var(--header-text) !important;
+}
+
+.card, .project-card, .service-card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* GitHub contribution chart colors */
+.contribution-cell[data-level="0"] {
+  background-color: var(--github-level-0) !important;
+}
+
+.contribution-cell[data-level="1"] {
+  background-color: var(--github-level-1) !important;
+}
+
+.contribution-cell[data-level="2"] {
+  background-color: var(--github-level-2) !important;
+}
+
+.contribution-cell[data-level="3"] {
+  background-color: var(--github-level-3) !important;
+}
+
+.contribution-cell[data-level="4"] {
+  background-color: var(--github-level-4) !important;
+}
+
+/* Additional dark mode specific styles */
+.dark a {
+  color: var(--link-color);
+}
+
+.dark .bg-white {
+  background-color: var(--card-bg) !important;
+}
+
+.dark .border {
+  border-color: var(--border-color) !important;
+}
+
+/* Improved text contrast for dark mode */
+.dark .text-gray-500 {
+  color: #a0aec0 !important; /* Brighter than default gray-500 for better contrast */
+}
+
+.dark .text-gray-600 {
+  color: #cbd5e0 !important; /* Brighter than default for better contrast */
+}
+
+.dark .text-gray-700, 
+.dark .text-gray-800 {
+  color: #e2e8f0 !important; /* Much brighter for dark backgrounds */
+}
+
+.dark .text-gray-900 {
+  color: #f7fafc !important; /* Almost white for maximum contrast */
+}
+
+/* Fix specific components */
+.dark .github-stats-section h3,
+.dark .github-contributions h3 {
+  color: #f7fafc !important; /* Ensure headers are bright enough */
+}
+
+.dark p, 
+.dark li,
+.dark span:not(.bg-green-100):not(.bg-green-300):not(.bg-green-500):not(.bg-green-700):not(.bg-gray-100) {
+  color: var(--text-color);
+}
+
+/* Project card improvements */
+.dark .project-card h3,
+.dark .service-card h3 {
+  color: #f7fafc !important;
+}
+
+.dark .project-card p,
+.dark .service-card p {
+  color: #e2e8f0 !important;
+}
+
+/* Form improvements for dark mode */
+.dark input, 
+.dark textarea, 
+.dark select {
+  background-color: var(--input-bg) !important;
+  color: var(--input-text) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark label {
+  color: var(--text-color) !important;
+}
+
+/* Box shadows for dark mode */
+.dark .shadow-md, 
+.dark .shadow-lg {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Table improvements for dark mode */
+.dark table th {
+  background-color: #1a202c !important;
+  color: #f7fafc !important;
+}
+
+.dark table td {
+  color: #e2e8f0 !important;
+}
+
+/* Button improvements */
+.dark button:not(.bg-blue-500):not(.bg-green-500):not(.bg-red-500) {
+  background-color: #2d3748 !important;
+  color: #e2e8f0 !important;
+}
+
+/* New styles for pills/tags */
+.dark .pill,
+.dark [class*="bg-gray-100"],
+.dark [class*="bg-blue-100"],
+.dark [class*="bg-green-100"],
+.dark [class*="bg-red-100"],
+.dark [class*="bg-yellow-100"],
+.dark [class*="bg-purple-100"],
+.dark [class*="bg-indigo-100"],
+.dark [class*="bg-pink-100"] {
+  background-color: var(--pill-bg) !important;
+  color: var(--pill-text) !important;
+}
+
+/* Category pills specific fix */
+.dark .categories-section .pill,
+.dark .category-pill {
+  background-color: var(--pill-bg) !important;
+  color: var(--pill-text) !important;
+  border-color: #4a5568 !important;
+}
+
+/* Checkbox styling for dark mode */
+.dark input[type="checkbox"] {
+  background-color: var(--checkbox-bg) !important;
+  border-color: var(--checkbox-border) !important;
+}
+
+.dark input[type="checkbox"]:checked {
+  background-color: #4299e1 !important;
+  border-color: #4299e1 !important;
+}
+
+/* Action buttons */
+.dark .btn,
+.dark [class*="bg-blue-600"],
+.dark [class*="bg-blue-500"],
+.dark .send-message-btn,
+.dark .subscribe-btn {
+  background-color: var(--button-bg) !important;
+  color: var(--button-text) !important;
+}
+
+/* Technical skills section */
+.dark .skills-section .pill,
+.dark .language-pill,
+.dark .framework-pill,
+.dark .tool-pill,
+.dark .library-pill {
+  background-color: #4a5568 !important;
+  color: #e2e8f0 !important;
+}
+
+/* GitHub activity timeline */
+.dark .github-activity-section,
+.dark .timeline-item {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark .timeline-connector {
+  background-color: var(--border-color) !important;
+}
+
+/* Mailchimp form and subscribe section */
+.dark .subscribe-section,
+.dark .mailchimp-form {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+.dark .mailchimp-branding img {
+  filter: brightness(0.8) contrast(1.2);
+}
+
+/* Response time section */
+.dark .response-time-section {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Music services sections */
+.dark .music-services-section,
+.dark .lesson-info,
+.dark .rates-info {
+  background-color: var(--card-bg) !important;
+  color: var(--text-color) !important;
+}
+
+/* Book a service button */
+.dark .book-service-btn {
+  background-color: var(--button-bg) !important;
+  color: var(--button-text) !important;
+}
+
+/* Fix for gradient backgrounds */
+.dark .bg-gradient-to-r.from-blue-50.to-indigo-50,
+.dark [class*="bg-gradient-to-r from-blue-50 to-indigo-50"] {
+  background: linear-gradient(to right, var(--gradient-start), var(--gradient-end)) !important;
+}
+
+.dark .bg-gradient-to-br.from-blue-100.to-indigo-100 {
+  background: linear-gradient(to bottom right, #2c5282, #434190) !important;
+}
+
+/* Fix for skill pills with bg-gray-200 */
+.dark .bg-gray-200,
+.dark [class*="bg-gray-200"] {
+  background-color: #4a5568 !important;
+  color: #e2e8f0 !important;
+}
+
+/* Fix for project card links */
+.dark .project-card-link,
+.dark .inline-flex.items-center.justify-center,
+.dark [class*="inline-flex items-center justify-center"] {
+  color: var(--link-color) !important;
+}
+
+.dark .bg-blue-50,
+.dark .bg-indigo-50,
+.dark [class*="bg-blue-50"],
+.dark [class*="bg-indigo-50"] {
+  background-color: #2a4365 !important;
+}
+
+/* Fix for bg-gray-700 elements in dark mode */
+.dark .bg-gray-700,
+.dark [class*="bg-gray-700"] {
+  background-color: #1a202c !important;
+}
+
+/* Fix for text-gray-700 elements that need better contrast */
+.dark .text-gray-700,
+.dark [class*="text-gray-700"] {
+  color: #e2e8f0 !important;
+}
+
+/* Fix for hover states on skills pills */
+.dark [class*="hover:bg-gray-300"] {
+  background-color: #4a5568 !important;
+}
+
+.dark [class*="hover:bg-gray-300"]:hover {
+  background-color: #2d3748 !important;
+}
+
+/* Fix for Mailchimp specific elements */
+.dark #mc_embed_shell,
+.dark [id*="mc_embed_shell"] {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+.dark #mc_embed_signup_scroll,
+.dark [id*="mc_embed_signup_scroll"] {
+  background-color: var(--card-bg) !important;
+}
+
+.dark #mc_embed_signup,
+.dark [id*="mc_embed_signup"] {
+  background-color: var(--card-bg) !important;
+}
+
+.dark .mc-embedded-subscribe-form {
+  background-color: var(--card-bg) !important;
+}
+
+/* Fix for blue text headers */
+.dark .text-blue-800,
+.dark [class*="text-blue-800"] {
+  color: var(--blue-text) !important;
+}
+
+/* Fix for small text with gray colors */
+.dark .text-xs.text-gray-500,
+.dark .text-sm.text-gray-500,
+.dark [class*="text-xs text-gray-500"],
+.dark [class*="text-sm text-gray-500"] {
+  color: #a0aec0 !important;
+}
+
+.dark .text-xs.text-gray-600,
+.dark .text-sm.text-gray-600,
+.dark [class*="text-xs text-gray-600"],
+.dark [class*="text-sm text-gray-600"] {
+  color: #cbd5e0 !important;
+}
+
+/* Fix for very light gray backgrounds */
+.dark .bg-gray-50,
+.dark [class*="bg-gray-50"] {
+  background-color: #2d3748 !important;
+}
+
+/* Additional fixes for text lists */
+.dark .list-disc.pl-5.text-gray-700,
+.dark [class*="list-disc pl-5 text-gray-700"] {
+  color: #e2e8f0 !important;
+}
+
+/* Fix for text in the gray area with list commits */
+.dark .text-xs.text-gray-500.mt-1,
+.dark [class*="text-xs text-gray-500 mt-1"] {
+  color: #cbd5e0 !important;
+}
+
+/* Fix for blue tag pills seen in the screenshots */
+.dark .bg-blue-200.text-blue-800,
+.dark [class*="bg-blue-200 text-blue-800"],
+.dark span.ml-2.bg-blue-200.text-blue-800.text-xs.px-2.py-1.rounded,
+.dark [class*="ml-2 bg-blue-200 text-blue-800"],
+.dark span.bg-blue-200.text-blue-800 {
+  background-color: var(--blue-tag-bg) !important;
+  color: var(--blue-tag-text) !important;
+}
+
+/* Fix for language percentage bars */
+.dark [class*="language-percentage"],
+.dark .language-bar {
+  border-color: var(--border-color) !important;
+}
+
+/* Colors for language percentage bars */
+.dark .javascript-bar,
+.dark [class*="javascript-percent"] {
+  background-color: #f0db4f !important;
+}
+
+.dark .python-bar,
+.dark [class*="python-percent"] {
+  background-color: #3572A5 !important;
+}
+
+.dark .html-bar,
+.dark [class*="html-percent"] {
+  background-color: #e34c26 !important;
+}
+
+.dark .css-bar,
+.dark [class*="css-percent"] {
+  background-color: #563d7c !important;
+}
+
+.dark .csharp-bar,
+.dark [class*="csharp-percent"] {
+  background-color: #178600 !important;
+}
+
+.dark .cpp-bar,
+.dark [class*="cpp-percent"] {
+  background-color: #f34b7d !important;
+}
+
+.dark .kotlin-bar,
+.dark [class*="kotlin-percent"] {
+  background-color: #A97BFF !important;
+}
+
+.dark .lua-bar,
+.dark [class*="lua-percent"] {
+  background-color: #000080 !important;
+}
+
+/* Fix for hover states on blue links */
+.dark a.text-blue-600:hover,
+.dark a.text-blue-800:hover,
+.dark a[class*="text-blue-600"]:hover,
+.dark a[class*="text-blue-800"]:hover {
+  color: #90cdf4 !important; /* lighter blue for better visibility */
+}
+
+/* Fix for hover effects on buttons with blue backgrounds */
+.dark .bg-blue-600:hover,
+.dark [class*="bg-blue-600"]:hover,
+.dark .bg-blue-700:hover,
+.dark [class*="bg-blue-700"]:hover {
+  background-color: #2b6cb0 !important; /* slightly darker blue for hover state */
+}
+
+/* Fix for details buttons */
+.dark a.details-button,
+.dark a[class*="details-button"],
+.dark [class*="repo-1"],
+.dark [class*="repo-2"] {
+  background-color: #2d3748 !important;
+  color: #e2e8f0 !important;
+  border-color: #4a5568 !important;
+}
+
+/* Fix for heading elements */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color);
+  transition: color 0.3s ease;
+}
+
+/* Specific style for contact heading */
+h3.text-lg.font-bold.mb-4 {
+  color: var(--contact-heading-color) !important;
+}
+
+/* Additional styles for h3 variations in the Contact page */
+h3.font-semibold.mb-4.text-gray-800,
+h3.font-semibold.text-lg.mb-3 {
+  color: var(--contact-heading-color) !important;
+}
+
+/* Direct high-contrast override for headings in both light and dark mode */
+:root h3.text-lg.font-bold.mb-4 {
+  color: #000000 !important; /* Black for maximum contrast in light mode */
+}
+.dark h3.text-lg.font-bold.mb-4 {
+  color: #ffffff !important; /* White for maximum contrast in dark mode */
+}
+
+/* Ensure all h3 elements with text-lg and font-bold classes are visible */
+.text-lg.font-bold {
+  color: var(--contact-heading-color) !important;
+}
+
+/* Specifically target the main heading */
+h1.text-3xl.md\:text-4xl.font-bold.mb-4 {
+  color: var(--heading-color) !important;
+}
+
+.dark h1.text-3xl.md\:text-4xl.font-bold.mb-4 {
+  color: var(--heading-color) !important;
+}
+
+/* Fix for article header background */
+article > header {
+  background-color: var(--article-header-bg) !important;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+/* Fix text colors in article header for light mode */
+:root article > header .text-gray-600 {
+  color: #4a5568 !important; /* darker gray for better contrast on light bg */
+}
+
+/* Fix text colors in article header for dark mode */
+.dark article > header .text-gray-600 {
+  color: #cbd5e0 !important; /* lighter gray for better contrast on dark bg */
+}
+
+/* Fix for text in Live Demo buttons - more specific selectors */
+.dark a.inline-flex.items-center.justify-center.px-4.py-2.text-sm.font-medium.text-white.bg-blue-600,
+.dark a.inline-flex.items-center.justify-center.px-4.py-2.text-sm.font-medium.text-white.bg-blue-600:hover,
+.dark [aria-label*="Open live demo"] {
+  color: #ffffff !important; /* Force white text for better contrast */
+}
+
+/* Fix for text-white class to ensure it remains white in dark mode */
+.dark .text-white,
+.dark [class*="text-white"] {
+  color: #ffffff !important;
+}
+
+/* Fix for C language color (bg-gray-500) in dark mode */
+.dark .bg-gray-500,
+.dark [class*="bg-gray-500"] {
+  background-color: #a0aec0 !important; /* Use a lighter gray for better visibility */
+}
+
+/* Fix for Python and Lua colors to differentiate in dark mode */
+.dark .bg-blue-600,
+.dark [class*="bg-blue-600"] {
+  background-color: #3182ce !important; /* Brighter blue for Python in dark mode */
+}
+
+.dark .bg-blue-400,
+.dark [class*="bg-blue-400"] {
+  background-color: #63b3ed !important; /* Much lighter blue for Lua in dark mode */
+} 

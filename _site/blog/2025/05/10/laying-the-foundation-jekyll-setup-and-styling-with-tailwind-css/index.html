@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS | Riviera Sperduto - Developer Portfolio</title>
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS | Riviera Sperduto - Developer Portfolio</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS" />
+<meta name="author" content="Riviera Sperduto" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services." />
+<meta property="og:description" content="Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services." />
+<link rel="canonical" href="http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/" />
+<meta property="og:url" content="http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/" />
+<meta property="og:site_name" content="Riviera Sperduto - Developer Portfolio" />
+<meta property="og:image" content="http://localhost:4000/assets/images/tutorial-part2-banner.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-10T10:00:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/images/tutorial-part2-banner.png" />
+<meta property="twitter:title" content="Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Riviera Sperduto" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/"},"datePublished":"2025-05-10T10:00:00-04:00","@type":"BlogPosting","url":"http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/default-social-image.png"},"name":"Riviera Sperduto"},"description":"Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.","image":"http://localhost:4000/assets/images/tutorial-part2-banner.png","author":{"@type":"Person","name":"Riviera Sperduto"},"headline":"Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS","dateModified":"2025-05-10T10:00:00-04:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+    <!-- Google AdSense -->
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7733001105026476"
+     crossorigin="anonymous"></script>
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/dark-mode.css">
+    <script>
+        // Check for saved dark mode preference on page load
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</head>
+<body class="page-transition enter-active">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <header class="bg-gray-900 text-white shadow-md">
+  <div class="container mx-auto px-4 py-4">
+    <nav class="flex flex-wrap items-center justify-between">
+      <!-- Logo/Site Title -->
+      <a href="/" class="text-xl font-bold text-gray-400" aria-label="Home page">
+        Riviera Sperduto
+      </a>
+      
+      <div class="flex items-center">
+        <!-- Dark Mode Toggle -->
+        <button id="dark-mode-toggle" class="focus:outline-none mr-4" aria-label="Toggle dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark-mode-sun hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark-mode-moon dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      
+        <!-- Mobile menu button -->
+        <button id="menu-toggle" class="block md:hidden focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Navigation Links -->
+      <div id="menu" class="w-full md:w-auto hidden md:block" role="navigation" aria-label="Main navigation">
+        <ul class="flex flex-col md:flex-row md:space-x-6 mt-4 md:mt-0">
+          <li><a href="/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Home">Home</a></li>
+          <li><a href="/about/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="About">About</a></li>
+          <li><a href="/projects/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Projects">Projects</a></li>
+          <li><a href="/services/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Services">Services</a></li>
+          <li><a href="/resume/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Resume">Resume</a></li>
+          <li><a href="/blog/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Blog">Blog</a></li>
+          <li><a href="/contact/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Contact">Contact</a></li>
+          <li><a href="/privacy/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Privacy Policy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Toggle mobile menu
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('menu').classList.toggle('hidden');
+    // Update aria-expanded state
+    const isExpanded = !document.getElementById('menu').classList.contains('hidden');
+    this.setAttribute('aria-expanded', isExpanded.toString());
+  });
+</script> 
+    
+
+    
+<div class="header-ad-container w-full py-3 bg-gray-100 border-b border-gray-200 border-2 border-dashed border-gray-300">
+  <div class="container mx-auto px-4 text-center">
+    <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7733001105026476"
+         data-ad-slot="4238838304"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+
+    
+    <main id="main-content" class="container mx-auto px-4 py-8">
+        <article class="max-w-4xl mx-auto">
+  <header class="mb-8 opacity-0" data-animate="fade-in">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS</h1>
+    
+    <div class="flex flex-wrap items-center text-gray-600 mb-6">
+      <time datetime="2025-05-10T10:00:00-04:00" class="flex items-center mr-4 mb-2">
+        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+        </svg>
+        May 10, 2025
+      </time>
+      
+      
+        <span class="flex items-center mr-4 mb-2">
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+          </svg>
+          Riviera Sperduto
+        </span>
+      
+      
+      
+        <span class="flex items-center mb-2">
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+          </svg>
+          
+            <a href="/categories/Portfolio%20Tutorial" class="hover:text-blue-600 transition-colors">Portfolio Tutorial</a>,&nbsp;
+          
+            <a href="/categories/Jekyll" class="hover:text-blue-600 transition-colors">Jekyll</a>,&nbsp;
+          
+            <a href="/categories/Development" class="hover:text-blue-600 transition-colors">Development</a>
+          
+        </span>
+      
+    </div>
+    
+    
+      <div class="mb-6 rounded-lg overflow-hidden shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <img src="/assets/images/tutorial-part2-banner.png" alt="Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS" class="w-full">
+      </div>
+    
+  </header>
+  
+  <div class="prose prose-blue max-w-none mb-12 opacity-0 post-content" data-animate="fade-in" data-scroll="fade-up">
+    <style>
+/* Custom code block styling for this post */
+.highlight {
+  border-radius: 6px;
+  margin: 1.5rem 0;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+}
+
+.highlight pre {
+  padding: 1.25rem;
+  margin: 0;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+.highlight code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+/* Dark mode considerations */
+html.dark .highlight {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Different background colors for different language blocks */
+.language-yaml .highlight { background-color: #f8fafc; border-left: 4px solid #4f46e5; }
+.language-ruby .highlight { background-color: #fef2f2; border-left: 4px solid #dc2626; }
+.language-html .highlight { background-color: #f0f9ff; border-left: 4px solid #0ea5e9; }
+.language-css .highlight { background-color: #f5f3ff; border-left: 4px solid #a855f7; }
+.language-bash .highlight { background-color: #f0fdf4; border-left: 4px solid #16a34a; }
+
+/* Dark mode versions */
+html.dark .language-yaml .highlight { background-color: #1e293b; border-left: 4px solid #4f46e5; }
+html.dark .language-ruby .highlight { background-color: #350c0c; border-left: 4px solid #dc2626; }
+html.dark .language-html .highlight { background-color: #082f49; border-left: 4px solid #0ea5e9; }
+html.dark .language-css .highlight { background-color: #2e1065; border-left: 4px solid #a855f7; }
+html.dark .language-bash .highlight { background-color: #052e16; border-left: 4px solid #16a34a; }
+</style>
+
+<div class="opacity-0" data-animate="fade-in">
+Welcome back to my portfolio tutorial series! In <a href="/blog/2025/05/08/conception-and-collaboration-planning-dynamic-portfolio-with-ai" class="text-blue-600 hover:text-blue-800">Part 1</a>, we explored the planning phase and architectural decisions that set the stage for this portfolio website. Now, it's time to roll up our sleeves and start building. In this second installment, we'll focus on setting up Jekyll and applying styling with Tailwind CSS to create a beautiful, responsive foundation.
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2.1. Jekyll: The Static Site Engine</h2>
+
+As mentioned in Part 1, Jekyll was our static site generator of choice for several compelling reasons:
+
+- Native support on GitHub Pages, eliminating the need for complex build configurations
+- Simplicity for content management, especially for blog posts
+- Flexible templating system using Liquid
+- Markdown support for easy content creation
+- Active community and extensive plugin ecosystem
+
+<h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Core Setup</h3>
+
+Setting up a Jekyll site involves creating a specific directory structure. With my AI assistant's guidance, I created the following essential directories:
+
+- `_layouts`: Contains template files that define the look of different types of pages
+- `_includes`: Houses reusable components that can be included in layouts and pages
+- `_data`: Stores structured data in YAML, JSON, or CSV format
+- `assets`: Holds static files like images, CSS, and JavaScript
+- `_posts`: Contains blog post files in Markdown format
+
+The most critical configuration file in a Jekyll site is `_config.yml`. Here's a snippet of the essential configurations I included:
+
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="c1"># Site settings</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">Riviera Sperduto</span>
+<span class="na">email</span><span class="pi">:</span> <span class="s">riviera.t.sperduto13@gmail.com</span>
+<span class="na">description</span><span class="pi">:</span> <span class="pi">&gt;-</span>
+  <span class="s">Full Stack Developer, Cloud Architect, and AI Enthusiast. </span>
+  <span class="s">This portfolio showcases my projects and technical expertise.</span>
+<span class="na">url</span><span class="pi">:</span> <span class="s2">"</span><span class="s">https://rivie13.github.io"</span>
+<span class="na">github_username</span><span class="pi">:</span> <span class="s">rivie13</span>
+<span class="na">google_analytics</span><span class="pi">:</span> <span class="s">G-XXXXXXXXXX</span>
+
+<span class="c1"># Build settings</span>
+<span class="na">markdown</span><span class="pi">:</span> <span class="s">kramdown</span>
+<span class="na">permalink</span><span class="pi">:</span> <span class="s">/blog/:year/:month/:day/:title/</span>
+<span class="na">plugins</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-feed</span>
+  <span class="pi">-</span> <span class="s">jekyll-seo-tag</span>
+  <span class="pi">-</span> <span class="s">jekyll-sitemap</span></code></pre></figure>
+
+
+Additionally, I set up the `Gemfile` to manage Jekyll and plugin versions (you may need to update these versions depending on your Ruby version and other dependencies, this list is not exhaustive):
+
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">source</span> <span class="s2">"https://rubygems.org"</span>
+
+<span class="n">gem</span> <span class="s2">"jekyll"</span><span class="p">,</span> <span class="s2">"~&gt; 4.4.0"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-feed"</span><span class="p">,</span> <span class="s2">"~&gt; 0.15.1"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-seo-tag"</span><span class="p">,</span> <span class="s2">"~&gt; 2.7.1"</span>
+<span class="n">gem</span> <span class="s2">"jekyll-sitemap"</span><span class="p">,</span> <span class="s2">"~&gt; 1.4.0"</span>
+
+<span class="n">group</span> <span class="ss">:jekyll_plugins</span> <span class="k">do</span>
+  <span class="c1"># Add any other Jekyll plugins here</span>
+<span class="k">end</span>
+
+<span class="c1"># Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem</span>
+<span class="n">gem</span> <span class="s2">"tzinfo-data"</span><span class="p">,</span> <span class="ss">platforms: </span><span class="p">[</span><span class="ss">:mingw</span><span class="p">,</span> <span class="ss">:mswin</span><span class="p">,</span> <span class="ss">:x64_mingw</span><span class="p">,</span> <span class="ss">:jruby</span><span class="p">]</span>
+<span class="c1"># Performance-booster for watching directories on Windows</span>
+<span class="n">gem</span> <span class="s2">"wdm"</span><span class="p">,</span> <span class="s2">"~&gt; 0.1.1"</span><span class="p">,</span> <span class="ss">:platforms</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="ss">:mingw</span><span class="p">,</span> <span class="ss">:mswin</span><span class="p">,</span> <span class="ss">:x64_mingw</span><span class="p">]</span></code></pre></figure>
+
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2.2. Crafting the Skeleton: Default Layout and Includes</h2>
+
+
+<div class="blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+  <h4 class="text-sm uppercase text-gray-500 mb-2">Sponsored Content</h4>
+  <div class="bg-white p-2 rounded shadow">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7733001105026476" data-ad-slot="5855397645" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+
+The default layout is the primary template that provides the common structure for all pages on the site. In Jekyll, this is typically defined in `_layouts/default.html`. Here's a breakdown of this crucial file:
+
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span> <span class="na">class=</span><span class="s">""</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;title&gt;</span>Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS | Riviera Sperduto - Developer Portfolio<span class="nt">&lt;/title&gt;</span>
+    {% seo %}
+    
+    {% include google-tag.html %}
+    
+    <span class="c">&lt;!-- Google AdSense --&gt;</span>
+    {% if site.google_adsense %}
+    <span class="nt">&lt;script </span><span class="na">async</span> <span class="na">src=</span><span class="s">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_adsense }}"</span>
+     <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    {% endif %}
+    
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/assets/css/main.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/assets/css/animations.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/assets/css/responsive.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/assets/css/dark-mode.css"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;script&gt;</span>
+        <span class="c1">// Check for saved dark mode preference on page load</span>
+        <span class="k">if </span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nf">getItem</span><span class="p">(</span><span class="dl">'</span><span class="s1">darkMode</span><span class="dl">'</span><span class="p">)</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">true</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">dark</span><span class="dl">'</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body</span> <span class="na">class=</span><span class="s">"page-transition enter-active"</span><span class="nt">&gt;</span>
+    
+    {% include header.html %}
+    
+    {% include header-ad.html %}
+    
+    <span class="nt">&lt;main</span> <span class="na">id=</span><span class="s">"main-content"</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 py-8"</span><span class="nt">&gt;</span>
+        {{ content }}
+    <span class="nt">&lt;/main&gt;</span>
+    
+    {% include footer-ad.html %}
+    
+    {% include footer.html %}
+    
+    <span class="c">&lt;!-- Load scripts in proper dependency order --&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/github-config.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/github-repos.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/github-activity.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/github-stats.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/github-contributions.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/project-cards.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/github-test.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/main.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/animations.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"/assets/js/responsive.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    
+    {% include cookie-consent.html %}
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></figure>
+
+
+Notice the inclusion of:
+- Semantic HTML structure for better SEO and accessibility
+- Metadata and the `<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS | Riviera Sperduto - Developer Portfolio</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS" />
+<meta name="author" content="Riviera Sperduto" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services." />
+<meta property="og:description" content="Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services." />
+<link rel="canonical" href="http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/" />
+<meta property="og:url" content="http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/" />
+<meta property="og:site_name" content="Riviera Sperduto - Developer Portfolio" />
+<meta property="og:image" content="http://localhost:4000/assets/images/tutorial-part2-banner.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-10T10:00:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/images/tutorial-part2-banner.png" />
+<meta property="twitter:title" content="Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Riviera Sperduto" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/"},"datePublished":"2025-05-10T10:00:00-04:00","@type":"BlogPosting","url":"http://localhost:4000/blog/2025/05/10/laying-the-foundation-jekyll-setup-and-styling-with-tailwind-css/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/default-social-image.png"},"name":"Riviera Sperduto"},"description":"Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer. Showcasing projects, skills, and services.","image":"http://localhost:4000/assets/images/tutorial-part2-banner.png","author":{"@type":"Person","name":"Riviera Sperduto"},"headline":"Part 2: Laying the Foundation - Jekyll Setup and Styling with Tailwind CSS","dateModified":"2025-05-10T10:00:00-04:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+` tag to enhance search engine optimization
+- Tailwind CSS from CDN and custom CSS files
+- Dark mode detection script
+- Google Analytics tracking and AdSense integration
+- Include tags for various modular components
+- JavaScript files that power GitHub integration and other dynamic elements
+
+<h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Header and Footer Components</h3>
+
+The `_includes/header.html` file contains the site navigation, which is displayed on every page:
+
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"bg-gray-900 text-white shadow-md"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 py-4"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"flex flex-wrap items-center justify-between"</span><span class="nt">&gt;</span>
+      <span class="c">&lt;!-- Logo/Site Title --&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/"</span> <span class="na">class=</span><span class="s">"text-xl font-bold text-gray-400"</span> <span class="na">aria-label=</span><span class="s">"Home page"</span><span class="nt">&gt;</span>
+        Riviera Sperduto
+      <span class="nt">&lt;/a&gt;</span>
+      
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-center"</span><span class="nt">&gt;</span>
+        <span class="c">&lt;!-- Dark Mode Toggle --&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"dark-mode-toggle"</span> <span class="na">class=</span><span class="s">"focus:outline-none mr-4"</span> <span class="na">aria-label=</span><span class="s">"Toggle dark mode"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;svg</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/2000/svg"</span> <span class="na">class=</span><span class="s">"h-6 w-6 dark-mode-sun hidden dark:block"</span> <span class="na">fill=</span><span class="s">"none"</span> <span class="na">viewBox=</span><span class="s">"0 0 24 24"</span> <span class="na">stroke=</span><span class="s">"currentColor"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;path</span> <span class="na">stroke-linecap=</span><span class="s">"round"</span> <span class="na">stroke-linejoin=</span><span class="s">"round"</span> <span class="na">stroke-width=</span><span class="s">"2"</span> <span class="na">d=</span><span class="s">"M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"</span> <span class="nt">/&gt;</span>
+          <span class="nt">&lt;/svg&gt;</span>
+          <span class="nt">&lt;svg</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/2000/svg"</span> <span class="na">class=</span><span class="s">"h-6 w-6 dark-mode-moon dark:hidden"</span> <span class="na">fill=</span><span class="s">"none"</span> <span class="na">viewBox=</span><span class="s">"0 0 24 24"</span> <span class="na">stroke=</span><span class="s">"currentColor"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;path</span> <span class="na">stroke-linecap=</span><span class="s">"round"</span> <span class="na">stroke-linejoin=</span><span class="s">"round"</span> <span class="na">stroke-width=</span><span class="s">"2"</span> <span class="na">d=</span><span class="s">"M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"</span> <span class="nt">/&gt;</span>
+          <span class="nt">&lt;/svg&gt;</span>
+        <span class="nt">&lt;/button&gt;</span>
+      
+        <span class="c">&lt;!-- Mobile menu button --&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"menu-toggle"</span> <span class="na">class=</span><span class="s">"block md:hidden focus:outline-none"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation menu"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-controls=</span><span class="s">"menu"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;svg</span> <span class="na">class=</span><span class="s">"w-6 h-6"</span> <span class="na">fill=</span><span class="s">"none"</span> <span class="na">stroke=</span><span class="s">"currentColor"</span> <span class="na">viewBox=</span><span class="s">"0 0 24 24"</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/2000/svg"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;path</span> <span class="na">stroke-linecap=</span><span class="s">"round"</span> <span class="na">stroke-linejoin=</span><span class="s">"round"</span> <span class="na">stroke-width=</span><span class="s">"2"</span> <span class="na">d=</span><span class="s">"M4 6h16M4 12h16M4 18h16"</span><span class="nt">&gt;&lt;/path&gt;</span>
+          <span class="nt">&lt;/svg&gt;</span>
+        <span class="nt">&lt;/button&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      
+      <span class="c">&lt;!-- Navigation Links --&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">"menu"</span> <span class="na">class=</span><span class="s">"w-full md:w-auto hidden md:block"</span> <span class="na">role=</span><span class="s">"navigation"</span> <span class="na">aria-label=</span><span class="s">"Main navigation"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"flex flex-col md:flex-row md:space-x-6 mt-4 md:mt-0"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/"</span> <span class="na">class=</span><span class="s">"nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300"</span> <span class="na">aria-label=</span><span class="s">"Home"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/about/"</span> <span class="na">class=</span><span class="s">"nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300"</span> <span class="na">aria-label=</span><span class="s">"About"</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/projects/"</span> <span class="na">class=</span><span class="s">"nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300"</span> <span class="na">aria-label=</span><span class="s">"Projects"</span><span class="nt">&gt;</span>Projects<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/services/"</span> <span class="na">class=</span><span class="s">"nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300"</span> <span class="na">aria-label=</span><span class="s">"Services"</span><span class="nt">&gt;</span>Services<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/resume/"</span> <span class="na">class=</span><span class="s">"nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300"</span> <span class="na">aria-label=</span><span class="s">"Resume"</span><span class="nt">&gt;</span>Resume<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/blog/"</span> <span class="na">class=</span><span class="s">"nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300"</span> <span class="na">aria-label=</span><span class="s">"Blog"</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/contact/"</span> <span class="na">class=</span><span class="s">"nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300"</span> <span class="na">aria-label=</span><span class="s">"Contact"</span><span class="nt">&gt;</span>Contact<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/privacy/"</span> <span class="na">class=</span><span class="s">"nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300"</span> <span class="na">aria-label=</span><span class="s">"Privacy Policy"</span><span class="nt">&gt;</span>Privacy Policy<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/nav&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/header&gt;</span></code></pre></figure>
+
+
+The `_includes/footer.html` file contains copyright information, social links, and contact info:
+
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;footer</span> <span class="na">class=</span><span class="s">"bg-gray-900 text-white py-12"</span> <span class="na">role=</span><span class="s">"contentinfo"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex flex-wrap"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-full lg:w-1/3 mb-8 lg:mb-0"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-xl font-bold mb-4 text-gray-400"</span><span class="nt">&gt;</span>Riviera Sperduto - Developer Portfolio<span class="nt">&lt;/h2&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-gray-400"</span><span class="nt">&gt;</span>A collection of my software development projects, skills, and services.<span class="nt">&lt;/p&gt;</span>
+        
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mt-4 flex space-x-4"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/rivie13"</span> <span class="na">target=</span><span class="s">"_blank"</span> <span class="na">class=</span><span class="s">"text-gray-400 hover:text-white"</span> <span class="na">aria-label=</span><span class="s">"GitHub profile"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;svg</span> <span class="na">class=</span><span class="s">"w-6 h-6"</span> <span class="na">fill=</span><span class="s">"currentColor"</span> <span class="na">viewBox=</span><span class="s">"0 0 24 24"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">"M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"</span><span class="nt">&gt;&lt;/path&gt;</span>
+            <span class="nt">&lt;/svg&gt;</span>
+          <span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://www.linkedin.com/in/"</span> <span class="na">target=</span><span class="s">"_blank"</span> <span class="na">class=</span><span class="s">"text-gray-400 hover:text-white"</span> <span class="na">aria-label=</span><span class="s">"LinkedIn profile"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;svg</span> <span class="na">class=</span><span class="s">"w-6 h-6"</span> <span class="na">fill=</span><span class="s">"currentColor"</span> <span class="na">viewBox=</span><span class="s">"0 0 24 24"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">"M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"</span><span class="nt">&gt;&lt;/path&gt;</span>
+            <span class="nt">&lt;/svg&gt;</span>
+          <span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"mailto:riviera.t.sperduto13@gmail.com"</span> <span class="na">class=</span><span class="s">"text-gray-400 hover:text-white"</span> <span class="na">aria-label=</span><span class="s">"Send email"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;svg</span> <span class="na">class=</span><span class="s">"w-6 h-6"</span> <span class="na">fill=</span><span class="s">"currentColor"</span> <span class="na">viewBox=</span><span class="s">"0 0 24 24"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">"M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"</span><span class="nt">&gt;&lt;/path&gt;</span>
+            <span class="nt">&lt;/svg&gt;</span>
+          <span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-full lg:w-1/3 mb-8 lg:mb-0"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-xl font-bold mb-4 text-gray-400"</span><span class="nt">&gt;</span>Quick Links<span class="nt">&lt;/h2&gt;</span>
+        <span class="nt">&lt;nav</span> <span class="na">role=</span><span class="s">"navigation"</span> <span class="na">aria-label=</span><span class="s">"Footer navigation"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"text-gray-400"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"mb-2"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/"</span> <span class="na">class=</span><span class="s">"hover:text-white"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"mb-2"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/about/"</span> <span class="na">class=</span><span class="s">"hover:text-white"</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"mb-2"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/projects/"</span> <span class="na">class=</span><span class="s">"hover:text-white"</span><span class="nt">&gt;</span>Projects<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"mb-2"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/services/"</span> <span class="na">class=</span><span class="s">"hover:text-white"</span><span class="nt">&gt;</span>Services<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"mb-2"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/resume/"</span> <span class="na">class=</span><span class="s">"hover:text-white"</span><span class="nt">&gt;</span>Resume<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"mb-2"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/blog/"</span> <span class="na">class=</span><span class="s">"hover:text-white"</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"mb-2"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/contact/"</span> <span class="na">class=</span><span class="s">"hover:text-white"</span><span class="nt">&gt;</span>Contact<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;/nav&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-full lg:w-1/3"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-xl font-bold mb-4 text-gray-400"</span><span class="nt">&gt;</span>Contact<span class="nt">&lt;/h2&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-gray-400 mb-2"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"inline-block mr-2"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;svg</span> <span class="na">class=</span><span class="s">"w-5 h-5"</span> <span class="na">fill=</span><span class="s">"currentColor"</span> <span class="na">viewBox=</span><span class="s">"0 0 24 24"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">"M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"</span><span class="nt">&gt;&lt;/path&gt;</span>
+            <span class="nt">&lt;/svg&gt;</span>
+          <span class="nt">&lt;/span&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"mailto:riviera.t.sperduto13@gmail.com"</span> <span class="na">class=</span><span class="s">"hover:text-white"</span><span class="nt">&gt;</span>riviera.t.sperduto13@gmail.com<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-gray-400"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"inline-block mr-2"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;svg</span> <span class="na">class=</span><span class="s">"w-5 h-5"</span> <span class="na">fill=</span><span class="s">"currentColor"</span> <span class="na">viewBox=</span><span class="s">"0 0 24 24"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+              <span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">"M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.5 0-10-4.5-10-10s4.5-10 10-10 10 4.5 10 10-4.5 10-10 10zm-1-14v7.59l5.293 5.3 1.414-1.42-4.707-4.71v-6.76h-2z"</span><span class="nt">&gt;&lt;/path&gt;</span>
+            <span class="nt">&lt;/svg&gt;</span>
+          <span class="nt">&lt;/span&gt;</span>
+          Available for freelance projects
+        <span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+    
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mt-8 pt-8 border-t border-gray-800 text-center text-gray-400"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;p&gt;</span><span class="ni">&amp;copy;</span> 2025 Riviera Sperduto - Developer Portfolio. All rights reserved.<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/footer&gt;</span></code></pre></figure>
+
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2.3. Bringing Pages to Life: Initial Content</h2>
+
+With the layouts and includes in place, I could now create the basic content pages. In Jekyll, these are typically Markdown files with YAML front matter at the top. 
+
+For the homepage (`index.md`):
+
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html">---
+layout: default
+title: Home
+---
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- Hero Section --&gt;</span>
+  <span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"py-8 md:py-16"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-8 items-center"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"md:col-span-3 opacity-0 px-2 md:px-0"</span> <span class="na">data-animate=</span><span class="s">"fade-in"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"text-3xl md:text-5xl font-bold mb-3 md:mb-4"</span><span class="nt">&gt;</span>Riviera Sperduto<span class="nt">&lt;/h1&gt;</span>
+        <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-lg md:text-2xl text-gray-600 mb-4 md:mb-6"</span><span class="nt">&gt;</span>Philadelphia-based Full Stack Developer | Cloud/Solutions Architect | AI Developer<span class="nt">&lt;/h2&gt;</span>
+        
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex flex-col sm:flex-row mb-4 md:mb-6 items-center"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/assets/images/your-image.jpg"</span> <span class="na">alt=</span><span class="s">"Riviera Sperduto"</span> <span class="na">class=</span><span class="s">"w-24 h-24 md:w-32 md:h-32 rounded-full mb-4 sm:mb-0 sm:mr-6 shadow-md border-2 border-blue-500"</span> <span class="na">data-hover=</span><span class="s">"scale"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-base md:text-lg text-center sm:text-left"</span><span class="nt">&gt;</span>I craft innovative solutions and leverage cutting-edge technologies to build exceptional digital experiences. With expertise in full-stack development, cloud architecture, and AI, I'm passionate about creating efficient, scalable, and user-friendly applications from my home in the City of Brotherly Love.<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex flex-col sm:flex-row gap-3 md:gap-4"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/projects/"</span> <span class="na">class=</span><span class="s">"w-full sm:w-auto text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-2.5 md:py-3 px-4 md:px-6 rounded-lg transition-all transform hover:scale-105"</span><span class="nt">&gt;</span>
+            View My Work
+          <span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/contact/"</span> <span class="na">class=</span><span class="s">"w-full sm:w-auto text-center bg-transparent hover:bg-blue-50 text-blue-600 font-bold py-2.5 md:py-3 px-4 md:px-6 rounded-lg border border-blue-600 transition-all transform hover:scale-105"</span><span class="nt">&gt;</span>
+            Get In Touch
+          <span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+      
+      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"md:col-span-2 opacity-0 mt-6 md:mt-0"</span> <span class="na">data-animate=</span><span class="s">"fade-in"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-gradient-to-br from-blue-100 to-indigo-100 p-1 rounded-xl shadow-xl"</span> <span class="na">data-hover=</span><span class="s">"scale"</span><span class="nt">&gt;</span>
+          <span class="c">&lt;!-- Philly image --&gt;</span>
+          <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/assets/images/frc-philly-1.gif"</span> <span class="na">alt=</span><span class="s">"Philadelphia Skyline"</span> <span class="na">class=</span><span class="s">"rounded-lg w-full"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/section&gt;</span>
+  
+  <span class="c">&lt;!-- Featured Projects and other sections follow --&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+
+And for the about page (`about.md`):
+
+
+<figure class="highlight"><pre><code class="language-markdown" data-lang="markdown"><span class="nn">---</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">default</span>
+<span class="na">title</span><span class="pi">:</span> <span class="s">About Me</span>
+<span class="nn">---</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"text-3xl font-bold mb-6 opacity-0"</span> <span class="na">data-animate=</span><span class="s">"fade-in"</span><span class="nt">&gt;</span>
+    About Me
+  <span class="nt">&lt;/h1&gt;</span>
+  
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mt-6 prose max-w-none opacity-0"</span> <span class="na">data-scroll=</span><span class="s">"fade-up"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+      Hello! I'm Riviera, a Full Stack Developer and Cloud Architect with a passion for building scalable, 
+      user-friendly applications. This page shares a bit more about my background, skills, and interests.
+    <span class="nt">&lt;/p&gt;</span>
+    
+    <span class="nt">&lt;h2&gt;</span>Professional Background<span class="nt">&lt;/h2&gt;</span>
+    <span class="nt">&lt;p&gt;</span>
+      With experience across the full development stack, I specialize in creating robust web applications 
+      that leverage modern cloud architecture. My expertise includes:
+    <span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;ul&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Full Stack Development (JavaScript, TypeScript, React, Node.js)<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Cloud Architecture (AWS, Azure)<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>Backend Systems (APIs, Databases, Serverless)<span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li&gt;</span>AI Integration (Machine Learning APIs, Natural Language Processing)<span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    
+    <span class="c">&lt;!-- Additional sections follow --&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></figure>
+
+
+The YAML front matter at the top of each file contains essential metadata:
+- `layout`: Specifies which layout template to use
+- `title`: The page title used in the browser tab and SEO
+- `permalink`: Defines the URL path for the page (when needed)
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2.4. Styling with Tailwind CSS: Utility-First Approach</h2>
+
+One of the key decisions I made (with AI guidance) was to use Tailwind CSS for styling. Tailwind is a utility-first CSS framework that allowed me to build custom designs quickly without leaving my HTML.
+
+<h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Why Tailwind?</h3>
+
+- **Rapid development**: Create custom UI designs directly in your markup
+- **Responsive out of the box**: Easy mobile-first responsive design
+- **Consistent design language**: Pre-defined spacing, color, and typography scales
+- **Low CSS bundle size**: Only includes the utilities you actually use in production
+- **Customizability**: Easily extend or modify the default configuration
+
+In the code snippets above, you can see Tailwind's utility classes in action. For example:
+
+- `container mx-auto px-4`: Sets a container with auto margins and horizontal padding
+- `text-3xl md:text-5xl font-bold`: Sets responsive font sizes that change at different breakpoints
+- `grid grid-cols-1 md:grid-cols-5 gap-4`: Creates a responsive grid layout
+- `bg-gray-900 text-white`: Sets background and text colors for the dark theme
+
+The beauty of Tailwind is how quickly you can iterate on designs directly in your markup, without switching between HTML and CSS files.
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2.5. Custom Styling Layers: Beyond Tailwind</h2>
+
+While Tailwind CSS handled most of my styling needs, I also created several custom CSS files for specific purposes:
+
+<h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">assets/css/main.css</h3>
+
+This file contains global styles and any custom components that couldn't be easily created with Tailwind alone:
+
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/* Global styles */</span>
+<span class="nt">html</span> <span class="p">{</span>
+  <span class="nl">scroll-behavior</span><span class="p">:</span> <span class="nb">smooth</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Inter'</span><span class="p">,</span> <span class="o">-</span><span class="n">apple-system</span><span class="p">,</span> <span class="n">BlinkMacSystemFont</span><span class="p">,</span> <span class="s2">'Segoe UI'</span><span class="p">,</span> <span class="n">Roboto</span><span class="p">,</span> <span class="n">Helvetica</span><span class="p">,</span> <span class="n">Arial</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">/* Custom components */</span>
+<span class="nc">.prose</span> <span class="nt">h1</span><span class="o">,</span>
+<span class="nc">.prose</span> <span class="nt">h2</span><span class="o">,</span>
+<span class="nc">.prose</span> <span class="nt">h3</span><span class="o">,</span>
+<span class="nc">.prose</span> <span class="nt">h4</span><span class="o">,</span>
+<span class="nc">.prose</span> <span class="nt">h5</span><span class="o">,</span>
+<span class="nc">.prose</span> <span class="nt">h6</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">#111827</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">700</span><span class="p">;</span>
+  <span class="nl">margin-top</span><span class="p">:</span> <span class="m">1.5em</span><span class="p">;</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">0.75em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.dark</span> <span class="nc">.prose</span> <span class="nt">h1</span><span class="o">,</span>
+<span class="nc">.dark</span> <span class="nc">.prose</span> <span class="nt">h2</span><span class="o">,</span>
+<span class="nc">.dark</span> <span class="nc">.prose</span> <span class="nt">h3</span><span class="o">,</span>
+<span class="nc">.dark</span> <span class="nc">.prose</span> <span class="nt">h4</span><span class="o">,</span>
+<span class="nc">.dark</span> <span class="nc">.prose</span> <span class="nt">h5</span><span class="o">,</span>
+<span class="nc">.dark</span> <span class="nc">.prose</span> <span class="nt">h6</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">#f3f4f6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.prose</span> <span class="nt">a</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">#2563eb</span><span class="p">;</span>
+  <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">underline</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.dark</span> <span class="nc">.prose</span> <span class="nt">a</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">#93c5fd</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">/* Skip to content link for accessibility */</span>
+<span class="nc">.skip-to-content</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">:</span> <span class="m">-9999px</span><span class="p">;</span>
+  <span class="nl">z-index</span><span class="p">:</span> <span class="m">999</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">1em</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="nx">white</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">black</span><span class="p">;</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.skip-to-content</span><span class="nd">:focus</span> <span class="p">{</span>
+  <span class="nl">left</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="nf">translateX</span><span class="p">(</span><span class="m">-50%</span><span class="p">);</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+
+<h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">assets/css/animations.css</h3>
+
+This file contains animation-related styles to add subtle motion and visual interest:
+
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/* Page transition effects */</span>
+<span class="nc">.page-transition</span> <span class="p">{</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="nf">opacity</span> <span class="m">0.3s</span> <span class="nb">ease-in-out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.enter-active</span> <span class="p">{</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">/* Fade-in animation */</span>
+<span class="k">@keyframes</span> <span class="n">fadeIn</span> <span class="p">{</span>
+  <span class="nt">from</span> <span class="p">{</span> <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span> <span class="p">}</span>
+  <span class="nt">to</span> <span class="p">{</span> <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nc">.fade-in</span> <span class="p">{</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="n">fadeIn</span> <span class="m">0.5s</span> <span class="nb">ease-in-out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c">/* Entrance animations triggered by scrolling */</span>
+<span class="o">[</span><span class="nt">data-animate</span><span class="o">=</span><span class="s1">"fade-in"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="nf">opacity</span> <span class="m">0.6s</span> <span class="nb">ease-out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">[</span><span class="nt">data-animate</span><span class="o">=</span><span class="s1">"fade-in"</span><span class="o">]</span><span class="nc">.is-visible</span> <span class="p">{</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">[</span><span class="nt">data-scroll</span><span class="o">=</span><span class="s1">"fade-up"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="nf">translateY</span><span class="p">(</span><span class="m">20px</span><span class="p">);</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="nf">opacity</span> <span class="m">0.6s</span> <span class="nb">ease-out</span><span class="p">,</span> <span class="n">transform</span> <span class="m">0.6s</span> <span class="nb">ease-out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">[</span><span class="nt">data-scroll</span><span class="o">=</span><span class="s1">"fade-up"</span><span class="o">]</span><span class="nc">.is-visible</span> <span class="p">{</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="nf">translateY</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c">/* Hover scale effect */</span>
+<span class="o">[</span><span class="nt">data-hover</span><span class="o">=</span><span class="s1">"scale"</span><span class="o">]</span> <span class="p">{</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="n">transform</span> <span class="m">0.3s</span> <span class="nb">ease-in-out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">[</span><span class="nt">data-hover</span><span class="o">=</span><span class="s1">"scale"</span><span class="o">]</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="nf">scale</span><span class="p">(</span><span class="m">1.03</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+
+<h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">assets/css/responsive.css</h3>
+
+This file contains additional responsive design styles beyond what Tailwind provides:
+
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/* Custom responsive adjustments */</span>
+<span class="k">@media</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">640px</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">.project-grid</span> <span class="p">{</span>
+    <span class="nl">grid-template-columns</span><span class="p">:</span> <span class="m">1fr</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nc">.hidden-mobile</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c">/* Print styles */</span>
+<span class="k">@media</span> <span class="n">print</span> <span class="p">{</span>
+  <span class="nt">header</span><span class="o">,</span> <span class="nt">footer</span><span class="o">,</span> <span class="nc">.no-print</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">12pt</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="nx">black</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nx">white</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nt">a</span> <span class="p">{</span>
+    <span class="nl">text-decoration</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="nx">black</span><span class="p">;</span>
+  <span class="p">}</span>
+  
+  <span class="nt">a</span><span class="nd">::after</span> <span class="p">{</span>
+    <span class="nl">content</span><span class="p">:</span> <span class="s1">" ("</span> <span class="nf">attr</span><span class="p">(</span><span class="n">href</span><span class="p">)</span> <span class="s1">")"</span><span class="p">;</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">10pt</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+
+<h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">assets/css/dark-mode.css</h3>
+
+This file contains styles specific to dark mode:
+
+
+<figure class="highlight"><pre><code class="language-css" data-lang="css"><span class="c">/* Dark mode specific styles */</span>
+<span class="nt">html</span><span class="nc">.dark</span> <span class="nt">body</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="nx">#111827</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">#f3f4f6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">html</span><span class="nc">.dark</span> <span class="nc">.bg-white</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="nx">#1f2937</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">html</span><span class="nc">.dark</span> <span class="nc">.text-gray-900</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">#f3f4f6</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">html</span><span class="nc">.dark</span> <span class="nc">.border-gray-200</span> <span class="p">{</span>
+  <span class="nl">border-color</span><span class="p">:</span> <span class="nx">#374151</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.dark-mode-sun</span><span class="o">,</span>
+<span class="nc">.dark-mode-moon</span> <span class="p">{</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="n">transform</span> <span class="m">0.5s</span> <span class="nb">ease</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#dark-mode-toggle</span><span class="nd">:hover</span> <span class="nc">.dark-mode-sun</span><span class="o">,</span>
+<span class="nf">#dark-mode-toggle</span><span class="nd">:hover</span> <span class="nc">.dark-mode-moon</span> <span class="p">{</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="nf">rotate</span><span class="p">(</span><span class="m">12deg</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+</div>
+
+<div class="opacity-0" data-scroll="fade-up">
+<h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">2.6. Local Development: See It Live!</h2>
+
+With the structure, layouts, and styling in place, it was time to see the site in action. Jekyll makes local development a breeze. After setting up Ruby and installing the necessary gems with `bundle install`, I could run:
+
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">bundle <span class="nb">exec </span>jekyll serve</code></pre></figure>
+
+
+This command:
+1. Builds the site from the source files
+2. Serves it locally at http://localhost:4000
+3. Watches for changes and rebuilds automatically
+
+This rapid feedback loop was invaluable for iterating on designs and testing functionality. The development process typically followed this pattern:
+
+1. Make changes to a template, page, or CSS file
+2. Save the file and wait a moment for Jekyll to rebuild (usually takes less than a second)
+3. Refresh the browser to see the changes
+4. Repeat until satisfied with the result
+
+The ability to instantly preview changes made the development process much more efficient and enjoyable.
+
+<br />
+<br />
+<div class="opacity-0" data-scroll="fade-up">
+NOTE: The content in this blog does not accurately reflect the content of the actual portfolio. It contains similar elements, but the actual portfolio is more comprehensive and detailed. You will need to expand and flesh out other parts of this and (hopefully) change it up to reflect your own work, experiences, and your own style.
+<br />
+<br />
+</div>
+
+<div class="opacity-0" data-animate="fade-in">
+---
+<br />
+<br />
+That wraps up Part 2 of our portfolio tutorial! We've covered the foundational aspects of setting up Jekyll and styling with Tailwind CSS. We now have a well-structured site with a beautiful, responsive, and accessible design.
+
+In Part 3, we'll dive into content architecture and building reusable components, exploring how to use Jekyll's data files and includes to create a modular, maintainable site.
+
+Stay tuned for the next installment, and as always, feel free to reach out with any questions or suggestions in the comments below! 
+</div> 
+</div>
+
+  </div>
+  
+  <!-- In-article ad after content -->
+  
+
+
+  
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-7733001105026476"
+             data-ad-slot="YOUR_IN_ARTICLE_SLOT_ID"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    
+ 
+  
+  
+    <div class="mb-8 pb-8 border-b opacity-0" data-animate="fade-in" data-scroll="fade-up">
+      <h3 class="text-lg font-bold mb-4">Tags</h3>
+      <div class="flex flex-wrap gap-2">
+        
+          <a href="/tag/Jekyll" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Jekyll
+          </a>
+        
+          <a href="/tag/Tailwind%20CSS" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Tailwind CSS
+          </a>
+        
+          <a href="/tag/Web%20Development" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Web Development
+          </a>
+        
+          <a href="/tag/Portfolio%20Development" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Portfolio Development
+          </a>
+        
+          <a href="/tag/Static%20Sites" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Static Sites
+          </a>
+        
+      </div>
+    </div>
+  
+  
+  <div class="flex justify-between items-center mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    <a href="/blog/" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to all posts
+    </a>
+    
+    <div class="flex space-x-4">
+      <a href="https://twitter.com/intent/tweet?text=Part+2%3A+Laying+the+Foundation+-+Jekyll+Setup+and+Styling+with+Tailwind+CSS&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F10%2Flaying-the-foundation-jekyll-setup-and-styling-with-tailwind-css%2F" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700">
+        <span class="sr-only">Share on Twitter</span>
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F10%2Flaying-the-foundation-jekyll-setup-and-styling-with-tailwind-css%2F&title=Part+2%3A+Laying+the+Foundation+-+Jekyll+Setup+and+Styling+with+Tailwind+CSS" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:text-blue-900">
+        <span class="sr-only">Share on LinkedIn</span>
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+        </svg>
+      </a>
+      <a href="https://bsky.app/intent/compose?text=Part+2%3A+Laying+the+Foundation+-+Jekyll+Setup+and+Styling+with+Tailwind+CSS%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F10%2Flaying-the-foundation-jekyll-setup-and-styling-with-tailwind-css%2F" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700">
+        <span class="sr-only">Share on Bluesky</span>
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#0085ff" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+  
+  
+    
+    <div class="mt-12 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+      <h3 class="text-2xl font-bold mb-6">Related Posts</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+            <div class="p-6">
+              <h4 class="text-lg font-bold mb-2">
+                <a href="/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" class="text-gray-900 hover:text-blue-600">Enhancing CodeGrind's AI Capabilities: A Journey of Improvement</a>
+              </h4>
+              <div class="text-gray-600 text-sm mb-3">
+                <time datetime="2025-05-21T13:00:00-04:00">May 21, 2025</time>
+              </div>
+              <p class="text-gray-600 mb-4">In this post, I'll share the journey of enhancing CodeGrind's AI capabilities, focusing on our recent improvements to the AI...</p>
+              <a href="/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                Read more
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+            <div class="p-6">
+              <h4 class="text-lg font-bold mb-2">
+                <a href="/blog/2025/05/20/the-tech-stack-behind-codegrind/" class="text-gray-900 hover:text-blue-600">The Tech Stack Behind CodeGrind</a>
+              </h4>
+              <div class="text-gray-600 text-sm mb-3">
+                <time datetime="2025-05-20T13:00:00-04:00">May 20, 2025</time>
+              </div>
+              <p class="text-gray-600 mb-4">In my previous post, I introduced CodeGrind as a modern coding practice platform. Today, I’ll share the actual technical architecture...</p>
+              <a href="/blog/2025/05/20/the-tech-stack-behind-codegrind/" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                Read more
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        
+        
+    
+      </div>
+      <!-- Display ad after related posts -->
+      
+
+
+  
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-7733001105026476"
+             data-ad-slot="YOUR_DISPLAY_AD_SLOT_ID"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    
+ 
+    </div>
+  
+  
+  <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    <h3 class="text-xl font-bold mb-4">Subscribe for Updates</h3>
+    <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
+    
+    <!-- Mailchimp Signup Form -->
+    <div id="mc_embed_shell" class="bg-white p-5 rounded-lg shadow-md">
+      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%; max-width: 600px; border-radius: 0.5rem;}
+        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+    <form action="https://github.us14.list-manage.com/subscribe/post?u=4c5f3cb9e9f5dfc6c64a01f23&amp;id=28ff2a557d&amp;f_id=00c351e0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll"><h2>Subscribe</h2>
+            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+        <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display: none;"></div>
+            <div class="response" id="mce-success-response" style="display: none;"></div>
+        </div>
+    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
+        <input type="text" name="b_4c5f3cb9e9f5dfc6c64a01f23_28ff2a557d" tabindex="-1" value="">
+    </div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                <p style="margin: 0px auto;"><a href="http://eepurl.com/jdZ9VY" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';fnames[6]='COMPANY';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
+    <!--End Mailchimp-->
+  </div>
+</article> 
+
+<!-- Code block styling enhancements -->
+<script>
+// Add copy button to code blocks
+document.addEventListener('DOMContentLoaded', () => {
+    const codeBlocks = document.querySelectorAll('.highlight');
+    
+    codeBlocks.forEach((block) => {
+        // Create copy button
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-code-button absolute top-2 right-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded px-2 py-1 text-xs font-mono';
+        copyButton.textContent = 'Copy';
+        
+        // Position the code block container relatively
+        block.style.position = 'relative';
+        
+        // Add button to block
+        block.appendChild(copyButton);
+        
+        // Add click event
+        copyButton.addEventListener('click', () => {
+            const code = block.querySelector('code').innerText;
+            navigator.clipboard.writeText(code);
+            
+            // Visual feedback
+            copyButton.textContent = 'Copied!';
+            copyButton.classList.add('bg-green-200', 'dark:bg-green-800', 'text-green-800', 'dark:text-green-200');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                copyButton.textContent = 'Copy';
+                copyButton.classList.remove('bg-green-200', 'dark:bg-green-800', 'text-green-800', 'dark:text-green-200');
+            }, 2000);
+        });
+    });
+});
+</script>
+
+<style>
+/* Specific styling for code blocks in posts */
+.post-content .highlight {
+    margin: 2rem 0;
+}
+
+/* Style for code copy button on hover */
+.copy-code-button {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.highlight:hover .copy-code-button {
+    opacity: 1;
+}
+</style> 
+    </main>
+    
+     <!-- This is to prevent the footer ad from appearing on the home page need to also hide on privacy policy page -->
+    
+<div class="footer-ad-container w-full py-4 bg-gray-50 border-t border-gray-200 mt-8 border-2 border-dashed border-gray-300">
+  <div class="container mx-auto px-4 text-center">
+    <h4 class="text-sm uppercase text-gray-500 mb-2 text-center">Advertisement</h4>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7733001105026476"
+         data-ad-slot="7978772768"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+    
+    
+    <footer class="bg-gray-900 text-white py-12" role="contentinfo">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Riviera Sperduto - Developer Portfolio</h2>
+        <p class="text-gray-400">A collection of my software development projects, skills, and services.</p>
+        
+        <div class="mt-4 flex space-x-4">
+          <a href="https://github.com/rivie13" target="_blank" class="text-gray-400 hover:text-white" aria-label="GitHub profile">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/" target="_blank" class="text-gray-400 hover:text-white" aria-label="LinkedIn profile">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+            </svg>
+          </a>
+          <a href="mailto:riviera.t.sperduto13@gmail.com" class="text-gray-400 hover:text-white" aria-label="Send email">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Quick Links</h2>
+        <nav role="navigation" aria-label="Footer navigation">
+          <ul class="text-gray-400">
+            <li class="mb-2"><a href="/" class="hover:text-white">Home</a></li>
+            <li class="mb-2"><a href="/about/" class="hover:text-white">About</a></li>
+            <li class="mb-2"><a href="/projects/" class="hover:text-white">Projects</a></li>
+            <li class="mb-2"><a href="/services/" class="hover:text-white">Services</a></li>
+            <li class="mb-2"><a href="/resume/" class="hover:text-white">Resume</a></li>
+            <li class="mb-2"><a href="/blog/" class="hover:text-white">Blog</a></li>
+            <li class="mb-2"><a href="/contact/" class="hover:text-white">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+      <div class="w-full lg:w-1/3">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Contact</h2>
+        <p class="text-gray-400 mb-2">
+          <span class="inline-block mr-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
+            </svg>
+          </span>
+          <a href="mailto:riviera.t.sperduto13@gmail.com" class="hover:text-white">riviera.t.sperduto13@gmail.com</a>
+        </p>
+        <p class="text-gray-400">
+          <span class="inline-block mr-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.5 0-10-4.5-10-10s4.5-10 10-10 10 4.5 10 10-4.5 10-10 10zm-1-14v7.59l5.293 5.3 1.414-1.42-4.707-4.71v-6.76h-2z"></path>
+            </svg>
+          </span>
+          Available for freelance projects
+        </p>
+      </div>
+    </div>
+    
+    <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+      <p>&copy; 2025 Riviera Sperduto - Developer Portfolio. All rights reserved.</p>
+    </div>
+  </div>
+</footer> 
+    
+    <!-- Load scripts in proper dependency order -->
+    <script src="/assets/js/github-config.js"></script>
+    <script src="/assets/js/github-repos.js"></script>
+    <script src="/assets/js/github-activity.js"></script>
+    <script src="/assets/js/github-stats.js"></script>
+    <script src="/assets/js/github-contributions.js"></script>
+    <script src="/assets/js/project-cards.js"></script>
+    <script src="/assets/js/github-test.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/animations.js"></script>
+    <script src="/assets/js/responsive.js"></script>
+    
+    <!-- Cookie Consent Banner -->
+<style>
+    #cookie-notice {
+        padding: 20px;
+        display: none;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #222;
+        color: rgba(255, 255, 255, 0.8);
+        z-index: 1000;
+    }
+
+    #cookie-notice a {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    #cookie-notice #cookie-notice-accept {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #cookie-notice #cookie-notice-deny {
+        background-color: #f44336;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #cookie-notice #cookie-notice-info {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 767px) {
+        #cookie-notice {
+            padding: 15px;
+        }
+        #cookie-notice a {
+            display: block;
+            margin: 8px auto;
+            max-width: 170px;
+        }
+    }
+</style>
+<div id="cookie-notice">
+    <span>I would like to use cookies to improve your experience on my website and to analyze site traffic.</span>
+    <a id="cookie-notice-accept">Accept</a>
+    <a id="cookie-notice-deny">Deny</a>
+    <a id="cookie-notice-info" href="/privacy">More info</a>
+</div>
+
+<script>
+    function createCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function loadAnalytics() {
+        // Load GA script
+        var script = document.createElement('script');
+        script.innerHTML = `/*This function will load script and call the callback once the script has loaded*/
+
+function loadScriptAsync(scriptSrc, callback) {
+    if (typeof callback !== 'function') {
+        throw new Error('Not a valid callback for async script load');
+    }
+    var script = document.createElement('script');
+    script.onload = callback;
+    script.src = scriptSrc;
+    document.head.appendChild(script);
+}
+
+/* This is the part where you call the above defined function and "calls back" your code which gets executed after the script has loaded */
+
+loadScriptAsync('https://www.googletagmanager.com/gtag/js?id=G-C9WDHTWS34', function () {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C9WDHTWS34', { 'anonymize_ip': true });
+}) `;
+        document.head.appendChild(script);
+    }
+
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    // Show the cookie notice if consent hasn't been given
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if we need to show the notice (only in production)
+        /*  */
+    });
+
+    // Button click handlers
+    document.getElementById('cookie-notice-accept').addEventListener('click', function () {
+        createCookie('cookie-notice-dismissed', 'true', 365);
+        document.getElementById('cookie-notice').style.display = 'none';
+        loadAnalytics();
+    });
+
+    document.getElementById('cookie-notice-deny').addEventListener('click', function () {
+        createCookie('cookie-notice-dismissed', 'false', 365);
+        document.getElementById('cookie-notice').style.display = 'none';
+    });
+</script> 
+</body>
+</html> 

@@ -1,0 +1,85 @@
+# Site settings
+title: Riviera Sperduto - Developer Portfolio
+email: riviera.t.sperduto13@gmail.com
+description: >-
+  Portfolio of Riviera Sperduto - Full Stack Developer, Cloud/Solutions Architect, and AI Developer.
+  Showcasing projects, skills, and services.
+baseurl: ""
+url: "https://rivie13.github.io"
+github_username: rivie13
+
+# Build settings
+markdown: kramdown
+future: true
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate-v2
+
+# SEO settings
+twitter:
+  username: # your Twitter username (if you have one)
+  card: summary_large_image
+logo: /assets/images/default-social-image.png  # Make sure this path exists
+social:
+  name: Riviera Sperduto
+  links:
+    - https://github.com/rivie13
+    - https://www.linkedin.com/in/riviera-sperduto-219a54203/  # Update with your actual LinkedIn URL
+    - https://bsky.app/profile/riviesperduto.bsky.social
+
+# Google Analytics
+google_analytics: G-C9WDHTWS34  # Your actual Google Analytics ID from the screenshot
+
+# Google AdSense
+google_adsense: ca-pub-7733001105026476
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/default-social-image.png  # Create this image in your assets folder
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Riviera Sperduto"
+      image: /assets/images/blog-social-image.png  # Create this image in your assets folder
+
+# Pagination settings for blog
+pagination:
+  enabled: true
+  per_page: 5
+  permalink: '/page:num/'
+  title: ':title - page :num'
+  first: '/blog/'
+  debug: true
+  sort_reverse: true
+
+# Social media links
+social_links:
+  github: rivie13
+  linkedin: https://www.linkedin.com/in/riviera-sperduto-219a54203/
+  bsky: https://bsky.app/profile/riviesperduto.bsky.social
+
+# Exclude from processing
+exclude:
+  - PLANNING.md
+  - RUBY_JEKYLL_SETUP.md
+  - COMPLETION_TRACKING.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - fix_jekyll.bat
+  - .gitignore
+  - .nojekyll 
+  - /docfiles

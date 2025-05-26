@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Stack Behind CodeGrind | Riviera Sperduto - Developer Portfolio</title>
+    <!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>The Tech Stack Behind CodeGrind | Riviera Sperduto - Developer Portfolio</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="The Tech Stack Behind CodeGrind" />
+<meta name="author" content="Riviera Sperduto" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In my previous post, I introduced CodeGrind as a modern coding practice platform. Today, I’ll share the actual technical architecture that powers this platform, focusing on the real implementation rather than theoretical choices." />
+<meta property="og:description" content="In my previous post, I introduced CodeGrind as a modern coding practice platform. Today, I’ll share the actual technical architecture that powers this platform, focusing on the real implementation rather than theoretical choices." />
+<link rel="canonical" href="http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind/" />
+<meta property="og:url" content="http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind/" />
+<meta property="og:site_name" content="Riviera Sperduto - Developer Portfolio" />
+<meta property="og:image" content="http://localhost:4000/assets/images/codegrind/codegrind-banner.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-05-20T13:00:00-04:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="http://localhost:4000/assets/images/codegrind/codegrind-banner.png" />
+<meta property="twitter:title" content="The Tech Stack Behind CodeGrind" />
+<meta name="twitter:site" content="@" />
+<meta name="twitter:creator" content="@Riviera Sperduto" />
+<script type="application/ld+json">
+{"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind/"},"datePublished":"2025-05-20T13:00:00-04:00","@type":"BlogPosting","url":"http://localhost:4000/blog/2025/05/20/the-tech-stack-behind-codegrind/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/default-social-image.png"},"name":"Riviera Sperduto"},"description":"In my previous post, I introduced CodeGrind as a modern coding practice platform. Today, I’ll share the actual technical architecture that powers this platform, focusing on the real implementation rather than theoretical choices.","image":"http://localhost:4000/assets/images/codegrind/codegrind-banner.png","author":{"@type":"Person","name":"Riviera Sperduto"},"headline":"The Tech Stack Behind CodeGrind","dateModified":"2025-05-20T13:00:00-04:00","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+    <!-- Google AdSense -->
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7733001105026476"
+     crossorigin="anonymous"></script>
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/animations.css">
+    <link rel="stylesheet" href="/assets/css/responsive.css">
+    <link rel="stylesheet" href="/assets/css/dark-mode.css">
+    <script>
+        // Check for saved dark mode preference on page load
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</head>
+<body class="page-transition enter-active">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <header class="bg-gray-900 text-white shadow-md">
+  <div class="container mx-auto px-4 py-4">
+    <nav class="flex flex-wrap items-center justify-between">
+      <!-- Logo/Site Title -->
+      <a href="/" class="text-xl font-bold text-gray-400" aria-label="Home page">
+        Riviera Sperduto
+      </a>
+      
+      <div class="flex items-center">
+        <!-- Dark Mode Toggle -->
+        <button id="dark-mode-toggle" class="focus:outline-none mr-4" aria-label="Toggle dark mode">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark-mode-sun hidden dark:block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 dark-mode-moon dark:hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+      
+        <!-- Mobile menu button -->
+        <button id="menu-toggle" class="block md:hidden focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Navigation Links -->
+      <div id="menu" class="w-full md:w-auto hidden md:block" role="navigation" aria-label="Main navigation">
+        <ul class="flex flex-col md:flex-row md:space-x-6 mt-4 md:mt-0">
+          <li><a href="/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Home">Home</a></li>
+          <li><a href="/about/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="About">About</a></li>
+          <li><a href="/projects/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Projects">Projects</a></li>
+          <li><a href="/services/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Services">Services</a></li>
+          <li><a href="/resume/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Resume">Resume</a></li>
+          <li><a href="/blog/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Blog">Blog</a></li>
+          <li><a href="/contact/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Contact">Contact</a></li>
+          <li><a href="/privacy/" class="nav-link block py-2 md:py-0 text-gray-300 hover:text-blue-300" aria-label="Privacy Policy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Toggle mobile menu
+  document.getElementById('menu-toggle').addEventListener('click', function() {
+    document.getElementById('menu').classList.toggle('hidden');
+    // Update aria-expanded state
+    const isExpanded = !document.getElementById('menu').classList.contains('hidden');
+    this.setAttribute('aria-expanded', isExpanded.toString());
+  });
+</script> 
+    
+
+    
+<div class="header-ad-container w-full py-3 bg-gray-100 border-b border-gray-200 border-2 border-dashed border-gray-300">
+  <div class="container mx-auto px-4 text-center">
+    <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7733001105026476"
+         data-ad-slot="4238838304"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+
+    
+    <main id="main-content" class="container mx-auto px-4 py-8">
+        <article class="max-w-4xl mx-auto">
+  <header class="mb-8 opacity-0" data-animate="fade-in">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">The Tech Stack Behind CodeGrind</h1>
+    
+    <div class="flex flex-wrap items-center text-gray-600 mb-6">
+      <time datetime="2025-05-20T13:00:00-04:00" class="flex items-center mr-4 mb-2">
+        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+        </svg>
+        May 20, 2025
+      </time>
+      
+      
+        <span class="flex items-center mr-4 mb-2">
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+          </svg>
+          Riviera Sperduto
+        </span>
+      
+      
+      
+        <span class="flex items-center mb-2">
+          <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
+          </svg>
+          
+            <a href="/categories/CodeGrind" class="hover:text-blue-600 transition-colors">CodeGrind</a>,&nbsp;
+          
+            <a href="/categories/Development" class="hover:text-blue-600 transition-colors">Development</a>,&nbsp;
+          
+            <a href="/categories/AI" class="hover:text-blue-600 transition-colors">AI</a>,&nbsp;
+          
+            <a href="/categories/Web%20Development" class="hover:text-blue-600 transition-colors">Web Development</a>
+          
+        </span>
+      
+    </div>
+    
+    
+      <div class="mb-6 rounded-lg overflow-hidden shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+        <img src="/assets/images/codegrind/codegrind-banner.png" alt="The Tech Stack Behind CodeGrind" class="w-full">
+      </div>
+    
+  </header>
+  
+  <div class="prose prose-blue max-w-none mb-12 opacity-0 post-content" data-animate="fade-in" data-scroll="fade-up">
+    <p>In my previous post, I introduced CodeGrind as a modern coding practice platform. Today, I’ll share the actual technical architecture that powers this platform, focusing on the real implementation rather than theoretical choices.</p>
+
+<h2 id="the-core-architecture">The Core Architecture</h2>
+
+<p>CodeGrind is built with a focus on simplicity, scalability, and cost-effectiveness. Here’s what we actually use:</p>
+
+<h3 id="frontend">Frontend</h3>
+<ul>
+  <li><strong>React</strong>: A simple, efficient frontend built with React</li>
+  <li><strong>Monaco Editor</strong>: The same editor that powers VS Code, providing a familiar coding experience</li>
+  <li><strong>Azure App Service</strong>: For hosting the frontend</li>
+</ul>
+
+<h3 id="backend">Backend</h3>
+<ul>
+  <li><strong>Node.js &amp; Express</strong>: The core of our backend services</li>
+  <li><strong>Azure App Service</strong>: For hosting the backend</li>
+  <li><strong>Azure Flexible Server</strong>: For storing user data, problems, and submissions</li>
+</ul>
+
+<h2 id="the-code-execution-engine">The Code Execution Engine</h2>
+
+<p>The heart of CodeGrind is its code execution system:</p>
+
+<ul>
+  <li><strong>Judge0</strong>: An open-source code execution system that handles code compilation and execution</li>
+  <li><strong>Smart VM Management</strong>: A custom system that intelligently manages VM lifecycle to optimize costs</li>
+  <li><strong>Azure Functions</strong>: For orchestrating code execution and VM management</li>
+</ul>
+
+<div class="blog-sidebar-ad my-8 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+  <h4 class="text-sm uppercase text-gray-500 mb-2">Sponsored Content</h4>
+  <div class="bg-white p-2 rounded shadow">
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7733001105026476" data-ad-slot="5855397645" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+
+<h2 id="ai-integration">AI Integration</h2>
+
+<p>We leverage Azure’s AI capabilities to enhance the learning experience:</p>
+
+<ul>
+  <li><strong>Azure OpenAI</strong>: Powers our AI coding assistant</li>
+  <li><strong>Azure Cognitive Services</strong>: For natural language processing and code analysis</li>
+</ul>
+
+<h2 id="security-and-performance">Security and Performance</h2>
+
+<p>Security is crucial for a platform that executes user code:</p>
+
+<ul>
+  <li><strong>Azure Key Vault</strong>: For secure management of secrets and API keys</li>
+  <li><strong>Session Management</strong>: For secure user authentication</li>
+  <li><strong>Rate Limiting</strong>: To prevent abuse and ensure fair usage</li>
+  <li><strong>Input Validation</strong>: To ensure code safety</li>
+</ul>
+
+<h2 id="development-and-deployment">Development and Deployment</h2>
+
+<p>Our development workflow is streamlined and efficient:</p>
+
+<ul>
+  <li><strong>GitHub Actions</strong>: For continuous integration and deployment</li>
+  <li><strong>ESLint &amp; Prettier</strong>: For code consistency</li>
+</ul>
+
+<h2 id="monitoring-and-analytics">Monitoring and Analytics</h2>
+
+<p>To ensure platform health and gather insights:</p>
+
+<ul>
+  <li><strong>Application Insights</strong>: For performance tracking and error monitoring</li>
+  <li><strong>Google Analytics</strong>: For user behavior analysis</li>
+  <li><strong>Custom Logging</strong>: For detailed execution tracking</li>
+</ul>
+
+<h2 id="the-real-challenges">The Real Challenges</h2>
+
+<p>Building CodeGrind came with its own set of challenges:</p>
+
+<ol>
+  <li>
+    <p><strong>Cost Optimization</strong>: The biggest challenge was managing the cost of code execution. We solved this by implementing a smart VM management system that only runs when needed.</p>
+  </li>
+  <li>
+    <p><strong>Security</strong>: Ensuring secure code execution while maintaining performance required careful planning and implementation.</p>
+  </li>
+  <li>
+    <p><strong>Scalability</strong>: The system needs to handle multiple concurrent code executions efficiently.</p>
+  </li>
+</ol>
+
+<h2 id="whats-next">What’s Next?</h2>
+
+<p>While the current implementation serves our needs well, we’re always looking to improve:</p>
+
+<ol>
+  <li><strong>Enhanced AI Features</strong>: Expanding the capabilities of our AI coding assistant</li>
+  <li><strong>Performance Optimization</strong>: Further improvements to code execution speed</li>
+  <li><strong>User Experience</strong>: Continuous improvements to the coding interface</li>
+</ol>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>CodeGrind’s tech stack is a practical combination of proven technologies that work together to create a reliable and efficient platform. We’ve focused on using Azure services where they make sense, while keeping the architecture simple and maintainable.</p>
+
+<p>In the next post, I’ll dive into how we implemented the learning features and the Tower Defense game. Stay tuned!</p>
+
+<p><br />
+<br /></p>
+
+<!--add the image of tower defense game here -->
+<p><img src="/assets/images/codegrind/tower-defense-solution-verified.png" alt="Tower Defense Game" class="img-fluid" /></p>
+
+<p><br /></p>
+
+<p><br /></p>
+
+<hr />
+
+<p><br /></p>
+
+<p><em>Want to learn more about CodeGrind? Try the platform yourself at <a href="https://codegrind.online">codegrind.online</a>.</em></p>
+
+  </div>
+  
+  <!-- In-article ad after content -->
+  
+
+
+  
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+        <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-7733001105026476"
+             data-ad-slot="YOUR_IN_ARTICLE_SLOT_ID"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    
+ 
+  
+  
+    <div class="mb-8 pb-8 border-b opacity-0" data-animate="fade-in" data-scroll="fade-up">
+      <h3 class="text-lg font-bold mb-4">Tags</h3>
+      <div class="flex flex-wrap gap-2">
+        
+          <a href="/tag/CodeGrind" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #CodeGrind
+          </a>
+        
+          <a href="/tag/Tech%20Stack" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Tech Stack
+          </a>
+        
+          <a href="/tag/JavaScript" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #JavaScript
+          </a>
+        
+          <a href="/tag/Azure%20Functions" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Azure Functions
+          </a>
+        
+          <a href="/tag/Serverless" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Serverless
+          </a>
+        
+          <a href="/tag/API%20Integration" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #API Integration
+          </a>
+        
+          <a href="/tag/Data%20Management" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Data Management
+          </a>
+        
+          <a href="/tag/Real-Time%20Execution" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Real-Time Execution
+          </a>
+        
+          <a href="/tag/Judge0" class="bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium py-1 px-2 rounded transition-colors">
+            #Judge0
+          </a>
+        
+      </div>
+    </div>
+  
+  
+  <div class="flex justify-between items-center mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    <a href="/blog/" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+      </svg>
+      Back to all posts
+    </a>
+    
+    <div class="flex space-x-4">
+      <a href="https://twitter.com/intent/tweet?text=The+Tech+Stack+Behind+CodeGrind&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F20%2Fthe-tech-stack-behind-codegrind%2F" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700">
+        <span class="sr-only">Share on Twitter</span>
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F20%2Fthe-tech-stack-behind-codegrind%2F&title=The+Tech+Stack+Behind+CodeGrind" target="_blank" rel="noopener noreferrer" class="text-blue-700 hover:text-blue-900">
+        <span class="sr-only">Share on LinkedIn</span>
+        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+        </svg>
+      </a>
+      <a href="https://bsky.app/intent/compose?text=The+Tech+Stack+Behind+CodeGrind%20http%3A%2F%2Flocalhost%3A4000%2Fblog%2F2025%2F05%2F20%2Fthe-tech-stack-behind-codegrind%2F" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-700">
+        <span class="sr-only">Share on Bluesky</span>
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#0085ff" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+  
+  
+    
+    <div class="mt-12 mb-8 opacity-0" data-animate="fade-in" data-scroll="fade-up">
+      <h3 class="text-2xl font-bold mb-6">Related Posts</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+            <div class="p-6">
+              <h4 class="text-lg font-bold mb-2">
+                <a href="/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" class="text-gray-900 hover:text-blue-600">Enhancing CodeGrind's AI Capabilities: A Journey of Improvement</a>
+              </h4>
+              <div class="text-gray-600 text-sm mb-3">
+                <time datetime="2025-05-21T13:00:00-04:00">May 21, 2025</time>
+              </div>
+              <p class="text-gray-600 mb-4">In this post, I'll share the journey of enhancing CodeGrind's AI capabilities, focusing on our recent improvements to the AI...</p>
+              <a href="/blog/2025/05/21/enhancing-codegrind-ai-capabilities/" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                Read more
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        
+          <div class="bg-white rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg opacity-0" data-animate="fade-in" data-scroll="fade-up">
+            <div class="p-6">
+              <h4 class="text-lg font-bold mb-2">
+                <a href="/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding/" class="text-gray-900 hover:text-blue-600">Introducing CodeGrind: A New Way to Practice Coding</a>
+              </h4>
+              <div class="text-gray-600 text-sm mb-3">
+                <time datetime="2025-05-19T11:00:00-04:00">May 19, 2025</time>
+              </div>
+              <p class="text-gray-600 mb-4">
+</p>
+              <a href="/blog/2025/05/19/introducing-codegrind-a-new-way-to-practice-coding/" class="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center">
+                Read more
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        
+        
+    
+      </div>
+      <!-- Display ad after related posts -->
+      
+
+
+  
+      <div class="adsense-container my-4 border-2 border-dashed border-gray-300 p-4 rounded text-center bg-gray-100">
+        <p class="text-gray-500 text-sm mb-2">Advertisement</p>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-7733001105026476"
+             data-ad-slot="YOUR_DISPLAY_AD_SLOT_ID"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+    
+    
+ 
+    </div>
+  
+  
+  <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-lg shadow-sm opacity-0" data-animate="fade-in" data-scroll="fade-up">
+    <h3 class="text-xl font-bold mb-4">Subscribe for Updates</h3>
+    <p class="mb-4 text-gray-700">Get notified when new articles are published. No spam, just valuable content.</p>
+    
+    <!-- Mailchimp Signup Form -->
+    <div id="mc_embed_shell" class="bg-white p-5 rounded-lg shadow-md">
+      <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+  <style type="text/css">
+        #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width: 100%; max-width: 600px; border-radius: 0.5rem;}
+        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+           We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+    <form action="https://github.us14.list-manage.com/subscribe/post?u=4c5f3cb9e9f5dfc6c64a01f23&amp;id=28ff2a557d&amp;f_id=00c351e0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+        <div id="mc_embed_signup_scroll"><h2>Subscribe</h2>
+            <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+            <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+        <div id="mce-responses" class="clear foot">
+            <div class="response" id="mce-error-response" style="display: none;"></div>
+            <div class="response" id="mce-success-response" style="display: none;"></div>
+        </div>
+    <div aria-hidden="true" style="position: absolute; left: -5000px;">
+        <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups -->
+        <input type="text" name="b_4c5f3cb9e9f5dfc6c64a01f23_28ff2a557d" tabindex="-1" value="">
+    </div>
+        <div class="optionalParent">
+            <div class="clear foot">
+                <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe">
+                <p style="margin: 0px auto;"><a href="http://eepurl.com/jdZ9VY" title="Mailchimp - email marketing made easy and fun"><span style="display: inline-block; background-color: transparent; border-radius: 4px;"><img class="refferal_badge" src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 220px; height: 40px; display: flex; padding: 2px 0px; justify-content: center; align-items: center;"></span></a></p>
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script><script type="text/javascript">(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';fnames[6]='COMPANY';ftypes[6]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script></div>
+    <!--End Mailchimp-->
+  </div>
+</article> 
+
+<!-- Code block styling enhancements -->
+<script>
+// Add copy button to code blocks
+document.addEventListener('DOMContentLoaded', () => {
+    const codeBlocks = document.querySelectorAll('.highlight');
+    
+    codeBlocks.forEach((block) => {
+        // Create copy button
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-code-button absolute top-2 right-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 rounded px-2 py-1 text-xs font-mono';
+        copyButton.textContent = 'Copy';
+        
+        // Position the code block container relatively
+        block.style.position = 'relative';
+        
+        // Add button to block
+        block.appendChild(copyButton);
+        
+        // Add click event
+        copyButton.addEventListener('click', () => {
+            const code = block.querySelector('code').innerText;
+            navigator.clipboard.writeText(code);
+            
+            // Visual feedback
+            copyButton.textContent = 'Copied!';
+            copyButton.classList.add('bg-green-200', 'dark:bg-green-800', 'text-green-800', 'dark:text-green-200');
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                copyButton.textContent = 'Copy';
+                copyButton.classList.remove('bg-green-200', 'dark:bg-green-800', 'text-green-800', 'dark:text-green-200');
+            }, 2000);
+        });
+    });
+});
+</script>
+
+<style>
+/* Specific styling for code blocks in posts */
+.post-content .highlight {
+    margin: 2rem 0;
+}
+
+/* Style for code copy button on hover */
+.copy-code-button {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.highlight:hover .copy-code-button {
+    opacity: 1;
+}
+</style> 
+    </main>
+    
+     <!-- This is to prevent the footer ad from appearing on the home page need to also hide on privacy policy page -->
+    
+<div class="footer-ad-container w-full py-4 bg-gray-50 border-t border-gray-200 mt-8 border-2 border-dashed border-gray-300">
+  <div class="container mx-auto px-4 text-center">
+    <h4 class="text-sm uppercase text-gray-500 mb-2 text-center">Advertisement</h4>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7733001105026476"
+         data-ad-slot="7978772768"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</div>
+ 
+    
+    
+    <footer class="bg-gray-900 text-white py-12" role="contentinfo">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-wrap">
+      <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Riviera Sperduto - Developer Portfolio</h2>
+        <p class="text-gray-400">A collection of my software development projects, skills, and services.</p>
+        
+        <div class="mt-4 flex space-x-4">
+          <a href="https://github.com/rivie13" target="_blank" class="text-gray-400 hover:text-white" aria-label="GitHub profile">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/" target="_blank" class="text-gray-400 hover:text-white" aria-label="LinkedIn profile">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
+            </svg>
+          </a>
+          <a href="mailto:riviera.t.sperduto13@gmail.com" class="text-gray-400 hover:text-white" aria-label="Send email">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
+      <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Quick Links</h2>
+        <nav role="navigation" aria-label="Footer navigation">
+          <ul class="text-gray-400">
+            <li class="mb-2"><a href="/" class="hover:text-white">Home</a></li>
+            <li class="mb-2"><a href="/about/" class="hover:text-white">About</a></li>
+            <li class="mb-2"><a href="/projects/" class="hover:text-white">Projects</a></li>
+            <li class="mb-2"><a href="/services/" class="hover:text-white">Services</a></li>
+            <li class="mb-2"><a href="/resume/" class="hover:text-white">Resume</a></li>
+            <li class="mb-2"><a href="/blog/" class="hover:text-white">Blog</a></li>
+            <li class="mb-2"><a href="/contact/" class="hover:text-white">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+      
+      <div class="w-full lg:w-1/3">
+        <h2 class="text-xl font-bold mb-4 text-gray-400">Contact</h2>
+        <p class="text-gray-400 mb-2">
+          <span class="inline-block mr-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25c-.25-.16-.4-.43-.4-.72 0-.67.73-1.07 1.3-.72L12 11l6.7-4.19c.57-.35 1.3.05 1.3.72 0 .29-.15.56-.4.72z"></path>
+            </svg>
+          </span>
+          <a href="mailto:riviera.t.sperduto13@gmail.com" class="hover:text-white">riviera.t.sperduto13@gmail.com</a>
+        </p>
+        <p class="text-gray-400">
+          <span class="inline-block mr-2">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 22c-5.5 0-10-4.5-10-10s4.5-10 10-10 10 4.5 10 10-4.5 10-10 10zm-1-14v7.59l5.293 5.3 1.414-1.42-4.707-4.71v-6.76h-2z"></path>
+            </svg>
+          </span>
+          Available for freelance projects
+        </p>
+      </div>
+    </div>
+    
+    <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+      <p>&copy; 2025 Riviera Sperduto - Developer Portfolio. All rights reserved.</p>
+    </div>
+  </div>
+</footer> 
+    
+    <!-- Load scripts in proper dependency order -->
+    <script src="/assets/js/github-config.js"></script>
+    <script src="/assets/js/github-repos.js"></script>
+    <script src="/assets/js/github-activity.js"></script>
+    <script src="/assets/js/github-stats.js"></script>
+    <script src="/assets/js/github-contributions.js"></script>
+    <script src="/assets/js/project-cards.js"></script>
+    <script src="/assets/js/github-test.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/animations.js"></script>
+    <script src="/assets/js/responsive.js"></script>
+    
+    <!-- Cookie Consent Banner -->
+<style>
+    #cookie-notice {
+        padding: 20px;
+        display: none;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background: #222;
+        color: rgba(255, 255, 255, 0.8);
+        z-index: 1000;
+    }
+
+    #cookie-notice a {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+
+    #cookie-notice #cookie-notice-accept {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #cookie-notice #cookie-notice-deny {
+        background-color: #f44336;
+        color: white;
+        padding: 8px 18px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    #cookie-notice #cookie-notice-info {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: underline;
+    }
+
+    @media (max-width: 767px) {
+        #cookie-notice {
+            padding: 15px;
+        }
+        #cookie-notice a {
+            display: block;
+            margin: 8px auto;
+            max-width: 170px;
+        }
+    }
+</style>
+<div id="cookie-notice">
+    <span>I would like to use cookies to improve your experience on my website and to analyze site traffic.</span>
+    <a id="cookie-notice-accept">Accept</a>
+    <a id="cookie-notice-deny">Deny</a>
+    <a id="cookie-notice-info" href="/privacy">More info</a>
+</div>
+
+<script>
+    function createCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    function loadAnalytics() {
+        // Load GA script
+        var script = document.createElement('script');
+        script.innerHTML = `/*This function will load script and call the callback once the script has loaded*/
+
+function loadScriptAsync(scriptSrc, callback) {
+    if (typeof callback !== 'function') {
+        throw new Error('Not a valid callback for async script load');
+    }
+    var script = document.createElement('script');
+    script.onload = callback;
+    script.src = scriptSrc;
+    document.head.appendChild(script);
+}
+
+/* This is the part where you call the above defined function and "calls back" your code which gets executed after the script has loaded */
+
+loadScriptAsync('https://www.googletagmanager.com/gtag/js?id=G-C9WDHTWS34', function () {
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-C9WDHTWS34', { 'anonymize_ip': true });
+}) `;
+        document.head.appendChild(script);
+    }
+
+    function eraseCookie(name) {
+        createCookie(name, "", -1);
+    }
+
+    // Show the cookie notice if consent hasn't been given
+    document.addEventListener('DOMContentLoaded', function () {
+        // Check if we need to show the notice (only in production)
+        /*  */
+    });
+
+    // Button click handlers
+    document.getElementById('cookie-notice-accept').addEventListener('click', function () {
+        createCookie('cookie-notice-dismissed', 'true', 365);
+        document.getElementById('cookie-notice').style.display = 'none';
+        loadAnalytics();
+    });
+
+    document.getElementById('cookie-notice-deny').addEventListener('click', function () {
+        createCookie('cookie-notice-dismissed', 'false', 365);
+        document.getElementById('cookie-notice').style.display = 'none';
+    });
+</script> 
+</body>
+</html> 

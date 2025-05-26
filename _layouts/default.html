@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | {{ site.title }}</title>
+    {% seo %}
+    
+    <!-- Google AdSense -->
+    {% if site.google_adsense %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ site.google_adsense }}"
+     crossorigin="anonymous"></script>
+    {% endif %}
+    
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/animations.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/responsive.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/dark-mode.css' | relative_url }}">
+    <script>
+        // Check for saved dark mode preference on page load
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+</head>
+<body class="page-transition enter-active">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    {% include header.html %}
+    
+{% unless page.url == '/' or page.url == '/privacy/' %}
+    {% include header-ad.html %}
+{% endunless %}
+    
+    <main id="main-content" class="container mx-auto px-4 py-8">
+        {{ content }}
+    </main>
+    
+    {% unless page.url == '/privacy/' %} <!-- This is to prevent the footer ad from appearing on the home page need to also hide on privacy policy page -->
+    {% include footer-ad.html %}
+    {% endunless %}
+    
+    {% include footer.html %}
+    
+    <!-- Load scripts in proper dependency order -->
+    <script src="{{ '/assets/js/github-config.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/github-repos.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/github-activity.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/github-stats.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/github-contributions.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/project-cards.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/github-test.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/animations.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/responsive.js' | relative_url }}"></script>
+    
+    {% include cookie-consent.html %}
+</body>
+</html> 
