@@ -247,4 +247,4 @@ class AIService {
 <p class="text-gray-700 dark:text-gray-300 mt-8">*Want to experience these AI improvements firsthand? Try CodeGrind at <a href="https://codegrind.online" class="text-blue-600 hover:text-blue-800">codegrind.online</a>.*</p>
 
 <!-- Load interactive elements script -->
-<script src="{{ '/assets/js/interactive-elements.js' | relative_url }}"></script> 
+{% include interactive-elements.js %}

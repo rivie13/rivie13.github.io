@@ -383,11 +383,11 @@
 
 <script>
 const ENDPOINTS = {
-  newChat: "{{ site.data.config.endpoints.newChat }}",
-  newSnippet: "{{ site.data.config.endpoints.newSnippet }}",
-  oldChat: "{{ site.data.config.endpoints.oldChat }}",
-  oldSnippet: "{{ site.data.config.endpoints.oldSnippet }}",
-  executeTwoSum: "{{ site.data.config.endpoints.executeTwoSum }}"
+  newChat: "https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy?code={{ site.env.NEWMETHOD_CHAT_KEY }}",
+  newSnippet: "https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy/tower-snippet?code={{ site.env.NEWMETHOD_SNIPPET_KEY }}",
+  oldChat: "https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy?code={{ site.env.OLDMETHOD_CHAT_KEY }}",
+  oldSnippet: "https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy/tower-snippet?code={{ site.env.OLDMETHOD_SNIPPET_KEY }}",
+  executeTwoSum: "https://blogpost-interactive-elements.azurewebsites.net/api/ExecuteTwoSumSolutionProxy?code={{ site.env.EXECUTETWOSUM_KEY }}"
 };
 
 class InteractiveElements {
@@ -557,7 +557,6 @@ document.addEventListener('DOMContentLoaded', () => {
     new InteractiveElements();
 });
 </script>
- 
 
 <!-- Code block styling enhancements -->
 <script>
