@@ -1,4 +1,4 @@
-{% raw %}
+
 <script>
 const ENDPOINTS = {
   newChat: "{{ site.data.config.endpoints.newChat }}",
@@ -175,4 +175,3 @@ document.addEventListener('DOMContentLoaded', () => {
     new InteractiveElements();
 });
 </script>
-{% endraw %} 
