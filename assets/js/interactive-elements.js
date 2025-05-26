@@ -1,9 +1,9 @@
 const ENDPOINTS = {
-  newChat: "https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy?code=YOUR_NEWMETHOD_CHAT_KEY",
-  newSnippet: "https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy/tower-snippet?code=YOUR_NEWMETHOD_SNIPPET_KEY",
-  oldChat: "https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy?code=YOUR_OLDMETHOD_CHAT_KEY",
-  oldSnippet: "https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy/tower-snippet?code=YOUR_OLDMETHOD_SNIPPET_KEY",
-  executeTwoSum: "https://blogpost-interactive-elements.azurewebsites.net/api/ExecuteTwoSumSolutionProxy?code=YOUR_EXECUTETWOSUM_KEY"
+  newChat: "{{ site.data.config.endpoints.newChat }}",
+  newSnippet: "{{ site.data.config.endpoints.newSnippet }}",
+  oldChat: "{{ site.data.config.endpoints.oldChat }}",
+  oldSnippet: "{{ site.data.config.endpoints.oldSnippet }}",
+  executeTwoSum: "{{ site.data.config.endpoints.executeTwoSum }}"
 };
 
 class InteractiveElements {

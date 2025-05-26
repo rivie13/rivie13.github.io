@@ -32,4 +32,5 @@ gem "webrick", "~> 1.7"
 # Add these gems to fix Ruby 3.3 compatibility warnings
 gem "csv"
 gem "base64"
-gem "bigdecimal" 
+gem "bigdecimal"
+gem 'dotenv' 
