@@ -84,14 +84,12 @@ exclude:
   - .nojekyll 
   - /docfiles
 
-## Environment variables - get the keys from the local .env file
-## When deploying to GitHub Pages, the .env file is not used, so we need to use our github secrets to store and retrieve the keys
+## Environment variables - YOU MUST HARD CODE THESE KEYS IN THE _CONFIG.YML FILE
 ## If you leave a secret in the commits and try to push it will not work!!!!
-## you will get errors and need to bfg to clean it up.....
-## https://help.github.com/en/articles/removing-sensitive-data-from-a-repository
+## SO WE NEED TO FIGURE OUT A WAY TO PUSH THIS FILE AS IS TO GITHUB.....
 env:
-  NEWMETHOD_CHAT_KEY: ${{ secrets.NEWMETHOD_CHAT_KEY }}
-  NEWMETHOD_SNIPPET_KEY: ${{ secrets.NEWMETHOD_SNIPPET_KEY }}
-  OLDMETHOD_CHAT_KEY: ${{ secrets.OLDMETHOD_CHAT_KEY }}
-  OLDMETHOD_SNIPPET_KEY: ${{ secrets.OLDMETHOD_SNIPPET_KEY }}
-  EXECUTETWOSUM_KEY: ${{ secrets.EXECUTETWOSUM_KEY }}
+  NEWMETHOD_CHAT_KEY: nD1a46NHMxN4lXjwU9QlyF1n6oocEufMHX3pISfh11XZAzFu9hxvhg==
+  NEWMETHOD_SNIPPET_KEY: nD1a46NHMxN4lXjwU9QlyF1n6oocEufMHX3pISfh11XZAzFu9hxvhg==
+  OLDMETHOD_CHAT_KEY: -4TTQHaCTQowUPWEVHledCxSibCXKw7CXn_4p4UeaNOeAzFuWX3yug==
+  OLDMETHOD_SNIPPET_KEY: -4TTQHaCTQowUPWEVHledCxSibCXKw7CXn_4p4UeaNOeAzFuWX3yug==
+  EXECUTETWOSUM_KEY: Sjz5G5JK3TtZpXDR8KeUtG8lAdyEq6yGdcJk0pgbPWZZAzFuepwheg==
