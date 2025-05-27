@@ -86,6 +86,9 @@ exclude:
 
 ## Environment variables - get the keys from the local .env file
 ## When deploying to GitHub Pages, the .env file is not used, so we need to use our github secrets to store and retrieve the keys
+## If you leave a secret in the commits and try to push it will not work!!!!
+## you will get errors and need to bfg to clean it up.....
+## https://help.github.com/en/articles/removing-sensitive-data-from-a-repository
 env:
   NEWMETHOD_CHAT_KEY: ${{ secrets.NEWMETHOD_CHAT_KEY }}
   NEWMETHOD_SNIPPET_KEY: ${{ secrets.NEWMETHOD_SNIPPET_KEY }}
