@@ -464,53 +464,312 @@
 
 <!-- Endpoint configuration -->
 <div id="endpoints" 
-  data-new-chat="https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy?code={{ site.env.NEWMETHOD_CHAT_KEY }}"
-  data-new-snippet="https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy/tower-snippet?code={{ site.env.NEWMETHOD_SNIPPET_KEY }}"
-  data-old-chat="https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy?code={{ site.env.OLDMETHOD_CHAT_KEY }}"
-  data-old-snippet="https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy/tower-snippet?code={{ site.env.OLDMETHOD_SNIPPET_KEY }}"
-  data-execute-two-sum="https://blogpost-interactive-elements.azurewebsites.net/api/ExecuteTwoSumSolutionProxy?code={{ site.env.EXECUTETWOSUM_KEY }}"
+  data-new-chat="https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy/chat?code=nD1a46NHMxN4lXjwU9QlyF1n6oocEufMHX3pISfh11XZAzFu9hxvhg=="
+  data-new-snippet="https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy/tower-snippet?code=nD1a46NHMxN4lXjwU9QlyF1n6oocEufMHX3pISfh11XZAzFu9hxvhg=="
+  data-old-chat="https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy/chat?code=-4TTQHaCTQowUPWEVHledCxSibCXKw7CXn_4p4UeaNOeAzFuWX3yug=="
+  data-old-snippet="https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy/tower-snippet?code=-4TTQHaCTQowUPWEVHledCxSibCXKw7CXn_4p4UeaNOeAzFuWX3yug=="
+  data-execute-two-sum="https://blogpost-interactive-elements.azurewebsites.net/api/ExecuteTwoSumSolutionProxy?code=Sjz5G5JK3TtZpXDR8KeUtG8lAdyEq6yGdcJk0pgbPWZZAzFuepwheg=="
   style="display: none;">
 </div> 
 <script>
-// Get endpoints from data attributes
-const ENDPOINTS = {
-  newChat: document.getElementById('endpoints')?.dataset.newChat || '/api/fallback',
-  newSnippet: document.getElementById('endpoints')?.dataset.newSnippet || '/api/fallback',
-  oldChat: document.getElementById('endpoints')?.dataset.oldChat || '/api/fallback',
-  oldSnippet: document.getElementById('endpoints')?.dataset.oldSnippet || '/api/fallback',
-  executeTwoSum: document.getElementById('endpoints')?.dataset.executeTwoSum || '/api/fallback'
+// Add global arrays for old and new solutions
+const TWO_SUM_SKELETON = [
+  'from typing import List',
+  '',
+  'class Solution:',
+  '    def twoSum(self, nums: List[int], target: int) -> List[int]:',
+  '        # Write your code below'
+];
+let builtSolutionOld = [...TWO_SUM_SKELETON];
+let builtSolutionNew = [...TWO_SUM_SKELETON];
+
+// Add global object for per-endpoint rate limits
+let rateLimits = {
+  old: { requests: null, reset: null, timer: null },
+  new: { requests: null, reset: null, timer: null },
+  execute: { requests: null, reset: null, timer: null }
 };
 
-// Add error handling for missing endpoints
-Object.keys(ENDPOINTS).forEach(key => {
-  if (!ENDPOINTS[key]) {
-    console.error(`Missing or invalid endpoint for ${key}`);
-    ENDPOINTS[key] = '/api/fallback'; // Fallback endpoint
-  }
-});
-
-// Helper function to handle API responses
-async function handleApiResponse(response) {
-  if (!response.ok) {
-    const errorText = await response.text();
-    console.error('API Error:', {
-      status: response.status,
-      statusText: response.statusText,
-      body: errorText
-    });
-    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
-  }
-  return response.json();
+// Add spinner styles
+const spinnerStyles = `
+<style>
+.button--loading {
+    position: relative;
+    color: transparent !important;
+    pointer-events: none;
 }
+
+.button--loading .spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+</style>
+`;
+
+// Add spinner styles to document
+document.head.insertAdjacentHTML('beforeend', spinnerStyles);
+
+// In-memory chat history for Hack Assistant
+let hackChatHistory = [
+  { role: 'assistant', content: "Greetings, hacker. I'm your neural infiltration assistant. How can I aid in your system breach today?" }
+];
+
+// Add a function to show rate limit info and countdown for all endpoints
+function showRateLimitInfo(endpoint, requests, seconds) {
+  if (!rateLimits[endpoint]) {
+    rateLimits[endpoint] = { requests: null, reset: null, timer: null };
+  }
+  rateLimits[endpoint].requests = requests;
+  rateLimits[endpoint].reset = seconds;
+  const infoDiv = document.getElementById('rate-limit-info');
+  if (!infoDiv) return;
+  // Clear any previous timer for this endpoint
+  if (rateLimits[endpoint].timer) {
+    clearInterval(rateLimits[endpoint].timer);
+    rateLimits[endpoint].timer = null;
+  }
+  // Build display for all endpoints
+  let html = '';
+  Object.entries(rateLimits).forEach(([key, val]) => {
+    let label = key === 'old' ? 'Old AI' : key === 'new' ? 'New AI' : 'Test Solution';
+    if (val.requests === null || val.reset === null) return;
+    if (val.requests === 0) {
+      html += `${label}: Rate limit reached. Try again in <span id="rate-timer-${key}">${val.reset}</span> seconds.<br/>`;
+      let remaining = val.reset;
+      rateLimits[key].timer = setInterval(() => {
+        remaining--;
+        const timerSpan = document.getElementById(`rate-timer-${key}`);
+        if (timerSpan) timerSpan.textContent = remaining;
+        if (remaining <= 0) {
+          clearInterval(rateLimits[key].timer);
+          rateLimits[key].timer = null;
+          // Optionally, reset display after timer expires
+          // infoDiv.textContent = '';
+        }
+      }, 1000);
+    } else {
+      html += `${label}: Requests left: ${val.requests}.`;
+      if (val.reset > 0) html += ` (refresh in ${val.reset}s)`;
+      html += '<br/>';
+    }
+  });
+  infoDiv.innerHTML = html;
+}
+
+// Add a global logging utility
+function logApiCall(label, details) {
+  try {
+    //console.log(`[API LOG] ${label}:`, JSON.stringify(details, null, 2));
+  } catch (e) {
+    //console.log(`[API LOG] ${label}:`, details);
+  }
+}
+
+// Update handleApiResponse to show rate limit info for a given endpoint
+async function handleApiResponse(response, endpointKey) {
+  logApiCall('handleApiResponse - response', {
+    status: response.status,
+    statusText: response.statusText,
+    headers: [...response.headers.entries()],
+  });
+  let data;
+  const text = await response.text();
+  logApiCall('handleApiResponse - raw text', { text });
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch (e) {
+    // If the response is the VM not ready message, handle it gracefully
+    if (text && text.includes('Judge0 VM is not ready')) {
+      data = { error: 'Judge0 VM is not ready' };
+    } else {
+      logApiCall('handleApiResponse - parse error', { error: e });
+      data = { error: "Invalid server response." };
+    }
+  }
+  if (endpointKey && data.requests_remaining !== undefined && data.reset_seconds !== undefined) {
+    showRateLimitInfo(endpointKey, data.requests_remaining, data.reset_seconds);
+  }
+  if (!response.ok || data.error) {
+    logApiCall('handleApiResponse - error', { error: data.error, status: response.status });
+    // If the error is Judge0 VM is not ready, throw a special error so pollAndRetry can catch it
+    if (data.error && data.error.includes('Judge0 VM is not ready')) {
+      throw new Error('Judge0 VM is not ready');
+    }
+    throw new Error(data.error || `API request failed: ${response.status} ${response.statusText}`);
+  }
+  logApiCall('handleApiResponse - success', { data });
+  return data;
+}
+
+// Add loading indicators for snippets
+function setSnippetLoading() {
+  const oldSnippetElement = document.getElementById('old-snippet');
+  const newSnippetElement = document.getElementById('new-snippet');
+  if (oldSnippetElement) oldSnippetElement.textContent = 'Loading...';
+  if (newSnippetElement) newSnippetElement.textContent = 'Loading...';
+}
+
+const towers = {
+  ForLoop: {
+    name: "For Loop",
+    desc: "Attacks multiple enemies in a sequence",
+    cost: 50,
+    dmg: 12,
+    rng: 3,
+    spd: 1.2,
+    upgrades: ["Faster Iteration", "Enhanced Range", "+1 more"]
+  },
+  WhileLoop: {
+    name: "While Loop",
+    desc: "Continuous attack on a single path",
+    cost: 75,
+    dmg: 8,
+    rng: 2,
+    spd: 2.5,
+    upgrades: ["Condition Enhancement", "Break Statement"]
+  },
+  IfCondition: {
+    name: "If Condition",
+    desc: "Attacks based on enemy type",
+    cost: 40,
+    dmg: 12,
+    rng: 2,
+    spd: 1,
+    upgrades: ["Additional Branch", "ElIf Statement"]
+  },
+  Variable: {
+    name: "Variable",
+    desc: "Stores enemy information, enhances nearby towers",
+    cost: 30,
+    dmg: 7,
+    rng: 4,
+    spd: 0.8,
+    upgrades: ["Type Specifialization", "Constant Declaration"]
+  },
+  Function: {
+    name: "Function",
+    desc: "Reusable attack pattern with high damage",
+    cost: 100,
+    dmg: 35,
+    rng: 3,
+    spd: 0.7,
+    upgrades: ["Parameter Expansion", "Recursive Function"]
+  },
+  Array: {
+    name: "Array",
+    desc: "Fires multiple shots in array pattern",
+    cost: 80,
+    dmg: 10,
+    rng: 4,
+    spd: 1,
+    upgrades: ["Sorting Attack", "Mapping Attack", "+1 more"]
+  },
+  Object: {
+    name: "Object",
+    desc: "Creates damage fields that persist",
+    cost: 110,
+    dmg: 25,
+    rng: 3,
+    spd: 0.6,
+    upgrades: ["Inheritance Boost", "Polymorphic Attack", "+1 more"]
+  },
+  Return: {
+    name: "Return",
+    desc: "High damage with knockback effect",
+    cost: 120,
+    dmg: 30,
+    rng: 2,
+    spd: 0.5,
+    upgrades: ["Early Return", "Multiple Returns"]
+  },
+  TryCatch: {
+    name: "Try/Catch",
+    desc: "Traps enemies and deals damage over time.",
+    cost: 65,
+    dmg: 10,
+    rng: 3,
+    spd: 0.5,
+    upgrades: ["Error Handling", "Finally Block"]
+  },
+  Switch: {
+    name: "Switch",
+    desc: "Switches attack pattern based on enemies",
+    cost: 60,
+    dmg: 15,
+    rng: 3,
+    spd: 0.9,
+    upgrades: ["Multiple Cases", "Default Case"]
+  }
+};
 
 class InteractiveElements {
     constructor() {
+        this.ENDPOINTS = {
+          newChat: document.getElementById('endpoints')?.dataset.newChat || '/api/fallback',
+          newSnippet: document.getElementById('endpoints')?.dataset.newSnippet || '/api/fallback',
+          oldChat: document.getElementById('endpoints')?.dataset.oldChat || '/api/fallback',
+          oldSnippet: document.getElementById('endpoints')?.dataset.oldSnippet || '/api/fallback',
+          executeTwoSum: document.getElementById('endpoints')?.dataset.executeTwoSum || '/api/fallback'
+        };
+
+        // Optional: Re-add error handling if needed, now using this.ENDPOINTS
+        Object.keys(this.ENDPOINTS).forEach(key => {
+          logApiCall('Endpoint config', { key, value: this.ENDPOINTS[key] });
+          if (!this.ENDPOINTS[key] || this.ENDPOINTS[key].includes('/api/fallback')) { // Check if it used fallback
+            //console.warn(`Endpoint for ${key} might be using a fallback or is not configured: ${this.ENDPOINTS[key]}`);
+          }
+        });
+
         this.initializeTowerDefense();
+        this.attachSolutionButtonListeners();
+    }
+
+    attachSolutionButtonListeners() {
+        const clearOldBtn = document.getElementById('clear-old');
+        const clearNewBtn = document.getElementById('clear-new');
+        const clearBothBtn = document.getElementById('clear-both');
+        const toggleBothBtn = document.getElementById('toggle-both');
+        if (clearOldBtn) clearOldBtn.onclick = () => { builtSolutionOld = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
+        if (clearNewBtn) clearNewBtn.onclick = () => { builtSolutionNew = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
+        if (clearBothBtn) clearBothBtn.onclick = () => { builtSolutionOld = [...TWO_SUM_SKELETON]; builtSolutionNew = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
+        if (toggleBothBtn) toggleBothBtn.onclick = () => {
+            const oldDiv = document.getElementById('old-solution-preview');
+            const newDiv = document.getElementById('solution-preview');
+            if (oldDiv && newDiv) {
+                if (oldDiv.style.display === 'none') {
+                    oldDiv.style.display = '';
+                    newDiv.style.display = '';
+                } else {
+                    oldDiv.style.display = 'none';
+                    newDiv.style.display = 'block';
+                }
+            }
+        };
     }
 
     async initializeTowerDefense() {
+        logApiCall('initializeTowerDefense', {});
         // Initialize tower selection
         const towerSelect = document.getElementById('tower-select');
+        // REMOVE: updateTowerInfo on dropdown change
+        // if (towerSelect) {
+        //     towerSelect.addEventListener('change', () => this.updateTowerInfo());
+        // }
+        // Instead, just update tower info display (no snippet generation)
         if (towerSelect) {
             towerSelect.addEventListener('change', () => this.updateTowerInfo());
         }
@@ -530,89 +789,125 @@ class InteractiveElements {
         // Initialize hack assistant
         this.initializeHackAssistant();
 
-        // Initial tower info update
+        // Add clear/toggle buttons for solutions
+        this.addSolutionButtons();
+
+        // Initial tower info update (show instructional message on page load)
         this.updateTowerInfo();
     }
 
-    async updateTowerInfo() {
-        const towerType = document.getElementById('tower-select')?.value;
-        if (!towerType) {
-            console.error('Tower select element not found');
-            return;
+    addSolutionButtons() {
+        // Move rate limit info area next to the Add Tower button
+        let infoDiv = document.getElementById('rate-limit-info');
+        if (!infoDiv) {
+            infoDiv = document.createElement('div');
+            infoDiv.id = 'rate-limit-info';
+            infoDiv.className = 'ml-4 inline-block align-middle text-sm text-gray-600';
         }
-
-        const context = {
-            problem: {
-                title: "Two Sum",
-                description: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target."
-            },
-            language: "Python",
-            code: document.getElementById('solution-preview')?.textContent || ''
-        };
-
-        try {
-            // Get old method snippet
-            const oldResponse = await fetch(ENDPOINTS.oldSnippet, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    towerType,
-                    context
-                })
-            });
-            const oldData = await handleApiResponse(oldResponse);
-            const oldSnippetElement = document.getElementById('old-snippet');
-            if (oldSnippetElement) {
-                oldSnippetElement.textContent = oldData.snippet;
+        // Insert next to the Add Tower button
+        const addTowerBtn = document.getElementById('add-tower');
+        if (addTowerBtn && addTowerBtn.parentNode) {
+            // If not already inserted, insert after the Add Tower button
+            if (addTowerBtn.nextSibling !== infoDiv) {
+                addTowerBtn.parentNode.insertBefore(infoDiv, addTowerBtn.nextSibling);
             }
-
-            // Get new method snippet
-            const newResponse = await fetch(ENDPOINTS.newSnippet, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    towerType,
-                    context
-                })
-            });
-            const newData = await handleApiResponse(newResponse);
-            const newSnippetElement = document.getElementById('new-snippet');
-            if (newSnippetElement) {
-                newSnippetElement.textContent = newData.snippet;
+        }
+        // Add clear/toggle buttons and old solution area if not present
+        if (!document.getElementById('old-solution-preview')) {
+            const solutionDiv = document.getElementById('solution-preview');
+            if (!solutionDiv) return; // Defensive: don't proceed if missing
+            const container = solutionDiv.parentNode;
+            // Create flex wrapper
+            const flexWrapper = document.createElement('div');
+            flexWrapper.className = 'solution-flex-row';
+            // Create oldDiv
+            const oldDiv = document.createElement('div');
+            oldDiv.id = 'old-solution-preview';
+            oldDiv.className = 'bg-slate-800 text-blue-400 rounded p-4 min-h-[3rem] text-base mb-2';
+            oldDiv.style.marginTop = '1rem';
+            // Remove inline-block/width styles
+            oldDiv.style.display = '';
+            oldDiv.style.width = '';
+            solutionDiv.style.display = '';
+            solutionDiv.style.width = '';
+            // Insert both into flex wrapper
+            flexWrapper.appendChild(oldDiv);
+            flexWrapper.appendChild(solutionDiv);
+            // Only insert if solutionDiv is still a child of container
+            if (solutionDiv.parentNode === container) {
+                container.insertBefore(flexWrapper, solutionDiv);
+                container.removeChild(solutionDiv);
+            } else {
+                // fallback: just append flexWrapper after container
+                container.appendChild(flexWrapper);
             }
-
-            // Update tower info display
-            const tower = towers[towerType];
-            const towerInfoElement = document.getElementById('tower-info');
-            if (towerInfoElement && tower) {
-                towerInfoElement.innerHTML =
-                    `<div class='mb-2'><span class='font-bold'>${tower.name}</span>: ${tower.desc}</div>` +
-                    `<div class='mb-2'>Cost: <span class='font-semibold'>${tower.cost} BITS</span> | DMG: <span class='font-semibold'>${tower.dmg}</span> | RNG: <span class='font-semibold'>${tower.rng}</span> | SPD: <span class='font-semibold'>${tower.spd}</span></div>` +
-                    `<div class='mb-2'>Upgrades: <span class='text-xs'>${tower.upgrades.join(', ')}</span></div>`;
-            }
-        } catch (error) {
-            console.error('Error updating tower info:', error);
-            // Show error to user
-            const towerInfoElement = document.getElementById('tower-info');
-            if (towerInfoElement) {
-                towerInfoElement.innerHTML = `<div class='text-red-500'>Error: Could not load tower information. Please try again later.</div>`;
-            }
+            // Add clear/toggle buttons
+            const btnDiv = document.createElement('div');
+            btnDiv.className = 'mb-2';
+            btnDiv.innerHTML = `
+                <button id="clear-old" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear Old</button>
+                <button id="clear-new" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear New</button>
+                <button id="clear-both" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear Both</button>
+                <button id="toggle-both" class="bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-1 px-2 rounded">Show/Hide Both</button>
+            `;
+            container.parentNode.insertBefore(btnDiv, container);
         }
     }
 
+    async updateTowerInfo() {
+        logApiCall('updateTowerInfo - start', {});
+        const towerType = document.getElementById('tower-select')?.value;
+        const towerInfoElement = document.getElementById('tower-info');
+        if (!towerType || !towers[towerType]) {
+            if (towerInfoElement) {
+                towerInfoElement.innerHTML = `<div class='text-gray-500'>Select a tower from the dropdown to see in-game stats and what they do.</div>`;
+            }
+            logApiCall('updateTowerInfo - no towerType', { towerType });
+            return;
+        }
+        // Only update tower info display, do NOT fetch/generate snippets
+        const tower = towers[towerType];
+        if (towerInfoElement && tower) {
+            towerInfoElement.innerHTML =
+                `<div class='mb-2'><span class='font-bold'>${tower.name}</span>: ${tower.desc}</div>` +
+                `<div class='mb-2'>Cost: <span class='font-semibold'>${tower.cost} BITS</span> | DMG: <span class='font-semibold'>${tower.dmg}</span> | RNG: <span class='font-semibold'>${tower.rng}</span> | SPD: <span class='font-semibold'>${tower.spd}</span></div>` +
+                `<div class='mb-2'>Upgrades: <span class='text-xs'>${tower.upgrades.join(', ')}</span></div>`;
+        }
+        logApiCall('updateTowerInfo - end', { towerType, tower });
+    }
+
     async addTower() {
+        logApiCall('addTower - start', {});
         const towerType = document.getElementById('tower-select').value;
+        const addTowerBtn = document.getElementById('add-tower');
+        if (addTowerBtn) {
+            // Store original button text
+            const originalText = addTowerBtn.textContent;
+            // Add spinner markup if not present
+            if (!addTowerBtn.querySelector('.spinner')) {
+                const spinner = document.createElement('span');
+                spinner.className = 'spinner';
+                addTowerBtn.appendChild(spinner);
+            }
+            addTowerBtn.classList.add('button--loading');
+            addTowerBtn.disabled = true;
+        }
+        // Only send the code body (indented lines after the skeleton) for snippet generation
+        const codeBody = builtSolutionNew.slice(TWO_SUM_SKELETON.length).join('\n');
         const context = {
             problem: {
                 title: "Two Sum",
                 description: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target."
             },
             language: "Python",
-            code: document.getElementById('solution-preview').textContent
+            // Always send the full skeleton plus code body for context
+            code: [...TWO_SUM_SKELETON, ...builtSolutionNew.slice(TWO_SUM_SKELETON.length)].join('\n')
         };
-
+        setSnippetLoading();
         try {
-            const response = await fetch(ENDPOINTS.newSnippet, {
+            logApiCall('addTower - fetch oldSnippet', { url: this.ENDPOINTS.oldSnippet, towerType, context });
+            // Fetch old snippet for comparison
+            const oldResponse = await fetch(this.ENDPOINTS.oldSnippet, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -620,73 +915,288 @@ class InteractiveElements {
                     context
                 })
             });
-            const data = await response.json();
-            builtSolution.push(data.snippet);
+            logApiCall('addTower - oldSnippet response', { status: oldResponse.status });
+            const oldData = await handleApiResponse(oldResponse, 'old');
+            const oldSnippetElement = document.getElementById('old-snippet');
+            if (oldSnippetElement) {
+                oldSnippetElement.textContent = oldData.snippet || (oldData.error || 'No snippet returned.');
+            }
+            if (oldData.snippet) {
+                builtSolutionOld.push('        ' + oldData.snippet.trim());
+            } else {
+                builtSolutionOld.push(`# Error: ${oldData.error || 'No snippet returned.'}`);
+            }
+            // Fetch new snippet and add to solution
+            logApiCall('addTower - fetch newSnippet', { url: this.ENDPOINTS.newSnippet, towerType, context });
+            const newResponse = await fetch(this.ENDPOINTS.newSnippet, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    towerType,
+                    context
+                })
+            });
+            logApiCall('addTower - newSnippet response', { status: newResponse.status });
+            const newData = await handleApiResponse(newResponse, 'new');
+            const newSnippetElement = document.getElementById('new-snippet');
+            if (newSnippetElement) {
+                newSnippetElement.textContent = newData.snippet || (newData.error || 'No snippet returned.');
+            }
+            if (newData.snippet) {
+                builtSolutionNew.push('        ' + newData.snippet.trim());
+            } else {
+                builtSolutionNew.push(`# Error: ${newData.error || 'No snippet returned.'}`);
+            }
             this.updateSolutionPreview();
+            logApiCall('addTower - end', { oldData, newData });
         } catch (error) {
             console.error('Error adding tower:', error);
+            logApiCall('addTower - error', { error });
+            builtSolutionNew.push(`# Error: Could not add tower. Please try again.`);
+            this.updateSolutionPreview();
+        } finally {
+            if (addTowerBtn) {
+                addTowerBtn.classList.remove('button--loading');
+                addTowerBtn.disabled = false;
+                // Remove spinner if it exists
+                const spinner = addTowerBtn.querySelector('.spinner');
+                if (spinner) {
+                    spinner.remove();
+                }
+            }
         }
     }
 
     updateSolutionPreview() {
-        document.getElementById('solution-preview').textContent = builtSolution.join('\n');
-    }
-
-    async testSolution() {
-        const solution = document.getElementById('solution-preview').textContent;
-        try {
-            const response = await fetch(ENDPOINTS.executeTwoSum, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ code: solution })
-            });
-            const data = await response.json();
-            const resultDiv = document.getElementById('test-result');
-            if (data.all_passed) {
-                resultDiv.innerHTML = '<span style="color:#22c55e;">✅ Success! Your solution passed all test cases.</span>';
-            } else {
-                resultDiv.innerHTML = '<span style="color:#f87171;">❌ Oops! Your solution is incomplete or has a bug. Try using more towers or ask the Hack Assistant for help.</span>';
-            }
-        } catch (error) {
-            console.error('Error testing solution:', error);
+        logApiCall('updateSolutionPreview', { builtSolutionOld, builtSolutionNew });
+        // Update the old solution preview
+        const oldDiv = document.getElementById('old-solution-preview');
+        if (oldDiv) {
+            oldDiv.innerHTML = `<h4 class=\"font-semibold text-blue-700 dark:text-blue-600 mb-2\">Old Code</h4>\n<pre class=\"bg-slate-900 text-blue-400 rounded p-4 min-h-[2.5rem] text-base mb-2\" style=\"overflow-x: auto; white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;\">${builtSolutionOld.length ? builtSolutionOld.join('\n\n') : ''}</pre>`;
+        }
+        // Update the new solution preview
+        const newDiv = document.getElementById('solution-preview');
+        if (newDiv) {
+            newDiv.innerHTML = `<h4 class=\"font-semibold text-green-700 dark:text-green-800 mb-2\">New Code</h4>\n<pre class=\"bg-slate-900 text-green-400 rounded p-4 min-h-[2.5rem] text-base mb-2\" style=\"overflow-x: auto; white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;\">${builtSolutionNew.length ? builtSolutionNew.join('\n\n') : ''}</pre>`;
         }
     }
 
+    async testSolution() {
+        logApiCall('testSolution - start', {});
+        const testBtn = document.getElementById('test-solution');
+        const resultDiv = document.getElementById('test-result');
+        if (testBtn) {
+            testBtn.classList.add('button--loading');
+        }
+        if (resultDiv) {
+            resultDiv.innerHTML = '';
+        }
+        // Add spinner markup if not present
+        if (testBtn && !testBtn.querySelector('.spinner')) {
+            const spinner = document.createElement('span');
+            spinner.className = 'spinner';
+            testBtn.appendChild(spinner);
+        }
+        let retryCount = 0;
+        const maxRetries = 20; // ~1 minute
+        const pollAndRetry = async () => {
+            try {
+                // Always send the full code (skeleton + all lines) for testing
+                const solution = builtSolutionNew.join('\n');
+                logApiCall('testSolution - fetch', { url: this.ENDPOINTS.executeTwoSum, solution });
+                const response = await fetch(this.ENDPOINTS.executeTwoSum, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ code: solution })
+                });
+                logApiCall('testSolution - response', { status: response.status });
+                const data = await handleApiResponse(response, 'execute');
+                if (data.error && data.error.includes('Judge0 VM is not ready')) {
+                    if (resultDiv) {
+                        resultDiv.innerHTML = `<span style='color:#fbbf24;'>⏳ Judge0 VM is starting up. Please wait... (Attempt ${retryCount + 1})</span>`;
+                    }
+                    if (retryCount < maxRetries) {
+                        retryCount++;
+                        setTimeout(pollAndRetry, 3000);
+                    } else {
+                        if (resultDiv) {
+                            resultDiv.innerHTML = `<span style='color:#f87171;'>❌ Error: Judge0 VM is still not ready after multiple attempts. Please try again later.</span>`;
+                        }
+                        if (testBtn) testBtn.classList.remove('button--loading');
+                    }
+                    return;
+                }
+                if (data.all_passed) {
+                    resultDiv.innerHTML = '<span style="color:#22c55e;">✅ Success! Your solution passed all test cases.</span>';
+                } else if (data.results && data.results.length > 0) {
+                    // Show error details for failed test cases
+                    let errorHtml = '<span style="color:#f87171;">❌ Some test cases failed.</span><ul style="color:#f87171;">';
+                    data.results.forEach(r => {
+                        if (!r.passed) {
+                            errorHtml += `<li>Test ${r.test_case}: `;
+                            if (r.error) {
+                                errorHtml += `<pre style='white-space: pre-wrap;'>${r.error}</pre>`;
+                            } else {
+                                errorHtml += 'Incorrect output.';
+                            }
+                            errorHtml += '</li>';
+                        }
+                    });
+                    errorHtml += '</ul>';
+                    resultDiv.innerHTML = errorHtml;
+                } else if (data.error) {
+                    resultDiv.innerHTML = `<span style='color:#f87171;'>❌ Error: ${data.error}</span>`;
+                } else {
+                    resultDiv.innerHTML = '<span style="color:#f87171;">❌ Oops! Your solution is incomplete or has a bug. Try using more towers or ask the Hack Assistant for help.</span>';
+                }
+                logApiCall('testSolution - end', { data });
+                if (testBtn) testBtn.classList.remove('button--loading');
+            } catch (error) {
+                // If the error is Judge0 VM is not ready, retry
+                if (error && error.message && error.message.includes('Judge0 VM is not ready')) {
+                    if (resultDiv) {
+                        resultDiv.innerHTML = `<span style='color:#fbbf24;'>⏳ Judge0 VM is starting up. Please wait... (Attempt ${retryCount + 1})</span>`;
+                    }
+                    if (retryCount < maxRetries) {
+                        retryCount++;
+                        setTimeout(pollAndRetry, 3000);
+                    } else {
+                        if (resultDiv) {
+                            resultDiv.innerHTML = `<span style='color:#f87171;'>❌ Error: Judge0 VM is still not ready after multiple attempts. Please try again later.</span>`;
+                        }
+                        if (testBtn) testBtn.classList.remove('button--loading');
+                    }
+                    return;
+                }
+                // Otherwise, show a generic error
+                console.error('Error testing solution:', error);
+                logApiCall('testSolution - error', { error });
+                if (resultDiv) {
+                    resultDiv.innerHTML = `<span style='color:#f87171;'>❌ Error: Could not test solution. Please try again.</span>`;
+                }
+                if (testBtn) testBtn.classList.remove('button--loading');
+            }
+        };
+        pollAndRetry();
+    }
+
     initializeHackAssistant() {
+        logApiCall('initializeHackAssistant', {});
         const transmitBtn = document.getElementById('transmit-btn-static');
         const hackInput = document.getElementById('hack-input-static');
         const assistLevel = document.getElementById('assist-level-static');
         const chatMsg = document.getElementById('hack-chat-msg-static');
+        const chatBox = document.getElementById('hack-chat-static');
+
+        // Add a scrollable chat log div if not present
+        if (!document.getElementById('hack-chat-log')) {
+            const chatLog = document.createElement('div');
+            chatLog.id = 'hack-chat-log';
+            chatLog.style.maxHeight = '200px';
+            chatLog.style.overflowY = 'auto';
+            chatLog.style.padding = '0.5rem 0';
+            chatLog.className = 'text-sm';
+            chatBox.innerHTML = '';
+            chatBox.appendChild(chatLog);
+        }
+        this.renderHackChatHistory();
 
         if (transmitBtn && hackInput) {
-            transmitBtn.addEventListener('click', async () => {
+            transmitBtn.onclick = async () => {
                 const query = hackInput.value.trim();
                 if (!query) return;
-
+                transmitBtn.classList.add('button--loading');
+                // Add spinner if not present
+                if (!transmitBtn.querySelector('.spinner')) {
+                    const spinner = document.createElement('span');
+                    spinner.className = 'spinner';
+                    transmitBtn.appendChild(spinner);
+                }
+                hackChatHistory.push({ role: 'user', content: query });
+                this.renderHackChatHistory();
+                logApiCall('HackAssistant - user query', { query, assistLevel: assistLevel.value });
                 try {
-                    const response = await fetch(ENDPOINTS.newChat, {
+                    logApiCall('HackAssistant - fetch', { url: this.ENDPOINTS.newChat, query, assistLevel: assistLevel.value });
+                    // --- FIX: Map dropdown value to backend key ---
+                    const assistLevelMap = {
+                        "Hints Only - Get hints and guidance, but never full code.": "hints_only",
+                        "Full Solution - Receive a complete code solution.": "full_solution",
+                        "Step-by-Step - Get a solution broken down into logical steps.": "step_by_step",
+                        "Debug Mode - Get help identifying and fixing bugs in your code.": "debug_mode",
+                        "Learning Mode - Get explanations and teaching for concepts and code.": "learning_mode",
+                        "Chat": "chat"
+                    };
+                    const selectedLevel = assistLevelMap[assistLevel.value] || "hints_only";
+                    // --- END FIX ---
+                    const response = await fetch(this.ENDPOINTS.newChat, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            messages: [{ role: 'user', content: query }],
-                            assistanceLevel: assistLevel.value.toLowerCase().replace(/[^a-z_]/g, '_')
+                            messages: hackChatHistory.map(m => ({ role: m.role, content: m.content })),
+                            assistanceLevel: selectedLevel
                         })
                     });
-                    const data = await response.json();
-                    chatMsg.textContent = data.response?.content || data.response || 'No response.';
+                    logApiCall('HackAssistant - response', { status: response.status });
+                    const data = await handleApiResponse(response, 'newChat');
+                    // Use markdown parser for assistant response
+                    hackChatHistory.push({ role: 'assistant', content: data.response?.content || data.response || data.error || 'No response.' });
+                    this.renderHackChatHistory();
                     hackInput.value = '';
+                    logApiCall('HackAssistant - end', { data });
                 } catch (error) {
                     console.error('Error getting hack assistant response:', error);
-                    chatMsg.textContent = 'Error: Could not get response from Hack Assistant. Please try again.';
+                    logApiCall('HackAssistant - error', { error });
+                    hackChatHistory.push({ role: 'assistant', content: 'Error: Could not get response from Hack Assistant. Please try again.' });
+                    this.renderHackChatHistory();
+                } finally {
+                    transmitBtn.classList.remove('button--loading');
                 }
-            });
+            };
         }
+    }
+
+    renderHackChatHistory() {
+        const chatLog = document.getElementById('hack-chat-log');
+        if (!chatLog) return;
+        chatLog.innerHTML = '';
+        hackChatHistory.forEach(msg => {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = msg.role === 'user' ? 'text-right mb-2' : 'text-left mb-2';
+            if (msg.role === 'user') {
+                msgDiv.innerHTML = `<span class='inline-block bg-blue-200 text-blue-900 rounded px-2 py-1' style='max-width: 90%; word-break: break-word; white-space: pre-wrap; overflow-wrap: anywhere;'>${msg.content}</span>`;
+            } else {
+                // Use marked.js for markdown rendering
+                msgDiv.innerHTML = `<span class='block bg-purple-100 text-purple-900 rounded px-2 py-1 w-full' style='width: 100%; white-space: pre-wrap; word-break: break-word; overflow-wrap: anywhere; box-sizing: border-box;'>${window.marked ? marked.parse(msg.content) : msg.content}</span>`;
+            }
+            chatLog.appendChild(msgDiv);
+        });
+        // Scroll to bottom
+        chatLog.scrollTop = chatLog.scrollHeight;
     }
 }
 
 // Initialize when DOM is loaded
+// Add rate limit info area if not present
+if (!document.getElementById('rate-limit-info')) {
+    const infoDiv = document.createElement('div');
+    infoDiv.id = 'rate-limit-info';
+    infoDiv.className = 'mb-4 text-sm text-gray-600';
+    const parent = document.querySelector('.mb-4') || document.body;
+    parent.parentNode.insertBefore(infoDiv, parent.nextSibling);
+}
 document.addEventListener('DOMContentLoaded', () => {
-    new InteractiveElements();
+    if (!window.marked) {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+        script.onload = () => { 
+            const ie = new InteractiveElements();
+            ie.attachSolutionButtonListeners();
+        };
+        document.body.appendChild(script);
+    } else {
+        const ie = new InteractiveElements();
+        ie.attachSolutionButtonListeners();
+    }
 });
 </script>
 

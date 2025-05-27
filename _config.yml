@@ -84,9 +84,11 @@ exclude:
   - .nojekyll 
   - /docfiles
 
+## Environment variables - get the keys from the local .env file
+## When deploying to GitHub Pages, the .env file is not used, so we need to use our github secrets to store and retrieve the keys
 env:
-  NEWMETHOD_CHAT_KEY: "your-key-here"
-  NEWMETHOD_SNIPPET_KEY: "your-key-here"
-  OLDMETHOD_CHAT_KEY: "your-key-here"
-  OLDMETHOD_SNIPPET_KEY: "your-key-here"
-  EXECUTETWOSUM_KEY: "your-key-here"
+  NEWMETHOD_CHAT_KEY: ${{ secrets.NEWMETHOD_CHAT_KEY }}
+  NEWMETHOD_SNIPPET_KEY: ${{ secrets.NEWMETHOD_SNIPPET_KEY }}
+  OLDMETHOD_CHAT_KEY: ${{ secrets.OLDMETHOD_CHAT_KEY }}
+  OLDMETHOD_SNIPPET_KEY: ${{ secrets.OLDMETHOD_SNIPPET_KEY }}
+  EXECUTETWOSUM_KEY: ${{ secrets.EXECUTETWOSUM_KEY }}

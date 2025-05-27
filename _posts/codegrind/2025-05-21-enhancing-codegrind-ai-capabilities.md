@@ -30,6 +30,73 @@ excerpt: "In this post, I'll share the journey of enhancing CodeGrind's AI capab
 html.dark .highlight {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 }
+.solution-flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2%;
+  width: 100%;
+}
+.solution-flex-row > div {
+  width: 50%;
+  min-width: 0;
+}
+@media (max-width: 700px) {
+  .solution-flex-row {
+    flex-direction: column;
+  }
+  .solution-flex-row > div {
+    width: 100%;
+  }
+}
+/* Spinner and loading button styles */
+.button--loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.7;
+}
+.button--loading .button__text {
+  visibility: hidden;
+  opacity: 0;
+}
+.button--loading .spinner {
+  display: block;
+}
+.spinner {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: 3px solid #fff;
+  border-top: 3px solid #38bdf8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 2;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+/* Force code blocks and pre elements in hack assistant to wrap */
+#hack-chat-log pre,
+#hack-chat-log code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.bg-purple-100 pre,
+.bg-purple-100 code {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: anywhere !important;
+  box-sizing: border-box;
+  max-width: 100%;
+}
 </style>
 
 <div class="opacity-0" data-animate="fade-in">
@@ -91,13 +158,21 @@ class AIService {
     <li>Tower Defense snippet generation</li>
   </ul>
   <img src="/assets/images/codegrind/AI_Problem_Generation.png" alt="AI Problem Generation" class="rounded-lg shadow-md w-full max-w-2xl mx-auto my-6">
+
+  <p class="text-gray-700 dark:text-gray-300 mb-4">
+    <strong>More on Problem Generation:</strong> Our advanced problem generation system empowers users to not only create custom programming challenges, but also to fully control the problem creation process. After generating a problem, you can review and edit every part of it—including the description, function signature, test cases, and even the expected outputs. To ensure quality and fairness, you must also provide a working solution for your problem, which is automatically tested before you can submit it to the platform. If you get stuck, you can use the integrated AI chat assistant for hints, debugging help, or even step-by-step guidance to solve your own problem. This makes the process both educational and interactive, whether you're learning or challenging others.<br>
+    <br>
+    <em>More information and an interactive demo of this feature are coming soon—stay tuned!</em>
+  </p>
+
+  <img src="/assets/images/codegrind/tower-defense-solution-verified.png" alt="Tower Defense Solution Verified" class="rounded-lg shadow-md w-full max-w-2xl mx-auto my-6">
 </div>
 
 <div class="opacity-0" data-scroll="fade-up">
   <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Interactive Demo: Build a Solution (Tower Defense Style)</h2>
   <div class="mb-4 p-4 bg-blue-100 dark:bg-slate-700 rounded-lg text-gray-800 dark:text-gray-200">
-    <strong>How to use this demo:</strong> Select a tower type (programming concept), view its stats and upgrades, and add it to your solution. Compare how the <span class="text-blue-700 font-semibold">Old AI</span> and <span class="text-green-700 font-semibold">New AI</span> would generate code for each tower. Build your solution step-by-step, just like in the real Tower Defense game!<br>
-    <span class="block mt-2">Need help? Use the <span class="text-purple-400 font-semibold">Hack Assistant</span> (bottom right) to get hints, step-by-step help, or even a full solution!</span>
+    <strong>How to use this demo:</strong> Select a tower type (programming concept), view its stats and upgrades, and add it to your solution. Compare how the <span class="text-blue-700 font-semibold">Old AI</span> and <span class="text-green-700 font-semibold">New AI</span> would generate code for each tower. Build your solution step-by-step, just like in the real Tower Defense game!<br>Notice how the old and new snippets generated are different, you can see that the old snippet generation would at times give a whole solution but the new snippet generation will actually give you the proper code for the programming concept you are trying to add to your solution.<br>
+    <span class="block mt-2">Need help? Use the <span class="text-purple-400 font-semibold">Hack Assistant</span> (bottom right) to get hints, step-by-step help, or even a full solution!</span><br>When you are ready to submit your solution, click the <span class="text-green-700 font-semibold">Test Solution</span> button to see if your solution is correct.
   </div>
   <div class="rounded-lg shadow-md bg-blue-50 dark:bg-slate-800 p-6 my-6 max-w-2xl mx-auto relative">
     <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">LeetCode Problem: Two Sum</h3>
@@ -106,6 +181,7 @@ class AIService {
     <div class="mb-4">
       <label for="tower-select" class="font-medium text-gray-800 dark:text-gray-200">Choose next tower type:</label>
       <select id="tower-select" class="ml-2 mb-2 rounded border-gray-300 dark:bg-slate-700 dark:text-white">
+        <option value="default" selected>Select a tower type</option>
         <option value="ForLoop">ForLoop</option>
         <option value="WhileLoop">WhileLoop</option>
         <option value="IfCondition">IfCondition</option>
@@ -132,7 +208,16 @@ class AIService {
     </div>
     <div>
       <h4 class="font-semibold text-gray-900 dark:text-white mb-2">Your Solution (as built):</h4>
-      <pre id="solution-preview" class="bg-slate-800 text-blue-400 rounded p-4 min-h-[3rem] text-base"></pre>
+      <div class="mb-2">
+        <button id="clear-old" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear Old</button>
+        <button id="clear-new" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear New</button>
+        <button id="clear-both" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear Both</button>
+        <button id="toggle-both" class="bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-1 px-2 rounded">Show/Hide Both</button>
+      </div>
+      <div class="solution-flex-row">
+        <div id="old-solution-preview" class="bg-slate-800 text-blue-400 rounded p-4 min-h-[3rem] text-base overflow-auto" style="white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;"></div>
+        <div id="solution-preview" class="bg-slate-800 text-green-400 rounded p-4 min-h-[3rem] text-base overflow-auto" style="white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;"></div>
+      </div>
       <button id="test-solution" class="mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded transition-colors">Test Solution</button>
       <div id="test-result" class="mt-4 text-base font-semibold"></div>
     </div>
@@ -241,10 +326,8 @@ class AIService {
   <p class="text-gray-700 dark:text-gray-300 mb-4">The journey of enhancing CodeGrind's AI capabilities has been both challenging and rewarding. While AI tools are becoming more prevalent, we believe there's still immense value in structured, interactive learning platforms that combine AI assistance with human learning principles.</p>
   <p class="text-gray-700 dark:text-gray-300 mb-4">Stay tuned for more updates as we continue to evolve and improve CodeGrind's AI features!</p>
 </div>
-
----
-
-<p class="text-gray-700 dark:text-gray-300 mt-8">*Want to experience these AI improvements firsthand? Try CodeGrind at <a href="https://codegrind.online" class="text-blue-600 hover:text-blue-800">codegrind.online</a>.*</p>
-
-<!-- Load interactive elements script -->
-{% include interactive-elements.js %}
+<br>
+<br>
+<div class="opacity-0" data-scroll="fade-up">
+  <p class="text-gray-700 dark:text-gray-300 mt-8">*Want to experience these AI improvements firsthand? Try CodeGrind at <a href="https://codegrind.online" class="text-blue-600 hover:text-blue-800">codegrind.online</a>.*</p>
+</div>

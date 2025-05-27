@@ -1,9 +1,9 @@
 <!-- Endpoint configuration -->
 <div id="endpoints" 
-  data-new-chat="{{ site.data.config.endpoints.newChat | default: 'https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy' }}"
-  data-new-snippet="{{ site.data.config.endpoints.newSnippet | default: 'https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy/tower-snippet' }}"
-  data-old-chat="{{ site.data.config.endpoints.oldChat | default: 'https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy' }}"
-  data-old-snippet="{{ site.data.config.endpoints.oldSnippet | default: 'https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy/tower-snippet' }}"
-  data-execute-two-sum="{{ site.data.config.endpoints.executeTwoSum | default: 'https://blogpost-interactive-elements.azurewebsites.net/api/ExecuteTwoSumSolutionProxy' }}"
+  data-new-chat="https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy/chat?code={{ site.env.NEWMETHOD_CHAT_KEY | default: '' }}"
+  data-new-snippet="https://blogpost-interactive-elements.azurewebsites.net/api/NewMethodProxy/tower-snippet?code={{ site.env.NEWMETHOD_SNIPPET_KEY | default: '' }}"
+  data-old-chat="https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy/chat?code={{ site.env.OLDMETHOD_CHAT_KEY | default: '' }}"
+  data-old-snippet="https://blogpost-interactive-elements.azurewebsites.net/api/OldMethodProxy/tower-snippet?code={{ site.env.OLDMETHOD_SNIPPET_KEY | default: '' }}"
+  data-execute-two-sum="https://blogpost-interactive-elements.azurewebsites.net/api/ExecuteTwoSumSolutionProxy?code={{ site.env.EXECUTETWOSUM_KEY | default: '' }}"
   style="display: none;">
 </div> 
