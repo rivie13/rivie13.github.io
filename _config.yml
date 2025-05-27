@@ -87,6 +87,7 @@ exclude:
 ## Environment variables - YOU MUST HARD CODE THESE KEYS IN THE _CONFIG.YML FILE
 ## If you leave a secret in the commits and try to push it will not work!!!!
 ## SO WE NEED TO FIGURE OUT A WAY TO PUSH THIS FILE AS IS TO GITHUB.....
+## DO NOT CHANGE THIS EVER!!!!!
 env:
   NEWMETHOD_CHAT_KEY: nD1a46NHMxN4lXjwU9QlyF1n6oocEufMHX3pISfh11XZAzFu9hxvhg==
   NEWMETHOD_SNIPPET_KEY: nD1a46NHMxN4lXjwU9QlyF1n6oocEufMHX3pISfh11XZAzFu9hxvhg==
