@@ -97,6 +97,20 @@ html.dark .highlight {
   box-sizing: border-box;
   max-width: 100%;
 }
+html.dark .bg-blue-100,
+html.dark .bg-blue-50 {
+  background-color: #232946 !important; /* or another dark blue */
+  color: #f4f4f4 !important;           /* or white */
+}
+html.dark .bg-blue-200,
+html.dark .bg-blue-300,
+html.dark .bg-blue-400,
+html.dark .bg-blue-500 {
+  background-color: #233554 !important; /* deep blue, not transparent or light */
+  color: #f4f4f4 !important;
+  border: 1px solid #3b4a6b !important;
+  box-shadow: 0 1px 4px 0 rgba(20,30,60,0.18);
+}
 </style>
 
 <div class="opacity-0" data-animate="fade-in">
