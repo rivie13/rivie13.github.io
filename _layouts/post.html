@@ -47,7 +47,7 @@ layout: default
   </div>
   
   <!-- In-article ad after content -->
-  {% include adsense-ad.html type="in-article" slot="YOUR_IN_ARTICLE_SLOT_ID" %}
+  {% include page-ad.html %}
   
   {% if page.tags.size > 0 %}
     <div class="mb-8 pb-8 border-b opacity-0" data-animate="fade-in" data-scroll="fade-up">
@@ -120,7 +120,7 @@ layout: default
     
       </div>
       <!-- Display ad after related posts -->
-      {% include adsense-ad.html type="display" format="auto" slot="YOUR_DISPLAY_AD_SLOT_ID" %}
+      {% include page-ad.html %}
     </div>
   {% endif %}
   
