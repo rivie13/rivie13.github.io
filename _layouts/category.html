@@ -15,8 +15,9 @@ layout: default
   </div>
   
   <div class="space-y-8">
-    {% if paginator.posts and paginator.posts.size > 0 %}
-      {% for post in paginator.posts %}
+    {% assign filtered_posts = site.posts | where_exp: "post", "post.categories contains page.category" %}
+    {% if filtered_posts.size > 0 %}
+      {% for post in filtered_posts %}
         <article class="bg-white rounded-lg shadow-md overflow-hidden opacity-0" data-animate="fade-in" data-scroll="fade-up">
           <div class="p-6">
             <h2 class="text-2xl font-bold mb-2">
