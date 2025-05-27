@@ -162,7 +162,7 @@ html.dark .bg-blue-500 {
   </p>
 </div>
 
-<div class="opacity-0" >
+<div class="opacity-0" data-animate="fade-in">
   <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Tower Defense AI Integration</h2>
   <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Code Generation System</h3>
   <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
