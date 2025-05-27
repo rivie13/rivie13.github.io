@@ -140,6 +140,29 @@ html.dark .bg-blue-500 {
 </div>
 
 <div class="opacity-0" data-animate="fade-in">
+  <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Code Breach: The Tower Defense Coding Game</h2>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">
+    Welcome to Code Breach, where you're not just solving coding problems - you're infiltrating corporate databases and data fortresses! In this unique tower defense game, you'll face waves of enemies representing code barriers and security systems. Your mission? Break through these barriers by solving DSA (Data Structures and Algorithms) problems similar to those found on LeetCode and even including actual LeetCode problems.
+  </p>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">
+    Choose your hacking language of choice - Java, JavaScript, Python, or C++ - and build your solution tower by tower. Each tower represents a programming concept (like loops, conditionals, or functions) that you can use to construct your solution. The final wave's difficulty is determined by whether your solution passes all test cases - fail, and you'll face an overwhelming final assault!
+  </p>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">
+    And when you need help, our newly enhanced Hack Assistant is at your service. This AI-powered companion provides tailored assistance based on your needs:
+  </p>
+  <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300 mb-4">
+    <li><strong>Hints Only:</strong> Get subtle guidance without spoiling the solution</li>
+    <li><strong>Full Solution:</strong> When you're completely stuck, get a complete working solution</li>
+    <li><strong>Step-by-Step:</strong> Break down the problem into manageable chunks</li>
+    <li><strong>Debug Mode:</strong> Get help identifying and fixing bugs in your code</li>
+    <li><strong>Learning Mode:</strong> Deep dive into the concepts and techniques used</li>
+  </ul>
+  <p class="text-gray-700 dark:text-gray-300 mb-4">
+    The Hack Assistant has been completely revamped with our latest AI improvements, providing more precise, context-aware assistance that adapts to your chosen assistance level. Whether you're a beginner looking for guidance or an experienced coder seeking optimization tips, the assistant will help you breach those corporate defenses!
+  </p>
+</div>
+
+<div class="opacity-0" >
   <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Tower Defense AI Integration</h2>
   <h3 class="text-xl font-bold mt-6 mb-3 text-gray-900 dark:text-white">Code Generation System</h3>
   <ul class="list-disc ml-8 text-gray-700 dark:text-gray-300">
