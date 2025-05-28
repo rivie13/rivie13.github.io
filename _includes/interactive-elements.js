@@ -502,31 +502,123 @@ class InteractiveElements {
     }
 
     formatCode(codeLines) {
-        // Ensure proper indentation for the solution
-        return codeLines.map((line, index) => {
+        let indentLevel = 0;
+        const indentSize = 4;
+        const result = [];
+        
+        for (let i = 0; i < codeLines.length; i++) {
+            const line = codeLines[i].trim();
+            
+            // Skip empty lines but preserve them
+            if (!line) {
+                result.push('');
+                continue;
+            }
+            
+            // Handle indentation level changes
+            if (line.endsWith(':')) {
+                // Current line gets current indentation
+                result.push(' '.repeat(indentLevel * indentSize) + line);
+                // Next level gets increased indentation
+                indentLevel++;
+            } else if (line.startsWith('return ') || line.startsWith('break ') || line.startsWith('continue ')) {
+                // These statements should be at the current indentation level
+                result.push(' '.repeat(indentLevel * indentSize) + line);
+            } else if (line.startsWith('class ')) {
+                // Class definition resets to base level
+                indentLevel = 0;
+                result.push(line);
+            } else if (line.startsWith('def ')) {
+                // Method definition is at base level + 1
+                indentLevel = 1;
+                result.push(' '.repeat(indentSize) + line);
+            } else if (line.startsWith('elif ') || line.startsWith('else:') || line.startsWith('except ') || line.startsWith('finally:')) {
+                // These should be at the same level as their matching if/try
+                indentLevel = Math.max(0, indentLevel - 1);
+                result.push(' '.repeat(indentLevel * indentSize) + line);
+            } else {
+                // Regular code line at current indentation
+                result.push(' '.repeat(indentLevel * indentSize) + line);
+            }
+        }
+        
+        return result;
+    }
+
+    validateAndFormatSolution(codeLines) {
+        // First format the indentation
+        let formattedLines = this.formatCode(codeLines);
+        
+        // Then validate and fix common structural issues
+        let inForLoop = false;
+        let inIfBlock = false;
+        let result = [];
+        
+        for (let i = 0; i < formattedLines.length; i++) {
+            const line = formattedLines[i].trim();
+            
             // Skip empty lines
-            if (!line.trim()) return line;
+            if (!line) {
+                result.push('');
+                continue;
+            }
             
-            // First line (class definition) should have no indentation
-            if (index === 0) return line;
-            
-            // Method definition should have 4 spaces
-            if (line.includes('def ')) return '    ' + line;
-            
-            // Method body should have 8 spaces
-            if (line.includes('    ')) return '        ' + line.trim();
-            
-            // Default indentation for other lines
-            return '        ' + line;
-        });
+            // Check for for loop
+            if (line.startsWith('for ')) {
+                inForLoop = true;
+                result.push(formattedLines[i]);
+                // Ensure next line is properly indented
+                if (i + 1 < formattedLines.length) {
+                    const nextLine = formattedLines[i + 1].trim();
+                    if (nextLine && !nextLine.startsWith('    ')) {
+                        formattedLines[i + 1] = '        ' + nextLine;
+                    }
+                }
+            }
+            // Check for if statement
+            else if (line.startsWith('if ')) {
+                inIfBlock = true;
+                result.push(formattedLines[i]);
+                // Ensure next line is properly indented
+                if (i + 1 < formattedLines.length) {
+                    const nextLine = formattedLines[i + 1].trim();
+                    if (nextLine && !nextLine.startsWith('    ')) {
+                        formattedLines[i + 1] = '        ' + nextLine;
+                    }
+                }
+            }
+            // Handle return statements
+            else if (line.startsWith('return ')) {
+                // If we're in a for loop or if block, ensure proper indentation
+                if (inForLoop || inIfBlock) {
+                    result.push('        ' + line);
+                } else {
+                    result.push(formattedLines[i]);
+                }
+            }
+            // Handle dictionary operations
+            else if (line.includes('[') && line.includes(']')) {
+                // Ensure proper indentation for dictionary operations
+                if (inForLoop || inIfBlock) {
+                    result.push('        ' + line);
+                } else {
+                    result.push(formattedLines[i]);
+                }
+            }
+            else {
+                result.push(formattedLines[i]);
+            }
+        }
+        
+        return result;
     }
 
     updateSolutionPreview() {
         logApiCall('updateSolutionPreview', { builtSolutionOld, builtSolutionNew });
         
-        // Format both solutions
-        const formattedOldSolution = this.formatCode(builtSolutionOld);
-        const formattedNewSolution = this.formatCode(builtSolutionNew);
+        // Format and validate both solutions
+        const formattedOldSolution = this.validateAndFormatSolution(builtSolutionOld);
+        const formattedNewSolution = this.validateAndFormatSolution(builtSolutionNew);
         
         // Update the old solution preview
         const oldDiv = document.getElementById('old-solution-preview');
@@ -642,6 +734,26 @@ class InteractiveElements {
         pollAndRetry();
     }
 
+    // Add input validation and sanitization
+    sanitizeInput(input) {
+        // Remove any HTML tags
+        input = input.replace(/<[^>]*>/g, '');
+        // Remove any script tags
+        input = input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+        // Remove any potentially dangerous characters
+        input = input.replace(/[<>]/g, '');
+        return input;
+    }
+
+    validateMessage(message) {
+        if (!message || typeof message !== 'string') return false;
+        // Limit message length to prevent DoS
+        if (message.length > 1000) return false;
+        // Check for potentially malicious content
+        if (message.includes('<script') || message.includes('javascript:')) return false;
+        return true;
+    }
+
     initializeHackAssistant() {
         logApiCall('initializeHackAssistant', {});
         const transmitBtn = document.getElementById('transmit-btn-static');
@@ -667,6 +779,14 @@ class InteractiveElements {
             transmitBtn.onclick = async () => {
                 const query = hackInput.value.trim();
                 if (!query) return;
+                
+                // Validate and sanitize input
+                if (!this.validateMessage(query)) {
+                    alert('Invalid message. Please check your input and try again.');
+                    return;
+                }
+                const sanitizedQuery = this.sanitizeInput(query);
+                
                 transmitBtn.classList.add('button--loading');
                 // Add spinner if not present
                 if (!transmitBtn.querySelector('.spinner')) {
@@ -674,11 +794,11 @@ class InteractiveElements {
                     spinner.className = 'spinner';
                     transmitBtn.appendChild(spinner);
                 }
-                hackChatHistory.push({ role: 'user', content: query });
+                hackChatHistory.push({ role: 'user', content: sanitizedQuery });
                 this.renderHackChatHistory();
-                logApiCall('HackAssistant - user query', { query, assistLevel: assistLevel.value });
+                logApiCall('HackAssistant - user query', { query: sanitizedQuery, assistLevel: assistLevel.value });
                 try {
-                    logApiCall('HackAssistant - fetch', { url: this.ENDPOINTS.newChat, query, assistLevel: assistLevel.value });
+                    logApiCall('HackAssistant - fetch', { url: this.ENDPOINTS.newChat, query: sanitizedQuery, assistLevel: assistLevel.value });
                     // --- FIX: Map dropdown value to backend key ---
                     const assistLevelMap = {
                         "Hints Only - Get hints and guidance, but never full code.": "hints_only",
@@ -700,8 +820,9 @@ class InteractiveElements {
                     });
                     logApiCall('HackAssistant - response', { status: response.status });
                     const data = await handleApiResponse(response, 'newChat');
-                    // Use markdown parser for assistant response
-                    hackChatHistory.push({ role: 'assistant', content: data.response?.content || data.response || data.error || 'No response.' });
+                    // Sanitize AI response before displaying
+                    const sanitizedResponse = this.sanitizeInput(data.response?.content || data.response || data.error || 'No response.');
+                    hackChatHistory.push({ role: 'assistant', content: sanitizedResponse });
                     this.renderHackChatHistory();
                     hackInput.value = '';
                     logApiCall('HackAssistant - end', { data });
