@@ -269,6 +269,8 @@ class InteractiveElements {
         const clearNewBtn = document.getElementById('clear-new');
         const clearBothBtn = document.getElementById('clear-both');
         const toggleBothBtn = document.getElementById('toggle-both');
+        const formatCodeBtn = document.getElementById('format-code');
+        
         if (clearOldBtn) clearOldBtn.onclick = () => { builtSolutionOld = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
         if (clearNewBtn) clearNewBtn.onclick = () => { builtSolutionNew = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
         if (clearBothBtn) clearBothBtn.onclick = () => { builtSolutionOld = [...TWO_SUM_SKELETON]; builtSolutionNew = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
@@ -284,6 +286,11 @@ class InteractiveElements {
                     newDiv.style.display = 'block';
                 }
             }
+        };
+        if (formatCodeBtn) formatCodeBtn.onclick = () => {
+            builtSolutionOld = this.formatCode(builtSolutionOld);
+            builtSolutionNew = this.formatCode(builtSolutionNew);
+            this.updateSolutionPreview();
         };
     }
 
@@ -374,7 +381,8 @@ class InteractiveElements {
                 <button id="clear-old" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear Old</button>
                 <button id="clear-new" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear New</button>
                 <button id="clear-both" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear Both</button>
-                <button id="toggle-both" class="bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-1 px-2 rounded">Show/Hide Both</button>
+                <button id="toggle-both" class="mr-2 bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-1 px-2 rounded">Show/Hide Both</button>
+                <button id="format-code" class="bg-green-200 hover:bg-green-300 text-green-800 font-semibold py-1 px-2 rounded">Format Code</button>
             `;
             container.parentNode.insertBefore(btnDiv, container);
         }
@@ -493,17 +501,45 @@ class InteractiveElements {
         }
     }
 
+    formatCode(codeLines) {
+        // Ensure proper indentation for the solution
+        return codeLines.map((line, index) => {
+            // Skip empty lines
+            if (!line.trim()) return line;
+            
+            // First line (class definition) should have no indentation
+            if (index === 0) return line;
+            
+            // Method definition should have 4 spaces
+            if (line.includes('def ')) return '    ' + line;
+            
+            // Method body should have 8 spaces
+            if (line.includes('    ')) return '        ' + line.trim();
+            
+            // Default indentation for other lines
+            return '        ' + line;
+        });
+    }
+
     updateSolutionPreview() {
         logApiCall('updateSolutionPreview', { builtSolutionOld, builtSolutionNew });
+        
+        // Format both solutions
+        const formattedOldSolution = this.formatCode(builtSolutionOld);
+        const formattedNewSolution = this.formatCode(builtSolutionNew);
+        
         // Update the old solution preview
         const oldDiv = document.getElementById('old-solution-preview');
         if (oldDiv) {
-            oldDiv.innerHTML = `<h4 class=\"font-semibold text-blue-700 dark:text-blue-600 mb-2\">Old Code</h4>\n<pre class=\"bg-slate-900 text-blue-400 rounded p-4 min-h-[2.5rem] text-base mb-2\" style=\"overflow-x: auto; white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;\">${builtSolutionOld.length ? builtSolutionOld.join('\n\n') : ''}</pre>`;
+            oldDiv.innerHTML = `<h4 class="font-semibold text-blue-700 dark:text-blue-600 mb-2">Old Code</h4>
+                <pre class="bg-slate-900 text-blue-400 rounded p-4 min-h-[2.5rem] text-base mb-2" style="overflow-x: auto; white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;">${formattedOldSolution.length ? formattedOldSolution.join('\n') : ''}</pre>`;
         }
+        
         // Update the new solution preview
         const newDiv = document.getElementById('solution-preview');
         if (newDiv) {
-            newDiv.innerHTML = `<h4 class=\"font-semibold text-green-700 dark:text-green-800 mb-2\">New Code</h4>\n<pre class=\"bg-slate-900 text-green-400 rounded p-4 min-h-[2.5rem] text-base mb-2\" style=\"overflow-x: auto; white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;\">${builtSolutionNew.length ? builtSolutionNew.join('\n\n') : ''}</pre>`;
+            newDiv.innerHTML = `<h4 class="font-semibold text-green-700 dark:text-green-800 mb-2">New Code</h4>
+                <pre class="bg-slate-900 text-green-400 rounded p-4 min-h-[2.5rem] text-base mb-2" style="overflow-x: auto; white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;">${formattedNewSolution.length ? formattedNewSolution.join('\n') : ''}</pre>`;
         }
     }
 
