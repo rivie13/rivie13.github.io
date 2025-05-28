@@ -747,7 +747,7 @@ class InteractiveElements {
 
     validateMessage(message) {
         if (!message || typeof message !== 'string') return false;
-        // Limit message length to prevent DoS
+        // Only limit length for user messages
         if (message.length > 1000) return false;
         // Check for potentially malicious content
         if (message.includes('<script') || message.includes('javascript:')) return false;
@@ -782,7 +782,7 @@ class InteractiveElements {
                 
                 // Validate and sanitize input
                 if (!this.validateMessage(query)) {
-                    alert('Invalid message. Please check your input and try again.');
+                    alert('Message too long. Please keep your message under 1000 characters.');
                     return;
                 }
                 const sanitizedQuery = this.sanitizeInput(query);
@@ -820,7 +820,7 @@ class InteractiveElements {
                     });
                     logApiCall('HackAssistant - response', { status: response.status });
                     const data = await handleApiResponse(response, 'newChat');
-                    // Sanitize AI response before displaying
+                    // Sanitize AI response before displaying, but don't limit length
                     const sanitizedResponse = this.sanitizeInput(data.response?.content || data.response || data.error || 'No response.');
                     hackChatHistory.push({ role: 'assistant', content: sanitizedResponse });
                     this.renderHackChatHistory();
