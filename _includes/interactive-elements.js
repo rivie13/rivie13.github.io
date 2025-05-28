@@ -242,6 +242,123 @@ const towers = {
   }
 };
 
+// Add CodeMirror configuration
+const CODEMIRROR_CONFIG = {
+    mode: 'python',
+    theme: 'monokai',
+    lineNumbers: true,
+    indentUnit: 4,
+    smartIndent: true,
+    tabSize: 4,
+    indentWithTabs: false,
+    lineWrapping: false,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    foldGutter: true,
+    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+    extraKeys: {
+        'Tab': 'indentMore',
+        'Shift-Tab': 'indentLess',
+        'Ctrl-Space': 'autocomplete'
+    }
+};
+
+// Add CodeMirror styles
+const codemirrorStyles = `
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/fold/foldgutter.css">
+<style>
+.CodeMirror {
+    min-height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    width: 100%;
+}
+
+/* Make CodeMirror editors scrollable */
+.CodeMirror-scroll {
+    max-height: 350px;
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 100%;
+}
+
+.solution-flex-row {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.solution-flex-row > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.CodeMirror-gutters {
+    border-right: 1px solid #ddd;
+    background-color: #f7f7f7;
+}
+
+html.dark .CodeMirror {
+    border-color: #4a5568;
+}
+
+html.dark .CodeMirror-gutters {
+    background-color: #2d3748;
+    border-color: #4a5568;
+}
+</style>
+`;
+
+// Add styles to document
+document.head.insertAdjacentHTML('beforeend', codemirrorStyles);
+
+// Function to load scripts in sequence
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+// Load CodeMirror and its addons in sequence
+async function loadCodeMirror() {
+    try {
+        // Load main CodeMirror library first
+        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js');
+        
+        // Load addons after main library is loaded
+        await Promise.all([
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/fold/foldcode.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/fold/foldgutter.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/fold/indent-fold.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/show-hint.min.js'),
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/hint/python-hint.min.js')
+        ]);
+        
+        // Initialize CodeMirror after all scripts are loaded
+        if (typeof CodeMirror !== 'undefined') {
+            // Add any global CodeMirror configurations here if needed
+            console.log('CodeMirror loaded successfully');
+        }
+    } catch (error) {
+        console.error('Error loading CodeMirror:', error);
+    }
+}
+
+// Call loadCodeMirror when the document is ready
+document.addEventListener('DOMContentLoaded', loadCodeMirror);
+
 class InteractiveElements {
     constructor() {
         this.ENDPOINTS = {
@@ -269,6 +386,8 @@ class InteractiveElements {
         const clearNewBtn = document.getElementById('clear-new');
         const clearBothBtn = document.getElementById('clear-both');
         const toggleBothBtn = document.getElementById('toggle-both');
+        const formatCodeBtn = document.getElementById('format-code');
+        
         if (clearOldBtn) clearOldBtn.onclick = () => { builtSolutionOld = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
         if (clearNewBtn) clearNewBtn.onclick = () => { builtSolutionNew = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
         if (clearBothBtn) clearBothBtn.onclick = () => { builtSolutionOld = [...TWO_SUM_SKELETON]; builtSolutionNew = [...TWO_SUM_SKELETON]; this.updateSolutionPreview(); };
@@ -284,6 +403,11 @@ class InteractiveElements {
                     newDiv.style.display = 'block';
                 }
             }
+        };
+        if (formatCodeBtn) formatCodeBtn.onclick = () => {
+            builtSolutionOld = this.formatCode(builtSolutionOld);
+            builtSolutionNew = this.formatCode(builtSolutionNew);
+            this.updateSolutionPreview();
         };
     }
 
@@ -338,6 +462,20 @@ class InteractiveElements {
                 addTowerBtn.parentNode.insertBefore(infoDiv, addTowerBtn.nextSibling);
             }
         }
+        // Add user note above editors
+        if (!document.getElementById('snippet-insert-note')) {
+            const noteDiv = document.createElement('div');
+            noteDiv.id = 'snippet-insert-note';
+            noteDiv.className = 'mb-2 text-xs text-gray-400';
+            noteDiv.innerHTML = 'Note: When you add a code snippet, it will be inserted at your current cursor position in the editor.';
+            noteDiv.innerHTML += '<br>Note: Even a refined prompt may not always generate the perfect code. You can always edit the code to make it better.';
+            noteDiv.innerHTML += '<br>Note: Only the New Code is used for testing/submission.';
+            // Insert above the flex wrapper (editors)
+            const solutionDiv = document.getElementById('solution-preview');
+            if (solutionDiv && solutionDiv.parentNode) {
+                solutionDiv.parentNode.parentNode.insertBefore(noteDiv, solutionDiv.parentNode);
+            }
+        }
         // Add clear/toggle buttons and old solution area if not present
         if (!document.getElementById('old-solution-preview')) {
             const solutionDiv = document.getElementById('solution-preview');
@@ -374,7 +512,8 @@ class InteractiveElements {
                 <button id="clear-old" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear Old</button>
                 <button id="clear-new" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear New</button>
                 <button id="clear-both" class="mr-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-2 rounded">Clear Both</button>
-                <button id="toggle-both" class="bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-1 px-2 rounded">Show/Hide Both</button>
+                <button id="toggle-both" class="mr-2 bg-blue-200 hover:bg-blue-300 text-blue-800 font-semibold py-1 px-2 rounded">Show/Hide Both</button>
+                <button id="format-code" class="bg-green-200 hover:bg-green-300 text-green-800 font-semibold py-1 px-2 rounded">Format Code</button>
             `;
             container.parentNode.insertBefore(btnDiv, container);
         }
@@ -447,7 +586,10 @@ class InteractiveElements {
             if (oldSnippetElement) {
                 oldSnippetElement.textContent = oldData.snippet || (oldData.error || 'No snippet returned.');
             }
-            if (oldData.snippet) {
+            // Insert at cursor in old editor if present
+            if (oldData.snippet && window.oldEditor && window.oldEditor.hasFocus()) {
+                window.oldEditor.replaceSelection('        ' + oldData.snippet.trim() + '\n');
+            } else if (oldData.snippet) {
                 builtSolutionOld.push('        ' + oldData.snippet.trim());
             } else {
                 builtSolutionOld.push(`# Error: ${oldData.error || 'No snippet returned.'}`);
@@ -468,7 +610,10 @@ class InteractiveElements {
             if (newSnippetElement) {
                 newSnippetElement.textContent = newData.snippet || (newData.error || 'No snippet returned.');
             }
-            if (newData.snippet) {
+            // Insert at cursor in new editor if present
+            if (newData.snippet && window.newEditor && window.newEditor.hasFocus()) {
+                window.newEditor.replaceSelection('        ' + newData.snippet.trim() + '\n');
+            } else if (newData.snippet) {
                 builtSolutionNew.push('        ' + newData.snippet.trim());
             } else {
                 builtSolutionNew.push(`# Error: ${newData.error || 'No snippet returned.'}`);
@@ -493,17 +638,165 @@ class InteractiveElements {
         }
     }
 
+    formatCode(codeLines) {
+        let indentLevel = 0;
+        const indentSize = 4;
+        const result = [];
+        
+        for (let i = 0; i < codeLines.length; i++) {
+            const line = codeLines[i].trim();
+            
+            // Skip empty lines but preserve them
+            if (!line) {
+                result.push('');
+                continue;
+            }
+            
+            // Handle indentation level changes
+            if (line.endsWith(':')) {
+                // Current line gets current indentation
+                result.push(' '.repeat(indentLevel * indentSize) + line);
+                // Next level gets increased indentation
+                indentLevel++;
+            } else if (line.startsWith('return ') || line.startsWith('break ') || line.startsWith('continue ')) {
+                // These statements should be at the current indentation level
+                result.push(' '.repeat(indentLevel * indentSize) + line);
+            } else if (line.startsWith('class ')) {
+                // Class definition resets to base level
+                indentLevel = 0;
+                result.push(line);
+            } else if (line.startsWith('def ')) {
+                // Method definition is at base level + 1
+                indentLevel = 1;
+                result.push(' '.repeat(indentSize) + line);
+            } else if (line.startsWith('elif ') || line.startsWith('else:') || line.startsWith('except ') || line.startsWith('finally:')) {
+                // These should be at the same level as their matching if/try
+                indentLevel = Math.max(0, indentLevel - 1);
+                result.push(' '.repeat(indentLevel * indentSize) + line);
+            } else {
+                // Regular code line at current indentation
+                result.push(' '.repeat(indentLevel * indentSize) + line);
+            }
+        }
+        
+        return result;
+    }
+
+    validateAndFormatSolution(codeLines) {
+        // First format the indentation
+        let formattedLines = this.formatCode(codeLines);
+        
+        // Then validate and fix common structural issues
+        let inForLoop = false;
+        let inIfBlock = false;
+        let result = [];
+        
+        for (let i = 0; i < formattedLines.length; i++) {
+            const line = formattedLines[i].trim();
+            
+            // Skip empty lines
+            if (!line) {
+                result.push('');
+                continue;
+            }
+            
+            // Check for for loop
+            if (line.startsWith('for ')) {
+                inForLoop = true;
+                result.push(formattedLines[i]);
+                // Ensure next line is properly indented
+                if (i + 1 < formattedLines.length) {
+                    const nextLine = formattedLines[i + 1].trim();
+                    if (nextLine && !nextLine.startsWith('    ')) {
+                        formattedLines[i + 1] = '        ' + nextLine;
+                    }
+                }
+            }
+            // Check for if statement
+            else if (line.startsWith('if ')) {
+                inIfBlock = true;
+                result.push(formattedLines[i]);
+                // Ensure next line is properly indented
+                if (i + 1 < formattedLines.length) {
+                    const nextLine = formattedLines[i + 1].trim();
+                    if (nextLine && !nextLine.startsWith('    ')) {
+                        formattedLines[i + 1] = '        ' + nextLine;
+                    }
+                }
+            }
+            // Handle return statements
+            else if (line.startsWith('return ')) {
+                // If we're in a for loop or if block, ensure proper indentation
+                if (inForLoop || inIfBlock) {
+                    result.push('        ' + line);
+                } else {
+                    result.push(formattedLines[i]);
+                }
+            }
+            // Handle dictionary operations
+            else if (line.includes('[') && line.includes(']')) {
+                // Ensure proper indentation for dictionary operations
+                if (inForLoop || inIfBlock) {
+                    result.push('        ' + line);
+                } else {
+                    result.push(formattedLines[i]);
+                }
+            }
+            else {
+                result.push(formattedLines[i]);
+            }
+        }
+        
+        return result;
+    }
+
     updateSolutionPreview() {
         logApiCall('updateSolutionPreview', { builtSolutionOld, builtSolutionNew });
+        // Format and validate both solutions
+        const formattedOldSolution = this.validateAndFormatSolution(builtSolutionOld);
+        const formattedNewSolution = this.validateAndFormatSolution(builtSolutionNew);
+
         // Update the old solution preview
         const oldDiv = document.getElementById('old-solution-preview');
         if (oldDiv) {
-            oldDiv.innerHTML = `<h4 class=\"font-semibold text-blue-700 dark:text-blue-600 mb-2\">Old Code</h4>\n<pre class=\"bg-slate-900 text-blue-400 rounded p-4 min-h-[2.5rem] text-base mb-2\" style=\"overflow-x: auto; white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;\">${builtSolutionOld.length ? builtSolutionOld.join('\n\n') : ''}</pre>`;
+            // If CodeMirror already exists, just update its value
+            if (window.oldEditor) {
+                window.oldEditor.setValue(formattedOldSolution.join('\n'));
+            } else {
+                oldDiv.innerHTML = `<h4 class="font-semibold text-blue-700 dark:text-blue-600 mb-2">Old Code</h4>
+                    <div id="old-editor"></div>`;
+                window.oldEditor = CodeMirror(document.getElementById('old-editor'), {
+                    ...CODEMIRROR_CONFIG,
+                    readOnly: false
+                });
+                window.oldEditor.setValue(formattedOldSolution.join('\n'));
+                window.oldEditor.on('change', (cm, change) => {
+                    if (change.origin !== 'setValue') {
+                        builtSolutionOld = cm.getValue().split('\n');
+                    }
+                });
+            }
         }
+
         // Update the new solution preview
         const newDiv = document.getElementById('solution-preview');
         if (newDiv) {
-            newDiv.innerHTML = `<h4 class=\"font-semibold text-green-700 dark:text-green-800 mb-2\">New Code</h4>\n<pre class=\"bg-slate-900 text-green-400 rounded p-4 min-h-[2.5rem] text-base mb-2\" style=\"overflow-x: auto; white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;\">${builtSolutionNew.length ? builtSolutionNew.join('\n\n') : ''}</pre>`;
+            if (window.newEditor) {
+                window.newEditor.setValue(formattedNewSolution.join('\n'));
+            } else {
+                newDiv.innerHTML = `<h4 class="font-semibold text-green-700 dark:text-green-800 mb-2">New Code</h4>
+                    <div id="new-editor"></div>`;
+                window.newEditor = CodeMirror(document.getElementById('new-editor'), {
+                    ...CODEMIRROR_CONFIG,
+                    readOnly: false
+                });
+                window.newEditor.setValue(formattedNewSolution.join('\n'));
+                window.newEditor.on('change', (cm, change) => {
+                    if (change.origin !== 'setValue') {
+                        builtSolutionNew = cm.getValue().split('\n');
+                    }
+                });
+            }
         }
     }
 
@@ -606,6 +899,26 @@ class InteractiveElements {
         pollAndRetry();
     }
 
+    // Add input validation and sanitization
+    sanitizeInput(input) {
+        // Remove any HTML tags
+        input = input.replace(/<[^>]*>/g, '');
+        // Remove any script tags
+        input = input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+        // Remove any potentially dangerous characters
+        input = input.replace(/[<>]/g, '');
+        return input;
+    }
+
+    validateMessage(message) {
+        if (!message || typeof message !== 'string') return false;
+        // Only limit length for user messages
+        if (message.length > 1000) return false;
+        // Check for potentially malicious content
+        if (message.includes('<script') || message.includes('javascript:')) return false;
+        return true;
+    }
+
     initializeHackAssistant() {
         logApiCall('initializeHackAssistant', {});
         const transmitBtn = document.getElementById('transmit-btn-static');
@@ -631,6 +944,14 @@ class InteractiveElements {
             transmitBtn.onclick = async () => {
                 const query = hackInput.value.trim();
                 if (!query) return;
+                
+                // Validate and sanitize input
+                if (!this.validateMessage(query)) {
+                    alert('Message too long. Please keep your message under 1000 characters.');
+                    return;
+                }
+                const sanitizedQuery = this.sanitizeInput(query);
+                
                 transmitBtn.classList.add('button--loading');
                 // Add spinner if not present
                 if (!transmitBtn.querySelector('.spinner')) {
@@ -638,11 +959,11 @@ class InteractiveElements {
                     spinner.className = 'spinner';
                     transmitBtn.appendChild(spinner);
                 }
-                hackChatHistory.push({ role: 'user', content: query });
+                hackChatHistory.push({ role: 'user', content: sanitizedQuery });
                 this.renderHackChatHistory();
-                logApiCall('HackAssistant - user query', { query, assistLevel: assistLevel.value });
+                logApiCall('HackAssistant - user query', { query: sanitizedQuery, assistLevel: assistLevel.value });
                 try {
-                    logApiCall('HackAssistant - fetch', { url: this.ENDPOINTS.newChat, query, assistLevel: assistLevel.value });
+                    logApiCall('HackAssistant - fetch', { url: this.ENDPOINTS.newChat, query: sanitizedQuery, assistLevel: assistLevel.value });
                     // --- FIX: Map dropdown value to backend key ---
                     const assistLevelMap = {
                         "Hints Only - Get hints and guidance, but never full code.": "hints_only",
@@ -664,8 +985,9 @@ class InteractiveElements {
                     });
                     logApiCall('HackAssistant - response', { status: response.status });
                     const data = await handleApiResponse(response, 'newChat');
-                    // Use markdown parser for assistant response
-                    hackChatHistory.push({ role: 'assistant', content: data.response?.content || data.response || data.error || 'No response.' });
+                    // Sanitize AI response before displaying, but don't limit length
+                    const sanitizedResponse = this.sanitizeInput(data.response?.content || data.response || data.error || 'No response.');
+                    hackChatHistory.push({ role: 'assistant', content: sanitizedResponse });
                     this.renderHackChatHistory();
                     hackInput.value = '';
                     logApiCall('HackAssistant - end', { data });
