@@ -9,11 +9,10 @@ const TWO_SUM_SKELETON = [
 let builtSolutionOld = [...TWO_SUM_SKELETON];
 let builtSolutionNew = [...TWO_SUM_SKELETON];
 
-// Add global object for per-endpoint rate limits
+// Add global object for per-endpoint rate limits (removed execute endpoint)
 let rateLimits = {
   old: { requests: null, reset: null, timer: null },
-  new: { requests: null, reset: null, timer: null },
-  execute: { requests: null, reset: null, timer: null }
+  new: { requests: null, reset: null, timer: null }
 };
 
 // Add spinner styles
@@ -71,7 +70,7 @@ function showRateLimitInfo(endpoint, requests, seconds) {
   // Build display for all endpoints
   let html = '';
   Object.entries(rateLimits).forEach(([key, val]) => {
-    let label = key === 'old' ? 'Old AI' : key === 'new' ? 'New AI' : 'Test Solution';
+    let label = key === 'old' ? 'Old AI' : key === 'new' ? 'New AI' : 'Unknown';
     if (val.requests === null || val.reset === null) return;
     if (val.requests === 0) {
       html += `${label}: Rate limit reached. Try again in <span id="rate-timer-${key}">${val.reset}</span> seconds.<br/>`;
@@ -118,23 +117,14 @@ async function handleApiResponse(response, endpointKey) {
   try {
     data = text ? JSON.parse(text) : {};
   } catch (e) {
-    // If the response is the VM not ready message, handle it gracefully
-    if (text && text.includes('Judge0 VM is not ready')) {
-      data = { error: 'Judge0 VM is not ready' };
-    } else {
-      logApiCall('handleApiResponse - parse error', { error: e });
-      data = { error: "Invalid server response." };
-    }
+    logApiCall('handleApiResponse - parse error', { error: e });
+    data = { error: "Invalid server response." };
   }
   if (endpointKey && data.requests_remaining !== undefined && data.reset_seconds !== undefined) {
     showRateLimitInfo(endpointKey, data.requests_remaining, data.reset_seconds);
   }
   if (!response.ok || data.error) {
     logApiCall('handleApiResponse - error', { error: data.error, status: response.status });
-    // If the error is Judge0 VM is not ready, throw a special error so pollAndRetry can catch it
-    if (data.error && data.error.includes('Judge0 VM is not ready')) {
-      throw new Error('Judge0 VM is not ready');
-    }
     throw new Error(data.error || `API request failed: ${response.status} ${response.statusText}`);
   }
   logApiCall('handleApiResponse - success', { data });
@@ -365,8 +355,8 @@ class InteractiveElements {
           newChat: document.getElementById('endpoints')?.dataset.newChat || '/api/fallback',
           newSnippet: document.getElementById('endpoints')?.dataset.newSnippet || '/api/fallback',
           oldChat: document.getElementById('endpoints')?.dataset.oldChat || '/api/fallback',
-          oldSnippet: document.getElementById('endpoints')?.dataset.oldSnippet || '/api/fallback',
-          executeTwoSum: document.getElementById('endpoints')?.dataset.executeTwoSum || '/api/fallback'
+          oldSnippet: document.getElementById('endpoints')?.dataset.oldSnippet || '/api/fallback'
+          // Removed executeTwoSum endpoint
         };
 
         // Optional: Re-add error handling if needed, now using this.ENDPOINTS
@@ -430,11 +420,7 @@ class InteractiveElements {
             addTowerBtn.addEventListener('click', () => this.addTower());
         }
 
-        // Initialize test solution button
-        const testSolutionBtn = document.getElementById('test-solution');
-        if (testSolutionBtn) {
-            testSolutionBtn.addEventListener('click', () => this.testSolution());
-        }
+        // Removed test solution button initialization since code execution is disabled
 
         // Initialize hack assistant
         this.initializeHackAssistant();
@@ -467,9 +453,10 @@ class InteractiveElements {
             const noteDiv = document.createElement('div');
             noteDiv.id = 'snippet-insert-note';
             noteDiv.className = 'mb-2 text-xs text-gray-400';
-            noteDiv.innerHTML = 'Note: When you add a code snippet, it will be inserted at your current cursor position in the editor.';
-            noteDiv.innerHTML += '<br>Note: Even a refined prompt may not always generate the perfect code. You can always edit the code to make it better.';
-            noteDiv.innerHTML += '<br>Note: Only the New Code is used for testing/submission.';
+            noteDiv.innerHTML = 'Note: When you add a code snippet, it will be inserted at your current cursor position in the editor.<br>';
+            noteDiv.innerHTML += '     - Even a refined prompt may not always generate the perfect code. You can always edit the code.<br>';
+            noteDiv.innerHTML += '     - Only the New Code is used for reference (code execution has been disabled).<br>';
+            noteDiv.innerHTML += '     - The Old Code is for comparison only.<br>';
             // Insert above the flex wrapper (editors)
             const solutionDiv = document.getElementById('solution-preview');
             if (solutionDiv && solutionDiv.parentNode) {
@@ -800,125 +787,6 @@ class InteractiveElements {
         }
     }
 
-    async testSolution() {
-        logApiCall('testSolution - start', {});
-        const testBtn = document.getElementById('test-solution');
-        const resultDiv = document.getElementById('test-result');
-        if (testBtn) {
-            testBtn.classList.add('button--loading');
-        }
-        if (resultDiv) {
-            resultDiv.innerHTML = '';
-        }
-        // Add spinner markup if not present
-        if (testBtn && !testBtn.querySelector('.spinner')) {
-            const spinner = document.createElement('span');
-            spinner.className = 'spinner';
-            testBtn.appendChild(spinner);
-        }
-        let retryCount = 0;
-        const maxRetries = 20; // ~1 minute
-        const pollAndRetry = async () => {
-            try {
-                // Always send the full code (skeleton + all lines) for testing
-                const solution = builtSolutionNew.join('\n');
-                logApiCall('testSolution - fetch', { url: this.ENDPOINTS.executeTwoSum, solution });
-                const response = await fetch(this.ENDPOINTS.executeTwoSum, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ code: solution })
-                });
-                logApiCall('testSolution - response', { status: response.status });
-                const data = await handleApiResponse(response, 'execute');
-                if (data.error && data.error.includes('Judge0 VM is not ready')) {
-                    if (resultDiv) {
-                        resultDiv.innerHTML = `<span style='color:#fbbf24;'>⏳ Judge0 VM is starting up. Please wait... (Attempt ${retryCount + 1})</span>`;
-                    }
-                    if (retryCount < maxRetries) {
-                        retryCount++;
-                        setTimeout(pollAndRetry, 3000);
-                    } else {
-                        if (resultDiv) {
-                            resultDiv.innerHTML = `<span style='color:#f87171;'>❌ Error: Judge0 VM is still not ready after multiple attempts. Please try again later.</span>`;
-                        }
-                        if (testBtn) testBtn.classList.remove('button--loading');
-                    }
-                    return;
-                }
-                if (data.all_passed) {
-                    resultDiv.innerHTML = '<span style="color:#22c55e;">✅ Success! Your solution passed all test cases.</span>';
-                } else if (data.results && data.results.length > 0) {
-                    // Show error details for failed test cases
-                    let errorHtml = '<span style="color:#f87171;">❌ Some test cases failed.</span><ul style="color:#f87171;">';
-                    data.results.forEach(r => {
-                        if (!r.passed) {
-                            errorHtml += `<li>Test ${r.test_case}: `;
-                            if (r.error) {
-                                errorHtml += `<pre style='white-space: pre-wrap;'>${r.error}</pre>`;
-                            } else {
-                                errorHtml += 'Incorrect output.';
-                            }
-                            errorHtml += '</li>';
-                        }
-                    });
-                    errorHtml += '</ul>';
-                    resultDiv.innerHTML = errorHtml;
-                } else if (data.error) {
-                    resultDiv.innerHTML = `<span style='color:#f87171;'>❌ Error: ${data.error}</span>`;
-                } else {
-                    resultDiv.innerHTML = '<span style="color:#f87171;">❌ Oops! Your solution is incomplete or has a bug. Try using more towers or ask the Hack Assistant for help.</span>';
-                }
-                logApiCall('testSolution - end', { data });
-                if (testBtn) testBtn.classList.remove('button--loading');
-            } catch (error) {
-                // If the error is Judge0 VM is not ready, retry
-                if (error && error.message && error.message.includes('Judge0 VM is not ready')) {
-                    if (resultDiv) {
-                        resultDiv.innerHTML = `<span style='color:#fbbf24;'>⏳ Judge0 VM is starting up. Please wait... (Attempt ${retryCount + 1})</span>`;
-                    }
-                    if (retryCount < maxRetries) {
-                        retryCount++;
-                        setTimeout(pollAndRetry, 3000);
-                    } else {
-                        if (resultDiv) {
-                            resultDiv.innerHTML = `<span style='color:#f87171;'>❌ Error: Judge0 VM is still not ready after multiple attempts. Please try again later.</span>`;
-                        }
-                        if (testBtn) testBtn.classList.remove('button--loading');
-                    }
-                    return;
-                }
-                // Otherwise, show a generic error
-                console.error('Error testing solution:', error);
-                logApiCall('testSolution - error', { error });
-                if (resultDiv) {
-                    resultDiv.innerHTML = `<span style='color:#f87171;'>❌ Error: Could not test solution. Please try again.</span>`;
-                }
-                if (testBtn) testBtn.classList.remove('button--loading');
-            }
-        };
-        pollAndRetry();
-    }
-
-    // Add input validation and sanitization
-    sanitizeInput(input) {
-        // Remove any HTML tags
-        input = input.replace(/<[^>]*>/g, '');
-        // Remove any script tags
-        input = input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-        // Remove any potentially dangerous characters
-        input = input.replace(/[<>]/g, '');
-        return input;
-    }
-
-    validateMessage(message) {
-        if (!message || typeof message !== 'string') return false;
-        // Only limit length for user messages
-        if (message.length > 1000) return false;
-        // Check for potentially malicious content
-        if (message.includes('<script') || message.includes('javascript:')) return false;
-        return true;
-    }
-
     initializeHackAssistant() {
         logApiCall('initializeHackAssistant', {});
         const transmitBtn = document.getElementById('transmit-btn-static');
@@ -1020,6 +888,26 @@ class InteractiveElements {
         });
         // Scroll to bottom
         chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    // Add input validation and sanitization
+    sanitizeInput(input) {
+        // Remove any HTML tags
+        input = input.replace(/<[^>]*>/g, '');
+        // Remove any script tags
+        input = input.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+        // Remove any potentially dangerous characters
+        input = input.replace(/[<>]/g, '');
+        return input;
+    }
+
+    validateMessage(message) {
+        if (!message || typeof message !== 'string') return false;
+        // Only limit length for user messages
+        if (message.length > 1000) return false;
+        // Check for potentially malicious content
+        if (message.includes('<script') || message.includes('javascript:')) return false;
+        return true;
     }
 }
 

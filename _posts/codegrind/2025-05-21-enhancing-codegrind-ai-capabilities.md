@@ -209,7 +209,7 @@ class AIService {
   <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Interactive Demo: Build a Solution (Tower Defense Style)</h2>
   <div class="mb-4 p-4 bg-blue-100 dark:bg-slate-700 rounded-lg text-gray-800 dark:text-gray-200">
     <strong>How to use this demo:</strong> Select a tower type (programming concept), view its stats and upgrades, and add it to your solution. Compare how the <span class="text-blue-700 font-semibold">Old AI</span> and <span class="text-green-700 font-semibold">New AI</span> would generate code for each tower. Build your solution step-by-step, just like in the real Tower Defense game!<br>Notice how the old and new snippets generated are different, you can see that the old snippet generation would at times give a whole solution but the new snippet generation will actually give you the proper code for the programming concept you are trying to add to your solution.<br>
-    <span class="block mt-2">Need help? Use the <span class="text-purple-400 font-semibold">Hack Assistant</span> (bottom right) to get hints, step-by-step help, or even a full solution!</span><br>When you are ready to submit your solution, click the <span class="text-green-700 font-semibold">Test Solution</span> button to see if your solution is correct.
+    <span class="block mt-2">Need help? Use the <span class="text-purple-400 font-semibold">Hack Assistant</span> (below) to get hints, step-by-step help, or even a full solution!</span>
   </div>
   <div class="rounded-lg shadow-md bg-blue-50 dark:bg-slate-800 p-6 my-6 max-w-2xl mx-auto relative">
     <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-white">LeetCode Problem: Two Sum</h3>
@@ -255,8 +255,6 @@ class AIService {
         <div id="old-solution-preview" class="bg-slate-800 text-blue-400 rounded p-4 min-h-[3rem] text-base overflow-auto" style="white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;"></div>
         <div id="solution-preview" class="bg-slate-800 text-green-400 rounded p-4 min-h-[3rem] text-base overflow-auto" style="white-space: pre; font-family: 'Consolas', 'Monaco', 'Courier New', monospace;"></div>
       </div>
-      <button id="test-solution" class="mt-4 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded transition-colors">Test Solution</button>
-      <div id="test-result" class="mt-4 text-base font-semibold"></div>
     </div>
     <!-- Hack Assistant UI - Static Integration -->
     <div id="hack-assistant-static" class="mt-8 p-6 bg-slate-900 rounded-lg shadow-xl border border-purple-700">
