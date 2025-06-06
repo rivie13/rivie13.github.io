@@ -98,23 +98,12 @@ function initScrollAnimations() {
       }
     });
   }, {
-    threshold: 0.15, // Trigger when at least 15% of the element is visible
-    rootMargin: '0px 0px -50px 0px' // Adjusted margin for earlier triggering
+    threshold: 0.1, // More lenient threshold for mobile devices
+    rootMargin: '0px 0px -20px 0px' // Smaller margin for mobile compatibility
   });
   
-  // Only hide and observe elements that are not currently visible and haven't been animated
+  // Observe all scroll animation elements
   animatedElements.forEach(element => {
-    // Check if element is currently visible in viewport
-    const rect = element.getBoundingClientRect();
-    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-    
-    // Only hide elements that are not visible and haven't been animated by other systems
-    if (!isVisible && (!element.style.opacity || element.style.opacity === '0')) {
-      element.style.opacity = '0';
-      element.style.visibility = 'hidden';
-    }
-    
-    // Observe all elements for scroll animations
     observer.observe(element);
   });
 } 
