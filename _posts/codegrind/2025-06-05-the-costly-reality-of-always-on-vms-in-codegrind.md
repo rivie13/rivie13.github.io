@@ -42,11 +42,46 @@ html.dark .cost-timeline {
 }
 
 html.dark .cost-comparison {
-  background: linear-gradient(135deg, #dc2626 0%, #ea580c 100%);
+  background: #1e293b !important;
+  border: 2px solid #dc2626;
 }
 
 html.dark .cost-savings {
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  background: #1e293b !important;
+  border: 2px solid #16a34a;
+}
+
+/* Fix for the specific problem boxes */
+html.dark .bg-yellow-50 {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-red-50 {
+  background-color: #1e293b !important;
+}
+
+html.dark .bg-green-50 {
+  background-color: #1e293b !important;
+}
+
+html.dark .text-yellow-800 {
+  color: #fef3c7 !important;
+}
+
+html.dark .text-red-800 {
+  color: #fee2e2 !important;
+}
+
+html.dark .text-green-800 {
+  color: #dcfce7 !important;
+}
+
+html.dark .text-red-700 {
+  color: #fecaca !important;
+}
+
+html.dark .text-green-700 {
+  color: #bbf7d0 !important;
 }
 
 .highlight {
@@ -88,25 +123,6 @@ html.dark .language-html .highlight { background-color: #082f49; border-left: 4p
 html.dark .language-css .highlight { background-color: #2e1065; border-left: 4px solid #a855f7; }
 html.dark .language-bash .highlight { background-color: #052e16; border-left: 4px solid #16a34a; }
 html.dark .language-javascript .highlight { background-color: #451a03; border-left: 4px solid #f59e0b; }
-
-/* FIX READABILITY - DARK TEXT FOR LIGHT CONTAINERS IN DARK MODE */
-html.dark .bg-yellow-50 .text-yellow-800 {
-  color: #1f2937 !important;
-}
-
-html.dark .bg-blue-50 .text-blue-800 {
-  color: #1f2937 !important;
-}
-
-html.dark .bg-red-50 .text-red-800,
-html.dark .bg-red-50 .text-red-700 {
-  color: #1f2937 !important;
-}
-
-html.dark .bg-green-50 .text-green-800,
-html.dark .bg-green-50 .text-green-700 {
-  color: #1f2937 !important;
-}
 </style>
 
 <div class="opacity-0" data-animate="fade-in">
@@ -201,7 +217,7 @@ html.dark .bg-green-50 .text-green-700 {
     I fell into what I call "availability anxiety" – the fear that your service won't be there when users need it. This led to over-provisioning and over-engineering for scenarios that rarely occurred.
   </p>
   
-  <div class="bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 dark:border-yellow-400 p-4 my-6">
+  <div class="bg-yellow-50 dark:bg-slate-800 border-l-4 border-yellow-400 dark:border-yellow-500 p-4 my-6 dark:shadow-lg">
     <div class="flex">
       <div class="ml-3">
         <p class="text-sm text-yellow-800 dark:text-yellow-100">
@@ -239,10 +255,10 @@ html.dark .bg-green-50 .text-green-700 {
     <li><strong>Queue-based system:</strong> Prevents VM from stopping during active use</li>
   </ul>
   
-  <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-400 dark:border-blue-400 p-4 my-6">
+  <div class="bg-blue-50 dark:bg-gray-800 border-l-4 border-blue-400 dark:border-blue-500 p-4 my-6 dark:shadow-lg">
     <div class="flex">
       <div class="ml-3">
-        <p class="text-sm text-blue-800 dark:text-blue-100">
+        <p class="text-sm text-blue-800 dark:text-blue-200">
           <strong>Key Insight:</strong> By using Azure Functions (serverless), the control system itself costs nothing or eventually pennies to run while saving dollars on the VM.
         </p>
       </div>
@@ -315,9 +331,9 @@ html.dark .bg-green-50 .text-green-700 {
   <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">The Financial Impact: Real Numbers</h2>
   
   <div class="grid md:grid-cols-2 gap-6 my-8">
-    <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-500 rounded-lg p-6">
+    <div class="bg-red-50 dark:bg-slate-800 border border-red-200 dark:border-red-500 rounded-lg p-6 dark:shadow-lg">
       <h3 class="text-lg font-bold text-red-800 dark:text-red-100 mb-3">Before Optimization</h3>
-      <ul class="text-sm text-red-700 dark:text-red-200">
+      <ul class="text-sm text-red-700 dark:text-red-100">
         <li>Monthly cost: <strong>$50+</strong></li>
         <li>Annual projection: <strong>$600+</strong></li>
         <li>VM utilization: <strong>~20%</strong></li>
@@ -325,9 +341,9 @@ html.dark .bg-green-50 .text-green-700 {
       </ul>
     </div>
     
-    <div class="bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-500 rounded-lg p-6">
+    <div class="bg-green-50 dark:bg-slate-800 border border-green-200 dark:border-green-500 rounded-lg p-6 dark:shadow-lg">
       <h3 class="text-lg font-bold text-green-800 dark:text-green-100 mb-3">After Optimization</h3>
-      <ul class="text-sm text-green-700 dark:text-green-200">
+      <ul class="text-sm text-green-700 dark:text-green-100">
         <li>Monthly cost: <strong>$10-15</strong></li>
         <li>Annual projection: <strong>$120-180</strong></li>
         <li>VM utilization: <strong>~80%</strong></li>
@@ -362,7 +378,7 @@ html.dark .bg-green-50 .text-green-700 {
 <div class="opacity-0" data-scroll="fade-up">
   <h2 class="text-2xl font-bold mt-8 mb-4 text-gray-900 dark:text-white">Key Takeaways for Your Projects</h2>
   
-  <div class="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-600 rounded-lg p-6 my-6">
+  <div class="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-6 my-6 dark:shadow-lg">
     <h3 class="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">Before You Build Always-On Infrastructure:</h3>
     <ol class="list-decimal ml-6 space-y-2 text-gray-700 dark:text-gray-200">
       <li>Analyze your actual usage patterns</li>
@@ -416,8 +432,8 @@ html.dark .bg-green-50 .text-green-700 {
 </div>
 
 <div class="opacity-0" data-scroll="fade-up">
-  <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-400 dark:border-blue-400 p-6 my-8">
-    <p class="text-blue-800 dark:text-blue-100">
+  <div class="bg-blue-50 dark:bg-gray-800 border-l-4 border-blue-400 dark:border-blue-500 p-6 my-8 dark:shadow-lg">
+    <p class="text-blue-800 dark:text-blue-200">
       <strong>Coming Up Next:</strong> "Securing CodeGrind's Secrets: Our Journey with Azure Key Vault" – where I'll share how we moved from environment variables to proper secret management, and why it was crucial for the Function Apps architecture to work securely.
     </p>
   </div>
