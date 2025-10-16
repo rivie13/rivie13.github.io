@@ -185,6 +185,61 @@ make sure to look in tags and categories directories and the relevant files in s
    - Reducing the frequency of API calls
    - Implementing GitHub token authentication for higher limits
 
+## Updating GitHub Token
+
+The site uses a GitHub Personal Access Token (PAT) for API authentication, which provides higher rate limits and access to additional features. Although the token is set to not expire, GitHub requires periodic manual renewal for security purposes.
+
+### When to Update the Token
+
+- When you receive a notification from GitHub about token expiration
+- When API calls start failing with authentication errors
+- Proactively every 6-12 months as a security best practice
+
+### Steps to Update the GitHub Token
+
+1. **Generate a new GitHub token**:
+   - Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+   - Click regenerate next to the existing token
+   - Set expiration to "No expiration" (you'll manually renew it)
+   - Click "Generate token"
+   - **Important**: Copy the token immediately (you won't be able to see it again)
+
+2. **Update Azure Key Vault**:
+   - Log in to the [Azure Portal](https://portal.azure.com)
+   - Navigate to your Key Vault resource
+   - Go to Secrets → Find your GitHub token secret
+   - Click "New Version"
+   - Paste the new token value
+   - Click "Create"
+   - Copy the secret identifier URL for the next step
+
+3. **Update Azure Function App settings**:
+   - In the Azure Portal, navigate to your Function App
+   - Go to Configuration → Application settings
+   - Find the environment variable that references the GitHub token (e.g., `GITHUB_TOKEN`)
+   - Update the value with the new secret identifier URL from Key Vault
+   - Click "Save" at the top of the page
+
+4. **Restart the Function App**:
+   - After saving the new configuration, go to the Function App Overview page
+   - Click "Restart" to ensure the Function App picks up the new token
+   - Wait for the restart to complete (usually 30-60 seconds)
+
+5. **Verify the update**:
+   - Test the site functionality that depends on the GitHub API
+   - Check the dev logs on the site itself for any errors
+   - Verify that API calls are working correctly
+   - Check the GitHub API rate limit to confirm authenticated requests are being made
+
+### Security Best Practices
+
+- Never commit tokens directly to your repository
+- Always use environment variables or Key Vault for token storage
+- Rotate tokens regularly (every 6-12 months)
+- Delete old tokens from GitHub after successful rotation
+- Monitor token usage in GitHub Settings → Developer settings → Personal access tokens
+- If a token is ever compromised, revoke it immediately and generate a new one
+
 ## Local Development
 
 1. Clone the repository:
