@@ -39,7 +39,15 @@ permalink: /resume/
         </span>
       </div>
     </div>
-    <a href="/assets/docs/Riviera_Sperduto_Resume_May_2025.pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all inline-flex items-center justify-center transform hover:scale-105">
+    <!-- 
+    =========================================
+    RESUME PDF DOWNLOAD LINK - UPDATE HERE
+    Change the filename below to match your latest resume PDF
+    Location: /assets/docs/[YOUR_RESUME_FILENAME].pdf
+    File should be placed in: c:\Users\rivie\vsCodeProjects\rivie13.github.io\assets\docs\
+    =========================================
+    -->
+    <a href="/assets/docs/Riviera_Sperduto_Resume_Oct2025.pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all inline-flex items-center justify-center transform hover:scale-105">
       <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
       </svg>
