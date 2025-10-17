@@ -15,8 +15,9 @@ permalink: /projects/
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {% assign featured_projects = '' | split: '' %}
+      {%- comment -%} Featured should be CodeGrind and TrackAmerica {%- endcomment -%}
       {% for project in site.data.projects %}
-        {% if project.name contains 'CodeGrind' or project.name contains 'Helios' %}
+        {% if project.name contains 'CodeGrind' or project.name contains 'TrackAmerica' %}
           {% assign featured_projects = featured_projects | push: project %}
         {% endif %}
       {% endfor %}
@@ -79,7 +80,13 @@ permalink: /projects/
   <section>
     <h2 class="text-2xl font-bold mb-6 pb-2 border-b opacity-0" data-animate="fade-in">All Projects</h2>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div id="all-projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {%- comment -%}
+        Projects are rendered in original YAML order.
+        JavaScript will dynamically sort by real GitHub push dates (fetched via API).
+        This ensures the order is ALWAYS based on actual repository activity, not hardcoded dates.
+      {%- endcomment -%}
+
       {% for project in site.data.projects %}
         <div class="h-full opacity-0" id="{{ project.name | slugify }}" data-animate="fade-in" data-scroll="fade-up">
           {% include project-card.html project=project %}
@@ -108,7 +115,7 @@ permalink: /projects/
           <p class="text-gray-700 dark:text-gray-300 text-lg">{{ project.detailed_description }}</p>
         </div>
         
-        {% if project.video_id %}
+        {% if project.video_id and project.video_id != "" %}
         <div class="mb-8">
           <h3 class="text-xl font-bold mb-4">Project Demo</h3>
           {% include video-embed.html video_id=project.video_id caption=project.name %}
@@ -427,5 +434,30 @@ permalink: /projects/
         }
       });
     });
+  });
+</script>
+
+<!-- Project Dates Manager - Fetches real push dates from GitHub -->
+<script src="{{ '/assets/js/project-dates.js' | relative_url }}"></script>
+
+<!-- Initialize dynamic sorting by GitHub push dates -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Wait for ProjectDates to be available
+    setTimeout(async function() {
+      if (window.ProjectDates && window.GitHubConfig) {
+        console.log('🚀 Initializing dynamic project sorting by GitHub push dates...');
+        
+        try {
+          // Sort the "All Projects" section by real GitHub dates
+          await window.ProjectDates.sortProjects('#all-projects-container');
+          console.log('✅ Projects sorted by GitHub push dates!');
+        } catch (error) {
+          console.error('❌ Error sorting projects:', error);
+        }
+      } else {
+        console.warn('⚠️ ProjectDates or GitHubConfig not available - sorting skipped');
+      }
+    }, 1000); // Wait 1 second to ensure all scripts are loaded
   });
 </script>
