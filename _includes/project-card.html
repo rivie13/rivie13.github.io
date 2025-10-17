@@ -12,6 +12,16 @@
           <div class="text-xs text-gray-500" aria-live="polite">Loading language data...</div>
         </div>
       </div>
+      {%- comment -%} Hidden repo link for language data fetching (needed for private repos like CodeGrind) {%- endcomment -%}
+      {% if project.repo %}
+        <a href="{{ project.repo }}" class="hidden" data-repo-link aria-hidden="true"></a>
+      {% endif %}
+      {% if project.repo1 %}
+        <a href="{{ project.repo1 }}" class="hidden" data-repo-link aria-hidden="true"></a>
+      {% endif %}
+      {% if project.repo2 %}
+        <a href="{{ project.repo2 }}" class="hidden" data-repo-link aria-hidden="true"></a>
+      {% endif %}
     </div>
     
     <div class="mb-4">

@@ -182,9 +182,10 @@ function initGitHubRepos() {
     '01-BestNotes',
     'Robotics-Nav2-SLAM-Example',
     'codegrind',
+    'TrackAmerica',
     'plr',
     'PLR'
-  ]; // Reduce excluded repos to show more
+  ]; // Exclude repos that are already detailed in projects.yml
   
   // Define repositories per page globally
   const reposPerPage = 8; // Show 8 repos initially

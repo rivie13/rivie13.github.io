@@ -1,24 +1,16 @@
 /**
  * Project Cards Enhancer
  * This script automatically adds the correct GitHub language statistics to project cards
+ * FULLY DYNAMIC - No hardcoded project mappings required!
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOM Content Loaded - Starting language update");
+  console.log("DOM Content Loaded - Starting dynamic language update");
   const username = window.GitHubConfig.username;
   
   // Project cards queue to process them one by one
   const projectQueue = [];
   let isProcessingQueue = false;
-  
-  // Map project slugs to their actual repository names
-  const projectRepoMap = {
-    'codegrind': ['codegrind'],
-    'helios-swarm-robotics': ['robotics-nav2-slam-example', 'helios'],
-    'bestnotes': ['01-bestnotes'],
-    'projectile-launcher-rework': ['plr'],
-    'book-player-application': ['assignment-10-rivie13']
-  };
   
   // Wait for any RequestQueue initialization to complete
   setTimeout(() => {
@@ -29,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Find all project cards in both featured and all projects sections
-    console.log("Finding all project cards on the page");
+    console.log("Finding all project cards on the page (dynamic detection)");
     findAndProcessCards();
     
   }, 100);
@@ -92,41 +84,48 @@ document.addEventListener('DOMContentLoaded', function() {
     // Track processed containers to avoid duplicates
     const processedContainers = new Set();
     
-    // Find all project cards - include cards without specific IDs to catch featured cards
+    // Find all project cards - look for cards with the standard structure
     const allProjectCards = document.querySelectorAll('.bg-white.dark\\:bg-gray-800.rounded-lg');
     
     allProjectCards.forEach(card => {
-      // Find the project title to identify which project this is
+      // Find the project title to get a unique ID
       const titleElem = card.querySelector('h3');
       if (!titleElem) return;
       
       const titleText = titleElem.textContent.trim();
-      let projectId = null;
+      const projectId = slugify(titleText); // Use slugified title as ID
       
-      // Identify project by name
-      if (titleText.includes('CodeGrind')) {
-        projectId = 'codegrind';
-      } else if (titleText.includes('Helios')) {
-        projectId = 'helios-swarm-robotics';
-      } else if (titleText.includes('BestNotes')) {
-        projectId = 'bestnotes';
-      } else if (titleText.includes('Projectile Launcher')) {
-        projectId = 'projectile-launcher-rework';
-      } else if (titleText.includes('Book Player')) {
-        projectId = 'book-player-application';
+      // Extract GitHub repo URLs from the card's links
+      const repoUrls = [];
+      const githubLinks = card.querySelectorAll('a[href*="github.com"]');
+      
+      githubLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        // Extract repo name from GitHub URL
+        // Format: https://github.com/username/repo-name
+        const match = href.match(/github\.com\/([^\/]+)\/([^\/\?#]+)/);
+        if (match && match[2]) {
+          const repoName = match[2];
+          // Avoid duplicates
+          if (!repoUrls.includes(repoName)) {
+            repoUrls.push(repoName);
+          }
+        }
+      });
+      
+      // Skip if no GitHub repos found for this card
+      if (repoUrls.length === 0) {
+        console.log(`No GitHub repos found for project: ${titleText}`);
+        return;
       }
       
-      if (!projectId || !projectRepoMap[projectId]) return;
+      console.log(`Found project card: "${titleText}" with repos: ${repoUrls.join(', ')}`);
       
-      console.log(`Found project card for: ${projectId} with title "${titleText}"`);
-      
-      // SIMPLIFIED: Always look for the parent language container with class language-container,
-      // NOT the inner .languages-container as that's what we'll be updating
+      // Find the language container
       let languageContainer = card.querySelector('.language-container');
       
-      // Fallback to other methods only if we don't find a dedicated container
+      // Fallback to looking for a language heading
       if (!languageContainer) {
-        // Try looking for a language heading 
         const languageHeading = card.querySelector('.mb-4 h4');
         if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
           languageContainer = languageHeading.closest('.mb-4');
@@ -134,13 +133,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       
       if (!languageContainer) {
-        console.warn(`Could not find language container for ${projectId}`);
+        console.warn(`Could not find language container for ${titleText}`);
         return;
       }
       
       // Skip if this exact container has already been processed
       if (processedContainers.has(languageContainer)) {
-        console.log(`Container for ${projectId} already processed, skipping`);
+        console.log(`Container for ${titleText} already processed, skipping`);
         return;
       }
       
@@ -151,58 +150,18 @@ document.addEventListener('DOMContentLoaded', function() {
       showLanguageLoading(languageContainer);
       
       // Queue the project for processing
-      queueProject(projectId, projectRepoMap[projectId], languageContainer);
+      queueProject(projectId, repoUrls, languageContainer);
     });
-    
-    // SIMPLIFIED: We ONLY need to look for cards with ID if we missed any
-    // But we'll now look for the SAME container class as above
-    document.querySelectorAll('[id*="codegrind"], [id*="helios"], [id*="bestnotes"], [id*="projectile"], [id*="book-player"]').forEach(card => {
-      let projectId = null;
-      
-      if (card.id.includes('codegrind')) {
-        projectId = 'codegrind';
-      } else if (card.id.includes('helios')) {
-        projectId = 'helios-swarm-robotics';
-      } else if (card.id.includes('bestnotes')) {
-        projectId = 'bestnotes';
-      } else if (card.id.includes('projectile')) {
-        projectId = 'projectile-launcher-rework';
-      } else if (card.id.includes('book-player')) {
-        projectId = 'book-player-application';
-      }
-      
-      if (!projectId || !projectRepoMap[projectId]) return;
-      
-      // CONSISTENT: Always look for parent container, NOT the inner container
-      let languageContainer = card.querySelector('.language-container');
-      
-      // Fallback only if needed
-      if (!languageContainer) {
-        const languageHeading = card.querySelector('.mb-4 h4');
-        if (languageHeading && languageHeading.textContent.includes('LANGUAGE')) {
-          languageContainer = languageHeading.closest('.mb-4');
-        }
-      }
-      
-      if (!languageContainer) return;
-      
-      // Skip if this exact container has already been processed
-      if (processedContainers.has(languageContainer)) {
-        console.log(`Container for ${projectId} already processed (by ID), skipping`);
-        return;
-      }
-      
-      console.log(`Found project card by ID: ${card.id} (${projectId})`);
-      
-      // Mark this container as processed
-      processedContainers.add(languageContainer);
-      
-      // Initially show loading state
-      showLanguageLoading(languageContainer);
-      
-      // Queue the project for processing
-      queueProject(projectId, projectRepoMap[projectId], languageContainer);
-    });
+  }
+  
+  // Helper function to slugify text (same as Jekyll's slugify filter)
+  function slugify(text) {
+    return text.toString().toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+      .replace(/^-+/, '')             // Trim - from start of text
+      .replace(/-+$/, '');            // Trim - from end of text
   }
   
   /**

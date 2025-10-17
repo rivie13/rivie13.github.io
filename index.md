@@ -145,31 +145,30 @@ title: Home
       </div>
     </div>
     
-    <!-- Helios Project with Demo -->
+    <!-- TrackAmerica Project (Featured) -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <div class="p-6 border-b">
-        <h3 class="text-2xl font-bold mb-2">Helios (Capstone Project)</h3>
-        <p class="mb-4">Swarm Robotics platform for disaster scenario simulations with Unity integration.</p>
+        <h3 class="text-2xl font-bold mb-2">TrackAmerica (Early-stage)</h3>
+        <p class="mb-4">Cross-platform app to track representatives, bills, and votes with AI-powered search and insights. Currently in active development.</p>
         <div class="flex justify-between items-center">
-          <a href="{{ '/projects/#helios' | relative_url }}" class="text-blue-600 hover:text-blue-800 font-medium">
-            Learn More →
+          <a href="https://github.com/rivie13/TrackAmerica" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium">
+            View on GitHub →
           </a>
           <div class="flex space-x-2">
-            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">Python</span>
-            <span class="bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded">Unity</span>
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">TypeScript</span>
+            <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Expo</span>
           </div>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
         <div class="bg-gray-200 flex items-center justify-center h-full">
-          <div class="p-4 w-full">
-            <img src="{{ '/assets/images/Helios.png' | relative_url }}" alt="Helios Screenshot" class="w-full object-cover mx-auto" style="min-height: 300px; max-height: 350px;">
+          <div class="p-4 w-full text-center text-gray-600" style="min-height: 300px; max-height: 350px;">
+            <p class="mt-12">No demo available yet — early-stage project. Screenshots and walkthroughs will be added as the project progresses.</p>
           </div>
         </div>
         <div class="p-4 pb-0">
-          <h4 class="text-lg font-bold mb-2">Helios: Single Robot Fire Demo</h4>
-          <p class="text-gray-600 text-sm mb-4">Disaster response simulation with swarm robotics</p>
-          {% include video-embed.html video_id="a-3ocUuVebk" %}
+          <h4 class="text-lg font-bold mb-2">TrackAmerica: Project Overview</h4>
+          <p class="text-gray-600 text-sm mb-4">An app to help citizens understand their federal representatives, bills, and voting histories. Features planned include an interactive map, representative profiles, bill tracking, and an AI assistant for natural-language questions.</p>
         </div>
       </div>
     </div>

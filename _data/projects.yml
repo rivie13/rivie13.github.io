@@ -42,6 +42,43 @@
     - Prisma
     - Azure
   period: "Jan 2025 - Present"
+  last_updated: "2025-10-16"
+
+- name: "TrackAmerica"
+  url: ""
+  demo: ""
+  repo: "https://github.com/rivie13/TrackAmerica"
+  description: "Track your representatives, their votes, and understand legislation with AI-powered insights. Cross-platform app (web + mobile) built with Expo, Express, PostgreSQL, and Azure OpenAI."
+  video_id: ""
+  private: false
+  detailed_description: "TrackAmerica is an early-stage cross-platform app that helps citizens stay informed about federal representatives, bills, and voting records. It includes an interactive US map, representative profiles, bill tracking, and an AI assistant for plain-English questions about legislation. Currently in active development with frontend (Expo) and backend (Express) components."
+  challenges:
+    - "Integrating representative and legislative data from external APIs"
+    - "Designing an intuitive cross-platform UI for state and representative navigation"
+    - "Building scalable backend APIs and semantic search for legislation"
+  solutions:
+    - "Using Expo + React Native for a unified mobile/web frontend"
+    - "Backend Express API with plans for PostgreSQL + pgvector for embeddings"
+    - "Roadmap-driven implementation with CI and linting enforced"
+  lessons_learned:
+    - "Early architecture and tooling choices speed up cross-platform development"
+  achievements:
+    - "Project scaffolding, CI, and initial feature set established"
+  features:
+    - "Interactive USA map"
+    - "Representative profiles"
+    - "Bill tracking and voting records"
+    - "AI chatbot (semantic search + assistant)"
+  future_plans: "Continue building state pages, representative detail views, bill search, and AI-powered semantic search and assistant features."
+  technologies:
+    - TypeScript
+    - Expo (React Native)
+    - Node.js
+    - Express
+    - PostgreSQL
+    - Azure OpenAI
+  period: "Oct 2025 - Present"
+  last_updated: "2025-10-05"
 
 - name: "Helios: Swarm Robotics"
   url: ""
@@ -87,6 +124,7 @@
     - PyQt5
     - ROS 2
   period: "January 2025 - May 2025"
+  last_updated: "2025-05-18"
 
 - name: "BestNotes"
   url: ""
@@ -120,6 +158,7 @@
     - Qt Core
     - Pyside6
   period: "October 2024 - December 2024"
+  last_updated: "2024-12-15"
 
 - name: "Projectile Launcher Rework"
   url: "https://www.nexusmods.com/cyberpunk2077/mods/6925"
@@ -156,6 +195,7 @@
     - JSON
     - RedScript
   period: "December 2022 - Present"
+  last_updated: "2025-01-10"
 
 - name: "Book Player Application"
   url: ""
@@ -193,3 +233,4 @@
     - Android SDK
     - Material Design
   period: "April 2025"
+  last_updated: "2025-04-25"
