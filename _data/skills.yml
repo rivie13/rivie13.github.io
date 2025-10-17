@@ -6,12 +6,15 @@ languages:
   - C#
   - SQL (MySQL & Postgres)
   - JavaScript
+  - TypeScript
   - HTML/CSS
   - YAML
   - Lua
   - RedScript
   - Ruby
   - Liquid
+  - GDScript
+  - JSON
 
 frameworks:
   - Testim.io
@@ -19,6 +22,9 @@ frameworks:
   - Tailwind
   - Unity
   - Jekyll
+  - Expo (React Native)
+  - Express
+  - React
 
 developer_tools:
   - Git/GitHub
@@ -38,10 +44,17 @@ developer_tools:
   - Google AdSense
   - Formspree
   - SEO optimization
+  - Studio 5000
+  - MCP (Model Context Protocol)
+  - pgvector
+  - ROS 2
 
 libraries:
   - Qt Core
   - Pyside6
   - Meraki
   - GUIZero
-  - React 
+  - React
+  - PyQt5
+  - Material Design
+  - Android SDK 

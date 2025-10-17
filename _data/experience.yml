@@ -1,3 +1,13 @@
+- title: "Industrial Field Engineer"
+  company: "Automation Standard"
+  location: "Remote / On-Site"
+  period: "September 2025 - Present"
+  responsibilities:
+    - "Supported MTN6 Amazon warehouse commissioning in Maryland, performing functional checks and troubleshooting hardware integration issues to ensure operational readiness."
+    - "Developed an internal dashboard application for tracking and reporting warehouse commissioning functional checks, improving quality assurance visibility and reducing manual tracking overhead."
+    - "Designed and prototyped an MCP (Model Context Protocol) tool enabling AI-assisted PLC code generation for Studio 5000 software, with capabilities for analyzing CAD drawings and leveraging existing project tags for automation."
+    - "Acquired domain knowledge in industrial automation systems, PLC programming concepts, and technical drawing interpretation to contribute effectively in a specialized engineering environment."
+
 - title: "Development Apprentice"
   company: "BRIO Designs Partners, LLC"
   location: "Conshohocken, PA"
