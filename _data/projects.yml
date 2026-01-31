@@ -1,7 +1,7 @@
 - name: "CodeGrind"
   url: "https://codegrind.online/"
   demo: ""
-  repo: "https://github.com/rivie13/codegrind"
+  repo: "https://github.com/rivie13/CodeGrind"
   description: "Gamified coding practice platform with a Tower Defense game, learning paths, AI assistance, and community features."
   video_id: "7ojBLtyNI50"
   private: true
