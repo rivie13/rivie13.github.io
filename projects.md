@@ -205,7 +205,7 @@ permalink: /projects/
                 </div>
               {% endif %}
               
-              {% if project.repo %}
+              {% if project.repo and project.private != true %}
                 <div>
                   <a href="{{ project.repo }}" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 transform hover:translate-x-2 transition-transform">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -216,7 +216,7 @@ permalink: /projects/
                 </div>
               {% endif %}
               
-              {% if project.repo1 %}
+              {% if project.repo1 and project.private != true %}
                 <div>
                   <a href="{{ project.repo1 }}" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 transform hover:translate-x-2 transition-transform">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -227,7 +227,7 @@ permalink: /projects/
                 </div>
               {% endif %}
               
-              {% if project.repo2 %}
+              {% if project.repo2 and project.private != true %}
                 <div>
                   <a href="{{ project.repo2 }}" target="_blank" class="inline-flex items-center text-blue-600 hover:text-blue-800 transform hover:translate-x-2 transition-transform">
                     <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

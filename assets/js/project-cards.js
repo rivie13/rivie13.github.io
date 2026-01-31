@@ -219,22 +219,20 @@ document.addEventListener('DOMContentLoaded', function() {
           
           console.log(`DEBUG Cards - Getting repo metadata for ${repo}: ${repoUrl}`);
           
-          // Use the global RequestQueueClient for proper authentication
-          await new Promise(resolve => {
-            window.RequestQueue.add(repoUrl, (response, data) => {
-              if (response.ok) {
-                if (data.private) {
-                  isPrivate = true;
-                  console.log(`Repo ${repo} is private`);
-                }
-                if (data.fork) {
-                  isFork = true;
-                  console.log(`Repo ${repo} is a fork`);
-                }
-              }
-              resolve();
-            });
-          });
+          // Use the global RequestQueueClient for proper authentication (with timeout)
+          const { response, data } = await requestWithTimeout(repoUrl, 8000);
+          if (response.ok) {
+            if (data.private) {
+              isPrivate = true;
+              console.log(`Repo ${repo} is private`);
+            }
+            if (data.fork) {
+              isFork = true;
+              console.log(`Repo ${repo} is a fork`);
+            }
+          } else if (response.timeout) {
+            console.warn(`Repo metadata request timed out for ${repo}`);
+          }
         } catch (err) {
           console.warn(`Failed to fetch repo metadata for ${repo}:`, err);
         }
@@ -254,27 +252,24 @@ document.addEventListener('DOMContentLoaded', function() {
           
           console.log(`DEBUG Cards - Getting language data for ${repo}: ${langUrl}`);
           
-          // Use the global RequestQueueClient for proper authentication
-          await new Promise(resolve => {
-            window.RequestQueue.add(langUrl, (response, data) => {
-              if (response.ok) {
-                // Add each language's bytes to the combined data
-                for (const [lang, bytes] of Object.entries(data)) {
-                  combinedData[lang] = (combinedData[lang] || 0) + bytes;
-                }
-                console.log(`Successfully fetched language data for ${repo}`);
-              } else {
-                console.warn(`Failed to fetch language data for ${repo}: ${response.status}`);
-                if (response.status === 404) {
-                  console.log(`Repo ${repo} not found`);
-                } else if (response.status === 403) {
-                  console.warn(`Rate limited for ${repo}. Using fallback.`);
-                }
-              }
-              
-              resolve();
-            });
-          });
+          // Use the global RequestQueueClient for proper authentication (with timeout)
+          const { response, data } = await requestWithTimeout(langUrl, 10000);
+          if (response.ok) {
+            // Add each language's bytes to the combined data
+            for (const [lang, bytes] of Object.entries(data)) {
+              combinedData[lang] = (combinedData[lang] || 0) + bytes;
+            }
+            console.log(`Successfully fetched language data for ${repo}`);
+          } else {
+            console.warn(`Failed to fetch language data for ${repo}: ${response.status}`);
+            if (response.status === 404) {
+              console.log(`Repo ${repo} not found`);
+            } else if (response.status === 403) {
+              console.warn(`Rate limited for ${repo}. Using fallback.`);
+            } else if (response.timeout) {
+              console.warn(`Language request timed out for ${repo}`);
+            }
+          }
           
         } catch (err) {
           console.warn(`Failed to fetch language data for ${repo}:`, err);
@@ -427,6 +422,27 @@ document.addEventListener('DOMContentLoaded', function() {
         indicator.textContent = 'Fork';
         titleElem.appendChild(indicator);
       }
+    });
+  }
+
+  /**
+   * RequestQueue wrapper with timeout so language loading can't hang forever
+   */
+  function requestWithTimeout(url, timeoutMs) {
+    return new Promise(resolve => {
+      let settled = false;
+      const timer = setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        resolve({ response: { ok: false, status: 408, timeout: true }, data: { message: 'Request timed out' } });
+      }, timeoutMs);
+
+      window.RequestQueue.add(url, (response, data) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve({ response, data });
+      });
     });
   }
   
