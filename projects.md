@@ -42,11 +42,11 @@ permalink: /projects/
       <h3 class="text-xl font-bold mb-4 opacity-0" data-animate="fade-in">CodeGrind Demos</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <div class="opacity-0" data-animate="fade-in" data-scroll="fade-up">
-          <h4 class="font-medium mb-2">Code Breach Demo Trailer</h4>
-          {% include video-embed.html video_id="P8kmlbjYdI4" caption="A short trailer showcasing the CodeGrind platform" %}
+          <h4 class="font-medium mb-2">CodeGrind 1.5 Trailer</h4>
+          {% include video-embed.html video_id="7ojBLtyNI50" caption="CodeGrind 1.5 trailer showcasing the updated platform" %}
         </div>
         <div class="opacity-0" data-animate="fade-in" data-scroll="fade-up">
-          <h4 class="font-medium mb-2">Code Breach Demo Full Length</h4>
+          <h4 class="font-medium mb-2">Code Breach Original Tower Defense V1 Demo</h4>
           {% include video-embed.html video_id="VZYFaoyLr_4" caption="Full walkthrough of the CodeGrind platform" %}
         </div>
       </div>

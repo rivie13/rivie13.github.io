@@ -382,15 +382,26 @@ class GitHubActivityFetcher {
         // Show PR title and link to PR
         const action = event.payload.action;
         const pr = event.payload.pull_request;
+        const isPrivateRepo = !!(
+          pr && (
+            (pr.base && pr.base.repo && pr.base.repo.private) ||
+            (pr.head && pr.head.repo && pr.head.repo.private)
+          )
+        );
+        const prLinkHTML = (!isPrivateRepo && pr && pr.html_url)
+          ? `
+              <a href="${pr.html_url}" target="_blank" class="text-blue-600 hover:underline">
+                View pull request
+              </a>
+            `
+          : `<span class="text-gray-500">Private repo — link unavailable</span>`;
         
         eventHTML += `
           <div class="text-sm text-gray-600 dark:text-gray-300">
             <div class="mb-1"><span class="font-medium">Action:</span> ${action}</div>
             <div><span class="font-medium">Title:</span> ${pr.title}</div>
             <div class="mt-2">
-              <a href="${pr.html_url}" target="_blank" class="text-blue-600 hover:underline">
-                View pull request
-              </a>
+              ${prLinkHTML}
             </div>
           </div>
         `;

@@ -35,7 +35,7 @@ permalink: /resume/
           <svg class="w-4 h-4 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
           </svg>
-          <a href="https://www.linkedin.com/in/riviera-sperduto" target="_blank" class="hover:text-blue-600 transition-colors truncate">LinkedIn Profile</a>
+          <a href="https://www.linkedin.com/in/riviera-sperduto-219a54203/" target="_blank" class="hover:text-blue-600 transition-colors truncate">LinkedIn Profile</a>
         </span>
       </div>
     </div>
@@ -47,7 +47,7 @@ permalink: /resume/
     File should be placed in: c:\Users\rivie\vsCodeProjects\rivie13.github.io\assets\docs\
     =========================================
     -->
-    <a href="/assets/docs/Riviera_Sperduto_Resume_Oct2025.pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all inline-flex items-center justify-center transform hover:scale-105">
+    <a href="/assets/docs/Riviera_Sperduto_Resume_January2026.pdf" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all inline-flex items-center justify-center transform hover:scale-105">
       <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
       </svg>

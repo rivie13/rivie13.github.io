@@ -120,7 +120,7 @@ title: Home
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <div class="p-6 border-b">
         <h3 class="text-2xl font-bold mb-2">CodeGrind</h3>
-        <p class="mb-4">Gamified technical interview preparation platform with AI tutoring assistant.</p>
+        <p class="mb-4">Gamified coding practice platform with a Tower Defense game, learning paths, AI assistance, and community features.</p>
         <div class="flex justify-between items-center">
           <a href="{{ '/projects/#codegrind' | relative_url }}" class="text-blue-600 hover:text-blue-800 font-medium">
             Learn More →
@@ -140,7 +140,7 @@ title: Home
         <div class="p-4 pb-0">
           <h4 class="text-lg font-bold mb-2">CodeGrind Demo</h4>
           <p class="text-gray-600 text-sm mb-4">Interactive coding platform with gamified learning experience</p>
-          {% include video-embed.html video_id="P8kmlbjYdI4" %}
+          {% include video-embed.html video_id="7ojBLtyNI50" %}
         </div>
       </div>
     </div>
