@@ -183,8 +183,8 @@ permalink: /about/
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
       <!-- CodeGrind Demo Video -->
       <div class="rounded-lg overflow-hidden shadow-lg" data-hover="scale">
-        {% include video-embed.html video_id="P8kmlbjYdI4" caption="CodeGrind Demo: Interactive Coding Platform" %}
-        <p class="text-sm text-gray-600 p-2">An interactive coding platform designed to teach data structures and algorithms through practice.</p>
+        {% include video-embed.html video_id="7ojBLtyNI50" caption="CodeGrind 1.5 Trailer" %}
+        <p class="text-sm text-gray-600 p-2">Gamified coding practice with Tower Defense, Learning Paths, and AI assistance.</p>
       </div>
       
       <!-- Helios Demo Video -->
@@ -232,7 +232,7 @@ permalink: /about/
         
         <h4 class="font-medium text-gray-900 mb-2">Current Positions:</h4>
         <ul class="list-disc pl-5 mb-4 text-gray-700">
-          <li>Tenor Section Leader at Church of the Good Samaritan (Oct 2021-Current)</li>
+          <li>Tenor Section Leader at Church of the Good Samaritan (Oct 2021-August 2025)</li>
           <li>Music Teacher - voice and piano in Philadelphia city (Jan 2025-Current)</li>
         </ul>
         

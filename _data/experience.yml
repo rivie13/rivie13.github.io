@@ -1,7 +1,16 @@
+- title: "Software Developer (Volunteer - Part-Time)"
+  company: "Whitemarsh Art Center"
+  location: "Remote"
+  period: "March 2025 - Present"
+  responsibilities:
+    - Engineered backend services with Azure Function Apps for authentication and inventory workflows.
+    - Migrated production infrastructure from WPEngine to Azure with Application Insights telemetry.
+    - Built automated backup workflows using Azure Blob Storage and managed Agile sprints in Azure DevOps.
+
 - title: "Industrial Field Engineer"
   company: "Automation Standard"
   location: "Remote / On-Site"
-  period: "September 2025 - Present"
+  period: "September 2025 - October 2025"
   responsibilities:
     - "Supported MTN6 Amazon warehouse commissioning in Maryland, performing functional checks and troubleshooting hardware integration issues to ensure operational readiness."
     - "Developed an internal dashboard application for tracking and reporting warehouse commissioning functional checks, improving quality assurance visibility and reducing manual tracking overhead."
