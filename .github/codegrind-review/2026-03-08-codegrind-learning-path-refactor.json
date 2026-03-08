@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-08-codegrind-learning-path-refactor.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-08-codegrind-learning-path-refactor.md",
+  "title": "Refining CodeGrind's Learning Path Flow: From Concept to Workspace",
+  "summary": "CodeGrind's learning system is evolving to guide learners from structured modules into an interactive workspace through a clear learn→tower→final sequence.",
+  "slug": "codegrind-learning-path-refactor",
+  "url": "https://rivie13.github.io/codegrind-learning-path-refactor",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-08-codegrind-learning-path-refactor.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-08-codegrind-learning-path-refactor.png",
+    "file": "assets/images/codegrind/2026-03-08-codegrind-learning-path-refactor.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind refines its learn→tower→final flow, linking structured DSA lessons to gameplay and workspace challenges. Details: https://rivie13.github.io/codegrind-learning-path-refactor #DSA #gamifiedlearning #coding",
+    "linkedin_text": "CodeGrind’s latest development updates focus on a streamlined learning path: learn→tower→final. Learners start with focused DSA lessons and guided AI-assisted practice, then apply concepts in the Code Breach game, visualizing algorithms as defensive structures, and finally transition into the full coding workspace for problem-solving and scoring.\n\nThis sequence reduces cognitive load, reinforces concepts through interactive gameplay, and prepares learners for competitive problem-solving. Technical changes include groundwork merges, improved payload and diagnostics in the blog generation workflow, and plans to integrate TanStack Query for state management across modules. Security enhancements, such as CSRF validation for login/logout, ensure safe transitions during gameplay and workspace activities.\n\nExplore how structured study and gamified challenges can work together: https://rivie13.github.io/codegrind-learning-path-refactor #DSA #gamifiedlearning #coding #interviewprep #edtech"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
