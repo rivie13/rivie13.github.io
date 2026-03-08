@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-08-codegrind-evolving-interview-practice.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-08-codegrind-evolving-interview-practice.md",
+  "title": "CodeGrind's Evolving Interview Practice: Moving Beyond Legacy Problems",
+  "summary": "CodeGrind is actively phasing out legacy LeetCode/NeetCode problems, focusing on developing its own curated interview challenge sets for a cleaner, more effective learning experience.",
+  "slug": "codegrind-evolving-interview-practice",
+  "url": "https://rivie13.github.io/blog/2026/03/08/codegrind-evolving-interview-practice/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-08-codegrind-evolving-interview-practice.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-08-codegrind-evolving-interview-practice.png",
+    "file": "assets/images/codegrind/2026-03-08-codegrind-evolving-interview-practice.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind is phasing out legacy interview problems to focus on our own curated challenge sets. This ensures higher quality, relevance, and integrity for your DSA practice. Learn more: https://rivie13.github.io/blog/2026/03/08/codegrind-evolving-interview-practice/ #CodeGrind #InterviewPrep #DSA",
+    "linkedin_text": "CodeGrind is evolving its interview practice by moving beyond legacy problems often associated with platforms like LeetCode and NeetCode. We are developing our own curated sets of interview challenges, authored by the CodeGrind team. This strategic shift aims to provide a cleaner, more effective, and consistent learning experience, ensuring higher quality and relevance for modern interview demands. By taking ownership of our problem sets, we can better align practice with real-world scenarios and maintain the integrity of our AI assistance features. Read more about our initiatives and the benefits of CodeGrind-authored challenges: https://rivie13.github.io/blog/2026/03/08/codegrind-evolving-interview-practice/ #CodeGrind #InterviewPractice #DataStructures #Algorithms #TechInterview #Learning"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
