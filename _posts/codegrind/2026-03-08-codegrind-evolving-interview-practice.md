@@ -3,7 +3,7 @@ layout: post
 title: "CodeGrind's Evolving Interview Practice: Moving Beyond Legacy Problems"
 date: 2026-03-08 06:00:00 +0000
 categories: [CodeGrind, Development]
-tags: [CodeGrind, interview-preparation, DSA, algorithm-practice, refactoring, code-quality, learning-platform, software-engineering]
+tags: [CodeGrind, interview-preparation, DSA, algorithm-practice, refactoring, code-quality, Learning Platform, software-engineering]
 author: rivie13
 excerpt: "CodeGrind is actively phasing out legacy LeetCode/NeetCode problems, focusing on developing its own curated interview challenge sets for a cleaner, more effective learning experience."
 image: /assets/images/codegrind/2026-03-08-codegrind-evolving-interview-practice.png
