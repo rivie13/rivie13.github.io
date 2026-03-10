@@ -1,0 +1,64 @@
+name: "CodeGrind Review: Welcome Guide"
+
+on:
+  pull_request:
+    types: [opened]
+    branches: [main]
+
+jobs:
+  post-guide:
+    if: startsWith(github.head_ref, 'codegrind-review-')
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Post usage guide
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                '## 📋 Review Commands',
+                '',
+                'Use these PR comment commands to edit this post before approving.',
+                '',
+                '### Regenerate hero image',
+                '```',
+                '/regen image',
+                '/regen image: darker, more abstract',
+                '```',
+                'Generates a new image prompt from the post content, then creates a fresh hero image via Pollinations.',
+                '',
+                '### Edit post frontmatter',
+                '```',
+                '/set post title: New Title Here',
+                '/set post excerpt: A concise new excerpt',
+                '```',
+                'Updates the field in the post, review JSON, and review markdown.',
+                '',
+                '### Find and replace in post',
+                '```',
+                '/set post replace: old text -> new text',
+                '```',
+                'Replaces all occurrences. Cannot modify immutable fields (`slug`, `date`, `layout`, `canonical_url`, `image`, `author`).',
+                '',
+                '### Set social copy',
+                '```',
+                '/set social bluesky: Full replacement text here',
+                '/set social linkedin: Full replacement text here',
+                '```',
+                'Bluesky: ≤ 300 chars. LinkedIn: ≤ 1,200 chars.',
+                '',
+                '### AI-assisted edits',
+                'For more complex changes, mention **@copilot** in a comment describing what you want changed.',
+                '',
+                '### Full regeneration',
+                'To regenerate the entire post (text + image + social), re-run the CodeGrind blog workflow instead.',
+                '',
+                '---',
+                '*Each command posts a summary when done. One command per comment.*'
+              ].join('\n')
+            });
