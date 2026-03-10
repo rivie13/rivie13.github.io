@@ -1,0 +1,72 @@
+name: "CodeGrind Review: Validate Social Limits"
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+jobs:
+  validate-social:
+    if: startsWith(github.head_ref, 'codegrind-review-')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+
+      - name: Validate social text character limits
+        shell: bash
+        run: |
+          BRANCH="${{ github.head_ref }}"
+          RAW_STEM="${BRANCH#codegrind-review-}"
+
+          # Validate stem is safe
+          if [[ -z "$RAW_STEM" ]] || ! [[ "$RAW_STEM" =~ ^[A-Za-z0-9._-]+$ ]] || [[ "$RAW_STEM" == *..* ]]; then
+            echo "::error::Invalid branch stem: $RAW_STEM"
+            exit 1
+          fi
+
+          REVIEW_JSON=".github/codegrind-review/${RAW_STEM}.json"
+
+          if [[ ! -f "$REVIEW_JSON" ]]; then
+            echo "No review JSON found at $REVIEW_JSON — skipping validation."
+            exit 0
+          fi
+
+          FAILED=false
+
+          # Validate Bluesky text
+          BLUESKY=$(jq -r '.social.bluesky_text // ""' "$REVIEW_JSON")
+          BS_LEN=${#BLUESKY}
+          if [[ "$BS_LEN" -gt 300 ]]; then
+            echo "::error::Bluesky text is $BS_LEN characters (limit: 300). Trim $(( BS_LEN - 300 )) characters."
+            echo ""
+            echo "Current Bluesky text:"
+            echo "$BLUESKY"
+            FAILED=true
+          else
+            echo "✓ Bluesky text: $BS_LEN / 300 characters"
+          fi
+
+          # Validate LinkedIn text
+          LINKEDIN=$(jq -r '.social.linkedin_text // ""' "$REVIEW_JSON")
+          LI_LEN=${#LINKEDIN}
+          if [[ "$LI_LEN" -gt 1200 ]]; then
+            echo "::error::LinkedIn text is $LI_LEN characters (limit: 1200). Trim $(( LI_LEN - 1200 )) characters."
+            echo ""
+            echo "Current LinkedIn text:"
+            echo "$LINKEDIN"
+            FAILED=true
+          else
+            echo "✓ LinkedIn text: $LI_LEN / 1200 characters"
+          fi
+
+          if [[ "$FAILED" == "true" ]]; then
+            echo ""
+            echo "Fix with PR comment commands:"
+            echo "  /set social bluesky: <shorter text>"
+            echo "  /set social linkedin: <shorter text>"
+            exit 1
+          fi
+
+          echo ""
+          echo "All social text within limits."
