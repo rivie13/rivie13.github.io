@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-10-automating-codegrind-documentation-sync.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-10-automating-codegrind-documentation-sync.md",
+  "title": "Automating CodeGrind's Documentation: How We Keep Guides in Sync with Code",
+  "summary": "How CodeGrind uses GitHub Actions and bot-driven workflows to keep documentation synchronized with codebase changes automatically.",
+  "slug": "automating-codegrind-documentation-sync",
+  "url": "https://rivie13.github.io/blog/2026/03/10/automating-codegrind-documentation-sync/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-10-automating-codegrind-documentation-sync.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-10-automating-codegrind-documentation-sync.png",
+    "file": "assets/images/codegrind/2026-03-10-automating-codegrind-documentation-sync.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind automates documentation sync! We use GitHub Actions to mirror instructions and fix errors, keeping guides up-to-date with code. Learn how we tackle documentation drift: https://rivie13.github.io/blog/2026/03/10/automating-codegrind-documentation-sync/ #devops #documentation #githubactions",
+    "linkedin_text": "Keeping documentation in sync with code is a persistent challenge in software development. At CodeGrind, we've implemented an automated system using GitHub Actions to tackle documentation drift. Our workflow automatically mirrors instruction files, corrects structural errors with bot-driven commits, and generates version-specific update pages. This ensures guides are always synchronized with our codebase, improving clarity for team members and AI agents alike. Discover how we keep our documentation current without manual intervention: https://rivie13.github.io/blog/2026/03/10/automating-codegrind-documentation-sync/ #CodeGrind #DevOps #GitHubActions #Documentation #SoftwareDevelopment #Automation"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
