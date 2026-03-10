@@ -20,17 +20,19 @@
 
 Enabled: true
 
-CodeGrind's CI/CD and branching strategy just got a boost! 🚀 Automate page generation, refine PR workflows, and enhance reliability. Learn more about our latest development pipeline updates: https://rivie13.github.io/blog/2026/03/10/streamlining-development-workflows-recent-updates-codegrind-ci-cd/ #CICD #DevOps #CodeGrind
+🧪 TEST POST (social workflow verification) — CodeGrind's CI/CD and branching strategy just got a boost! 🚀 Automate page generation, refine PR workflows, and enhance reliability. Learn more about our latest development pipeline updates: https://rivie13.github.io/blog/2026/03/10/streamlining-development-workflows-recent-updates-codegrind-ci-cd/ #CICD #DevOps #CodeGrind
 
 ### LinkedIn
 
 Enabled: true
 
+🧪 **Test Post — This is a workflow verification post.**
+
 Streamlining Development Workflows: Recent Updates to CodeGrind's CI/CD and Branching Strategy
 
 We're excited to share recent enhancements to the CodeGrind development pipeline, designed to boost efficiency and reliability. Key updates include:
 
-- **CI/CD Improvements:** Introduction of automated page generation and version tracking, alongside fixes to ensure CI checks run on pull requests to the dev branch and hardened branchname validation.
+- **CI/CD Improvements:** Introduction of automated page generation and version tracking, alongside fixes to ensure CI checks run on pull requests to the dev branch and hardened branch name validation.
 - **Refined Branching & Review:** A new strategy requiring draft PRs for board automation to clarify the review process and improve code quality. We're also addressing AI-assisted review findings to further optimize our workflows.
 - **Infrastructure Updates:** Upgraded Azure login actions and rotated service principal secrets for enhanced security.
 
