@@ -7,7 +7,7 @@ tags: [CodeGrind, Automation, GitHub Actions, Documentation, Development Process
 author: Riviera Sperduto
 excerpt: "How CodeGrind uses GitHub Actions and bot-driven workflows to keep documentation synchronized with codebase changes automatically."
 image: /assets/images/codegrind/2026-03-10-automating-codegrind-documentation-sync.png
-keywords: documentation automation, GitHub Actions, CI/CD, developer workflow, code synchronization, DevOps"
+keywords: documentation automation, GitHub Actions, CI/CD, developer workflow, code synchronization, DevOps
 slug: automating-codegrind-documentation-sync
 canonical_url: https://rivie13.github.io/blog/2026/03/10/automating-codegrind-documentation-sync/
 ---
