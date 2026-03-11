@@ -550,6 +550,20 @@ jobs:
             exit 1
           fi
 
+          # Validate platform-specific character limits
+          CHAR_COUNT=${#VALUE}
+          if [[ "$PLATFORM" == "bluesky" && "$CHAR_COUNT" -gt 300 ]]; then
+            echo "::error::Bluesky text exceeds 300 characters ($CHAR_COUNT chars)"
+            echo "too_long=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          if [[ "$PLATFORM" == "linkedin" && "$CHAR_COUNT" -gt 1200 ]]; then
+            echo "::error::LinkedIn text exceeds 1200 characters ($CHAR_COUNT chars)"
+            echo "too_long=true" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          echo "char_count=$CHAR_COUNT" >> "$GITHUB_OUTPUT"
+
           JQ_KEY=".social.${PLATFORM}_text"
           OLD_VALUE=$(jq -r "${JQ_KEY} // \"\"" "$REVIEW_JSON")
 
@@ -594,6 +608,7 @@ jobs:
           OLD_TEXT: ${{ steps.parse.outputs.old_text || '' }}
           NEW_TEXT: ${{ steps.parse.outputs.new_text || '' }}
           PLATFORM: ${{ steps.parse.outputs.platform || '' }}
+          CHAR_COUNT: ${{ steps.set_social.outputs.char_count || '' }}
         with:
           script: |
             // Replace eyes with rocket
@@ -638,7 +653,8 @@ jobs:
               const platform = process.env.PLATFORM;
               const oldVal = process.env.OLD_VALUE;
               const newVal = process.env.NEW_VALUE;
-              body = `**Updated ${platform} copy** :rocket:\n\n**Before:** ${oldVal}\n**After:** ${newVal}`;
+              const charCount = process.env.CHAR_COUNT;
+              body = `**Updated ${platform} copy** :rocket:\n\n**Characters:** ${charCount}\n**Before:** ${oldVal}\n**After:** ${newVal}`;
             }
 
             if (body) {
