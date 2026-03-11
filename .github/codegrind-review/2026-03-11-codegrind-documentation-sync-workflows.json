@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-11-codegrind-documentation-sync-workflows.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-11-codegrind-documentation-sync-workflows.md",
+  "title": "Keeping CodeGrind in Sync: Documentation, Workflows, and AI-Assisted Development",
+  "summary": "How CodeGrind uses AI agents and automation to maintain synchronized documentation and streamline release workflows.",
+  "slug": "codegrind-documentation-sync-workflows",
+  "url": "https://rivie13.github.io/blog/2026/03/11/codegrind-documentation-sync-workflows/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-11-codegrind-documentation-sync-workflows.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-11-codegrind-documentation-sync-workflows.png",
+    "file": "assets/images/codegrind/2026-03-11-codegrind-documentation-sync-workflows.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind uses AI agents & automation to sync docs and workflows—tackling version drift and file duplication to reduce manual overhead. #CodeGrind #DevOps #AI https://rivie13.github.io/blog/2026/03/11/codegrind-documentation-sync-workflows/",
+    "linkedin_text": "Maintaining consistency in large open-source projects like CodeGrind is a significant challenge. In our latest blog post, we detail how we're using AI agents and automation to keep documentation, workflows, and versioning in sync. We faced issues with documentation drift, including duplicate steps and version mismatches across files. Our solutions involve automated version synchronization using GitHub Actions, mirroring instruction files for local and CI/CD consistency, and leveraging AI assistance (Copilot's SWE Agent) to identify and correct documentation errors. These updates have already led to 4 merged pull requests, significantly reducing manual effort and potential errors. Discover the techniques that ensure a smoother development process for CodeGrind. #CodeGrind #OpenSource #DevOps #AIinDevelopment #Documentation #WorkflowAutomation https://rivie13.github.io/blog/2026/03/11/codegrind-documentation-sync-workflows/"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
