@@ -503,7 +503,7 @@ jobs:
           content = open(md).read()
           if field == 'title':
               import re
-              content = re.sub(r'^# .+$', f'# {value}', content, count=1, flags=re.MULTILINE)
+              content = re.sub(r'^- Title:.*$', f'- Title: {value}', content, count=1, flags=re.MULTILINE)
           open(md, 'w').write(content)
           " "$REVIEW_MD" "$FIELD" "$VALUE"
           fi
