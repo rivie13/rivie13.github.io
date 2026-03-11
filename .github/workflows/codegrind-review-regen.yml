@@ -522,11 +522,15 @@ jobs:
           import sys
           post, old, new = sys.argv[1], sys.argv[2], sys.argv[3]
           content = open(post).read()
+          IMMUTABLE_KEYS = ('slug:', 'date:', 'layout:', 'canonical_url:', 'image:', 'author:')
+          if any(k in old or k in new for k in IMMUTABLE_KEYS):
+              print('::error::Editing immutable frontmatter keys (slug, date, layout, canonical_url, image, author) is not allowed via /set post replace.')
+              sys.exit(1)
           if old not in content:
               print(f'::error::Text not found in post: {old}')
               sys.exit(1)
           count = content.count(old)
-          content = content.replace(old, new, 1)
+          content = content.replace(old, new)
           open(post, 'w').write(content)
           print(f'Replaced {count} occurrence(s)')
           " "$POST_FILE" "$OLD_TEXT" "$NEW_TEXT"
