@@ -3,7 +3,7 @@ layout: post
 title: "Keeping CodeGrind in Sync: Documentation, Workflows, and AI-Assisted Development"
 date: 2026-03-11 06:00:00 +0000
 categories: [CodeGrind, Development]
-tags: [CodeGrind, documentation, automation, ai-collaboration, development-process, github-actions, version-control, planning]
+tags: [CodeGrind, Documentation, automation, AI Collaboration, development-process, GitHub Actions, version-control, planning]
 author: Riviera Sperduto
 excerpt: "How CodeGrind uses AI agents and automation to maintain synchronized documentation and streamline release workflows."
 image: /assets/images/codegrind/2026-03-11-codegrind-documentation-sync-workflows.png
