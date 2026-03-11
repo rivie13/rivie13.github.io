@@ -7,7 +7,7 @@ tags: [CodeGrind, documentation, automation, ai-collaboration, development-proce
 author: Riviera Sperduto
 excerpt: "How CodeGrind uses AI agents and automation to maintain synchronized documentation and streamline release workflows."
 image: /assets/images/codegrind/2026-03-11-codegrind-documentation-sync-workflows.png
-keywords: CodeGrind documentation sync, AI-assisted development, GitHub automation, workflow management, software release process"
+keywords: CodeGrind documentation sync, AI-assisted development, GitHub automation, workflow management, software release process
 slug: codegrind-documentation-sync-workflows
 canonical_url: https://rivie13.github.io/blog/2026/03/11/codegrind-documentation-sync-workflows/
 ---
