@@ -566,11 +566,11 @@ jobs:
           CMD: ${{ steps.parse.outputs.command }}
           TARGET: ${{ steps.parse.outputs.target }}
         run: |
-          if git diff --quiet && git diff --cached --quiet; then
+          git add -A
+          if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
-          git add -A
           case "${CMD}-${TARGET}" in
             regen-image)   MSG="chore(blog): regenerate hero image" ;;
             set-post-field) MSG="chore(blog): update post field" ;;
