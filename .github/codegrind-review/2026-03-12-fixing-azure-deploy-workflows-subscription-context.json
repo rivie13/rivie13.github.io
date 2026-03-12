@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-12-fixing-azure-deploy-workflows-subscription-context.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-12-fixing-azure-deploy-workflows-subscription-context.md",
+  "title": "Fixing Azure Deploy Workflows: Decoupling Login from Subscription Context",
+  "summary": "How CodeGrind resolved a critical Azure login failure by decoupling authentication from subscription preflight checks.",
+  "slug": "fixing-azure-deploy-workflows-subscription-context",
+  "url": "https://rivie13.github.io/blog/2026/03/12/fixing-azure-deploy-workflows-subscription-context/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-12-fixing-azure-deploy-workflows-subscription-context.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-12-fixing-azure-deploy-workflows-subscription-context.png",
+    "file": "assets/images/codegrind/2026-03-12-fixing-azure-deploy-workflows-subscription-context.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Deployment workflows failing with \"No subscriptions found\"? CodeGrind shares how decoupling Azure login from subscription context fixed this common issue. Learn more: https://rivie13.github.io/blog/2026/03/12/fixing-azure-deploy-workflows-subscription-context/ #Azure #DevOps #CI/CD",
+    "linkedin_text": "CodeGrind encountered a critical failure in our Azure deployment workflows where the `azure/login` action reported \"No subscriptions found.\" This cryptic error, while appearing to be a credential issue, was actually an architectural problem caused by coupling authentication with subscription preflight checks. We've detailed how we resolved this by creating a composite action, `azureauthpreflight`, to decouple these concerns. This action handles authentication separately, gracefully manages missing subscriptions, and adds defensive JSON parsing. Read the full technical breakdown and implementation details: https://rivie13.github.io/blog/2026/03/12/fixing-azure-deploy-workflows-subscription-context/ #Azure #DevOps #GitHubActions #CI #CD #CloudComputing"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
