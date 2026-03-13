@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-13-codegrind-1-6-release-guest-registration-security.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-13-codegrind-1-6-release-guest-registration-security.md",
+  "title": "CodeGrind 1.6: Guest Registration, Security Hardening, and Wrapper Improvements",
+  "summary": "A closer look at the 1.6 release: guest registration fixes, wrapper enhancements, and Active Directory secret verification improvements.",
+  "slug": "codegrind-1-6-release-guest-registration-security",
+  "url": "https://rivie13.github.io/blog/2026/03/13/codegrind-1-6-release-guest-registration-security/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-13-codegrind-1-6-release-guest-registration-security.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-13-codegrind-1-6-release-guest-registration-security.png",
+    "file": "assets/images/codegrind/2026-03-13-codegrind-1-6-release-guest-registration-security.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind 1.6 is here! We've fixed guest registration for smoother onboarding, enhanced wrapper stability for a better coding experience, and hardened Active Directory secret verification. Try it out! https://rivie13.github.io/blog/2026/03/13/codegrind-1-6-release-guest-registration-security/ #CodeGrind #Release #DevOps",
+    "linkedin_text": "Announcing CodeGrind 1.6: Enhancements to Guest Registration, Wrapper Stability, and Active Directory Security.\n\nThis release focuses on improving the user experience and platform security:\n\n*   **Guest Registration Path Fix:** Streamlined onboarding for new users, making it easier to explore CodeGrind.\n*   **Wrapper Fixes and Stability:** Improved responsive behavior and state management for a smoother interactive coding experience.\n*   **Active Directory Secret Verification:** Strengthened validation logic and error handling for enhanced security, crucial for enterprise deployments.\n\nThese updates lower the entry barrier for learners and reinforce our commitment to data protection.\n\nLearn more about the changes: https://rivie13.github.io/blog/2026/03/13/codegrind-1-6-release-guest-registration-security/ #CodeGrind #SoftwareDevelopment #Cybersecurity #DevOps #ProductUpdate"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
