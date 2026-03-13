@@ -298,10 +298,9 @@ jobs:
           Generate a fresh alternative that matches the article but takes a different visual approach."
           fi
 
-          # Use Pollinations-supported flux variants for prompt generation fallback.
-          # These same model IDs are also used in image generation below.
+          # Use text-capable models for prompt generation.
           NEW_PROMPT=""
-          for MODEL in "flux" "flux-2-dev"; do
+          for MODEL in "gemini-fast" "openai" "openai-fast"; do
             PAYLOAD=$(jq -n \
               --arg sys "$SYSTEM_MSG" \
               --arg usr "$USER_MSG" \
@@ -325,7 +324,7 @@ jobs:
             NEW_PROMPT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty' 2>/dev/null)
 
             if [[ -n "$NEW_PROMPT" ]]; then
-              echo "Used model: $MODEL"
+              echo "Used text model: $MODEL"
               break
             fi
             echo "Model $MODEL failed, trying next..."
