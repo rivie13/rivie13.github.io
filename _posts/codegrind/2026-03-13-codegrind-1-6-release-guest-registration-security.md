@@ -3,7 +3,7 @@ layout: post
 title: "CodeGrind 1.6: Guest Registration, Security Hardening, and Wrapper Improvements"
 date: 2026-03-13 06:00:00 +0000
 categories: [CodeGrind, Development]
-tags: [CodeGrind, authentication, security, release, bug-fixes, development-process, version-control, software-development]
+tags: [CodeGrind, authentication, security, release, bug-fixes, Development Process, Version Control, software-development]
 author: CodeGrind Team
 excerpt: "A closer look at the 1.6 release: guest registration fixes, wrapper enhancements, and Active Directory secret verification improvements."
 image: /assets/images/codegrind/2026-03-13-codegrind-1-6-release-guest-registration-security.png
