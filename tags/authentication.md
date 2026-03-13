@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "authentication"
-tag: "authentication"
-permalink: "/tag/authentication"
+title: "Authentication"
+tag: "Authentication"
+permalink: "/tag/Authentication"
 ---
