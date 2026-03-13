@@ -7,7 +7,7 @@ tags: [CodeGrind, authentication, security, release, bug-fixes, development-proc
 author: CodeGrind Team
 excerpt: "A closer look at the 1.6 release: guest registration fixes, wrapper enhancements, and Active Directory secret verification improvements."
 image: /assets/images/codegrind/2026-03-13-codegrind-1-6-release-guest-registration-security.png
-keywords: CodeGrind 1.6, guest registration, authentication, security, Active Directory, code execution"
+keywords: CodeGrind 1.6, guest registration, authentication, security, Active Directory, code execution
 slug: codegrind-1-6-release-guest-registration-security
 canonical_url: https://rivie13.github.io/blog/2026/03/13/codegrind-1-6-release-guest-registration-security/
 ---
