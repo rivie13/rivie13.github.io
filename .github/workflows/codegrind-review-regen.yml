@@ -298,9 +298,9 @@ jobs:
           Generate a fresh alternative that matches the article but takes a different visual approach."
           fi
 
-          # Try primary model, then fallback
+          # Use text-capable models for prompt generation.
           NEW_PROMPT=""
-          for MODEL in "openai" "openai-fast"; do
+          for MODEL in "gemini-fast" "openai" "openai-fast"; do
             PAYLOAD=$(jq -n \
               --arg sys "$SYSTEM_MSG" \
               --arg usr "$USER_MSG" \
@@ -324,19 +324,30 @@ jobs:
             NEW_PROMPT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty' 2>/dev/null)
 
             if [[ -n "$NEW_PROMPT" ]]; then
-              echo "Used model: $MODEL"
+              echo "Used text model: $MODEL"
               break
             fi
             echo "Model $MODEL failed, trying next..."
           done
 
+          # Prepare bounded values for deterministic fallback prompt composition.
+          TITLE_SAFE=$(echo "$TITLE" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 180)
+          EXCERPT_SAFE=$(echo "$EXCERPT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 320)
+          HINT_SAFE=$(echo "$HINT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 220)
+
           if [[ -z "$NEW_PROMPT" ]]; then
-            echo "::error::Failed to generate image prompt from all models"
-            exit 1
+            echo "All models failed to generate a prompt; using deterministic fallback prompt."
+            NEW_PROMPT="16:9 editorial hero image for '${TITLE_SAFE}': modern software product visuals with a coding workspace, UI dashboards, and engineering context; reflect this excerpt: ${EXCERPT_SAFE}; ${HINT_SAFE:+reviewer direction: ${HINT_SAFE}; }no text, no watermark"
           fi
 
           # Clean up prompt (remove quotes wrapping)
           NEW_PROMPT=$(echo "$NEW_PROMPT" | sed 's/^"//;s/"$//')
+          # Normalize whitespace and enforce core rendering constraints
+          NEW_PROMPT=$(echo "$NEW_PROMPT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//')
+          shopt -s nocasematch
+          [[ "$NEW_PROMPT" == *"no text"* || "$NEW_PROMPT" == *"no-text"* ]] || NEW_PROMPT="${NEW_PROMPT}, no text"
+          [[ "$NEW_PROMPT" == *"no watermark"* || "$NEW_PROMPT" == *"no-watermark"* ]] || NEW_PROMPT="${NEW_PROMPT}, no watermark"
+          shopt -u nocasematch
 
           echo "new_prompt<<EOFNEWPROMPT" >> "$GITHUB_OUTPUT"
           echo "$NEW_PROMPT" >> "$GITHUB_OUTPUT"
@@ -351,12 +362,17 @@ jobs:
           NEW_PROMPT: ${{ steps.img_prompt.outputs.new_prompt }}
           IMAGE_FILE: ${{ steps.read.outputs.image_file }}
         run: |
+          if [[ -z "${NEW_PROMPT//[[:space:]]/}" ]]; then
+            echo "::error::Image prompt is empty; cannot generate image"
+            exit 1
+          fi
+
           mkdir -p "$(dirname "$IMAGE_FILE")"
 
           ENCODED_PROMPT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.stdin.read().strip()))" <<< "$NEW_PROMPT")
 
           SUCCESS=false
-          for MODEL in "flux" "flux-pro"; do
+          for MODEL in "flux" "flux-2-dev"; do
             URL="https://gen.pollinations.ai/image/${ENCODED_PROMPT}?width=1792&height=1024&nologo=true&model=${MODEL}"
 
             for ATTEMPT in 1 2 3; do
