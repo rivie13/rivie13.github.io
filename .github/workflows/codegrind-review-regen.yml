@@ -332,12 +332,16 @@ jobs:
           done
 
           if [[ -z "$NEW_PROMPT" ]]; then
-            echo "::error::Failed to generate image prompt from all models"
-            exit 1
+            echo "All models failed to generate a prompt; using deterministic fallback prompt."
+            NEW_PROMPT="16:9 editorial hero image for '${TITLE}': modern software product visuals with a coding workspace, UI dashboards, and engineering context; reflect this excerpt: ${EXCERPT}; ${HINT:+reviewer direction: ${HINT}; }no text, no watermark"
           fi
 
           # Clean up prompt (remove quotes wrapping)
           NEW_PROMPT=$(echo "$NEW_PROMPT" | sed 's/^"//;s/"$//')
+          # Normalize whitespace and enforce core rendering constraints
+          NEW_PROMPT=$(echo "$NEW_PROMPT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//')
+          [[ "$NEW_PROMPT" == *"no text"* ]] || NEW_PROMPT="${NEW_PROMPT}, no text"
+          [[ "$NEW_PROMPT" == *"no watermark"* ]] || NEW_PROMPT="${NEW_PROMPT}, no watermark"
 
           echo "new_prompt<<EOFNEWPROMPT" >> "$GITHUB_OUTPUT"
           echo "$NEW_PROMPT" >> "$GITHUB_OUTPUT"
@@ -352,6 +356,11 @@ jobs:
           NEW_PROMPT: ${{ steps.img_prompt.outputs.new_prompt }}
           IMAGE_FILE: ${{ steps.read.outputs.image_file }}
         run: |
+          if [[ -z "${NEW_PROMPT//[[:space:]]/}" ]]; then
+            echo "::error::Image prompt is empty; cannot generate image"
+            exit 1
+          fi
+
           mkdir -p "$(dirname "$IMAGE_FILE")"
 
           ENCODED_PROMPT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.stdin.read().strip()))" <<< "$NEW_PROMPT")
