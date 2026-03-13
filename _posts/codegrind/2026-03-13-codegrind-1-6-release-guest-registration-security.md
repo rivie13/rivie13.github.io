@@ -61,3 +61,6 @@ For existing users, these changes are backward-compatible and will roll out tran
 ---
 
 **Key Takeaway:** Version 1.6 balances accessibility (guest registration) with security (AD verification) and reliability (wrapper stability). It's a focused release that addresses real friction points while maintaining the integrity of the platform.
+
+<!-- IMAGE_PROMPT -->
+16:9 editorial hero image, close-up shot of a sleek, modern user interface showing a simplified guest registration form with subtle progress indicators. In the background, abstract, interconnected nodes represent secure data flow and authentication processes, hinting at Active Directory integration. The overall aesthetic is clean, technical, and professional, with a focus on UI elements and data visualization. no text, no watermark
