@@ -331,17 +331,24 @@ jobs:
             echo "Model $MODEL failed, trying next..."
           done
 
+          # Prepare bounded values for deterministic fallback prompt composition.
+          TITLE_SAFE=$(echo "$TITLE" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 180)
+          EXCERPT_SAFE=$(echo "$EXCERPT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 320)
+          HINT_SAFE=$(echo "$HINT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 220)
+
           if [[ -z "$NEW_PROMPT" ]]; then
             echo "All models failed to generate a prompt; using deterministic fallback prompt."
-            NEW_PROMPT="16:9 editorial hero image for '${TITLE}': modern software product visuals with a coding workspace, UI dashboards, and engineering context; reflect this excerpt: ${EXCERPT}; ${HINT:+reviewer direction: ${HINT}; }no text, no watermark"
+            NEW_PROMPT="16:9 editorial hero image for '${TITLE_SAFE}': modern software product visuals with a coding workspace, UI dashboards, and engineering context; reflect this excerpt: ${EXCERPT_SAFE}; ${HINT_SAFE:+reviewer direction: ${HINT_SAFE}; }no text, no watermark"
           fi
 
           # Clean up prompt (remove quotes wrapping)
           NEW_PROMPT=$(echo "$NEW_PROMPT" | sed 's/^"//;s/"$//')
           # Normalize whitespace and enforce core rendering constraints
           NEW_PROMPT=$(echo "$NEW_PROMPT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//')
-          [[ "$NEW_PROMPT" == *"no text"* ]] || NEW_PROMPT="${NEW_PROMPT}, no text"
-          [[ "$NEW_PROMPT" == *"no watermark"* ]] || NEW_PROMPT="${NEW_PROMPT}, no watermark"
+          shopt -s nocasematch
+          [[ "$NEW_PROMPT" == *"no text"* || "$NEW_PROMPT" == *"no-text"* ]] || NEW_PROMPT="${NEW_PROMPT}, no text"
+          [[ "$NEW_PROMPT" == *"no watermark"* || "$NEW_PROMPT" == *"no-watermark"* ]] || NEW_PROMPT="${NEW_PROMPT}, no watermark"
+          shopt -u nocasematch
 
           echo "new_prompt<<EOFNEWPROMPT" >> "$GITHUB_OUTPUT"
           echo "$NEW_PROMPT" >> "$GITHUB_OUTPUT"
