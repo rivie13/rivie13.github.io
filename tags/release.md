@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "release"
-tag: "release"
-permalink: "/tag/release"
+title: "Release"
+tag: "Release"
+permalink: "/tag/Release"
 ---

@@ -2,5 +2,5 @@
 layout: tag
 title: "Security"
 tag: "Security"
-permalink: "/tag/security"
+permalink: "/tag/Security"
 ---
