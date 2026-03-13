@@ -298,7 +298,8 @@ jobs:
           Generate a fresh alternative that matches the article but takes a different visual approach."
           fi
 
-          # Try primary model, then fallback
+          # Use Pollinations-supported flux variants for prompt generation fallback.
+          # These same model IDs are also used in image generation below.
           NEW_PROMPT=""
           for MODEL in "flux" "flux-2-dev"; do
             PAYLOAD=$(jq -n \
