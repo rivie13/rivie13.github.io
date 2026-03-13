@@ -300,7 +300,7 @@ jobs:
 
           # Try primary model, then fallback
           NEW_PROMPT=""
-          for MODEL in "openai" "openai-fast"; do
+          for MODEL in "flux" "flux-2-dev"; do
             PAYLOAD=$(jq -n \
               --arg sys "$SYSTEM_MSG" \
               --arg usr "$USER_MSG" \
@@ -356,7 +356,7 @@ jobs:
           ENCODED_PROMPT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.stdin.read().strip()))" <<< "$NEW_PROMPT")
 
           SUCCESS=false
-          for MODEL in "flux" "flux-pro"; do
+          for MODEL in "flux" "flux-2-dev"; do
             URL="https://gen.pollinations.ai/image/${ENCODED_PROMPT}?width=1792&height=1024&nologo=true&model=${MODEL}"
 
             for ATTEMPT in 1 2 3; do
