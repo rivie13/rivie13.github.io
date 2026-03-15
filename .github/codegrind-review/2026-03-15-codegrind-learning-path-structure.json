@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-15-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-15-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Guide You Through DSA Mastery",
+  "summary": "Discover how CodeGrind structures learning paths to take you from basics to interview-ready DSA skills through progressive difficulty and adaptive challenges.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/03/15/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-15-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-15-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-03-15-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Master Data Structures and Algorithms with CodeGrind's structured learning paths! Progress from basics to interview-ready skills with difficulty-based filtering, LeetCode integration, and real-time feedback. #DSA #InterviewPrep #Coding #LearningPaths https://rivie13.github.io/blog/2026/03/15/codegrind-learning-path-structure/",
+    "linkedin_text": "Unlock your potential in Data Structures and Algorithms with CodeGrind's expertly designed learning paths. Our platform guides you from fundamental concepts to advanced problem-solving, ensuring you're interview-ready. \n\nKey features include:\n- Difficulty-based problem filtering: Start easy, build confidence, and tackle interview-level challenges.\n- LeetCode problem integration: Practice with industry-standard problems.\n- Real-time code execution and feedback: Understand performance and fix errors instantly.\n- Adaptive challenge modes: Test your skills under pressure with unique modes like Matrix Bomb and Time Attack.\n\nLearn more about how our structured approach accelerates your DSA mastery:\nhttps://rivie13.github.io/blog/2026/03/15/codegrind-learning-path-structure/ \n\n#DataStructures #Algorithms #DSA #InterviewPreparation #CodingPractice #TechInterview #CodeGrind"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
