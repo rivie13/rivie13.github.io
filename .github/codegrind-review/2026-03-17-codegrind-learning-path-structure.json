@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-17-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-17-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Structure DSA Progression for Real Interview Success",
+  "summary": "Explore how CodeGrind's structured learning paths guide developers from fundamentals through advanced DSA mastery with real-world interview readiness.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/03/17/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-17-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-17-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-03-17-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Master DSA with CodeGrind's structured learning paths! Progress from fundamentals to advanced topics with AI guidance and gamified challenges. Real interview readiness starts here. https://rivie13.github.io/blog/2026/03/17/codegrind-learning-path-structure/ #DSAPrep #CodingInterviews #LearnToCode",
+    "linkedin_text": "Structured learning is key to mastering Data Structures and Algorithms (DSA) for interview success. CodeGrind's platform organizes your practice into logical learning paths, starting with foundational concepts like Arrays and Strings, progressing to pattern recognition with Trees and Graphs, and culminating in advanced interview readiness scenarios. Our architecture ensures you build core understanding before tackling complex problems. \n\nKey features include:\n- Foundational Layer: Solidify basics with targeted problem sets.\n- Intermediate Layer: Develop pattern recognition using AI assistance in Challenge Mode.\n- Advanced Layer: Simulate interview pressure with Time Attack and Matrix Bomb modes.\n\nPrepare effectively and build confidence with CodeGrind. Learn more about our structured approach: https://rivie13.github.io/blog/2026/03/17/codegrind-learning-path-structure/ #CodeGrind #DSA #InterviewPreparation #SoftwareEngineering #TechJobs #CodingPractice"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
