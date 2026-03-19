@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-19-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-19-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Guide You Through DSA Mastery",
+  "summary": "Discover how CodeGrind structures learning paths to scaffold your DSA journey from fundamentals to interview-ready mastery.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/03/19/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-19-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-19-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-03-19-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Master Data Structures and Algorithms with CodeGrind's structured learning paths. Progress from fundamentals to interview-ready problem-solving, avoiding common pitfalls of unstructured practice. Learn more: https://rivie13.github.io/blog/2026/03/19/codegrind-learning-path-structure/ #DSA #Coding #InterviewPrep",
+    "linkedin_text": "Feeling overwhelmed by Data Structures and Algorithms (DSA)? CodeGrind's learning paths are designed to guide you from foundational concepts to interview-ready mastery. We structure practice by difficulty and concept, helping you build deep familiarity and avoid common issues like cognitive overload and skill gaps often found on platforms with unstructured problem sets. Our system tracks your progress with enhanced scoring based on efficiency and problem-solving approach. Discover how structured learning leads to real skill development: https://rivie13.github.io/blog/2026/03/19/codegrind-learning-path-structure/ #CodeGrind #DSA #DataStructures #Algorithms #CodingInterviews #TechEducation"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
