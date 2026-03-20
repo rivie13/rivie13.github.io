@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-20-codegrind-secure-ai-assistance-workflow.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-20-codegrind-secure-ai-assistance-workflow.md",
+  "title": "Inside CodeGrind's Secure AI Assistance Workflow",
+  "summary": "Explore how CodeGrind integrates Azure OpenAI for secure AI assistance, focusing on prompt safety, model selection, and user privacy.",
+  "slug": "codegrind-secure-ai-assistance-workflow",
+  "url": "https://rivie13.github.io/blog/2026/03/20/codegrind-secure-ai-assistance-workflow/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-20-codegrind-secure-ai-assistance-workflow.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-20-codegrind-secure-ai-assistance-workflow.png",
+    "file": "assets/images/codegrind/2026-03-20-codegrind-secure-ai-assistance-workflow.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind integrates Azure OpenAI for secure AI coding assistance. Explore prompt safety, model selection, and user privacy in our latest blog post. #AICoding #DevTools #CodeGrind https://rivie13.github.io/blog/2026/03/20/codegrind-secure-ai-assistance-workflow/",
+    "linkedin_text": "Discover how CodeGrind enhances the coding practice experience through secure AI assistance powered by Azure OpenAI. Our latest blog post details our approach to prompt safety, flexible model selection (including GPT4o), and user privacy. Learn about the UI enhancements designed for efficient interaction and our commitment to responsible AI usage. Read more about our secure AI workflow: https://rivie13.github.io/blog/2026/03/20/codegrind-secure-ai-assistance-workflow/ #CodeGrind #AIinSoftware #AzureOpenAI #DeveloperTools #CodingPractice #EdTech"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
