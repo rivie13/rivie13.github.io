@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-21-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-21-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Structure DSA Progression for Interview Success",
+  "summary": "Explore how CodeGrind's structured learning paths guide users through Data Structures and Algorithms with gamification, real-time feedback, and AI assistance.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/03/21/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-21-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-21-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-03-21-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Master DSA for interviews with CodeGrind's structured learning paths! Get gamified practice, real-time feedback, and AI assistance. Start building practical skills today. #DSA #InterviewPrep #Coding #TechJobs https://rivie13.github.io/blog/2026/03/21/codegrind-learning-path-structure/",
+    "linkedin_text": "Technical interviews demand strong Data Structures and Algorithms (DSA) skills, but traditional practice can feel disjointed and demotivating. CodeGrind transforms DSA preparation into a structured, gamified journey. Our learning paths guide you systematically through problems, filtered by difficulty, from foundational concepts to advanced patterns. Receive instant feedback on correctness and performance with our real-time code execution engine. Our scoring system rewards efficiency and quality, tracking your progress through coding streaks, success rates, and personal bests. AI assistance provides contextual guidance to accelerate your learning. Discover how CodeGrind's approach builds practical mastery for interview success. #DSA #DataStructures #Algorithms #InterviewPreparation #CodingPractice #TechInterviews https://rivie13.github.io/blog/2026/03/21/codegrind-learning-path-structure/"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
