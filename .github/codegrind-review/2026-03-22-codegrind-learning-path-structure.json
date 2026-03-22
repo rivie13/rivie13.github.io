@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-22-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-22-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Drive Practical DSA Progression",
+  "summary": "Discover how CodeGrind structures learning paths to guide developers from fundamentals to interview-ready DSA mastery.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/03/22/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-22-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-22-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-03-22-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind's learning paths structure DSA practice from fundamentals to interview-ready mastery. Guided progression, adaptive scoring, and realtime feedback make learning rewarding. #DSA #CodingInterview #LearnToCode https://rivie13.github.io/blog/2026/03/22/codegrind-learning-path-structure/",
+    "linkedin_text": "Traditional DSA practice can feel unstructured and demotivating. CodeGrind addresses this by organizing Data Structures and Algorithms (DSA) practice into guided learning paths. Our approach combines realtime execution, adaptive difficulty, and gamified progression to help developers build practical skills. \n\nDiscover how CodeGrind structures problem sequencing, scoring mechanics, and feedback loops to turn algorithm practice into a coherent and rewarding journey, preparing you for technical interviews and strengthening your engineering fundamentals. Learn more about our structured approach:\n\nhttps://rivie13.github.io/blog/2026/03/22/codegrind-learning-path-structure/ #CodeGrind #DSA #DataStructures #Algorithms #InterviewPrep #SoftwareEngineering"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
