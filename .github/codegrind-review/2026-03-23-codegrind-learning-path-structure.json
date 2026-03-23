@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-23-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-23-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Structure DSA Progression for Real Interview Success",
+  "summary": "Discover how CodeGrind's structured learning paths guide developers through DSA mastery with gamification, real-time feedback, and interview-ready challenges.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/03/23/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-23-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-23-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-03-23-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Tired of random DSA practice? CodeGrind's structured learning paths build real interview skills with gamification & AI hints. Progress logically from Easy to Hard. Learn more: https://rivie13.github.io/blog/2026/03/23/codegrind-learning-path-structure/ #DSA #CodingInterview #EdTech",
+    "linkedin_text": "Traditional DSA practice often leads to motivation loss and gaps in understanding due to random problem selection. CodeGrind revolutionizes this with structured learning paths designed for real interview success. Our approach sequences problems by difficulty and concept, ensuring you build a solid foundation before tackling complex topics. \n\nKey features include:\n- Difficulty-based filtering with concept-specific sequencing\n- Real-time feedback on submissions with a scoring system\n- AI-guided problem-solving for personalized hints\n- Gamification elements like streaks and leaderboards to maintain engagement\n\nDiscover how CodeGrind guides you from fundamentals to interview-ready problem-solving and boosts your competency. Read the full post: https://rivie13.github.io/blog/2026/03/23/codegrind-learning-path-structure/ #DataStructures #Algorithms #InterviewPrep #CodingPractice #EdTech #Gamification"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
