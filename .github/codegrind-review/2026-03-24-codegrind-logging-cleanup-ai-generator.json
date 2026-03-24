@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-24-codegrind-logging-cleanup-ai-generator.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-24-codegrind-logging-cleanup-ai-generator.md",
+  "title": "Cleaning Up Logging in CodeGrind's AI Problem Generator",
+  "summary": "Why we removed excessive logging from AIProblemGenerator and how it improves code maintainability.",
+  "slug": "codegrind-logging-cleanup-ai-generator",
+  "url": "https://rivie13.github.io/blog/2026/03/24/codegrind-logging-cleanup-ai-generator/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-24-codegrind-logging-cleanup-ai-generator.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-24-codegrind-logging-cleanup-ai-generator.png",
+    "file": "assets/images/codegrind/2026-03-24-codegrind-logging-cleanup-ai-generator.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind’s AI Problem Generator is getting a log cleanup! We’re removing excessive logging to improve maintainability and clarity. Clean logs mean faster troubleshooting and better observability. #CodeGrind #AI #DevOps #Logging https://rivie13.github.io/blog/2026/03/24/codegrind-logging-cleanup-ai-generator/",
+    "linkedin_text": "We've been working on improving the maintainability of CodeGrind's AI Problem Generator. A recent update involved cleaning up excessive logging, a crucial step for any development workflow. \n\nExcessive logging can degrade the signal, impacting performance and making it harder to troubleshoot real issues. By commenting out unnecessary trace logs in the AIProblemGenerator module, we're ensuring:\n\n✨ Faster troubleshooting\n✨ Better observability of the AI pipeline\n✨ Cleaner console output\n✨ Easier code reviews\n\nThis principle of intentional logging is key, especially for AI-driven features that rely on real-time interactions. We encourage contributors to keep logging hygiene in mind to maintain a smooth development experience.\n\nLearn more about our logging best practices and the impact of this cleanup: https://rivie13.github.io/blog/2026/03/24/codegrind-logging-cleanup-ai-generator/ #CodeGrind #AI #SoftwareDevelopment #Logging #Maintainability #DevOps"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
