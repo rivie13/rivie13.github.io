@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-29-codegrind-secure-ai-assistance-workflow.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-29-codegrind-secure-ai-assistance-workflow.md",
+  "title": "CodeGrind's AI Assistance: A Deep Dive into Secure Prompting and Model Flexibility",
+  "summary": "Explore CodeGrind's secure AI assistance, featuring Azure OpenAI, GPT-4o, flexible model switching, and robust prompt safety controls for a more effective coding practice experience.",
+  "slug": "codegrind-secure-ai-assistance-workflow",
+  "url": "https://rivie13.github.io/blog/2026/03/29/codegrind-secure-ai-assistance-workflow/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-29-codegrind-secure-ai-assistance-workflow.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-29-codegrind-secure-ai-assistance-workflow.png",
+    "file": "assets/images/codegrind/2026-03-29-codegrind-secure-ai-assistance-workflow.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind's AI assistance now features Azure OpenAI and GPT-4o for enhanced coding practice. Enjoy flexible model switching and robust prompt safety controls for a secure learning experience. Learn more: https://rivie13.github.io/blog/2026/03/29/codegrind-secure-ai-assistance-workflow/ #CodeGrind #AI #Coding",
+    "linkedin_text": "CodeGrind is enhancing its AI assistance capabilities with the integration of Azure OpenAI and the latest GPT-4o model. This update focuses on providing a more effective and secure coding practice experience through flexible model switching and robust prompt safety controls. \n\nOur AI assistant is designed to help you understand complex problems, debug code, and explore alternative solutions, all while ensuring data privacy and content relevance. By leveraging Azure OpenAI, we bring enterprise-grade security and compliance to your learning journey.\n\nDiscover how CodeGrind's AI can empower your coding practice:\nhttps://rivie13.github.io/blog/2026/03/29/codegrind-secure-ai-assistance-workflow/\n\n#CodeGrind #AI #OpenAI #GPT4o #CodingPractice #EdTech #DeveloperTools"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
