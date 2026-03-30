@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-30-inside-codegrind-secure-ai-assistance.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-30-inside-codegrind-secure-ai-assistance.md",
+  "title": "Inside CodeGrind's Secure AI Assistance Workflow",
+  "summary": "Explore the secure workflow of CodeGrind's AI assistance, focusing on Azure OpenAI integration, prompt safety, and model controls for an enhanced learning experience.",
+  "slug": "inside-codegrind-secure-ai-assistance",
+  "url": "https://rivie13.github.io/blog/2026/03/30/inside-codegrind-secure-ai-assistance/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-30-inside-codegrind-secure-ai-assistance.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-30-inside-codegrind-secure-ai-assistance.png",
+    "file": "assets/images/codegrind/2026-03-30-inside-codegrind-secure-ai-assistance.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Explore CodeGrind's secure AI assistance workflow, powered by Azure OpenAI. Learn how we ensure prompt safety, model controls, and an enhanced learning experience for DSA and interview prep. #CodeGrind #AI #AzureOpenAI #Coding https://rivie13.github.io/blog/2026/03/30/inside-codegrind-secure-ai-assistance/",
+    "linkedin_text": "CodeGrind is enhancing its AI-powered assistance with a secure workflow built on Azure OpenAI. This integration focuses on enterprise-grade security, compliance, and responsible AI practices, ensuring user data is handled with strict privacy standards. Our AI assistant supports advanced models like GPT4o to provide sophisticated help with coding problems, acting as a scalable and available tutor. We've implemented key features like model switching, a resizable chat input, and a persistent chat interface to optimize the learning experience. Prompt engineering techniques guide the AI to offer constructive assistance without bypassing the learning process, balancing gamified challenges with effective education. Discover more about our secure AI guidance: https://rivie13.github.io/blog/2026/03/30/inside-codegrind-secure-ai-assistance/ #CodeGrind #AI #AzureOpenAI #CodingEducation #DSA #InterviewPrep"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
