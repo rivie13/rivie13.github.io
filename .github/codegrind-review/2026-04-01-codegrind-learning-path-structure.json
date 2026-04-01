@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-04-01-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-04-01-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Guide You Through DSA Mastery",
+  "summary": "Discover how CodeGrind structures learning paths to take you from fundamentals to interview-ready DSA skills through progressive difficulty and real-time feedback.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/04/01/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-04-01-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-04-01-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-04-01-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Master Data Structures & Algorithms with CodeGrind's structured learning paths! Progress from easy to hard with real-time AI feedback. Built on LeetCode problems. Learn more: https://rivie13.github.io/blog/2026/04/01/codegrind-learning-path-structure/ #DSA #Coding #InterviewPrep #EdTech",
+    "linkedin_text": "CodeGrind's learning paths are designed to guide you through Data Structures and Algorithms mastery, from fundamental concepts to interview-ready skills. We structure problems by progressive difficulty (Easy, Medium, Hard) and leverage the LeetCode problem set, segmented into learnable chunks. Our platform offers real-time feedback with an AI assistant that provides hints without spoilers, model flexibility, and persistent chat history. Enhanced scoring tracks correctness, time efficiency, memory optimization, and more. Discover how our structured approach accelerates your learning and builds confidence for technical interviews. Read more: https://rivie13.github.io/blog/2026/04/01/codegrind-learning-path-structure/ #CodeGrind #DSA #DataStructures #Algorithms #CodingInterview #TechEducation #AIinEd"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
