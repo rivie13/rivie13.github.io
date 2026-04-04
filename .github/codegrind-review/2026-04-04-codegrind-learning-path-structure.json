@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-04-04-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-04-04-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Guide Practical DSA Progression",
+  "summary": "Discover how CodeGrind structures learning paths to turn scattered DSA practice into coherent, measurable progression toward interview readiness.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/04/04/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-04-04-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-04-04-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-04-04-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Tired of random DSA practice? CodeGrind's learning paths organize problems by difficulty (Easy, Medium, Hard) to build coherent mastery and interview readiness. Track your real-time progression! #DataStructures #Algorithms #CodingInterview #CodeGrind https://rivie13.github.io/blog/2026/04/04/codegrind-learning-path-structure/",
+    "linkedin_text": "Data Structures and Algorithms (DSA) practice can feel overwhelming without a clear structure. CodeGrind addresses this by organizing problems into sequential learning paths that scaffold knowledge and build toward interview readiness. Our approach segments problems into Easy, Medium, and Hard tiers, focusing on foundational patterns, skill integration, and advanced mastery respectively. We also provide real-time progression tracking with a scoring system that rewards speed and efficiency. Discover how CodeGrind transforms scattered practice into measurable growth. #CodeGrind #DSA #DataStructures #Algorithms #CodingPractice #InterviewPrep https://rivie13.github.io/blog/2026/04/04/codegrind-learning-path-structure/"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
