@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-04-05-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-04-05-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Structure DSA Practice for Real Interview Success",
+  "summary": "Learn how CodeGrind's structured learning paths combine difficulty-based progression, gamified challenges, and AI assistance to prepare you for technical interviews.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/04/05/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-04-05-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-04-05-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-04-05-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Structure your DSA practice for real interview success with CodeGrind's learning paths. Difficulty tiers, instant feedback, and gamified challenges prepare you for technical interviews. Learn more: https://rivie13.github.io/blog/2026/04/05/codegrind-learning-path-structure/ #DSA #InterviewPrep #CodingPractice",
+    "linkedin_text": "Technical interviews can be daunting, especially when it comes to Data Structures and Algorithms (DSA) practice. CodeGrind's structured learning paths are designed to bridge the gap between theoretical knowledge and practical interview readiness. Our approach organizes problems into clear difficulty tiers (Easy, Medium, Hard), provides real-time execution and instant feedback through Azure Judge0 integration, and incorporates gamified progression with a scoring system that rewards efficiency. We also offer Challenge Mode features like the Matrix Bomb effect and timer challenges to simulate interview pressure. AI assistance is integrated to guide your learning journey. Discover how CodeGrind can elevate your interview preparation: https://rivie13.github.io/blog/2026/04/05/codegrind-learning-path-structure/ #CodeGrind #DSA #DataStructures #Algorithms #InterviewPreparation #CodingChallenges #AI"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
