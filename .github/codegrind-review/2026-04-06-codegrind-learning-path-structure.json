@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-04-06-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-04-06-codegrind-learning-path-structure.md",
+  "title": "How CodeGrind Learning Paths Guide You Through DSA Progression",
+  "summary": "Discover how CodeGrind structures learning paths to build DSA mastery through difficulty-based progression and real-time feedback.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/04/06/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-04-06-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-04-06-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-04-06-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "Master DSA with CodeGrind's structured learning paths! Our difficulty-based progression and real-time feedback guide you from easy foundations to hard interview challenges. Learn efficiently, build confidence, and avoid burnout. #DSA #Coding #InterviewPrep #LearnToCode https://rivie13.github.io/blog/2026/04/06/codegrind-learning-path-structure/",
+    "linkedin_text": "Struggling with unstructured Data Structures and Algorithms (DSA) practice? CodeGrind's blog post \"How CodeGrind Learning Paths Guide You Through DSA Progression\" explains our structured approach. We organize problems into difficulty-based learning paths (Easy, Medium, Hard) with progressive unlocking, ensuring you build a strong foundation before tackling complex challenges. Our real-time feedback loop, powered by Azure Judge0, provides instant results to reinforce learning and prevent burnout. Discover how this systematic method accelerates your coding growth and interview preparation.\n\nRead more: https://rivie13.github.io/blog/2026/04/06/codegrind-learning-path-structure/ #DSA #DataStructures #Algorithms #CodingPractice #InterviewPreparation #TechSkills"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
