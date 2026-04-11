@@ -114,6 +114,27 @@ permalink: /projects/
         <div class="mb-6">
           <p class="text-gray-700 dark:text-gray-300 text-lg">{{ project.detailed_description }}</p>
         </div>
+
+        {% if project.name == "TrackAmerica" %}
+        <div class="mb-8">
+          <h3 class="text-xl font-bold mb-4">Latest Screenshots</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">Click an image to open it full size.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <figure class="bg-gray-50 dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+              <a href="{{ '/assets/images/TrackAmericaHomePage.png' | relative_url }}" target="_blank" rel="noopener noreferrer" aria-label="Open full size desktop TrackAmerica screenshot">
+                <img src="{{ '/assets/images/TrackAmericaHomePage.png' | relative_url }}" alt="TrackAmerica desktop homepage with national indicators" class="w-full object-contain bg-gray-100 dark:bg-gray-950" style="height: 20rem;" loading="lazy">
+              </a>
+              <figcaption class="text-sm text-gray-600 dark:text-gray-400 p-3">Desktop homepage with national indicators and score breakdown.</figcaption>
+            </figure>
+            <figure class="bg-gray-50 dark:bg-gray-900 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+              <a href="{{ '/assets/images/TrackAmericaMobilePA.png' | relative_url }}" target="_blank" rel="noopener noreferrer" aria-label="Open full size mobile TrackAmerica screenshot">
+                <img src="{{ '/assets/images/TrackAmericaMobilePA.png' | relative_url }}" alt="TrackAmerica mobile Pennsylvania page with representative map and tabs" class="w-full object-contain bg-gray-100 dark:bg-gray-950" style="height: 26rem;" loading="lazy">
+              </a>
+              <figcaption class="text-sm text-gray-600 dark:text-gray-400 p-3">Mobile Pennsylvania page with district map and representative/senator tabs.</figcaption>
+            </figure>
+          </div>
+        </div>
+        {% endif %}
         
         {% if project.video_id and project.video_id != "" %}
         <div class="mb-8">

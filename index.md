@@ -148,8 +148,8 @@ title: Home
     <!-- TrackAmerica Project (Featured) -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-12 opacity-0" data-animate="fade-in" data-scroll="fade-up">
       <div class="p-6 border-b">
-        <h3 class="text-2xl font-bold mb-2">TrackAmerica (Early-stage)</h3>
-        <p class="mb-4">Cross-platform app to track representatives, bills, and votes with AI-powered search and insights. Currently in active development.</p>
+        <h3 class="text-2xl font-bold mb-2">TrackAmerica (In Progress)</h3>
+        <p class="mb-4">Cross-platform app to track representatives, bills, and votes with AI-powered search and insights. Initial web and mobile experiences are now implemented.</p>
         <div class="flex justify-between items-center">
           <a href="https://github.com/rivie13/TrackAmerica" target="_blank" class="text-blue-600 hover:text-blue-800 font-medium">
             View on GitHub →
@@ -161,14 +161,22 @@ title: Home
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-0">
-        <div class="bg-gray-200 flex items-center justify-center h-full">
-          <div class="p-4 w-full text-center text-gray-600" style="min-height: 300px; max-height: 350px;">
-            <p class="mt-12">No demo available yet — early-stage project. Screenshots and walkthroughs will be added as the project progresses.</p>
+        <div class="bg-gray-100 p-4">
+          <h4 class="text-lg font-bold mb-3">Latest UI Screens</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <figure class="bg-white rounded-lg shadow-sm overflow-hidden">
+              <img src="{{ '/assets/images/TrackAmericaHomePage.png' | relative_url }}" alt="TrackAmerica web homepage with national indicators dashboard" class="w-full h-48 object-cover object-top" loading="lazy">
+              <figcaption class="text-xs text-gray-600 p-2">Web dashboard with national indicators and score breakdown.</figcaption>
+            </figure>
+            <figure class="bg-white rounded-lg shadow-sm overflow-hidden">
+              <img src="{{ '/assets/images/TrackAmericaMobilePA.png' | relative_url }}" alt="TrackAmerica mobile Pennsylvania page with district map and tabs" class="w-full h-48 object-cover object-top" loading="lazy">
+              <figcaption class="text-xs text-gray-600 p-2">Mobile state page with district map plus representative and senator tabs.</figcaption>
+            </figure>
           </div>
         </div>
         <div class="p-4 pb-0">
-          <h4 class="text-lg font-bold mb-2">TrackAmerica: Project Overview</h4>
-          <p class="text-gray-600 text-sm mb-4">An app to help citizens understand their federal representatives, bills, and voting histories. Features planned include an interactive map, representative profiles, bill tracking, and an AI assistant for natural-language questions.</p>
+          <h4 class="text-lg font-bold mb-2">TrackAmerica: Current Progress</h4>
+          <p class="text-gray-600 text-sm mb-4">TrackAmerica now includes early web and mobile UI flows, including a national indicators dashboard and a state-level representative map view. Next milestones focus on deeper bill search, voting-history drilldowns, and AI-assisted legislation Q and A.</p>
         </div>
       </div>
     </div>
