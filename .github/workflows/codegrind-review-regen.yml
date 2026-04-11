@@ -20,7 +20,7 @@ jobs:
       cancel-in-progress: false
 
     steps:
-      # ── 1. Parse comment ──────────────────────────────────────────────
+      # ── 1. Parse comment ──────────────────────────────────────────────────────
       - name: Parse comment command
         id: parse
         uses: actions/github-script@v7
@@ -91,7 +91,7 @@ jobs:
               ].join('\n')
             });
 
-      # ── 2. Validate PR context ────────────────────────────────────────
+      # ── 2. Validate PR context ────────────────────────────────────────────────
       - name: Validate PR context
         if: steps.parse.outputs.valid == 'true'
         id: validate
@@ -156,7 +156,7 @@ jobs:
               content: 'eyes'
             });
 
-      # ── 3. Checkout PR branch ─────────────────────────────────────────
+      # ── 3. Checkout PR branch ─────────────────────────────────────────────────
       - name: Checkout PR branch
         if: steps.parse.outputs.valid == 'true' && steps.validate.conclusion == 'success' && steps.validate.outputs.branch != ''
         uses: actions/checkout@v4
@@ -170,7 +170,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      # ── 4. Read existing files ─────────────────────────────────────────
+      # ── 4. Read existing files ─────────────────────────────────────────────────
       - name: Read existing files
         if: steps.parse.outputs.valid == 'true' && steps.validate.conclusion == 'success' && steps.validate.outputs.branch != ''
         id: read
@@ -215,7 +215,8 @@ jobs:
           echo "EOFPROMPT" >> "$GITHUB_OUTPUT"
 
           # Extract body text (strip frontmatter, HTML, markdown syntax; first ~2000 chars)
-          BODY=$(awk 'BEGIN{n=0} /^---$/{n++; next} n>=2' "$POST_FILE" | \
+          # Disable pipefail in subshell to avoid SIGPIPE from head -c closing sed's stdout
+          BODY=$(set +o pipefail; awk 'BEGIN{n=0} /^---$/{n++; next} n>=2' "$POST_FILE" | \
                  sed 's/<[^>]*>//g; s/^#\+\s*//; s/\*\*\|__//g; s/\*\|_//g; s/\[\([^]]*\)\]([^)]*)/\1/g' | \
                  head -c 2000)
           echo "body<<EOFBODY" >> "$GITHUB_OUTPUT"
@@ -243,7 +244,7 @@ jobs:
           echo "review_md=$REVIEW_MD" >> "$GITHUB_OUTPUT"
           echo "image_file=$IMAGE_FILE" >> "$GITHUB_OUTPUT"
 
-      # ── 5. Regen image ────────────────────────────────────────────────
+      # ── 5. Regen image ──────────────────────────────────────────────────────
       - name: "Regen image: validate API key"
         if: steps.parse.outputs.valid == 'true' && steps.parse.outputs.command == 'regen'
         env:
@@ -297,9 +298,9 @@ jobs:
           Generate a fresh alternative that matches the article but takes a different visual approach."
           fi
 
-          # Try primary model, then fallback
+          # Use text-capable models for prompt generation.
           NEW_PROMPT=""
-          for MODEL in "openai" "openai-fast"; do
+          for MODEL in "gemini-fast" "openai" "openai-fast"; do
             PAYLOAD=$(jq -n \
               --arg sys "$SYSTEM_MSG" \
               --arg usr "$USER_MSG" \
@@ -323,19 +324,30 @@ jobs:
             NEW_PROMPT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // empty' 2>/dev/null)
 
             if [[ -n "$NEW_PROMPT" ]]; then
-              echo "Used model: $MODEL"
+              echo "Used text model: $MODEL"
               break
             fi
             echo "Model $MODEL failed, trying next..."
           done
 
+          # Prepare bounded values for deterministic fallback prompt composition.
+          TITLE_SAFE=$(echo "$TITLE" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 180)
+          EXCERPT_SAFE=$(echo "$EXCERPT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 320)
+          HINT_SAFE=$(echo "$HINT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//' | head -c 220)
+
           if [[ -z "$NEW_PROMPT" ]]; then
-            echo "::error::Failed to generate image prompt from all models"
-            exit 1
+            echo "All models failed to generate a prompt; using deterministic fallback prompt."
+            NEW_PROMPT="16:9 editorial hero image for '${TITLE_SAFE}': modern software product visuals with a coding workspace, UI dashboards, and engineering context; reflect this excerpt: ${EXCERPT_SAFE}; ${HINT_SAFE:+reviewer direction: ${HINT_SAFE}; }no text, no watermark"
           fi
 
           # Clean up prompt (remove quotes wrapping)
           NEW_PROMPT=$(echo "$NEW_PROMPT" | sed 's/^"//;s/"$//')
+          # Normalize whitespace and enforce core rendering constraints
+          NEW_PROMPT=$(echo "$NEW_PROMPT" | tr '\n' ' ' | sed 's/[[:space:]]\+/ /g; s/^ //; s/ $//')
+          shopt -s nocasematch
+          [[ "$NEW_PROMPT" == *"no text"* || "$NEW_PROMPT" == *"no-text"* ]] || NEW_PROMPT="${NEW_PROMPT}, no text"
+          [[ "$NEW_PROMPT" == *"no watermark"* || "$NEW_PROMPT" == *"no-watermark"* ]] || NEW_PROMPT="${NEW_PROMPT}, no watermark"
+          shopt -u nocasematch
 
           echo "new_prompt<<EOFNEWPROMPT" >> "$GITHUB_OUTPUT"
           echo "$NEW_PROMPT" >> "$GITHUB_OUTPUT"
@@ -350,12 +362,17 @@ jobs:
           NEW_PROMPT: ${{ steps.img_prompt.outputs.new_prompt }}
           IMAGE_FILE: ${{ steps.read.outputs.image_file }}
         run: |
+          if [[ -z "${NEW_PROMPT//[[:space:]]/}" ]]; then
+            echo "::error::Image prompt is empty; cannot generate image"
+            exit 1
+          fi
+
           mkdir -p "$(dirname "$IMAGE_FILE")"
 
           ENCODED_PROMPT=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.stdin.read().strip()))" <<< "$NEW_PROMPT")
 
           SUCCESS=false
-          for MODEL in "flux" "flux-pro"; do
+          for MODEL in "flux" "flux-2-dev"; do
             URL="https://gen.pollinations.ai/image/${ENCODED_PROMPT}?width=1792&height=1024&nologo=true&model=${MODEL}"
 
             for ATTEMPT in 1 2 3; do
@@ -419,7 +436,7 @@ jobs:
           open(post, 'w').writelines(out)
           " "$POST_FILE" "$NEW_PROMPT"
 
-      # ── 6. Set post field ──────────────────────────────────────────────
+      # ── 6. Set post field ────────────────────────────────────────────────────
       - name: "Set post field"
         if: steps.parse.outputs.valid == 'true' && steps.parse.outputs.target == 'post-field'
         id: set_field
@@ -499,22 +516,15 @@ jobs:
             python3 -c "
           import sys
           md, field, value = sys.argv[1], sys.argv[2], sys.argv[3]
-          lines = open(md).readlines()
-          out = []
-          for line in lines:
-              if field == 'title' and line.startswith('## '):
-                  out.append(f'## {value}\n')
-              elif field == 'title' and line.startswith('**Title:**'):
-                  out.append(f'**Title:** {value}\n')
-              elif field == 'excerpt' and line.startswith('**Summary:**'):
-                  out.append(f'**Summary:** {value}\n')
-              else:
-                  out.append(line)
-          open(md, 'w').writelines(out)
-            " "$REVIEW_MD" "$FIELD" "$VALUE"
+          content = open(md).read()
+          if field == 'title':
+              import re
+              content = re.sub(r'^- Title:.*$', f'- Title: {value}', content, count=1, flags=re.MULTILINE)
+          open(md, 'w').write(content)
+          " "$REVIEW_MD" "$FIELD" "$VALUE"
           fi
 
-      # ── 7. Set post replace ────────────────────────────────────────────
+      # ── 7. Set post replace ──────────────────────────────────────────────────
       - name: "Set post replace"
         if: steps.parse.outputs.valid == 'true' && steps.parse.outputs.target == 'post-replace'
         id: set_replace
@@ -524,45 +534,30 @@ jobs:
           OLD_TEXT: ${{ steps.parse.outputs.old_text }}
           NEW_TEXT: ${{ steps.parse.outputs.new_text }}
         run: |
-          # Guard: reject immutable frontmatter field edits
-          IMMUTABLE_KEYS="slug date layout canonical_url image author"
-          for KEY in $IMMUTABLE_KEYS; do
-            if echo "$OLD_TEXT" | grep -qP "^${KEY}:"; then
-              echo "::error::Cannot modify immutable field '${KEY}' via replace. Use the CodeGrind workflow to regenerate."
-              echo "rejected=true" >> "$GITHUB_OUTPUT"
-              echo "reject_reason=Cannot modify immutable field '${KEY}'" >> "$GITHUB_OUTPUT"
-              exit 1
-            fi
-          done
-
-          # Count occurrences
-          COUNT=$(grep -cF "$OLD_TEXT" "$POST_FILE" || true)
-
-          if [[ "$COUNT" -eq 0 ]]; then
-            echo "::error::Text not found in post"
-            echo "not_found=true" >> "$GITHUB_OUTPUT"
-            exit 1
-          fi
-
-          echo "replace_count=$COUNT" >> "$GITHUB_OUTPUT"
-
-          # Perform replacement (all occurrences) — use Python for character safety
           python3 -c "
           import sys
           post, old, new = sys.argv[1], sys.argv[2], sys.argv[3]
           content = open(post).read()
+          IMMUTABLE_KEYS = ('slug:', 'date:', 'layout:', 'canonical_url:', 'image:', 'author:')
+          if any(k in old or k in new for k in IMMUTABLE_KEYS):
+              print('::error::Editing immutable frontmatter keys (slug, date, layout, canonical_url, image, author) is not allowed via /set post replace.')
+              sys.exit(1)
+          if old not in content:
+              print(f'::error::Text not found in post: {old}')
+              sys.exit(1)
+          count = content.count(old)
           content = content.replace(old, new)
           open(post, 'w').write(content)
+          print(f'Replaced {count} occurrence(s)')
           " "$POST_FILE" "$OLD_TEXT" "$NEW_TEXT"
 
-      # ── 8. Set social ──────────────────────────────────────────────────
+      # ── 8. Set social ───────────────────────────────────────────────────────
       - name: "Set social"
         if: steps.parse.outputs.valid == 'true' && steps.parse.outputs.target == 'social'
         id: set_social
         shell: bash
         env:
           REVIEW_JSON: ${{ steps.read.outputs.review_json }}
-          REVIEW_MD: ${{ steps.read.outputs.review_md }}
           PLATFORM: ${{ steps.parse.outputs.platform }}
           VALUE: ${{ steps.parse.outputs.value }}
         run: |
@@ -571,7 +566,7 @@ jobs:
             exit 1
           fi
 
-          # Validate length
+          # Validate platform-specific character limits
           CHAR_COUNT=${#VALUE}
           if [[ "$PLATFORM" == "bluesky" && "$CHAR_COUNT" -gt 300 ]]; then
             echo "::error::Bluesky text exceeds 300 characters ($CHAR_COUNT chars)"
@@ -583,97 +578,56 @@ jobs:
             echo "too_long=true" >> "$GITHUB_OUTPUT"
             exit 1
           fi
-
           echo "char_count=$CHAR_COUNT" >> "$GITHUB_OUTPUT"
 
-          # Read old value for feedback
-          if [[ "$PLATFORM" == "bluesky" ]]; then
-            OLD_VALUE=$(jq -r '.social.bluesky_text // ""' "$REVIEW_JSON")
-            jq --arg v "$VALUE" '.social.bluesky_text = $v' "$REVIEW_JSON" > tmp.json && mv tmp.json "$REVIEW_JSON"
-          else
-            OLD_VALUE=$(jq -r '.social.linkedin_text // ""' "$REVIEW_JSON")
-            jq --arg v "$VALUE" '.social.linkedin_text = $v' "$REVIEW_JSON" > tmp.json && mv tmp.json "$REVIEW_JSON"
-          fi
+          JQ_KEY=".social.${PLATFORM}_text"
+          OLD_VALUE=$(jq -r "${JQ_KEY} // \"\"" "$REVIEW_JSON")
 
-          echo "old_value<<EOFOLDSOCIAL" >> "$GITHUB_OUTPUT"
+          echo "old_value<<EOFOLD" >> "$GITHUB_OUTPUT"
           echo "$OLD_VALUE" >> "$GITHUB_OUTPUT"
-          echo "EOFOLDSOCIAL" >> "$GITHUB_OUTPUT"
+          echo "EOFOLD" >> "$GITHUB_OUTPUT"
 
-          # Update review MD social section if it exists
-          if [[ -f "$REVIEW_MD" ]]; then
-            python3 -c "
-          import sys
-          md, platform, value = sys.argv[1], sys.argv[2], sys.argv[3]
-          label = 'Bluesky' if platform == 'bluesky' else 'LinkedIn'
-          prefix = f'**{label}:**'
-          lines = open(md).readlines()
-          out = []
-          for line in lines:
-              if line.startswith(prefix):
-                  out.append(f'{prefix} {value}\n')
-              else:
-                  out.append(line)
-          open(md, 'w').writelines(out)
-            " "$REVIEW_MD" "$PLATFORM" "$VALUE"
-          fi
+          jq --arg v "$VALUE" "${JQ_KEY} = \$v" "$REVIEW_JSON" > tmp.json && mv tmp.json "$REVIEW_JSON"
 
-      # ── 9. Commit and push ─────────────────────────────────────────────
+      # ── 9. Commit and push ───────────────────────────────────────────────────
       - name: Commit and push
-        if: steps.parse.outputs.valid == 'true'
-        id: commit
-        shell: bash
+        if: steps.parse.outputs.valid == 'true' && steps.validate.conclusion == 'success' && steps.validate.outputs.branch != ''
         env:
-          COMMAND: ${{ steps.parse.outputs.command }}
+          CMD: ${{ steps.parse.outputs.command }}
           TARGET: ${{ steps.parse.outputs.target }}
-          FIELD: ${{ steps.parse.outputs.field }}
-          PLATFORM: ${{ steps.parse.outputs.platform }}
         run: |
-          # Build commit message
-          if [[ "$COMMAND" == "regen" ]]; then
-            MSG="blog(review): regen image"
-          elif [[ "$TARGET" == "post-field" ]]; then
-            MSG="blog(review): set ${FIELD}"
-          elif [[ "$TARGET" == "post-replace" ]]; then
-            MSG="blog(review): replace text"
-          elif [[ "$TARGET" == "social" ]]; then
-            MSG="blog(review): set social ${PLATFORM}"
-          else
-            MSG="blog(review): update"
-          fi
-
           git add -A
           if git diff --cached --quiet; then
-            echo "no_changes=true" >> "$GITHUB_OUTPUT"
             echo "No changes to commit"
-          else
-            git commit -m "$MSG"
-            git push
-            echo "no_changes=false" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+          case "${CMD}-${TARGET}" in
+            regen-image)   MSG="chore(blog): regenerate hero image" ;;
+            set-post-field) MSG="chore(blog): update post field" ;;
+            set-post-replace) MSG="chore(blog): update post text" ;;
+            set-social)    MSG="chore(blog): update social copy" ;;
+            *)             MSG="chore(blog): review update" ;;
+          esac
+          git commit -m "$MSG"
+          git push
 
-      # ── 10. Feedback: success ──────────────────────────────────────────
+      # ── 10. Feedback ─────────────────────────────────────────────────────────
       - name: Post success feedback
-        if: steps.parse.outputs.valid == 'true' && success()
+        if: steps.parse.outputs.valid == 'true' && steps.validate.conclusion == 'success' && steps.validate.outputs.branch != ''
         uses: actions/github-script@v7
         env:
-          COMMAND: ${{ steps.parse.outputs.command }}
+          CMD: ${{ steps.parse.outputs.command }}
           TARGET: ${{ steps.parse.outputs.target }}
           FIELD: ${{ steps.parse.outputs.field }}
-          PLATFORM: ${{ steps.parse.outputs.platform }}
-          VALUE: ${{ steps.parse.outputs.value }}
-          HINT: ${{ steps.parse.outputs.hint }}
-          OLD_PROMPT: ${{ steps.read.outputs.image_prompt }}
-          NEW_PROMPT: ${{ steps.img_prompt.outputs.new_prompt }}
-          SET_FIELD_OLD: ${{ steps.set_field.outputs.old_value }}
-          REPLACE_COUNT: ${{ steps.set_replace.outputs.replace_count }}
-          OLD_TEXT: ${{ steps.parse.outputs.old_text }}
-          NEW_TEXT: ${{ steps.parse.outputs.new_text }}
-          SOCIAL_OLD: ${{ steps.set_social.outputs.old_value }}
-          SOCIAL_CHARS: ${{ steps.set_social.outputs.char_count }}
-          NO_CHANGES: ${{ steps.commit.outputs.no_changes }}
+          OLD_VALUE: ${{ steps.set_field.outputs.old_value || steps.set_social.outputs.old_value || '' }}
+          NEW_VALUE: ${{ steps.parse.outputs.value || '' }}
+          OLD_TEXT: ${{ steps.parse.outputs.old_text || '' }}
+          NEW_TEXT: ${{ steps.parse.outputs.new_text || '' }}
+          PLATFORM: ${{ steps.parse.outputs.platform || '' }}
+          CHAR_COUNT: ${{ steps.set_social.outputs.char_count || '' }}
         with:
           script: |
-            // Replace eyes with checkmark
+            // Replace eyes with rocket
             const reactions = await github.rest.reactions.listForIssueComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -693,53 +647,43 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               comment_id: context.payload.comment.id,
-              content: process.env.NO_CHANGES === 'true' ? 'confused' : '+1'
+              content: 'rocket'
             });
 
-            // Build summary
-            let lines = [];
-            const cmd = process.env.COMMAND;
+            const cmd = process.env.CMD;
             const target = process.env.TARGET;
+            let body = '';
 
-            if (process.env.NO_CHANGES === 'true') {
-              lines.push('**No changes detected** — nothing was committed.');
-            } else if (cmd === 'regen') {
-              lines.push('**Image regenerated** ✅');
-              if (process.env.OLD_PROMPT) {
-                lines.push(`**Old prompt:** ${process.env.OLD_PROMPT}`);
-              }
-              lines.push(`**New prompt:** ${process.env.NEW_PROMPT}`);
-              if (process.env.HINT) {
-                lines.push(`**Hint used:** ${process.env.HINT}`);
-              }
-            } else if (target === 'post-field') {
-              lines.push(`**Updated \`${process.env.FIELD}\`** ✅`);
-              lines.push(`**Old:** ${process.env.SET_FIELD_OLD}`);
-              lines.push(`**New:** ${process.env.VALUE}`);
-            } else if (target === 'post-replace') {
-              lines.push('**Text replaced** ✅');
-              lines.push(`**Old:** ${process.env.OLD_TEXT}`);
-              lines.push(`**New:** ${process.env.NEW_TEXT}`);
-              lines.push(`**Occurrences:** ${process.env.REPLACE_COUNT}`);
-            } else if (target === 'social') {
-              const plat = process.env.PLATFORM;
-              lines.push(`**Updated ${plat} social copy** ✅`);
-              lines.push(`**Characters:** ${process.env.SOCIAL_CHARS}`);
-              lines.push(`**New text:** ${process.env.VALUE}`);
+            if (cmd === 'regen' && target === 'image') {
+              body = '**Image regenerated** :rocket:\nPush incoming — refresh the Files tab to see the new hero image.';
+            } else if (cmd === 'set' && target === 'post-field') {
+              const field = process.env.FIELD;
+              const oldVal = process.env.OLD_VALUE;
+              const newVal = process.env.NEW_VALUE;
+              body = `**Updated \`${field}\`** :rocket:\n\n**Before:** ${oldVal}\n**After:** ${newVal}`;
+            } else if (cmd === 'set' && target === 'post-replace') {
+              const oldText = process.env.OLD_TEXT;
+              const newText = process.env.NEW_TEXT;
+              body = `**Text replaced** :rocket:\n\n**Before:** ${oldText}\n**After:** ${newText}`;
+            } else if (cmd === 'set' && target === 'social') {
+              const platform = process.env.PLATFORM;
+              const oldVal = process.env.OLD_VALUE;
+              const newVal = process.env.NEW_VALUE;
+              const charCount = process.env.CHAR_COUNT;
+              body = `**Updated ${platform} copy** :rocket:\n\n**Characters:** ${charCount}\n**Before:** ${oldVal}\n**After:** ${newVal}`;
             }
 
-            if (lines.length > 0) {
+            if (body) {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body: lines.join('\n')
+                body
               });
             }
 
-      # ── 11. Feedback: failure ──────────────────────────────────────────
       - name: Post failure feedback
-        if: steps.parse.outputs.valid == 'true' && failure()
+        if: failure() && steps.parse.outputs.valid == 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -770,7 +714,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: '**Command failed** ❌\nCheck the [workflow run](' +
+              body: '**Command failed** :x:\nCheck the [workflow run](' +
                 `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}` +
                 ') for details.'
             });

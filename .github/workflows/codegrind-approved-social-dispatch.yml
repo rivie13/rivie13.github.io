@@ -1,0 +1,76 @@
+name: CodeGrind Approved Social Dispatch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/codegrind-review/*.json'
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch-approved-social:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Dispatch approved social workflows
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::GH_PAT is required in rivie13.github.io to dispatch approved CodeGrind social workflows"
+            exit 1
+          fi
+
+          BEFORE="${BEFORE_SHA}"
+          AFTER="${AFTER_SHA}"
+          if [ -z "${BEFORE}" ] || [ "${BEFORE}" = "0000000000000000000000000000000000000000" ]; then
+            BEFORE=$(git rev-parse "${AFTER}^" 2>/dev/null || true)
+          fi
+
+          mapfile -t review_files < <(git diff --name-only "${BEFORE}" "${AFTER}" | grep -E '^\.github/codegrind-review/.*\.json$' || true)
+          if [ ${#review_files[@]} -eq 0 ]; then
+            echo "No approved CodeGrind review json files changed in this push."
+            exit 0
+          fi
+
+          for review_file in "${review_files[@]}"; do
+            if [ ! -f "${review_file}" ]; then
+              echo "Skipping removed review file ${review_file}."
+              continue
+            fi
+
+            post_file=$(jq -r '.post_file // empty' "${review_file}")
+            if [ -z "${post_file}" ]; then
+              echo "::warning::Review file ${review_file} is missing post_file metadata. Skipping dispatch."
+              continue
+            fi
+
+            gh api "repos/rivie13/CodeGrind/actions/workflows/codegrind-blog-social.yml/dispatches" \
+              --method POST \
+              --input <(jq -n \
+                --arg ref "main" \
+                --arg post_ref "${post_file}" \
+                --arg approved_social_ref "${review_file}" \
+                '{
+                  ref: $ref,
+                  inputs: {
+                    post_ref: $post_ref,
+                    approved_social_ref: $approved_social_ref,
+                    require_approved_draft: "true"
+                  }
+                }')
+
+            echo "Dispatched approved social workflow for ${post_file} using ${review_file}."
+          done

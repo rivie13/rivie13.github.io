@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-03-10-streamlining-development-workflows-recent-updates-codegrind-ci-cd.md",
+  "review_markdown_file": ".github/codegrind-review/2026-03-10-streamlining-development-workflows-recent-updates-codegrind-ci-cd.md",
+  "title": "Streamlining Development Workflows: Recent Updates to CodeGrind's CI/CD and Branching Strategy",
+  "summary": "Explore recent enhancements to CodeGrind's development pipeline, focusing on CI/CD improvements, automated workflows, and a refined branching strategy for increased efficiency and reliability.",
+  "slug": "streamlining-development-workflows-recent-updates-codegrind-ci-cd",
+  "url": "https://rivie13.github.io/blog/2026/03/10/streamlining-development-workflows-recent-updates-codegrind-ci-cd/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-03-10-streamlining-development-workflows-recent-updates-codegrind-ci-cd.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-03-10-streamlining-development-workflows-recent-updates-codegrind-ci-cd.png",
+    "file": "assets/images/codegrind/2026-03-10-streamlining-development-workflows-recent-updates-codegrind-ci-cd.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "🧪 TEST POST (social workflow verification) — CodeGrind's CI/CD and branching strategy just got a boost! 🚀 Automate page generation, refine PR workflows, and enhance reliability. Learn more about our latest development pipeline updates: https://rivie13.github.io/blog/2026/03/10/streamlining-development-workflows-recent-updates-codegrind-ci-cd/ #CICD #DevOps #CodeGrind",
+    "linkedin_text": "🧪 Test Post — This is a workflow verification post.\n\nStreamlining Development Workflows: Recent Updates to CodeGrind's CI/CD and Branching Strategy\n\nWe're excited to share recent enhancements to the CodeGrind development pipeline, designed to boost efficiency and reliability. Key updates include:\n\n- **CI/CD Improvements:** Introduction of automated page generation and version tracking, alongside fixes to ensure CI checks run on pull requests to the dev branch and hardened branch name validation.\n- **Refined Branching & Review:** A new strategy requiring draft PRs for board automation to clarify the review process and improve code quality. We're also addressing AI-assisted review findings to further optimize our workflows.\n- **Infrastructure Updates:** Upgraded Azure login actions and rotated service principal secrets for enhanced security.\n\nThese changes reflect our commitment to an improved developer experience and a more robust deployment process.\n\nRead the full details: https://rivie13.github.io/blog/2026/03/10/streamlining-development-workflows-recent-updates-codegrind-ci-cd/ \n\n#CodeGrind #CICD #DevOps #SoftwareDevelopment #BranchingStrategy #WorkflowAutomation"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
