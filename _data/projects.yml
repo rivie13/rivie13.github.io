@@ -53,7 +53,7 @@
   description: "Track your representatives, their votes, and understand legislation with AI-powered insights. Cross-platform app (web + mobile) built with Expo, Express, PostgreSQL, and Azure OpenAI."
   video_id: ""
   private: false
-  detailed_description: "TrackAmerica is an early-stage cross-platform app that helps citizens stay informed about federal representatives, bills, and voting records. It includes an interactive US map, representative profiles, bill tracking, and an AI assistant for plain-English questions about legislation. Currently in active development with frontend (Expo) and backend (Express) components."
+  detailed_description: "TrackAmerica is a cross-platform civic intelligence app in active development that helps citizens stay informed about federal representatives, bills, and voting records. The latest build includes a desktop homepage dashboard and a mobile state page view with district mapping and representative/senator navigation. Ongoing work is focused on bill search, voting-history drilldowns, and AI-assisted plain-English legislation Q and A."
   challenges:
     - "Integrating representative and legislative data from external APIs"
     - "Designing an intuitive cross-platform UI for state and representative navigation"
@@ -65,13 +65,15 @@
   lessons_learned:
     - "Early architecture and tooling choices speed up cross-platform development"
   achievements:
-    - "Project scaffolding, CI, and initial feature set established"
+    - "Published first TrackAmerica UI screenshots for both desktop and mobile views"
+    - "Implemented a national indicators homepage dashboard and state-level map navigation flow"
+    - "Established Expo frontend + Express backend foundations with CI and linting"
   features:
     - "Interactive USA map"
     - "Representative profiles"
     - "Bill tracking and voting records"
     - "AI chatbot (semantic search + assistant)"
-  future_plans: "Continue building state pages, representative detail views, bill search, and AI-powered semantic search and assistant features."
+  future_plans: "Expand bill search and voting-history views, add representative detail drilldowns, and continue AI-powered semantic search and assistant improvements."
   technologies:
     - TypeScript
     - Expo (React Native)
@@ -80,7 +82,7 @@
     - PostgreSQL
     - Azure OpenAI
   period: "Oct 2025 - Present"
-  last_updated: "2025-10-05"
+  last_updated: "2026-04-11"
 
 - name: "Helios: Swarm Robotics"
   url: ""
