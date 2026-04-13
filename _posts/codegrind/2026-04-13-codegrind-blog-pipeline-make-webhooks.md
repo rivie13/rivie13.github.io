@@ -3,7 +3,7 @@ layout: post
 title: "Fixing CodeGrind's Blog Pipeline: From LinkedIn API to Make Webhooks"
 date: 2026-04-13 06:00:00 +0000
 categories: [CodeGrind, DevOps]
-tags: [CodeGrind, automation, ci-cd, github-actions, api-integration, social-media, workflow-optimization, documentation]
+tags: [CodeGrind, Automation, CI/CD, GitHub Actions, API Integration, Social Media, Workflow Optimization, Documentation]
 author: Riviera Sperduto
 excerpt: "How we migrated CodeGrind's blog social distribution from direct LinkedIn API calls to Make webhooks, enforced character limits, and improved weekly automation."
 image: /assets/images/codegrind/2026-04-13-codegrind-blog-pipeline-make-webhooks.png
