@@ -35,4 +35,4 @@ Our solution involved:
 This shift enhances resilience, flexibility for non-technical team members, and testability, ensuring reliable social distribution.
 
 Read the full story:
-https://rivie13.github.io/blog/2026/04/13/codegrind-blog-pipeline-make-webhooks/ /CD
+https://rivie13.github.io/blog/2026/04/13/codegrind-blog-pipeline-make-webhooks/
