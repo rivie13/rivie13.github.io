@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-04-13-codegrind-blog-pipeline-make-webhooks.md",
+  "review_markdown_file": ".github/codegrind-review/2026-04-13-codegrind-blog-pipeline-make-webhooks.md",
+  "title": "Fixing CodeGrind's Blog Pipeline: From LinkedIn API to Make Webhooks",
+  "summary": "How we migrated CodeGrind's blog social distribution from direct LinkedIn API calls to Make webhooks, enforced character limits, and improved weekly automation.",
+  "slug": "codegrind-blog-pipeline-make-webhooks",
+  "url": "https://rivie13.github.io/blog/2026/04/13/codegrind-blog-pipeline-make-webhooks/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-04-13-codegrind-blog-pipeline-make-webhooks.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-04-13-codegrind-blog-pipeline-make-webhooks.png",
+    "file": "assets/images/codegrind/2026-04-13-codegrind-blog-pipeline-make-webhooks.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind's blog pipeline evolved! We migrated from direct LinkedIn API calls to Make webhooks, enhancing automation and reliability. Learn how we enforced character limits and improved distribution. https://rivie13.github.io/blog/2026/04/13/codegrind-blog-pipeline-make-webhooks/",
+    "linkedin_text": "CodeGrind's blog distribution faced scaling challenges with direct LinkedIn API integrations, leading to rate limit fragility and character limit issues. We've successfully migrated our workflow to Make webhooks, decoupling blog generation from social posting and improving weekly automation.\n\nOur solution involved:\n1. Character Limit Enforcement: A preflight check in GitHub Actions ensures posts adhere to LinkedIn's 1200-character limit.\n2. Paragraph Preservation: A utility intelligently truncates excerpts while maintaining paragraph breaks and sentence integrity.\n\nThis shift enhances resilience, flexibility for non-technical team members, and testability, ensuring reliable social distribution.\n\nRead the full story:\nhttps://rivie13.github.io/blog/2026/04/13/codegrind-blog-pipeline-make-webhooks/ /CD"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
