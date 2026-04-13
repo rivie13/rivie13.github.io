@@ -7,7 +7,7 @@ tags: [CodeGrind, automation, ci-cd, github-actions, api-integration, social-med
 author: Riviera Sperduto
 excerpt: "How we migrated CodeGrind's blog social distribution from direct LinkedIn API calls to Make webhooks, enforced character limits, and improved weekly automation."
 image: /assets/images/codegrind/2026-04-13-codegrind-blog-pipeline-make-webhooks.png
-keywords: blog automation, LinkedIn API, Make webhooks, CI/CD pipeline, character enforcement, social media distribution"
+keywords: blog automation, LinkedIn API, Make webhooks, CI/CD pipeline, character enforcement, social media distribution
 slug: codegrind-blog-pipeline-make-webhooks
 canonical_url: https://rivie13.github.io/blog/2026/04/13/codegrind-blog-pipeline-make-webhooks/
 ---
