@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "social-media"
-tag: "social-media"
+title: "Social Media"
+tag: "Social Media"
 permalink: "/tag/social-media"
 ---
