@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "workflow-optimization"
-tag: "workflow-optimization"
+title: "Workflow Optimization"
+tag: "Workflow Optimization"
 permalink: "/tag/workflow-optimization"
 ---
