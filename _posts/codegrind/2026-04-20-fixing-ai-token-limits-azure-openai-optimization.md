@@ -52,6 +52,7 @@ const response = await openAIClient.chat.completions.create({
 
 PR #706 included a verification test:
 
+```js
 // Verify the AI service correctly passes max_completion_tokens
 test('ai service uses max_completion_tokens', () => {
   const spy = jest.spyOn(openAIClient.chat.completions, 'create');
@@ -62,6 +63,7 @@ test('ai service uses max_completion_tokens', () => {
     })
   );
 });
+```
 
 This ensures future refactors don't accidentally revert the fix.
 
