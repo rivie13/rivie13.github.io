@@ -7,7 +7,7 @@ tags: [CodeGrind, AI Integration, azure-openai, Bug Fixes, API Integration, perf
 author: Riviera Sperduto
 excerpt: "CodeGrind fixed a critical AI service bug by switching to max_completion_tokens for Azure OpenAI requests, improving token efficiency and cost control."
 image: /assets/images/codegrind/2026-04-20-fixing-ai-token-limits-azure-openai-optimization.png
-keywords: Azure OpenAI, token limits, API optimization, CodeGrind AI, completion tokens, cost control, LLM integration"
+keywords: Azure OpenAI, token limits, API optimization, CodeGrind AI, completion tokens, cost control, LLM integration
 slug: fixing-ai-token-limits-azure-openai-optimization
 canonical_url: https://rivie13.github.io/blog/2026/04/20/fixing-ai-token-limits-azure-openai-optimization/
 ---
