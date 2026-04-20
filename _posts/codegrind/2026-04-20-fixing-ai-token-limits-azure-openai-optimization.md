@@ -26,6 +26,7 @@ This wasn't a catastrophic failure—the system worked—but it was inefficient 
 
 In **PR #706**, we implemented a straightforward but impactful change:
 
+```js
 // Before: No explicit token limit
 const response = await openAIClient.chat.completions.create({
   model: "gpt-4o",
@@ -40,6 +41,7 @@ const response = await openAIClient.chat.completions.create({
   temperature: 0.7,
   max_completion_tokens: 1024  // Explicit ceiling
 });
+```
 
 ### Why This Matters
 
