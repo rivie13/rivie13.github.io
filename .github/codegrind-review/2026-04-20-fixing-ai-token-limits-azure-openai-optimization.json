@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-04-20-fixing-ai-token-limits-azure-openai-optimization.md",
+  "review_markdown_file": ".github/codegrind-review/2026-04-20-fixing-ai-token-limits-azure-openai-optimization.md",
+  "title": "Fixing AI Token Limits: How CodeGrind Optimized Azure OpenAI Requests",
+  "summary": "CodeGrind fixed a critical AI service bug by switching to max_completion_tokens for Azure OpenAI requests, improving token efficiency and cost control.",
+  "slug": "fixing-ai-token-limits-azure-openai-optimization",
+  "url": "https://rivie13.github.io/blog/2026/04/20/fixing-ai-token-limits-azure-openai-optimization/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-04-20-fixing-ai-token-limits-azure-openai-optimization.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-04-20-fixing-ai-token-limits-azure-openai-optimization.png",
+    "file": "assets/images/codegrind/2026-04-20-fixing-ai-token-limits-azure-openai-optimization.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind optimized Azure OpenAI requests by implementing `max_completion_tokens`. This improves token efficiency, reduces API costs, and ensures faster, more predictable AI-generated hints. Learn how we fixed this:...",
+    "linkedin_text": "CodeGrind recently tackled a key challenge in our AI-assisted practice features: unbounded token generation with Azure OpenAI. By implementing `max_completion_tokens` in our API calls, we've achieved significant improvements in:\n\n✅ Cost Predictability: Setting explicit token ceilings helps forecast API expenses accurately.\n✅ Reduced Latency: Shorter maximum response lengths lead to faster AI-generated hints and code snippets.\n✅ Consistent User Experience: Focused responses guide learners effectively without being overly verbose.\n✅ Azure Compliance: Utilizing `max_completion_tokens` ensures compatibility with current Azure OpenAI API versions.\n\nThis optimization was part of a larger effort to refine our AI workflows, ensuring our tools are helpful yet bounded. Read the full technical details on how we improved our AI architecture:\nhttps://rivie13.github.io/blog/2026/04/20/fixing-ai-token-limits-azure-openai-optimization/"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
