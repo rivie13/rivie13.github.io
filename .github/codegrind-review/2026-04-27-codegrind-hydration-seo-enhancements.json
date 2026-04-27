@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-04-27-codegrind-hydration-seo-enhancements.md",
+  "review_markdown_file": ".github/codegrind-review/2026-04-27-codegrind-hydration-seo-enhancements.md",
+  "title": "CodeGrind's Recent Hydration Fixes and SEO Enhancements",
+  "summary": "Dive into the recent improvements in CodeGrind, focusing on critical hydration fixes for public routes and enhancements to SEO rendering, ensuring a smoother and more discoverable user experience.",
+  "slug": "codegrind-hydration-seo-enhancements",
+  "url": "https://rivie13.github.io/blog/2026/04/27/codegrind-hydration-seo-enhancements/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-04-27-codegrind-hydration-seo-enhancements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-04-27-codegrind-hydration-seo-enhancements.png",
+    "file": "assets/images/codegrind/2026-04-27-codegrind-hydration-seo-enhancements.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "enabled": {
+      "bluesky": true,
+      "linkedin": true
+    },
+    "bluesky_text": "CodeGrind now offers improved hydration for public routes and enhanced SEO rendering. Experience faster loading and better discoverability with recent updates. #CodeGrind #WebDev #SEO https://rivie13.github.io/blog/2026/04/27/codegrind-hydration-seo-enhancements/",
+    "linkedin_text": "CodeGrind has recently implemented significant improvements to its hydration process for public routes and enhanced SEO rendering. These updates focus on ensuring a smoother, more interactive user experience and increasing the discoverability of the platform. By addressing hydration challenges and refining SEO strategies, including static prerendering with viteprerenderplugin, CodeGrind aims to provide faster loading times, improved interactivity, and greater visibility in search engine results. Discover the technical details and what these enhancements mean for users on our blog. #CodeGrind #WebDevelopment #SEO #UserExperience #DSA #InterviewPrep https://rivie13.github.io/blog/2026/04/27/codegrind-hydration-seo-enhancements/"
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
