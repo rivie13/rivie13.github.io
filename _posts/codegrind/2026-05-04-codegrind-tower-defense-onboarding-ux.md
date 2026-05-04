@@ -41,7 +41,7 @@ The new flow brings Tower Defense into the welcome experience:
 ### Phase 1: Reveal & Boot Sequence
 When a new user (guest or pro) enters, they see:
 - A **reveal staging** animation that introduces the Tower Defense game world
-- **Demo boot sequence** that shows how towers work without requiring full problem completion
+- **Demo boot sequence** — a visually engaging cinematic intro that sets the atmosphere
 - Clear callouts explaining mechanics (tower placement, wave management, code-to-defense sync)
 
 ### Phase 2: Language & Slot Selection
@@ -50,8 +50,8 @@ Users choose their preferred coding language (Java, Python, C++) and unlock thei
 ### Phase 3: Guided Gameplay
 Instead of jumping into endless mode, new users experience:
 - **Tutorial codex modal** with detailed gameplay instructions and tactical notes
-- **Slot locking mechanism** that prevents overwhelming new players with too many options
-- **Pro Trial onboarding flow** for paid users, with access to advanced towers and strategies
+- **Slot locking mechanism** that keeps the game slot anchored on screen
+- **Pro Trial onboarding flow** for users doing interview prep rather than a learning path—designed for those who already know how to code
 
 ### Phase 4: Progress Tracking
 Guest progress is now tracked throughout onboarding, so users who convert to accounts retain all their achievements and XP.
@@ -85,9 +85,9 @@ Key updates to the `SlottableLayout` and `TowerDefenseV2Page`:
 ### Guest-to-Account Migration
 One of the trickiest parts: ensuring guests who sign up don't lose their onboarding progress or XP. The migration logic now:
 
-1. Captures all guest achievements and tower placements
+1. Captures all guest achievements
 2. Transfers XP without double-counting demo bonuses
-3. Preserves the last problem worked on (fixing issue #869)
+3. Preserves the record of problems already completed (fixing issue #869)
 4. Maintains breach progress and leaderboard scores
 
 ---
@@ -120,7 +120,7 @@ These features build on the onboarding work—users who understand the basics ca
 
 If you're building a learning platform with gamification, **integrate the game into onboarding, not after it**. The game *is* the learning experience. By letting users play first and learn the mechanics through doing, you dramatically improve engagement and retention.
 
-For more details on CodeGrind's architecture and feature development process, check out [CodeGrind's GitHub repository](https://github.com/rivie13/CodeGrind) and visit [CodeGrind.online](https://codegrind.online) to try the onboarding flow yourself.
+For more details on CodeGrind's feature development, visit [CodeGrind.online](https://codegrind.online) to try the onboarding flow yourself.
 
 ---
 
@@ -131,4 +131,4 @@ For more details on CodeGrind's architecture and feature development process, ch
 - [Streamlining Development Workflows: Recent Updates to CodeGrind CI/CD](/blog/streamlining-development-workflows-recent-updates-codegrind-ci-cd)
 
 <!-- IMAGE_PROMPT -->
-Editorial hero image, 16:9 aspect ratio, showcasing a sleek, futuristic cyberpunk cityscape at night. In the foreground, a stylized, glowing holographic interface displays intricate circuit board patterns and abstract data visualizations, resembling a game's command center. Subtle, glowing lines of code are integrated into the background architecture, hinting at the learning aspect. The overall mood is high-tech and analytical, with a focus on the visual representation of programming and game mechanics. no text, no watermark
+Editorial hero image, 16:9 aspect ratio, futuristic cyberpunk cityscape at night. Glowing holographic interface with circuit board patterns and abstract data visualizations in the foreground. Cyberpunk architecture with neon lighting and subtle grid patterns. Pure visual composition — absolutely no text, no letters, no labels, no words, no UI text elements, no watermark of any kind.
