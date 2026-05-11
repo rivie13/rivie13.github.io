@@ -18,16 +18,8 @@
       "bluesky": true,
       "linkedin": true
     },
-    "bluesky_text": "CodeGrind mobile preview is live. This is our first-pass release, demoed at last week's Philly AI Ecosystem Summit, with responsive UI and onboarding improvements now rolling out. Read more: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #MobileDev #UX",
-    "linkedin_text": "We just shipped the first preview release of the CodeGrind mobile build and demoed it at last week's Philly AI Ecosystem Summit.
-
-This is a first pass, and we're actively improving it with feedback from real usage. Current updates include:
-
-- **Mobile responsiveness improvements** across key layouts
-- **Onboarding refinements** including better callout flow and manual progression
-- **Mobile gameplay UX updates** like the Tower Defense dock and compact landscape shell adjustments
-
-We're continuing to iterate quickly as we move toward a fuller release. Read the full update: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #UIUX #MobileDevelopment #Onboarding #DevUpdates"
+    "bluesky_text": "CodeGrind mobile preview is live. This is our first-pass release, demoed at last week's Philly AI Ecosystem Summit, with responsive UI and onboarding improvements rolling out. Read more: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #MobileDev #UX",
+    "linkedin_text": "We just shipped the first preview release of the CodeGrind mobile build and demoed it at last week's Philly AI Ecosystem Summit.\n\nThis is a first pass, and we're actively improving it with feedback from real usage. Current updates include:\n\n- **Mobile responsiveness improvements** across key layouts\n- **Onboarding refinements** including better callout flow and manual progression\n- **Mobile gameplay UX updates** like the Tower Defense dock and compact landscape shell adjustments\n\nWe're continuing to iterate quickly as we move toward a fuller release. Read the full update: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #UIUX #MobileDevelopment #Onboarding #DevUpdates"
   },
   "review": {
     "status": "pending",

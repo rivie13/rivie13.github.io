@@ -22,7 +22,7 @@
 
 Enabled: true
 
-CodeGrind mobile preview is live. This is our first-pass release, demoed at last week's Philly AI Ecosystem Summit, with responsive UI and onboarding improvements now rolling out. Read more: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #MobileDev #UX
+CodeGrind mobile preview is live. This is our first-pass release, demoed at last week's Philly AI Ecosystem Summit, with responsive UI and onboarding improvements rolling out. Read more: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #MobileDev #UX
 
 ### LinkedIn
 
