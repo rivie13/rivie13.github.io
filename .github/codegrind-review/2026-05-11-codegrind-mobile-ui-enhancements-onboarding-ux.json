@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.md",
+  "review_markdown_file": ".github/codegrind-review/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.md",
+  "title": "CodeGrind's Mobile-First UI Enhancements and Onboarding UX",
+  "summary": "Discover how CodeGrind is prioritizing a seamless mobile user experience with recent UI enhancements and improved onboarding flows, making coding practice accessible anywhere.",
+  "slug": "codegrind-mobile-ui-enhancements-onboarding-ux",
+  "url": "https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.png",
+    "file": "assets/images/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "attempts": 1,
+      "strict_compress_used": false,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "CodeGrind is leveling up its mobile experience! 📱 Discover UI enhancements and streamlined onboarding to make coding practice accessible anywhere. Learn more: https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/ #CodeGrind #MobileDev #Coding",
+    "linkedin_text": "CodeGrind is excited to announce recent updates focused on enhancing the mobile user experience. Our latest UI improvements and onboarding refinements are designed to make practicing coding skills on the go more effective and intuitive than ever before. Key updates include optimized layouts for smaller screens, improved callout behavior during onboarding, and the introduction of compact landscape shell modes to maximize screen real estate. These changes reflect our commitment to providing a seamless and accessible coding practice environment for developers everywhere.\n\nRead the full post to see how we're prioritizing mobile-first development: https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/\n\n#CodeGrind #MobileFirst #UIUX #DeveloperExperience #CodingPractice #SoftwareDevelopment",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind is leveling up its mobile experience! 📱 Discover UI enhancements and streamlined onboarding to make coding practice accessible anywhere. Learn more: https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/ #CodeGrind #MobileDev #Coding",
+        "url": "https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/",
+        "title": "CodeGrind's Mobile-First UI Enhancements and Onboarding UX",
+        "description": "Discover how CodeGrind is prioritizing a seamless mobile user experience with recent UI enhancements and improved onboarding flows, making coding practice accessible anywhere.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind is leveling up its mobile experience! 📱 Discover UI enhancements and streamlined onboarding to make coding practice accessible anywhere. Learn more: https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/ #CodeGrind #MobileDev #Coding",
+        "url": "https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/",
+        "title": "CodeGrind's Mobile-First UI Enhancements and Onboarding UX",
+        "description": "Discover how CodeGrind is prioritizing a seamless mobile user experience with recent UI enhancements and improved onboarding flows, making coding practice accessible anywhere.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind is excited to announce recent updates focused on enhancing the mobile user experience. Our latest UI improvements and onboarding refinements are designed to make practicing coding skills on the go more effective and intuitive than ever before. Key updates include optimized layouts for smaller screens, improved callout behavior during onboarding, and the introduction of compact landscape shell modes to maximize screen real estate. These changes reflect our commitment to providing a seamless and accessible coding practice environment for developers everywhere.\n\nRead the full post to see how we're prioritizing mobile-first development: https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/\n\n#CodeGrind #MobileFirst #UIUX #DeveloperExperience #CodingPractice #SoftwareDevelopment",
+        "title": "CodeGrind's Mobile-First UI Enhancements and Onboarding UX",
+        "url": "https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/",
+        "description": "Discover how CodeGrind is prioritizing a seamless mobile user experience with recent UI enhancements and improved onboarding flows, making coding practice accessible anywhere.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind Enhances Mobile UI and Onboarding UX for Accessible Coding Practice",
+        "text": "CodeGrind has released updates focusing on mobile-first development, including UI enhancements and improved onboarding flows. The goal is to make coding practice more accessible and intuitive on mobile devices.\n\nKey changes involve responsive layouts, better callout behavior for onboarding, and compact shell modes.\n\nRead more about the updates here: https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/\n\nWhat are your thoughts on mobile-first development for coding platforms?",
+        "url": "https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "New CodeGrind Blog Post: Mobile UI Enhancements & Onboarding UX",
+        "text": "Just published a new post on the CodeGrind blog detailing our recent work on improving the mobile user experience. We've rolled out UI enhancements and refined the onboarding process to make practicing code on the go even smoother. Check out the details and see how we're making coding practice more accessible:\n\nhttps://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/\n\nWould love to hear your feedback on these mobile-focused updates!",
+        "url": "https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind is making it easier than ever to practice your coding skills on the go! 🚀 We've just rolled out significant UI enhancements and streamlined onboarding flows specifically for mobile users. Our goal is to provide a seamless and intuitive coding experience, no matter where you are.\n\nDiscover the latest updates, including responsive layouts and improved guidance for new users.\n\nRead the full story here: https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/\n\n#CodeGrind #MobileDevelopment #Coding #UIUX",
+        "title": "CodeGrind's Mobile-First UI Enhancements and Onboarding UX",
+        "url": "https://rivie13.github.io/blog/2026/05/11/codegrind-mobile-ui-enhancements-onboarding-ux/",
+        "description": "Discover how CodeGrind is prioritizing a seamless mobile user experience with recent UI enhancements and improved onboarding flows, making coding practice accessible anywhere.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Leveling up your coding practice on mobile! 📱✨\n\nCodeGrind is thrilled to share our latest updates, focusing on a superior mobile-first UI and a smoother onboarding experience. We've implemented key enhancements to make practicing coding skills on the go as effective and intuitive as possible.\n\nFrom responsive layouts that adapt to your screen to guided onboarding steps that reduce friction, we're committed to making CodeGrind accessible anywhere.\n\nLink in bio for the full post and to learn more about our mobile UI enhancements and onboarding UX improvements!\n\n#CodeGrind #MobileDev #CodingPractice #UIUX #SoftwareDevelopment #TechUpdates",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-11-codegrind-mobile-ui-enhancements-onboarding-ux.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
