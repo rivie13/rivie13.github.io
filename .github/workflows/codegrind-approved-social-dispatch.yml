@@ -1,4 +1,4 @@
-name: CodeGrind Approved Social Dispatch
+name: Dispatch Approved CodeGrind Social Workflows
 
 on:
   push:
@@ -6,25 +6,58 @@ on:
       - main
     paths:
       - '.github/codegrind-review/*.json'
+      - '.github/codegrind-engagement-review/*.json'
 
 permissions:
   contents: read
 
 jobs:
-  dispatch-approved-social:
+  dispatch-approved-socials:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout pages repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
 
-      - name: Dispatch approved social workflows
+      - name: Resolve changed approved review files
+        id: changed
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BEFORE_SHA="${{ github.event.before }}"
+          AFTER_SHA="${{ github.sha }}"
+
+          if [ -z "$BEFORE_SHA" ] || [ "$BEFORE_SHA" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "${BEFORE_SHA}^{commit}" 2>/dev/null; then
+            BEFORE_SHA=$(git rev-parse HEAD^ 2>/dev/null || echo "")
+          fi
+
+          if [ -n "$BEFORE_SHA" ]; then
+            git diff --name-only "$BEFORE_SHA" "$AFTER_SHA" > /tmp/codegrind-pages-changed-files.txt
+          else
+            git show --pretty='' --name-only "$AFTER_SHA" > /tmp/codegrind-pages-changed-files.txt
+          fi
+
+          BLOG_FILES=$(grep '^\.github/codegrind-review/.*\.json$' /tmp/codegrind-pages-changed-files.txt || true)
+          ENGAGEMENT_FILES=$(grep '^\.github/codegrind-engagement-review/.*\.json$' /tmp/codegrind-pages-changed-files.txt || true)
+
+          {
+            echo "blog_files<<EOF"
+            printf '%s\n' "$BLOG_FILES"
+            echo "EOF"
+            echo "engagement_files<<EOF"
+            printf '%s\n' "$ENGAGEMENT_FILES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Dispatch approved blog social workflow
+        if: steps.changed.outputs.blog_files != ''
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
-          BEFORE_SHA: ${{ github.event.before }}
-          AFTER_SHA: ${{ github.sha }}
+          BLOG_FILES: ${{ steps.changed.outputs.blog_files }}
+        shell: bash
         run: |
           set -euo pipefail
 
@@ -33,19 +66,11 @@ jobs:
             exit 1
           fi
 
-          BEFORE="${BEFORE_SHA}"
-          AFTER="${AFTER_SHA}"
-          if [ -z "${BEFORE}" ] || [ "${BEFORE}" = "0000000000000000000000000000000000000000" ]; then
-            BEFORE=$(git rev-parse "${AFTER}^" 2>/dev/null || true)
-          fi
+          while IFS= read -r review_file; do
+            if [ -z "${review_file}" ]; then
+              continue
+            fi
 
-          mapfile -t review_files < <(git diff --name-only "${BEFORE}" "${AFTER}" | grep -E '^\.github/codegrind-review/.*\.json$' || true)
-          if [ ${#review_files[@]} -eq 0 ]; then
-            echo "No approved CodeGrind review json files changed in this push."
-            exit 0
-          fi
-
-          for review_file in "${review_files[@]}"; do
             if [ ! -f "${review_file}" ]; then
               echo "Skipping removed review file ${review_file}."
               continue
@@ -72,5 +97,45 @@ jobs:
                   }
                 }')
 
-            echo "Dispatched approved social workflow for ${post_file} using ${review_file}."
-          done
+            echo "Dispatched approved blog social workflow for ${post_file} using ${review_file}."
+          done <<< "${BLOG_FILES}"
+
+      - name: Dispatch approved engagement social workflow
+        if: steps.changed.outputs.engagement_files != ''
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+          ENGAGEMENT_FILES: ${{ steps.changed.outputs.engagement_files }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::GH_PAT is required in rivie13.github.io to dispatch approved CodeGrind social workflows"
+            exit 1
+          fi
+
+          while IFS= read -r review_file; do
+            if [ -z "${review_file}" ]; then
+              continue
+            fi
+
+            if [ ! -f "${review_file}" ]; then
+              echo "Skipping removed review file ${review_file}."
+              continue
+            fi
+
+            gh api "repos/rivie13/CodeGrind/actions/workflows/codegrind-engagement-social.yml/dispatches" \
+              --method POST \
+              --input <(jq -n \
+                --arg ref "main" \
+                --arg approved_social_ref "${review_file}" \
+                '{
+                  ref: $ref,
+                  inputs: {
+                    approved_social_ref: $approved_social_ref,
+                    require_approved_draft: "true"
+                  }
+                }')
+
+            echo "Dispatched approved engagement social workflow using ${review_file}."
+          done <<< "${ENGAGEMENT_FILES}"
