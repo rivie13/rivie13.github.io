@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "ui-enhancements"
-tag: "ui-enhancements"
-permalink: "/tag/ui-enhancements"
+title: "UI Enhancements"
+tag: "UI Enhancements"
+permalink: "/tag/UI Enhancements/"
 ---

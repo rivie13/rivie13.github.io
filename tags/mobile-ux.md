@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "mobile-ux"
-tag: "mobile-ux"
-permalink: "/tag/mobile-ux"
+title: "Mobile UX"
+tag: "Mobile UX"
+permalink: "/tag/Mobile UX/"
 ---

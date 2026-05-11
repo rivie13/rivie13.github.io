@@ -2,14 +2,16 @@
 
 ## Draft post
 
-- Title: CodeGrind's Evolving UI: Enhancing Mobile Experience and Onboarding
+- Title: CodeGrind Mobile Preview: First-Pass UI Enhancements and Onboarding Updates
 - Post file: _posts/codegrind/2026-05-11-codegrind-ui-enhancements-mobile-onboarding.md
 - Canonical URL: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/
 - Image path: /assets/images/codegrind/2026-05-11-codegrind-ui-enhancements-mobile-onboarding.png
-- Image generated this run: true
+- Includes summit photo in post body: true
 
 ## Review notes
 
+- This draft now reflects that the mobile build is a preview release (first pass), not a full release.
+- The post explicitly notes the live demo at the Philly AI Ecosystem Summit last week.
 - Approve this PR only when both the article content and the social copy look ready for public release.
 - Merging this PR will publish the post on the site and dispatch the approved social copy workflow.
 - If edits are needed, update this PR branch instead of merging.
@@ -20,17 +22,18 @@
 
 Enabled: true
 
-CodeGrind's UI just got a mobile upgrade! Experience enhanced responsiveness, new ticker callouts, and a dedicated Tower Defense dock. Plus, smoother onboarding flows await. Try it out! https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #MobileDev #UX
+CodeGrind mobile preview is live. This is our first-pass release, demoed at last week's Philly AI Ecosystem Summit, with responsive UI and onboarding improvements now rolling out. Read more: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #MobileDev #UX
 
 ### LinkedIn
 
 Enabled: true
 
-We're excited to share recent updates to the CodeGrind platform, focusing on significantly enhancing the mobile user experience and refining our onboarding process. Our latest development cycles have introduced key improvements, including:
+We just shipped the first preview release of the CodeGrind mobile build and demoed it at last week's Philly AI Ecosystem Summit.
 
-- **Enhanced Mobile Responsiveness:** We've optimized layouts and introduced ticker callouts for better readability on smaller screens.
-- **Dedicated Mobile Components:** Specific features, like our Tower Defense game, now have tailored mobile interfaces for a more seamless experience.
-- **Streamlined Onboarding:** New users will benefit from improved callout behavior and manual progression options, making it easier to navigate the platform.
-- **Adaptive Interface:** A new compact landscape shell mode ensures better usability across different mobile orientations.
+This is a first pass, and we're actively improving it with feedback from real usage. Current updates include:
 
-These updates are part of our ongoing commitment to making CodeGrind accessible and intuitive for everyone, everywhere. Learn more about these UI enhancements: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #UIUX #MobileDevelopment #DeveloperExperience #Onboarding #TechUpdates
+- **Mobile responsiveness improvements** across key layouts
+- **Onboarding refinements** including better callout flow and manual progression
+- **Mobile gameplay UX updates** like the Tower Defense dock and compact landscape shell adjustments
+
+We're continuing to iterate quickly as we move toward a fuller release. Read the full update: https://rivie13.github.io/blog/2026/05/11/codegrind-ui-enhancements-mobile-onboarding/ #CodeGrind #UIUX #MobileDevelopment #Onboarding #DevUpdates

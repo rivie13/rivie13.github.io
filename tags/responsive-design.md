@@ -1,6 +1,6 @@
 ---
 layout: tag
-title: "responsive-design"
-tag: "responsive-design"
-permalink: "/tag/responsive-design"
+title: "Responsive Design"
+tag: "Responsive Design"
+permalink: "/tag/Responsive Design/"
 ---
