@@ -1,0 +1,121 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-13-engagement-workflow-improvements.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-13-engagement-workflow-improvements.json",
+  "title": "CodeGrind Engagement Workflow Enhancements",
+  "summary": "We've improved our engagement workflow by refining JSON handling for social media targets and adding robust URL verification. These updates ensure smoother content generation and deployment.",
+  "slug": "engagement-workflow-improvements",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "Recent development efforts have focused on enhancing the internal tools that power our social media and engagement campaigns. Key improvements include more robust JSON handling for social media targets and the implementation of a `wait_for_public_url` function for better URL verification. These updates streamline the process of getting new content and features out to you.",
+  "cta": "Learn more about our platform updates at CodeGrind!",
+  "visual_brief": "A clean, modern graphic representing a streamlined workflow or a simplified JSON structure, perhaps with a subtle nod to social media icons or a progress bar.",
+  "source_media_tags": [
+    "workflow",
+    "json",
+    "social media",
+    "development",
+    "enhancement",
+    "automation"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-engagement-workflow-improvements",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+    "file": "assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+    "file": "assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "gemini-fast",
+      "social_provider": "pollinations",
+      "social_model": "gemini-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "engagement-text",
+        "text": "CodeGrind's engagement workflow just got a significant upgrade! We've refined JSON handling and added robust URL verification to streamline content deployment. Learn more about our platform updates: https://codegrind.online #CodeGrind #DevTools #Workflow",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "engagement-text",
+        "text": "CodeGrind's engagement workflow just got a significant upgrade! We've refined JSON handling and added robust URL verification to streamline content deployment. Learn more about our platform updates: https://codegrind.online #CodeGrind #DevTools #Workflow",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "We're excited to share recent enhancements to the CodeGrind engagement workflow. Our development team has focused on improving the internal tools that power our social media and engagement campaigns. Key updates include more robust JSON handling for social media targets and the implementation of a `wait_for_public_url` function for better URL verification. These improvements are designed to streamline the process of delivering new content and features to our users more efficiently.\n\nLearn more about these platform updates and what they mean for your experience:\nhttps://codegrind.online\n\n#CodeGrind #PlatformUpdates #WorkflowAutomation #SocialMediaMarketing #DeveloperTools #DevOps",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind Enhances Engagement Workflow with Improved JSON Handling and URL Verification",
+        "text": "Our latest development efforts have focused on refining the internal tools that drive our engagement campaigns. We've implemented more robust JSON handling for social media targets and added a `wait_for_public_url` function for enhanced URL verification. These updates aim to streamline the deployment of new content and features.\n\nRead more about these enhancements on our platform:\nhttps://codegrind.online\n\n#CodeGrind #DevTools #Workflow #SocialMedia",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "destination": "u/rivie13",
+        "title": "CodeGrind Engagement Workflow Improvements",
+        "text": "CodeGrind has rolled out significant improvements to its engagement workflow. These enhancements include refined JSON handling for social media targets and robust URL verification through a new `wait_for_public_url` function. These updates are designed to ensure smoother and more efficient content generation and deployment.\n\nDiscover more about our platform updates here: https://codegrind.online\n\n#CodeGrind #PlatformUpdates #Workflow #DevTools",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Exciting updates from CodeGrind! We've been hard at work enhancing our engagement workflow to serve you better. Our recent development efforts have focused on improving the internal tools that power our social media and engagement campaigns. \n\nKey improvements include:\n✨ More robust JSON handling for social media targets.\n✨ Implementation of a `wait_for_public_url` function for better URL verification.\n\nThese updates streamline the process of getting new content and features out to you more efficiently. Learn more about these platform updates and how they benefit our users:\nhttps://codegrind.online\n\n#CodeGrind #PlatformUpdates #Workflow #SocialMediaMarketing #DeveloperTools #Automation",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Streamlining our workflow! ✨ We've enhanced CodeGrind's engagement tools with improved JSON handling and robust URL verification. Get ready for smoother content deployment and faster feature releases.\n\nLearn more about our platform updates!",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-13-engagement-workflow-improvements.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
