@@ -7,7 +7,7 @@ on:
 
 jobs:
   validate-social:
-    if: startsWith(github.head_ref, 'codegrind-review-')
+    if: startsWith(github.head_ref, 'codegrind-review-') || startsWith(github.head_ref, 'codegrind-engagement-review-')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout PR branch
@@ -16,57 +16,122 @@ jobs:
       - name: Validate social text character limits
         shell: bash
         run: |
-          BRANCH="${{ github.head_ref }}"
-          RAW_STEM="${BRANCH#codegrind-review-}"
+          set -euo pipefail
 
-          # Validate stem is safe
+          BRANCH="${{ github.head_ref }}"
+          REVIEW_KIND=""
+          RAW_STEM=""
+          REVIEW_JSON=""
+          FAILED=false
+
+          validate_length() {
+            local label="$1"
+            local value="$2"
+            local limit="$3"
+            local required="$4"
+            local length=${#value}
+
+            if [[ "$required" == "true" && -z "$value" ]]; then
+              echo "::error::${label} is required but empty."
+              FAILED=true
+              return
+            fi
+
+            if [[ "$length" -gt "$limit" ]]; then
+              echo "::error::${label} is ${length} characters (limit: ${limit}). Trim $(( length - limit )) characters."
+              echo ""
+              echo "Current ${label}:"
+              echo "$value"
+              FAILED=true
+            else
+              echo "✓ ${label}: ${length} / ${limit} characters"
+            fi
+          }
+
+          validate_engagement_target() {
+            local key="$1"
+            local field="$2"
+            local label="$3"
+            local limit="$4"
+            local enabled
+            local value
+
+            enabled=$(jq -r --arg key "$key" '.social.targets[$key].enabled // false' "$REVIEW_JSON")
+            if [[ "$enabled" != "true" ]]; then
+              echo "↷ ${label}: target disabled"
+              return
+            fi
+
+            value=$(jq -r --arg key "$key" --arg field "$field" '.social.targets[$key][$field] // ""' "$REVIEW_JSON")
+            validate_length "$label" "$value" "$limit" true
+          }
+
+          if [[ "$BRANCH" == codegrind-review-* ]]; then
+            REVIEW_KIND="blog"
+            RAW_STEM="${BRANCH#codegrind-review-}"
+            REVIEW_JSON=".github/codegrind-review/${RAW_STEM}.json"
+          elif [[ "$BRANCH" == codegrind-engagement-review-* ]]; then
+            REVIEW_KIND="engagement"
+            RAW_STEM="${BRANCH#codegrind-engagement-review-}"
+            REVIEW_JSON=".github/codegrind-engagement-review/${RAW_STEM}.json"
+          else
+            echo "Branch ${BRANCH} is not a CodeGrind review branch. Skipping validation."
+            exit 0
+          fi
+
           if [[ -z "$RAW_STEM" ]] || ! [[ "$RAW_STEM" =~ ^[A-Za-z0-9._-]+$ ]] || [[ "$RAW_STEM" == *..* ]]; then
             echo "::error::Invalid branch stem: $RAW_STEM"
             exit 1
           fi
 
-          REVIEW_JSON=".github/codegrind-review/${RAW_STEM}.json"
-
           if [[ ! -f "$REVIEW_JSON" ]]; then
-            echo "No review JSON found at $REVIEW_JSON — skipping validation."
+            echo "::error::Expected review JSON not found at $REVIEW_JSON."
+            exit 1
+          fi
+
+          if ! jq -e . "$REVIEW_JSON" >/dev/null; then
+            echo "::error::Review JSON is invalid: $REVIEW_JSON"
+            exit 1
+          fi
+
+          if [[ "$REVIEW_KIND" == "blog" ]]; then
+            BLUESKY=$(jq -r '.social.bluesky_text // ""' "$REVIEW_JSON")
+            LINKEDIN=$(jq -r '.social.linkedin_text // ""' "$REVIEW_JSON")
+
+            validate_length "Bluesky text" "$BLUESKY" 300 true
+            validate_length "LinkedIn text" "$LINKEDIN" 1200 true
+
+            if [[ "$FAILED" == "true" ]]; then
+              echo ""
+              echo "Fix with PR comment commands:"
+              echo "  /set social bluesky: <shorter text>"
+              echo "  /set social linkedin: <shorter text>"
+              exit 1
+            fi
+
+            echo ""
+            echo "All blog social text within limits."
             exit 0
           fi
 
-          FAILED=false
-
-          # Validate Bluesky text
-          BLUESKY=$(jq -r '.social.bluesky_text // ""' "$REVIEW_JSON")
-          BS_LEN=${#BLUESKY}
-          if [[ "$BS_LEN" -gt 300 ]]; then
-            echo "::error::Bluesky text is $BS_LEN characters (limit: 300). Trim $(( BS_LEN - 300 )) characters."
-            echo ""
-            echo "Current Bluesky text:"
-            echo "$BLUESKY"
-            FAILED=true
-          else
-            echo "✓ Bluesky text: $BS_LEN / 300 characters"
+          if ! jq -e '.social.targets' "$REVIEW_JSON" >/dev/null; then
+            echo "::error::Engagement review JSON is missing .social.targets"
+            exit 1
           fi
 
-          # Validate LinkedIn text
-          LINKEDIN=$(jq -r '.social.linkedin_text // ""' "$REVIEW_JSON")
-          LI_LEN=${#LINKEDIN}
-          if [[ "$LI_LEN" -gt 1200 ]]; then
-            echo "::error::LinkedIn text is $LI_LEN characters (limit: 1200). Trim $(( LI_LEN - 1200 )) characters."
-            echo ""
-            echo "Current LinkedIn text:"
-            echo "$LINKEDIN"
-            FAILED=true
-          else
-            echo "✓ LinkedIn text: $LI_LEN / 1200 characters"
-          fi
+          validate_engagement_target "bluesky_personal" "text" "Bluesky personal text" 300
+          validate_engagement_target "bluesky_company" "text" "Bluesky company text" 300
+          validate_engagement_target "linkedin" "text" "LinkedIn text" 1200
+          validate_engagement_target "reddit_subreddit" "title" "Reddit subreddit title" 300
+          validate_engagement_target "reddit_profile" "title" "Reddit profile title" 300
+          validate_engagement_target "facebook_page" "text" "Facebook page text" 1200
+          validate_engagement_target "instagram" "caption" "Instagram caption" 2200
 
           if [[ "$FAILED" == "true" ]]; then
             echo ""
-            echo "Fix with PR comment commands:"
-            echo "  /set social bluesky: <shorter text>"
-            echo "  /set social linkedin: <shorter text>"
+            echo "Fix the reviewed engagement copy in ${REVIEW_JSON} under .social.targets.* and push an update to the PR branch."
             exit 1
           fi
 
           echo ""
-          echo "All social text within limits."
+          echo "All engagement social text within limits."
