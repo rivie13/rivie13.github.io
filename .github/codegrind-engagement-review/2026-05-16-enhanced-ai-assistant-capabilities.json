@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-16-enhanced-ai-assistant-capabilities.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-16-enhanced-ai-assistant-capabilities.json",
+  "title": "CodeGrind AI Assistant: Now with GPT-4o and Model Switching!",
+  "summary": "Level up your problem-solving with CodeGrind's enhanced AI assistant. Now featuring GPT-4o, model switching, and a persistent, resizable chat interface for seamless guidance.",
+  "slug": "enhanced-ai-assistant-capabilities",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind's AI assistant has been significantly upgraded with the integration of Azure OpenAI's GPT-4o model. Users can now switch between different AI models during conversations, and the chat interface is more user-friendly with a resizable input area and fixed controls, ensuring a smoother and more effective problem-solving experience.",
+  "cta": "Try the enhanced AI assistant on CodeGrind today!",
+  "visual_brief": "A split image showing a user interacting with the CodeGrind AI chat interface. One side shows a traditional chat window, the other side highlights the new features: GPT-4o model selection, a resizable input box, and fixed controls. Use a clean, modern UI aesthetic.",
+  "source_media_tags": [
+    "AI",
+    "chat interface",
+    "coding assistant",
+    "GPT-4o",
+    "user interface"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-enhanced-ai-assistant-capabilities",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+    "file": "assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+    "file": "assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "gemini-fast",
+      "social_provider": "pollinations",
+      "social_model": "gemini-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind's AI Assistant just got a major upgrade! \n\n⚡️ Now featuring GPT-4o\n🔄 Seamless model switching\n✍️ Resizable chat input\n\nLevel up your problem-solving. Try it now: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "image_alt": "CodeGrind AI Assistant: Now with GPT-4o and Model Switching!",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind's AI Assistant just got a major upgrade! \n\n⚡️ Now featuring GPT-4o\n🔄 Seamless model switching\n✍️ Resizable chat input\n\nLevel up your problem-solving. Try it now: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "image_alt": "CodeGrind AI Assistant: Now with GPT-4o and Model Switching!",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind is excited to announce significant enhancements to its AI Assistant, designed to elevate your problem-solving experience.\n\nKey upgrades include:\n\n*   **GPT-4o Integration:** Leverage the power of OpenAI's latest model for more advanced assistance.\n*   **Model Switching:** Seamlessly transition between different AI models within a single conversation to find the best fit for your task.\n*   **Enhanced Chat Interface:** Enjoy a more intuitive user experience with a persistent, resizable chat input area and fixed controls, ensuring your workflow remains uninterrupted.\n\nThese improvements are built to provide more effective and efficient guidance as you code.\n\nDiscover the difference these new capabilities can make. Try the enhanced AI assistant on CodeGrind today: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind AI Assistant Update: GPT-4o, Model Switching, and UI Improvements",
+        "text": "CodeGrind's AI assistant has received a substantial upgrade, now featuring:\n\n*   **GPT-4o Integration:** Access the latest in AI model technology for enhanced problem-solving.\n*   **Model Switching:** Effortlessly switch between AI models during your conversations to optimize results.\n*   **Improved Chat Interface:** Benefit from a persistent and resizable chat input, along with fixed controls for a smoother, more user-friendly experience.\n\nWe've focused on making your coding assistance more powerful and intuitive. \n\nTry the enhanced AI assistant on CodeGrind today: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind's AI assistant has received a substantial upgrade, now featuring:\n\n*   **GPT-4o Integration:** Access the latest in AI model technology for enhanced problem-solving.\n*   **Model Switching:** Effortlessly switch between AI models during your conversations to optimize results.\n*   **Improved Chat Interface:** Benefit from a persistent and resizable chat input, along with fixed controls for a smoother, more user-friendly experience.\n\nWe've focused on making your coding assistance more powerful and intuitive. \n\nTry the enhanced AI assistant on CodeGrind today: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind AI Assistant: GPT-4o, Model Switching, and UI Improvements",
+        "text": "CodeGrind's AI assistant has received a substantial upgrade, now featuring:\n\n*   **GPT-4o Integration:** Access the latest in AI model technology for enhanced problem-solving.\n*   **Model Switching:** Effortlessly switch between AI models during your conversations to optimize results.\n*   **Improved Chat Interface:** Benefit from a persistent and resizable chat input, along with fixed controls for a smoother, more user-friendly experience.\n\nWe've focused on making your coding assistance more powerful and intuitive. \n\nTry the enhanced AI assistant on CodeGrind today: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind's AI assistant has received a substantial upgrade, now featuring:\n\n*   **GPT-4o Integration:** Access the latest in AI model technology for enhanced problem-solving.\n*   **Model Switching:** Effortlessly switch between AI models during your conversations to optimize results.\n*   **Improved Chat Interface:** Benefit from a persistent and resizable chat input, along with fixed controls for a smoother, more user-friendly experience.\n\nWe've focused on making your coding assistance more powerful and intuitive. \n\nTry the enhanced AI assistant on CodeGrind today: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "🚀 Big news for CodeGrind users! Our AI Assistant has been significantly upgraded to help you tackle complex problems more effectively.\n\nHere's what's new:\n\n✨ **GPT-4o Integration:** Harness the power of the latest advanced AI model.\n🔄 **Seamless Model Switching:** Easily change AI models mid-conversation to get the best possible guidance.\n✍️ **Enhanced Chat Interface:** Enjoy a more intuitive experience with a resizable input area and fixed controls that stay out of your way.\n\nThese updates are designed to provide a smoother, more powerful coding assistance experience.\n\nReady to level up your problem-solving? Try the enhanced AI assistant on CodeGrind today! https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Level up your problem-solving with CodeGrind's enhanced AI Assistant! 🚀\n\nWe've integrated GPT-4o for more powerful assistance, added seamless model switching, and improved the chat interface with a resizable input area and fixed controls for a smoother workflow. \n\nExplore the new capabilities and experience more effective coding guidance. \n\nTry the enhanced AI assistant on CodeGrind today!",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-16-enhanced-ai-assistant-capabilities.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
