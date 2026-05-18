@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-18-bug-fix-focus-navbar-level-display.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-18-bug-fix-focus-navbar-level-display.json",
+  "title": "Fixing the Navbar Level Display Bug",
+  "summary": "We've identified and are addressing a bug where the level display in the navbar isn't updating correctly. Your progress visibility is important to us!",
+  "slug": "bug-fix-focus-navbar-level-display",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "We are actively working on resolving an issue where the user's level display in the navigation bar is not accurately reflecting their current level. This fix is a priority to ensure accurate user profile information is always visible.",
+  "cta": "Check your profile for the latest updates!",
+  "visual_brief": "A screenshot of the CodeGrind navbar with a subtle visual indicator highlighting the incorrect level display, possibly with a 'bug fix in progress' overlay.",
+  "source_media_tags": [
+    "ui",
+    "navbar",
+    "bugfix",
+    "coding",
+    "platform"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-bug-fix-focus-navbar-level-display",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+    "file": "assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+    "file": "assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "gemini-fast",
+      "social_provider": "pollinations",
+      "social_model": "gemini-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "We're addressing a bug affecting the navbar level display. Ensuring your progress is accurately shown is a priority. Learn more: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "image_alt": "Fixing the Navbar Level Display Bug",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "We're addressing a bug affecting the navbar level display. Ensuring your progress is accurately shown is a priority. Learn more: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "image_alt": "Fixing the Navbar Level Display Bug",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "We've identified an issue where the user's level display in the CodeGrind navbar isn't updating correctly. Our team is actively working on a fix to ensure your progress is always accurately reflected. This update is a priority to maintain clear visibility of your profile information. Visit https://codegrind.online for more details and check your profile for the latest updates!",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "Bug Fix: Navbar Level Display Accuracy",
+        "text": "We're aware of an issue where the level display in the navbar isn't updating correctly. Our team is prioritizing this fix to ensure your progress is always accurately reflected. Check your profile for the latest updates! Learn more: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "We're aware of an issue where the level display in the navbar isn't updating correctly. Our team is prioritizing this fix to ensure your progress is always accurately reflected. Check your profile for the latest updates! Learn more: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind Platform Update: Navbar Level Display Bug",
+        "text": "We're actively working on resolving a bug impacting the navbar's level display. Accurate visibility of your progress is crucial, and we're making this fix a priority. Visit https://codegrind.online to see your profile for the latest updates!",
+        "body_text": null,
+        "comment_text": "We're actively working on resolving a bug impacting the navbar's level display. Accurate visibility of your progress is crucial, and we're making this fix a priority. Visit https://codegrind.online to see your profile for the latest updates!",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "We've identified and are actively working on a bug where the level display in the CodeGrind navbar isn't updating correctly. Ensuring your progress is accurately reflected is a priority for us. This fix is essential for maintaining clear visibility of your profile information. Visit https://codegrind.online for more details and check your profile for the latest updates!",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Fixing a bug that affects the navbar level display. We're prioritizing this to ensure your progress is always accurately shown. Check your profile for the latest updates!",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-18-bug-fix-focus-navbar-level-display.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
