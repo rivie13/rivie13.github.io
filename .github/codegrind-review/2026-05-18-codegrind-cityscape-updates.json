@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-05-18-codegrind-cityscape-updates.md",
+  "review_markdown_file": ".github/codegrind-review/2026-05-18-codegrind-cityscape-updates.md",
+  "title": "CodeGrind's Evolving Cityscape: New Features in the City Map and Interactions",
+  "summary": "Explore the latest advancements in CodeGrind's City Map, focusing on enhanced user interactions, responsive design, and new gameplay elements that blend coding challenges with immersive virtual environments.",
+  "slug": "codegrind-cityscape-updates",
+  "url": "https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-05-18-codegrind-cityscape-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-05-18-codegrind-cityscape-updates.png",
+    "file": "assets/images/codegrind/2026-05-18-codegrind-cityscape-updates.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "attempts": 3,
+      "strict_compress_used": false,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Explore the latest CodeGrind City Map updates! We've enhanced user interactions, responsive design, and added new gamelike elements for a more immersive coding practice. Learn more: https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/ #CodeGrind #Coding #EdTech",
+    "linkedin_text": "CodeGrind's City Map is getting a major upgrade! Our latest blog post details exciting new features focused on enhanced user interactions, improved responsive design for seamless mobile use, and the integration of gamelike elements to make your coding practice more engaging. Discover how these advancements create a dynamic and immersive virtual learning environment. Read the full update: https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/ #CodeGrind #CodingEducation #InteractiveLearning #TechUpdates #DSA #InterviewPrep",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Explore the latest CodeGrind City Map updates! We've enhanced user interactions, responsive design, and added new gamelike elements for a more immersive coding practice. Learn more: https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/ #CodeGrind #Coding #EdTech",
+        "url": "https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/",
+        "title": "CodeGrind's Evolving Cityscape: New Features in the City Map and Interactions",
+        "description": "Explore the latest advancements in CodeGrind's City Map, focusing on enhanced user interactions, responsive design, and new gameplay elements that blend coding challenges with immersive virtual environments.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-18-codegrind-cityscape-updates.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Explore the latest CodeGrind City Map updates! We've enhanced user interactions, responsive design, and added new gamelike elements for a more immersive coding practice. Learn more: https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/ #CodeGrind #Coding #EdTech",
+        "url": "https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/",
+        "title": "CodeGrind's Evolving Cityscape: New Features in the City Map and Interactions",
+        "description": "Explore the latest advancements in CodeGrind's City Map, focusing on enhanced user interactions, responsive design, and new gameplay elements that blend coding challenges with immersive virtual environments.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-18-codegrind-cityscape-updates.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind's City Map is getting a major upgrade! Our latest blog post details exciting new features focused on enhanced user interactions, improved responsive design for seamless mobile use, and the integration of gamelike elements to make your coding practice more engaging. Discover how these advancements create a dynamic and immersive virtual learning environment. Read the full update: https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/ #CodeGrind #CodingEducation #InteractiveLearning #TechUpdates #DSA #InterviewPrep",
+        "title": "CodeGrind's Evolving Cityscape: New Features in the City Map and Interactions",
+        "url": "https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/",
+        "description": "Explore the latest advancements in CodeGrind's City Map, focusing on enhanced user interactions, responsive design, and new gameplay elements that blend coding challenges with immersive virtual environments.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-18-codegrind-cityscape-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind City Map: New Features for Enhanced User Interactions and Immersive Coding Practice",
+        "text": "CodeGrind has released new updates for its City Map feature, focusing on improved responsive design for better mobile accessibility and more dynamic user interactions. They've also introduced gamelike elements to enhance engagement. Check out the details here: https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/ What are your thoughts on these changes for the platform?",
+        "url": "https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "New CodeGrind Blog Post: Evolving Cityscape with Enhanced Interactions and Responsive Design",
+        "text": "Just read about the latest updates to the CodeGrind City Map. They're really focusing on making the platform more interactive and accessible, especially on mobile. New gamelike elements sound interesting for engagement. You can find the full details here: https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/",
+        "url": "https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind's City Map is evolving! Discover the latest enhancements, including improved user interactions, responsive design for all devices, and exciting new gamelike elements that make coding practice more immersive. Learn more about these updates and how they benefit your learning journey. Read the full post: https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/ #CodeGrind #Coding #EdTech",
+        "title": "CodeGrind's Evolving Cityscape: New Features in the City Map and Interactions",
+        "url": "https://rivie13.github.io/blog/2026/05/18/codegrind-cityscape-updates/",
+        "description": "Explore the latest advancements in CodeGrind's City Map, focusing on enhanced user interactions, responsive design, and new gameplay elements that blend coding challenges with immersive virtual environments.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-18-codegrind-cityscape-updates.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Our City Map is getting a significant upgrade! 🗺️ Dive into the latest CodeGrind developments, featuring enhanced user interactions, a more responsive design for seamless use on any device, and new gamelike elements designed to boost engagement. We're committed to creating a dynamic and immersive virtual environment for your coding practice. Link in bio for the full post!",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-18-codegrind-cityscape-updates.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
