@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-19-code-breach-td-art-redo.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-19-code-breach-td-art-redo.json",
+  "title": "Code Breach TD Art Overhaul Underway!",
+  "summary": "We're enhancing the cyberpunk hacker aesthetic of Code Breach! An issue is open to redo the Tower Defense art, promising more immersive visuals and gameplay. Stay tuned for updates on this exciting visual upgrade.",
+  "slug": "code-breach-td-art-redo",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "The art for Code Breach, our tower defense game, is getting a significant cyberpunk redesign. This update aims to improve the visual immersion and overall aesthetic of the game.",
+  "cta": "Follow our progress on the Code Breach art redo!",
+  "visual_brief": "Cyberpunk hacker aesthetic, stylized game art, tower defense elements, digital glitch effects.",
+  "source_media_tags": [
+    "cyberpunk",
+    "game art",
+    "tower defense",
+    "hacker",
+    "digital art",
+    "concept art"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-code-breach-td-art-redo",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+    "file": "assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+    "file": "assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "gemini-fast",
+      "social_provider": "pollinations",
+      "social_model": "gemini-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "Code Breach TD is getting a cyberpunk art overhaul! We're enhancing the hacker aesthetic for more immersive visuals. Follow the progress of this exciting redesign. Learn more: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "image_alt": "Code Breach TD Art Overhaul Underway!",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "Code Breach TD is getting a cyberpunk art overhaul! We're enhancing the hacker aesthetic for more immersive visuals. Follow the progress of this exciting redesign. Learn more: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "image_alt": "Code Breach TD Art Overhaul Underway!",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Code Breach TD Art Overhaul Underway!\n\nWe are excited to announce that the art for Code Breach, our tower defense game, is undergoing a significant redesign. The focus is on enhancing the cyberpunk hacker aesthetic to deliver a more immersive visual experience and elevate the overall gameplay feel. This update aims to bring a fresh, stylized look to the game, aligning with its core themes.\n\nStay tuned for updates on this visual upgrade and follow our progress.\n\nLearn more about Code Breach: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "Code Breach TD Art Overhaul Underway! Cyberpunk Redesign in Progress",
+        "text": "We're excited to share that the art for Code Breach, our tower defense game, is receiving a major cyberpunk redesign. This initiative aims to significantly enhance the game's visual immersion and overall aesthetic, bringing a fresh, stylized look to the hacker-themed experience. \n\nFollow our progress on this exciting visual upgrade!\n\nLearn more: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "We're excited to share that the art for Code Breach, our tower defense game, is receiving a major cyberpunk redesign. This initiative aims to significantly enhance the game's visual immersion and overall aesthetic, bringing a fresh, stylized look to the hacker-themed experience. \n\nFollow our progress on this exciting visual upgrade!\n\nLearn more: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "Code Breach TD Art Overhaul Underway!",
+        "text": "Code Breach TD is getting a significant cyberpunk art overhaul! We're enhancing the hacker aesthetic for more immersive visuals and gameplay. Follow the progress of this exciting redesign and stay tuned for updates.\n\nLearn more: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Code Breach TD is getting a significant cyberpunk art overhaul! We're enhancing the hacker aesthetic for more immersive visuals and gameplay. Follow the progress of this exciting redesign and stay tuned for updates.\n\nLearn more: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Code Breach TD Art Overhaul Underway!\n\nWe're thrilled to announce that the art for Code Breach, our tower defense game, is getting a significant cyberpunk redesign! This update focuses on enhancing the hacker aesthetic to deliver a more immersive visual experience and elevate the overall gameplay feel. \n\nWe're committed to bringing a fresh, stylized look to the game that aligns with its core themes. Follow our progress on this exciting visual upgrade and stay tuned for more updates!\n\nLearn more about Code Breach: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Code Breach TD is getting a major art overhaul! 💻✨ Immerse yourself in a revamped cyberpunk hacker aesthetic designed to elevate your gameplay experience. Follow our progress on this exciting visual upgrade! #CodeBreach #TowerDefense #Cyberpunk #GameArt #IndieGame #ArtUpdate #HackerAesthetic",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-19-code-breach-td-art-redo.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
