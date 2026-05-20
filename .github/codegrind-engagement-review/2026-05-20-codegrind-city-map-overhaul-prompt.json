@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-20-codegrind-city-map-overhaul-prompt.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-20-codegrind-city-map-overhaul-prompt.json",
+  "title": "City Map Overlay: Visualize District Interactions in CodeGrind",
+  "summary": "Spotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades.",
+  "slug": "codegrind-city-map-overhaul-prompt",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now features enhanced CityMap and CityScene components that improve scene management for District 01, delivering a richer cyberpunk city experience and clearer walking interactions.",
+  "cta": "Explore the District 01 update in CodeGrind and try the improved CityMap experience today.",
+  "visual_brief": "Static announcement-style image showing the cyberpunk District 01 city map with glowing routes, CityMap and CityScene panels visible, subtle UI elements, and an overlay caption: 'District 01 CityMap & Scene Update'.",
+  "source_media_tags": [
+    "city-map",
+    "district-01",
+    "cyberpunk-ui",
+    "scene-components",
+    "visual-overview"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-city-map-overhaul-prompt",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+    "file": "assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+    "file": "assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "City Map Overlay: Visualize District Interactions in CodeGrind. Spotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades. https://codegrind.online #CodeGrind #Inter",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "image_alt": "City Map Overlay: Visualize District Interactions in CodeGrind",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "City Map Overlay: Visualize District Interactions in CodeGrind. Spotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades. https://codegrind.online #CodeGrind #Inter",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "image_alt": "City Map Overlay: Visualize District Interactions in CodeGrind",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "City Map Overlay: Visualize District Interactions in CodeGrind\n\nSpotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades.\n\nExplore the District 01 update in CodeGrind and try the improved CityMap experience today.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "City Map Overlay: Visualize District Interactions in CodeGrind",
+        "text": "Spotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Spotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "City Map Overlay: Visualize District Interactions in CodeGrind",
+        "text": "City Map Overlay: Visualize District Interactions in CodeGrind\n\nSpotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "City Map Overlay: Visualize District Interactions in CodeGrind\n\nSpotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "City Map Overlay: Visualize District Interactions in CodeGrind\n\nSpotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "City Map Overlay: Visualize District Interactions in CodeGrind\n\nSpotlighting the revamped CityMap and scene components with a focus on District 01 interactions and cyberpunk city visuals. A static, announcement-style post highlighting UI and scene upgrades.\n\nExplore the District 01 update in CodeGrind and try the improved CityMap experience today.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-20-codegrind-city-map-overhaul-prompt.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
