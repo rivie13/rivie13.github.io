@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-21-codegrind-engagement-visual-updates.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-21-codegrind-engagement-visual-updates.json",
+  "title": "CodeGrind: Visualizing Tower-Defense Coding",
+  "summary": "Showcase how CodeGrind visualizes programming concepts as towers in Code Breach, highlighting the cyberpunk aesthetic and real-time AI assistance features.",
+  "slug": "codegrind-engagement-visual-updates",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends interactive DSA practice with a cyberpunk tower-defense aesthetic, where coding concepts become defensive towers and AI-assisted guidance helps students improve in real time.",
+  "cta": "Try CodeGrind now and see how coding concepts build powerful towers with AI help.",
+  "visual_brief": "Static hero-style image featuring cyberpunk-themed Code Breach towers (ForLoop, IfCondition, Function, Variable) on a neon cityscape backdrop. Include subtle UI elements like a code editor pane, AI chat badge, and tower attack particles to convey interactivity without animation.",
+  "source_media_tags": [
+    "cyberpunk",
+    "tower-defense",
+    "coding-visual",
+    "ai-assistance",
+    "code-breach",
+    "neon-city"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-engagement-visual-updates",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind visualizes coding concepts as neon defense towers in Code Breach. See cyberpunk towers, AI-assisted guidance, and real-time practice in a static hero image. Try CodeGrind now and see how concepts build powerful towers with AI help. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "image_alt": "CodeGrind: Visualizing Tower-Defense Coding",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind visualizes coding concepts as neon defense towers in Code Breach. See cyberpunk towers, AI-assisted guidance, and real-time practice in a static hero image. Try CodeGrind now and see how concepts build powerful towers with AI help. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "image_alt": "CodeGrind: Visualizing Tower-Defense Coding",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind blends interactive DSA practice with a cyberpunk tower-defense aesthetic. Our new visual showcase highlights ForLoop, IfCondition, Function, and Variable as defensive towers, with AI-assisted guidance in real time. Explore the experience and see the interactive approach for mastering concepts. Try CodeGrind now: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind – Visualizing Tower-Defense Coding",
+        "text": "Discover CodeGrind’s latest visual: cyberpunk tower-defense aesthetics, where ForLoop, IfCondition, Function, and Variable become defensive towers. Real-time AI guidance supports learning within Code Breach. Check out the new image-led showcase and how concepts turn into powerful towers with AI help. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s latest visual: cyberpunk tower-defense aesthetics, where ForLoop, IfCondition, Function, and Variable become defensive towers. Real-time AI guidance supports learning within Code Breach. Check out the new image-led showcase and how concepts turn into powerful towers with AI help. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind Visual Update",
+        "text": "New visual update for CodeGrind: a static hero-style image featuring cyberpunk Code Breach towers, code editor UI, and AI badge to convey interactivity. See how coding concepts become towers and get real-time assistance as you practice. Learn more at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "New visual update for CodeGrind: a static hero-style image featuring cyberpunk Code Breach towers, code editor UI, and AI badge to convey interactivity. See how coding concepts become towers and get real-time assistance as you practice. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind reveals a cyberpunk-inspired visual of tower-defense coding in Code Breach. Static hero-style imagery shows towers for ForLoop, IfCondition, Function, and Variable with a code editor pane and AI chat badge, illustrating interactive practice with real-time guidance. Try CodeGrind now: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "A cyberpunk snapshot of CodeGrind’s tower-defense coding concept — ForLoop, IfCondition, Function, Variable rise as defensive towers with a live-code editor and AI guidance. See the visual and learn how interactive practice builds skills. Explore more and start your journey with CodeGrind.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-21-codegrind-engagement-visual-updates.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
