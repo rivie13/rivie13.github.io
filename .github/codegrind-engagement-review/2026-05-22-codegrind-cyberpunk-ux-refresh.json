@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-22-codegrind-cyberpunk-ux-refresh.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-22-codegrind-cyberpunk-ux-refresh.json",
+  "title": "CodeGrind: Cyberpunk UX Refresh Deep Dive",
+  "summary": "Highlight the revamped cyberpunk UI/UX in CodeBreach, linking tower-defense visuals to programming concepts and AI-assisted problem solving.",
+  "slug": "codegrind-cyberpunk-ux-refresh",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind’s UI overhaul for Code Breach blends cyberpunk aesthetics with actionable DSA learning: dynamic towers, real-time AI guidance, and immersive feedback that ties gameplay to problem-solving.",
+  "cta": "Explore the refreshed Code Breach experience and try a new difficulty wave using the AI assistant.",
+  "visual_brief": "Static, high-contrast cyberpunk UI screenshot showing Code Breach towers with code snippets in the background, glowing neon accents, and a panel highlighting AI-assisted hints.",
+  "source_media_tags": [
+    "cyberpunk-ui",
+    "tower-defense-visuals",
+    "ai-assistant-panel",
+    "code-snippets-in-ui",
+    "neon-glow",
+    "gameplay-feedback"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-cyberpunk-ux-refresh",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+    "file": "assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+    "file": "assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: Cyberpunk UX Refresh Deep Dive. See the revamped Code Breach UI—tower dynamics, AI-guided hints, and real-time feedback that tie gameplay to problem solving. Explore the refreshed experience and push a new difficulty wave with the AI assistant. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "image_alt": "CodeGrind: Cyberpunk UX Refresh Deep Dive",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: Cyberpunk UX Refresh Deep Dive. See the revamped Code Breach UI—tower dynamics, AI-guided hints, and real-time feedback that tie gameplay to problem solving. Explore the refreshed experience and push a new difficulty wave with the AI assistant. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "image_alt": "CodeGrind: Cyberpunk UX Refresh Deep Dive",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind unveils the Cyberpunk UX Refresh for Code Breach. The UI overhaul blends neon cyberpunk aesthetics with actionable learning: dynamic towers, real-time AI guidance, and immersive feedback that connects gameplay to problem-solving. Explore the refreshed experience and try a new difficulty wave using the AI assistant. Learn more: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Cyberpunk UX Refresh Deep Dive",
+        "text": "We’ve refreshed Code Breach’s UI with cyberpunk aesthetics, adding dynamic towers, real-time AI guidance, and immersive feedback that ties gameplay to problem-solving. Check out the updated experience and test a new difficulty wave with the AI assistant. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "We’ve refreshed Code Breach’s UI with cyberpunk aesthetics, adding dynamic towers, real-time AI guidance, and immersive feedback that ties gameplay to problem-solving. Check out the updated experience and test a new difficulty wave with the AI assistant. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: Cyberpunk UX Refresh Deep Dive",
+        "text": "Explore Code Breach’s revamped UI—neon-glow visuals, AI-assisted hints, and gameplay feedback designed to teach DSA concepts through tower defense. Dive into the refreshed experience and try a higher difficulty with the AI assistant. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Explore Code Breach’s revamped UI—neon-glow visuals, AI-assisted hints, and gameplay feedback designed to teach DSA concepts through tower defense. Dive into the refreshed experience and try a higher difficulty with the AI assistant. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind presents the Cyberpunk UX Refresh for Code Breach. The UI overhaul brings dynamic towers, AI-guided hints, and real-time feedback that connects gameplay to problem-solving. Explore the refreshed experience and challenge a new difficulty wave with the AI assistant. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Static, high-contrast cyberpunk UI scene from Code Breach shows neon-glow towers and AI-assisted hints. See how the UI supports problem-solving through gameplay feedback. Explore the refreshed experience and try a new difficulty wave with the AI assistant — tap the link in our bio to learn more.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-22-codegrind-cyberpunk-ux-refresh.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
