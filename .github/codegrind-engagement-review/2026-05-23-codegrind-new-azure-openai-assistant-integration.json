@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-23-codegrind-new-azure-openai-assistant-integration.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-23-codegrind-new-azure-openai-assistant-integration.json",
+  "title": "CodeGrind: Azure OpenAI Assistant for Guided DSA Practice",
+  "summary": "Highlight the new Azure OpenAI-powered assistant integrated into CodeGrind, guiding users through DSA problems with model-assisted hints and adaptive feedback.",
+  "slug": "codegrind-new-azure-openai-assistant-integration",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now includes an Azure OpenAI-powered assistant that helps you solve LeetCode-style problems with contextual hints, multi-model support, and real-time guidance within the coding playground. It enhances learning without bypassing problem-solving effort.",
+  "cta": "Try the AI-guided problem solve in CodeGrind today and compare your approach with model-assisted hints.",
+  "visual_brief": "A short, practical demo video showing the CodeGrind editor with the AI assistant: opening a LeetCode-style problem, the assistant suggesting hints, code editor updates in real-time, and a verdict panel after submission. Include UI cues for model switching and hint depth.",
+  "source_media_tags": [
+    "ui-editor-dsa",
+    "ai-assistant-interface",
+    "code-editor-with-hints",
+    "problem-solution-flow",
+    "real-time-feedback",
+    "azure-openai"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-new-azure-openai-assistant-integration",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+    "file": "assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+    "file": "assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind adds an Azure OpenAI-powered assistant to guide you through LeetCode-style problems. See contextual hints, real-time feedback, and model-switching in the editor as you practice. Ready to compare your approach with model-assisted hints? Try the AI-guided problem solve in CodeGrind today.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "image_alt": "CodeGrind: Azure OpenAI Assistant for Guided DSA Practice",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind adds an Azure OpenAI-powered assistant to guide you through LeetCode-style problems. See contextual hints, real-time feedback, and model-switching in the editor as you practice. Ready to compare your approach with model-assisted hints? Try the AI-guided problem solve in CodeGrind today.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "image_alt": "CodeGrind: Azure OpenAI Assistant for Guided DSA Practice",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind introduces an Azure OpenAI-powered assistant to guide you through LeetCode-style problems with contextual hints, real-time guidance, and adaptive feedback within the coding playground. It supports multi-model hints and keeps problem-solving effort front and center. Try the AI-guided problem solve in CodeGrind today and compare your approach with model-assisted hints. Learn more at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind — Azure OpenAI Assistant for Guided DSA Practice",
+        "text": "CodeGrind now includes an Azure OpenAI-powered assistant that helps you solve LeetCode-style problems with contextual hints, real-time guidance, and adaptive feedback inside the editor. Switch models, request deeper hints, and see verdicts after submission as you practice DSA. Try the AI-guided problem solve and compare approaches in CodeGrind today.",
+        "body_text": null,
+        "comment_text": "CodeGrind now includes an Azure OpenAI-powered assistant that helps you solve LeetCode-style problems with contextual hints, real-time guidance, and adaptive feedback inside the editor. Switch models, request deeper hints, and see verdicts after submission as you practice DSA. Try the AI-guided problem solve and compare approaches in CodeGrind today.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: Azure OpenAI Assistant for Guided DSA Practice",
+        "text": "CodeGrind introduces an Azure OpenAI-powered assistant to guide you through LeetCode-style problems with contextual hints and real-time feedback inside the coding playground. Explore multi-model support and adaptive insights while solving problems—no bypassing effort. Try the AI-guided problem solve today.",
+        "body_text": null,
+        "comment_text": "CodeGrind introduces an Azure OpenAI-powered assistant to guide you through LeetCode-style problems with contextual hints and real-time feedback inside the coding playground. Explore multi-model support and adaptive insights while solving problems—no bypassing effort. Try the AI-guided problem solve today.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind unveils an Azure OpenAI-powered assistant to guide you through LeetCode-style problems with contextual hints and real-time feedback in the editor. Experience model-assisted insights, switch between models, and see verdicts after submissions as you practice. Try the AI-guided problem solve in CodeGrind today and compare your approach with hints.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Meet the Azure OpenAI-powered assistant in CodeGrind. Get contextual hints, real-time guidance, and adaptive feedback as you tackle LeetCode-style problems in the editor. Watch the quick demo, switch hint depth and models, and see your results evolve. Explore AI-guided problem solving in CodeGrind today. #CodeGrind #AzureOpenAI #DSA",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-23-codegrind-new-azure-openai-assistant-integration.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
