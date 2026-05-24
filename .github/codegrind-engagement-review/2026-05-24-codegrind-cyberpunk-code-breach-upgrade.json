@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.json",
+  "title": "CodeGrind Code Breach: Cyberpunk Update Brings Visuals, AI, and UI polish",
+  "summary": "Showcase the Code Breach cyberpunk redesign with AI-assisted problems, new tower types, and a refreshed UI all tied to recent updates.",
+  "slug": "codegrind-cyberpunk-code-breach-upgrade",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind combines LeetCode-style challenges with a cyberpunk tower-defense aesthetic, now featuring enhanced AI assistance, upgraded visuals, and streamlined problem-solving workflows to boost learning and engagement.",
+  "cta": "Dive into Code Breach’s updated experience and level up your DSA practice today.",
+  "visual_brief": "Static promotional poster featuring Code Breach cyberpunk visual overhaul: neon city backdrop, towers representing code concepts (ForLoop, WhileLoop, IfCondition, Function) with glowing code snippets; prominent AI assistant panel; teaser text: 'Cyberpunk Makeover Complete' and 'New AI-assisted challenges'.",
+  "source_media_tags": [
+    "codegrind-cyberpunk",
+    "code-breach",
+    "ai-assistant",
+    "tower-defense",
+    "neon-ui",
+    "promo"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-cyberpunk-code-breach-upgrade",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+    "file": "assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+    "file": "assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind Code Breach gets a cyberpunk facelift. See AI-assisted problems, new tower types, and a polished UI that streamlines practice. Dive into the updated experience and level up your DSA skills with neon visuals and a sharper workflow. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "image_alt": "CodeGrind Code Breach: Cyberpunk Update Brings Visuals, AI, and UI polish",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind Code Breach gets a cyberpunk facelift. See AI-assisted problems, new tower types, and a polished UI that streamlines practice. Dive into the updated experience and level up your DSA skills with neon visuals and a sharper workflow. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "image_alt": "CodeGrind Code Breach: Cyberpunk Update Brings Visuals, AI, and UI polish",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind Code Breach: Cyberpunk Update brings AI-assisted challenges, upgraded visuals, and a streamlined workflow to accelerate DSA practice. Explore new towers (ForLoop, WhileLoop, IfCondition, Function), enhanced UI, and AI guidance designed to boost learning and engagement. Dive into the updated experience and level up your skills today at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind Code Breach – Cyberpunk Update",
+        "text": "Experience CodeGrind Code Breach’s cyberpunk update: AI-assisted problems, new tower types, and a refreshed UI designed to streamline solving and learning. The poster showcases neon city visuals with code concepts illuminated by AI. Learn more and explore the updated challenge flow at https://codegrind.online.",
+        "body_text": null,
+        "comment_text": "Experience CodeGrind Code Breach’s cyberpunk update: AI-assisted problems, new tower types, and a refreshed UI designed to streamline solving and learning. The poster showcases neon city visuals with code concepts illuminated by AI. Learn more and explore the updated challenge flow at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind Code Breach: Cyberpunk Upgrade",
+        "text": "Cyberpunk upgrade banner for CodeGrind Code Breach highlights AI-assisted challenges, upgraded visuals, and a sleeker workflow. Neon city backdrop, towers representing key concepts, and a prominent AI panel illustrate the enhanced learning experience. Discover the updated practice at https://codegrind.online.",
+        "body_text": null,
+        "comment_text": "Cyberpunk upgrade banner for CodeGrind Code Breach highlights AI-assisted challenges, upgraded visuals, and a sleeker workflow. Neon city backdrop, towers representing key concepts, and a prominent AI panel illustrate the enhanced learning experience. Discover the updated practice at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind Code Breach is back with a cyberpunk upgrade: AI-assisted problems, new tower types, and a refreshed UI to make DSA practice smoother. See the neon visuals and streamlined workflow in our new promo. Learn more and start the updated experience today at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Cyberpunk upgrade alert: CodeGrind Code Breach now features AI-assisted challenges, upgraded visuals, and a sleeker UI. See the neon city, new towers, and AI guidance in our promo image. Tap to learn more and start your enhanced practice today.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-24-codegrind-cyberpunk-code-breach-upgrade.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
