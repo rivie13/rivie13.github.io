@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.md",
+  "review_markdown_file": ".github/codegrind-review/2026-05-25-debugging-race-conditions-codegrind-onboarding.md",
+  "title": "Debugging Race Conditions in CodeGrind's Onboarding Flow",
+  "summary": "How we identified and fixed a race condition causing intro state misalignment before the tower defense demo loads.",
+  "slug": "debugging-race-conditions-codegrind-onboarding",
+  "url": "https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.png",
+    "file": "assets/images/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": true,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Debugging Race Conditions in CodeGrind's onboarding flow. We traced a subtle race bug that caused intro state misalignment before the tower defense demo loads and implemented a layered, dependency-driven init to fix it....",
+    "linkedin_text": "Debugging Race Conditions in CodeGrind's onboarding flow reveals how a subtle timing issue caused intro state misalignment before the tower defense demo loads. We implemented a layered initialization with explicit dependency ordering to ensure auth, profile, assets, and demo initialization occur in the correct sequence. https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Debugging Race Conditions in CodeGrind's onboarding flow. We traced a subtle race bug that caused intro state misalignment before the tower defense demo loads and implemented a layered, dependency-driven init to fix it....",
+        "url": "https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "title": "Debugging Race Conditions in CodeGrind's Onboarding Flow",
+        "description": "How we identified and fixed a race condition causing intro state misalignment before the tower defense demo loads.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Debugging Race Conditions in CodeGrind's onboarding flow. We traced a subtle race bug that caused intro state misalignment before the tower defense demo loads and implemented a layered, dependency-driven init to fix it....",
+        "url": "https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "title": "Debugging Race Conditions in CodeGrind's Onboarding Flow",
+        "description": "How we identified and fixed a race condition causing intro state misalignment before the tower defense demo loads.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Debugging Race Conditions in CodeGrind's onboarding flow reveals how a subtle timing issue caused intro state misalignment before the tower defense demo loads. We implemented a layered initialization with explicit dependency ordering to ensure auth, profile, assets, and demo initialization occur in the correct sequence. https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "title": "Debugging Race Conditions in CodeGrind's Onboarding Flow",
+        "url": "https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "description": "How we identified and fixed a race condition causing intro state misalignment before the tower defense demo loads.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "Debugging Race Conditions in CodeGrind’s Onboarding Flow",
+        "text": "We tracked a race condition in CodeGrind’s onboarding sequence that caused intro state misalignment before the tower defense demo boots. The fix uses explicit dependency ordering across auth, profile fetch, asset preloading, and demo init. More details: https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "url": "https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Debugging Race Conditions in CodeGrind Onboarding",
+        "text": "Took a closer look at a race condition in CodeGrind’s onboarding, where intro state could misalign before the tower defense demo loaded. Implemented dependency-aware initialization to ensure proper sequencing. Full write-up: https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "url": "https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind fixed a race condition in the onboarding flow that caused intro state misalignment before the tower defense demo loads. We implemented a layered initialization with explicit dependencies to ensure proper sequencing across auth, profile fetch, asset preloading, and demo startup. https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "title": "Debugging Race Conditions in CodeGrind's Onboarding Flow",
+        "url": "https://rivie13.github.io/blog/2026/05/25/debugging-race-conditions-codegrind-onboarding/",
+        "description": "How we identified and fixed a race condition causing intro state misalignment before the tower defense demo loads.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "We tackled a race condition in CodeGrind’s onboarding flow that caused intro state misalignment before the tower defense demo loads. The fix uses clear dependency ordering for auth, profile data, assets, and demo startup. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-05-25-debugging-race-conditions-codegrind-onboarding.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
