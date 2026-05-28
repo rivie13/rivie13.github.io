@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-28-codegrind-engagement-city-map-updates.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-28-codegrind-engagement-city-map-updates.json",
+  "title": "CodeGrind City Map Updates: District 01 Gets Smarter",
+  "summary": "Highlighting recent District 01 map and scene enhancements that improve mobile visibility and walking interactions in CodeGrind.",
+  "slug": "codegrind-engagement-city-map-updates",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "We’ve shipped CityMap and CityScene improvements for District 01, including mobile shell visibility management and smoother walking interactions, plus tighter integration with the CodeGrind UI. This keeps players engaged with clearer navigation and responsive scenes as they practice DSA within the platform.",
+  "cta": "Explore the updated District 01 map and share your experience with the new mobile-friendly interactions.",
+  "visual_brief": "Static UI update: District 01 map and CityScene components with improved mobile visibility controls, new walkway interactions, cyberpunk aesthetic cues, clean captions overlay describing changes",
+  "source_media_tags": [
+    "district-01-map",
+    "cityscene-update",
+    "mobile-visibility",
+    "walking-interactions",
+    "cyberpunk-ui",
+    "codegrind-dsa"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-engagement-city-map-updates",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind City Map Updates: District 01 gets smarter. See mobile-friendly visibility, smoother walking interactions, and tighter UI integration in CityMap and CityScene. Explore the updated District 01 map and share your experience with the new interactions. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "image_alt": "CodeGrind City Map Updates: District 01 Gets Smarter",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind City Map Updates: District 01 gets smarter. See mobile-friendly visibility, smoother walking interactions, and tighter UI integration in CityMap and CityScene. Explore the updated District 01 map and share your experience with the new interactions. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "image_alt": "CodeGrind City Map Updates: District 01 Gets Smarter",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind unveils CityMap and CityScene improvements for District 01, focusing on mobile visibility controls, smoother walking interactions, and tighter integration with the CodeGrind UI. The update enhances navigation and responsive scenes as you practice DSA within the platform. Explore the updated District 01 map and share your experience with the new mobile-friendly interactions: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind City Map Updates — District 01 Gets Smarter",
+        "text": "CityMap and CityScene improvements arrive for District 01, featuring mobile visibility controls, smoother walking interactions, and closer CodeGrind UI integration. These tweaks enhance navigation clarity and responsive scenes while practicing DSA in CodeGrind. Check out the District 01 rollout and share your thoughts on the updated mobile-friendly interactions at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CityMap and CityScene improvements arrive for District 01, featuring mobile visibility controls, smoother walking interactions, and closer CodeGrind UI integration. These tweaks enhance navigation clarity and responsive scenes while practicing DSA in CodeGrind. Check out the District 01 rollout and share your thoughts on the updated mobile-friendly interactions at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: District 01 City Map Update",
+        "text": "District 01 gets smarter with CityMap and CityScene updates that improve mobile visibility, walking interactions, and UI integration in CodeGrind. See the updated map, try the new interactions, and discuss feedback on the District 01 changes at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "District 01 gets smarter with CityMap and CityScene updates that improve mobile visibility, walking interactions, and UI integration in CodeGrind. See the updated map, try the new interactions, and discuss feedback on the District 01 changes at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind announces CityMap and CityScene updates for District 01, improving mobile visibility and walking interactions with tighter UI integration. Explore the updated District 01 map and experience the clearer navigation and responsive scenes as you practice DSA on CodeGrind. Share your experience with the new mobile-friendly interactions at the link: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "District 01 just got smarter: CityMap and CityScene enhancements improve mobile visibility and walking interactions, with tighter CodeGrind UI integration. See the static District 01 map update and the refreshed scene workflow. Explore the update and share your experience with the new mobile-friendly interactions. Learn more at the link in our bio.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-28-codegrind-engagement-city-map-updates.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
