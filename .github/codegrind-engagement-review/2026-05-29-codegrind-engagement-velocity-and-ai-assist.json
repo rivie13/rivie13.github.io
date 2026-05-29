@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-29-codegrind-engagement-velocity-and-ai-assist.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-29-codegrind-engagement-velocity-and-ai-assist.json",
+  "title": "CodeGrind: Speed, AI Guidance, and New Auth in Practice",
+  "summary": "Showcase CodeGrind's fast, AI-assisted DSA practice with an emphasis on the new Google authentication integration and real-time AI guidance.",
+  "slug": "codegrind-engagement-velocity-and-ai-assist",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends LeetCode-style challenges with Azure OpenAI-powered guidance and a refreshed Google authentication flow for quick, secure access. Practice problems faster, get AI-assisted hints, and track progress in a cyberpunk-inspired learning playground.",
+  "cta": "Try a quick challenge now and sign in with Google to unlock AI-assisted hints.",
+  "visual_brief": "A short 20-45 second looped video: show the CodeGrind editor in action solving a problem, AI assistant panel giving hints, and a smooth Google sign-in flow. Include subtle cyberpunk UI flourishes and a quick highlight of the Google Sign-In button.",
+  "source_media_tags": [
+    "codegrind-editor",
+    "ai-assistant",
+    "google-auth",
+    "sign-in-flow",
+    "problem-solving",
+    "cyberpunk-ui"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-engagement-velocity-and-ai-assist",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+    "file": "assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+    "file": "assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind speeds up practice with AI-guided hints and a refreshed Google sign-in. See the editor in action, AI assistant helping solve problems, and a cyberpunk UI vibe. Quick challenge, fast access—sign in with Google to unlock AI-assisted hints.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "image_alt": "CodeGrind: Speed, AI Guidance, and New Auth in Practice",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind speeds up practice with AI-guided hints and a refreshed Google sign-in. See the editor in action, AI assistant helping solve problems, and a cyberpunk UI vibe. Quick challenge, fast access—sign in with Google to unlock AI-assisted hints.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "image_alt": "CodeGrind: Speed, AI Guidance, and New Auth in Practice",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind blends fast, LeetCode-style practice with Azure OpenAI-powered guidance and a refreshed Google authentication flow. The new experience features real-time AI hints, a streamlined sign-in, and a cyberpunk-inspired editor. Try a quick challenge now and sign in with Google to unlock AI-assisted hints. Learn more at the campaign URL.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Velocity, AI Guidance, and Google Sign-In",
+        "text": "Explore how CodeGrind accelerates problem-solving with AI-assisted hints and a refreshed Google authentication flow. See the editor in action, AI helper panels, and a cyberpunk UI, all in the new practice playground. Sign in with Google to unlock faster access and hints.",
+        "body_text": null,
+        "comment_text": "Explore how CodeGrind accelerates problem-solving with AI-assisted hints and a refreshed Google authentication flow. See the editor in action, AI helper panels, and a cyberpunk UI, all in the new practice playground. Sign in with Google to unlock faster access and hints.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: Velocity & AI Guidance",
+        "text": "Discover CodeGrind’s fast, AI-assisted DSA practice with a new Google Sign-In flow. Watch the editor solve problems, get AI hints, and track progress in a cyberpunk-inspired learning playground. Sign in with Google to unlock AI-assisted hints.",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s fast, AI-assisted DSA practice with a new Google Sign-In flow. Watch the editor solve problems, get AI hints, and track progress in a cyberpunk-inspired learning playground. Sign in with Google to unlock AI-assisted hints.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind speeds up practice with AI-guided hints and a refreshed Google sign-in. See the editor in action, AI assistant panels, and a cyberpunk UI. Try a quick challenge now and sign in with Google to unlock AI-assisted hints. Learn more at the campaign URL.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Speed through practice with AI-guided hints and a refreshed Google Sign-In. Watch the CodeGrind editor in action, see the AI assistant in real time, and enjoy a cyberpunk-inspired interface. Try a quick challenge and sign in with Google to unlock AI-assisted hints.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-29-codegrind-engagement-velocity-and-ai-assist.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
