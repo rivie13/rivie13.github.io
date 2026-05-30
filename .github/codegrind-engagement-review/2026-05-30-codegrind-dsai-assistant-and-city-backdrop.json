@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.json",
+  "title": "CodeGrind: AI Assistant Meets City Backdrop Upgrade",
+  "summary": "Show how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop.",
+  "slug": "codegrind-dsai-assistant-and-city-backdrop",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now pairs Azure OpenAI-powered problem-solving guidance with the updated cyberpunk city backdrop, enhanced city map and improved scene management to create a more engaging DSA practice experience.",
+  "cta": "Try a guided problem session with the AI assistant and explore the new City backdrop and Map features in CodeGrind.",
+  "visual_brief": "A short, cinematic demo: split-screen or overlay showing the AI assistant responding to a coding prompt on the left and the cyberpunk city backdrop with the CityMap in motion on the right. Include subtle UI elements: code editor, problem description, AI chat, and a circling highlight around a skyline or tower visualizing problem-solving steps. End with a CTA screen: ‘Practice with AI • Explore City Backdrop’.",
+  "source_media_tags": [
+    "ai-assistant-demo",
+    "city-backdrop",
+    "city-map",
+    "cyberpunk-ui",
+    "code-editor",
+    "problem-solution-walkthrough"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsai-assistant-and-city-backdrop",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+    "file": "assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+    "file": "assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: AI Assistant Meets City Backdrop Upgrade. Show how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "image_alt": "CodeGrind: AI Assistant Meets City Backdrop Upgrade",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: AI Assistant Meets City Backdrop Upgrade. Show how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "image_alt": "CodeGrind: AI Assistant Meets City Backdrop Upgrade",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI Assistant Meets City Backdrop Upgrade\n\nShow how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop.\n\nTry a guided problem session with the AI assistant and explore the new City backdrop and Map features in CodeGrind.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI Assistant Meets City Backdrop Upgrade",
+        "text": "Show how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Show how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI Assistant Meets City Backdrop Upgrade",
+        "text": "CodeGrind: AI Assistant Meets City Backdrop Upgrade\n\nShow how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind: AI Assistant Meets City Backdrop Upgrade\n\nShow how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI Assistant Meets City Backdrop Upgrade\n\nShow how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind: AI Assistant Meets City Backdrop Upgrade\n\nShow how CodeGrind's AI assistant aids problem-solving alongside the refreshed city backdrop and city map components—illustrating a more immersive learning loop.\n\nTry a guided problem session with the AI assistant and explore the new City backdrop and Map features in CodeGrind.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-30-codegrind-dsai-assistant-and-city-backdrop.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
