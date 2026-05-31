@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-05-31-codegrind-city-map-update-highlights.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-05-31-codegrind-city-map-update-highlights.json",
+  "title": "CodeGrind City Map and City Scene: Fresh Visual Enhancements",
+  "summary": "Showcase the latest CityMap/CityScene improvements and their impact on District 01 navigation and immersion.",
+  "slug": "codegrind-city-map-update-highlights",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind's recent map and scene updates enhance district navigation, mobile shell visibility, and walking interactions, delivering a more immersive cyberpunk coding world.",
+  "cta": "Explore the new District 01 visuals and try the updated CityMap features in CodeGrind.",
+  "visual_brief": "Static hero-style image of District 01 cityscape with neon cyberpunk UI overlays, highlighting CityMap and CityScene components, with subtle motion blur to imply depth. Include captions: CityMap · CityScene · District 01.",
+  "source_media_tags": [
+    "district-01",
+    "city-map",
+    "city-scene",
+    "cyberpunk-ui",
+    "neon-neighborhood",
+    "immersion"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-city-map-update-highlights",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+    "file": "assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+    "file": "assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: City Map and City Scene get a fresh look. District 01 navigation is sharper, CityMap and CityScene cues glow with neon UI for deeper immersion. Explore the updated visuals and features today.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "image_alt": "CodeGrind City Map and City Scene: Fresh Visual Enhancements",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: City Map and City Scene get a fresh look. District 01 navigation is sharper, CityMap and CityScene cues glow with neon UI for deeper immersion. Explore the updated visuals and features today.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "image_alt": "CodeGrind City Map and City Scene: Fresh Visual Enhancements",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind reveals updates to City Map and City Scene, highlighting improved District 01 navigation, mobile visibility, and walking interactions for a more immersive cyberpunk coding world. See the new visuals and try the updated CityMap features. Explore the new District 01 visuals at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind City Map & City Scene – Fresh Visual Enhancements",
+        "text": "Discover CodeGrind’s latest City Map and City Scene improvements. District 01 navigation is clearer, neon UI accents heighten immersion, and walking interactions feel more responsive. Check out the updated visuals and features, and see how CityMap enhances District 01 exploration. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s latest City Map and City Scene improvements. District 01 navigation is clearer, neon UI accents heighten immersion, and walking interactions feel more responsive. Check out the updated visuals and features, and see how CityMap enhances District 01 exploration. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: City Map Update Highlights",
+        "text": "Explore the refreshed City Map and City Scene in CodeGrind. District 01 navigation is easier, with enhanced mobile shell visibility and interactive walking cues for a deeper cyberpunk immersion. Learn more about the new visuals and try CityMap features at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Explore the refreshed City Map and City Scene in CodeGrind. District 01 navigation is easier, with enhanced mobile shell visibility and interactive walking cues for a deeper cyberpunk immersion. Learn more about the new visuals and try CityMap features at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind introduces fresh visuals for City Map and City Scene in District 01. The updated navigation and neon UI cues enhance immersion and walking interactions in our cyberpunk coding world. See the new District 01 visuals and try the updated CityMap features at the link. Explore now: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Static hero image of District 01 with neon cyberpunk UI overlays showcases CityMap and CityScene updates. District 01 captions are visible, highlighting navigation and immersion. Explore the new visuals and try the updated CityMap features in CodeGrind — tap to explore.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-05-31-codegrind-city-map-update-highlights.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
