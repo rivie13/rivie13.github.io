@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-01-codegrind-dsb-cyber-progression.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-01-codegrind-dsb-cyber-progression.json",
+  "title": "CodeGrind: DSA Practice Gets Cyberspace Makeover",
+  "summary": "Showcase CodeGrind's cyberpunk-coded towers and AI-assisted DSA practice, highlighting the Code Breach vibe and new AI enhancements without overhyping.",
+  "slug": "codegrind-dsb-cyber-progression",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends LeetCode-style problems with an AI-assisted teaching layer and a cyberpunk tower-defense aesthetic. Real-time editor, Azure OpenAI guidance, and upcoming gameplay polish make practicing data structures feel interactive and visual.",
+  "cta": "Try a guided practice session today and see how AI hints integrate with problem solving in CodeGrind.",
+  "visual_brief": "Static image showing CodeGrind interface with code editor on one side and a cyberpunk tower-defense visualization (towers labeled with ForLoop, IfCondition, Variable, Function) attacking code snippets, neon glow, and subtle GitHub/Azure OpenAI branding; include a small banner stating AI-assisted problem solving.",
+  "source_media_tags": [
+    "code editor UI",
+    "cyberpunk game visuals",
+    "tower defense concept",
+    "AI assistance UI",
+    "Azure OpenAI branding",
+    "CodeGrind branding"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsb-cyber-progression",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+    "file": "assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+    "file": "assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: DSA practice meets cyberspace. See AI-assisted hints, a real-time editor, and cyberpunk tower-defense visuals that make problem solving tangible. Try a guided practice session and discover how AI guidance fits into coding challenges. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "image_alt": "CodeGrind: DSA Practice Gets Cyberspace Makeover",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: DSA practice meets cyberspace. See AI-assisted hints, a real-time editor, and cyberpunk tower-defense visuals that make problem solving tangible. Try a guided practice session and discover how AI guidance fits into coding challenges. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "image_alt": "CodeGrind: DSA Practice Gets Cyberspace Makeover",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind blends LeetCode-style problems with an AI-assisted teaching layer and a cyberpunk tower-defense aesthetic. Real-time editor, Azure OpenAI guidance, and upcoming gameplay polish make practicing data structures interactive and visual. Explore a guided practice session at https://codegrind.online and see how AI hints integrate with problem solving.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: DSA Practice Gets Cyberspace Makeover",
+        "text": "CodeGrind brings LeetCode-style DSA practice into a cyberpunk, AI-assisted environment. The new interface pairs a live editor with a tower-defense visualization to show how concepts like ForLoop, IfCondition, and Function interact in real time. Check out a guided practice session and see the AI hints in action at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind brings LeetCode-style DSA practice into a cyberpunk, AI-assisted environment. The new interface pairs a live editor with a tower-defense visualization to show how concepts like ForLoop, IfCondition, and Function interact in real time. Check out a guided practice session and see the AI hints in action at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: DSA Practice Gets Cyberspace Makeover",
+        "text": "Experience CodeGrind’s AI-assisted DSA practice with a cyberpunk visualization and a live editor. The tower-defense UI highlights key data structures while AI guidance helps you solve problems. Start with a guided practice session at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Experience CodeGrind’s AI-assisted DSA practice with a cyberpunk visualization and a live editor. The tower-defense UI highlights key data structures while AI guidance helps you solve problems. Start with a guided practice session at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind delivers DSA practice in a cyberpunk aesthetic with AI-assisted teaching. Explore a real-time editor paired with tower-defense visuals that illustrate how loops, conditions, and functions work together. Start a guided practice session today at CodeGrind and see AI hints integrated into problem solving.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind’s DSA practice gets a cyberpunk makeover. See AI-assisted hints within a live editor and tower-defense visuals that show data structures in action. Ready to try a guided practice session and feel the AI guidance in your problem solving? Tap through to start your session and explore CodeGrind.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-01-codegrind-dsb-cyber-progression.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
