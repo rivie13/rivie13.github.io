@@ -2,7 +2,7 @@
 
 ## Draft post
 
-- Title: Rebuilding CodeGrind's City Mode: Navigation, State, and Mobile Resilience
+- Title: Rebuilding CodeGrind's City Mode: New Engine, Navigation, State, and Mobile Resilience
 - Post file: _posts/codegrind/2026-06-01-codegrind-city-mode-rebuild.md
 - Canonical URL: https://rivie13.github.io/blog/2026/06/01/codegrind-city-mode-rebuild/
 - Image path: /assets/images/codegrind/2026-06-01-codegrind-city-mode-rebuild.png
