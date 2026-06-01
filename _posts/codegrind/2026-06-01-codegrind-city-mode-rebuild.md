@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Rebuilding CodeGrind's City Mode: Navigation, State, and Mobile Resilience"
+title: "Rebuilding CodeGrind's City Mode: New Engine, Navigation, State, and Mobile Resilience"
 date: 2026-06-01 06:00:00 +0000
 categories: [CodeGrind, Frontend]
 tags: [CodeGrind, Feature Development, Game Development, Mobile UX, UI Enhancements, Navigation, State Management, Onboarding, Performance]
 author: Riviera Sperduto
-excerpt: "How CodeGrind refactored its city mode to handle standalone routing, mobile shell bootstrap, and stateful navigation—lessons from 10 merged PRs."
+excerpt: "How CodeGrind refactored its city mode to handle more immersive experiences, standalone routing, mobile shell bootstrap, and stateful navigation—lessons from 10 merged PRs."
 image: /assets/images/codegrind/2026-06-01-codegrind-city-mode-rebuild.png
 keywords: city mode navigation, state management, mobile UI, game development, onboarding UX, route detection, asset caching"
 slug: codegrind-city-mode-rebuild
@@ -14,8 +14,7 @@ canonical_url: https://rivie13.github.io/blog/2026/06/01/codegrind-city-mode-reb
 
 ## The Challenge: A Fragmented City Experience
 
-Over the past week, CodeGrind's dev branch saw 41 commits and 10 merged pull requests focused on a single, critical refactor: **rebuilding the city mode**. The issue wasn't flashy—no new game mechanics, no new features—but it was foundational. Players couldn't reliably navigate the city, mobile shells weren't bootstrapping correctly, and state was leaking across routes.
-
+Over the past week, CodeGrind's dev branch saw 41 commits and 10 merged pull requests focused on a single, critical refactor: **rebuilding the city mode**. This recent batch of updates focused on improving the city experience for our users by increasing immersion with the implementation of the phaser.js game engine, improving navigation and state management, and enhancing mobile resilience. The city mode is the heart of our onboarding experience, and it had become increasingly clear that the old implementation was struggling to keep up with our vision for a seamless, engaging user experience.
 This is the story of how we fixed it.
 
 ## What Broke, and Why
@@ -27,10 +26,20 @@ The city mode is CodeGrind's hub for onboarding and world exploration. It's wher
 3. **Viewport sizing was rigid** – Container dimensions weren't responsive to actual available space.
 4. **Asset loading was synchronous** – Backdrops and apartment previews blocked the render pipeline.
 5. **State wasn't recoverable** – Fullscreen toggles, chat status, and navigation context could get out of sync on mobile.
+and most critically:
+6. **Bad Visual Experience** - The City mode left much to be desired visually. There was no real game engine, just some crude engineering to give a bad experience that was not the intended vision. The backdrop would load after the apartment, and mobile users would often see a blank screen. 
 
-Each issue alone was manageable. Together, they created a cascade of bugs: players on mobile would see a blank screen, city navigation would fail after a refresh, or the chat bar would remain visible over fullscreen game content.
+Each issue alone was manageable. Together, they created a cascade of bugs and poor user experiences: players on mobile would see a blank screen, city navigation would fail after a refresh, all while experiencing a visually unpleasing environment.
 
-## The Solution: Four Key Refactors
+## The Solution: Four Key Refactors and an Engine Upgrade
+
+### 0. The Phaser.js Engine Upgrade
+
+The most significant change was the introduction of the Phaser.js game engine to power the city mode. This allowed us to create a more immersive and visually appealing environment for players, with smoother animations and better performance. The engine upgrade also provided a solid foundation for future enhancements, such as interactive NPCs (working on improving) and dynamic environments (to be added in soon).
+
+We also implemented a new renderer transition system that allows for seamless switching between the city mode game engine and the regular site in both directions. This means that players can now enjoy a more cohesive visual experience without jarring transitions or out of touch loading screens.
+
+This also included a complete overhaul of the asset loading system, allowing for asynchronous loading of backdrops and apartment previews, which significantly improved the visual experience and reduced load times.
 
 ### 1. Standalone City Route Detection
 
@@ -80,7 +89,7 @@ Players can now toggle fullscreen in a game, close the browser, and return to th
 Beyond the four pillars, we refined several supporting systems:
 
 - **City backdrop caching** (`ca87ecb`) – Apartment preview scenes now cache backdrops asynchronously, avoiding jank.
-- **ChatStatusBar theming** (`7585c38`) – Animation components now respect theme classes, preventing white flashes on dark mode.
+- **ChatStatusBar theming** (`7585c38`) – Animation components now respect theme classes, preventing non retro look for chat bars.
 - **Asset loading for production** (`8ae734a`) – URLs are now environment-aware; dev and production CDNs are handled correctly.
 - **Guest-to-user migration** (`9f8e6b4`) – Learning node data packets are now preserved when a guest upgrades to a full account.
 
@@ -99,10 +108,10 @@ By fixing route detection, state management, and responsive layout, we've made t
 - Use the platform on any device without a blank screen.
 - Persist their navigation state across sessions.
 
-## Takeaway: Invisible Infrastructure Wins
+## Takeaway: Invisible Infrastructure Wins paired with a Game Engine Upgrade
 
-This refactor had no visible feature launch, no new game mode, no marketing angle. But it's the kind of work that separates polished products from janky ones. Every player who lands in the city and sees a fully rendered apartment instead of a loading spinner is experiencing the result of these 10 PRs.
+The infrastructure improvements, combined with the Phaser.js game engine upgrade, have transformed the city mode experience. Every player who lands in the city and sees a fully rendered apartment instead of a loading spinner is experiencing the result of these 10 PRs.
 
-**For developers:** When your users report "it just doesn't work," the fix often isn't a new feature—it's fixing the invisible infrastructure. Route detection, state machines, and responsive layout don't make headlines, but they make products.
+**For developers:** When your users report "it just doesn't work," the fix often involves refactoring the underlying architecture to be more robust and resilient. Don't just patch symptoms—invest in the invisible infrastructure that powers the experience, especially when paired with a game engine upgrade.
 
-Learn more about CodeGrind's architecture and game design philosophy at [codegrind.online](https://codegrind.online), and track all recent changes on [GitHub](https://github.com/rivie13/CodeGrind).
+Learn more about CodeGrind's architecture and game design philosophy at [codegrind.online](https://codegrind.online), and track all recent changes on [GitHub](https://github.com/rivie13).
