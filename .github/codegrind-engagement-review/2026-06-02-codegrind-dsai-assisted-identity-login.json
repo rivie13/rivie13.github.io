@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-02-codegrind-dsai-assisted-identity-login.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-02-codegrind-dsai-assisted-identity-login.json",
+  "title": "DSA Practice Gets a Personal AI Assistant at Sign‑In",
+  "summary": "Showcase the new Google authentication integration with Azure OpenAI AI assistant that guides users during problem solving, tying sign-in flow to AI help.",
+  "slug": "codegrind-dsai-assisted-identity-login",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now pairs seamless Google sign-in with an AI assistant that helps you approach problems as you log in, easing onboarding and providing real-time, model-assisted guidance during practice sessions.",
+  "cta": "Try CodeGrind with Google sign-in and ask the AI assistant for a quick hint on your next problem.",
+  "visual_brief": "A short 15–20s demo video showing: 1) user selecting Google sign-in, 2) redirected to CodeGrind dashboard, 3) AI assistant panel appearing with a sample hint, 4) focus on a LeetCode-style problem and code editor with syntax highlighting. Include subtle cyberpunk UI accents and CodeGrind branding.",
+  "source_media_tags": [
+    "google-signin",
+    "ai-assistant",
+    "problem-hint",
+    "code-editor",
+    "dashboard-ui",
+    "cyberpunk-theme"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsai-assisted-identity-login",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+    "file": "assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+    "file": "assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind now pairs Google sign-in with an AI assistant that guides you through problems as you log in. See a quick 15–20s demo: sign-in, dashboard, AI hint, LeetCode-style editor. Try CodeGrind with Google sign-in and ask the AI for a quick hint before you start. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "image_alt": "DSA Practice Gets a Personal AI Assistant at Sign‑In",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind now pairs Google sign-in with an AI assistant that guides you through problems as you log in. See a quick 15–20s demo: sign-in, dashboard, AI hint, LeetCode-style editor. Try CodeGrind with Google sign-in and ask the AI for a quick hint before you start. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "image_alt": "DSA Practice Gets a Personal AI Assistant at Sign‑In",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind now combines Google sign-in with an AI assistant that supports problem solving during onboarding. In this 15–20s demo, you’ll see sign-in, the CodeGrind dashboard, and an AI panel offering a sample hint as you work in a LeetCode-style editor. Try CodeGrind with Google sign-in and ask for a quick hint to start solving.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind DS AI Assistant Sign-In Demo",
+        "text": "Discover CodeGrind’s new Google sign-in paired with an AI assistant that helps you approach problems as you log in. The 15–20s demo shows the sign-in flow, dashboard access, and an AI hint in the code editor. Try CodeGrind with Google sign-in and ask for a quick hint to begin solving.",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s new Google sign-in paired with an AI assistant that helps you approach problems as you log in. The 15–20s demo shows the sign-in flow, dashboard access, and an AI hint in the code editor. Try CodeGrind with Google sign-in and ask for a quick hint to begin solving.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI-Assisted Sign-In Demo",
+        "text": "See how CodeGrind integrates Google sign-in with an AI assistant that guides you through problems during onboarding. The short demo highlights the sign-in flow, dashboard view, and an AI hint in the code editor to kick off practice.",
+        "body_text": null,
+        "comment_text": "See how CodeGrind integrates Google sign-in with an AI assistant that guides you through problems during onboarding. The short demo highlights the sign-in flow, dashboard view, and an AI hint in the code editor to kick off practice.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind now offers Google sign-in paired with an AI assistant to guide you through problem-solving as you log in. The new 15–20s demo showcases the sign-in flow, dashboard, and an AI hint in the editor. Try CodeGrind with Google sign-in and ask the AI for a quick hint to start solving. Learn more at the site.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "See CodeGrind’s new Google sign-in with an AI assistant that guides you through problems as you log in. Watch a quick 15–20s demo: sign-in, dashboard, AI hint, and code editor. Try CodeGrind with Google sign-in and ask for a quick hint to start solving. #CodeGrind #AIassistant #SignInDemo",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-02-codegrind-dsai-assisted-identity-login.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
