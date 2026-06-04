@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-04-codegrind-ai-assisted-login-ux.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-04-codegrind-ai-assisted-login-ux.json",
+  "title": "CodeGrind: AI-assisted login and new authentication flow",
+  "summary": "Showcase the new Google authentication integration and AI-assisted onboarding flow, focusing on secure sign-in, profile sync, and a smoother first-run experience.",
+  "slug": "codegrind-ai-assisted-login-ux",
+  "content_kind": "text",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now offers a streamlined authentication experience with Google sign-in, OAuth 2.0 security, and an AI-assisted onboarding flow to help new users get productive faster without friction.",
+  "cta": "Try the new Google sign-in today and complete your profile in under a minute.",
+  "visual_brief": "Short 20–40 second explainer video showing the sign-in flow: user clicks 'Sign in with Google', OAuth prompts, profile setup screen with stats, and a welcome dashboard. Include UI hints: OAuth 2.0 badge, secure icons, and a cyberpunk-themed onboarding screen re: CodeGrind features.",
+  "source_media_tags": [
+    "ui-signin",
+    "google-auth",
+    "onboarding",
+    "profile-dashboard",
+    "oauth-2",
+    "cyberpunk-ui"
+  ],
+  "media": {
+    "source": "text-only",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": null,
+    "asset_mime": null,
+    "path": null,
+    "url": null,
+    "file": null,
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": null,
+    "url": null,
+    "file": null
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "link",
+        "embed_mode": "external-card",
+        "text": "CodeGrind introduces AI-assisted login and a streamlined onboarding flow. Try Google sign-in, secure OAuth 2.0, and a faster first-run setup that gets you productive in minutes. Explore the new authentication experience and complete your profile quickly at codegrind.online.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": null,
+        "image_url": null,
+        "image_alt": null,
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "link",
+        "embed_mode": "external-card",
+        "text": "CodeGrind introduces AI-assisted login and a streamlined onboarding flow. Try Google sign-in, secure OAuth 2.0, and a faster first-run setup that gets you productive in minutes. Explore the new authentication experience and complete your profile quickly at codegrind.online.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": null,
+        "image_url": null,
+        "image_alt": null,
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "text",
+        "text": "CodeGrind launches an AI-assisted login and onboarding flow featuring Google sign-in and OAuth 2.0 security. See a smoother first-run experience, faster profile setup, and synced profiles for immediate productivity. Learn more and try the new sign-in today at the CodeGrind site: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": null,
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI-assisted login UX",
+        "text": "We’re showcasing CodeGrind’s AI-assisted login and onboarding flow, including Google sign-in, OAuth 2.0 security, and a fast, profile-synced setup. The goal is a frictionless first run and quicker productivity. Details and access at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "We’re showcasing CodeGrind’s AI-assisted login and onboarding flow, including Google sign-in, OAuth 2.0 security, and a fast, profile-synced setup. The goal is a frictionless first run and quicker productivity. Details and access at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": null,
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "link",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind – AI-assisted login UX",
+        "text": "Announcing CodeGrind’s AI-assisted login and onboarding flow: Google sign-in, secure OAuth 2.0, and a streamlined first-run with quick profile completion. See how onboarding is designed for speed and productivity. Learn more at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Announcing CodeGrind’s AI-assisted login and onboarding flow: Google sign-in, secure OAuth 2.0, and a streamlined first-run with quick profile completion. See how onboarding is designed for speed and productivity. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": null,
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "text",
+        "text": "CodeGrind reveals an AI-assisted login and a faster onboarding flow, featuring Google sign-in and OAuth 2.0 security for a frictionless first run. Sync your profile and get productive quickly with a streamlined setup. Discover the new authentication experience and try it now at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": null,
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": false,
+        "post_type": "skip",
+        "caption": "AI-assisted login and a streamlined onboarding flow from CodeGrind. Sign in with Google, enjoy secure OAuth 2.0, and complete your profile in minutes. See the new authentication experience in action and tap to learn more at CodeGrind.",
+        "asset_url": null,
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
