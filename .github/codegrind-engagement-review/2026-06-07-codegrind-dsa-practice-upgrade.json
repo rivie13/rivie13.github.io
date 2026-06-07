@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-07-codegrind-dsa-practice-upgrade.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-07-codegrind-dsa-practice-upgrade.json",
+  "title": "CodeGrind: DSA Practice Upgrades with AI Assist and Mobile Onboarding",
+  "summary": "Highlight CodeGrind's latest DSA practice features, Azure OpenAI assistance, and revamped onboarding for mobile users, anchored by recent dev-focused updates.",
+  "slug": "codegrind-dsa-practice-upgrade",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now blends LeetCode-style problems with AI-powered guidance and a polished onboarding flow, plus an upgraded Tower Defense-inspired visualization of programming concepts. Real-time editor, model-switching AI, and streamlined sign-in improve practice efficiency and learning engagement.",
+  "cta": "Try a guided problem now with AI assistance and share your progress with the CodeGrind community.",
+  "visual_brief": "A short 20-30s demo video showing the CodeGrind editor in action: a user selects a problem, the AI assistant suggests hints, code is written with real-time feedback, and an on-screen onboarding tip highlights Google sign-in and mobile-friendly UI. Include cyberpunk UI accents and subtle tower-defense visuals in the background to tie to CodeGrind’s branding.",
+  "source_media_tags": [
+    "codegrind-editor-demo",
+    "ai-assistant-hinting",
+    "mobile-onboarding-tip",
+    "login-signin-flow",
+    "tower-defense-visualization",
+    "cyberpunk-ui"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsa-practice-upgrade",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+    "file": "assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+    "file": "assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind elevates DSA practice with AI guidance and a streamlined mobile onboarding. See the editor in action, real-time feedback, and our tower-defense-inspired visuals. Try a guided problem with AI help and share your progress with the CodeGrind community. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "image_alt": "CodeGrind: DSA Practice Upgrades with AI Assist and Mobile Onboarding",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind elevates DSA practice with AI guidance and a streamlined mobile onboarding. See the editor in action, real-time feedback, and our tower-defense-inspired visuals. Try a guided problem with AI help and share your progress with the CodeGrind community. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "image_alt": "CodeGrind: DSA Practice Upgrades with AI Assist and Mobile Onboarding",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind is upgrades to DSA practice with AI-assisted hints, a real-time editor, and a polished mobile onboarding flow. The new Tower Defense-inspired visualization ties concepts to practice. Experience the demo of selecting a problem, AI suggestions, and instant feedback. Try a guided problem now and share progress with the CodeGrind community at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind DSA Practice Upgrade – AI Assist & Mobile Onboarding",
+        "text": "CodeGrind’s latest DSA practice upgrade combines LeetCode-style problems with AI-powered guidance and a refreshed onboarding flow for mobile users. Watch the demo of the editor in action, see real-time feedback, and explore the cyberpunk UI with tower-defense visuals. Try a guided problem now and share progress with the CodeGrind community at https://codegrind.online.",
+        "body_text": null,
+        "comment_text": "CodeGrind’s latest DSA practice upgrade combines LeetCode-style problems with AI-powered guidance and a refreshed onboarding flow for mobile users. Watch the demo of the editor in action, see real-time feedback, and explore the cyberpunk UI with tower-defense visuals. Try a guided problem now and share progress with the CodeGrind community at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: DSA Practice Upgrade with AI Assist",
+        "text": "Discover CodeGrind’s DSA practice upgrade featuring AI-powered hints, a real-time editor, and a streamlined mobile onboarding flow. The new tower-defense-inspired visualization ties programming concepts to practice. Watch the demo and try a guided problem with AI assistance. Learn more at https://codegrind.online.",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s DSA practice upgrade featuring AI-powered hints, a real-time editor, and a streamlined mobile onboarding flow. The new tower-defense-inspired visualization ties programming concepts to practice. Watch the demo and try a guided problem with AI assistance. Learn more at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind presents a DSA practice upgrade with AI-assisted hints, a real-time editor, and a revamped mobile onboarding. The updated tower-defense visualization connects concepts to practice in a cyberpunk UI. Watch the demo of the editor in action and try a guided problem with AI help. Learn more at https://codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "See the new DSA practice upgrade in action: AI guidance, real-time editor, and a mobile-friendly onboarding. Watch the editor demo, explore hints, and vibe with cyberpunk UI and tower-defense visuals. Ready to try a guided problem with AI assistance? Tap to learn more and start practicing.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-07-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
