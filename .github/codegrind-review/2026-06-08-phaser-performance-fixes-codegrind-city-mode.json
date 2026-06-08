@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-06-08-phaser-performance-fixes-codegrind-city-mode.md",
+  "review_markdown_file": ".github/codegrind-review/2026-06-08-phaser-performance-fixes-codegrind-city-mode.md",
+  "title": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements",
+  "summary": "A look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.",
+  "slug": "phaser-performance-fixes-codegrind-city-mode",
+  "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+  "image": {
+    "path": "/assets/images/codegrind/codegrind-banner.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/codegrind-banner.png",
+    "file": null
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": false,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements\n\nA look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibil…\n\nhttps://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/\n\n#CodeGrind #InterviewPrep #DSA",
+    "linkedin_text": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements\n\nA look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.\n\nRead more: https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/\n\n#CodeGrind #CodingPractice #InterviewPrep #DSA #EdTech",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements\n\nA look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibil…\n\nhttps://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/\n\n#CodeGrind #InterviewPrep #DSA",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+        "title": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements",
+        "description": "A look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/codegrind-banner.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements\n\nA look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibil…\n\nhttps://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/\n\n#CodeGrind #InterviewPrep #DSA",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+        "title": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements",
+        "description": "A look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/codegrind-banner.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements\n\nA look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.\n\nRead more: https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/\n\n#CodeGrind #CodingPractice #InterviewPrep #DSA #EdTech",
+        "title": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+        "description": "A look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/codegrind-banner.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements",
+        "text": "A look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.\n\nRead more: https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements",
+        "text": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements\n\nA look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.\n\nRead more: https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements\n\nA look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.\n\nRead more: https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "title": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-fixes-codegrind-city-mode/",
+        "description": "A look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/codegrind-banner.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Phaser Performance Fixes Behind CodeGrind's City Mode Improvements\n\nA look at the recent Phaser-focused work in CodeGrind, from background preloading to input cleanup and visibility-aware pause handling.\n\nLink in bio for the full post.\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/codegrind-banner.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
