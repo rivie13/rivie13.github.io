@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-10-codegrind-ai-assistant-launch-tutorial.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-10-codegrind-ai-assistant-launch-tutorial.json",
+  "title": "CodeGrind AI Assistant: Guided Problem-Solving in Real Time",
+  "summary": "Showcase the newly enhanced AI assistant in CodeGrind with a guided problem-solving flow, highlighting multi-model support and real-time guidance within the editor.",
+  "slug": "codegrind-ai-assistant-launch-tutorial",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now offers an upgraded AI assistant (Azure OpenAI) that helps users tackle LeetCode-like problems directly in the code editor, with model switching, persistent chat, and real-time guidance to accelerate learning.",
+  "cta": "Try the new AI-assisted problem solving in CodeGrind today and share your first solved problem with a screenshot.",
+  "visual_brief": "Short looping video: 1) user opens CodeGrind editor, 2) selects AI model and receives step-by-step hints, 3) user implements solution, 4) a quick results panel shows diagnostic feedback and score",
+  "source_media_tags": [
+    "ai-assistant",
+    "code-editor",
+    "real-time-feedback",
+    "azure-openai",
+    "problem-solving",
+    "tutorial"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assistant-launch-tutorial",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+    "file": "assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+    "file": "assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind AI Assistant is here. See real-time guidance in the editor, multi-model switching, and persistent chats for guided problem-solving. Watch a short loop of opening the editor, choosing a model, stepping through hints, and receiving instant feedback. Try the AI-assisted problem solving now.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "image_alt": "CodeGrind AI Assistant: Guided Problem-Solving in Real Time",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind AI Assistant is here. See real-time guidance in the editor, multi-model switching, and persistent chats for guided problem-solving. Watch a short loop of opening the editor, choosing a model, stepping through hints, and receiving instant feedback. Try the AI-assisted problem solving now.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "image_alt": "CodeGrind AI Assistant: Guided Problem-Solving in Real Time",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind introduces an upgraded AI assistant (Azure OpenAI) for guided problem-solving directly in the code editor. The short looping visual demonstrates selecting a model, receiving step-by-step hints, implementing a solution, and viewing real-time diagnostic feedback. Try the new AI-assisted problem solving in CodeGrind today and share your first solved problem with a screenshot. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind AI Assistant—Guided Problem-Solving in Real Time",
+        "text": "CodeGrind unveils an upgraded AI assistant (Azure OpenAI) that guides you through LeetCode-like problems inside the code editor. The loop shows selecting a model, getting step-by-step hints, implementing the solution, and seeing real-time diagnostic feedback. Try the AI-assisted problem solving in CodeGrind and share your first solved problem with a screenshot at the official site.",
+        "body_text": null,
+        "comment_text": "CodeGrind unveils an upgraded AI assistant (Azure OpenAI) that guides you through LeetCode-like problems inside the code editor. The loop shows selecting a model, getting step-by-step hints, implementing the solution, and seeing real-time diagnostic feedback. Try the AI-assisted problem solving in CodeGrind and share your first solved problem with a screenshot at the official site.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind AI Assistant Launch",
+        "text": "Explore CodeGrind’s new AI assistant for guided problem-solving within the editor. The video demonstrates multi-model support, persistent chat, and real-time feedback as you tackle problems and optimize solutions.",
+        "body_text": null,
+        "comment_text": "Explore CodeGrind’s new AI assistant for guided problem-solving within the editor. The video demonstrates multi-model support, persistent chat, and real-time feedback as you tackle problems and optimize solutions.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Introducing the CodeGrind AI Assistant: a guided problem-solving flow in the editor with real-time feedback. Watch the short loop—open the editor, choose a model, follow hints, implement, and review the diagnostic score. Try the new AI-assisted problem solving in CodeGrind today and share your first solved problem with a screenshot at codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind AI Assistant now guides you through real-time problem solving in the editor. See multi-model support, step-by-step hints, and instant feedback in action. Watch the workflow, try the AI-assisted solving flow, and share your first solved problem with a screenshot. Tap to learn more.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-10-codegrind-ai-assistant-launch-tutorial.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
