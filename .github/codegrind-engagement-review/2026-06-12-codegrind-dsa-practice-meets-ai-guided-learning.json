@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.json",
+  "title": "CodeGrind: DSA Practice Meets AI Guided Learning",
+  "summary": "Show how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes.",
+  "slug": "codegrind-dsa-practice-meets-ai-guided-learning",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind combines structured DSA challenges, real-time code execution, and AI-guided problem-solving to accelerate learning. Users tackle LeetCode-style problems in a game-like environment with immediate feedback and scalable AI help.",
+  "cta": "Try a sample challenge with AI help now or sign in to continue practicing with personalized guidance.",
+  "visual_brief": "Static, high-contrast UI mockup showing code editor, problem panel, and AI assistant alongside a cyberpunk-styled CodeGrind interface; include subtle leaderboard hints and a prominent 'Start Challenge' button.",
+  "source_media_tags": [
+    "code-editor-ui",
+    "ai-assistant",
+    "leaderboard",
+    "cyberpunk-theme",
+    "problem-statement",
+    "real-time-execution"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsa-practice-meets-ai-guided-learning",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+    "file": "assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+    "file": "assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: DSA Practice Meets AI Guided Learning. Show how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "image_alt": "CodeGrind: DSA Practice Meets AI Guided Learning",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: DSA Practice Meets AI Guided Learning. Show how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "image_alt": "CodeGrind: DSA Practice Meets AI Guided Learning",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: DSA Practice Meets AI Guided Learning\n\nShow how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes.\n\nTry a sample challenge with AI help now or sign in to continue practicing with personalized guidance.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: DSA Practice Meets AI Guided Learning",
+        "text": "Show how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Show how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: DSA Practice Meets AI Guided Learning",
+        "text": "CodeGrind: DSA Practice Meets AI Guided Learning\n\nShow how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind: DSA Practice Meets AI Guided Learning\n\nShow how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: DSA Practice Meets AI Guided Learning\n\nShow how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind: DSA Practice Meets AI Guided Learning\n\nShow how CodeGrind blends LeetCode-style problems with Azure OpenAI assistance and a cyberpunk-tuned UI to boost practice and learning outcomes.\n\nTry a sample challenge with AI help now or sign in to continue practicing with personalized guidance.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-12-codegrind-dsa-practice-meets-ai-guided-learning.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
