@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-14-codegrind-ci-cd-and-ai-enhancements.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-14-codegrind-ci-cd-and-ai-enhancements.json",
+  "title": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks",
+  "summary": "Showcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in.",
+  "slug": "codegrind-ci-cd-and-ai-enhancements",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind continues to evolve with robust CI/CD improvements, enhanced Azure OpenAI assistance, and a more seamless Google authentication flow. This campaign highlights the reliability, accessibility, and smarter support that users get as they practice DSA through our gamified platform.",
+  "cta": "Explore the latest CodeGrind updates and try the improved AI-assisted problem solving and secure sign-in today.",
+  "visual_brief": "Static announcement-style graphic featuring CodeGrind UI elements: a clean dashboard mockup, a highlighted AI assistant chat panel, and a prominent Google sign-in button. Include subtle cyberpunk accents and a badge for CI/CD improvements.",
+  "source_media_tags": [
+    "announcement",
+    "ui-mockup",
+    "ai-assistant",
+    "google-sign-in",
+    "ci-cd",
+    "security-updates"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ci-cd-and-ai-enhancements",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+    "file": "assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+    "file": "assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks. Showcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "image_alt": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks. Showcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "image_alt": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks\n\nShowcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in.\n\nExplore the latest CodeGrind updates and try the improved AI-assisted problem solving and secure sign-in today.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks",
+        "text": "Showcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Showcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks",
+        "text": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks\n\nShowcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks\n\nShowcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks\n\nShowcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind improvements: CI/CD, AI assistant upgrades, and security tweaks\n\nShowcase recent CodeGrind updates: CI/CD polish, Azure OpenAI integration enhancements, and streamlined authentication with Google sign-in.\n\nExplore the latest CodeGrind updates and try the improved AI-assisted problem solving and secure sign-in today.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-14-codegrind-ci-cd-and-ai-enhancements.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
