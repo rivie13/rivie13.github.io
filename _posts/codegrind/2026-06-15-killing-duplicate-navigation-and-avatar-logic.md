@@ -35,6 +35,7 @@ The refactor fixed both by moving shared behavior into utilities and making cons
 
 Before this cleanup, `App.jsx` contained its own path normalization helper:
 
+```jsx
 const LEARNING_PATH_IDS = new Set(['python-path', 'javascript-path', 'java-path', 'cpp-path']);
 
 const normalizeLearningPathId = (value) => {
@@ -49,9 +50,11 @@ const normalizeLearningPathId = (value) => {
   if (normalized === 'cpp' || normalized === 'c++') return 'cpp-path';
   return null;
 };
+```
 
 I also had effectively the same logic in `useGuestProgress.js`:
 
+```jsx
 const LEARNING_PATH_IDS = new Set(['python-path', 'javascript-path', 'java-path', 'cpp-path']);
 
 const normalizeLearningPathId = (value) => {
@@ -67,27 +70,31 @@ const normalizeLearningPathId = (value) => {
 
   return null;
 };
+```
 
 That is classic copy-paste technical debt. It works right up until one call site gets patched and the other does not.
 
 I replaced both local implementations with a shared import.
 
 ### In `App.jsx`
-
+```jsx
 import { normalizeLearningPathId } from './utils/navigation/learningPathUtils';
-
+```
 ### In `useGuestProgress.js`
-
+```jsx
 import { normalizeLearningPathId } from '../../utils/navigation/learningPathUtils';
-
+```
 ### Why this mattered
 
 `App.jsx` uses the normalized path to derive trial behavior:
-
+```jsx
 const getSelectedTrialLearningPath = (guest) =>
   normalizeLearningPathId(guest?.selectedTrialLearningPath || guest?.progress?.trialLearningPath);
+```
+`useGuestProgress.js` also depends on the same normalization rules while interpreting guest progress state. 
 
-`useGuestProgress.js` also depends on the same normalization rules while interpreting guest progress state. If those two places disagree, guest onboarding and in-app routing diverge. That is the kind of bug that feels random to users because one screen says “you’re on JavaScript” and another behaves like no path was selected.
+If those two places disagree, guest onboarding and in-app routing diverge. That is the kind of bug that feels random to users 
+because one screen says “you’re on JavaScript” and another behaves like no path was selected.
 
 By forcing both flows through one utility, I reduced that risk to one implementation surface.
 
@@ -97,6 +104,7 @@ The city UI had another repeated block: avatar asset resolution with diagonal fa
 
 In `CityScene.jsx`, I had this:
 
+```jsx
 const IDLE_DIRECTION_FALLBACKS = {
   northeast: ['east', 'north'],
   northwest: ['west', 'north'],
@@ -133,13 +141,13 @@ const getAvatarCandidates = (avatarAsset) => {
 
   return [primarySrc, fallbackSrc];
 };
-
+```
 And `CityTravelTransition.jsx` contained the same logic again.
 
 I replaced both local copies with a shared import:
-
+```jsx
 import { resolveAvatarAsset, getAvatarCandidates } from '../../utils/city/avatarUtils';
-
+```
 That happened in both files.
 
 ### What this fixed beyond “cleaner code”
@@ -154,7 +162,7 @@ By moving both of these into `avatarUtils`, I made sprite selection deterministi
 
 ## Deleting the legacy city route instead of pretending it still mattered
 
-The bigger cleanup was removing the legacy city page entirely.
+The bigger cleanup was removing the legacy city page entirely. The site just implemented an actual game engine with phaser.js so there was no reason to keep the old stuff. The legacy code was meant to get a quick idea out on how I wanted the experience to be like. So it was time to clean it up a bit.
 
 In `App.jsx`, I removed the import:
 
@@ -172,6 +180,7 @@ Then I deleted `src/pages/city/CityMap.jsx`, which was huge and fully deprecated
 
 The deleted file was over two thousand lines. Even the visible section tells the story:
 
+```
 import { Box, Button, HStack, Text, VStack, useToast } from '@chakra-ui/react';
 import { keyframes } from '@emotion/react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -185,9 +194,9 @@ import audioManager from '../../utils/audio/AudioManager';
 import audioService from '../../utils/audio/AudioService';
 import getAssetUrl from '../../utils/assets/assetUrl';
 import useIsMobileDevice from '../../hooks/useIsMobileDevice';
-
+```
 And further down, it carried its own constants and duplicated domain rules:
-
+```
 const CITY_WALK_SPEED = 43.2;
 const LEARNING_PATH_IDS = new Set(['python-path', 'javascript-path', 'java-path', 'cpp-path']);
 const CLUSTER_SCENE_IDS = new Set(['array-fixer-office-01']);
@@ -198,26 +207,33 @@ const AVATAR_DIRECTION_FALLBACKS = {
   southeast: ['east', 'south'],
   southwest: ['west', 'south'],
 };
-
-That file had become a gravity well: rendering, routing, movement, mobile controls, audio, apartment state, scene math, and navigation behavior all mixed into one place. Keeping it around behind a legacy route meant I was still shipping a dormant alternate implementation of city logic.
+```
+That file had become a gravity well: rendering, routing, movement, mobile controls, audio, apartment state, scene math, and navigation behavior all mixed into one place. Keeping it around behind a legacy route meant I was still shipping a dormant alternate implementation of city logic. More importantly this code was not being used by the new phaser.js engine implementation so it needed to be removed.
 
 Dormant code is not free. It still affects bundle analysis, future refactors, route safety, and mental load.
 
 ### Why I removed the route instead of keeping a compatibility alias
 
-Because compatibility layers are only worth it if something still depends on them.
+Because compatibility layers are only worth it if something still depends on them. With phaser, I do not need these things, because it does it already for me. That meant it was cleaning time.
 
 At this point the active path was:
-
+```
 const CITY_ROUTE_PATH = '/city';
 const LEGACY_CITY_PHASER_ROUTE_PATH = '/city/phaser-preview';
-
+```
 and the app already routes the real city entry through the Phaser-based page:
-
+```
 <Route path={CITY_ROUTE_PATH} element={<CityPhaserRoute />} />
-
+```
 So keeping `/city/legacy` alive just meant I had two city implementations with overlapping responsibilities. That is how regressions sneak in during “small” updates.
 
 ## This refactor also reduced import-level confusion
 
 One detail I care about in large React codebases is import truthfulness. If a component needs city avatar resolution, it should import a city avatar utility,
+but that does not mean that we should just keep dead import either. Having lots of dead imports can lead to a bit of bloat,
+and every bit counts when you are doing a lot in React, and it's just nicer knowing that your dead code is cleaned out of the codebase.
+
+The next steps of the refactor for this round will be taking out the old art style code which the AI left in during the new
+art implementation that I was too lazy to take out at the time. There are also a lot of component files that have logic that 
+should be extracted out into hooks with the city implementation I have. It's important to keep code tidy to ensure that when you want to expand you can
+and more importantly when that weird bug comes someday and you have to hunt for it, you'll have better knowledge of where to look.
