@@ -18,7 +18,7 @@ The immediate problem was simple: I had the same logic copied across multiple pl
 
 This pass was mostly about centralizing rules, deleting dead code, and reducing the number of places where the app could disagree with itself. The work landed inside the main frontend app, guest progress flow, and city scene rendering.
 
-If you want the live product context, the app is at <https://codegrind.online>, and the codebase is here: <https://github.com/rivie13/CodeGrind>.
+If you want the live product context, the app is at <https://codegrind.online>, and you can check out my github here: <https://github.com/rivie13>.
 
 ## The real problem: duplicated rules rot faster than features
 
