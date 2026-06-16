@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.json",
+  "title": "CodeGrind: AI Assistant meets Code Breach Tower Defense Sync",
+  "summary": "Show how the AI assistant guides problem-solving while Code Breach towers visualize coding concepts, highlighting real-time interaction and problem-solving flow.",
+  "slug": "codegrind-ai-assistant-and-tower-defense-sync",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "Demonstrate the integration of Azure OpenAI-powered guidance with Code Grinds’ cyberpunk Code Breach tower defense—where programming concepts are visually represented as towers and the AI assistant helps users solve challenges in real time.",
+  "cta": "Try a problem now with AI guidance and watch your towers adapt to the solution flow",
+  "visual_brief": "Dynamic 15–20s clip: split screen showing (left) AI chat panel guiding a LeetCode-style problem; (right) in-game view of Code Breach towers like ForLoop and IfCondition upgrading in response to AI prompts; include subtle cyberpunk aesthetics and UI chrome from CodeGrind.",
+  "source_media_tags": [
+    "ai-assistant",
+    "code-breach",
+    "tower-defense",
+    "cyberpunk-ui",
+    "live-coding",
+    "gaming-education"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assistant-and-tower-defense-sync",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+    "file": "assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+    "file": "assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind blends AI-powered guidance with Code Breach tower defense. See real-time problem-solving as towers upgrade in response to AI prompts. Watch the cyberpunk UI and live-coding flow in a single image, then try a problem with AI guidance and let your towers adapt. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "image_alt": "CodeGrind: AI Assistant meets Code Breach Tower Defense Sync",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind blends AI-powered guidance with Code Breach tower defense. See real-time problem-solving as towers upgrade in response to AI prompts. Watch the cyberpunk UI and live-coding flow in a single image, then try a problem with AI guidance and let your towers adapt. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "image_alt": "CodeGrind: AI Assistant meets Code Breach Tower Defense Sync",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind presents AI Assistant meets Code Breach Tower Defense Sync. A 15–20s motion-forward concept shows an AI chat guiding a LeetCode-style problem on the left, while Code Breach towers (ForLoop, IfCondition) upgrade in real time on the right in a cyberpunk UI. See real-time problem-solving flow and problem-solving guidance powered by Azure OpenAI. Try a problem now with AI guidance and watch your towers adapt to the solution flow. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI Assistant meets Code Breach Tower Defense Sync",
+        "text": "New CodeGrind concept: an AI assistant guides real-time problem-solving in a Code Breach tower defense setup. Visualize programming concepts as towers that upgrade in response to AI prompts, all within a cyberpunk UI. Watch the live-coding flow and see how Azure OpenAI-powered guidance accelerates solving LeetCode-style challenges. Try a problem now with AI guidance and watch your towers adapt to the solution flow at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "New CodeGrind concept: an AI assistant guides real-time problem-solving in a Code Breach tower defense setup. Visualize programming concepts as towers that upgrade in response to AI prompts, all within a cyberpunk UI. Watch the live-coding flow and see how Azure OpenAI-powered guidance accelerates solving LeetCode-style challenges. Try a problem now with AI guidance and watch your towers adapt to the solution flow at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind — AI Assistant + Code Breach Tower Defense",
+        "text": "Explore CodeGrind’s AI-assisted problem-solving experience. In this concept, an AI chat panel guides a LeetCode-style problem while Code Breach towers upgrade based on AI prompts, all inside a cyberpunk interface. A live-coding, problem-solving flow demonstrating real-time guidance. Try a problem now with AI guidance and watch your towers adapt to the solution flow at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Explore CodeGrind’s AI-assisted problem-solving experience. In this concept, an AI chat panel guides a LeetCode-style problem while Code Breach towers upgrade based on AI prompts, all inside a cyberpunk interface. A live-coding, problem-solving flow demonstrating real-time guidance. Try a problem now with AI guidance and watch your towers adapt to the solution flow at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI Assistant meets Code Breach Tower Defense Sync. A dynamic concept video-worthy image shows an AI chat guiding a LeetCode-style problem on one side and Code Breach towers upgrading in response to AI prompts on the other, embedded in a cyberpunk UI. See real-time problem-solving flow and the Azure OpenAI-powered guidance. Try a problem now with AI guidance and watch your towers adapt to the solution flow at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "AI Assistant guides real-time problem-solving in CodeGrind’s Code Breach Tower Defense concept. See towers upgrade as AI prompts help solve LeetCode-style challenges, all in a cyberpunk UI. Try a problem now with AI guidance and watch your towers adapt to the solution flow. CTA: Try a problem now at the link in bio.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-16-codegrind-ai-assistant-and-tower-defense-sync.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
