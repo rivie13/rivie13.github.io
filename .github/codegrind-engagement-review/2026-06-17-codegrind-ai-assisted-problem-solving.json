@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-17-codegrind-ai-assisted-problem-solving.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-17-codegrind-ai-assisted-problem-solving.json",
+  "title": "AI-assisted problem solving in CodeGrind",
+  "summary": "Showcase how CodeGrind's AI assistant helps learners tackle DS&A challenges in real-time with guided hints and model switching.",
+  "slug": "codegrind-ai-assisted-problem-solving",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind combines LeetCode-style problems with Azure OpenAI-powered guidance, giving learners dynamic problem-solving help, multiple model options, and an integrated editor to practice and learn faster.",
+  "cta": "Try a new AI-assisted problem now and compare how different models influence your approach.",
+  "visual_brief": "A short screen-recorded flow: user opens a DS&A problem in CodeGrind, AI assistant panel appears with model toggle (GPT-4o/GPT-3.5), hints unfold step-by-step, code editor updates in real-time, ending with a quick summary of solution approach and a prompt to try another model.",
+  "source_media_tags": [
+    "ai-assisted-coding",
+    "dsalgo-practice",
+    "interactive-editor",
+    "model-switching",
+    "real-time-hints",
+    "code-grind-ui"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assisted-problem-solving",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+    "file": "assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+    "file": "assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind brings AI-assisted problem solving to DS&A practice. See real-time hints, model switching (GPT-4o vs GPT-3.5), and an integrated editor that updates as you work through a LeetCode-style challenge. Try a new AI-assisted problem now and compare model approaches. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "image_alt": "AI-assisted problem solving in CodeGrind",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind brings AI-assisted problem solving to DS&A practice. See real-time hints, model switching (GPT-4o vs GPT-3.5), and an integrated editor that updates as you work through a LeetCode-style challenge. Try a new AI-assisted problem now and compare model approaches. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "image_alt": "AI-assisted problem solving in CodeGrind",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind now showcases AI-assisted problem solving for DS&A practice. Watch a short screen flow: opening a problem, AI assistant panel with model toggle (GPT-4o / GPT-3.5), step-by-step hints, live code editor updates, and a summary of the solution approach. See how dynamic guidance accelerates learning. Try a new AI-assisted problem now and compare model approaches. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind AI-assisted DS&A problem solving",
+        "text": "CodeGrind introduces an AI-assisted problem-solving flow for DS&A practice. Watch a short screen-recorded demo: open a problem, switch between GPT-4o and GPT-3.5, receive guided hints, see real-time code updates, and get a concise solution overview. Try a new AI-assisted problem and compare model approaches at CodeGrind.",
+        "body_text": null,
+        "comment_text": "CodeGrind introduces an AI-assisted problem-solving flow for DS&A practice. Watch a short screen-recorded demo: open a problem, switch between GPT-4o and GPT-3.5, receive guided hints, see real-time code updates, and get a concise solution overview. Try a new AI-assisted problem and compare model approaches at CodeGrind.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI-assisted problem solving",
+        "text": "Explore CodeGrind's AI-assisted problem-solving flow. See how guided hints and model switching (GPT-4o vs GPT-3.5) help you tackle DS&A challenges with an integrated editor and real-time updates. Try a new AI-assisted problem and compare models.",
+        "body_text": null,
+        "comment_text": "Explore CodeGrind's AI-assisted problem-solving flow. See how guided hints and model switching (GPT-4o vs GPT-3.5) help you tackle DS&A challenges with an integrated editor and real-time updates. Try a new AI-assisted problem and compare models.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Discover CodeGrind's AI-assisted problem solving for DS&A practice. A short screen-flow shows opening a problem, AI panel with model toggle, step-by-step hints, live code updates, and a model-compare summary. Try a new AI-assisted problem now and see how different models influence your approach. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "See AI-assisted problem solving in CodeGrind: open a DS&A challenge, toggle between GPT-4o and GPT-3.5, watch real-time hints unfold, and watch the editor update as you build the solution. Ready to compare models? Try a new AI-assisted problem now.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-17-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
