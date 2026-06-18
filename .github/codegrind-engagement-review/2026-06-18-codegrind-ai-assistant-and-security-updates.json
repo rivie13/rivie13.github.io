@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-18-codegrind-ai-assistant-and-security-updates.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-18-codegrind-ai-assistant-and-security-updates.json",
+  "title": "CodeGrind: AI Assistant Enhancements & Secure Sign-In",
+  "summary": "Highlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access.",
+  "slug": "codegrind-ai-assistant-and-security-updates",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now ships an enhanced Azure OpenAI-powered AI assistant and Google authentication integration, improving problem-solving guidance, model-switching during chats, and a streamlined, secure sign-in flow for faster onboarding and a smoother learning experience.",
+  "cta": "Try the updated AI assistant in a new problem and log in with Google to experience the streamlined onboarding.",
+  "visual_brief": "A short 30-45s demo video showing: (1) user initiating a LeetCode-style problem, (2) AI assistant providing step-by-step guidance with model-switching, (3) clicking 'Sign in with Google' and a quick profile sync, (4) subtle UI cues of secure OAuth flow and real-time problem-solving tips.",
+  "source_media_tags": [
+    "ai-assistant-demo",
+    "google-auth-flow",
+    "oauth-signin",
+    "problem-solving-guidance",
+    "azure-openai",
+    "ui-demo"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assistant-and-security-updates",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: AI Assistant Enhancements & Secure Sign-In. Highlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "image_alt": "CodeGrind: AI Assistant Enhancements & Secure Sign-In",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: AI Assistant Enhancements & Secure Sign-In. Highlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "image_alt": "CodeGrind: AI Assistant Enhancements & Secure Sign-In",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI Assistant Enhancements & Secure Sign-In\n\nHighlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access.\n\nTry the updated AI assistant in a new problem and log in with Google to experience the streamlined onboarding.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI Assistant Enhancements & Secure Sign-In",
+        "text": "Highlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Highlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI Assistant Enhancements & Secure Sign-In",
+        "text": "CodeGrind: AI Assistant Enhancements & Secure Sign-In\n\nHighlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind: AI Assistant Enhancements & Secure Sign-In\n\nHighlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI Assistant Enhancements & Secure Sign-In\n\nHighlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind: AI Assistant Enhancements & Secure Sign-In\n\nHighlight the new AI assistant capabilities and Google authentication integration that streamline problem-solving and secure user access.\n\nTry the updated AI assistant in a new problem and log in with Google to experience the streamlined onboarding.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-18-codegrind-ai-assistant-and-security-updates.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
