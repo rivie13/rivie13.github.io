@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-21-codegrind-ai-assisted-problem-solving.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-21-codegrind-ai-assisted-problem-solving.json",
+  "title": "AI-assisted problem solving in CodeGrind",
+  "summary": "Showcase CodeGrind's AI-assisted problem solving and real-time guidance as users tackle a challenge with the Azure OpenAI integration.",
+  "slug": "codegrind-ai-assisted-problem-solving",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind combines LeetCode-style challenges with an AI assistant to guide you through solving problems in real-time, showcasing problem-solving flow from prompt to solution.",
+  "cta": "Try a practice problem with AI help now",
+  "visual_brief": "A short demo style video: split-screen showing the CodeGrind editor on one side with a LeetCode-style problem prompt, and the AI assistant panel providing hints and code suggestions; subtle cyberpunk UI touches and real-time code updates.",
+  "source_media_tags": [
+    "ai-assisted-coding",
+    "problem-solving-flow",
+    "real-time-guidance",
+    "code-editor-ui",
+    "azure-openai-integration",
+    "practice-problems"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assisted-problem-solving",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+    "file": "assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+    "file": "assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind taps AI-assisted problem solving with real-time guidance. See the editor, LeetCode-style prompt, and AI hints in one clean workflow. Try a practice problem with AI help now.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "image_alt": "AI-assisted problem solving in CodeGrind",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind taps AI-assisted problem solving with real-time guidance. See the editor, LeetCode-style prompt, and AI hints in one clean workflow. Try a practice problem with AI help now.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "image_alt": "AI-assisted problem solving in CodeGrind",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind combines LeetCode-style challenges with an AI assistant that provides real-time guidance as you work through problems. Watch the editor side-by-side with AI hints and code suggestions, powered by Azure OpenAI integration. Try a practice problem with AI help now. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI-assisted problem solving in real time",
+        "text": "CodeGrind showcases AI-assisted problem solving with real-time guidance. A split-screen view demonstrates the editor alongside an AI assistant offering hints and code suggestions as you tackle a LeetCode-style prompt. Powered by Azure OpenAI integration. Try a practice problem with AI help now. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind showcases AI-assisted problem solving with real-time guidance. A split-screen view demonstrates the editor alongside an AI assistant offering hints and code suggestions as you tackle a LeetCode-style prompt. Powered by Azure OpenAI integration. Try a practice problem with AI help now. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind — AI-assisted problem solving workflow",
+        "text": "Discover CodeGrind’s AI-assisted problem solving workflow: LeetCode-style prompts with real-time guidance from an AI assistant, integrated with Azure OpenAI. See how hints and code suggestions unfold as you progress. Try a practice problem with AI help now. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s AI-assisted problem solving workflow: LeetCode-style prompts with real-time guidance from an AI assistant, integrated with Azure OpenAI. See how hints and code suggestions unfold as you progress. Try a practice problem with AI help now. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Explore CodeGrind’s AI-assisted problem solving with real-time guidance. A short demo-style view shows the editor and AI assistant working together on a LeetCode-like prompt, powered by Azure OpenAI. Try a practice problem with AI help now at the site.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "See CodeGrind in action: AI-assisted problem solving with real-time guidance inside the editor, paired with AI hints and code suggestions. A clean, editorial look demonstrates the workflow. Ready to test it yourself? Try a practice problem with AI help now.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-21-codegrind-ai-assisted-problem-solving.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
