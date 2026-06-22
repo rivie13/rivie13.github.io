@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-22-codegrind-dsa-practice-tower-defense-update.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-22-codegrind-dsa-practice-tower-defense-update.json",
+  "title": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update",
+  "summary": "Highlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring.",
+  "slug": "codegrind-dsa-practice-tower-defense-update",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now blends practical DSA practice with a cyberpunk tower-defense aesthetic, featuring an improved real-time editor, Azure OpenAI assistance, and refreshed problem-to-tower mappings that visualize programming concepts as defensive structures. See faster loading, smarter AI guidance, and a more immersive learning experience.",
+  "cta": "Try a live problem now and watch towers generate code snippets as you solve.",
+  "visual_brief": "Static product-like reveal image: CodeGrind editor interface with cyberpunk tower visuals, clear problem panel, and AI chat, plus shimmering towers representing ForLoop, IfCondition, and Function. Include subtle UI polish cues and a dark neon color palette.",
+  "source_media_tags": [
+    "codegrind-editor-ui",
+    "cyberpunk-tower-defense",
+    "ai-assistant-interface",
+    "problem-visualization",
+    "real-time-coding",
+    "tutorial-snippet"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsa-practice-tower-defense-update",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+    "file": "assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+    "file": "assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update. Highlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "image_alt": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update. Highlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "image_alt": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update\n\nHighlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring.\n\nTry a live problem now and watch towers generate code snippets as you solve.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update",
+        "text": "Highlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Highlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update",
+        "text": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update\n\nHighlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update\n\nHighlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update\n\nHighlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind DSA Practice Meets Cyberpunk Tower Defense Update\n\nHighlighting CodeGrind's updated tower-defense-themed problem visualization and Azure OpenAI-powered guidance, with new UI polish and real-time scoring.\n\nTry a live problem now and watch towers generate code snippets as you solve.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-22-codegrind-dsa-practice-tower-defense-update.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
