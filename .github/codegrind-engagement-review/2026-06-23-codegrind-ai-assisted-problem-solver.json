@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-23-codegrind-ai-assisted-problem-solver.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-23-codegrind-ai-assisted-problem-solver.json",
+  "title": "AI-assisted Problem Solver: Elevate DSA Practice with Azure OpenAI Coach",
+  "summary": "Showcase CodeGrind's AI assistant guiding users through a LeetCode-style problem, highlighting real-time coding help, model-switching, and seamless integration with the coding workflow.",
+  "slug": "codegrind-ai-assisted-problem-solver",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind combines a real-time code editor with an Azure OpenAI-powered assistant to help users solve DSA problems more efficiently. The AI offers problem-solving guidance, model switching, and persistent chat within the practice environment, improving learning flow without leaving the editor.",
+  "cta": "Try the AI-assisted problem solving in CodeGrind now",
+  "visual_brief": "Short to mid-length walkthrough video: show the in-editor AI chat guiding a LeetCode-style problem, model-switching UI, and real-time code execution. Include UI chrome, problem panel, code editor, and AI responses with subtle cyberpunk aesthetic elements.",
+  "source_media_tags": [
+    "ai-assistant",
+    "in-editor-chat",
+    "problem-solving-demo",
+    "code-execution",
+    "azure-openai",
+    "ui-demo"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assisted-problem-solver",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+    "file": "assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+    "file": "assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind AI-assisted Problem Solver: real-time in-editor guidance powered by Azure OpenAI Coach. See problem-panel hints, model-switching, and live code execution in a seamless workflow. Try the AI-assisted problem solving in CodeGrind now: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "image_alt": "AI-assisted Problem Solver: Elevate DSA Practice with Azure OpenAI Coach",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind AI-assisted Problem Solver: real-time in-editor guidance powered by Azure OpenAI Coach. See problem-panel hints, model-switching, and live code execution in a seamless workflow. Try the AI-assisted problem solving in CodeGrind now: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "image_alt": "AI-assisted Problem Solver: Elevate DSA Practice with Azure OpenAI Coach",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind introduces an AI-assisted Problem Solver that sits inside the editor, pairing a real-time chat with an Azure OpenAI-powered assistant to guide you through LeetCode-style problems. Features include problem-solving guidance, model switching, and persistent chat within the practice environment for a smoother learning flow without leaving the editor. Try the AI-assisted problem solving in CodeGrind now: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI-assisted Problem Solver inside the editor",
+        "text": "Introducing CodeGrind’s AI-assisted Problem Solver, an in-editor assistant powered by Azure OpenAI. Watch a LeetCode-style problem solved with real-time guidance, model-switching, and persistent chat—directly in your coding workflow. Explore the AI-assisted problem solving in CodeGrind now: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Introducing CodeGrind’s AI-assisted Problem Solver, an in-editor assistant powered by Azure OpenAI. Watch a LeetCode-style problem solved with real-time guidance, model-switching, and persistent chat—directly in your coding workflow. Explore the AI-assisted problem solving in CodeGrind now: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI-assisted Problem Solver inside the editor",
+        "text": "See CodeGrind’s AI-assisted Problem Solver in action: an in-editor AI chat that guides you through problems, switches models, and keeps your problem-solving history inside the editor. Experience real-time coding help within your workflow. Try the AI-assisted problem solving in CodeGrind now: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "See CodeGrind’s AI-assisted Problem Solver in action: an in-editor AI chat that guides you through problems, switches models, and keeps your problem-solving history inside the editor. Experience real-time coding help within your workflow. Try the AI-assisted problem solving in CodeGrind now: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Explore CodeGrind’s AI-assisted Problem Solver, powered by Azure OpenAI, crafted to guide you through LeetCode-style problems without leaving the editor. Watch the in-editor AI chat provide real-time hints, model switching, and persistent context as you code. Learn more and try the AI-assisted problem solving in CodeGrind now at CodeGrind.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "See CodeGrind’s AI-assisted Problem Solver in action: an in-editor AI chat guiding you through a LeetCode-style problem with real-time code execution and model-switching. Elevate your DSA practice within your workflow. Try the AI-assisted problem solving in CodeGrind now.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-23-codegrind-ai-assisted-problem-solver.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
