@@ -15,35 +15,42 @@ canonical_url: https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-load
 CodeGrind's implementation of the phaser game engine had the kind of loading bug that wastes an entire afternoon because nothing is technically “crashing.” The page loaded, Phaser booted, the scene existed, but the apartment intro flow could get stuck behind an overlay camera or render in the wrong visual state depending on timing. There was also just a lot of performance bugs that really made the site not feel great to use on initial boot, which is a big cause for people to bounce.
 
 The real problem was a combination of many things:
-1. lifecycle drift: React route hydration, Phaser scene readiness, service worker asset fetches, and mobile onboarding UI were all making assumptions about when the game was “ready.”
-2. Phaser's boot sequence was not being initiated at the points it should have been or worse being skipped if a user went through the home page too fast, which caused loading screens to get stuck occassionally.
-3. Heavy network calls to load in big assests caused CPU spikes which caused the site to stutter or worse freeze up because these loads were happening on the main thread.
+
+1. **Lifecycle drift**: React route hydration, Phaser scene readiness, service worker asset fetches, and mobile onboarding UI were all making assumptions about when the game was “ready.”
+2. **Boot sequence drops**: Phaser's boot sequence was not being initiated at the points it should have been or worse being skipped if a user went through the home page too fast, which caused loading screens to get stuck occasionally.
+3. **Main thread bottlenecks**: Heavy network calls to load in big assets caused CPU spikes which caused the site to stutter or worse freeze up because these loads were happening on the main thread.
 
 I spent this pass tightening those boundaries in [CodeGrind](https://codegrind.online): overlay cameras now explicitly enter and exit fullscreen states, the service worker path for game assets got stricter error handling, and lazy loading reduced the amount of frontend work competing with Phaser startup.
+
+---
 
 ## The Runtime Bug: Phaser Was Ready, but the Camera Stack Wasn’t
 
 The failing path was City Mode apartment loading:
 
-```
+```text
 /city?scene=apartment-room-01
 &entry=path-choice
 &track=beginner
 &learningPath=python-path
 &apartmentState=hub
 &fallback=%2Flearning%2Fpython-path
+
 ```
+
 The apartment scene uses a normal main camera for the room plus a fullscreen overlay camera for intro and transition UI. The issue was that the overlay camera could remain visible after the overlay targets faded out.
 
 That leaves Phaser in a bad visual state:
 
-- scene children exist
-- main camera exists
-- intro overlay objects may be hidden
-- fullscreen overlay camera can still be active
-- rendering appears blank, blocked, or visually stale
+* Scene children exist
+* Main camera exists
+* Intro overlay objects may be hidden
+* Fullscreen overlay camera can still be active
+* Rendering appears blank, blocked, or visually stale
 
 The bug was not “Phaser didn’t load.” It was “Phaser loaded, but the camera visibility lifecycle was under-specified.”
+
+---
 
 ## I Added a Headless Scene Inspection Script
 
@@ -99,23 +106,31 @@ async function run() {
 }
 
 run().catch(console.error);
+
 ```
+
 The important part is this block:
+
 ```js
 overlayCameraExists: !!scene.fullscreenOverlayCamera,
 overlayCameraVisible: scene.fullscreenOverlayCamera ? scene.fullscreenOverlayCamera.visible : null,
 childrenCount: scene.children ? scene.children.list.length : 0,
 childrenTypes: scene.children ? scene.children.list.map(c => c.type) : [],
+
 ```
+
 I did not need a full test harness for this pass. I needed a fast runtime inspection hook that answered one question: *is the scene actually loaded, or is camera state lying to me?*
 
 That gave me a clean split between asset/preload failures and rendering/camera failures.
+
+---
 
 ## The Core Fix: Make Overlay Camera Visibility Explicit
 
 The first lifecycle fix landed in `createApartmentPreviewScene.js`.
 
 When the apartment scene finishes hiding intro targets and returns to the main viewport, I now force the fullscreen overlay camera off:
+
 ```js
 if (this.fullscreenOverlayCamera) {
   this.fullscreenOverlayCamera.setVisible(false);
@@ -124,12 +139,15 @@ if (this.fullscreenOverlayCamera) {
 if (this.cameras?.main) {
   this.updateViewportLayout();
 }
+
 ```
+
 This looks small, but it removes ambiguity. The overlay targets fading out is not the same thing as the overlay camera becoming inactive. Phaser will still keep a camera alive until I explicitly change it.
 
 ### Turning the Overlay Camera Back On During Intro
 
 The matching change went into `introFlowMethods.js`:
+
 ```js
 this.layoutIntroOverlay?.();
 
@@ -140,18 +158,23 @@ if (this.fullscreenOverlayCamera) {
 [this.introBackdropMatte, this.introCityBackdrop, this.introCityTint]
   .filter(Boolean)
   .forEach((target) => {
+
 ```
+
 This is the other half of the lifecycle contract:
 
-- intro starts → overlay camera visible
-- intro ends → overlay camera hidden
-- viewport layout updates → main camera owns the room again
+* Intro starts → overlay camera visible
+* Intro ends → overlay camera hidden
+* Viewport layout updates → main camera owns the room again
 
 Without both sides, I was relying on whatever state the camera happened to retain from the previous render path.
+
+---
 
 ## Preventing Overlay Camera Clears from Wiping the Scene
 
 The overlay camera setup also needed one Phaser-specific detail:
+
 ```js
 this.fullscreenOverlayCamera = this.cameras.add(
   0,
@@ -162,20 +185,28 @@ this.fullscreenOverlayCamera = this.cameras.add(
   'ApartmentPreviewOverlayCamera'
 );
 this.fullscreenOverlayCamera.clearBeforeRender = false;
+
 ```
+
 The new line is:
+
 ```js
 this.fullscreenOverlayCamera.clearBeforeRender = false;
+
 ```
+
 That matters because this camera is not supposed to behave like a primary world-rendering camera. It exists for overlay composition. If it clears before render at the wrong point in the stack, it can create the exact kind of “blank but loaded” behavior that makes scene debugging annoying.
 
 I want the overlay camera to draw overlay content without destroying what the main camera already rendered.
+
+---
 
 ## I Closed the Fade-Out Paths Too
 
 The scene had multiple ways to leave intro/overlay mode. Fixing only the main path would have left timing bugs behind.
 
 In `viewportCameraMethods.js`, the fade-out completion now hides the overlay camera:
+
 ```js
 overlayTargets.forEach((target) => {
   target.setVisible(false);
@@ -183,49 +214,56 @@ overlayTargets.forEach((target) => {
 if (this.fullscreenOverlayCamera) {
   this.fullscreenOverlayCamera.setVisible(false);
 }
+
 ```
+
 And in `windowCameraTerminalMethods.js`, terminal overlay completion does the same:
+
 ```js
 this.introCityAnimationTimer?.remove(false);
 this.introCityAnimationTimer = null;
 if (this.fullscreenOverlayCamera) {
   this.fullscreenOverlayCamera.setVisible(false);
 }
+
 ```
+
 This is the part I care about most in Phaser scene work: every entry path needs a matching exit path. It is easy to add a camera for one overlay and forget that three different animation flows can dismiss it.
+
+---
 
 ## Service Worker Asset Fetches Were Part of the Loading Problem
 
 The same loading pass also touched the service worker path. I refactored fetch handling around game assets, API requests, Azure Blob Storage CORS behavior, and error logging.
 
-The activity was centered around these changes:
+The activity was centered around these architecture updates:
 
-refactor: streamline service worker fetch handling for game assets and improve error logging
-refactor: enhance service worker error handling and improve hydration checks in Phaser integration
-refactor: update service worker to support CORS for Azure Blob Storage and improve asset handling
-fix: include API requests in service worker fetch handling for game assets
+* **refactor**: streamline service worker fetch handling for game assets and improve error logging
+* **refactor**: enhance service worker error handling and improve hydration checks in Phaser integration
+* **refactor**: update service worker to support CORS for Azure Blob Storage and improve asset handling
+* **fix**: include API requests in service worker fetch handling for game assets
 
 I am keeping this grounded to the available code notes rather than pretending the exact service worker diff is here. The architectural issue was clear enough: City Mode does not only depend on bundled JavaScript. It depends on game assets, API-loaded state, and cross-origin blob-hosted resources behaving consistently during startup.
 
 If a service worker swallows an asset failure or treats a game fetch like a normal document request, Phaser can hang in a misleading state. Better error logging matters because the visible symptom is often “the scene did not finish,” while the real cause is a missing image, failed CORS fetch, or stale cached response.
 
+---
+
 ## Lazy Loading Reduced Contention Before Phaser Boot
 
 I also refactored the public app structure to lazy load pages:
 
-refactor: implement lazy loading for pages and enhance PublicApp structure
+* **refactor**: implement lazy loading for pages and enhance PublicApp structure
 
 That change was part of the same performance pass. City Mode is heavier than a static marketing page or auth screen. If the app eagerly imports unrelated routes before Phaser even gets its turn, the browser does unnecessary parse and execution work on the critical path.
 
 The goal was simple:
 
-- keep public routing lighter
-- defer non-current page code
-- let Phaser scene initialization compete with less JavaScript during startup
-- reduce Lighthouse pressure from oversized initial work
+* Keep public routing lighter
+* Defer non-current page code
+* Let Phaser scene initialization compete with less JavaScript during startup
+* Reduce Lighthouse pressure from oversized initial work
 
-This all means that first time users get a meaningful improvement to many different facets of the site: initial page loads are smoother and quicker, page stutters are eliminated when we 
-allow assets to get lazy loaded and happen in the background, and they don't get stuck on loading transitions anymore.
+This all means that first time users get a meaningful improvement to many different facets of the site: initial page loads are smoother and quicker, page stutters are eliminated when we allow assets to get lazy loaded and happen in the background, and they don't get stuck on loading transitions anymore.
 
 Be sure to check out the site and let me know what you think of the improved UX!
-
