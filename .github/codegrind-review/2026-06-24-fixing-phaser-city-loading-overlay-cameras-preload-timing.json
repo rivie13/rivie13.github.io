@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.md",
+  "review_markdown_file": ".github/codegrind-review/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.md",
+  "title": "Fixing Phaser City Loading: Overlay Cameras, Preload Timing, and Service Worker Asset Fetches",
+  "summary": "I fixed City Mode loading bugs by tightening Phaser overlay camera state, preload timing, hydration checks, and service worker asset handling.",
+  "slug": "fixing-phaser-city-loading-overlay-cameras-preload-timing",
+  "url": "https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.png",
+    "file": "assets/images/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "attempts": 2,
+      "strict_compress_used": false,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Fixing City Mode loading: tightening overlay camera state, preload timing, hydration checks, and service worker asset fetches. Read more: https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/ #CodeGrind #PhaserFix #WebDev #GameDev",
+    "linkedin_text": "CodeGrind recent post: I fixed City Mode loading by tightening overlay camera state, preload timing, hydration checks, and service worker asset handling. The update reduces visual state drift during startup and improves asset fetch resilience. Read the full write-up at https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/ #CodeGrind #Phaser #WebDevelopment #GameDev #Frontend",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Fixing City Mode loading: tightening overlay camera state, preload timing, hydration checks, and service worker asset fetches. Read more: https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/ #CodeGrind #PhaserFix #WebDev #GameDev",
+        "url": "https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+        "title": "Fixing Phaser City Loading: Overlay Cameras, Preload Timing, and Service Worker Asset Fetches",
+        "description": "I fixed City Mode loading bugs by tightening Phaser overlay camera state, preload timing, hydration checks, and service worker asset handling.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Fixing City Mode loading: tightening overlay camera state, preload timing, hydration checks, and service worker asset fetches. Read more: https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/ #CodeGrind #PhaserFix #WebDev #GameDev",
+        "url": "https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+        "title": "Fixing Phaser City Loading: Overlay Cameras, Preload Timing, and Service Worker Asset Fetches",
+        "description": "I fixed City Mode loading bugs by tightening Phaser overlay camera state, preload timing, hydration checks, and service worker asset handling.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind recent post: I fixed City Mode loading by tightening overlay camera state, preload timing, hydration checks, and service worker asset handling. The update reduces visual state drift during startup and improves asset fetch resilience. Read the full write-up at https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/ #CodeGrind #Phaser #WebDevelopment #GameDev #Frontend",
+        "title": "Fixing Phaser City Loading: Overlay Cameras, Preload Timing, and Service Worker Asset Fetches",
+        "url": "https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+        "description": "I fixed City Mode loading bugs by tightening Phaser overlay camera state, preload timing, hydration checks, and service worker asset handling.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Fixing Phaser City Loading — Overlay Cameras, Preload Timing, and Service Worker Asset Fetches",
+        "text": "New CodeGrind post details how City Mode loading issues were addressed by tightening overlay camera lifecycle, preload timing, hydration checks, and service worker asset handling. Includes a Playwright probe approach and concrete code notes. Full write-up: https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/ #CodeGrind #Phaser #WebDev",
+        "url": "https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Fixing Phaser City Loading: Overlay Cameras, Preload Timing, and Service Worker Asset Fetches",
+        "text": "I dug into City Mode loading issues at CodeGrind and fixed overlay camera lifecycle, preload timing, hydration checks, and service worker asset handling. The post walks through the debugging approach and the concrete changes. https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+        "url": "https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind: Fixing Phaser City Loading — Overlay cameras, preload timing, and service worker asset fetches. The post explains how I tightened camera state and asset handling to avoid stuck intro sequences in City Mode. Read more: https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+        "title": "Fixing Phaser City Loading: Overlay Cameras, Preload Timing, and Service Worker Asset Fetches",
+        "url": "https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/",
+        "description": "I fixed City Mode loading bugs by tightening Phaser overlay camera state, preload timing, hydration checks, and service worker asset handling.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "City Mode loading fixes in CodeGrind: overlay camera lifecycle, preload timing, hydration checks, and stricter service worker asset handling. Learn how these tweaks prevent stuck intro sequences and improve startup reliability. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-24-fixing-phaser-city-loading-overlay-cameras-preload-timing.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
