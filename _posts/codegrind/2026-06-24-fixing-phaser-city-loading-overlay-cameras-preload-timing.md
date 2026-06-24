@@ -25,13 +25,14 @@ I spent this pass tightening those boundaries in [CodeGrind](https://codegrind.o
 
 The failing path was City Mode apartment loading:
 
+```
 /city?scene=apartment-room-01
 &entry=path-choice
 &track=beginner
 &learningPath=python-path
 &apartmentState=hub
 &fallback=%2Flearning%2Fpython-path
-
+```
 The apartment scene uses a normal main camera for the room plus a fullscreen overlay camera for intro and transition UI. The issue was that the overlay camera could remain visible after the overlay targets faded out.
 
 That leaves Phaser in a bad visual state:
@@ -48,6 +49,7 @@ The bug was not “Phaser didn’t load.” It was “Phaser loaded, but the cam
 
 Before changing more scene code, I added a tiny Playwright probe so I could inspect the live Phaser scene without guessing from screenshots.
 
+```js
 import { chromium } from 'playwright';
 
 async function run() {
@@ -97,14 +99,14 @@ async function run() {
 }
 
 run().catch(console.error);
-
+```
 The important part is this block:
-
+```js
 overlayCameraExists: !!scene.fullscreenOverlayCamera,
 overlayCameraVisible: scene.fullscreenOverlayCamera ? scene.fullscreenOverlayCamera.visible : null,
 childrenCount: scene.children ? scene.children.list.length : 0,
 childrenTypes: scene.children ? scene.children.list.map(c => c.type) : [],
-
+```
 I did not need a full test harness for this pass. I needed a fast runtime inspection hook that answered one question: *is the scene actually loaded, or is camera state lying to me?*
 
 That gave me a clean split between asset/preload failures and rendering/camera failures.
@@ -114,7 +116,7 @@ That gave me a clean split between asset/preload failures and rendering/camera f
 The first lifecycle fix landed in `createApartmentPreviewScene.js`.
 
 When the apartment scene finishes hiding intro targets and returns to the main viewport, I now force the fullscreen overlay camera off:
-
+```js
 if (this.fullscreenOverlayCamera) {
   this.fullscreenOverlayCamera.setVisible(false);
 }
@@ -122,13 +124,13 @@ if (this.fullscreenOverlayCamera) {
 if (this.cameras?.main) {
   this.updateViewportLayout();
 }
-
+```
 This looks small, but it removes ambiguity. The overlay targets fading out is not the same thing as the overlay camera becoming inactive. Phaser will still keep a camera alive until I explicitly change it.
 
 ### Turning the Overlay Camera Back On During Intro
 
 The matching change went into `introFlowMethods.js`:
-
+```js
 this.layoutIntroOverlay?.();
 
 if (this.fullscreenOverlayCamera) {
@@ -138,7 +140,7 @@ if (this.fullscreenOverlayCamera) {
 [this.introBackdropMatte, this.introCityBackdrop, this.introCityTint]
   .filter(Boolean)
   .forEach((target) => {
-
+```
 This is the other half of the lifecycle contract:
 
 - intro starts → overlay camera visible
@@ -150,7 +152,7 @@ Without both sides, I was relying on whatever state the camera happened to retai
 ## Preventing Overlay Camera Clears from Wiping the Scene
 
 The overlay camera setup also needed one Phaser-specific detail:
-
+```js
 this.fullscreenOverlayCamera = this.cameras.add(
   0,
   0,
@@ -160,11 +162,11 @@ this.fullscreenOverlayCamera = this.cameras.add(
   'ApartmentPreviewOverlayCamera'
 );
 this.fullscreenOverlayCamera.clearBeforeRender = false;
-
+```
 The new line is:
-
+```js
 this.fullscreenOverlayCamera.clearBeforeRender = false;
-
+```
 That matters because this camera is not supposed to behave like a primary world-rendering camera. It exists for overlay composition. If it clears before render at the wrong point in the stack, it can create the exact kind of “blank but loaded” behavior that makes scene debugging annoying.
 
 I want the overlay camera to draw overlay content without destroying what the main camera already rendered.
@@ -174,22 +176,22 @@ I want the overlay camera to draw overlay content without destroying what the ma
 The scene had multiple ways to leave intro/overlay mode. Fixing only the main path would have left timing bugs behind.
 
 In `viewportCameraMethods.js`, the fade-out completion now hides the overlay camera:
-
+```js
 overlayTargets.forEach((target) => {
   target.setVisible(false);
 });
 if (this.fullscreenOverlayCamera) {
   this.fullscreenOverlayCamera.setVisible(false);
 }
-
+```
 And in `windowCameraTerminalMethods.js`, terminal overlay completion does the same:
-
+```js
 this.introCityAnimationTimer?.remove(false);
 this.introCityAnimationTimer = null;
 if (this.fullscreenOverlayCamera) {
   this.fullscreenOverlayCamera.setVisible(false);
 }
-
+```
 This is the part I care about most in Phaser scene work: every entry path needs a matching exit path. It is easy to add a camera for one overlay and forget that three different animation flows can dismiss it.
 
 ## Service Worker Asset Fetches Were Part of the Loading Problem
