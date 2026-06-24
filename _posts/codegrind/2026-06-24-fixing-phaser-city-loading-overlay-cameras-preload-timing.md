@@ -220,3 +220,6 @@ The goal was simple:
 - reduce Lighthouse pressure from oversized initial work
 
 This
+
+<!-- IMAGE_PROMPT -->
+Abstract 16:9 editorial hero image about debugging Phaser City Mode loading: split-screen technical composition showing a layered camera stack diagram represented by translucent rectangular viewports (main camera vs fullscreen overlay camera), one overlay layer fading out incorrectly while another layer remains active; include subtle network/service-worker flow arcs and loading sequence timing cues as clean geometric shapes (no numbers, no symbols, no text), and small block-like asset tiles moving toward a central “game scene” node; emphasize product/engineering visuals with glossy UI glass, crisp lighting, minimal color palette (deep navy, teal, cyan, muted gray, slight amber highlights), depth-of-field, realistic render of abstract UI components, high detail, no people, no fantasy. Ensure: no text, no watermark.
