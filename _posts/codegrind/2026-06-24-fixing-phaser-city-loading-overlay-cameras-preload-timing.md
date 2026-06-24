@@ -12,11 +12,14 @@ slug: fixing-phaser-city-loading-overlay-cameras-preload-timing
 canonical_url: https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/
 ---
 
-CodeGrind's implementation of the phaser game engine had the kind of loading bug that wastes an entire afternoon because nothing is technically “crashing.” The page loaded, Phaser booted, the scene existed, but the apartment intro flow could get stuck behind an overlay camera or render in the wrong visual state depending on timing.
+CodeGrind's implementation of the phaser game engine had the kind of loading bug that wastes an entire afternoon because nothing is technically “crashing.” The page loaded, Phaser booted, the scene existed, but the apartment intro flow could get stuck behind an overlay camera or render in the wrong visual state depending on timing. There was also just a lot of performance bugs that really made the site not feel great to use on initial boot, which is a big cause for people to bounce.
 
-The real problem was lifecycle drift: React route hydration, Phaser scene readiness, service worker asset fetches, and mobile onboarding UI were all making assumptions about when the game was “ready.”
+The real problem was a combination of many things:
+1. lifecycle drift: React route hydration, Phaser scene readiness, service worker asset fetches, and mobile onboarding UI were all making assumptions about when the game was “ready.”
+2. Phaser's boot sequence was not being initiated at the points it should have been or worse being skipped if a user went through the home page too fast, which caused loading screens to get stuck occassionally.
+3. Heavy network calls to load in big assests caused CPU spikes which caused the site to stutter or worse freeze up because these loads were happening on the main thread.
 
-I spent this pass tightening those boundaries in [CodeGrind](https://codegrind.online): overlay cameras now explicitly enter and exit fullscreen states, the service worker path for game assets got stricter error handling, and lazy loading reduced the amount of frontend work competing with Phaser startup. The code lives in the public repo at [github.com/rivie13/CodeGrind](https://github.com/rivie13/CodeGrind).
+I spent this pass tightening those boundaries in [CodeGrind](https://codegrind.online): overlay cameras now explicitly enter and exit fullscreen states, the service worker path for game assets got stricter error handling, and lazy loading reduced the amount of frontend work competing with Phaser startup.
 
 ## The Runtime Bug: Phaser Was Ready, but the Camera Stack Wasn’t
 
@@ -219,7 +222,8 @@ The goal was simple:
 - let Phaser scene initialization compete with less JavaScript during startup
 - reduce Lighthouse pressure from oversized initial work
 
-This
+This all means that first time users get a meaningful improvement to many different facets of the site: initial page loads are smoother and quicker, page stutters are eliminated when we 
+allow assets to get lazy loaded and happen in the background, and they don't get stuck on loading transitions anymore.
 
-<!-- IMAGE_PROMPT -->
-Abstract 16:9 editorial hero image about debugging Phaser City Mode loading: split-screen technical composition showing a layered camera stack diagram represented by translucent rectangular viewports (main camera vs fullscreen overlay camera), one overlay layer fading out incorrectly while another layer remains active; include subtle network/service-worker flow arcs and loading sequence timing cues as clean geometric shapes (no numbers, no symbols, no text), and small block-like asset tiles moving toward a central “game scene” node; emphasize product/engineering visuals with glossy UI glass, crisp lighting, minimal color palette (deep navy, teal, cyan, muted gray, slight amber highlights), depth-of-field, realistic render of abstract UI components, high detail, no people, no fantasy. Ensure: no text, no watermark.
+Be sure to check out the site and let me know what you think of the improved UX!
+
