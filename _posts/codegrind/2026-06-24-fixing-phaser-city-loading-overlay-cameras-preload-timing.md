@@ -12,7 +12,7 @@ slug: fixing-phaser-city-loading-overlay-cameras-preload-timing
 canonical_url: https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/
 ---
 
-City Mode had the kind of loading bug that wastes an entire afternoon because nothing is technically “crashing.” The page loaded, Phaser booted, the scene existed, but the apartment intro flow could get stuck behind an overlay camera or render in the wrong visual state depending on timing.
+CodeGrind's implementation of the phaser game engine had the kind of loading bug that wastes an entire afternoon because nothing is technically “crashing.” The page loaded, Phaser booted, the scene existed, but the apartment intro flow could get stuck behind an overlay camera or render in the wrong visual state depending on timing.
 
 The real problem was lifecycle drift: React route hydration, Phaser scene readiness, service worker asset fetches, and mobile onboarding UI were all making assumptions about when the game was “ready.”
 
