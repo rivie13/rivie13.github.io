@@ -38,7 +38,7 @@ Fixing City Mode loading: tightening overlay camera state, preload timing, hydra
 
 Enabled: true
 
-CodeGrind recent post: I fixed City Mode loading by tightening overlay camera state, preload timing, hydration checks, and service worker asset handling. The update reduces visual state drift during startup and improves asset fetch resilience. Read the full write-up at https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/ #CodeGrind #Phaser #WebDevelopment #GameDev #Frontend
+CodeGrind just got a major performance boost: I fixed City Mode loading by tightening overlay camera state, preload timing, hydration checks, and some other tricks. The update reduces visual state drift during startup and improves asset fetch resilience. Read the full write-up at https://rivie13.github.io/blog/2026/06/24/fixing-phaser-city-loading-overlay-cameras-preload-timing/ #CodeGrind #Phaser #WebDevelopment #GameDev #Frontend
 
 ### Reddit Subreddit
 
