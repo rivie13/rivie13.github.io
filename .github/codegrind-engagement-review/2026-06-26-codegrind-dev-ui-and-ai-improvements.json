@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-26-codegrind-dev-ui-and-ai-improvements.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-26-codegrind-dev-ui-and-ai-improvements.json",
+  "title": "CodeGrind: UI polish meets AI assist enhancements",
+  "summary": "Highlighting recent UI refinements alongside upgraded AI assistant capabilities to boost coding practice and problem-solving workflows.",
+  "slug": "codegrind-dev-ui-and-ai-improvements",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now blends a smoother UI with enhanced AI-assisted problem solving, enabling faster context switching, clearer feedback, and a more engaging learning loop for DS&A practice.",
+  "cta": "Try the updated UI and AI helper in your next practice session on CodeGrind.",
+  "visual_brief": "Static, clean screenshot-style image showing the CodeGrind code editor with AI chat panel and updated UI elements (neon cyberpunk accents, clear problem pane, responsive layout). Include subtle indicators of AI guidance and problem-solving workflow.",
+  "source_media_tags": [
+    "ui-updates",
+    "ai-assistant",
+    "code-editor",
+    "cyberpunk-aesthetic",
+    "problem-solving",
+    "user-dashboard"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dev-ui-and-ai-improvements",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+    "file": "assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+    "file": "assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind blends a polished UI with smarter AI assistant support. See faster context switching, clearer feedback, and a smoother problem-solving loop for DS&A practice. Try the updated UI and AI helper in your next CodeGrind session. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "image_alt": "CodeGrind: UI polish meets AI assist enhancements",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind blends a polished UI with smarter AI assistant support. See faster context switching, clearer feedback, and a smoother problem-solving loop for DS&A practice. Try the updated UI and AI helper in your next CodeGrind session. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "image_alt": "CodeGrind: UI polish meets AI assist enhancements",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind now combines a refined UI with enhanced AI-assisted problem solving to streamline coding practice. Expect faster context switching, clearer feedback, and a more engaging learning loop for DS&A workflows. Explore the updated UI and AI helper in your next practice session on CodeGrind. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind UI polish meets AI assist improvements",
+        "text": "We’ve updated CodeGrind with a cleaner UI and upgraded AI-assisted problem solving. Expect faster context switching, clearer feedback, and a more engaging DS&A practice loop. Check out the updated UI and AI helper during your next practice session on CodeGrind. More details at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "We’ve updated CodeGrind with a cleaner UI and upgraded AI-assisted problem solving. Expect faster context switching, clearer feedback, and a more engaging DS&A practice loop. Check out the updated UI and AI helper during your next practice session on CodeGrind. More details at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: UI polish with AI assist enhancements",
+        "text": "CodeGrind now blends a smoother UI with enhanced AI-assisted problem solving to boost DS&A practice. Experience faster context switching, clearer feedback, and a more engaging learning loop. Try the updated UI and AI helper during your next CodeGrind session at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind now blends a smoother UI with enhanced AI-assisted problem solving to boost DS&A practice. Experience faster context switching, clearer feedback, and a more engaging learning loop. Try the updated UI and AI helper during your next CodeGrind session at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind has a refreshed UI paired with an upgraded AI assistant to streamline DS&A practice. Enjoy faster context switching, clearer feedback, and a more engaging learning loop. Try the updated UI and AI helper in your next CodeGrind session at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "A fresh UI paired with smarter AI assistance for CodeGrind. See faster context switching, clearer guidance, and a more engaging problem-solving flow in your practice sessions. Try it in your next CodeGrind session and explore the updated experience.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-26-codegrind-dev-ui-and-ai-improvements.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
