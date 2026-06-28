@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.json",
+  "title": "CodeGrind adds Azure OpenAI assistant and Google sign-in for smoother on-boarding",
+  "summary": "CodeGrind now integrates Azure OpenAI-based AI assistant and Google authentication, streamlining problem solving help and secure sign-ins for faster onboarding.",
+  "slug": "codegrind-ai-assistant-and-cloud-sign-in-update",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "Enhance your CodeGrind experience with an AI-assisted problem-solving companion powered by Azure OpenAI and a streamlined Google-based sign-in flow for quicker, secure access.",
+  "cta": "Explore the new AI assistant while signing in with Google today and accelerate your DSA practice.",
+  "visual_brief": "A clean UI shot of CodeGrind editor with an AI chat panel on the right and a Google Sign-In button visible; include subtle cyberpunk accents and highlighting the Azure OpenAI logo in a corner. Optional before/after animation showing problem solving aided by AI tips appearing in real-time.",
+  "source_media_tags": [
+    "ai-assistant-ui",
+    "google-sign-in",
+    "azure-openai-logo",
+    "code-grind-editor",
+    "cyberpunk-theme",
+    "problem-solving-prompt"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assistant-and-cloud-sign-in-update",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+    "file": "assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+    "file": "assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind adds an Azure OpenAI AI assistant and Google sign-in for faster onboarding. See the AI helper in action next to the Google Sign-In, with a cyberpunk touch. Explore the new AI assistant while signing in with Google today and accelerate your DSA practice. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "image_alt": "CodeGrind adds Azure OpenAI assistant and Google sign-in for smoother on-boarding",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind adds an Azure OpenAI AI assistant and Google sign-in for faster onboarding. See the AI helper in action next to the Google Sign-In, with a cyberpunk touch. Explore the new AI assistant while signing in with Google today and accelerate your DSA practice. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "image_alt": "CodeGrind adds Azure OpenAI assistant and Google sign-in for smoother on-boarding",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind now integrates an Azure OpenAI-based AI assistant and Google authentication to streamline onboarding and problem-solving sessions. The updated UI highlights the AI chat panel alongside a visible Google Sign-In button, with a cyberpunk aesthetic. Explore the new AI assistant while signing in with Google today and accelerate your DSA practice. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind AI Assistant and Google Sign-In Update",
+        "text": "We’re updating CodeGrind with an Azure OpenAI-powered AI assistant and Google sign-in to speed onboarding and problem solving. The visual showcases a clean editor UI with an AI chat panel and a Google Sign-In button, accented by a cyberpunk theme. Explore the new AI assistant while signing in with Google today and accelerate your DSA practice. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "We’re updating CodeGrind with an Azure OpenAI-powered AI assistant and Google sign-in to speed onboarding and problem solving. The visual showcases a clean editor UI with an AI chat panel and a Google Sign-In button, accented by a cyberpunk theme. Explore the new AI assistant while signing in with Google today and accelerate your DSA practice. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind Update: Azure OpenAI Assistant + Google Sign-In",
+        "text": "CodeGrind introduces an AI-assisted problem-solving companion powered by Azure OpenAI and a streamlined Google sign-in flow for quicker, secure access. The image highlights the editor UI with the AI chat panel and Google Sign-In, wrapped in cyberpunk accents. Explore the new AI assistant while signing in with Google today and accelerate your DSA practice. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind introduces an AI-assisted problem-solving companion powered by Azure OpenAI and a streamlined Google sign-in flow for quicker, secure access. The image highlights the editor UI with the AI chat panel and Google Sign-In, wrapped in cyberpunk accents. Explore the new AI assistant while signing in with Google today and accelerate your DSA practice. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind now features an Azure OpenAI-powered AI assistant and Google sign-in to streamline onboarding and problem solving. The updated visual focuses on the editor UI with an AI chat panel and a Google Sign-In button, set in a cyberpunk-inspired aesthetic. Explore the new AI assistant while signing in with Google today and accelerate your DSA practice. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "A clean CodeGrind editor view shows an AI chat panel and Google Sign-In, with Azure OpenAI accents. See how AI-assisted problem solving and secure sign-in speed up onboarding. Tap to explore the new AI assistant and sign-in with Google today. (No URL in caption)",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-28-codegrind-ai-assistant-and-cloud-sign-in-update.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
