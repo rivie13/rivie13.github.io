@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.md",
+  "review_markdown_file": ".github/codegrind-review/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.md",
+  "title": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing",
+  "summary": "I removed eager Phaser preloading, deferred showcase GIF downloads, and split route bundles to reduce CodeGrind's initial home page load pressure.",
+  "slug": "cutting-home-page-load-path-lazy-gifs-phaser-preload",
+  "url": "https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.png",
+    "file": "assets/images/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": true,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Cutting the home page load path: lazy GIFs, lazy routes, and Phaser preload timing. I moved Phaser preload behind user intent, deferred showcase media, and split route bundles for a cleaner first load. Details:...",
+    "linkedin_text": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing. This post explains how deferring Phaser preload, delaying showcase GIFs, and splitting route bundles reduced initial load pressure on CodeGrind’s home page. https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Cutting the home page load path: lazy GIFs, lazy routes, and Phaser preload timing. I moved Phaser preload behind user intent, deferred showcase media, and split route bundles for a cleaner first load. Details:...",
+        "url": "https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "title": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing",
+        "description": "I removed eager Phaser preloading, deferred showcase GIF downloads, and split route bundles to reduce CodeGrind's initial home page load pressure.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Cutting the home page load path: lazy GIFs, lazy routes, and Phaser preload timing. I moved Phaser preload behind user intent, deferred showcase media, and split route bundles for a cleaner first load. Details:...",
+        "url": "https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "title": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing",
+        "description": "I removed eager Phaser preloading, deferred showcase GIF downloads, and split route bundles to reduce CodeGrind's initial home page load pressure.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing. This post explains how deferring Phaser preload, delaying showcase GIFs, and splitting route bundles reduced initial load pressure on CodeGrind’s home page. https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "title": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing",
+        "url": "https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "description": "I removed eager Phaser preloading, deferred showcase GIF downloads, and split route bundles to reduce CodeGrind's initial home page load pressure.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing",
+        "text": "I reduced initial home page work by deferring Phaser preload, lazy-loading showcase media, and splitting route bundles. The changes target a cleaner first-load path for CodeGrind. Full write-up: https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "url": "https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing",
+        "text": "I trimmed the home page load by deferring Phaser preload, lazy-loading GIFs, and splitting route bundles. The result is a cleaner first-load path for CodeGrind. Details: https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "url": "https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "I trimmed the home page load by deferring Phaser preload, lazy-loading showcase media, and splitting route bundles for CodeGrind. Read the full write-up: https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "title": "Cutting the Home Page Load Path: Lazy GIFs, Lazy Routes, and Phaser Preload Timing",
+        "url": "https://rivie13.github.io/blog/2026/06/29/cutting-home-page-load-path-lazy-gifs-phaser-preload/",
+        "description": "I removed eager Phaser preloading, deferred showcase GIF downloads, and split route bundles to reduce CodeGrind's initial home page load pressure.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Cutting the Home Page Load Path: lazy GIFs, lazy routes, and timing tweaks for Phaser preload. Learn how deferring work and splitting bundles improved first-load performance for CodeGrind. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-29-cutting-home-page-load-path-lazy-gifs-phaser-preload.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
