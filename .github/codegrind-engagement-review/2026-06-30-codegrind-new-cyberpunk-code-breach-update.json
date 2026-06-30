@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-06-30-codegrind-new-cyberpunk-code-breach-update.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-06-30-codegrind-new-cyberpunk-code-breach-update.json",
+  "title": "Code Breach Cyberpunk Update: Towers, Code, and Immersive Visuals",
+  "summary": "New cyberpunk Code Breach overhaul adds immersive visuals, updated AI-assisted problem-solving, and enhanced tower-defense gameplay tied to programming concepts.",
+  "slug": "codegrind-new-cyberpunk-code-breach-update",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "Code Grinds’ Code Breach reboot brings a cyberpunk aesthetic to the tower-defense-meets-coding experience, with enhanced AI guidance, richer visuals, and deeper coding concept visualization in the gameplay loop.",
+  "cta": "Explore the Code Breach overhaul in our latest update and try the new cyberpunk towers today.",
+  "visual_brief": "Showcase a cyberpunk-themed Code Breach battle scene: towers representing ForLoop, WhileLoop, IfCondition with neon-lit UI, code snippets flowing between towers, and dynamic particle effects; include a prominent CodeGrind branding element.",
+  "source_media_tags": [
+    "cyberpunk-ui",
+    "tower-defense",
+    "programming-visualization",
+    "ai-assistant",
+    "neon-code",
+    "gameplay-preview"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-new-cyberpunk-code-breach-update",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+    "file": "assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+    "file": "assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "Code Breach gets a cyberpunk overhaul. See neon towers forForLoop, WhileLoop, and IfCondition in a battle scene with AI-guided play and richer visuals. Explore the update and try the new cyberpunk towers today. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "image_alt": "Code Breach Cyberpunk Update: Towers, Code, and Immersive Visuals",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "Code Breach gets a cyberpunk overhaul. See neon towers forForLoop, WhileLoop, and IfCondition in a battle scene with AI-guided play and richer visuals. Explore the update and try the new cyberpunk towers today. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "image_alt": "Code Breach Cyberpunk Update: Towers, Code, and Immersive Visuals",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Code Grinds’ Code Breach reboot launches with a cyberpunk aesthetic, AI-assisted problem solving, and deeper concept visualizations in the tower-defense gameplay. The update highlights neon-lit towers, flowing code snippets, and immersive visuals. Explore the update and try the new cyberpunk towers today. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind Code Breach Cyberpunk Update",
+        "text": "Introducing the Code Breach cyberpunk overhaul: enhanced AI guidance, richer visuals, and towers that visualize ForLoop, WhileLoop, and IfCondition. See neon UI, code snippets flowing between towers, and dynamic particle effects in a still-image preview. Learn more at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Introducing the Code Breach cyberpunk overhaul: enhanced AI guidance, richer visuals, and towers that visualize ForLoop, WhileLoop, and IfCondition. See neon UI, code snippets flowing between towers, and dynamic particle effects in a still-image preview. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: Code Breach Cyberpunk Update",
+        "text": "The new Code Breach update brings a cyberpunk aesthetic to tower-defense-meets-coding, with AI-assisted guidance and deeper programming concept visualization. Check out the visual preview and explore the update at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "The new Code Breach update brings a cyberpunk aesthetic to tower-defense-meets-coding, with AI-assisted guidance and deeper programming concept visualization. Check out the visual preview and explore the update at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "Code Breach receives a cyberpunk upgrade with enhanced visuals and AI-assisted problem solving. See neon-lit towers representing ForLoop, WhileLoop, and IfCondition, with code snippets flowing between towers and dynamic particle effects. Explore the update and try the cyberpunk towers today at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Cyberpunk overhaul alert: Code Breach brings neon towers, flowing code, and AI-guided play to a richer battle scene. See the visual update, explore new concepts, and try the cyberpunk towers today. Tap to learn more and dive into the update at the official site.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-06-30-codegrind-new-cyberpunk-code-breach-update.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
