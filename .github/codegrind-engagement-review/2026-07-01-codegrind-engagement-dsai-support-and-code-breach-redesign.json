@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.json",
+  "title": "CodeGrind: AI-assisted DSA practice meets cyberpunk Code Breach",
+  "summary": "Showcase CodeGrind's AI-assisted problem solving, real-time editor, and the Code Breach cyberpunk redesign with a focus on learning throughput and customization.",
+  "slug": "codegrind-engagement-dsai-support-and-code-breach-redesign",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends LeetCode-style challenges with an Azure OpenAI assistant, real-time code execution, and a cyberpunk Code Breach visual layer to visualize programming concepts as interactive towers.",
+  "cta": "Try a guided DSA challenge with AI help now and explore the Code Breach tower defenses in-action.",
+  "visual_brief": "Short demonstration video: 1) split screen of problem prompt, 2) live coding with syntax highlighting, 3) AI assistant guidance pane, 4) gameplay view showing Code Breach towers visualizing a problem solution, 5) quick UI tour of new features and sign-in flow",
+  "source_media_tags": [
+    "ai-assistant",
+    "code-editor",
+    "tower-defense",
+    "cyberpunk-ui",
+    "real-time-execution",
+    "signin-flow"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-engagement-dsai-support-and-code-breach-redesign",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+    "file": "assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+    "file": "assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind blends AI-assisted DSA practice with a cyberpunk Code Breach redesign. See real-time editor, AI guidance, and Code Breach towers in action. Try a guided DSA challenge with AI help now and explore the towers in-action. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "image_alt": "CodeGrind: AI-assisted DSA practice meets cyberpunk Code Breach",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind blends AI-assisted DSA practice with a cyberpunk Code Breach redesign. See real-time editor, AI guidance, and Code Breach towers in action. Try a guided DSA challenge with AI help now and explore the towers in-action. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "image_alt": "CodeGrind: AI-assisted DSA practice meets cyberpunk Code Breach",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind’s AI-assisted DSA practice merges LeetCode-style problems with an Azure OpenAI assistant, real-time execution, and a cyberpunk Code Breach visual layer. Watch a short demonstration of problem prompts, live coding, AI guidance, and the Code Breach towers. Try a guided DSA challenge with AI help now and explore the towers in-action. Learn more: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI-assisted DSA practice meets cyberpunk Code Breach",
+        "text": "Explore CodeGrind’s AI-assisted DSA practice with a cyberpunk Code Breach redesign. The platform pairs real-time code execution and an AI assistant to visualize problem-solving through interactive towers. Watch the demo and consider trying a guided DSA challenge with AI help now at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Explore CodeGrind’s AI-assisted DSA practice with a cyberpunk Code Breach redesign. The platform pairs real-time code execution and an AI assistant to visualize problem-solving through interactive towers. Watch the demo and consider trying a guided DSA challenge with AI help now at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind — AI-assisted DSA practice with Code Breach visuals",
+        "text": "Discover CodeGrind’s AI-assisted DSA practice, featuring real-time execution and a cyberpunk Code Breach visual layer. See problem prompts, live coding, and AI guidance in action, then try a guided DSA challenge with AI help at https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s AI-assisted DSA practice, featuring real-time execution and a cyberpunk Code Breach visual layer. See problem prompts, live coding, and AI guidance in action, then try a guided DSA challenge with AI help at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind redefines DSA practice with AI-assisted solving, a real-time editor, and the cyberpunk Code Breach redesign. This image showcases the interactive towers visualization and streamlined sign-in flow. Explore a guided DSA challenge with AI help now at the link.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "See AI-assisted DSA solving in action: live coding, AI guidance, and Code Breach towers visualization. Tap to learn more and start a guided challenge with AI help today.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-01-codegrind-engagement-dsai-support-and-code-breach-redesign.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
