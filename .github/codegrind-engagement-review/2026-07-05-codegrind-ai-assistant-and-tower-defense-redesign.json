@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.json",
+  "title": "CodeGrind evolves: AI assistant upgrades and Code Breach visuals collide with learning",
+  "summary": "Showcase CodeGrind's upgraded AI assistant capabilities alongside the cyberpunk Code Breach visuals to highlight integrated learning, problem-solving help, and immersive gameplay.",
+  "slug": "codegrind-ai-assistant-and-tower-defense-redesign",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now blends Azure OpenAI-powered AI guidance with a visually redesigned Code Breach tower-defense world, reinforcing hands-on learning, real-time feedback, and engaging problem-solving in one platform.",
+  "cta": "Try the updated CodeGrind now: sign in to experience AI-assisted problem solving and the refreshed Code Breach visuals.",
+  "visual_brief": "Static hero-style image featuring the redesigned Code Breach cyberpunk aesthetic on one side, with a subtle overlay of AI chat guidance UI and sample problem prompts, in CodeGrind branding colors. Include a captioned banner reading 'AI-assisted learning meets cyberpunk gameplay.'",
+  "source_media_tags": [
+    "ai-assistant",
+    "code-breach",
+    "cyberpunk",
+    "tower-defense",
+    "learning-platform",
+    "ui-overlay"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assistant-and-tower-defense-redesign",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+    "file": "assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+    "file": "assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind evolves with AI-assisted guidance and a redesigned Code Breach. See the cyberpunk tower-defense world, enhanced learning, and real-time feedback in one immersive experience. Try the updated CodeGrind now: visit https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "image_alt": "CodeGrind evolves: AI assistant upgrades and Code Breach visuals collide with learning",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind evolves with AI-assisted guidance and a redesigned Code Breach. See the cyberpunk tower-defense world, enhanced learning, and real-time feedback in one immersive experience. Try the updated CodeGrind now: visit https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "image_alt": "CodeGrind evolves: AI assistant upgrades and Code Breach visuals collide with learning",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind now blends Azure OpenAI-powered AI guidance with a visually redesigned Code Breach tower-defense world. Experience integrated learning, real-time feedback, and engaging problem-solving in one platform. Explore the updated experience and visuals, and sign in to try the AI-assisted problem solving and refreshed Code Breach aesthetics. Target URL: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind AI Assistant + Code Breach Redesign",
+        "text": "CodeGrind evolves with AI-assisted guidance and a redesigned Code Breach cyberpunk world. The upgraded platform combines hands-on learning, real-time feedback, and immersive gameplay in one place. Learn how AI guidance enhances problem solving in the CodeGrind environment. More at the project URL.",
+        "body_text": null,
+        "comment_text": "CodeGrind evolves with AI-assisted guidance and a redesigned Code Breach cyberpunk world. The upgraded platform combines hands-on learning, real-time feedback, and immersive gameplay in one place. Learn how AI guidance enhances problem solving in the CodeGrind environment. More at the project URL.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI Assistant Meets Cyberpunk Code Breach",
+        "text": "Discover CodeGrind’s AI-assisted learning enhancements and the redesigned Code Breach visuals. The updated experience blends problem-solving support with immersive tower-defense gameplay, delivering real-time feedback in a hands-on learning platform. See the update and sign in to explore.",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s AI-assisted learning enhancements and the redesigned Code Breach visuals. The updated experience blends problem-solving support with immersive tower-defense gameplay, delivering real-time feedback in a hands-on learning platform. See the update and sign in to explore.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind introduces an AI-assisted learning upgrade and a redesigned Code Breach visuals. The new experience combines hands-on problem solving with immersive cyberpunk gameplay, offering real-time feedback within the platform. Explore the updated CodeGrind and sign in to try the AI-assisted problem solving and refreshed visuals.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "AI-assisted learning meets cyberpunk gameplay. See the updated CodeGrind with a redesigned Code Breach world, real-time guidance, and hands-on problem solving. Tap to explore the new experience and sign in to try AI-driven support today.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-05-codegrind-ai-assistant-and-tower-defense-redesign.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
