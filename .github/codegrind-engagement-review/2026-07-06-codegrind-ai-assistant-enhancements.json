@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-06-codegrind-ai-assistant-enhancements.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-06-codegrind-ai-assistant-enhancements.json",
+  "title": "CodeGrind AI Assistant Enhancements: Smarter help, faster guidance",
+  "summary": "Showcase the upgraded Azure OpenAI-powered assistant in CodeGrind with multi-model support, improved chat UX, and real-time problem-solving guidance.",
+  "slug": "codegrind-ai-assistant-enhancements",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now features an enhanced AI assistant powered by Azure OpenAI with multi-model support, delivering smarter, context-aware help directly in the practice editor. Users get guided problem-solving, code suggestions, and seamless switching between models for faster learning.",
+  "cta": "Try the new AI assistant in your next practice session and share your experience with #CodeGrindAI",
+  "visual_brief": "A short demo video showing a user asking for hints, the AI assistant proposing a plan, code snippets appearing in the editor, and a quick toggle between AI models. Include UI elements: code editor, chat pane, model switcher, and a subtle CodeGrind brand presence.",
+  "source_media_tags": [
+    "ai-assistant",
+    "azure-openai",
+    "coding-help",
+    "ui-demo",
+    "problem-solving",
+    "code-prompt-chat"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assistant-enhancements",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+    "file": "assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+    "file": "assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind AI Assistant Enhancements: smarter, context-aware help right in your practice editor. Multi-model support, real-time guidance, and seamless model switching to speed up learning. Try the new AI assistant in your next session. #CodeGrindAI",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "image_alt": "CodeGrind AI Assistant Enhancements: Smarter help, faster guidance",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind AI Assistant Enhancements: smarter, context-aware help right in your practice editor. Multi-model support, real-time guidance, and seamless model switching to speed up learning. Try the new AI assistant in your next session. #CodeGrindAI",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "image_alt": "CodeGrind AI Assistant Enhancements: Smarter help, faster guidance",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind introduces an upgraded AI assistant powered by Azure OpenAI with multi-model support, delivering smarter, context-aware help directly in the practice editor. Users get guided problem-solving, code suggestions, and quick model switching for faster learning. Explore the enhanced experience and share feedback with #CodeGrindAI. Learn more: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind AI Assistant Enhancements",
+        "text": "CodeGrind has upgraded its AI assistant with Azure OpenAI-backed multi-model support, delivering smarter, context-aware help directly in the practice editor. Expect guided problem-solving, real-time code suggestions, and easy model switching to accelerate learning. See the demo and share your feedback with #CodeGrindAI. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind has upgraded its AI assistant with Azure OpenAI-backed multi-model support, delivering smarter, context-aware help directly in the practice editor. Expect guided problem-solving, real-time code suggestions, and easy model switching to accelerate learning. See the demo and share your feedback with #CodeGrindAI. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind AI Assistant Enhancements",
+        "text": "Enhanced AI assistant in CodeGrind now offers context-aware guidance, multi-model support, and real-time problem-solving within the editor. Watch as hints flow, code snippets appear, and model switching happens in-stream. Engage with the update using #CodeGrindAI. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Enhanced AI assistant in CodeGrind now offers context-aware guidance, multi-model support, and real-time problem-solving within the editor. Watch as hints flow, code snippets appear, and model switching happens in-stream. Engage with the update using #CodeGrindAI. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind announces AI Assistant Enhancements powered by Azure OpenAI. Experience smarter, context-aware help directly in the practice editor with multi-model support, real-time guidance, and effortless model switching. Try the new assistant in your next session and share your experience with #CodeGrindAI. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "See CodeGrind’s AI Assistant Enhancements in action: smarter guidance, real-time code prompts, and quick model switching inside the editor. Watch the UI flow and try it during your practice session. Share your results with #CodeGrindAI and explore the new experience.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-06-codegrind-ai-assistant-enhancements.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
