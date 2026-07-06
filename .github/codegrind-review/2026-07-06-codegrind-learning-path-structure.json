@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-07-06-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-07-06-codegrind-learning-path-structure.md",
+  "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Content Dump",
+  "summary": "How I structure CodeGrind learning paths around DSA progression, scoring pressure, AI limits, and gameplay loops instead of dumping random problems.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-07-06-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-07-06-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-07-06-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": true,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Structuring CodeGrind learning paths around DSA progression, AI limits, and gameplay loops—not endless problem dumps. Learn how we design steps that balance cognitive load, feedback, and challenges. https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+    "linkedin_text": "Structuring CodeGrind learning paths around DSA progression, scoring pressure, AI limits, and gameplay loops to avoid turning practice into a problem dump. The approach treats learning paths as a systems design problem, balancing cognitive load, feedback, and meaningful progression. https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind learning paths around DSA progression, AI limits, and gameplay loops—not endless problem dumps. Learn how we design steps that balance cognitive load, feedback, and challenges. https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Content Dump",
+        "description": "How I structure CodeGrind learning paths around DSA progression, scoring pressure, AI limits, and gameplay loops instead of dumping random problems.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-06-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind learning paths around DSA progression, AI limits, and gameplay loops—not endless problem dumps. Learn how we design steps that balance cognitive load, feedback, and challenges. https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Content Dump",
+        "description": "How I structure CodeGrind learning paths around DSA progression, scoring pressure, AI limits, and gameplay loops instead of dumping random problems.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-06-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind learning paths around DSA progression, scoring pressure, AI limits, and gameplay loops to avoid turning practice into a problem dump. The approach treats learning paths as a systems design problem, balancing cognitive load, feedback, and meaningful progression. https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Content Dump",
+        "url": "https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "description": "How I structure CodeGrind learning paths around DSA progression, scoring pressure, AI limits, and gameplay loops instead of dumping random problems.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-06-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Structuring Learning Paths Without Turning DSA Into a Content Dump",
+        "text": "New post: I share how CodeGrind structures learning paths to manage cognitive load, feedback, AI usage, and gameplay unlocks, rather than presenting a raw problem list. It’s about progression design within a three-panel workspace (problem, editor, AI chat). https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Content Dump",
+        "text": "I’ve been refining CodeGrind’s approach to DSA practice by designing learning paths that balance difficulty, feedback, AI use, and gameplay progression. It’s not just about listing problems—it's about creating a structured progression. Details: https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind’s approach to DSA practice focuses on structured learning paths that balance progression, feedback, and gameplay. Read how we design steps that control cognitive load and integrate AI guidance without diluting real interview-style coding. https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/ #DSA #LearningPaths",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Content Dump",
+        "url": "https://rivie13.github.io/blog/2026/07/06/codegrind-learning-path-structure/",
+        "description": "How I structure CodeGrind learning paths around DSA progression, scoring pressure, AI limits, and gameplay loops instead of dumping random problems.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-06-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Structuring CodeGrind learning paths around DSA progression, scoring pressure, AI limits, and gameplay loops—not just a giant problem dump. Learn how we map steps to the three-panel workspace (Problem, Editor, AI Chat) to balance challenge and feedback. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-06-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
