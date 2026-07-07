@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-07-codegrind-cyberpunk-ux-updates.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-07-codegrind-cyberpunk-ux-updates.json",
+  "title": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting",
+  "summary": "Showcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow.",
+  "slug": "codegrind-cyberpunk-ux-updates",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind has refreshed its core DSA practice experience with a cyberpunk visual overhaul, a more capable AI assistant, and streamlined sign-in. This campaign highlights tangible UX improvements, real-time AI guidance, and a smoother onboarding flow to reinforce practice impact.",
+  "cta": "Explore the refreshed CodeGrind experience and try a problem with AI-assisted hints today.",
+  "visual_brief": "Static hero image featuring CodeGrind UI in a neon cyberpunk aesthetic: updated three-panel layout (Problem Description, Code Editor, AI Chat) with glowing towers visualizing concepts, subtle GitHub/Google sign-in cues, and a prominent AI-help prompt.",
+  "source_media_tags": [
+    "cyberpunk-ui",
+    "code-editor",
+    "ai-assistant",
+    "google-signin",
+    "azure-openai",
+    " ui-refresh"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-cyberpunk-ux-updates",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting. Showcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "image_alt": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting. Showcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "image_alt": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting\n\nShowcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow.\n\nExplore the refreshed CodeGrind experience and try a problem with AI-assisted hints today.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting",
+        "text": "Showcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Showcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting",
+        "text": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting\n\nShowcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting\n\nShowcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting\n\nShowcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind: Cyberpunk UX Overhaul with AI-Powered Troubleshooting\n\nShowcase CodeGrind's cyberpunk UI revamp and AI-assisted problem solving, highlighting the improved editor, Azure OpenAI guidance, and new authentication flow.\n\nExplore the refreshed CodeGrind experience and try a problem with AI-assisted hints today.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-07-codegrind-cyberpunk-ux-updates.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
