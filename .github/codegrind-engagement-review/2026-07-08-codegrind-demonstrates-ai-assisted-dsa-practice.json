@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.json",
+  "title": "CodeGrind: AI-assisted DSA Practice with Real-time Editor and Azure OpenAI",
+  "summary": "Showcase CodeGrind's AI-assisted problem solving, real-time editor, and fresh Google authentication integration in a concise post highlighting the latest workflow and learning features.",
+  "slug": "codegrind-demonstrates-ai-assisted-dsa-practice",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind combines LeetCode-style challenges with an Azure OpenAI assistant, real-time code execution, and streamlined sign-in to deliver an engaging, hands-on DSA practice experience.",
+  "cta": "Try CodeGrind now and level up your practice with AI guidance and instant feedback.",
+  "visual_brief": "A short demo-style video showing the CodeGrind interface: problem description on one side, live code editor with syntax highlighting, AI assistant chat panel, and a quick sign-in flow. Include subtle cyberpunk touches and UI glow to reflect the Code Breach theme. End with a call-to-action screen: 'Practice DSA with AI help at codegrind.online'.",
+  "source_media_tags": [
+    "codegrind-ai-assistant",
+    "live-code-editor",
+    "google-auth-integration",
+    "real-time-execution",
+    "problem-solver-chat",
+    "cyberpunk-theme-ui"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-demonstrates-ai-assisted-dsa-practice",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+    "file": "assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+    "file": "assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind combines LeetCode-style challenges with an Azure OpenAI assistant, real-time editor, and fast sign-in to power hands-on DSA practice. See AI-assisted solving in action in a short demo-style video and try CodeGrind now at codegrind.online.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "image_alt": "CodeGrind: AI-assisted DSA Practice with Real-time Editor and Azure OpenAI",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind combines LeetCode-style challenges with an Azure OpenAI assistant, real-time editor, and fast sign-in to power hands-on DSA practice. See AI-assisted solving in action in a short demo-style video and try CodeGrind now at codegrind.online.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "image_alt": "CodeGrind: AI-assisted DSA Practice with Real-time Editor and Azure OpenAI",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind now fuses LeetCode-style challenges with an Azure OpenAI assistant, real-time code execution, and streamlined Google authentication for a hands-on DSA practice experience. Watch the demo-style flow: problem description, live editor, AI chat, and quick sign-in. Try CodeGrind now and level up with AI guidance and instant feedback at codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI-assisted DSA Practice with Real-time Editor",
+        "text": "Explore CodeGrind’s AI-assisted DSA workflow: LeetCode-style problems, real-time editor, AI assistant, and instant feedback with easy sign-in. The demo video highlights how the interface works—from problem to live code and AI guidance. Try CodeGrind now at codegrind.online.",
+        "body_text": null,
+        "comment_text": "Explore CodeGrind’s AI-assisted DSA workflow: LeetCode-style problems, real-time editor, AI assistant, and instant feedback with easy sign-in. The demo video highlights how the interface works—from problem to live code and AI guidance. Try CodeGrind now at codegrind.online.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI-assisted DSA Practice",
+        "text": "See CodeGrind’s AI-assisted DSA workflow in action: problems, real-time editor, AI assistant, and quick sign-in. A short demo-style video showcases the end-to-end experience. Start practicing with AI guidance at codegrind.online.",
+        "body_text": null,
+        "comment_text": "See CodeGrind’s AI-assisted DSA workflow in action: problems, real-time editor, AI assistant, and quick sign-in. A short demo-style video showcases the end-to-end experience. Start practicing with AI guidance at codegrind.online.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind brings AI-assisted DSA practice to life with a real-time editor, AI assistant, and simple sign-in. Watch the short demo-style video to see the interface in action—from problem description to live code and instant feedback. Ready to practice? Try CodeGrind now at codegrind.online.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Watch CodeGrind in action: AI-assisted DSA practice with a real-time editor and AI guidance. See the live problem, code, and chat in one flow. Ready to level up your practice? Try CodeGrind now at codegrind.online.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-08-codegrind-demonstrates-ai-assisted-dsa-practice.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
