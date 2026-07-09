@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.md",
+  "review_markdown_file": ".github/codegrind-review/2026-06-15-killing-duplicate-navigation-and-avatar-logic.md",
+  "title": "Killing Duplicate Navigation and Avatar Logic Before It Turned Into More Production Bugs",
+  "summary": "I removed duplicated route and avatar logic, deleted a legacy city page, and centralized path normalization before it caused more drift.",
+  "slug": "killing-duplicate-navigation-and-avatar-logic",
+  "url": "https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.png",
+    "file": "assets/images/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": true,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Killing duplicate navigation and avatar logic to prevent drift and production bugs. I centralized rules, deleted dead code, and reduced cross-component divergence. Full context in the post. https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+    "linkedin_text": "Killing duplicate navigation and avatar logic before it caused more production bugs. I centralized rules, removed dead code, and reduced divergence across app areas like frontend, guest progress flow, and city scene rendering. Read the full post for details and approach. https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Killing duplicate navigation and avatar logic to prevent drift and production bugs. I centralized rules, deleted dead code, and reduced cross-component divergence. Full context in the post. https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "url": "https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "title": "Killing Duplicate Navigation and Avatar Logic Before It Turned Into More Production Bugs",
+        "description": "I removed duplicated route and avatar logic, deleted a legacy city page, and centralized path normalization before it caused more drift.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Killing duplicate navigation and avatar logic to prevent drift and production bugs. I centralized rules, deleted dead code, and reduced cross-component divergence. Full context in the post. https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "url": "https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "title": "Killing Duplicate Navigation and Avatar Logic Before It Turned Into More Production Bugs",
+        "description": "I removed duplicated route and avatar logic, deleted a legacy city page, and centralized path normalization before it caused more drift.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Killing duplicate navigation and avatar logic before it caused more production bugs. I centralized rules, removed dead code, and reduced divergence across app areas like frontend, guest progress flow, and city scene rendering. Read the full post for details and approach. https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "title": "Killing Duplicate Navigation and Avatar Logic Before It Turned Into More Production Bugs",
+        "url": "https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "description": "I removed duplicated route and avatar logic, deleted a legacy city page, and centralized path normalization before it caused more drift.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "Killing Duplicate Navigation and Avatar Logic Before It Turned Into More Production Bugs",
+        "text": "I cleaned up frontend duplication by centralizing path normalization, removing dead code, and unifying shared logic for avatar resolution and learning path normalization. The post explains what was changed across the main app, guest progress flow, and city scene rendering. https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "url": "https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Killing Duplicate Navigation and Avatar Logic — refactor to reduce drift",
+        "text": "Posted about cleaning up duplicated navigation and avatar logic, deleting a legacy city page, and centralizing path normalization to prevent drift and production bugs. Details across the main frontend app, guest progress flow, and city scene rendering. https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "url": "https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Killing Duplicate Navigation and Avatar Logic: I centralized rules and removed dead code to reduce drift and prevent production bugs. See how path normalization was unified across the app, guest progress flow, and city rendering. https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/ #CodeGrind #Frontend #Refactor",
+        "title": "Killing Duplicate Navigation and Avatar Logic Before It Turned Into More Production Bugs",
+        "url": "https://rivie13.github.io/blog/2026/06/15/killing-duplicate-navigation-and-avatar-logic/",
+        "description": "I removed duplicated route and avatar logic, deleted a legacy city page, and centralized path normalization before it caused more drift.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Killing duplicate navigation and avatar logic to prevent drift and production bugs. I centralized rules, removed dead code, and simplified path normalization across the app. Read about the changes and why they matter for consistent behavior. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-15-killing-duplicate-navigation-and-avatar-logic.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
