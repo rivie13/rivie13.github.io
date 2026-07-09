@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-06-08-phaser-performance-improvements-city-mode.md",
+  "review_markdown_file": ".github/codegrind-review/2026-06-08-phaser-performance-improvements-city-mode.md",
+  "title": "Phaser Performance Improvements Behind CodeGrind's City Mode Updates",
+  "summary": "Recent CodeGrind updates focused on Phaser performance: background preloading, cleaner input handling, route-aware keyboard control, and pause-resume fixes.",
+  "slug": "phaser-performance-improvements-city-mode",
+  "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-06-08-phaser-performance-improvements-city-mode.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-06-08-phaser-performance-improvements-city-mode.png",
+    "file": "assets/images/codegrind/2026-06-08-phaser-performance-improvements-city-mode.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": true,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "CodeGrind sharpens Phaser performance in City Mode with background preloading, cleaner input, route-aware keyboard control, and pause-resume fixes. These updates improve stability and responsiveness across existing scenes....",
+    "linkedin_text": "CodeGrind has rolled out Phaser performance improvements behind City Mode updates, focusing on background preloading, asset management, keyboard cleanup, and pause-resume behavior to make interactive scenes more stable within the app shell. This work addresses lifecycle efficiency in a React-style web app with embedded game scenes. https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind sharpens Phaser performance in City Mode with background preloading, cleaner input, route-aware keyboard control, and pause-resume fixes. These updates improve stability and responsiveness across existing scenes....",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "title": "Phaser Performance Improvements Behind CodeGrind's City Mode Updates",
+        "description": "Recent CodeGrind updates focused on Phaser performance: background preloading, cleaner input handling, route-aware keyboard control, and pause-resume fixes.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-08-phaser-performance-improvements-city-mode.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind sharpens Phaser performance in City Mode with background preloading, cleaner input, route-aware keyboard control, and pause-resume fixes. These updates improve stability and responsiveness across existing scenes....",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "title": "Phaser Performance Improvements Behind CodeGrind's City Mode Updates",
+        "description": "Recent CodeGrind updates focused on Phaser performance: background preloading, cleaner input handling, route-aware keyboard control, and pause-resume fixes.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-08-phaser-performance-improvements-city-mode.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind has rolled out Phaser performance improvements behind City Mode updates, focusing on background preloading, asset management, keyboard cleanup, and pause-resume behavior to make interactive scenes more stable within the app shell. This work addresses lifecycle efficiency in a React-style web app with embedded game scenes. https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "title": "Phaser Performance Improvements Behind CodeGrind's City Mode Updates",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "description": "Recent CodeGrind updates focused on Phaser performance: background preloading, cleaner input handling, route-aware keyboard control, and pause-resume fixes.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-08-phaser-performance-improvements-city-mode.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Phaser performance improvements in City Mode",
+        "text": "CodeGrind released focused Phaser performance improvements for City Mode, including background preloading, asset management, keyboard handling cleanup, and pause/resume reliability. These changes aim to reduce load times and improve scene lifecycle behavior in the CodeGrind app. https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Phaser performance improvements behind City Mode updates",
+        "text": "CodeGrind’s latest update centers on improving Phaser-powered scenes within the app shell: background preloading, asset management, and robust pause/resume/keyboard handling. Read the details and how it impacts scene stability here: https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind highlights Phaser performance improvements behind City Mode updates, including background preloading, asset management, and cleaner input handling to boost stability for embedded game scenes. Details: https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "title": "Phaser Performance Improvements Behind CodeGrind's City Mode Updates",
+        "url": "https://rivie13.github.io/blog/2026/06/08/phaser-performance-improvements-city-mode/",
+        "description": "Recent CodeGrind updates focused on Phaser performance: background preloading, cleaner input handling, route-aware keyboard control, and pause-resume fixes.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-08-phaser-performance-improvements-city-mode.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Phaser performance improvements behind CodeGrind's City Mode updates enhance stability and responsiveness across embedded game scenes. From background preloading to cleaner input handling and pause-resume reliability, these changes optimize lifecycle management within the app shell. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-06-08-phaser-performance-improvements-city-mode.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
