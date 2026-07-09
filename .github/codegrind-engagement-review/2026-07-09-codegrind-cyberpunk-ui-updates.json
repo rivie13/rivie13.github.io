@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-09-codegrind-cyberpunk-ui-updates.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-09-codegrind-cyberpunk-ui-updates.json",
+  "title": "CodeGrind: Cyberpunk UI Refresh and AI Assist Enhancements",
+  "summary": "Highlighting the recent UI refresh for CodeGrind's cyberpunk aesthetic and the expanded AI assistant capabilities, with a look at how users can leverage these features in problem-solving sessions.",
+  "slug": "codegrind-cyberpunk-ui-updates",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind has a revamped cyberpunk UI and upgraded AI assistant to streamline problem-solving: immersive visuals, responsive editor, and multi-model AI guidance designed to accelerate learning and engagement.",
+  "cta": "Try the new UI and ask the AI assistant for problem-solving guidance in your next challenge.",
+  "visual_brief": "Static hero image showcasing CodeGrind's cyberpunk-themed UI: neon dashboards, code editor with syntax highlighting, and celebratory problem-solve visuals. Include subtle motion-free elements like glowing outlines to convey polish without animation.",
+  "source_media_tags": [
+    "cyberpunk-ui",
+    "codegrind-dashboards",
+    "ai-assistant",
+    "problem-solving",
+    "neon-editor"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-cyberpunk-ui-updates",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind unveils a cyberpunk UI refresh and expanded AI assistant. See neon dashboards, a responsive editor, and multi-model guidance that accelerates learning and problem-solving. Try the new UI and ask the AI for guidance on your next challenge. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "image_alt": "CodeGrind: Cyberpunk UI Refresh and AI Assist Enhancements",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind unveils a cyberpunk UI refresh and expanded AI assistant. See neon dashboards, a responsive editor, and multi-model guidance that accelerates learning and problem-solving. Try the new UI and ask the AI for guidance on your next challenge. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "image_alt": "CodeGrind: Cyberpunk UI Refresh and AI Assist Enhancements",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind announces a revamped cyberpunk UI alongside upgraded AI assistant capabilities. The refreshed visuals feature neon dashboards, a responsive code editor, and multi-model AI guidance designed to streamline problem-solving and accelerate learning. Try the new UI and leverage the AI assistant for guidance on your next challenge. Learn more at https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Cyberpunk UI Refresh and AI Enhancements",
+        "text": "CodeGrind has rolled out a cyberpunk UI refresh and upgraded AI assistant capabilities. The new visuals include neon dashboards, a responsive code editor, and multi-model AI guidance aimed at accelerating problem-solving and learning. Explore the refreshed experience and try the AI assistance on your next challenge at the provided link.",
+        "body_text": null,
+        "comment_text": "CodeGrind has rolled out a cyberpunk UI refresh and upgraded AI assistant capabilities. The new visuals include neon dashboards, a responsive code editor, and multi-model AI guidance aimed at accelerating problem-solving and learning. Explore the refreshed experience and try the AI assistance on your next challenge at the provided link.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind—Cyberpunk UI Refresh & AI Enhancements",
+        "text": "CodeGrind reveals a cyberpunk UI refresh and an expanded AI assistant to streamline problem-solving. Expect neon dashboards, a responsive editor, and multi-model AI guidance designed to speed up learning. Try the new UI and ask the AI for guidance on your next challenge with the link provided.",
+        "body_text": null,
+        "comment_text": "CodeGrind reveals a cyberpunk UI refresh and an expanded AI assistant to streamline problem-solving. Expect neon dashboards, a responsive editor, and multi-model AI guidance designed to speed up learning. Try the new UI and ask the AI for guidance on your next challenge with the link provided.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind unveils a cyberpunk UI refresh and upgraded AI assistant. Experience neon dashboards, a responsive code editor, and multi-model AI guidance designed to accelerate problem-solving and learning. Try the new UI and ask the AI for guidance on your next challenge at CodeGrind. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "New: CodeGrind’s cyberpunk UI refresh plus upgraded AI assistant. Explore neon dashboards, a responsive editor, and multi-model AI guidance built to accelerate problem-solving. Dive in and try the new UI—ask the AI for guidance on your next challenge. CTA: explore the new UI and start solving with AI today.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-09-codegrind-cyberpunk-ui-updates.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
