@@ -6,8 +6,8 @@
 // GitHub username
 const GITHUB_USERNAME = 'rivie13';
 
-// Your function app URL - replace with your actual deployed function URL
-const FUNCTION_APP_URL = 'https://portfoliowebsitegithubauth.azurewebsites.net/api/github';
+// Vercel-deployed GitHub API proxy (replaced the old Azure Function App)
+const FUNCTION_APP_URL = 'https://github-api-proxy-function.vercel.app/api/github';
 
 // Export configuration
 window.GitHubConfig = {
