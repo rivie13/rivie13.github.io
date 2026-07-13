@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-13-codegrind-dsai-practice-boost.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-13-codegrind-dsai-practice-boost.json",
+  "title": "CodeGrind: Boost DS&A Practice with AI-guided Challenges",
+  "summary": "Showcase how CodeGrind pairs LeetCode-style problems with Azure OpenAI AI assistant for guided learning, dynamic scoring, and immersive tower-defense-themed visualization.",
+  "slug": "codegrind-dsai-practice-boost",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends hands-on DS&A practice with AI-assisted problem solving, real-time code execution, and a cyberpunk-themed learning environment. See how AI guidance and live feedback accelerate mastery without leaving the platform.",
+  "cta": "Try a guided DS&A challenge now and compare AI-assisted reasoning vs. solo attempts.",
+  "visual_brief": "A short demo video: split-screen showing a LeetCode-style problem, AI assistant chat with GPT-4o, and the real-time code editor executing test cases; include subtle CodeGrind branding and tower-defense visuals in the background.",
+  "source_media_tags": [
+    "dsai",
+    "ai-assistant",
+    "code-editor",
+    "live-execution",
+    "tower-defense",
+    "cyberpunk"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsai-practice-boost",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+    "file": "assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+    "file": "assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind pairs LeetCode-style problems with an AI assistant for guided learning. See real-time code execution, AI guidance, and tower-defense visuals in a cyberpunk learning environment. Try a guided DS&A challenge now and compare AI-assisted reasoning vs solo attempts. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "image_alt": "CodeGrind: Boost DS&A Practice with AI-guided Challenges",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind pairs LeetCode-style problems with an AI assistant for guided learning. See real-time code execution, AI guidance, and tower-defense visuals in a cyberpunk learning environment. Try a guided DS&A challenge now and compare AI-assisted reasoning vs solo attempts. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "image_alt": "CodeGrind: Boost DS&A Practice with AI-guided Challenges",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind blends hands-on DS&A practice with AI-assisted problem solving, real-time code execution, and a cyberpunk learning environment. Watch a short demo: LeetCode-style problem, AI assistant chat, and live execution with tower-defense visuals. See how AI guidance accelerates mastery on CodeGrind. Try a guided DS&A challenge now and compare AI-assisted reasoning vs solo attempts. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI-guided DS&A Practice Demo",
+        "text": "Discover how CodeGrind pairs LeetCode-style problems with an AI assistant for guided learning. The platform offers real-time code execution and a cyberpunk, tower-defense visual backdrop. See a short demo video and explore AI-guided problem solving—then try a guided DS&A challenge and compare AI-assisted reasoning vs solo attempts. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Discover how CodeGrind pairs LeetCode-style problems with an AI assistant for guided learning. The platform offers real-time code execution and a cyberpunk, tower-defense visual backdrop. See a short demo video and explore AI-guided problem solving—then try a guided DS&A challenge and compare AI-assisted reasoning vs solo attempts. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind DS&A Practice with AI Guidance",
+        "text": "CodeGrind showcases AI-assisted DS&A practice with live code execution and a cyberpunk learning vibe. Check out the quick demo video featuring an AI assistant chat and a LeetCode-style problem, then try a guided DS&A challenge to compare AI-assisted reasoning with solo attempts. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind showcases AI-assisted DS&A practice with live code execution and a cyberpunk learning vibe. Check out the quick demo video featuring an AI assistant chat and a LeetCode-style problem, then try a guided DS&A challenge to compare AI-assisted reasoning with solo attempts. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind brings DS&A practice to life with an AI-guided assistant, live code execution, and a cyberpunk learning vibe. Watch a short demo showing a LeetCode-style problem, AI chat, and real-time results, plus subtle tower-defense visuals. Ready to level up your practice? Try a guided DS&A challenge now and compare AI-assisted reasoning vs solo attempts at CodeGrind. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "See DS&A practice come alive with AI guidance, live code execution, and a cyberpunk learning backdrop. Watch the demo split-screen with a LeetCode-style problem, AI assistant chat, and real-time testing. Ready to level up your practice? Try a guided DS&A challenge now and compare AI-assisted reasoning vs solo attempts. https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-13-codegrind-dsai-practice-boost.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
