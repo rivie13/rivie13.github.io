@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-07-13-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-07-13-codegrind-learning-path-structure.md",
+  "title": "Structuring CodeGrind Learning Paths Around Real DSA Progression",
+  "summary": "How I structure CodeGrind learning paths so DSA practice moves from guided repetition to timed execution without turning into shallow gamification.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-07-13-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-07-13-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-07-13-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": true,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Structuring CodeGrind learning paths to move from guided practice to timed execution, not just gamified drills. Learn how this execution pipeline approach links problem data, real-time code execution, scoring, and AI guidance....",
+    "linkedin_text": "Structuring CodeGrind learning paths around real DSA progression shifts practice from guided repetition to timed execution. The article outlines an execution-pipeline approach: problem metadata, real-time code editor, AI-assisted guidance, and a cohesive progression model that emphasizes reinforces over mere completion. Read more at https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind learning paths to move from guided practice to timed execution, not just gamified drills. Learn how this execution pipeline approach links problem data, real-time code execution, scoring, and AI guidance....",
+        "url": "https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Around Real DSA Progression",
+        "description": "How I structure CodeGrind learning paths so DSA practice moves from guided repetition to timed execution without turning into shallow gamification.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-13-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind learning paths to move from guided practice to timed execution, not just gamified drills. Learn how this execution pipeline approach links problem data, real-time code execution, scoring, and AI guidance....",
+        "url": "https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Around Real DSA Progression",
+        "description": "How I structure CodeGrind learning paths so DSA practice moves from guided repetition to timed execution without turning into shallow gamification.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-13-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind learning paths around real DSA progression shifts practice from guided repetition to timed execution. The article outlines an execution-pipeline approach: problem metadata, real-time code editor, AI-assisted guidance, and a cohesive progression model that emphasizes reinforces over mere completion. Read more at https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Around Real DSA Progression",
+        "url": "https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "description": "How I structure CodeGrind learning paths so DSA practice moves from guided repetition to timed execution without turning into shallow gamification.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-13-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind learning paths: from guided practice to timed execution",
+        "text": "I describe how CodeGrind structures learning paths as an execution pipeline to move beyond simple problem playlists. It covers problem metadata, realtime execution, AI guidance, and progression signals to reinforce transfer of skills. https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/ Discuss how this approach could impact practice flow and problem selection.",
+        "url": "https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Structuring CodeGrind learning paths around real DSA progression",
+        "text": "I explored how CodeGrind shifts DSA practice from basic repetition to timed execution by modeling learning paths as an execution pipeline, tying problem data, real-time evaluation, scoring, and AI usage. Read more: https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind learning paths are designed to move from guided practice to timed execution, integrating problem data, realtime code execution, AI guidance, and progression signals. Learn how this approach shapes effective DSA practice at https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Around Real DSA Progression",
+        "url": "https://rivie13.github.io/blog/2026/07/13/codegrind-learning-path-structure/",
+        "description": "How I structure CodeGrind learning paths so DSA practice moves from guided repetition to timed execution without turning into shallow gamification.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-13-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Structuring CodeGrind learning paths around real DSA progression to move from guided repetition to timed execution. The article explores an execution pipeline that ties problem data, realtime code testing, and AI guidance into a cohesive progression model. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-13-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
