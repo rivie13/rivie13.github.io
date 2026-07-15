@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-15-codegrind-dsa-practice-upgrade.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-15-codegrind-dsa-practice-upgrade.json",
+  "title": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow",
+  "summary": "Showcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback.",
+  "slug": "codegrind-dsa-practice-upgrade",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now blends LeetCode-style problems with an upgraded AI assistant, delivering real-time guidance, difficulty-aware filtering, and a more engaging problem-to-solution workflow. This centers practical practice, learning momentum, and tangible progress tracking for users exploring data structures and algorithms.",
+  "cta": "Try the refreshed practice flow and share a screenshot of your first solved problem with AI guidance.",
+  "visual_brief": "Static hero-style banner: CodeGrind UI showing a code editor on one side and an AI assistant panel with a chat-like interface; include a solved problem badge and a subtle cyberpunk accent to reflect the CodeBreach aesthetic. Use bold title overlay: 'DSA Practice Upgrades'.",
+  "source_media_tags": [
+    "ui-refresh",
+    "ai-assistant",
+    "code-editor",
+    "problem-solution-flow",
+    "cyberpunk-aesthetic",
+    "hero-banner"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsa-practice-upgrade",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+    "file": "assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+    "file": "assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow. Showcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback. https://codegrind.online #Code",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "image_alt": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow. Showcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback. https://codegrind.online #Code",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "image_alt": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow\n\nShowcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback.\n\nTry the refreshed practice flow and share a screenshot of your first solved problem with AI guidance.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow",
+        "text": "Showcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Showcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow",
+        "text": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow\n\nShowcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow\n\nShowcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow\n\nShowcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "DSA Practice Upgrades: Real-time AI Assist & Enhanced Problem Flow\n\nShowcase CodeGrind's refreshed practice loop: AI-assisted problem solving with Azure OpenAI, improved problem filtering, and a sharper UI flow that ties LeetCode-style challenges to real-time feedback.\n\nTry the refreshed practice flow and share a screenshot of your first solved problem with AI guidance.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-15-codegrind-dsa-practice-upgrade.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
