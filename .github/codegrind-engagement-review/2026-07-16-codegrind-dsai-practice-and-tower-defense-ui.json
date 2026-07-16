@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.json",
+  "title": "CodeGrind DS&A Practice meets Tower Defense UX—A Fresh Challenge",
+  "summary": "Showcases CodeGrind's integration of data structures practice with the Code Breach cyberpunk tower defense vibe, highlighting real-time editor, AI assist, and new UI enhancements.",
+  "slug": "codegrind-dsai-practice-and-tower-defense-ui",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends LeetCode-style DS&A challenges with an immersive cyberpunk UI and AI-assisted guidance, making practice engaging and visually expressive. Real-time code execution, authentication improvements, and tower-based visualizations tie programming concepts to interactive gameplay.",
+  "cta": "Try a DS&A challenge now on CodeGrind and explore the cyberpunk Code Breach redesign with AI-assisted problem solving.",
+  "visual_brief": "Static promotional image showing a split-screen: left side a code editor with highlighted DS&A problem and status indicators; right side a section of Code Breach-style towers visually representing programming concepts (ForLoop, IfCondition, Function) with cyberpunk neon accents; include subtle UI elements that imply real-time feedback and AI assistance.",
+  "source_media_tags": [
+    "code-editor",
+    "cyberpunk-ui",
+    "tower-defense-visuals",
+    "ai-assistance",
+    "dsA-problem",
+    "neon-near-future"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsai-practice-and-tower-defense-ui",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+    "file": "assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+    "file": "assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind DS&A Practice meets Tower Defense UX. See real-time DS&A challenges, AI-assisted guidance, and Code Breach-inspired UI in a split-screen promo image. Try a DS&A challenge now and explore the cyberpunk redesign.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "image_alt": "CodeGrind DS&A Practice meets Tower Defense UX—A Fresh Challenge",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind DS&A Practice meets Tower Defense UX. See real-time DS&A challenges, AI-assisted guidance, and Code Breach-inspired UI in a split-screen promo image. Try a DS&A challenge now and explore the cyberpunk redesign.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "image_alt": "CodeGrind DS&A Practice meets Tower Defense UX—A Fresh Challenge",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind blends LeetCode-style DS&A with a cyberpunk UI and AI-assisted guidance. The new immersive practice features real-time code execution, authentication improvements, and tower-based visualizations that tie programming concepts to interactive gameplay. Explore the Code Breach redesign and try a DS&A challenge today. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind DS&A Practice meets Tower Defense UX",
+        "text": "Introducing CodeGrind’s DS&A Practice with a Tower Defense-inspired UI. A static promo image showcases a split-screen: left is a DS&A problem in a code editor; right features Code Breach-style towers representing ForLoop, IfCondition, and Function, all with neon cyberpunk accents and AI-assisted feedback. Explore real-time results and start a DS&A challenge.",
+        "body_text": null,
+        "comment_text": "Introducing CodeGrind’s DS&A Practice with a Tower Defense-inspired UI. A static promo image showcases a split-screen: left is a DS&A problem in a code editor; right features Code Breach-style towers representing ForLoop, IfCondition, and Function, all with neon cyberpunk accents and AI-assisted feedback. Explore real-time results and start a DS&A challenge.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind DS&A Practice + Tower Defense UX",
+        "text": "Promotional image: CodeGrind merges DS&A practice with cyberpunk UI and AI guidance. The split-screen design highlights a code editor alongside tower-based visualizations. Real-time feedback and AI assistance are part of the experience. Start a DS&A challenge today.",
+        "body_text": null,
+        "comment_text": "Promotional image: CodeGrind merges DS&A practice with cyberpunk UI and AI guidance. The split-screen design highlights a code editor alongside tower-based visualizations. Real-time feedback and AI assistance are part of the experience. Start a DS&A challenge today.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind DS&A Practice meets Tower Defense UX. A static promo image highlights a split-screen: left shows a DS&A problem in a code editor, right shows Code Breach-style towers with neon accents and AI feedback. Explore real-time execution, improved authentication, and interactive gameplay. Try a DS&A challenge now at CodeGrind.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Static promo image: DS&A practice meets cyberpunk Tower Defense UI with AI guidance. See real-time feedback and code execution visuals. Ready to try a DS&A challenge and explore the Code Breach redesign? Tap to begin on CodeGrind.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-16-codegrind-dsai-practice-and-tower-defense-ui.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
