@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-19-codegrind-dsai-augmented-playground.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-19-codegrind-dsai-augmented-playground.json",
+  "title": "CodeGrind: AI-Assisted DSA Practice Gets a Cyberpunk Edge",
+  "summary": "Show how CodeGrind blends DSA practice with AI guidance and an evolving cyberpunk game aesthetic, highlighting real-time editor, Azure OpenAI assistant, and new sign-in features.",
+  "slug": "codegrind-dsai-augmented-playground",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind merges interactive DSA challenges with AI-assisted problem solving, a real-time editor, and a cyberpunk tower-defense visualization to reinforce concepts from For loops to functions. This daily piece spotlights the learning flow, AI guidance, and a fresh cyberpunk theme without hype, grounded in our current features and recent updates.",
+  "cta": "Try CodeGrind now and practice a problem with AI help available in-editor.",
+  "visual_brief": "A short 15–20s motion clip showing the CodeGrind editor with problem prompt on one side, AI assistant chat on the other, and a dynamic cyberpunk tower-defense visualization in the background. Include subtle UI cues like a sign-in flow, code snippets rendering, and a progress bar to imply real-time feedback.",
+  "source_media_tags": [
+    "codegrind-editor",
+    "ai-assistant",
+    "cyberpunk-visuals",
+    "tower-defense-visual",
+    "sign-in-flow",
+    "real-time-feedback"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsai-augmented-playground",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+    "file": "assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+    "file": "assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind blends DSA practice with AI guidance in a cyberpunk, real-time editor. See AI assistant, sign-in flow, and a tower-defense visualization powering problem-solving from loops to functions. Try CodeGrind now and practice a problem with AI help in-editor. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "image_alt": "CodeGrind: AI-Assisted DSA Practice Gets a Cyberpunk Edge",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind blends DSA practice with AI guidance in a cyberpunk, real-time editor. See AI assistant, sign-in flow, and a tower-defense visualization powering problem-solving from loops to functions. Try CodeGrind now and practice a problem with AI help in-editor. https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "image_alt": "CodeGrind: AI-Assisted DSA Practice Gets a Cyberpunk Edge",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind merges interactive DSA challenges with AI-assisted problem solving, a real-time editor, and a cyberpunk tower-defense visualization. This 15–20s motion-forward look highlights how AI guidance and live feedback reinforce concepts from loops to functions. Try CodeGrind now and practice a problem with AI help available in-editor. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI-Assisted DSA Practice with Cyberpunk Edge",
+        "text": "Discover CodeGrind’s AI-assisted DSA practice, featuring a real-time editor, AI guidance, and cyberpunk-themed tower-defense visualization. The platform emphasizes learning flow, sign-in cues, and live feedback as you work through problems from for loops to functions. Try it now with in-editor AI help. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "Discover CodeGrind’s AI-assisted DSA practice, featuring a real-time editor, AI guidance, and cyberpunk-themed tower-defense visualization. The platform emphasizes learning flow, sign-in cues, and live feedback as you work through problems from for loops to functions. Try it now with in-editor AI help. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI-Assisted DSA Practice (Cyberpunk Edition)",
+        "text": "CodeGrind blends interactive DSA challenges with AI-assisted problem solving in a real-time editor, wrapped in a cyberpunk visual theme. See how AI guidance and live feedback reinforce concepts from loops to functions, with a sign-in flow and in-editor hints. Try CodeGrind now with AI help in-editor. https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind blends interactive DSA challenges with AI-assisted problem solving in a real-time editor, wrapped in a cyberpunk visual theme. See how AI guidance and live feedback reinforce concepts from loops to functions, with a sign-in flow and in-editor hints. Try CodeGrind now with AI help in-editor. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind brings AI-assisted DSA practice into a real-time editor, wrapped in a cyberpunk tower-defense visualization. See AI guidance, live feedback, and a sign-in flow that makes practice smooth and focused on concepts from loops to functions. Try CodeGrind now and practice a problem with AI help available in-editor. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Experience CodeGrind’s AI-assisted DSA practice in a cyberpunk-styled editor with real-time feedback and an AI assistant. Watch the problem prompt, see guidance in the chat, and follow the sign-in flow as you tackle a new challenge. Ready to try? Tap to start practicing with in-editor AI help.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-19-codegrind-dsai-augmented-playground.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
