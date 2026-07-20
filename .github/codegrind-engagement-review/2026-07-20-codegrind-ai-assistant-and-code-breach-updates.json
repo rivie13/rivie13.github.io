@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.json",
+  "title": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update",
+  "summary": "Showcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals.",
+  "slug": "codegrind-ai-assistant-and-code-breach-updates",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends Azure OpenAI-powered AI assistance with a refreshed Code Breach cyberpunk experience, delivering guided problem solving in a dynamic coding game. Users get model-switching conversations, persistent chats, and enhanced in-game visuals that visualize programming concepts as defensive towers.",
+  "cta": "Try the updated CodeGrind AI assistant now and explore the Code Breach redesign in action.",
+  "visual_brief": "Static hero-style banner showing a code editor mockup on one side and a cyberpunk Code Breach tower-defense scene on the other, with glowing towers representing ForLoop, WhileLoop, and IfCondition, and an AI chat bubble overlay highlighting problem-solving guidance.",
+  "source_media_tags": [
+    "ai-assistant-ui",
+    "code-breach-cyberpunk",
+    "tower-defense-visuals",
+    "real-time-coding-editor",
+    "ai-chat-prompt"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-ai-assistant-and-code-breach-updates",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+    "file": "assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update. Showcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "image_alt": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update. Showcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "image_alt": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update\n\nShowcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals.\n\nTry the updated CodeGrind AI assistant now and explore the Code Breach redesign in action.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update",
+        "text": "Showcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Showcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update",
+        "text": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update\n\nShowcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update\n\nShowcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update\n\nShowcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind: AI Assistant Enhancements meet Cyberpunk Code Breach Visual Update\n\nShowcase the new AI assistant capabilities alongside the Code Breach cyberpunk redesign, highlighting real-time problem-solving help and immersive tower-defense visuals.\n\nTry the updated CodeGrind AI assistant now and explore the Code Breach redesign in action.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-20-codegrind-ai-assistant-and-code-breach-updates.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
