@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-07-20-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-07-20-codegrind-learning-path-structure.md",
+  "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checklist",
+  "summary": "How I think about CodeGrind learning paths: DSA progression, gameplay pressure, AI guidance, scoring, and real interview practice.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-07-20-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-07-20-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-07-20-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "attempts": 2,
+      "strict_compress_used": false,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Structuring CodeGrind learning paths to avoid turning DSA into a checklist. How progression should reflect execution quality, independence, and challenge. Read more: https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/ #DSA #LearningPaths #CodeGrind #AI-assisted",
+    "linkedin_text": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checklist. A look at how progression should reflect quality signals across multiple systems (execution, AI guidance, scoring, challenges) rather than a simple completed flag. Read more: https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/ #DSA #LearningPaths #CodeGrind #AIAssistance #EdTech #SoftwareEngineering",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind learning paths to avoid turning DSA into a checklist. How progression should reflect execution quality, independence, and challenge. Read more: https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/ #DSA #LearningPaths #CodeGrind #AI-assisted",
+        "url": "https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checklist",
+        "description": "How I think about CodeGrind learning paths: DSA progression, gameplay pressure, AI guidance, scoring, and real interview practice.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-20-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind learning paths to avoid turning DSA into a checklist. How progression should reflect execution quality, independence, and challenge. Read more: https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/ #DSA #LearningPaths #CodeGrind #AI-assisted",
+        "url": "https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checklist",
+        "description": "How I think about CodeGrind learning paths: DSA progression, gameplay pressure, AI guidance, scoring, and real interview practice.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-20-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checklist. A look at how progression should reflect quality signals across multiple systems (execution, AI guidance, scoring, challenges) rather than a simple completed flag. Read more: https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/ #DSA #LearningPaths #CodeGrind #AIAssistance #EdTech #SoftwareEngineering",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checklist",
+        "url": "https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/",
+        "description": "How I think about CodeGrind learning paths: DSA progression, gameplay pressure, AI guidance, scoring, and real interview practice.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-20-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Structuring Learning Paths Without a DSA Checklist",
+        "text": "I explored how CodeGrind should model learning path progression beyond a simple completed flag, tying together execution quality, AI guidance, scoring, and challenge modes. Sharing the approach and the constraints observed in the current architecture. https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/ Interested in thoughts on progress signals and how you’d model mastery.",
+        "url": "https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Thoughts on CodeGrind learning path progression",
+        "text": "I’ve been digging into how to model CodeGrind learning paths so progression isn’t just a checklist. The approach emphasizes execution quality, independence, and challenge pressure, coordinating multiple systems like Judge0, AI guidance, and scoring. Details: https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind learning paths should reflect true progress, not just a checklist. The system needs to coordinate multiple signals—execution quality, AI guidance, scoring, and challenge modes—to represent mastery. Read the thoughtful breakdown and approach: https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/ #CodeGrind #DSA #LearningPaths",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checklist",
+        "url": "https://rivie13.github.io/blog/2026/07/20/codegrind-learning-path-structure/",
+        "description": "How I think about CodeGrind learning paths: DSA progression, gameplay pressure, AI guidance, scoring, and real interview practice.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-20-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Rethinking CodeGrind learning paths: progression as a derived state from execution quality, independence, and challenge pressure, not a simple completed flag. Explore how AI guidance, scoring, and multi-system coordination shape a richer learning journey. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-20-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
