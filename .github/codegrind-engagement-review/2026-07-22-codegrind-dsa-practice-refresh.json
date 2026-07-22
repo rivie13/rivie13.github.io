@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-22-codegrind-dsa-practice-refresh.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-22-codegrind-dsa-practice-refresh.json",
+  "title": "CodeGrind: Fresh DSA Practice with AI-Guided Play",
+  "summary": "NewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum.",
+  "slug": "codegrind-dsa-practice-refresh",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now emphasizes streamlined, AI-assisted DSA practice: faster problem discovery, real-time guidance from Azure OpenAI, and a clearer path from problem description to solution. The update keeps competition and progress tracking at the core, while improving authentication flow and user experience.",
+  "cta": "Try the new AI-guided practice flow today and track your progress across the refreshed problem set.",
+  "visual_brief": "Static UI-focused image showing the CodeGrind problem editor with AI chat pane, a prominent DSA problem card, and a progress/profile panel. Cyberpunk-inspired but clean, emphasize problem-solving flow and real-time guidance.",
+  "source_media_tags": [
+    "CodeGrind-dashboard",
+    "AI-assisted-solution",
+    "DSA-problem-editor",
+    "progress-tracker",
+    "user-auth-flow",
+    "cyberpunk-ui"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsa-practice-refresh",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+    "file": "assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+    "file": "assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: Fresh DSA Practice with AI-Guided Play. NewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "image_alt": "CodeGrind: Fresh DSA Practice with AI-Guided Play",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: Fresh DSA Practice with AI-Guided Play. NewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "image_alt": "CodeGrind: Fresh DSA Practice with AI-Guided Play",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: Fresh DSA Practice with AI-Guided Play\n\nNewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum.\n\nTry the new AI-guided practice flow today and track your progress across the refreshed problem set.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Fresh DSA Practice with AI-Guided Play",
+        "text": "NewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "NewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: Fresh DSA Practice with AI-Guided Play",
+        "text": "CodeGrind: Fresh DSA Practice with AI-Guided Play\n\nNewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind: Fresh DSA Practice with AI-Guided Play\n\nNewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: Fresh DSA Practice with AI-Guided Play\n\nNewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind: Fresh DSA Practice with AI-Guided Play\n\nNewCodeGrind update: enhanced DSA practice with AI-assisted problem solving, refreshed UI flow, and updated problem filtering to boost learning momentum.\n\nTry the new AI-guided practice flow today and track your progress across the refreshed problem set.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-22-codegrind-dsa-practice-refresh.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
