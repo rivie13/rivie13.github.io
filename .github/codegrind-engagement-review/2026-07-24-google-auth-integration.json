@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-24-google-auth-integration.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-24-google-auth-integration.json",
+  "title": "Seamless Sign-In with Google Authentication!",
+  "summary": "Log in to CodeGrind faster than ever! We've integrated Google Authentication, offering a secure and seamless way to sign in using your existing Google account. Get started in seconds!",
+  "slug": "google-auth-integration",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind now supports Google Authentication, allowing users to sign in quickly and securely using their Google accounts. This feature simplifies account setup and login, enhancing user experience with OAuth 2.0.",
+  "cta": "Sign in with Google today!",
+  "visual_brief": "A clean graphic showing the Google sign-in button prominently displayed on a CodeGrind interface. Icons representing security and speed could be subtly incorporated.",
+  "source_media_tags": [
+    "google-auth",
+    "login",
+    "authentication",
+    "ui",
+    "seamless",
+    "security"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-google-auth-integration",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+    "file": "assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+    "file": "assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "gemini-fast",
+      "social_provider": "pollinations",
+      "social_model": "gemini-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind now supports Google Authentication! Sign in faster and more securely using your Google account. Simplify your login experience today. Learn more: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "image_alt": "Seamless Sign-In with Google Authentication!",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind now supports Google Authentication! Sign in faster and more securely using your Google account. Simplify your login experience today. Learn more: https://codegrind.online",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "image_alt": "Seamless Sign-In with Google Authentication!",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "We're excited to announce the integration of Google Authentication into CodeGrind! This enhancement allows you to sign in quickly and securely using your existing Google account, streamlining your access and improving your overall user experience. Leveraging OAuth 2.0, this feature provides a seamless and protected way to manage your CodeGrind access. Get started in seconds and experience a more efficient login process.\n\nLearn more and sign in with Google today: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind Now Supports Google Authentication for Faster, Secure Logins!",
+        "text": "We've just integrated Google Authentication into CodeGrind!\n\nThis means you can now sign in to your CodeGrind account faster and more securely using your existing Google account. Our implementation uses OAuth 2.0 to ensure a seamless and protected login experience.\n\nSimplify your account setup and login process today. Get started in seconds!\n\nLearn more and try it out: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "We've just integrated Google Authentication into CodeGrind!\n\nThis means you can now sign in to your CodeGrind account faster and more securely using your existing Google account. Our implementation uses OAuth 2.0 to ensure a seamless and protected login experience.\n\nSimplify your account setup and login process today. Get started in seconds!\n\nLearn more and try it out: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: Seamless Google Authentication Integration Live!",
+        "text": "CodeGrind now offers Google Authentication for quicker and more secure logins. Use your Google account to sign in effortlessly. Learn more: https://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind now offers Google Authentication for quicker and more secure logins. Use your Google account to sign in effortlessly. Learn more: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "🚀 Exciting News from CodeGrind! 🚀\n\nWe've just rolled out Google Authentication, making your login experience faster and more secure than ever before! \n\nWith this new integration, you can now sign in to CodeGrind using your existing Google account in just seconds. We've implemented OAuth 2.0 to ensure a seamless and protected process, simplifying account access and enhancing your overall user experience.\n\nSay goodbye to remembering multiple passwords and hello to effortless access. \n\nReady to try it out? Sign in with Google today!\n\nLearn more: https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Seamless sign-in is here! ✨ CodeGrind now supports Google Authentication, allowing you to log in faster and more securely using your Google account. Simplify your access and get started in seconds. \n\n#CodeGrind #GoogleAuth #Authentication #Login #TechUpdate #UserExperience #Security #OAuth",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-24-google-auth-integration.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
