@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-07-27-codegrind-dsa-practice-evolution.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-07-27-codegrind-dsa-practice-evolution.json",
+  "title": "CodeGrind DSA Practice Gets a Smarter Twist",
+  "summary": "Highlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features.",
+  "slug": "codegrind-dsa-practice-evolution",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends LeetCode-like challenges with an AI-assisted mentor, real-time code execution, and a refreshed user experience. Practice smarter with adaptive problem filtering, secure sign-in, and seamless progress tracking across District-style layers of the platform.",
+  "cta": "Try a new AI-assisted problem now and compare your approach with the AI mentor in the CodeGrind editor.",
+  "visual_brief": "Short 20–30s product walkthrough showing the CodeGrind editor in action: problem prompt, real-time code editor with syntax highlighting, AI assistant panel offering guidance, and a quick problem-filter demo. End with a call-to-action screen and CodeGrind logo.",
+  "source_media_tags": [
+    "codegrind-editor-demo",
+    "ai-assistant-chat",
+    "coding-challenge",
+    "real-time-execution",
+    "cyberpunk-ui",
+    "ui-improvements"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsa-practice-evolution",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+    "file": "assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+    "file": "assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind DSA Practice Gets a Smarter Twist. Highlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "image_alt": "CodeGrind DSA Practice Gets a Smarter Twist",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind DSA Practice Gets a Smarter Twist. Highlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "image_alt": "CodeGrind DSA Practice Gets a Smarter Twist",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind DSA Practice Gets a Smarter Twist\n\nHighlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features.\n\nTry a new AI-assisted problem now and compare your approach with the AI mentor in the CodeGrind editor.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind DSA Practice Gets a Smarter Twist",
+        "text": "Highlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Highlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind DSA Practice Gets a Smarter Twist",
+        "text": "CodeGrind DSA Practice Gets a Smarter Twist\n\nHighlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind DSA Practice Gets a Smarter Twist\n\nHighlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind DSA Practice Gets a Smarter Twist\n\nHighlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind DSA Practice Gets a Smarter Twist\n\nHighlighting CodeGrind's AI-assisted DSA practice and the latest UX polish, with a focus on real-time coding, problem filtering, and enhanced security features.\n\nTry a new AI-assisted problem now and compare your approach with the AI mentor in the CodeGrind editor.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-07-27-codegrind-dsa-practice-evolution.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
