@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-07-27-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-07-27-codegrind-learning-path-structure.md",
+  "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checkbox List",
+  "summary": "How I think about CodeGrind learning paths: DSA progression, execution feedback, AI guidance, scoring pressure, and gameplay without hiding the work.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-07-27-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-07-27-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-07-27-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": true,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "New approach to CodeGrind learning paths: move beyond checklists to a graph of practical skills—problem selection, realtime execution, AI guidance, scoring, and gameplay feedback all in one loop. Learn how this design ties together tooling and pedagogy....",
+    "linkedin_text": "CodeGrind is rethinking learning paths for DSA by weaving problem selection, realtime execution, AI guidance, scoring penalties, and profile history into a cohesive learning loop. This design aims to reduce checkbox behavior and emphasize actual interview-grade problem solving. https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "New approach to CodeGrind learning paths: move beyond checklists to a graph of practical skills—problem selection, realtime execution, AI guidance, scoring, and gameplay feedback all in one loop. Learn how this design ties together tooling and pedagogy....",
+        "url": "https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checkbox List",
+        "description": "How I think about CodeGrind learning paths: DSA progression, execution feedback, AI guidance, scoring pressure, and gameplay without hiding the work.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-27-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "New approach to CodeGrind learning paths: move beyond checklists to a graph of practical skills—problem selection, realtime execution, AI guidance, scoring, and gameplay feedback all in one loop. Learn how this design ties together tooling and pedagogy....",
+        "url": "https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checkbox List",
+        "description": "How I think about CodeGrind learning paths: DSA progression, execution feedback, AI guidance, scoring pressure, and gameplay without hiding the work.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-27-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind is rethinking learning paths for DSA by weaving problem selection, realtime execution, AI guidance, scoring penalties, and profile history into a cohesive learning loop. This design aims to reduce checkbox behavior and emphasize actual interview-grade problem solving. https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checkbox List",
+        "url": "https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "description": "How I think about CodeGrind learning paths: DSA progression, execution feedback, AI guidance, scoring pressure, and gameplay without hiding the work.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-27-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind learning paths: from checklists to connected problem-solving graphs",
+        "text": "CodeGrind is evolving its learning paths to connect problem selection, realtime execution, AI guidance, and scoring into one loop, rather than a simple 20-problem checklist. The goal is to better teach interview-grade problem solving. https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/ Discuss how this approach might impact practice and progression.",
+        "url": "https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Rethinking CodeGrind learning paths: from checklists to connected problem-solving graphs",
+        "text": "I'm exploring how CodeGrind can move beyond checkbox-style DSA paths to a graph of practical skills—linking problem selection, realtime execution, AI guidance, and scoring into one cohesive loop. Details here: https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind is redesigning learning paths for DSA to connect problem selection, real-time execution, AI guidance, and scoring into one cohesive loop. Learn how this shift moves away from simple checklists: https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "title": "Structuring CodeGrind Learning Paths Without Turning DSA Into a Checkbox List",
+        "url": "https://rivie13.github.io/blog/2026/07/27/codegrind-learning-path-structure/",
+        "description": "How I think about CodeGrind learning paths: DSA progression, execution feedback, AI guidance, scoring pressure, and gameplay without hiding the work.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-27-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Rethinking CodeGrind learning paths: moving from static checklists to a connected skill graph that ties problem selection, live coding, and AI-guided feedback into one loop. Aiming for real interview-grade problem solving. Link in bio for the full post.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-07-27-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
