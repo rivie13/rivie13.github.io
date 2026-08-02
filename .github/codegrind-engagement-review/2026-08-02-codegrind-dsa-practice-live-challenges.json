@@ -1,0 +1,134 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-08-02-codegrind-dsa-practice-live-challenges.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-08-02-codegrind-dsa-practice-live-challenges.json",
+  "title": "CodeGrind: Live DSA Practice Challenges with AI Assist",
+  "summary": "Introduce a fresh daily challenge flow: dynamic DSA problems, AI-assisted hints, and real-time feedback to boost practice momentum without leaving CodeGrind.",
+  "slug": "codegrind-dsa-practice-live-challenges",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "Launch a daily, adaptive DSA practice loop on CodeGrind: users tackle a fresh problem, receive AI-guided hints, see real-time feedback, and compare progress on leaderboards. The experience emphasizes hands-on coding, evaluation, and incremental learning.",
+  "cta": "Try today's challenge, enable AI hints, and rise on the leaderboard.",
+  "visual_brief": "Static promo image showing a CodeGrind UI with a coding editor, a problem card, and an AI hint panel. Include cyberpunk-inspired accents, subtle debug glow, and a prominentCTA button reading “Start Today.”",
+  "source_media_tags": [
+    "ui-problem-card",
+    "ai-hint-panel",
+    "leaderboard-visual",
+    "cyberpunk-ai-glow",
+    "code-editor-preview"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-dsa-practice-live-challenges",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+    "file": "assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+    "file": "assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png"
+  },
+  "social": {
+    "generation_source": "ai",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "pollinations",
+      "social_model": "openai-fast"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind launches a daily DSA practice loop with AI-guided hints, real-time feedback, and a board to track progress. Tackle a fresh problem, learn incrementally, and compare on the leaderboard. Start today and explore AI-assisted practice.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "image_alt": "CodeGrind: Live DSA Practice Challenges with AI Assist",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind launches a daily DSA practice loop with AI-guided hints, real-time feedback, and a board to track progress. Tackle a fresh problem, learn incrementally, and compare on the leaderboard. Start today and explore AI-assisted practice.",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "image_alt": "CodeGrind: Live DSA Practice Challenges with AI Assist",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind presents a new daily DSA practice loop with AI-guided hints, real-time feedback, and a progress leaderboard. Tackle a fresh problem each day, monitor improvements, and build hands-on coding momentum. Try today’s challenge, enable AI hints, and rise on the leaderboard. https://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Live DSA Practice Challenges with AI Assist",
+        "text": "We’re rolling out a daily DSA practice loop on CodeGrind. Each day there’s a new problem, AI-guided hints, and real-time feedback to help you learn by doing. Track your progress on the leaderboard and push your skills forward. Try today’s challenge and enable AI hints to climb higher.",
+        "body_text": null,
+        "comment_text": "We’re rolling out a daily DSA practice loop on CodeGrind. Each day there’s a new problem, AI-guided hints, and real-time feedback to help you learn by doing. Track your progress on the leaderboard and push your skills forward. Try today’s challenge and enable AI hints to climb higher.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: Live DSA Practice Challenges with AI Assist",
+        "text": "Introducing a daily DSA practice flow on CodeGrind. New problem each day, AI-guided hints, and real-time feedback to accelerate learning. Compare progress on the leaderboard and advance hands-on coding skills. Start today and enable AI hints to rise on the board.",
+        "body_text": null,
+        "comment_text": "Introducing a daily DSA practice flow on CodeGrind. New problem each day, AI-guided hints, and real-time feedback to accelerate learning. Compare progress on the leaderboard and advance hands-on coding skills. Start today and enable AI hints to rise on the board.",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind launches a new daily DSA practice loop with AI-assisted hints and real-time feedback. Each day brings a fresh problem, a live evaluation, and a clear path to progress on the leaderboard. Experience the AI-assisted practice flow—start today and see how you rank.",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "Daily DSA practice just got smarter with AI-guided hints and real-time feedback on CodeGrind. A fresh problem, hands-on coding, and leaderboard progress await. See the new flow, try today’s challenge, and rise on the board — start today.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-02-codegrind-dsa-practice-live-challenges.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
