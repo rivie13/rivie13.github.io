@@ -1,0 +1,106 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-blog-review",
+  "post_file": "_posts/codegrind/2026-08-03-codegrind-learning-path-structure.md",
+  "review_markdown_file": ".github/codegrind-review/2026-08-03-codegrind-learning-path-structure.md",
+  "title": "Structuring Learning Paths Without Turning DSA Practice Into a Checklist",
+  "summary": "How I structure CodeGrind learning paths so DSA practice builds skill progressively instead of becoming random problem grinding.",
+  "slug": "codegrind-learning-path-structure",
+  "url": "https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+  "image": {
+    "path": "/assets/images/codegrind/2026-08-03-codegrind-learning-path-structure.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind/2026-08-03-codegrind-learning-path-structure.png",
+    "file": "assets/images/codegrind/2026-08-03-codegrind-learning-path-structure.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "attempts": 5,
+      "strict_compress_used": true,
+      "hard_truncate_used": false
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "bluesky_text": "Understanding learning paths that avoid turning DSA practice into a checklist. A peek at CodeGrind’s structure: from LeetCode-style challenges to realtime execution, AI help, scoring, and progress tracking. Public project here:...",
+    "linkedin_text": "In this post, I share how CodeGrind structures learning paths to ensure DSA practice builds meaningful skills rather than becoming a random problem grind. The approach includes LeetCode-style challenges, difficulty filtering, realtime execution, AI assistance, scoring, leaderboards, and a progression model. https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Understanding learning paths that avoid turning DSA practice into a checklist. A peek at CodeGrind’s structure: from LeetCode-style challenges to realtime execution, AI help, scoring, and progress tracking. Public project here:...",
+        "url": "https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "title": "Structuring Learning Paths Without Turning DSA Practice Into a Checklist",
+        "description": "How I structure CodeGrind learning paths so DSA practice builds skill progressively instead of becoming random problem grinding.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-08-03-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "Understanding learning paths that avoid turning DSA practice into a checklist. A peek at CodeGrind’s structure: from LeetCode-style challenges to realtime execution, AI help, scoring, and progress tracking. Public project here:...",
+        "url": "https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "title": "Structuring Learning Paths Without Turning DSA Practice Into a Checklist",
+        "description": "How I structure CodeGrind learning paths so DSA practice builds skill progressively instead of becoming random problem grinding.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-08-03-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "In this post, I share how CodeGrind structures learning paths to ensure DSA practice builds meaningful skills rather than becoming a random problem grind. The approach includes LeetCode-style challenges, difficulty filtering, realtime execution, AI assistance, scoring, leaderboards, and a progression model. https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "title": "Structuring Learning Paths Without Turning DSA Practice Into a Checklist",
+        "url": "https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "description": "How I structure CodeGrind learning paths so DSA practice builds skill progressively instead of becoming random problem grinding.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-08-03-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "link",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: Structuring Learning Paths for Skillful DSA Practice",
+        "text": "I wrote about structuring CodeGrind learning paths so DSA practice builds real skill instead of becoming a checklist. It covers LeetCode-style challenges, realtime execution, AI assistance, scoring, and progress tracking. More details here: https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "self",
+        "destination": "u/rivie13",
+        "title": "Structuring Learning Paths in CodeGrind's DSA Practice",
+        "text": "Sharing thoughts on how CodeGrind designs learning paths to keep DSA practice purposeful, with features like difficulty-based filtering, realtime code execution, AI assistance, and a progression model. Full post: https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "url": "https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "blog-link-share",
+        "text": "CodeGrind structures learning paths to keep DSA practice purposeful, not a random problem grind. The post covers LeetCode-style challenges, realtime execution, AI assistance, scoring, and progression tracking. Read more: https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "title": "Structuring Learning Paths Without Turning DSA Practice Into a Checklist",
+        "url": "https://rivie13.github.io/blog/2026/08/03/codegrind-learning-path-structure/",
+        "description": "How I structure CodeGrind learning paths so DSA practice builds skill progressively instead of becoming random problem grinding.",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind/2026-08-03-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "caption-plus-media",
+        "caption": "Structuring learning paths so DSA practice builds real skill, not a random checklist. See how CodeGrind combines LeetCode-style challenges, realtime execution, AI assistance, and a clear progression model. Learn more via the link in bio.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind/2026-08-03-codegrind-learning-path-structure.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
