@@ -1,0 +1,135 @@
+{
+  "schema_version": 2,
+  "workflow": "codegrind-engagement-review",
+  "review_markdown_file": ".github/codegrind-engagement-review/2026-08-03-codegrind-engagement-ai-assist-and-ux.md",
+  "review_json_file": ".github/codegrind-engagement-review/2026-08-03-codegrind-engagement-ai-assist-and-ux.json",
+  "title": "CodeGrind: AI-assisted solving meets streamlined UX polish",
+  "summary": "Showcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features.",
+  "slug": "codegrind-engagement-ai-assist-and-ux",
+  "content_kind": "image",
+  "url": "https://codegrind.online",
+  "core_message": "CodeGrind blends Azure OpenAI-powered assistance with a polished, secure sign-in flow and responsive problem-solving UX. Players get guided hints, multiple model support, and real-time code execution to practice data structures and algorithms while enjoying a cohesive learning environment.",
+  "cta": "Try a practice problem now with AI help and see your progress in the new login-enabled experience.",
+  "visual_brief": "Static UI-focused hero image: CodeGrind dashboard with code editor, AI assistant panel, and a prominent sign-in prompt. Include cyberpunk-inspired accents and subtle performance indicators to convey real-time feedback.",
+  "source_media_tags": [
+    "CodeGrind-dashboard",
+    "AI-assistant-ui",
+    "real-time-code-exec",
+    "login-flow",
+    "cyberpunk-UI",
+    "dashboard-analytics"
+  ],
+  "media": {
+    "source": "generated",
+    "selection_reason": "No public blob assets were available, so the workflow will generate a review image from the brief.",
+    "asset_label": "generated-codegrind-engagement-ai-assist-and-ux",
+    "asset_mime": "image/png",
+    "path": "/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+    "file": "assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+    "selected_reference_asset": null
+  },
+  "image": {
+    "path": "/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+    "url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+    "file": "assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png"
+  },
+  "social": {
+    "generation_source": "fallback",
+    "generation_meta": {
+      "brief_provider": "pollinations",
+      "brief_model": "openai-fast",
+      "social_provider": "fallback",
+      "social_model": "fallback"
+    },
+    "enabled": {
+      "bluesky": true,
+      "bluesky_personal": true,
+      "bluesky_company": true,
+      "linkedin": true,
+      "reddit_subreddit": true,
+      "reddit_profile": true,
+      "facebook_page": true,
+      "instagram": true
+    },
+    "targets": {
+      "bluesky_personal": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: AI-assisted solving meets streamlined UX polish. Showcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "image_alt": "CodeGrind: AI-assisted solving meets streamlined UX polish",
+        "validation_status": "pending"
+      },
+      "bluesky_company": {
+        "enabled": true,
+        "post_type": "image",
+        "embed_mode": "native-image",
+        "text": "CodeGrind: AI-assisted solving meets streamlined UX polish. Showcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features. https://codegrind.online #CodeGrind #InterviewPrep",
+        "card_url": "https://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "image_alt": "CodeGrind: AI-assisted solving meets streamlined UX polish",
+        "validation_status": "pending"
+      },
+      "linkedin": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI-assisted solving meets streamlined UX polish\n\nShowcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features.\n\nTry a practice problem now with AI help and see your progress in the new login-enabled experience.\n\nhttps://codegrind.online\n\n#CodeGrind #CodingPractice #InterviewPrep",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "validation_status": "pending"
+      },
+      "reddit_subreddit": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "r/CodeGrindOnline",
+        "title": "CodeGrind: AI-assisted solving meets streamlined UX polish",
+        "text": "Showcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "Showcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "validation_status": "pending"
+      },
+      "reddit_profile": {
+        "enabled": true,
+        "post_type": "image",
+        "body_mode": "comment",
+        "destination": "u/rivie13",
+        "title": "CodeGrind: AI-assisted solving meets streamlined UX polish",
+        "text": "CodeGrind: AI-assisted solving meets streamlined UX polish\n\nShowcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features.\n\nhttps://codegrind.online",
+        "body_text": null,
+        "comment_text": "CodeGrind: AI-assisted solving meets streamlined UX polish\n\nShowcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "validation_status": "pending"
+      },
+      "facebook_page": {
+        "enabled": true,
+        "post_type": "image",
+        "text": "CodeGrind: AI-assisted solving meets streamlined UX polish\n\nShowcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features.\n\nhttps://codegrind.online",
+        "url": "https://codegrind.online",
+        "image_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "validation_status": "pending"
+      },
+      "instagram": {
+        "enabled": true,
+        "post_type": "photo",
+        "caption": "CodeGrind: AI-assisted solving meets streamlined UX polish\n\nShowcase how the AI assistant aids problem-solving alongside updated UX like improved login and real-time feedback, grounded in CodeGrind’s current features.\n\nTry a practice problem now with AI help and see your progress in the new login-enabled experience.",
+        "asset_url": "https://rivie13.github.io/assets/images/codegrind-engagement/2026-08-03-codegrind-engagement-ai-assist-and-ux.png",
+        "validation_status": "pending"
+      }
+    }
+  },
+  "review": {
+    "status": "pending",
+    "approved_at": null
+  }
+}
